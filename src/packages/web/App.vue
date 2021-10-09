@@ -1,5 +1,9 @@
+<script lang="ts">
+
+</script>
+
 <template>
-    <div>1111</div>
+    <h1>前端展示</h1>
 </template>
 
 <style>
