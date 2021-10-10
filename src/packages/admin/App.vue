@@ -9,3 +9,15 @@ export default defineComponent({
     name: 'App',
 })
 </script>
+<style>
+    html,body{
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
+    #app{
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+    }
+</style>
