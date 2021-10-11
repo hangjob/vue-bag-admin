@@ -1,9 +1,9 @@
 import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
-
+import vueJsx from '@vitejs/plugin-vue-jsx'
 const path = require('path');
 export default defineConfig({
-    plugins: [vue()],
+    plugins: [vue(),vueJsx()],
     resolve: {
         alias: {
             // 如果报错__dirname找不到，需要安装node,执行yarn add @types/node --save-dev

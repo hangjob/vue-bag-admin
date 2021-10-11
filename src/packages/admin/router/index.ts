@@ -12,6 +12,10 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: 'home', name: 'home', meta: {title: '首页'},
                 component: () => import('@/packages/admin/views/home/index.vue')
+            },
+            {
+                path: '/sys/menu', name: 'sys-home', meta: {title: '菜单列表'},
+                component: () => import('@/packages/admin/views/sys/menu.vue')
             }
         ]
     }
