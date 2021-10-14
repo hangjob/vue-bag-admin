@@ -4,7 +4,7 @@
             YXS-ADMIN
         </div>
         <div class="left-sider-menu scroll">
-            <a-menu theme="light" v-model:selectedKeys="selectedKeys" mode="inline">
+            <a-menu v-model:selectedKeys="selectedKeys" mode="inline" theme="light">
                 <a-menu-item key="1">
                     <pie-chart-outlined/>
                     <span>工作台</span>
@@ -40,6 +40,7 @@
 import {DesktopOutlined, PieChartOutlined, UserOutlined,} from '@ant-design/icons-vue';
 import {defineComponent, ref} from 'vue';
 import YxsMenuSlider from '@/packages/admin/layout/components/menu/index.tsx'
+
 export default defineComponent({
     name: 'Slider',
     components: {

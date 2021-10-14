@@ -12,9 +12,10 @@ import {defineComponent} from 'vue'
 export default defineComponent({})
 </script>
 <style lang="less" scoped>
-.layout-header_scroller{
+.layout-header_scroller {
     background-color: transparent;
     padding: 10px;
+
     .app-process_item {
         display: inline-flex;
         align-items: center;

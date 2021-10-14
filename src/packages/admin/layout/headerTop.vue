@@ -12,7 +12,7 @@
 
 </script>
 <style lang="less" scoped>
-.layout-header_top{
+.layout-header_top {
     height: 50px;
     line-height: 50px;
     box-sizing: border-box;

@@ -1,4 +1,4 @@
-import {createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw,RouterOptions} from 'vue-router'
+import {createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw, RouterOptions} from 'vue-router'
 import {routerMode} from '@/packages/admin/config';
 import {App} from 'vue';
 
