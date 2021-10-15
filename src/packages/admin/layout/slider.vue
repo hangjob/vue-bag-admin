@@ -1,7 +1,7 @@
 <template>
     <div class="left-sider">
         <div class="left-sider-logo">
-            YXS-ADMIN
+            YXS-ADMIN1
         </div>
         <div class="left-sider-menu scroll">
             <a-menu v-model:selectedKeys="selectedKeys" mode="inline" theme="light">
@@ -31,8 +31,9 @@
                     </template>
                     <a-menu-item key="4">Bill</a-menu-item>
                 </a-sub-menu>
-                <YxsMenuSlider/>
+
             </a-menu>
+            <YxsMenuSlider/>
         </div>
     </div>
 </template>

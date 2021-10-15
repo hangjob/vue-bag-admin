@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "ant-design-vue": "^2.2.8",
+    "lodash": "^4.17.21",
     "minireset.css": "0.0.7",
     "normalize.css": "^8.0.1",
     "vue": "^3.2.16",
