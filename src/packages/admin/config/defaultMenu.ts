@@ -19,27 +19,45 @@ const defaultMenu = [
         router: '/home',
         icon: 'HomeFilled',
         isShow: 1,
-        id: 1
+    },
+    {
+        name: '系统管理',
+        router: '',
+        icon: 'HomeFilled',
+        isShow: 1,
+        children: [
+            {
+                name:'菜单列表',
+                router: '/sys/menu',
+                icon:'',
+                isShow: 1,
+            }
+        ]
     },
     {
         name: '组件库',
         router: '',
         isShow: 1,
-        id: 2,
         children: [
             {
                 name: 'Markdown编辑器',
-                router: '/markdown',
+                router: '/module/markdown',
                 icon: 'HomeFilled',
                 isShow: 1,
-                id: 3,
             },
             {
                 name: '文件上传',
-                router: '/fileUpload',
+                router: '',
                 icon: 'UploadOutlined',
                 isShow: 1,
-                id: 4,
+                children:[
+                    {
+                        name: '图片上传',
+                        router: '/module/fileUploadImg',
+                        icon: 'UploadOutlined',
+                        isShow: 1,
+                    }
+                ]
             },
         ]
     },
@@ -48,8 +66,7 @@ const defaultMenu = [
         router: '/about',
         icon: 'UserOutlined',
         isShow: 1,
-        id: 5,
-    },
+    }
 ]
 
 const InfiniteTraversal = (arr: Array<any>) => {

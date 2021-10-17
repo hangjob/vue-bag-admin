@@ -9,3 +9,12 @@
 #### 别名`@`按住ctrl不跳转
 
 > 解决：添加tsconfig.json，按照我的给出的实列，不要使用官方的
+
+### router-view
+```vue
+<router-view class="router-view" v-slot="{ Component }">
+    <transition :name="transitionName">
+        <component :is="Component" />
+    </transition>
+</router-view>
+```

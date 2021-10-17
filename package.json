@@ -8,11 +8,12 @@
   },
   "dependencies": {
     "ant-design-vue": "^2.2.8",
+    "jquery": "^3.6.0",
     "lodash": "^4.17.21",
     "minireset.css": "0.0.7",
     "normalize.css": "^8.0.1",
     "vue": "^3.2.16",
-    "vue-router": "^4.0.11",
+    "vue-router": "^4.0.12",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
