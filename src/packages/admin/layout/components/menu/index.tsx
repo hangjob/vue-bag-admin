@@ -9,7 +9,8 @@ export default defineComponent({
         const router = useRouter();
         const route = useRoute();
 
-        const selectedKeys = ref<string[]>(['1']);
+        const selectedKeys = ref<string[]>(['id_7'])
+        const openKeys =  ref<string[]>(['id_4','id_6','id_7'])
         const menuList = computed(() => store.getters.menuList);
 
         const goView = (url:string)=>{
@@ -25,7 +26,8 @@ export default defineComponent({
         return {
             selectedKeys,
             menuList,
-            handleClick
+            handleClick,
+            openKeys
         }
     },
     render(ctx: any) {
@@ -67,6 +69,7 @@ export default defineComponent({
             <div class="yxs-menu-slider">
                 <a-menu
                     v-model:selectedKeys={ctx.selectedKeys}
+                    v-model:openKeys={ctx.openKeys}
                     mode="inline"
                     onClick={ctx.handleClick}
                     theme="light">

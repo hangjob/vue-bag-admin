@@ -7,8 +7,9 @@ const store = createStore({
     state: {
         userinfo: {name: 1},
         menuList: defaultMenu,
-        processList: [],
-        currentRouter: {}
+        processList: [], // tab切换栏
+        currentRouter: {}, // 当前路由数据
+        tabViewsPath: [] // 访问路经
     },
     // 定义getters 好处可以过滤数据
     getters: {
@@ -20,13 +21,16 @@ const store = createStore({
         },
         currentRouter: (state) => {
             return state.currentRouter;
+        },
+        tabViewsPath: (state) => {
+            return state.tabViewsPath;
         }
     },
     actions: {},
     mutations: {
         // 添加头部路由标签
         addProcessList(state: any, item: any) {
-            if (!find(item, state.processList)) {
+            if (!find({key: 'fullPath', value: item.fullPath}, state.processList)) {
                 state.processList.push(item);
             }
         },
@@ -35,8 +39,11 @@ const store = createStore({
             state.processList = remove(item, state.processList)
         },
         // 更新当前路由
-        updataCurrentRouter(state: any, item: any) {
+        updataCurrentRouter(state: any, item: object) {
             state.currentRouter = item;
+        },
+        updateTabViewsPath(state: any, arr: Array<any>) {
+            state.tabViewsPath = arr.reverse();
         }
     }
 })

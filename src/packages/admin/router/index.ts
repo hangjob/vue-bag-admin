@@ -2,6 +2,8 @@ import {createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw, Ro
 import {routerMode} from '@/packages/admin/config';
 import {App} from 'vue';
 import store from '@/packages/admin/store'
+import {getAllParentArr} from '@/utils/utils'
+
 // 定义路由
 const routes: Array<RouteRecordRaw> = [
     {
@@ -41,14 +43,17 @@ const router = createRouter({
 
 
 router.beforeEach((to: any, from: any, next: any) => {
+
     store.commit("addProcessList", {
         keepAlive: to.meta.keepAlive,
         title: to.meta.title,
         fullPath: to.fullPath
     });
-    store.commit("updataCurrentRouter",{
+    
+    store.commit("updataCurrentRouter", {
         ...to
     })
+    store.commit('updateTabViewsPath', getAllParentArr(store.getters.menuList, to.path))
     console.log(to)
     next()
 });

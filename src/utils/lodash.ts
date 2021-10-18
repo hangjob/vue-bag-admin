@@ -1,8 +1,8 @@
 import * as _ from "lodash";
 
 // 查找
-const find = (tag: any, arr: Array<any>) => {
-    return _.find(arr, {fullPath: tag.fullPath})
+const find = (item: any, arr: Array<any>) => {
+    return _.find(arr, {[item.key]: item.value})
 }
 
 const remove = (tag: any, arr: Array<any>) => {
