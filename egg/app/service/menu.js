@@ -4,7 +4,8 @@ class MenuService extends Service {
     constructor(ctx) {
         super(ctx);
     }
-    async findAll(){
+
+    async findAll() {
 
     }
 }

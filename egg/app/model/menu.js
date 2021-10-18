@@ -28,10 +28,10 @@ module.exports = app => {
         Pid: {
             type: INTEGER
         },
-    },{
+    }, {
         createdAt: 'createTime', // 指定名字
         updatedAt: 'updateTime',
-        tableName:'yxs_menu' // 定义实际表名
+        tableName: 'yxs_menu' // 定义实际表名
     })
     return Menu;
 }
