@@ -1,7 +1,7 @@
 <template>
     <div>
         <div id="contextmenu" class="contextmenu">
-            <div class="menu" v-for="(item,idx) in items" :key="idx">{{ item.name }}</div>
+            <div class="menu" v-for="(item,idx) in items" :key="idx" @click="handleCallback(item)">{{ item.name }}</div>
         </div>
     </div>
 </template>
@@ -20,11 +20,11 @@ export default defineComponent({
             }
         })
 
-        const handleClose = () => {
-
+        const handleCallback = (item: any) => {
+            item.callback && item.callback(item)
         }
         return {
-            handleClose,
+            handleCallback,
             items
         }
     }

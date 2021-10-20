@@ -3,11 +3,11 @@
         <div class="layout-container-view">
             <div class="layout-container-view-content scroll">
                 <router-view v-slot="{ Component ,route }">
-                    <transition :name="transitionName">
+<!--                    <transition :name="transitionName">-->
                         <keep-alive :include="caches">
                             <component :is="Component" />
                         </keep-alive>
-                    </transition>
+<!--                    </transition>-->
                 </router-view>
             </div>
         </div>

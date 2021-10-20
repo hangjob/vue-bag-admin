@@ -1,7 +1,7 @@
 <template>
     <div class="left-sider">
         <div class="left-sider-logo">
-            YXS-ADMIN
+<!--            YXS-ADMIN-->
         </div>
         <div class="left-sider-menu scroll">
             <YxsMenuSlider/>

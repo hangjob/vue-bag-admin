@@ -3,7 +3,7 @@
         <div class="app-process_item"
              v-for="(item,index) in processList"
              :key="index"
-             :class="{active : item.fullPath === active}"
+             :class="{active:item.active}"
              @click="handleClickCutTap(item)"
              @contextmenu.stop.prevent="handleContextMenu($event, item)"
         >
@@ -17,6 +17,7 @@ import {computed, defineComponent, inject} from 'vue'
 import {useStore} from "vuex";
 import {CloseOutlined} from '@ant-design/icons-vue';
 import {useRoute, useRouter} from "vue-router";
+import {last} from '@/utils/lodash'
 
 export default defineComponent({
     components: {
@@ -27,9 +28,18 @@ export default defineComponent({
         const route = useRoute();
         const router = useRouter();
         const appContextmenu: any = inject('appContextmenu');
-        const active = computed(() => store.getters.currentRouter.fullPath) // 使用computed 才触发视图更新
+        const processList = computed(() => store.getters.processList) // 数据列表 // 使用computed 才触发视图更新
+        console.log(processList.value)
+        const toPath = () => {
+            const active = processList.value.find((e: any) => e.active); // 查找是否含有是当前激活的菜单 否则去 跳转最后一个
+            if (!active) {
+                const next = last(processList.value);
+                console.log(next)
+                // router.push(next ? next.value : "/");
+            }
+        }
 
-        const processList = computed(() => store.getters.processList)
+
         const handleContextMenu = (e: any, item: any) => {
             e.preventDefault(); // 阻止默认事件
             //获取我们自定义的右键菜单
@@ -38,7 +48,27 @@ export default defineComponent({
             contextmenu.style.left = e.clientX + 'px';
             contextmenu.style.top = e.clientY + 'px';
             contextmenu.style.display = "block"
-            appContextmenu.value.items = [{name: '关闭当前'}, {name: '关闭其他'}, {name: '关闭所有'}]
+            appContextmenu.value.items = [
+                {
+                    name: '关闭当前', data: item, callback: (res: any) => {
+                        const idx: number = processList.value.findIndex((e: any) => e.fullPath == item.fullPath)
+                        store.commit('delProcessList', idx)
+                        toPath();
+                    }
+                },
+                {
+                    name: '关闭其他', data: item, callback: (res: any) => {
+                        const arr = processList.value.filter((e: any) => e.fullPath == item.fullPath || e.value == "/");
+                        console.log(arr)
+                        toPath();
+                    }
+                },
+                {
+                    name: '关闭所有', data: item, callback: (res: any) => {
+                        toPath();
+                    }
+                }
+            ]
         }
 
         const handleClickCutTap = (item: any) => {
@@ -48,7 +78,6 @@ export default defineComponent({
         return {
             processList,
             handleContextMenu,
-            active,
             handleClickCutTap
         }
     }

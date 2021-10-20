@@ -4,7 +4,6 @@ import {getAllParentArr} from "@/utils/utils";
 const ignore = ["/login", "/403", "/404", "/500", "/502"];
 const setupRouterGuard = (to: any, from: any, next: any) => {
     const {token, browser} = store.getters;
-    console.log(token)
     if (token) {
         if (to.path.indexOf("/login") === 0) {
             return next("/");
@@ -15,7 +14,7 @@ const setupRouterGuard = (to: any, from: any, next: any) => {
                 fullPath: to.fullPath
             });
 
-            store.commit("updataCurrentRouter", {
+            store.commit("updateCurrentRouter", {
                 ...to
             })
             store.commit('updateTabViewsPath', getAllParentArr(store.getters.menuList, to.path))
