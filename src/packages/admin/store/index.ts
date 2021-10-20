@@ -2,18 +2,13 @@ import {createStore} from 'vuex'
 import {defaultMenu} from "@/packages/admin/config/defaultMenu";
 import {find, remove} from '@/utils/lodash';
 
-const defaultHome = {
-    active: true,
-    fullPath: '/',
-    title: '首页'
-}
 const store = createStore({
     strict: true,
     state: {
         userinfo: {name: 1},
         token: '1',
         menuList: defaultMenu,
-        processList: [defaultHome], // tab切换栏
+        processList: [], // tab切换栏
         currentRouter: {}, // 当前路由数据
         tabViewsPath: [] // 访问路经
     },
@@ -23,7 +18,7 @@ const store = createStore({
             return state.menuList;
         },
         processList: (state) => {
-            return state.processList;
+            return state.processList
         },
         currentRouter: (state) => {
             return state.currentRouter;
@@ -39,7 +34,7 @@ const store = createStore({
     mutations: {
         // 添加头部路由标签
         addProcessList(state: any, item: any) {
-            if (!find({key: 'fullPath', value: item.fullPath}, state.processList)) {
+            if (!find({key: 'path', value: item.path}, state.processList)) {
                 state.processList.push(item);
             }
         },
@@ -63,7 +58,7 @@ const store = createStore({
         updateCurrentRouter(state: any, item: any) {
             // 激活当前的 processList 中的 active
             state.processList.map((obj: any) => {
-                obj.active = obj.fullPath === item.fullPath;
+                obj.active = obj.path === item.path;
             });
             state.currentRouter = item;
         },

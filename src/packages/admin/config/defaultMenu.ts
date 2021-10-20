@@ -11,14 +11,21 @@
 // type: 1
 // updateTime: "2021-03-03 11:03:21"
 // viewPath: "https://www.vipbic.com"
-import {uniqueId} from 'lodash';
 
-const defaultMenu = [
+import {addUniqueId} from '@/utils/lodash';
+
+/**
+ * disabled 是否禁用关闭
+ * tabHidden 是否显示tab栏
+ */
+const arr = [
     {
         name: '首页',
         router: '/home',
         icon: 'HomeFilled',
         isShow: 1,
+        disabled: true,
+        tabHidden: false
     },
     {
         name: '系统管理',
@@ -27,10 +34,12 @@ const defaultMenu = [
         isShow: 1,
         children: [
             {
-                name:'菜单列表',
+                name: '菜单列表',
                 router: '/sys/menu',
-                icon:'',
+                icon: '',
                 isShow: 1,
+                disabled: false,
+                tabHidden: false
             }
         ]
     },
@@ -44,18 +53,22 @@ const defaultMenu = [
                 router: '/module/markdown',
                 icon: 'HomeFilled',
                 isShow: 1,
+                disabled: false,
+                tabHidden: true
             },
             {
                 name: '文件上传',
                 router: '',
                 icon: 'UploadOutlined',
                 isShow: 1,
-                children:[
+                children: [
                     {
                         name: '图片上传',
                         router: '/module/fileUploadImg',
                         icon: 'UploadOutlined',
                         isShow: 1,
+                        disabled: disabled,
+                        tabHidden: false
                     }
                 ]
             },
@@ -66,18 +79,11 @@ const defaultMenu = [
         router: '/about',
         icon: 'UserOutlined',
         isShow: 1,
+        disabled: false,
+        tabHidden: false
     }
 ]
-
-const InfiniteTraversal = (arr: Array<any>) => {
-    return arr.forEach((item: any) => {
-        item.id = uniqueId('id_');
-        if (item.children) {
-            InfiniteTraversal(item.children)
-        }
-    })
-}
-InfiniteTraversal(defaultMenu)
+const defaultMenu  = addUniqueId(arr)
 export {
     defaultMenu
 }

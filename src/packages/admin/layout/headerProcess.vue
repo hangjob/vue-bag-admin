@@ -13,7 +13,7 @@
     </div>
 </template>
 <script lang="ts">
-import {computed, defineComponent, inject} from 'vue'
+import {computed, defineComponent, inject, watch} from 'vue'
 import {useStore} from "vuex";
 import {CloseOutlined} from '@ant-design/icons-vue';
 import {useRoute, useRouter} from "vue-router";
@@ -28,8 +28,7 @@ export default defineComponent({
         const route = useRoute();
         const router = useRouter();
         const appContextmenu: any = inject('appContextmenu');
-        const processList = computed(() => store.getters.processList) // 数据列表 // 使用computed 才触发视图更新
-        console.log(processList.value)
+        const processList = computed(() => store.getters.processList.filter((e: any) => e.item.tabHidden === false)) // 数据列表 // 使用computed 才触发视图更新
         const toPath = () => {
             const active = processList.value.find((e: any) => e.active); // 查找是否含有是当前激活的菜单 否则去 跳转最后一个
             if (!active) {
@@ -38,7 +37,6 @@ export default defineComponent({
                 // router.push(next ? next.value : "/");
             }
         }
-
 
         const handleContextMenu = (e: any, item: any) => {
             e.preventDefault(); // 阻止默认事件
@@ -51,14 +49,14 @@ export default defineComponent({
             appContextmenu.value.items = [
                 {
                     name: '关闭当前', data: item, callback: (res: any) => {
-                        const idx: number = processList.value.findIndex((e: any) => e.fullPath == item.fullPath)
+                        const idx: number = processList.value.findIndex((e: any) => e.path == item.path)
                         store.commit('delProcessList', idx)
                         toPath();
                     }
                 },
                 {
                     name: '关闭其他', data: item, callback: (res: any) => {
-                        const arr = processList.value.filter((e: any) => e.fullPath == item.fullPath || e.value == "/");
+                        const arr = processList.value.filter((e: any) => e.path == item.path || e.value == "/");
                         console.log(arr)
                         toPath();
                     }
@@ -72,7 +70,7 @@ export default defineComponent({
         }
 
         const handleClickCutTap = (item: any) => {
-            router.push(item.fullPath);
+            router.push(item.path);
         }
 
         return {
