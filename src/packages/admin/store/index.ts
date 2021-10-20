@@ -1,14 +1,18 @@
 import {createStore} from 'vuex'
 import {defaultMenu} from "@/packages/admin/config/defaultMenu";
-import {find, remove} from '@/utils/lodash';
+import {find, remove, findContainingObject} from '@/utils/lodash';
 
+
+const defaultTabFixs = () => {
+    return  findContainingObject({key:'tabFix',value:true},defaultMenu)
+}
 const store = createStore({
     strict: true,
     state: {
         userinfo: {name: 1},
-        token: '1',
+        token: '',
         menuList: defaultMenu,
-        processList: [], // tab切换栏
+        processList: [].concat(defaultTabFixs()), // tab切换栏
         currentRouter: {}, // 当前路由数据
         tabViewsPath: [] // 访问路经
     },

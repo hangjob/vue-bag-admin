@@ -8,11 +8,11 @@
                     <p>你可以直接输入您的账号和密码登录</p>
                     <div class="login-input">
                         <i></i>
-                        <input type="text" placeholder="账户">
+                        <input type="text" placeholder="输入你的账户">
                     </div>
                     <div class="login-input">
                         <i></i>
-                        <input type="text" placeholder="账户">
+                        <input type="text" placeholder="输入你的密码">
                     </div>
                     <div class="login-btn">
                         <button>登录</button>
@@ -24,11 +24,12 @@
 </template>
 
 <style lang="less" scoped>
-    .login{
+    .login {
         width: 100vw;
         height: 100vh;
         background-color: #ff9595;
-        &-container{
+
+        &-container {
             width: 75%;
             height: 80%;
             background-color: #ffffff;
@@ -36,41 +37,59 @@
             position: absolute;
             left: 50%;
             top: 50%;
-            transform: translate(-50%,-50%);
+            transform: translate(-50%, -50%);
         }
-        &-content{
+
+        &-content {
             display: flex;
             width: 100%;
             height: 100%;
             padding: 100px;
             box-sizing: border-box;
-            .slide-left{
+
+            .slide-left {
                 flex: 1;
             }
-            .slide-right{
+
+            .slide-right {
                 flex: 1;
-                h2{
+
+                h2 {
                     font-size: 30px;
                     color: #333333;
                 }
-                p{
+
+                p {
                     color: #d2d0d1;
                     font-size: 14px;
                 }
             }
-            .login-input{
-                margin-bottom: 15px;
-                input{
+
+            .login-input {
+                margin-bottom: 20px;
+                input {
                     background-color: #fff9f9;
                     border-radius: 10px;
-                    padding: 10px;
+                    padding: 12px 10px;
                     width: 80%;
                     border: none;
+                    outline: 0;
+                    font-size: 16px;
                 }
             }
-            .login-btn{
-                button{
-                    
+
+            .login-btn {
+                button {
+                    background-image: linear-gradient(to right, #e34c44, #f59178);
+                    border: none;
+                    color: white;
+                    width: 80%;
+                    padding: 12px 10px;
+                    text-align: center;
+                    border-radius: 30px;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 16px;
                 }
             }
         }

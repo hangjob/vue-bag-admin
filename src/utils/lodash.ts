@@ -75,11 +75,27 @@ const addUniqueId = (arr: Array<any>, prefix?: string) => {
     return arr
 }
 
+
+const findContainingObject = (tag: any, arr: Array<any>) => {
+    let result: any = [];
+    const deep = (tag: any, arr: Array<any>) => {
+        arr.filter(item => {
+            if (item[tag.key] === tag.value) {
+                result.push(item)
+            }
+            item.children && deep(tag, item.children)
+        })
+    }
+    deep(tag, arr)
+    return result;
+}
+
 export {
     find,
     remove,
     last,
     findUnsetDepth,
     findChildrenDepth,
-    addUniqueId
+    addUniqueId,
+    findContainingObject
 }

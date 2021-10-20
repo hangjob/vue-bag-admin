@@ -9,8 +9,8 @@ export default defineComponent({
         const router = useRouter();
         const route = useRoute();
 
-        const selectedKeys = ref<string[]>(['id_7'])
-        const openKeys =  ref<string[]>(['id_4','id_6','id_7'])
+        const selectedKeys = ref<string[]>(['7'])
+        const openKeys =  ref<string[]>(['4','6','7'])
         const menuList = computed(() => store.getters.menuList);
 
         const goView = (url:string)=>{
@@ -20,7 +20,7 @@ export default defineComponent({
         }
 
         const handleClick = (res:any) => {
-            goView(res.item['menu-info'].router);
+            goView(res.item['menu-info'].path);
         }
 
         return {

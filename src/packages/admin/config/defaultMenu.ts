@@ -15,17 +15,17 @@
 import {addUniqueId} from '@/utils/lodash';
 
 /**
- * disabled 是否禁用关闭
  * tabHidden 是否显示tab栏
+ * tabFix 是否固定 tab栏
  */
 const arr = [
     {
         name: '首页',
-        router: '/home',
+        path: '/home',
         icon: 'HomeFilled',
         isShow: 1,
-        disabled: true,
-        tabHidden: false
+        tabHidden: false,
+        tabFix: true
     },
     {
         name: '系统管理',
@@ -35,11 +35,11 @@ const arr = [
         children: [
             {
                 name: '菜单列表',
-                router: '/sys/menu',
+                path: '/sys/menu',
                 icon: '',
                 isShow: 1,
-                disabled: false,
-                tabHidden: false
+                tabHidden: false,
+                tabFix: true
             }
         ]
     },
@@ -50,25 +50,25 @@ const arr = [
         children: [
             {
                 name: 'Markdown编辑器',
-                router: '/module/markdown',
+                path: '/module/markdown',
                 icon: 'HomeFilled',
                 isShow: 1,
-                disabled: false,
-                tabHidden: true
+                tabHidden: true,
+                tabFix: false
             },
             {
                 name: '文件上传',
-                router: '',
+                path: '',
                 icon: 'UploadOutlined',
                 isShow: 1,
                 children: [
                     {
                         name: '图片上传',
-                        router: '/module/fileUploadImg',
+                        path: '/module/fileUploadImg',
                         icon: 'UploadOutlined',
                         isShow: 1,
-                        disabled: disabled,
-                        tabHidden: false
+                        tabHidden: false,
+                        tabFix: false
                     }
                 ]
             },
@@ -76,14 +76,14 @@ const arr = [
     },
     {
         name: '关于',
-        router: '/about',
+        path: '/about',
         icon: 'UserOutlined',
         isShow: 1,
-        disabled: false,
-        tabHidden: false
+        tabHidden: false,
+        tabFix: false
     }
 ]
-const defaultMenu  = addUniqueId(arr)
+const defaultMenu = addUniqueId(arr)
 export {
     defaultMenu
 }

@@ -9,13 +9,13 @@ const setupRouterGuard = (to: any, from: any, next: any) => {
         if (to.path.indexOf("/login") === 0) {
             return next("/");
         } else {
-            const item = findChildrenDepth({key: 'router', value: to.path, node: 'children'}, store.getters.menuList);
+            const item:any = findChildrenDepth({key: 'path', value: to.path, node: 'children'}, store.getters.menuList);
+
             store.commit("addProcessList", {
                 keepAlive: to.meta.keepAlive,
-                title: to.meta.title,
                 fullPath: to.fullPath,
                 path: to.path,
-                item: item
+                ...item
             });
 
             store.commit("updateCurrentRouter", {
@@ -23,6 +23,7 @@ const setupRouterGuard = (to: any, from: any, next: any) => {
             })
 
             store.commit('updateTabViewsPath', getAllParentArr(store.getters.menuList, to.path))
+
         }
     } else {
         if (!ignore.some((e: string) => to.path.indexOf(e) === 0)) {
