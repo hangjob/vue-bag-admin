@@ -1,9 +1,7 @@
 import {createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw, RouterOptions} from 'vue-router'
 import {routerMode} from '@/packages/admin/config';
 import {App} from 'vue';
-import store from '@/packages/admin/store'
-import {getAllParentArr} from '@/utils/utils'
-
+import {setupRouterGuard} from './guard/index'
 // 定义路由
 const routes: Array<RouteRecordRaw> = [
     {
@@ -32,6 +30,10 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import('@/packages/admin/views/about/index.vue')
             }
         ]
+    },
+    {
+        path: "/login", name: 'login', meta: {title: '登录'},
+        component: () => import('@/packages/admin/views/login/index.vue'),
     }
 ]
 
@@ -43,19 +45,7 @@ const router = createRouter({
 
 
 router.beforeEach((to: any, from: any, next: any) => {
-
-    store.commit("addProcessList", {
-        keepAlive: to.meta.keepAlive,
-        title: to.meta.title,
-        fullPath: to.fullPath
-    });
-    
-    store.commit("updateCurrentRouter", {
-        ...to
-    })
-    store.commit('updateTabViewsPath', getAllParentArr(store.getters.menuList, to.path))
-    console.log(to)
-    next()
+    setupRouterGuard(to, from, next)
 });
 
 const setupRouter = (app: App) => {

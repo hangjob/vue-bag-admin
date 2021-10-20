@@ -6,6 +6,7 @@ const store = createStore({
     strict: true,
     state: {
         userinfo: {name: 1},
+        token: '',
         menuList: defaultMenu,
         processList: [], // tab切换栏
         currentRouter: {}, // 当前路由数据
@@ -24,6 +25,9 @@ const store = createStore({
         },
         tabViewsPath: (state) => {
             return state.tabViewsPath;
+        },
+        token: (state) => {
+            return state.token;
         }
     },
     actions: {},
