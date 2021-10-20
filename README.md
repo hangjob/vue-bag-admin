@@ -18,3 +18,11 @@
     </transition>
 </router-view>
 ```
+
+### 参考方向
+https://github.com/flipped-aurora/gin-vue-admin
+https://demo.gin-vue-admin.com/#/layout/admin/api
+
+https://github.com/cool-team-official/cool-admin-vue
+https://show.cool-admin.com/
+

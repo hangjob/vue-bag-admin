@@ -13,7 +13,7 @@
     </div>
 </template>
 <script lang="ts">
-import {computed, defineComponent} from 'vue'
+import {computed, defineComponent, inject} from 'vue'
 import {useStore} from "vuex";
 import {CloseOutlined} from '@ant-design/icons-vue';
 import {useRoute, useRouter} from "vue-router";
@@ -26,7 +26,7 @@ export default defineComponent({
         const store = useStore()
         const route = useRoute();
         const router = useRouter();
-
+        const appContextmenu: any = inject('appContextmenu');
         const active = computed(() => store.getters.currentRouter.fullPath) // 使用computed 才触发视图更新
 
         const processList = computed(() => store.getters.processList)
@@ -38,6 +38,7 @@ export default defineComponent({
             contextmenu.style.left = e.clientX + 'px';
             contextmenu.style.top = e.clientY + 'px';
             contextmenu.style.display = "block"
+            appContextmenu.value.items = [{name: '关闭当前'}, {name: '关闭其他'}, {name: '关闭所有'}]
         }
 
         const handleClickCutTap = (item: any) => {

@@ -50,7 +50,7 @@ router.beforeEach((to: any, from: any, next: any) => {
         fullPath: to.fullPath
     });
     
-    store.commit("updataCurrentRouter", {
+    store.commit("updateCurrentRouter", {
         ...to
     })
     store.commit('updateTabViewsPath', getAllParentArr(store.getters.menuList, to.path))

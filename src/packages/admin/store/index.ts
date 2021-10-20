@@ -39,9 +39,10 @@ const store = createStore({
             state.processList = remove(item, state.processList)
         },
         // 更新当前路由
-        updataCurrentRouter(state: any, item: object) {
+        updateCurrentRouter(state: any, item: object) {
             state.currentRouter = item;
         },
+        // 更新tab栏路由
         updateTabViewsPath(state: any, arr: Array<any>) {
             state.tabViewsPath = arr.reverse();
         }
