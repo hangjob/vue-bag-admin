@@ -1,3 +1,5 @@
+
+// 获取子节点，父级节点 链
 const getAllParentArr = (list: any, path: any) => {
     for (let i in list) {
         if (list.hasOwnProperty(i)) {
@@ -15,6 +17,7 @@ const getAllParentArr = (list: any, path: any) => {
         }
     }
 }
+
 
 export {
     getAllParentArr

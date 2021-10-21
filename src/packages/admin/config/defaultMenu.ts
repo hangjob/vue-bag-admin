@@ -81,7 +81,7 @@ const arr = [
         isShow: 1,
         tabHidden: false,
         tabFix: false
-    }
+    },
 ]
 const defaultMenu = addUniqueId(arr)
 export {

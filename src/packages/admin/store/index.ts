@@ -10,7 +10,7 @@ const store = createStore({
     strict: true,
     state: {
         userinfo: {name: 1},
-        token: '',
+        token: '1',
         menuList: defaultMenu,
         processList: [].concat(defaultTabFixs()), // tab切换栏
         currentRouter: {}, // 当前路由数据

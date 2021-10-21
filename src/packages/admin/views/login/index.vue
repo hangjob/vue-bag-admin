@@ -24,74 +24,81 @@
 </template>
 
 <style lang="less" scoped>
-    .login {
-        width: 100vw;
-        height: 100vh;
-        background-color: #ff9595;
+.login {
+    width: 100vw;
+    height: 100vh;
+    background-color: #ff9595;
 
-        &-container {
-            width: 75%;
-            height: 80%;
-            background-color: #ffffff;
-            border-radius: 40px;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
+    &-container {
+        width: 75%;
+        height: 80%;
+        background-color: #ffffff;
+        border-radius: 40px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    &-content {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        padding: 100px;
+        box-sizing: border-box;
+
+        .slide-left {
+            flex: 1;
         }
 
-        &-content {
-            display: flex;
-            width: 100%;
-            height: 100%;
-            padding: 100px;
-            box-sizing: border-box;
+        .slide-right {
+            flex: 1;
 
-            .slide-left {
-                flex: 1;
+            h2 {
+                font-size: 30px;
+                color: #333333;
             }
 
-            .slide-right {
-                flex: 1;
+            p {
+                color: #d2d0d1;
+                font-size: 14px;
+            }
+        }
 
-                h2 {
-                    font-size: 30px;
-                    color: #333333;
-                }
 
-                p {
-                    color: #d2d0d1;
-                    font-size: 14px;
-                }
+        .login-input {
+            &:nth-of-type(1) {
+                margin-top: 80px;
             }
 
-            .login-input {
-                margin-bottom: 20px;
-                input {
-                    background-color: #fff9f9;
-                    border-radius: 10px;
-                    padding: 12px 10px;
-                    width: 80%;
-                    border: none;
-                    outline: 0;
-                    font-size: 16px;
-                }
-            }
+            margin-bottom: 20px;
 
-            .login-btn {
-                button {
-                    background-image: linear-gradient(to right, #e34c44, #f59178);
-                    border: none;
-                    color: white;
-                    width: 80%;
-                    padding: 12px 10px;
-                    text-align: center;
-                    border-radius: 30px;
-                    text-decoration: none;
-                    display: inline-block;
-                    font-size: 16px;
-                }
+            input {
+                background-color: #fff9f9;
+                border-radius: 10px;
+                padding: 12px 10px;
+                width: 80%;
+                border: none;
+                outline: 0;
+                font-size: 16px;
+            }
+        }
+
+        .login-btn {
+            button {
+                background-image: linear-gradient(to right, #e34c44, #f59178);
+                border: none;
+                color: white;
+                width: 80%;
+                padding: 12px 10px;
+                text-align: center;
+                border-radius: 30px;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                cursor: pointer;
             }
         }
     }
+}
 </style>
