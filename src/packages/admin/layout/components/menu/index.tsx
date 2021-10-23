@@ -11,7 +11,7 @@ export default defineComponent({
 
         const selectedKeys = ref<string[]>(['7'])
         const openKeys =  ref<string[]>(['4','6','7'])
-        const menuList = computed(() => store.getters.menuList);
+        const menuList = computed(() => store.getters['app/menuList']);
 
         const goView = (url:string)=>{
             if(url != route.path){

@@ -57,6 +57,14 @@ const arr = [
                 tabFix: false
             },
             {
+                name: '解析Exel',
+                path: '/module/exel',
+                icon: 'HomeFilled',
+                isShow: 1,
+                tabHidden: false,
+                tabFix: false
+            },
+            {
                 name: '文件上传',
                 path: '',
                 icon: 'UploadOutlined',
@@ -77,6 +85,14 @@ const arr = [
     {
         name: '关于',
         path: '/about',
+        icon: 'UserOutlined',
+        isShow: 1,
+        tabHidden: false,
+        tabFix: false
+    },
+    {
+        name: '权限控制',
+        path: '/permit',
         icon: 'UserOutlined',
         isShow: 1,
         tabHidden: false,

@@ -11,7 +11,11 @@
             "@/*": [
                 "src/*"
             ]
-        }
+        },
+        "types": [
+            "webpack-env",
+            "node"
+        ]
     },
     "exclude": [
         "node_modules"

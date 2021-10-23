@@ -35,12 +35,10 @@ export default defineComponent({
     },
     setup() {
         const store = useStore()
-        const route = useRoute();
         const router = useRouter();
         const appContextmenu: any = inject('appContextmenu');
-        const processList = computed(() => store.getters.processList.filter((e: any) => e.tabHidden === false)) // 数据列表 // 使用computed 才触发视图更新
-
-        const tabContainer = ref<HTMLAreaElement | null>(null);
+        const processList = computed(() => store.state.app.processList.filter((e: any) => e.tabHidden === false)) // 数据列表 // 使用computed 才触发视图更新
+        const tabContainer = ref<HTMLAreaElement | any>(null);
 
 
         function scrollBar(left: number) {
@@ -63,7 +61,6 @@ export default defineComponent({
         }
 
         onMounted(() => {
-            console.log(tabContainer.value)
         })
 
         const toPath = () => {
@@ -89,7 +86,7 @@ export default defineComponent({
                 {
                     name: '关闭当前', data: item, callback: (res: any) => {
                         const idx: number = processList.value.findIndex((e: any) => e.path == item.path)
-                        store.commit('delProcessList', idx)
+                        store.commit('app/delProcessList', idx)
                         toPath();
                     }
                 },

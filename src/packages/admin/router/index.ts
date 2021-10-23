@@ -28,6 +28,14 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: '/about', name: 'about', meta: {title: '关于'},
                 component: () => import('@/packages/admin/views/about/index.vue')
+            },
+            {
+                path: '/permit', name: 'permit', meta: {title: '权限管理'},
+                component: () => import('@/packages/admin/views/permit/index.vue')
+            },
+            {
+                path: '/module/exel', name: 'module-exel', meta: {title: '解析Exel'},
+                component: () => import('@/packages/admin/views/module/exel/index.vue')
             }
         ]
     },
