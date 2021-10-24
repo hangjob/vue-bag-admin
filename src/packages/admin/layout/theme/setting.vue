@@ -7,9 +7,13 @@
             :visible="visible"
             @close="onClose"
     >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        <a-form :model="formState" labelAlign="right" :label-col="labelCol" :wrapper-col="wrapperCol">
+            <a-form-item labelAlign="left" label="主题设置">
+                <a-select @change="changeTheme" v-model:value="formState.theme" placeholder="请选择主题">
+                    <a-select-option v-for="item in themeList" :key="item.color">{{item.name}}</a-select-option>
+                </a-select>
+            </a-form-item>
+        </a-form>
         <div
                 :style="{
                 position: 'absolute',
@@ -29,7 +33,7 @@
     </a-drawer>
 </template>
 <script>
-    import {defineComponent, ref} from 'vue';
+    import {defineComponent, ref, reactive} from 'vue';
 
     export default defineComponent({
         setup() {
@@ -44,11 +48,51 @@
                 visible.value = false;
             };
 
+            const themeList = [
+                {
+                    name: '默认',
+                    color: '#992777'
+                },
+                {
+                    name: '薄暮',
+                    color: '#F5222D'
+                },
+                {
+                    name: '火山',
+                    color: '#FA541C'
+                },
+                {
+                    name: '日暮',
+                    color: '#FAAD14'
+                },
+                {
+                    name: '明清',
+                    color: '#13C2C2'
+                }
+            ]
+
+            const formState = reactive({
+                theme: themeList[0].color,
+            });
+
+            const changeTheme = (value) => {
+                window.less.modifyVars({'@primary-color': value});
+            }
+
             return {
                 placement,
                 visible,
                 showDrawer,
                 onClose,
+                labelCol: {
+                    span: 10,
+                },
+                wrapperCol: {
+                    span: 14,
+                },
+                formState,
+                themeList,
+                changeTheme
             };
         },
     });
