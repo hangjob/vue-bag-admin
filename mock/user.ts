@@ -5,6 +5,7 @@ import {resData} from './baseCommon'
 Mock.mock("/yxs/userinfo", 'post', (options: any) => {
     const data = Mock.mock({
         id: "@id",
+        token: "@id",
         username: '@name',
         createTime: "@datetime(yy-MM-dd HH:mm:ss)",
         text: "@cparagraph(5)",

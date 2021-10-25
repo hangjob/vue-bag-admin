@@ -71,8 +71,8 @@
         setup() {
             const ThemeSetting = ref()
             const store = useStore();
-            const list = computed(() => store.getters.tabViewsPath);
-
+            const list = computed(() => store.getters['app/tabViewsPath']);
+            console.log(list)
             const handleOpenThemeSetting = () => {
                 ThemeSetting.value.showDrawer()
             }
