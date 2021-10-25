@@ -24,7 +24,7 @@
 import {computed, defineComponent, inject, onMounted, ref} from 'vue'
 import {useStore} from "vuex";
 import {CaretLeftFilled, CaretRightFilled, CloseOutlined} from '@ant-design/icons-vue';
-import {useRoute, useRouter} from "vue-router";
+import {useRouter} from "vue-router";
 import {last} from '@/utils/lodash'
 
 export default defineComponent({
@@ -119,6 +119,7 @@ export default defineComponent({
     }
 })
 </script>
+<!--suppress LessResolvedByNameOnly -->
 <style lang="less" scoped>
 .layout-header_scroller {
     background-color: transparent;
@@ -140,7 +141,7 @@ export default defineComponent({
             background-color: #ffffff;
 
             .icon-svg {
-                color: #2f54eb;
+                color: @primary-color;
             }
         }
 
@@ -181,7 +182,7 @@ export default defineComponent({
         }
 
         &.active {
-            color: #1890ff;
+            color: @primary-color;
         }
 
         .icon-svg {
@@ -190,7 +191,7 @@ export default defineComponent({
         }
 
         &:hover {
-            color: #1890ff;
+            color: @primary-color;
 
             .icon-svg {
                 font-size: inherit;

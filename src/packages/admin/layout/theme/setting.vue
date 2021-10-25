@@ -1,21 +1,21 @@
 <template>
     <a-drawer
-            title="设置主题"
-            :placement="placement"
-            :closable="false"
-            :width="400"
-            :visible="visible"
-            @close="onClose"
+        title="设置主题"
+        :placement="placement"
+        :closable="false"
+        :width="400"
+        :visible="visible"
+        @close="onClose"
     >
         <a-form :model="formState" labelAlign="right" :label-col="labelCol" :wrapper-col="wrapperCol">
             <a-form-item labelAlign="left" label="主题设置">
                 <a-select @change="changeTheme" v-model:value="formState.theme" placeholder="请选择主题">
-                    <a-select-option v-for="item in themeList" :key="item.color">{{item.name}}</a-select-option>
+                    <a-select-option v-for="item in themeList" :key="item.path">{{ item.name }}</a-select-option>
                 </a-select>
             </a-form-item>
         </a-form>
         <div
-                :style="{
+            :style="{
                 position: 'absolute',
                 bottom: 0,
                 width: '100%',
@@ -32,68 +32,53 @@
         </div>
     </a-drawer>
 </template>
-<script>
-    import {defineComponent, ref, reactive} from 'vue';
+<script lang="ts">
+import {defineComponent, reactive, ref} from 'vue';
+import {themeList} from '@/packages/admin/theme/utils'
+import {theme} from "@/packages/admin/config";
+import {find} from "@/utils/lodash";
+import darkVars from '@/config/dark.json';
+export default defineComponent({
+    setup() {
+        const placement = ref('right');
+        const visible = ref(false);
 
-    export default defineComponent({
-        setup() {
-            const placement = ref('right');
-            const visible = ref(false);
+        const showDrawer = () => {
+            visible.value = true;
+        };
 
-            const showDrawer = () => {
-                visible.value = true;
-            };
+        const onClose = () => {
+            visible.value = false;
+        };
 
-            const onClose = () => {
-                visible.value = false;
-            };
 
-            const themeList = [
-                {
-                    name: '默认',
-                    color: '#992777'
-                },
-                {
-                    name: '薄暮',
-                    color: '#F5222D'
-                },
-                {
-                    name: '火山',
-                    color: '#FA541C'
-                },
-                {
-                    name: '日暮',
-                    color: '#FAAD14'
-                },
-                {
-                    name: '明清',
-                    color: '#13C2C2'
-                }
-            ]
+        const cacheTheme = localStorage.getItem(theme.catchKey);
+        let data = find({key: 'path', value: cacheTheme}, themeList)
+        const formState = reactive({
+            theme: data ? data.path : themeList[0].path,
+        });
 
-            const formState = reactive({
-                theme: themeList[0].color,
-            });
+        const changeTheme = (path: string) => {
+            window['less'].modifyVars({
+                '@primary-color':'blue'
+            }).then(console.log);
+        }
 
-            const changeTheme = (value) => {
-                window.less.modifyVars({'@primary-color': value});
-            }
-
-            return {
-                placement,
-                visible,
-                showDrawer,
-                onClose,
-                labelCol: {
-                    span: 10,
-                },
-                wrapperCol: {
-                    span: 14,
-                },
-                formState,
-                themeList,
-                changeTheme
-            };
-        },
-    });
+        return {
+            placement,
+            visible,
+            showDrawer,
+            onClose,
+            labelCol: {
+                span: 10,
+            },
+            wrapperCol: {
+                span: 14,
+            },
+            formState,
+            themeList,
+            changeTheme
+        };
+    },
+});
 </script>
