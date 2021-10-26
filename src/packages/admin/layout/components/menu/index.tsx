@@ -1,4 +1,4 @@
-import {computed, defineComponent, h, ref, watchEffect,watch} from 'vue'
+import {computed, defineComponent, h, ref, resolveComponent, watchEffect} from 'vue'
 import {useStore} from 'vuex'
 import {useRoute, useRouter} from "vue-router";
 
@@ -9,12 +9,14 @@ export default defineComponent({
         const router = useRouter();
         const route = useRoute();
 
+        const collapsed = computed(() => store.state.app.collapsed)
+
         const selectedKeys = ref<string[]>([])
         const openKeys = ref<string[]>([])
         const menuList = computed(() => store.getters['app/menuList']);
         // 是否可见
         const visible = ref<boolean>(true);
-
+        console.log('menuList', menuList)
         const goView = (url: string) => {
             if (url != route.path) {
                 router.push(url)
@@ -43,10 +45,12 @@ export default defineComponent({
             menuList,
             handleClick,
             openKeys,
-            visible
+            visible,
+            collapsed
         }
     },
     render(ctx: any) {
+
         const deepMenu = function (list: Array<any>) {
             let html = null;
             return list.filter((item: any) => item.isShow).map((item: any) => {
@@ -56,7 +60,7 @@ export default defineComponent({
                         {},
                         {
                             title: () => {
-                                return <span>{item.name}</span>
+                                return item.icon ? [h(resolveComponent(item.icon)), h('span', item.name)] : h('span', item.name)
                             },
                             default: () => {
                                 let children = item.children.map((todo: any) => {
@@ -72,7 +76,8 @@ export default defineComponent({
                         {},
                         {
                             default: () => {
-                                return <span>{item.name}</span>
+                                // 主体渲染方式请看官方文档 https://v3.vuejs.org/guide/render-function.html#return-values-for-render-functions
+                                return item.icon ? [h(resolveComponent(item.icon)), h('span', item.name)] : h('span', item.name)
                             }
                         }
                     )
@@ -87,6 +92,7 @@ export default defineComponent({
                     <a-menu
                         v-model:selectedKeys={ctx.selectedKeys}
                         v-model:openKeys={ctx.openKeys}
+                        inline-collapsed={ctx.collapsed}
                         mode="inline"
                         onClick={ctx.handleClick}
                         theme="light">

@@ -16,6 +16,11 @@ setupRouter(app)
 app.use(store)
 app.use(Antd)
 
+import * as antIcons from '@ant-design/icons-vue'
+Object.keys(antIcons).forEach(key => {
+    // @ts-ignore
+    app.component(key, antIcons[key])
+})
 
 setupGlobDirectives(app)
 router.isReady().then(() => {

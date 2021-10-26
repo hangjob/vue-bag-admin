@@ -46,6 +46,7 @@ const arr = [
     {
         name: '组件库',
         router: '',
+        icon:'HomeFilled',
         isShow: 1,
         children: [
             {

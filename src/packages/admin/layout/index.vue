@@ -1,9 +1,7 @@
 <template>
     <a-layout style="height: 100%">
-        <div class="slider-container" theme="light">
-            <Slider/>
-        </div>
-        <a-layout class="layout">
+        <Slider/>
+        <a-layout class="layout" :class="$store.state.app.collapsed ? 'layout-is-collapse' : null">
             <HeaderTop/>
             <HeaderProcess/>
             <LayoutContainer/>
@@ -13,10 +11,8 @@
         </a-layout>
     </a-layout>
 </template>
-<!--https://show.cool-admin.com/-->
 <script lang="ts">
-import {DesktopOutlined, FileOutlined, PieChartOutlined, TeamOutlined, UserOutlined,} from '@ant-design/icons-vue';
-import {defineComponent, ref} from 'vue';
+import {defineComponent} from 'vue';
 import Slider from './slider.vue'
 import HeaderTop from './headerTop.vue'
 import HeaderProcess from './headerProcess.vue'
@@ -24,33 +20,14 @@ import LayoutContainer from './layoutContainer.vue'
 
 export default defineComponent({
     components: {
-        PieChartOutlined,
-        DesktopOutlined,
-        UserOutlined,
-        TeamOutlined,
-        FileOutlined,
         Slider,
         HeaderTop,
         HeaderProcess,
         LayoutContainer
-    },
-    data() {
-        return {
-            collapsed: ref<boolean>(false),
-            selectedKeys: ref<string[]>(['1']),
-        };
-    },
+    }
 });
 </script>
 <style lang="less" scoped>
-.slider-container {
-    position: fixed;
-    left: 0;
-    height: 100%;
-    width: 250px;
-    background-color: #ffffff
-}
-
 .layout {
     display: flex;
     flex-direction: column;
@@ -64,5 +41,9 @@ export default defineComponent({
         background-color: #ffffff;
         font-size: 12px;
     }
+}
+
+.layout-is-collapse {
+    margin-left: 64px;
 }
 </style>

@@ -1,58 +1,69 @@
 <template>
-    <div class="left-sider">
-        <div class="left-sider-logo">
-<!--            YXS-ADMIN-->
-        </div>
-        <div class="left-sider-menu scroll">
-            <YxsMenuSlider/>
+    <div class="slider-container" :class="$store.state.app.collapsed ? 'slider-is-collapse' : null">
+        <div class="left-slider">
+            <div class="left-slider-logo">
+                <!--            YXS-ADMIN-->
+            </div>
+            <div class="left-slider-menu scroll">
+                <YxsMenuSlider/>
+            </div>
         </div>
     </div>
 </template>
 <script lang="ts">
-    import {DesktopOutlined, PieChartOutlined, UserOutlined,} from '@ant-design/icons-vue';
-    import {defineComponent, ref} from 'vue';
-    import YxsMenuSlider from '@/packages/admin/layout/components/menu/index.tsx'
+import {defineComponent} from 'vue';
+import YxsMenuSlider from '@/packages/admin/layout/components/menu/index.tsx'
 
-    export default defineComponent({
-        name: 'Slider',
-        components: {
-            DesktopOutlined,
-            PieChartOutlined,
-            UserOutlined,
-            YxsMenuSlider
-        },
-        data() {
-            return {
-                selectedKeys: ref<string[]>(['1']),
-            };
-        },
-    })
+export default defineComponent({
+    name: 'Slider',
+    components: {
+        YxsMenuSlider
+    },
+    setup() {
+
+    }
+})
 </script>
 <style lang="less" scoped>
-    .left-sider {
+.slider-container {
+    position: fixed;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    background-color: #ffffff;
+    transition: all 0.4s;
+}
+
+.slider-is-collapse {
+    width: 64px;
+    border-right: 0;
+}
+
+.left-slider {
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 34px);
+
+    .left-slider-logo {
         display: flex;
-        flex-direction: column;
-        height: calc(100% - 34px);
+        align-items: center;
+        justify-content: center;
+        height: 80px;
+        cursor: pointer;
+        background-color: #2f3447;
+        color: #ffffff;
+        font-size: 28px;
+        font-weight: bold;
+    }
 
-        .left-sider-logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 80px;
-            cursor: pointer;
-            background-color: #2f3447;
-            color: #ffffff;
-            font-size: 28px;
-            font-weight: bold;
-        }
+    .left-slider-menu {
+        overflow: hidden auto;
+        flex: 1;
 
-        .left-sider-menu {
-            overflow: hidden auto;
-            flex: 1;
 
-            /deep/ ul {
-                border-right: none;
-            }
+        /deep/ ul {
+            border-right: none;
         }
     }
+}
 </style>

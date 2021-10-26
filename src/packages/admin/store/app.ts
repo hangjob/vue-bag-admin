@@ -13,7 +13,8 @@ const app = {
         menuList: defaultMenu,
         processList: [].concat(defaultTabFixs()), // tab切换栏
         currentRouter: {}, // 当前路由数据
-        tabViewsPath: [] // 访问路经
+        tabViewsPath: [], // 访问路经
+        collapsed: false // 菜单是否折叠
     },
     // 定义getters 好处可以过滤数据
     getters: {
@@ -64,6 +65,9 @@ const app = {
         // 更新tab栏路由
         updateTabViewsPath(state: any, arr: Array<any>) {
             state.tabViewsPath = arr.reverse()
+        },
+        updateCollapsed(state: any, bol: boolean) {
+            state.collapsed = bol
         }
     }
 }
