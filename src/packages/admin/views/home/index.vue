@@ -2,7 +2,7 @@
     <YxsCard>
         <template v-slot:title>欢迎您</template>
         <div class="welcome">
-            <!--            <div class="head"><img src="@/assets/yanghang.jpg" alt=""></div>-->
+            <div class="head"><img src="@/assets/yanghang.jpg" alt=""></div>
             <div class="des">
                 <h1>嗨，下午好，我是羊先生，准备吃什么呢?</h1>
                 <p>前端工程师 |
@@ -11,13 +11,13 @@
         </div>
     </YxsCard>
     <div>
-        <YxsCard style="width: 40%">
-            <template v-slot:title>信息</template>
+        <YxsCard style="width: 45%">
+            <template v-slot:title>每月/收益额</template>
             <div class="project-info">
-
+                <div id="container" ref="mountNode"></div>
             </div>
         </YxsCard>
-        <YxsCard style="width: 59%;margin-left: 1%">
+        <YxsCard style="width: 54%;margin-left: 1%">
             <template v-slot:title>信息</template>
             <div class="project-info">
                 <a-table :showHeader="false" size="small" :columns="columns" :data-source="data" bordered
@@ -39,92 +39,129 @@
     </div>
 </template>
 <script lang="ts">
-import {defineComponent} from 'vue'
+    import {defineComponent, ref, onMounted} from 'vue'
+    import G2 from '@antv/g2';
+    import {Chart} from '@antv/g2';
+    
+    const columns = [
+        {
+            title: 'Name', dataIndex: 'name', className: 'column-title', width: 200
+        },
+        {
+            title: 'Cash Assets', className: 'column-value', dataIndex: 'versions',
+        },
+        {
+            title: 'Address', dataIndex: 'name2', className: 'column-title', width: 200
+        },
+        {
+            title: 'Address', className: 'column-value', dataIndex: 'versions2',
+        },
+    ];
+    const data = [
+        {
+            key: '1', name: 'Vue', versions: '^3.2.16', name2: 'Vite', versions2: '^2.6.0'
+        },
+        {
+            key: '2', name: 'Vuex', versions: '^4.0.2', name2: 'Vue-router', versions2: '^4.0.12'
+        },
+        {
+            key: '3', name: 'Ant-design-vue', versions: '^2.2.8', name2: 'Axios', versions2: '^0.23.0'
+        },
+    ];
+    export default defineComponent({
+        setup() {
+            onMounted(() => {
+                const data = [
+                    {year: '1 月', sales: 38},
+                    {year: '2 月', sales: 52},
+                    {year: '3 月', sales: 61},
+                    {year: '4 月', sales: 145},
+                    {year: '5 月', sales: 48},
+                    {year: '6 月', sales: 38},
+                    {year: '7 月', sales: 38},
+                    {year: '8 月', sales: 52},
+                    {year: '9 月', sales: 61},
+                    {year: '10 月', sales: 145},
+                    {year: '11 月', sales: 48},
+                    {year: '12 月', sales: 38},
+                ];
+                const chart = new Chart({
+                    container: 'container',
+                    autoFit: true,
+                    height: 208,
+                });
 
-const columns = [
-    {
-        title: 'Name', dataIndex: 'name', className: 'column-title', width: 200
-    },
-    {
-        title: 'Cash Assets', className: 'column-value', dataIndex: 'versions',
-    },
-    {
-        title: 'Address', dataIndex: 'name2', className: 'column-title', width: 200
-    },
-    {
-        title: 'Address', className: 'column-value', dataIndex: 'versions2',
-    },
-];
-const data = [
-    {
-        key: '1', name: 'Vue', versions: '^3.2.16', name2: 'Vite', versions2: '^2.6.0'
-    },
-    {
-        key: '2', name: 'Vuex', versions: '^4.0.2', name2: 'Vue-router', versions2: '^4.0.12'
-    },
-    {
-        key: '3', name: 'Ant-design-vue', versions: '^2.2.8', name2: 'Axios', versions2: '^0.23.0'
-    },
-];
-export default defineComponent({
-    setup() {
-        return {
-            data,
-            columns,
+                chart.data(data);
+                chart.scale('sales', {
+                    nice: true,
+                });
+                chart.tooltip({
+                    showMarkers: false
+                });
+                chart.interaction('active-region');
+                chart.interval().position('year*sales').color('#13C2C2');
+                chart.render();
+
+            })
+            return {
+                data,
+                columns,
+            }
         }
-    }
-})
+    })
 </script>
 <style lang="less" scoped>
-.welcome {
-    display: flex;
-    align-items: center;
-
-    .head {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        overflow: hidden;
-        margin-right: 20px;
-    }
-
-    .des {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        height: 100%;
-        flex: 1;
-
-        p {
-            margin: 0;
-        }
-
-        h1 {
-            font-size: 20px;
-            font-weight: 600;
-            color: @heading-color;
-        }
-
-        p {
-            color: @text-color-secondary;
-        }
-    }
-}
-
-.project-info {
-    /deep/ .column-title {
-        background-color: #f7f7f7 !important;
-        text-align: right;
-        padding-right: 20px !important;
-    }
-    .down{
+    .welcome {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        p{
-            margin-bottom: 0;
-            color: @text-color-secondary;
+
+        .head {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 20px;
+        }
+
+        .des {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            height: 100%;
+            flex: 1;
+
+            p {
+                margin: 0;
+            }
+
+            h1 {
+                font-size: 20px;
+                font-weight: 600;
+                color: @heading-color;
+            }
+
+            p {
+                color: @text-color-secondary;
+            }
         }
     }
-}
+
+    .project-info {
+        /deep/ .column-title {
+            background-color: #f7f7f7 !important;
+            text-align: right;
+            padding-right: 20px !important;
+        }
+
+        .down {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            p {
+                margin-bottom: 0;
+                color: @text-color-secondary;
+            }
+        }
+    }
 </style>

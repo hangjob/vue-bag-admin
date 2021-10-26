@@ -7,6 +7,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@antv/g2": "^4.1.32",
     "ant-design-vue": "^2.2.8",
     "antd-theme-generator": "^1.2.6",
     "axios": "^0.23.0",
