@@ -1,4 +1,3 @@
-
 // 获取子节点，父级节点 链
 const getAllParentArr = (list: any, path: any) => {
     for (let i in list) {
@@ -8,7 +7,7 @@ const getAllParentArr = (list: any, path: any) => {
                 return [list[i]];
             }
             if (list[i].children) {
-                let node:any = getAllParentArr(list[i].children, path);
+                let node: any = getAllParentArr(list[i].children, path);
                 if (node !== undefined) {
                     //查询到把父节点连起来
                     return node.concat(list[i]);

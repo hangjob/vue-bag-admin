@@ -1,6 +1,6 @@
-import {computed, defineComponent, h, ref} from 'vue'
+import {computed, defineComponent, h, ref, watchEffect,watch} from 'vue'
 import {useStore} from 'vuex'
-import { useRoute, useRouter } from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 
 export default defineComponent({
     name: 'yxs-menu-slider',
@@ -9,25 +9,41 @@ export default defineComponent({
         const router = useRouter();
         const route = useRoute();
 
-        const selectedKeys = ref<string[]>(['7'])
-        const openKeys =  ref<string[]>(['4','6','7'])
+        const selectedKeys = ref<string[]>([])
+        const openKeys = ref<string[]>([])
         const menuList = computed(() => store.getters['app/menuList']);
+        // 是否可见
+        const visible = ref<boolean>(true);
 
-        const goView = (url:string)=>{
-            if(url != route.path){
+        const goView = (url: string) => {
+            if (url != route.path) {
                 router.push(url)
             }
         }
 
-        const handleClick = (res:any) => {
+        const handleClick = (res: any) => {
             goView(res.item['menu-info'].path);
         }
 
+        // 监听菜单变化 - 两种方式
+        // 一
+        // watch(() => store.getters['app/tabViewsPath'], (val, old) => {
+        //     const tabPaths = JSON.parse(JSON.stringify(val));
+        //     openKeys.value = tabPaths.map((item: any) => item.id) //
+        //     selectedKeys.value = [tabPaths.pop().id];
+        // }, {deep: false, immediate: true})
+        // 二
+        watchEffect(() => {
+            const tabPaths = JSON.parse(JSON.stringify(store.getters['app/tabViewsPath']));
+            openKeys.value = tabPaths.map((item: any) => item.id);
+            selectedKeys.value = [tabPaths.pop().id];
+        })
         return {
             selectedKeys,
             menuList,
             handleClick,
-            openKeys
+            openKeys,
+            visible
         }
     },
     render(ctx: any) {
@@ -66,16 +82,18 @@ export default defineComponent({
         }
         const children = deepMenu(ctx.menuList);
         return (
-            <div class="yxs-menu-slider">
-                <a-menu
-                    v-model:selectedKeys={ctx.selectedKeys}
-                    v-model:openKeys={ctx.openKeys}
-                    mode="inline"
-                    onClick={ctx.handleClick}
-                    theme="light">
-                {children}
-            </a-menu>
-    </div>
-    )
+            ctx.visible && (
+                <div class="yxs-menu-slider">
+                    <a-menu
+                        v-model:selectedKeys={ctx.selectedKeys}
+                        v-model:openKeys={ctx.openKeys}
+                        mode="inline"
+                        onClick={ctx.handleClick}
+                        theme="light">
+                        {children}
+                    </a-menu>
+                </div>
+            )
+        )
     }
 })

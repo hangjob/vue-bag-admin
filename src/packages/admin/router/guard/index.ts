@@ -25,9 +25,7 @@ function setAppStoreData(to: any, from: any, next: any) {
         ...to
     })
 
-    store.commit('app/updateTabViewsPath', getAllParentArr(store.getters['app/menuList'], to.path))
-
-
+    store.commit('app/updateTabViewsPath',getAllParentArr(store.getters['app/menuList'], to.path))
 }
 
 // 处理user-store数据

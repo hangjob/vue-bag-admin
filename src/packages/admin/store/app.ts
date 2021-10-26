@@ -63,7 +63,7 @@ const app = {
         },
         // 更新tab栏路由
         updateTabViewsPath(state: any, arr: Array<any>) {
-            state.tabViewsPath = arr.reverse();
+            state.tabViewsPath = arr.reverse()
         }
     }
 }

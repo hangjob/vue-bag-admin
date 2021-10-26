@@ -32,6 +32,6 @@ Mock.mock("/yxs/userinfo", 'post', (options: any) => {
 
 
 // 数据延迟
-Mock.setup({
-    timeout: "500-1000"
-});
+// Mock.setup({
+//     timeout: "500-800"
+// });

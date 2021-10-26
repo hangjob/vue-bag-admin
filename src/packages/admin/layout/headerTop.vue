@@ -46,87 +46,88 @@
 </template>
 
 <script lang="ts">
-    import {computed, defineComponent, ref} from 'vue'
-    import {useStore} from 'vuex'
-    import ThemeSetting from './theme/setting.vue'
-    import {
+import {computed, defineComponent, ref} from 'vue'
+import {useStore} from 'vuex'
+import ThemeSetting from './theme/setting.vue'
+import {
+    BellOutlined,
+    ClearOutlined,
+    DownOutlined,
+    ExpandOutlined,
+    SearchOutlined,
+    SyncOutlined
+} from '@ant-design/icons-vue';
+
+export default defineComponent({
+    components: {
+        SearchOutlined,
         BellOutlined,
+        ExpandOutlined,
+        SyncOutlined,
         ClearOutlined,
         DownOutlined,
-        ExpandOutlined,
-        SearchOutlined,
-        SyncOutlined
-    } from '@ant-design/icons-vue';
-
-    export default defineComponent({
-        components: {
-            SearchOutlined,
-            BellOutlined,
-            ExpandOutlined,
-            SyncOutlined,
-            ClearOutlined,
-            DownOutlined,
-            ThemeSetting
-        },
-        setup() {
-            const ThemeSetting = ref()
-            const store = useStore();
-            const list = computed(() => store.getters['app/tabViewsPath']);
-            const handleOpenThemeSetting = () => {
-                ThemeSetting.value.showDrawer()
-            }
-
-            return {
-                list,
-                ThemeSetting,
-                handleOpenThemeSetting
-            }
+        ThemeSetting
+    },
+    setup() {
+        const ThemeSetting = ref()
+        const store = useStore();
+        const list = computed(() => store.getters['app/tabViewsPath']);
+        const handleOpenThemeSetting = () => {
+            console.log(list.value)
+            ThemeSetting.value.showDrawer()
         }
-    })
+
+        return {
+            list,
+            ThemeSetting,
+            handleOpenThemeSetting
+        }
+    }
+})
 </script>
 <style lang="less" scoped>
-    .layout-header {
-        display: flex;
-        background-color: #fff;
-        align-items: center;
-        padding-right: 10px;
+.layout-header {
+    display: flex;
+    background-color: #fff;
+    align-items: center;
+    padding-right: 10px;
 
-        &_top {
+    &_top {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #f0f0f0;
+        background-color: #fff;
+        padding: 0 16px;
+        box-sizing: border-box;
+        flex: 1;
+        line-height: 50px;
+        height: 50px;
+    }
+
+    &_right_menu {
+        display: flex;
+
+        .right_menu-item {
+            margin-right: 25px;
             display: flex;
             align-items: center;
-            border-bottom: 1px solid #f0f0f0;
-            background-color: #fff;
-            padding: 0 16px;
-            box-sizing: border-box;
-            flex: 1;
-            line-height: 50px;
-            height: 50px;
-        }
+            cursor: pointer;
 
-        &_right_menu {
-            display: flex;
+            &:last-of-type {
+                margin-right: 0;
+            }
 
-            .right_menu-item {
-                margin-right: 25px;
-                display: flex;
-                align-items: center;
-                cursor: pointer;
+            .icon-svg {
+                font-size: 15px;
+            }
 
-                &:last-of-type {
-                    margin-right: 0;
-                }
-
-                .icon-svg {
-                    font-size: 15px;
-                }
-
-                .user-head {
-                    width: 36px;
-                    height: 36px;
-                    border-radius: 50%;
-                    margin-right: 5px;
-                }
+            .user-head {
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                margin-right: 5px;
             }
         }
     }
+}
 </style>
