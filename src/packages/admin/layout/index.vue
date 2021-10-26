@@ -6,7 +6,7 @@
             <HeaderProcess/>
             <LayoutContainer/>
             <div class="layout-footer">
-                Ant Design ©2018 Created by Ant UED
+                Yxs Admin ©2021 <a-typography-link href="//www.vipbic.com">www.vipbic.com</a-typography-link>
             </div>
         </a-layout>
     </a-layout>
@@ -44,6 +44,6 @@ export default defineComponent({
 }
 
 .layout-is-collapse {
-    margin-left: 64px;
+    margin-left: 80px;
 }
 </style>

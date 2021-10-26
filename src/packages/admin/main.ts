@@ -9,20 +9,22 @@ import "ant-design-vue/dist/antd.less";
 import '@/style/scrollbar.less'
 import '@/style/transition.less'
 import {setupGlobDirectives} from '@/packages/admin/directive'
+import {setupGlobComponents} from '@/components'
 import '../../../mock'
+import * as antIcons from '@ant-design/icons-vue'
 
 const app = createApp(App)
 setupRouter(app)
 app.use(store)
 app.use(Antd)
 
-import * as antIcons from '@ant-design/icons-vue'
 Object.keys(antIcons).forEach(key => {
     // @ts-ignore
     app.component(key, antIcons[key])
 })
 
 setupGlobDirectives(app)
+setupGlobComponents(app)
 router.isReady().then(() => {
     app.mount('#app')
 })

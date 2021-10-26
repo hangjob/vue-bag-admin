@@ -35,7 +35,7 @@ export default defineComponent({
 }
 
 .slider-is-collapse {
-    width: 64px;
+    width: 80px;
     border-right: 0;
 }
 

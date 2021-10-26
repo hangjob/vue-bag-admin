@@ -127,6 +127,8 @@ export default defineComponent({
     display: flex;
     align-items: center;
     position: relative;
+    box-shadow: 0 1px 3px rgba(184, 184, 184, 0.5);
+    z-index: 101;
 
     .tab-action {
         cursor: pointer;

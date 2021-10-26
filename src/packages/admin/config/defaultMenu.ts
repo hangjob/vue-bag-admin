@@ -30,7 +30,7 @@ const arr = [
     {
         name: '系统管理',
         router: '',
-        icon: 'HomeFilled',
+        icon: 'SettingOutlined',
         isShow: 1,
         children: [
             {
@@ -46,13 +46,13 @@ const arr = [
     {
         name: '组件库',
         router: '',
-        icon:'HomeFilled',
+        icon:'SendOutlined',
         isShow: 1,
         children: [
             {
                 name: 'Markdown编辑器',
                 path: '/module/markdown',
-                icon: 'HomeFilled',
+                icon: 'ReadOutlined',
                 isShow: 1,
                 tabHidden: true,
                 tabFix: false
@@ -60,21 +60,29 @@ const arr = [
             {
                 name: '解析Exel',
                 path: '/module/exel',
-                icon: 'HomeFilled',
+                icon: 'InsertRowBelowOutlined',
                 isShow: 1,
                 tabHidden: false,
                 tabFix: false
             },
             {
-                name: '文件上传',
+                name: '上传',
                 path: '',
-                icon: 'UploadOutlined',
+                icon: 'FolderAddOutlined',
                 isShow: 1,
                 children: [
                     {
                         name: '图片上传',
                         path: '/module/fileUploadImg',
-                        icon: 'UploadOutlined',
+                        icon: 'FileImageOutlined',
+                        isShow: 1,
+                        tabHidden: false,
+                        tabFix: false
+                    },
+                    {
+                        name: '文件上传',
+                        path: '/module/fileUploadImg',
+                        icon: 'FileAddOutlined',
                         isShow: 1,
                         tabHidden: false,
                         tabFix: false
@@ -84,16 +92,16 @@ const arr = [
         ]
     },
     {
-        name: '关于',
-        path: '/about',
-        icon: 'UserOutlined',
+        name: '权限控制',
+        path: '/permit',
+        icon: 'UserSwitchOutlined',
         isShow: 1,
         tabHidden: false,
         tabFix: false
     },
     {
-        name: '权限控制',
-        path: '/permit',
+        name: '关于',
+        path: '/about',
         icon: 'UserOutlined',
         isShow: 1,
         tabHidden: false,
