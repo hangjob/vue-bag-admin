@@ -113,6 +113,7 @@ export default defineComponent({
         const beforeUpload = (file: any) => {
             readExcelToJson(file).then((res: any) => {
                 console.log(res)
+                console.log(generateTreeData(res))
             })
             return false;
         };

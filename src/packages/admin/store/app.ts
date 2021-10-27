@@ -1,6 +1,6 @@
 import {defaultMenu} from "@/packages/admin/config/defaultMenu";
 import {find, findContainingObject, remove} from "@/utils/lodash";
-
+import {getBrowser} from '@/utils/utils'
 
 // 默认菜单
 const defaultTabFixs = () => {
@@ -10,6 +10,7 @@ const defaultTabFixs = () => {
 const app = {
     namespaced: true,
     state: {
+        browser: {},
         menuList: defaultMenu,
         processList: [].concat(defaultTabFixs()), // tab切换栏
         currentRouter: {}, // 当前路由数据
@@ -30,6 +31,9 @@ const app = {
         tabViewsPath: (state: any) => {
             return state.tabViewsPath;
         },
+        getBrowser: (state: any) => {
+            return state.browser;
+        }
     },
     mutations: {
         // 添加头部路由标签
@@ -68,6 +72,10 @@ const app = {
         },
         updateCollapsed(state: any, bol: boolean) {
             state.collapsed = bol
+        },
+        // 更新当前设备信息
+        updateBrowser(state: any) {
+            state.browser = getBrowser()
         }
     }
 }

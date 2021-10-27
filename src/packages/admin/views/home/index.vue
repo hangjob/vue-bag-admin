@@ -1,167 +1,359 @@
 <template>
-    <YxsCard>
-        <template v-slot:title>欢迎您</template>
-        <div class="welcome">
-            <div class="head"><img src="@/assets/yanghang.jpg" alt=""></div>
-            <div class="des">
-                <h1>嗨，下午好，我是羊先生，准备吃什么呢?</h1>
-                <p>前端工程师 |
-                    品茗股份，Yxs-Admin，采用Vite2.0、Vue3.2、TypeScript、JavaScript构建，支持多种写法和调用，完整的框架体系，适合企业中后台管理系统，支持现有业务各种扩展....</p>
-            </div>
-        </div>
-    </YxsCard>
-    <div>
-        <YxsCard style="width: 45%">
-            <template v-slot:title>每月/收益额</template>
-            <div class="project-info">
-                <div id="container" ref="mountNode"></div>
-            </div>
-        </YxsCard>
-        <YxsCard style="width: 54%;margin-left: 1%">
-            <template v-slot:title>信息</template>
-            <div class="project-info">
-                <a-table :showHeader="false" size="small" :columns="columns" :data-source="data" bordered
-                         :pagination="false">
-                    <template #title>插件库信息</template>
-                    <template #footer>
-                        <div class="down">
-                            <p>快到碗里来</p>
-                            <a-button-group>
-                                <a-button type="primary">使用文档</a-button>
-                                <a-button type="primary">GitHub</a-button>
-                                <a-button type="primary">点击下载</a-button>
-                            </a-button-group>
+    <a-row>
+        <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+            <yxs-card>
+                <template v-slot:title>欢迎您</template>
+                <div class="welcome">
+                    <!--            <div class="head"><img src="@/assets/yanghang.jpg" alt=""></div>-->
+                    <div class="des">
+                        <h1>嗨，下午好，我是羊先生，准备吃什么呢?</h1>
+                        <p>前端工程师 |
+                            品茗股份，Yxs-Admin，采用Vite2.0、Vue3.2、TypeScript、JavaScript构建，支持多种写法和调用，完整的框架体系，适合企业中后台管理系统，支持现有业务各种扩展....</p>
+                    </div>
+                </div>
+            </yxs-card>
+        </a-col>
+    </a-row>
+    <a-row :gutter="[16,0]">
+        <a-col :xs="24" :sm="24" :md="24" :lg="10" :xl="10">
+            <Returns/>
+        </a-col>
+        <a-col :xs="24" :sm="24" :md="24" :lg="14" :xl="14">
+            <ProjectInfo/>
+        </a-col>
+    </a-row>
+    <a-row :gutter="[16,0]">
+        <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="8">
+            <yxs-card>
+                <div class="money">
+                    <div class="money-header">
+                        <span class="label">2021全国销售额</span>
+                        <span class="value">￥15920.00</span>
+                    </div>
+                    <div class="money-content">
+                        <ul>
+                            <li>
+                                <span>7月同比</span>
+                                <div class="rise">
+                                    <RiseOutlined/>
+                                    <span>+8%</span>
+                                </div>
+                            </li>
+
+                            <li>
+                                <span>8月同比</span>
+                                <div class="fall">
+                                    <FallOutlined/>
+                                    <span>-6%</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="money-footer">
+                        <span class="label">月均销售额</span>
+                        <span class="value">￥1362.00</span>
+                    </div>
+                </div>
+            </yxs-card>
+        </a-col>
+        <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="8">
+            <yxs-card>
+                <div class="money">
+                    <div class="money-header">
+                        <span class="label">总销售额</span>
+                        <span class="value">￥15920</span>
+                    </div>
+                    <div class="money-content">
+                        <ul>
+                            <li>
+                                <span>7月同比</span>
+                                <div class="rise">
+                                    <RiseOutlined/>
+                                    <span>+8%</span>
+                                </div>
+                            </li>
+
+                            <li>
+                                <span>8月同比</span>
+                                <div class="fall">
+                                    <FallOutlined/>
+                                    <span>-6%</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="money-footer">
+                        <span class="label">日销售额</span>
+                        <span class="value">￥1298.00</span>
+                    </div>
+                </div>
+            </yxs-card>
+        </a-col>
+        <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="8">
+            <yxs-card>
+                <div class="money">
+                    <div class="money-header">
+                        <span class="label">总销售额</span>
+                        <span class="value">￥15920</span>
+                    </div>
+                    <div class="money-content">
+                        <ul>
+                            <li>
+                                <span>7月同比</span>
+                                <div class="rise">
+                                    <RiseOutlined/>
+                                    <span>+8%</span>
+                                </div>
+                            </li>
+
+                            <li>
+                                <span>8月同比</span>
+                                <div class="fall">
+                                    <FallOutlined/>
+                                    <span>-6%</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="money-footer">
+                        <span class="label">日销售额</span>
+                        <span class="value">￥1298.00</span>
+                    </div>
+                </div>
+            </yxs-card>
+        </a-col>
+    </a-row>
+    <a-row :gutter="[16,0]">
+        <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="10">
+            <yxs-card class="profit">
+                <template v-slot:title>
+                    <div class="profit-header">
+                        <div class="profit-header-title">项目盈利占比</div>
+                        <div class="profit-header-tab">
+                            <span class="active">今天</span>
+                            <span>本月</span>
+                            <span>本年</span>
+                            <span>预测</span>
                         </div>
-                    </template>
-                </a-table>
-            </div>
-        </YxsCard>
-    </div>
+                    </div>
+                </template>
+                <div class="profit-content">
+                    <ul>
+                        <li>
+                            <strong>1</strong>
+                            <p>品茗信息有限公司</p>
+                            <span>$42231.00</span>
+                        </li>
+                        <li>
+                            <strong>2</strong>
+                            <p>品茗信息有限公司</p>
+                            <span>$42231.00</span>
+                        </li>
+                        <li>
+                            <strong>3</strong>
+                            <p>品茗信息有限公司</p>
+                            <span>$42231.00</span>
+                        </li>
+                        <li>
+                            <strong>4</strong>
+                            <p>品茗信息有限公司</p>
+                            <span>$42231.00</span>
+                        </li>
+                        <li>
+                            <strong>5</strong>
+                            <p>品茗信息有限公司</p>
+                            <span>$42231.00</span>
+                        </li>
+                    </ul>
+                </div>
+            </yxs-card>
+        </a-col>
+        <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="7">
+            <Ripple/>
+        </a-col>
+        <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="7">
+           <Dynamic/>
+        </a-col>
+    </a-row>
 </template>
 <script lang="ts">
-    import {defineComponent, ref, onMounted} from 'vue'
-    import G2 from '@antv/g2';
-    import {Chart} from '@antv/g2';
-    
-    const columns = [
-        {
-            title: 'Name', dataIndex: 'name', className: 'column-title', width: 200
-        },
-        {
-            title: 'Cash Assets', className: 'column-value', dataIndex: 'versions',
-        },
-        {
-            title: 'Address', dataIndex: 'name2', className: 'column-title', width: 200
-        },
-        {
-            title: 'Address', className: 'column-value', dataIndex: 'versions2',
-        },
-    ];
-    const data = [
-        {
-            key: '1', name: 'Vue', versions: '^3.2.16', name2: 'Vite', versions2: '^2.6.0'
-        },
-        {
-            key: '2', name: 'Vuex', versions: '^4.0.2', name2: 'Vue-router', versions2: '^4.0.12'
-        },
-        {
-            key: '3', name: 'Ant-design-vue', versions: '^2.2.8', name2: 'Axios', versions2: '^0.23.0'
-        },
-    ];
-    export default defineComponent({
-        setup() {
-            onMounted(() => {
-                const data = [
-                    {year: '1 月', sales: 38},
-                    {year: '2 月', sales: 52},
-                    {year: '3 月', sales: 61},
-                    {year: '4 月', sales: 145},
-                    {year: '5 月', sales: 48},
-                    {year: '6 月', sales: 38},
-                    {year: '7 月', sales: 38},
-                    {year: '8 月', sales: 52},
-                    {year: '9 月', sales: 61},
-                    {year: '10 月', sales: 145},
-                    {year: '11 月', sales: 48},
-                    {year: '12 月', sales: 38},
-                ];
-                const chart = new Chart({
-                    container: 'container',
-                    autoFit: true,
-                    height: 208,
-                });
+import {defineComponent} from 'vue'
+import Returns from './returns.vue'
+import ProjectInfo from './project-info.vue'
+import Ripple from './ripple.vue'
+import Dynamic from './dynamic.vue'
 
-                chart.data(data);
-                chart.scale('sales', {
-                    nice: true,
-                });
-                chart.tooltip({
-                    showMarkers: false
-                });
-                chart.interaction('active-region');
-                chart.interval().position('year*sales').color('#13C2C2');
-                chart.render();
 
-            })
-            return {
-                data,
-                columns,
-            }
-        }
-    })
+export default defineComponent({
+    components: {
+        Returns,
+        ProjectInfo,
+        Ripple,
+        Dynamic
+    }
+})
 </script>
 <style lang="less" scoped>
-    .welcome {
+.welcome {
+    display: flex;
+    align-items: center;
+
+    .head {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 20px;
+    }
+
+    .des {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        height: 100%;
+        flex: 1;
+
+        p {
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 20px;
+            font-weight: 600;
+            color: @heading-color;
+        }
+
+        p {
+            color: @text-color-secondary;
+        }
+    }
+}
+
+.money {
+    &-header, &-footer {
         display: flex;
         align-items: center;
 
-        .head {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-right: 20px;
-        }
-
-        .des {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            height: 100%;
-            flex: 1;
-
-            p {
-                margin: 0;
-            }
-
-            h1 {
-                font-size: 20px;
-                font-weight: 600;
-                color: @heading-color;
-            }
-
-            p {
-                color: @text-color-secondary;
-            }
+        .value {
+            font-size: 18px;
+            font-weight: bold;
+            margin-left: 10px;
         }
     }
 
-    .project-info {
-        /deep/ .column-title {
-            background-color: #f7f7f7 !important;
-            text-align: right;
-            padding-right: 20px !important;
-        }
-
-        .down {
+    &-content {
+        ul {
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0;
 
-            p {
-                margin-bottom: 0;
-                color: @text-color-secondary;
+            li {
+                display: flex;
+                list-style: none;
+                flex: 1;
+                color: #d8d8d8;
+
+                .fall,
+                .rise {
+                    display: flex;
+                    align-items: center;
+                    margin-left: 10px;
+                }
+
+                .fall {
+                    color: #13ae7c;
+                }
+
+                .rise {
+                    color: #f21e37;
+                }
             }
         }
     }
+
+    &-header, &-footer, &-content {
+        padding: 10px;
+    }
+}
+
+.market {
+    span {
+        margin-right: 20px;
+        color: @disabled-color;
+        cursor: pointer;
+    }
+
+    span.active {
+        color: @primary-color;
+    }
+}
+
+.profit {
+    &-header {
+        display: flex;
+
+        &-title {
+
+        }
+
+        &-tab {
+            flex: 1;
+            text-align: right;
+
+            span {
+                margin-left: 20px;
+                color: @disabled-color;
+                cursor: pointer;
+            }
+
+            span.active {
+                color: @primary-color;
+            }
+        }
+    }
+
+    &-content {
+        ul {
+            margin-bottom: 0;
+
+            li {
+                display: flex;
+                align-items: center;
+                padding: 10px 0;
+                cursor: pointer;
+
+                strong {
+                    display: inline-block;
+                    border-radius: 50%;
+                    text-align: center;
+                    font-size: 12px;
+                    width: 16px;
+                    height: 16px;
+                    line-height: 16px;
+                    margin-right: 10px;
+                    color: @primary-color;
+                }
+
+                p {
+                    margin: 0;
+                    flex: 1;
+                }
+
+                &:nth-last-child(n + 3) {
+                    strong {
+                        background-color: @primary-color;
+                        color: #fff;
+                    }
+                }
+
+                &:hover {
+                    p {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+}
 </style>

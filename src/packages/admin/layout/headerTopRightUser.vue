@@ -16,7 +16,7 @@
     <div class="right_menu-item" @click="handleOpenThemeSetting">
         <ClearOutlined class="icon-svg"/>
     </div>
-    <div class="right_menu-item">
+    <div class="right_menu-item hidden-xs">
         <img class="user-head" src="@/assets/yanghang.jpg" alt="">
         <a-dropdown>
             <a class="ant-dropdown-link" @click.prevent>

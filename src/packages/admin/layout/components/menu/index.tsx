@@ -9,6 +9,7 @@ export default defineComponent({
         const router = useRouter();
         const route = useRoute();
 
+        const browser = computed(() => store.getters['app/getBrowser']);
         const collapsed = computed(() => store.state.app.collapsed)
 
         const selectedKeys = ref<string[]>([])
@@ -39,6 +40,7 @@ export default defineComponent({
             const tabPaths = JSON.parse(JSON.stringify(store.getters['app/tabViewsPath']));
             openKeys.value = tabPaths.map((item: any) => item.id);
             selectedKeys.value = [tabPaths.pop().id];
+            console.log(browser)
         })
         return {
             selectedKeys,
@@ -46,7 +48,8 @@ export default defineComponent({
             handleClick,
             openKeys,
             visible,
-            collapsed
+            collapsed,
+            browser
         }
     },
     render(ctx: any) {
