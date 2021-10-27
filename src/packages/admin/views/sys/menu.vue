@@ -1,26 +1,50 @@
 <template>
     <yxs-table>
-        <a-table :columns="columns" :data-source="data" :row-selection="rowSelection" />
+        <a-table :columns="columns" size="middle" :bordered="true" :data-source="data" :row-selection="rowSelection" />
     </yxs-table>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
 const columns = [
     {
-        title: 'Name',
+        title: '名称',
         dataIndex: 'name',
         key: 'name',
     },
     {
-        title: 'Age',
+        title: '图表',
         dataIndex: 'age',
         key: 'age',
-        width: '12%',
     },
     {
-        title: 'Address',
+        title: '类型',
         dataIndex: 'address',
-        width: '30%',
+        key: 'address',
+    },
+    {
+        title: '节点路由',
+        dataIndex: 'address',
+        key: 'address',
+    },
+    {
+        title: '文件路径',
+        dataIndex: 'address',
+        key: 'address',
+    },
+    {
+        title: '路由缓存',
+        dataIndex: 'address',
+        key: 'address',
+    },
+    {
+        title: '权限',
+        dataIndex: 'address',
+        key: 'address',
+    },
+    {
+        title: '更新时间',
+        dataIndex: 'address',
+        width: '100',
         key: 'address',
     },
 ];
@@ -36,15 +60,15 @@ interface DataItem {
 const data: DataItem[] = [
     {
         key: 1,
-        name: 'John Brown sr.',
+        name: '系统管理',
         age: 60,
-        address: 'New York No. 1 Lake Park',
+        address: '2021-10-27 19:55:30',
         children: [
             {
                 key: 11,
-                name: 'John Brown',
+                name: '菜单列表',
                 age: 42,
-                address: 'New York No. 2 Lake Park',
+                address: '2021-10-27 19:55:30',
             },
             {
                 key: 12,
@@ -94,7 +118,7 @@ const data: DataItem[] = [
         key: 2,
         name: 'Joe Black',
         age: 32,
-        address: 'Sidney No. 1 Lake Park',
+        address: '2021-10-27 19:55:30',
     },
 ];
 
