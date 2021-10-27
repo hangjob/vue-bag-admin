@@ -129,7 +129,7 @@
                 <template v-slot:title>
                     <div class="profit-header">
                         <div class="profit-header-title">项目盈利占比</div>
-                        <div class="profit-header-tab">
+                        <div class="profit-header-tab  hidden-xs">
                             <span class="active">今天</span>
                             <span>本月</span>
                             <span>本年</span>
