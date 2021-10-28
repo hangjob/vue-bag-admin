@@ -172,188 +172,237 @@
             <Ripple/>
         </a-col>
         <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="7">
-           <Dynamic/>
+            <Dynamic/>
+        </a-col>
+    </a-row>
+    <a-row :gutter="[16,0]">
+        <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="10">
+            <yxs-card>
+                <template v-slot:title>项目进度</template>
+                <div class="schedule-strip">
+                    <a-progress :percent="30"/>
+                    <a-progress :percent="50" status="active"/>
+                    <a-progress :percent="70" status="exception"/>
+                    <a-progress :percent="100"/>
+                    <a-progress :percent="50" :show-info="false"/>
+                </div>
+            </yxs-card>
+        </a-col>
+        <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="8">
+            <yxs-card>
+                <template v-slot:title>项目进度</template>
+                <div class="schedule-lop">
+                    <a-progress type="circle" :percent="75"/>
+                    <a-progress type="circle" :percent="70" status="exception"/>
+                    <a-progress type="circle" :percent="100"/>
+                </div>
+            </yxs-card>
+        </a-col>
+        <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="6">
+            <yxs-card>
+                <template v-slot:title>时间轴</template>
+                <div class="timeline">
+                    <a-timeline pending="持续更新中..." :reverse="false">
+                        <a-timeline-item>Create a services site 2015-09-01</a-timeline-item>
+                        <a-timeline-item>Solve initial network problems 2015-09-01</a-timeline-item>
+                        <a-timeline-item>Technical testing 2015-09-01</a-timeline-item>
+                    </a-timeline>
+                </div>
+            </yxs-card>
         </a-col>
     </a-row>
 </template>
 <script lang="ts">
-import {defineComponent} from 'vue'
-import Returns from './returns.vue'
-import ProjectInfo from './project-info.vue'
-import Ripple from './ripple.vue'
-import Dynamic from './dynamic.vue'
+    import {defineComponent} from 'vue'
+    import Returns from './returns.vue'
+    import ProjectInfo from './project-info.vue'
+    import Ripple from './ripple.vue'
+    import Dynamic from './dynamic.vue'
 
 
-export default defineComponent({
-    components: {
-        Returns,
-        ProjectInfo,
-        Ripple,
-        Dynamic
-    }
-})
+    export default defineComponent({
+        components: {
+            Returns,
+            ProjectInfo,
+            Ripple,
+            Dynamic
+        }
+    })
 </script>
 <style lang="less" scoped>
-.welcome {
-    display: flex;
-    align-items: center;
-
-    .head {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        overflow: hidden;
-        margin-right: 20px;
-    }
-
-    .des {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        height: 100%;
-        flex: 1;
-
-        p {
-            margin: 0;
-        }
-
-        h1 {
-            font-size: 20px;
-            font-weight: 600;
-            color: @heading-color;
-        }
-
-        p {
-            color: @text-color-secondary;
-        }
-    }
-}
-
-.money {
-    &-header, &-footer {
+    .welcome {
         display: flex;
         align-items: center;
 
-        .value {
-            font-size: 18px;
-            font-weight: bold;
-            margin-left: 10px;
+        .head {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 20px;
         }
-    }
 
-    &-content {
-        ul {
+        .des {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0;
-
-            li {
-                display: flex;
-                list-style: none;
-                flex: 1;
-                color: #d8d8d8;
-
-                .fall,
-                .rise {
-                    display: flex;
-                    align-items: center;
-                    margin-left: 10px;
-                }
-
-                .fall {
-                    color: #13ae7c;
-                }
-
-                .rise {
-                    color: #f21e37;
-                }
-            }
-        }
-    }
-
-    &-header, &-footer, &-content {
-        padding: 10px;
-    }
-}
-
-.market {
-    span {
-        margin-right: 20px;
-        color: @disabled-color;
-        cursor: pointer;
-    }
-
-    span.active {
-        color: @primary-color;
-    }
-}
-
-.profit {
-    &-header {
-        display: flex;
-
-        &-title {
-
-        }
-
-        &-tab {
+            flex-direction: column;
+            justify-content: space-evenly;
+            height: 100%;
             flex: 1;
-            text-align: right;
 
-            span {
-                margin-left: 20px;
-                color: @disabled-color;
-                cursor: pointer;
+            p {
+                margin: 0;
             }
 
-            span.active {
-                color: @primary-color;
+            h1 {
+                font-size: 20px;
+                font-weight: 600;
+                color: @heading-color;
+            }
+
+            p {
+                color: @text-color-secondary;
             }
         }
     }
 
-    &-content {
-        ul {
-            margin-bottom: 0;
+    .money {
+        &-header, &-footer {
+            display: flex;
+            align-items: center;
 
-            li {
+            .value {
+                font-size: 18px;
+                font-weight: bold;
+                margin-left: 10px;
+            }
+        }
+
+        &-content {
+            ul {
                 display: flex;
+                justify-content: space-between;
                 align-items: center;
-                padding: 10px 0;
-                cursor: pointer;
+                margin-bottom: 0;
 
-                strong {
-                    display: inline-block;
-                    border-radius: 50%;
-                    text-align: center;
-                    font-size: 12px;
-                    width: 16px;
-                    height: 16px;
-                    line-height: 16px;
-                    margin-right: 10px;
+                li {
+                    display: flex;
+                    list-style: none;
+                    flex: 1;
+                    color: #d8d8d8;
+
+                    .fall,
+                    .rise {
+                        display: flex;
+                        align-items: center;
+                        margin-left: 10px;
+                    }
+
+                    .fall {
+                        color: #13ae7c;
+                    }
+
+                    .rise {
+                        color: #f21e37;
+                    }
+                }
+            }
+        }
+
+        &-header, &-footer, &-content {
+            padding: 10px;
+        }
+    }
+
+    .market {
+        span {
+            margin-right: 20px;
+            color: @disabled-color;
+            cursor: pointer;
+        }
+
+        span.active {
+            color: @primary-color;
+        }
+    }
+
+    .profit {
+        &-header {
+            display: flex;
+
+            &-title {
+
+            }
+
+            &-tab {
+                flex: 1;
+                text-align: right;
+
+                span {
+                    margin-left: 20px;
+                    color: @disabled-color;
+                    cursor: pointer;
+                }
+
+                span.active {
                     color: @primary-color;
                 }
+            }
+        }
 
-                p {
-                    margin: 0;
-                    flex: 1;
-                }
+        &-content {
+            ul {
+                margin-bottom: 0;
 
-                &:nth-last-child(n + 3) {
+                li {
+                    display: flex;
+                    align-items: center;
+                    padding: 10px 0;
+                    cursor: pointer;
+
                     strong {
-                        background-color: @primary-color;
-                        color: #fff;
+                        display: inline-block;
+                        border-radius: 50%;
+                        text-align: center;
+                        font-size: 12px;
+                        width: 16px;
+                        height: 16px;
+                        line-height: 16px;
+                        margin-right: 10px;
+                        color: @primary-color;
                     }
-                }
 
-                &:hover {
                     p {
-                        text-decoration: underline;
+                        margin: 0;
+                        flex: 1;
+                    }
+
+                    &:nth-last-child(n + 3) {
+                        strong {
+                            background-color: @primary-color;
+                            color: #fff;
+                        }
+                    }
+
+                    &:hover {
+                        p {
+                            text-decoration: underline;
+                        }
                     }
                 }
             }
         }
     }
-}
+
+    .schedule-strip {
+        display: flex;
+        height: 200px;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .schedule-lop{
+        height: 200px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
 </style>
