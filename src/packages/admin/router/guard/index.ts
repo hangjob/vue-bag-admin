@@ -7,7 +7,7 @@ const ignore = ["/login", "/403", "/404", "/500", "/502"];
 let userinfo: any = {};
 
 // 处理app-store数据
-function setAppStoreData(to: any, from: any, next: any) {
+function setAppStoreData(to: any, from: any, next: any): void {
     const item: any = findChildrenDepth({
         key: 'path',
         value: to.path,
@@ -25,17 +25,17 @@ function setAppStoreData(to: any, from: any, next: any) {
         ...to
     })
 
-    store.commit('app/updateTabViewsPath',getAllParentArr(store.getters['app/menuList'], to.path))
+    store.commit('app/updateTabViewsPath', getAllParentArr(store.getters['app/menuList'], to.path))
 }
 
 // 处理user-store数据
-function setUserStoreData(to: any, from: any, next: any, res: any) {
+function setUserStoreData(to: any, from: any, next: any, res: any): void {
     store.commit('user/updateUserinfo', res)
     store.commit('user/updateRoles', res.roles)
 }
 
 // 处理路由跳转
-function disposeRouter(to: any, from: any, next: any) {
+function disposeRouter(to: any, from: any, next: any): void {
     const token = store.getters['user/token'];
     if (token) {
         if (to.path.indexOf("/login") === 0) {

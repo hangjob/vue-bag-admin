@@ -8,7 +8,7 @@ import 'minireset.css/minireset.css' // 统一样式 ，重置所有浏览器所
 import "ant-design-vue/dist/antd.less";
 import '@/style/scrollbar.less'
 import '@/style/transition.less'
-import '@/style/bootcss.hidden.less'
+import '@/style/bootcss.media.less'
 import '@/style/ant-design.extend.button.less'
 import '@/packages/admin/common/resize'
 import {setupGlobDirectives} from '@/packages/admin/directive'

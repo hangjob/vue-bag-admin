@@ -36,7 +36,7 @@
 </template>
 <script lang="ts">
 import UserSetting from './user/setting.vue'
-import {defineComponent, ref} from 'vue'
+import {defineComponent, ref,reactive} from 'vue'
 import {
     BellOutlined,
     ClearOutlined,
@@ -61,7 +61,7 @@ export default defineComponent({
         SyncOutlined
     },
     setup() {
-        const UserSetting = ref()
+        const UserSetting = reactive()
 
         const handleOpenThemeSetting = () => {
             UserSetting.value.showDrawer()

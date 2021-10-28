@@ -15,10 +15,10 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent} from 'vue'
+import {computed, defineComponent,watchEffect} from 'vue'
 import {useStore} from 'vuex'
 import HeaderTopRightUser from './headerTopRightUser.vue'
-import {MenuFoldOutlined, MenuUnfoldOutlined,} from '@ant-design/icons-vue';
+import {MenuFoldOutlined, MenuUnfoldOutlined} from '@ant-design/icons-vue';
 
 export default defineComponent({
     components: {
@@ -30,14 +30,17 @@ export default defineComponent({
 
         const store = useStore();
         const list = computed(() => store.getters['app/tabViewsPath']);
-
+        const browser = computed(() => store.getters['app/getBrowser'])
         const collapsed = computed(() => store.state.app.collapsed)
 
         const handleCollapsed = (bol: boolean) => {
-            store.commit('app/updateCollapsed', bol)
+            if (!browser.value.isMobile) {
+                store.commit('app/updateCollapsed', bol)
+            }
         }
+
         return {
-            list,
+            list: browser.value.isMobile ? [JSON.parse(JSON.stringify(list.value)).pop()] : list,
             collapsed,
             handleCollapsed
         }

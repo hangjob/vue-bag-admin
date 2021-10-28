@@ -76,6 +76,9 @@ const app = {
         // 更新当前设备信息
         updateBrowser(state: any) {
             state.browser = getBrowser()
+            if (state.browser.isMobile) {
+                state.collapsed = true;
+            }
         }
     }
 }

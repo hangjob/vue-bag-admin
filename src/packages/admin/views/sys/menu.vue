@@ -4,7 +4,7 @@
             <div class="table-action-btn">
                 <a-space :size="20">
                     <a-button type="primary" size="middle">刷新</a-button>
-                    <a-button class="yxs-button-color-green" size="middle">新增</a-button>
+                    <a-button class="yxs-button-color-green" size="middle" @click="visible = true,activeKey = '1'">新增</a-button>
                     <a-button type="primary" danger size="middle">删除</a-button>
                 </a-space>
             </div>
@@ -29,18 +29,23 @@
             </template>
         </a-table>
     </yxs-table>
-    <yxs-modal :visible="visible" title="新增" width="1000px" isCustomStyles>
+    <yxs-modal v-model:visible="visible" title="新增" width="1000px" isCustomStyles>
         <div class="form">
             <a-tabs type="card" v-model:activeKey="activeKey">
-                <a-tab-pane key="1" tab="Tab 1">Content of Tab Pane 1</a-tab-pane>
-                <a-tab-pane key="2" tab="Tab 2">Content of Tab Pane 2</a-tab-pane>
-                <a-tab-pane key="3" tab="Tab 3">Content of Tab Pane 3</a-tab-pane>
+                <a-tab-pane key="1" tab="目录">
+                    <add/>
+                </a-tab-pane>
+                <a-tab-pane key="2" tab="节点">
+                    <edit/>
+                </a-tab-pane>
             </a-tabs>
         </div>
     </yxs-modal>
 </template>
 <script lang="ts">
 import {defineComponent, ref} from 'vue';
+import add from './menu/add.vue'
+import edit from './menu/edit.vue'
 
 const columns = [
     {
@@ -246,10 +251,13 @@ const rowSelection = {
 };
 
 export default defineComponent({
+    components: {
+        add, edit
+    },
     setup() {
         const value = ref('')
-        const visible = ref(true);
-        const activeKey = ref('2');
+        const visible = ref(false);
+        const activeKey = ref('1');
         return {
             data,
             columns,
@@ -269,9 +277,10 @@ export default defineComponent({
 }
 
 .form {
-    .ant-tabs{
+    .ant-tabs {
         padding: 10px 0;
     }
+
     /deep/ .ant-tabs-nav {
         padding-left: 20px;
     }

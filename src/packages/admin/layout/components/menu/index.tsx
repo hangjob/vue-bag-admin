@@ -17,7 +17,6 @@ export default defineComponent({
         const menuList = computed(() => store.getters['app/menuList']);
         // 是否可见
         const visible = ref<boolean>(true);
-        console.log('menuList', menuList)
         const goView = (url: string) => {
             if (url != route.path) {
                 router.push(url)
@@ -95,7 +94,7 @@ export default defineComponent({
                     <a-menu
                         v-model:selectedKeys={ctx.selectedKeys}
                         v-model:openKeys={ctx.openKeys}
-                        inline-collapsed={ctx.collapsed}
+                        inline-collapsed={ctx.browser.isMobile ? true : ctx.collapsed}
                         mode="inline"
                         onClick={ctx.handleClick}
                         theme="light">
