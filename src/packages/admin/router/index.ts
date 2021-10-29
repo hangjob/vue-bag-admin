@@ -36,6 +36,10 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: '/module/exel', name: 'module-exel', meta: {title: '解析Exel'},
                 component: () => import('@/packages/admin/views/module/exel/index.vue')
+            },
+            {
+                path: '/module/rich', name: 'module-rich', meta: {title: '富文本编辑器'},
+                component: () => import('@/packages/admin/views/module/rich/index.vue')
             }
         ]
     },

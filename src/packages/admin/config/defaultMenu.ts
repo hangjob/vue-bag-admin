@@ -46,7 +46,7 @@ const arr = [
     {
         name: '组件库',
         router: '',
-        icon:'SendOutlined',
+        icon: 'SendOutlined',
         isShow: 1,
         children: [
             {
@@ -54,7 +54,15 @@ const arr = [
                 path: '/module/markdown',
                 icon: 'ReadOutlined',
                 isShow: 1,
-                tabHidden: true,
+                tabHidden: false,
+                tabFix: false
+            },
+            {
+                name: '富文本编辑器',
+                path: '/module/rich',
+                icon: 'ReadOutlined',
+                isShow: 1,
+                tabHidden: false,
                 tabFix: false
             },
             {

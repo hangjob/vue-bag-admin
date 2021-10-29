@@ -76,7 +76,7 @@ const app = {
         // 更新当前设备信息
         updateBrowser(state: any) {
             state.browser = getBrowser()
-            if (state.browser.isMobile) {
+            if (state.browser.isMobile || state.browser.isMini) {
                 state.collapsed = true;
             }
         }

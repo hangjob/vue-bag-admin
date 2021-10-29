@@ -4,8 +4,11 @@
         <a-layout-header class="layout-header_top">
             <MenuFoldOutlined v-if="collapsed" @click="handleCollapsed(false)"/>
             <MenuUnfoldOutlined @click="handleCollapsed(true)" v-else/>
-            <a-breadcrumb style="height: 45px;line-height: 45px;margin-left: 10px">
+            <a-breadcrumb style="height: 45px;line-height: 45px;margin-left: 10px" v-if="!collapsed">
                 <a-breadcrumb-item v-for="(item,idx) in list" :key="idx">{{ item.name }}</a-breadcrumb-item>
+            </a-breadcrumb>
+            <a-breadcrumb style="height: 45px;line-height: 45px;margin-left: 10px" v-else>
+                <a-breadcrumb-item>{{ list[list.length - 1].name }}</a-breadcrumb-item>
             </a-breadcrumb>
         </a-layout-header>
         <div class="layout-header_right_menu">
@@ -15,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import {computed, defineComponent,watchEffect} from 'vue'
+import {computed, defineComponent} from 'vue'
 import {useStore} from 'vuex'
 import HeaderTopRightUser from './headerTopRightUser.vue'
 import {MenuFoldOutlined, MenuUnfoldOutlined} from '@ant-design/icons-vue';
@@ -40,7 +43,7 @@ export default defineComponent({
         }
 
         return {
-            list: browser.value.isMobile ? [JSON.parse(JSON.stringify(list.value)).pop()] : list,
+            list,
             collapsed,
             handleCollapsed
         }

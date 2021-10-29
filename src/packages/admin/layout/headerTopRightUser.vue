@@ -61,7 +61,7 @@ export default defineComponent({
         SyncOutlined
     },
     setup() {
-        const UserSetting = reactive()
+        const UserSetting = ref()
 
         const handleOpenThemeSetting = () => {
             UserSetting.value.showDrawer()

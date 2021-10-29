@@ -162,6 +162,7 @@ export default defineComponent({
         overflow-x: hidden;
         overflow-y: hidden;
         white-space: nowrap;
+        scroll-behavior:smooth;
     }
 
     .app-process_item {

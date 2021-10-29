@@ -8,7 +8,7 @@
                     <a-button type="primary" danger size="middle">删除</a-button>
                 </a-space>
             </div>
-            <div class="table-action-search">
+            <div class="table-action-search hidden-xs">
                 <a-input-search
                     v-model:value="value"
                     placeholder="输入关键词搜索"
