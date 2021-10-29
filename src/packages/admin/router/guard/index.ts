@@ -3,6 +3,13 @@ import {getAllParentArr} from "@/utils/utils";
 import {findChildrenDepth} from "@/utils/lodash";
 import {apiUserinfo} from "@/packages/admin/serve/user";
 
+import NProgress from "nprogress";
+
+NProgress.configure({
+    showSpinner: false
+});
+
+
 const ignore = ["/login", "/403", "/404", "/500", "/502"];
 let userinfo: any = {};
 
@@ -51,9 +58,11 @@ function disposeRouter(to: any, from: any, next: any): void {
 }
 
 const setupRouterGuard = (to: any, from: any, next: any) => {
+    NProgress.start();
     apiUserinfo().then((res) => {
         disposeRouter(to, from, next)
         setUserStoreData(to, from, next, res)
+        NProgress.done();
         next();
     })
 
