@@ -14,12 +14,14 @@ import '@/style/ant-design.extend.button.less'
 import '@/style/yxs-admin.media.less'
 import '@/packages/admin/common/resize'
 import {setupGlobDirectives} from '@/packages/admin/directive'
+import {setVxeTable} from '@/packages/admin/plugin/vxe-table'
 import {setupGlobComponents} from '@/components'
 import '../../../mock'
 import * as antIcons from '@ant-design/icons-vue'
 
 const app = createApp(App)
 setupRouter(app)
+setVxeTable(app)
 app.use(store)
 app.use(Antd)
 

@@ -100,6 +100,24 @@ const arr = [
         ]
     },
     {
+        name: '大数据表格',
+        path: '',
+        icon: 'TableOutlined',
+        isShow: 1,
+        tabHidden: false,
+        tabFix: false,
+        children:[
+            {
+                name: '基础表格',
+                path: '/vxe-table/base',
+                icon: 'TableOutlined',
+                isShow: 1,
+                tabHidden: false,
+                tabFix: false
+            } 
+        ]
+    },
+    {
         name: '权限控制',
         path: '/permit',
         icon: 'UserSwitchOutlined',

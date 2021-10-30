@@ -53,9 +53,6 @@ export default defineComponent({
 </script>
 <style lang="less" scoped>
 .markdown {
-    padding: 15px;
-    box-sizing: border-box;
-
     .v-md-editor {
         box-shadow: none;
         border: 1px solid #dddddd;

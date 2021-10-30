@@ -40,6 +40,10 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: '/module/rich', name: 'module-rich', meta: {title: '富文本编辑器'},
                 component: () => import('@/packages/admin/views/module/rich/index.vue')
+            },
+            {
+                path: '/vxe-table/base', name: 'vxe-table-base', meta: {title: '基础数据'},
+                component: () => import('@/packages/admin/views/vxe-table/base/index.vue')
             }
         ]
     },

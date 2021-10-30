@@ -1,11 +1,22 @@
 import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
+import styleImport from 'vite-plugin-style-import' //按需加载模块
+
 import theme from './src/packages/admin/theme/ming'
 
 const path = require('path');
 export default defineConfig({
-    plugins: [vue(), vueJsx(),],
+    plugins: [vue(), vueJsx(),styleImport({
+        libs: [
+            {
+              libraryName: 'vxe-table',
+              esModule: true,
+              resolveComponent: (name) => `vxe-table/es/${name}`,
+              resolveStyle: (name) => `vxe-table/es/${name}/style.css`
+            }
+          ]
+    })],
     resolve: {
         alias: {
             // 如果报错__dirname找不到，需要安装node,执行yarn add @types/node --save-dev
