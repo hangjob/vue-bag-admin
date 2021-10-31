@@ -97,6 +97,14 @@ const arr = [
                     }
                 ]
             },
+            {
+                name: '文件打印',
+                path: '/module/print',
+                icon: 'PrinterOutlined',
+                isShow: 1,
+                tabHidden: false,
+                tabFix: false
+            },
         ]
     },
     {

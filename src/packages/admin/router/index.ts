@@ -59,7 +59,11 @@ const routes: Array<RouteRecordRaw> = [
             },
             {
                 path: '/iframe', name: 'iframe', meta: { title: 'iframe' },
-                component: () => import('@/packages/admin/module/iframe/index.vue')
+                component: () => import('@/packages/admin/views/module/iframe/index.vue')
+            },
+            {
+                path: '/module/print', name: 'module-print', meta: { title: 'print' },
+                component: () => import('@/packages/admin/views/module/print/index.vue')
             }
         ]
     },
