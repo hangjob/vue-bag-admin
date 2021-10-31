@@ -44,6 +44,22 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: '/vxe-table/base', name: 'vxe-table-base', meta: {title: '基础数据'},
                 component: () => import('@/packages/admin/views/vxe-table/base/index.vue')
+            },
+            {
+                path: '/vxe-table/great-table', name: 'vxe-table-great-table', meta: {title: '海量数据'},
+                component: () => import('@/packages/admin/views/vxe-table/great-table/index.vue')
+            },
+            {
+                path: '/vxe-table/edit-table', name: 'vxe-table-edit-table', meta: {title: '编辑表格'},
+                component: () => import('@/packages/admin/views/vxe-table/edit-table/index.vue')
+            },
+            {
+                path: '/vxe-table/verify-table', name: 'vxe-table-verify-table', meta: {title: '校验表格'},
+                component: () => import('@/packages/admin/views/vxe-table/verify-table/index.vue')
+            },
+            {
+                path: '/iframe', name: 'iframe', meta: { title: 'iframe' },
+                component: () => import('@/packages/admin/module/iframe/index.vue')
             }
         ]
     },

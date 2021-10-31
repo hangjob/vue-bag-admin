@@ -29,7 +29,7 @@ function setAppStoreData(to: any, from: any, next: any): void {
     });
 
     store.commit("app/updateCurrentRouter", {
-        ...to
+        ...to,
     })
 
     store.commit('app/updateTabViewsPath', getAllParentArr(store.getters['app/menuList'], to.path))

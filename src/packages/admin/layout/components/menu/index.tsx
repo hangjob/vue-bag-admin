@@ -39,7 +39,6 @@ export default defineComponent({
             const tabPaths = JSON.parse(JSON.stringify(store.getters['app/tabViewsPath']));
             openKeys.value = tabPaths.map((item: any) => item.id);
             selectedKeys.value = [tabPaths.pop().id];
-            console.log(browser)
         })
         return {
             selectedKeys,

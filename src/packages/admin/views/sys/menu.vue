@@ -1,5 +1,5 @@
 <template>
-    <yxs-table>
+    <yxs-form-table>
         <div class="table-action">
             <div class="table-action-btn">
                 <a-space :size="20">
@@ -28,7 +28,7 @@
                 </a-space>
             </template>
         </a-table>
-    </yxs-table>
+    </yxs-form-table>
     <yxs-modal v-model:visible="visible" title="新增" width="1000px" isCustomStyles>
         <div class="form">
             <a-tabs type="card" v-model:activeKey="activeKey">

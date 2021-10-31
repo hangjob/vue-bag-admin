@@ -1,10 +1,10 @@
-import {defaultMenu} from "@/packages/admin/config/defaultMenu";
-import {find, findContainingObject, remove} from "@/utils/lodash";
-import {getBrowser} from '@/utils/utils'
+import { defaultMenu } from "@/packages/admin/config/defaultMenu";
+import { find, findContainingObject, remove } from "@/utils/lodash";
+import { getBrowser } from '@/utils/utils'
 
 // 默认菜单
 const defaultTabFixs = () => {
-    return findContainingObject({key: 'tabFix', value: true}, defaultMenu)
+    return findContainingObject({ key: 'tabFix', value: true }, defaultMenu)
 }
 
 const app = {
@@ -38,7 +38,7 @@ const app = {
     mutations: {
         // 添加头部路由标签
         addProcessList(state: any, item: any) {
-            if (!find({key: 'path', value: item.path}, state.processList)) {
+            if (!find({ key: 'path', value: item.path }, state.processList)) {
                 state.processList.push(item);
             }
         },
@@ -62,9 +62,13 @@ const app = {
         updateCurrentRouter(state: any, item: any) {
             // 激活当前的 processList 中的 active
             state.processList.map((obj: any) => {
-                obj.active = obj.path === item.path;
+                if (obj.path === item.path) {
+                    obj.active = true;
+                    state.currentRouter = { ...obj, ...item };
+                } else {
+                    obj.active = false;
+                }
             });
-            state.currentRouter = item;
         },
         // 更新tab栏路由
         updateTabViewsPath(state: any, arr: Array<any>) {

@@ -1,47 +1,54 @@
 <template>
     <yxs-view>
+        <a-space :size="10">
+            <vxe-button status="warning" content="设置第三、四行选中" @click="toggleCheckboxRow"></vxe-button>
+            <vxe-button status="danger" content="获取高亮行" @click="getCurrentEvent"></vxe-button>
+            <vxe-button content="清除所有行选中" @click="$refs.xTable.clearCheckboxRow()"></vxe-button>
+        </a-space>
+        <br />
+        <br />
         <vxe-table
+            round
             border
-            stripe
-            resizable
+            ref="xTable"
+            :cell-style="cellStyle"
             highlight-hover-row
-            height="100%"
+            highlight-current-row
             :tooltip-config="demo1.tableTooltipConfig"
-            :loading="demo1.loading"
-            :checkbox-config="{labelField: 'id', highlight: true, range: true}"
             :data="demo1.tableData"
         >
+            <vxe-column type="checkbox" width="60"></vxe-column>
             <vxe-column type="seq" width="60"></vxe-column>
-            <vxe-column type="checkbox" title="ID" width="140"></vxe-column>
-            <vxe-column field="name" title="Name" sortable></vxe-column>
+            <vxe-column field="name" title="名称" :title-help="{message: '自定义帮助提示信息'}"></vxe-column>
             <vxe-column
-                field="sex"
-                title="Sex"
-                :filters="sexList"
-                :filter-multiple="false"
-                :formatter="formatterSex"
+                field="role"
+                title="角色"
+                :title-help="{message: '自定义图标', icon: 'fa fa-bell'}"
             ></vxe-column>
-            <vxe-column
-                field="age"
-                title="Age"
-                sortable
-                :filters="[{label: '大于16岁', value: 16}, {label: '大于26岁', value: 26}, {label: '大于30岁', value: 30}]"
-                :filter-method="filterAgeMethod"
-            ></vxe-column>
-            <vxe-column field="address" title="Address" show-overflow></vxe-column>
+            <vxe-column field="date" title="Date"></vxe-column>
+            <vxe-column field="rate" title="Rate">
+                <template #header>
+                    <span>自定义标题</span>
+                </template>
+            </vxe-column>
+            <vxe-column field="address" title="Address" width="160"></vxe-column>
+            <vxe-column type="html" field="content" title="Content" width="200"></vxe-column>
         </vxe-table>
     </yxs-view>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, reactive } from 'vue'
-import { VxeColumnPropTypes, VxeTablePropTypes } from 'vxe-table'
-
+import { defineComponent, onMounted, reactive, ref } from 'vue'
+import {
+    VxeColumnPropTypes,
+    VxeTablePropTypes,
+    VxeTableInstance,
+    VXETable,
+} from 'vxe-table'
+import tableData from './data'
 export default defineComponent({
     setup() {
         const demo1 = reactive({
             loading: false,
-            tableData: [] as any[],
-
             sexList: [
                 {
                     label: '女',
@@ -57,10 +64,19 @@ export default defineComponent({
                 enterable: true,
                 contentMethod: ({ type, column, row, items, _columnIndex }) => {
                     const { property } = column
-                    return null
+                    return null // 返回默认值
                 },
             } as VxeTablePropTypes.TooltipConfig,
+            tableData: tableData,
+            tableCheckboxConfig: {
+                labelField: 'name',
+                checkMethod: ({ row }: any) => {
+                    return row.role !== 'Designer'
+                },
+            } as VxeTablePropTypes.CheckboxConfig,
         })
+
+        const xTable = ref({} as VxeTableInstance)
 
         const formatterSex: VxeColumnPropTypes.Formatter = ({ cellValue }) => {
             const item = demo1.sexList.find((item) => item.value === cellValue)
@@ -74,179 +90,38 @@ export default defineComponent({
             return row.age >= value
         }
 
-        onMounted(() => {
-            demo1.loading = true
-            setTimeout(() => {
-                demo1.tableData = [
-                    {
-                        id: 10001,
-                        name: 'Test1',
-                        role: 'Develop',
-                        sex: '0',
-                        age: 28,
-                        address: 'vxe-table 从入门到放弃',
-                    },
-                    {
-                        id: 10002,
-                        name: 'Test2',
-                        role: 'Test',
-                        sex: '1',
-                        age: 22,
-                        address: 'Guangzhou',
-                    },
-                    {
-                        id: 10003,
-                        name: 'Test3',
-                        role: 'PM',
-                        sex: '0',
-                        age: 32,
-                        address: 'Shanghai',
-                    },
-                    {
-                        id: 10004,
-                        name: 'Test4',
-                        role: 'Designer',
-                        sex: '1',
-                        age: 23,
-                        address: 'vxe-table 从入门到放弃',
-                    },
-                    {
-                        id: 10005,
-                        name: 'Test5',
-                        role: 'Develop',
-                        sex: '1',
-                        age: 30,
-                        address: 'Shanghai',
-                    },
-                    {
-                        id: 10006,
-                        name: 'Test6',
-                        role: 'Designer',
-                        sex: '1',
-                        age: 21,
-                        address: 'vxe-table 从入门到放弃',
-                    },
-                    {
-                        id: 10007,
-                        name: 'Test7',
-                        role: 'Test',
-                        sex: '0',
-                        age: 29,
-                        address: 'vxe-table 从入门到放弃',
-                    },
-                    {
-                        id: 10008,
-                        name: 'Test8',
-                        role: 'Develop',
-                        sex: '0',
-                        age: 35,
-                        address: 'vxe-table 从入门到放弃',
-                    },
-                    {
-                        id: 10009,
-                        name: 'Test9',
-                        role: 'Test',
-                        sex: '1',
-                        age: 21,
-                        address: 'vxe-table 从入门到放弃',
-                    },
-                    {
-                        id: 10010,
-                        name: 'Test10',
-                        role: 'Develop',
-                        sex: '0',
-                        age: 28,
-                        address: 'vxe-table 从入门到放弃',
-                    },
-                    {
-                        id: 10011,
-                        name: 'Test11',
-                        role: 'Test',
-                        sex: '0',
-                        age: 29,
-                        address: 'vxe-table 从入门到放弃',
-                    },
-                    {
-                        id: 10012,
-                        name: 'Test12',
-                        role: 'Develop',
-                        sex: '1',
-                        age: 27,
-                        address: 'vxe-table 从入门到放弃',
-                    },
-                    {
-                        id: 10013,
-                        name: 'Test13',
-                        role: 'Test',
-                        sex: '0',
-                        age: 24,
-                        address: 'vxe-table 从入门到放弃',
-                    },
-                    {
-                        id: 10014,
-                        name: 'Test14',
-                        role: 'Develop',
-                        sex: '1',
-                        age: 34,
-                        address: 'vxe-table 从入门到放弃',
-                    },
-                    {
-                        id: 10015,
-                        name: 'Test15',
-                        role: 'Test',
-                        sex: '1',
-                        age: 21,
-                        address: 'vxe-table 从入门到放弃',
-                    },
-                    {
-                        id: 10016,
-                        name: 'Test16',
-                        role: 'Develop',
-                        sex: '0',
-                        age: 20,
-                        address: 'vxe-table 从入门到放弃',
-                    },
-                    {
-                        id: 10017,
-                        name: 'Test17',
-                        role: 'Test',
-                        sex: '1',
-                        age: 31,
-                        address: 'vxe-table 从入门到放弃',
-                    },
-                    {
-                        id: 10018,
-                        name: 'Test18',
-                        role: 'Develop',
-                        sex: '0',
-                        age: 32,
-                        address: 'vxe-table 从入门到放弃',
-                    },
-                    {
-                        id: 10019,
-                        name: 'Test19',
-                        role: 'Test',
-                        sex: '1',
-                        age: 37,
-                        address: 'vxe-table 从入门到放弃',
-                    },
-                    {
-                        id: 10020,
-                        name: 'Test20',
-                        role: 'Develop',
-                        sex: '1',
-                        age: 41,
-                        address: 'vxe-table 从入门到放弃',
-                    },
-                ]
-                demo1.loading = false
-            }, 500)
-        })
+        const getCurrentEvent = () => {
+            const $table = xTable.value
+            VXETable.modal.alert(JSON.stringify($table.getCurrentRecord()))
+        }
+
+        const toggleCheckboxRow = () => {
+            const $table = xTable.value
+            $table.setCheckboxRow([tableData[2], tableData[3]], true)
+        }
+
+        const cellStyle: VxeTablePropTypes.CellStyle = ({ row, column }) => {
+            if (column.property === 'sex') {
+                if (row.name === 'Test3') {
+                    return {
+                        backgroundColor: '#187',
+                    }
+                } else if (row.age === 26) {
+                    return {
+                        backgroundColor: '#2db7f5',
+                    }
+                }
+            }
+        }
 
         return {
             demo1,
+            xTable,
             formatterSex,
             filterAgeMethod,
+            getCurrentEvent,
+            toggleCheckboxRow,
+            cellStyle
         }
     },
 })

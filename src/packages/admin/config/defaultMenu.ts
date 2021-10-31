@@ -12,7 +12,7 @@
 // updateTime: "2021-03-03 11:03:21"
 // viewPath: "https://www.vipbic.com"
 
-import {addUniqueId} from '@/utils/lodash';
+import { addUniqueId } from '@/utils/lodash';
 
 /**
  * tabHidden 是否显示tab栏
@@ -100,13 +100,13 @@ const arr = [
         ]
     },
     {
-        name: '大数据表格',
+        name: '海量数据表格',
         path: '',
         icon: 'TableOutlined',
         isShow: 1,
         tabHidden: false,
         tabFix: false,
-        children:[
+        children: [
             {
                 name: '基础表格',
                 path: '/vxe-table/base',
@@ -114,7 +114,40 @@ const arr = [
                 isShow: 1,
                 tabHidden: false,
                 tabFix: false
-            } 
+            },
+            {
+                name: '海量数据',
+                path: '/vxe-table/great-table',
+                icon: 'TableOutlined',
+                isShow: 1,
+                tabHidden: false,
+                tabFix: false
+            },
+            {
+                name: '编辑表格',
+                path: '/vxe-table/edit-table',
+                icon: 'TableOutlined',
+                isShow: 1,
+                tabHidden: false,
+                tabFix: false
+            },
+            {
+                name: '校验表格',
+                path: '/vxe-table/verify-table',
+                icon: 'TableOutlined',
+                isShow: 1,
+                tabHidden: false,
+                tabFix: false
+            },
+            {
+                name: '更多介绍',
+                path: '/iframe',
+                icon: 'TableOutlined',
+                isShow: 1,
+                iframe: 'https://xuliangzhan_admin.gitee.io/vxe-table/v4/table/tree/basic',
+                tabHidden: false,
+                tabFix: false
+            }
         ]
     },
     {
