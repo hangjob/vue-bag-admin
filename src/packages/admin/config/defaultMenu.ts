@@ -12,7 +12,7 @@
 // updateTime: "2021-03-03 11:03:21"
 // viewPath: "https://www.vipbic.com"
 
-import { addUniqueId } from '@/utils/lodash';
+import {addUniqueId} from '@/utils/lodash';
 
 /**
  * tabHidden 是否显示tab栏
@@ -52,7 +52,7 @@ const arr = [
             {
                 name: 'Markdown编辑器',
                 path: '/module/markdown',
-                icon: 'FileMarkdownOutlined',
+                icon: '',
                 isShow: 1,
                 tabHidden: false,
                 tabFix: false
@@ -60,7 +60,7 @@ const arr = [
             {
                 name: '富文本编辑器',
                 path: '/module/rich',
-                icon: 'FileTextOutlined',
+                icon: '',
                 isShow: 1,
                 tabHidden: false,
                 tabFix: false
@@ -68,7 +68,7 @@ const arr = [
             {
                 name: '解析Exel',
                 path: '/module/exel',
-                icon: 'InsertRowBelowOutlined',
+                icon: '',
                 isShow: 1,
                 tabHidden: false,
                 tabFix: false
@@ -76,13 +76,13 @@ const arr = [
             {
                 name: '上传',
                 path: '',
-                icon: 'FolderAddOutlined',
+                icon: 'FileImageOutlined',
                 isShow: 1,
                 children: [
                     {
                         name: '图片上传',
                         path: '/module/fileUploadImg',
-                        icon: 'FileImageOutlined',
+                        icon: '',
                         isShow: 1,
                         tabHidden: false,
                         tabFix: false
@@ -90,7 +90,7 @@ const arr = [
                     {
                         name: '文件上传',
                         path: '/module/fileUploadImg',
-                        icon: 'FileAddOutlined',
+                        icon: '',
                         isShow: 1,
                         tabHidden: false,
                         tabFix: false
@@ -100,7 +100,15 @@ const arr = [
             {
                 name: '文件打印',
                 path: '/module/print',
-                icon: 'PrinterOutlined',
+                icon: '',
+                isShow: 1,
+                tabHidden: false,
+                tabFix: false
+            },
+            {
+                name: '拖拽排序',
+                path: '/module/draggable',
+                icon: '',
                 isShow: 1,
                 tabHidden: false,
                 tabFix: false
@@ -108,7 +116,7 @@ const arr = [
             {
                 name: '简洁图标',
                 path: '/module/icon/iconfont',
-                icon: 'SmileOutlined',
+                icon: '',
                 isShow: 1,
                 tabHidden: false,
                 tabFix: false
@@ -126,7 +134,7 @@ const arr = [
             {
                 name: '基础表格',
                 path: '/vxe-table/base',
-                icon: 'TableOutlined',
+                icon: '',
                 isShow: 1,
                 tabHidden: false,
                 tabFix: false
@@ -134,7 +142,7 @@ const arr = [
             {
                 name: '海量数据',
                 path: '/vxe-table/great-table',
-                icon: 'TableOutlined',
+                icon: '',
                 isShow: 1,
                 tabHidden: false,
                 tabFix: false
@@ -142,7 +150,7 @@ const arr = [
             {
                 name: '编辑表格',
                 path: '/vxe-table/edit-table',
-                icon: 'TableOutlined',
+                icon: '',
                 isShow: 1,
                 tabHidden: false,
                 tabFix: false
@@ -150,7 +158,7 @@ const arr = [
             {
                 name: '校验表格',
                 path: '/vxe-table/verify-table',
-                icon: 'TableOutlined',
+                icon: '',
                 isShow: 1,
                 tabHidden: false,
                 tabFix: false
@@ -158,9 +166,28 @@ const arr = [
             {
                 name: '更多介绍',
                 path: '/iframe',
-                icon: 'TableOutlined',
+                icon: '',
                 isShow: 1,
                 iframe: 'https://xuliangzhan_admin.gitee.io/vxe-table/v4/table/tree/basic',
+                tabHidden: false,
+                tabFix: false
+            }
+        ]
+    },
+    {
+        name: '动画',
+        path: '',
+        icon: 'SmileOutlined',
+        isShow: 1,
+        tabHidden: false,
+        tabFix: false,
+        children:[
+            {
+                name: 'Mo.js',
+                path: '/animation/mojs',
+                icon: '',
+                isShow: 1,
+                iframe: '',
                 tabHidden: false,
                 tabFix: false
             }

@@ -1,7 +1,7 @@
 import {App, Directive, DirectiveBinding} from 'vue'
 import store from "@/packages/admin/store";
 
-
+// 权限指令
 function handlePermission(el: Element, binding: DirectiveBinding) {
     const {value, arg} = binding;
     if (value && value instanceof Array) {

@@ -58,16 +58,24 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import('@/packages/admin/views/vxe-table/verify-table/index.vue')
             },
             {
-                path: '/iframe', name: 'iframe', meta: { title: 'iframe' },
+                path: '/iframe', name: 'iframe', meta: {title: 'iframe'},
                 component: () => import('@/packages/admin/views/module/iframe/index.vue')
             },
             {
-                path: '/module/print', name: 'module-print', meta: { title: 'print' },
+                path: '/module/print', name: 'module-print', meta: {title: 'print'},
                 component: () => import('@/packages/admin/views/module/print/index.vue')
             },
             {
-                path: '/module/icon/iconfont', name: 'module-icon-iconfont', meta: { title: '图标' },
+                path: '/module/icon/iconfont', name: 'module-icon-iconfont', meta: {title: '图标'},
                 component: () => import('@/packages/admin/views/module/icon/iconfont/index.vue')
+            },
+            {
+                path: '/animation/mojs', name: 'animation-mojs', meta: {title: '动画'},
+                component: () => import('@/packages/admin/views/animation/mojs/index.vue')
+            },
+            {
+                path: '/module/draggable', name: 'module-draggable', meta: {title: '拖拽排序'},
+                component: () => import('@/packages/admin/views/module/draggable/index.vue')
             }
         ]
     },
