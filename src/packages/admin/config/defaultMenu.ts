@@ -164,8 +164,8 @@ const arr = [
                 tabFix: false
             },
             {
-                name: '更多介绍',
-                path: '/iframe',
+                name: 'vxe-table文档',
+                path: '/iframe/xuliangzhan_admin',
                 icon: '',
                 isShow: 1,
                 iframe: 'https://xuliangzhan_admin.gitee.io/vxe-table/v4/table/tree/basic',
@@ -192,6 +192,94 @@ const arr = [
                 tabFix: false
             }
         ]
+    },
+    {
+        name: '数据图表',
+        path: '',
+        icon: 'PieChartOutlined',
+        isShow: 1,
+        tabHidden: false,
+        tabFix: false,
+        children:[
+            {
+                name: 'Echarts',
+                path: '/chart/echarts',
+                icon: '',
+                isShow: 1,
+                iframe: '',
+                tabHidden: false,
+                tabFix: false
+            },
+            {
+                name: 'G2',
+                path: '/chart/g2',
+                icon: '',
+                isShow: 1,
+                iframe: '',
+                tabHidden: false,
+                tabFix: false
+            },
+            {
+                name: 'G2plot',
+                path: '/chart/g2plot',
+                icon: '',
+                isShow: 1,
+                iframe: '',
+                tabHidden: false,
+                tabFix: false
+            }
+        ]
+    },
+    {
+        name: '开发文档',
+        path: '/permit',
+        icon: 'ReadOutlined',
+        isShow: 1,
+        tabHidden: false,
+        tabFix: false,
+        children:[
+            {
+                name: 'Vue3',
+                path: '/iframe/Vue3',
+                icon: '',
+                isShow: 1,
+                iframe: 'https://v3.cn.vuejs.org/',
+                tabHidden: false,
+                tabFix: false
+            }
+        ]
+    },
+    {
+        name: '异常收集',
+        path: '/error',
+        icon: 'BugOutlined',
+        isShow: 1,
+        tabHidden: false,
+        tabFix: false
+    },
+    {
+        name: '错误页面',
+        path: '/error',
+        icon: 'FrownOutlined',
+        isShow: 1,
+        tabHidden: false,
+        tabFix: false
+    },
+    {
+        name: '引导页',
+        path: '/error',
+        icon: 'NodeCollapseOutlined',
+        isShow: 1,
+        tabHidden: false,
+        tabFix: false
+    },
+    {
+        name: '打点吧',
+        path: '/error',
+        icon: 'RedEnvelopeOutlined',
+        isShow: 1,
+        tabHidden: false,
+        tabFix: false
     },
     {
         name: '权限控制',

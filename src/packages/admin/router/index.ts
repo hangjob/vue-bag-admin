@@ -58,7 +58,7 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import('@/packages/admin/views/vxe-table/verify-table/index.vue')
             },
             {
-                path: '/iframe', name: 'iframe', meta: {title: 'iframe'},
+                path: '/iframe/:name', name: 'iframe', meta: {title: 'iframe'},
                 component: () => import('@/packages/admin/views/module/iframe/index.vue')
             },
             {
@@ -76,6 +76,18 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: '/module/draggable', name: 'module-draggable', meta: {title: '拖拽排序'},
                 component: () => import('@/packages/admin/views/module/draggable/index.vue')
+            },
+            {
+                path: '/chart/echarts', name: 'chart-echarts', meta: {title: '百度Echarts'},
+                component: () => import('@/packages/admin/views/chart/echarts/index.vue')
+            },
+            {
+                path: '/chart/g2', name: 'chart-g2', meta: {title: 'G2'},
+                component: () => import('@/packages/admin/views/chart/g2/index.vue')
+            },
+            {
+                path: '/chart/g2plot', name: 'chart-g2plot', meta: {title: 'G2plot'},
+                component: () => import('@/packages/admin/views/chart/g2plot/index.vue')
             }
         ]
     },
