@@ -64,6 +64,10 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: '/module/print', name: 'module-print', meta: { title: 'print' },
                 component: () => import('@/packages/admin/views/module/print/index.vue')
+            },
+            {
+                path: '/module/icon/iconfont', name: 'module-icon-iconfont', meta: { title: '图标' },
+                component: () => import('@/packages/admin/views/module/icon/iconfont/index.vue')
             }
         ]
     },

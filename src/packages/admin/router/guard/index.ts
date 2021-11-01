@@ -2,13 +2,7 @@ import store from '@/packages/admin/store/index'
 import {getAllParentArr} from "@/utils/utils";
 import {findChildrenDepth} from "@/utils/lodash";
 import {apiUserinfo} from "@/packages/admin/serve/user";
-
-import NProgress from "nprogress";
-
-NProgress.configure({
-    showSpinner: false
-});
-
+import {NProgress} from '@/packages/admin/plugin/nprogress/index'
 
 const ignore = ["/login", "/403", "/404", "/500", "/502"];
 let userinfo: any = {};
@@ -29,7 +23,7 @@ function setAppStoreData(to: any, from: any, next: any): void {
     });
 
     store.commit("app/updateCurrentRouter", {
-        ...to,
+        ...to
     })
 
     store.commit('app/updateTabViewsPath', getAllParentArr(store.getters['app/menuList'], to.path))

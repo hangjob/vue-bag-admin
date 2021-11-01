@@ -52,7 +52,7 @@ const arr = [
             {
                 name: 'Markdown编辑器',
                 path: '/module/markdown',
-                icon: 'ReadOutlined',
+                icon: 'FileMarkdownOutlined',
                 isShow: 1,
                 tabHidden: false,
                 tabFix: false
@@ -60,7 +60,7 @@ const arr = [
             {
                 name: '富文本编辑器',
                 path: '/module/rich',
-                icon: 'ReadOutlined',
+                icon: 'FileTextOutlined',
                 isShow: 1,
                 tabHidden: false,
                 tabFix: false
@@ -101,6 +101,14 @@ const arr = [
                 name: '文件打印',
                 path: '/module/print',
                 icon: 'PrinterOutlined',
+                isShow: 1,
+                tabHidden: false,
+                tabFix: false
+            },
+            {
+                name: '简洁图标',
+                path: '/module/icon/iconfont',
+                icon: 'SmileOutlined',
                 isShow: 1,
                 tabHidden: false,
                 tabFix: false

@@ -10,6 +10,7 @@
     "@antv/g2": "^4.1.32",
     "@antv/g2plot": "^2.3.39",
     "@kangc/v-md-editor": "^2.3.12",
+    "@soerenmartius/vue3-clipboard": "^0.1.2",
     "ant-design-vue": "^2.2.8",
     "antd-theme-generator": "^1.2.6",
     "axios": "^0.23.0",
