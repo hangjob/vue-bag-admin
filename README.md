@@ -19,6 +19,8 @@
 </router-view>
 ```
 
+### base目录作为基础块
+
 ### 参考方向
 https://github.com/flipped-aurora/gin-vue-admin
 https://demo.gin-vue-admin.com/#/layout/admin/api

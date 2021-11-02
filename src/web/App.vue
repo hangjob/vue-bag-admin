@@ -1,18 +1,35 @@
-<script lang="ts">
-
-</script>
-
 <template>
-    <h1>前端展示</h1>
+    <router-view/>
+    <Contextmenu ref="contextmenu"/>
 </template>
+<script lang="ts">
+import Contextmenu from '@/packages/extend/contextmenu/index.vue'
+import {defineComponent, provide, ref} from 'vue'
 
-<style>
+export default defineComponent({
+    name: 'App',
+    components: {
+        Contextmenu
+    },
+    setup(props, context: any) {
+        const contextmenu: any = ref(null)
+        provide('appContextmenu', contextmenu)
+        return {
+            contextmenu
+        }
+    }
+})
+</script>
+<style lang="less">
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
 #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
 }
 </style>
