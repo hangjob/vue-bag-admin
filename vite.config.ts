@@ -2,20 +2,19 @@ import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import styleImport from 'vite-plugin-style-import' //按需加载模块
-
-import theme from './src/packages/admin/theme/ming'
+import theme from './src/packages/theme/ming'
 
 const path = require('path');
 export default defineConfig({
-    plugins: [vue(), vueJsx(),styleImport({
+    plugins: [vue(), vueJsx(), styleImport({
         libs: [
             {
-              libraryName: 'vxe-table',
-              esModule: true,
-              resolveComponent: (name) => `vxe-table/es/${name}`,
-              resolveStyle: (name) => `vxe-table/es/${name}/style.css`
+                libraryName: 'vxe-table',
+                esModule: true,
+                resolveComponent: (name) => `vxe-table/es/${name}`,
+                resolveStyle: (name) => `vxe-table/es/${name}/style.css`
             }
-          ]
+        ]
     })],
     resolve: {
         alias: {
