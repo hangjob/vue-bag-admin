@@ -1,19 +1,21 @@
 <template>
-    <h2>解析Exel</h2>
-    <div class="clearfix">
-        <a-upload :file-list="fileList" :remove="handleRemove" :before-upload="beforeUpload">
-            <a-button>
-                <upload-outlined></upload-outlined>
-                选择Exel文件
-            </a-button>
-        </a-upload>
-    </div>
+    <yxs-view>
+        <template v-slot:action>
+            <a-upload :file-list="fileList" :remove="handleRemove" :before-upload="beforeUpload">
+                <a-button type="primary">
+                    选择Exel文件
+                </a-button>
+            </a-upload>
+        </template>
+        <Table :columns="columns" :data="tableData"/>
+    </yxs-view>
 </template>
 <script lang="ts">
 import {UploadOutlined} from '@ant-design/icons-vue';
 import {defineComponent, ref} from 'vue';
+// @ts-ignore
 import XLSX from "xlsx";
-
+import Table from "./table.vue";
 // 解析exel为json
 const readExcelToJson = (file: any) => {
     return new Promise((resolve, reject) => {
@@ -31,7 +33,7 @@ const readExcelToJson = (file: any) => {
     });
 }
 
-const generateTreeData = (arr: any) => {
+const generateTreeData = (arr: Array) => {
     const topLevelNodeMap = new Map();
     const secondLevelNodeMap = new Map();
     const thirdLevelNodeMap = new Map();
@@ -97,11 +99,14 @@ const generateTreeData = (arr: any) => {
 export default defineComponent({
     components: {
         UploadOutlined,
+        Table
     },
 
     setup() {
         const fileList = ref([]);
         const uploading = ref(false);
+        const tableData = ref([]);
+        const columns = ref([]);
 
         const handleRemove = (file: any) => {
             const index = fileList.value.indexOf(file);
@@ -111,14 +116,32 @@ export default defineComponent({
         };
 
         const beforeUpload = (file: any) => {
-            readExcelToJson(file).then((res: any) => {
-                console.log(res)
-                console.log(generateTreeData(res))
+            readExcelToJson(file).then((res: Array) => {
+                let firstData = res[0];
+                columns.value = Object.keys(firstData).map((item) => {
+                    return {
+                        title: item,
+                        dataIndex: item,
+                        key: item,
+                        ellipsis: true,
+                    }
+                })
+
+                tableData.value = res.map((item, idx) => {
+                    return {
+                        ...item,
+                        key: idx
+                    }
+                });
+                console.log(columns.value)
+                // console.log(generateTreeData(res))
             })
             return false;
         };
 
         return {
+            tableData,
+            columns,
             fileList,
             uploading,
             handleRemove,

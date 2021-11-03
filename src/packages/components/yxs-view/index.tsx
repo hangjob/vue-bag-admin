@@ -8,6 +8,13 @@ export default defineComponent({
     },
     props: {},
     render(ctx: any) {
-        return h('div', {class: classes['yxs-view']},  ctx.$slots.default?.());
+        let html = [];
+        if (ctx.$slots.action) {
+            html.push(h('div', {class: classes['yxs-view-action']}, ctx.$slots.action?.()));
+        }
+        if (ctx.$slots.default) {
+            html.push(h('div', {class: classes['yxs-view-content']}, ctx.$slots.default?.()));
+        }
+        return h('div', {class: classes['yxs-view']}, html);
     }
 })

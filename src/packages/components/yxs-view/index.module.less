@@ -2,8 +2,24 @@
     background-color: #ffffff;
     border-radius: 3px;
     position: relative;
-    padding: 15px;
-    box-sizing: border-box;
     height: 100%;
-    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+
+    &-action {
+        height: 60px;
+        align-items: center;
+        display: flex;
+        box-sizing: border-box;
+        padding: 0 15px;
+        border-bottom: 1px solid #eeeeee;
+    }
+
+    &-content {
+        padding: 15px;
+        box-sizing: border-box;
+        flex: 1;
+        overflow: hidden;
+        overflow-y: scroll;
+    }
 }
