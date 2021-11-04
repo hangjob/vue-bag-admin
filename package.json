@@ -9,6 +9,7 @@
   "dependencies": {
     "@antv/g2": "^4.1.32",
     "@antv/g2plot": "^2.3.39",
+    "@braks/revue-draggable": "^0.3.1",
     "@kangc/v-md-editor": "^2.3.12",
     "@mojs/core": "^1.2.1",
     "@soerenmartius/vue3-clipboard": "^0.1.2",

@@ -1,6 +1,5 @@
 import type {App} from 'vue';
 import Antd from 'ant-design-vue';
-import '@/packages/style/index.less'
 import "ant-design-vue/dist/antd.less";
 import * as antIcons from '@ant-design/icons-vue'
 

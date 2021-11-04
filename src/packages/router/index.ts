@@ -96,6 +96,10 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: '/error', name: 'error', meta: {title: '错误页面'},
                 component: () => import('@/packages/views/error/index.vue')
+            },
+            {
+                path: '/module/descriptions', name: 'module-descriptions', meta: {title: '描述列表'},
+                component: () => import('@/packages/views/module/descriptions/index.vue')
             }
         ]
     },

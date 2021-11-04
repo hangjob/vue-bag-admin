@@ -121,6 +121,14 @@ const arr = [
                 tabHidden: false,
                 tabFix: false
             },
+            {
+                name: '描述列表',
+                path: '/module/descriptions',
+                icon: '',
+                isShow: 1,
+                tabHidden: false,
+                tabFix: false
+            },
         ]
     },
     {
