@@ -111,9 +111,7 @@ export default defineComponent({
 </script>
 <style lang="less" scoped>
 .rich {
-    padding: 15px;
     box-sizing: border-box;
-
     /deep/ .editor-container {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;

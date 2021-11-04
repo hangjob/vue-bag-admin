@@ -13,7 +13,7 @@ class FileBreakpoint {
     protected chunkSize = 3 * 1024 * 1024; // 设置分片大小
     private chunksLength = 0;
     private dataChunks = [];
-    private allChunksUploadStatus = []
+    private allChunksUploadStatus = [] // 切片状态
     private code = '1'; // 成功状态码
     private timeout = 3 * 60 * 1000
 
@@ -68,8 +68,7 @@ class FileBreakpoint {
         this.success = success;
         this.error = error;
         if (this.hasChunk(size)) {
-            this.dataChunks = this.makeChunks(file)
-            this.allChunksUploadStatus = _.fill(new Array(this.dataChunks.chunks.length), false);
+            this.fileChunks = this.makeChunks(file)
             this.getFormDataChunks();
         } else {
             this.postFileAxios(file);
@@ -91,12 +90,13 @@ class FileBreakpoint {
      * 获取FormData格式化的切片
      */
     getFormDataChunks() {
+        this.allChunksUploadStatus = _.fill(new Array(this.fileChunks.chunks.length), false);
         const formData = new FormData();
-        this.dataChunks.chunks.forEach((chunk, index) => {
+        this.fileChunks.chunks.forEach((chunk, index) => {
             formData.append("index", index + "");
-            formData.append("chunk", fileChunks.file.slice(chunk.start, chunk.end));
-            formData.append("name", fileChunks.file.name);
-            formData.append("chunksLength", fileChunks.chunks.length + "");
+            formData.append("chunk", this.fileChunks.file.slice(chunk.start, chunk.end));
+            formData.append("name", this.fileChunks.file.name);
+            formData.append("chunksLength", this.fileChunks.chunks.length + "");
             formData.append("uid", randomId());
             this.postChunksAxios(formData)
         })
