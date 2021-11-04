@@ -89,7 +89,7 @@ const arr = [
                     },
                     {
                         name: '文件上传',
-                        path: '/module/fileUploadImg',
+                        path: '/module/fileUpload',
                         icon: '',
                         isShow: 1,
                         tabHidden: false,

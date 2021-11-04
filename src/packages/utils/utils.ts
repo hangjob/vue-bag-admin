@@ -121,7 +121,21 @@ const getBrowser = () => {
     };
 }
 
+
+// 生成随机id
+const randomId = () => {
+    let str = "";
+    for (let i = 0; i < 4; i++) {
+        str += Math.random().toString().replace(/\./, "");
+    }
+    str = "uid" + str;
+    // 取前32位随机字符，不足补0
+    return str.length >= 32 ? str.substr(0, 32) : str + repeat("0", 32 - str.length);
+};
+
+
 export {
     getAllParentArr,
-    getBrowser
+    getBrowser,
+    randomId
 }

@@ -35,7 +35,6 @@ export default defineComponent({
     margin-left: 250px;
 
     &-footer {
-        margin-top: 10px;
         padding: 8px 0;
         text-align: center;
         background-color: #ffffff;

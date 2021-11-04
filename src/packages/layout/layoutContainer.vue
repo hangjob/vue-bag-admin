@@ -53,7 +53,6 @@ export default defineComponent({
         height: 100%;
         width: 100%;
         box-sizing: border-box;
-        padding: 0 10px;
 
         &-content {
             overflow: hidden auto;

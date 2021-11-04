@@ -26,6 +26,10 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import('@/packages/views/module/fileUpload/fileUploadImg.vue')
             },
             {
+                path: '/module/fileUpload', name: 'module-fileUpload', meta: {title: '文件上传'},
+                component: () => import('@/packages/views/module/fileUpload/fileUpload.vue')
+            },
+            {
                 path: '/about', name: 'about', meta: {title: '关于'},
                 component: () => import('@/packages/views/about/index.vue')
             },
