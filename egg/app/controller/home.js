@@ -13,8 +13,30 @@ class HomeController extends Controller {
         console.log(ctx.request)
     }
 
-    async addMneu() {
+    async addMenu() {
+        const {ctx} = this;
+        const result = await ctx.model.Menu.create({name: 'dad'})
+        console.log(result)
+    }
 
+    async deleteMenu() {
+        const {ctx} = this;
+        const result = await ctx.model.Menu.destroy({
+            where: {
+                id: 1
+            }
+        })
+    }
+
+    async findOne(){
+        const {ctx} = this;
+        const result = await ctx.model.Menu.findOne({
+            where: {
+                id: 2
+            }
+        })
+        ctx.body = result;
+        console.log(result)
     }
 
     async findAll() {

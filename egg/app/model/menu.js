@@ -25,7 +25,25 @@ module.exports = app => {
         order: {
             type: INTEGER
         },
-        Pid: {
+        pid: {
+            type: INTEGER
+        },
+        type: {
+            type: INTEGER
+        },
+        filePath: {
+            type: STRING
+        },
+        iframePath: {
+            type: STRING
+        },
+        keepAlive: {
+            type: INTEGER
+        },
+        tabHidden: {
+            type: INTEGER
+        },
+        tabFix: {
             type: INTEGER
         },
     }, {

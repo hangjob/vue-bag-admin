@@ -8,4 +8,7 @@ module.exports = app => {
     router.get('/', controller.home.index);
     router.get('/test', controller.home.test);
     router.get('/findAll', controller.home.findAll);
+    router.get('/addMenu', controller.home.addMenu);
+    router.get('/deleteMenu', controller.home.deleteMenu);
+    router.get('/findOne', controller.home.findOne);
 };
