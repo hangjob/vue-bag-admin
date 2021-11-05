@@ -103,8 +103,8 @@ const columns = [
     },
     {
         title: '固定菜单',
-        dataIndex: 'false',
-        key: 'false',
+        dataIndex: 'tabFix',
+        key: 'tabFix',
     },
     {
         title: '是否显示',

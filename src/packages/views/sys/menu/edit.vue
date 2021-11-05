@@ -73,4 +73,3 @@ export default defineComponent({
     },
 });
 </script>
-<style lang="less" scoped></style>

@@ -1,6 +1,8 @@
 <template>
     <div class="right_menu-item">
-        <SearchOutlined class="icon-svg"/>
+        <input class="key-input" v-model="searchKey" @keydown.enter="handleKeyBoard($event,handleEnter)"
+               :class="searchActive" type="text">
+        <SearchOutlined class="icon-svg icon-search" @click="handleSearch"/>
     </div>
     <div class="right_menu-item">
         <a-badge count="5">
@@ -8,7 +10,8 @@
         </a-badge>
     </div>
     <div class="right_menu-item">
-        <ExpandOutlined class="icon-svg"/>
+        <CompressOutlined class="icon-svg" @click="handleScreenModel" v-if="fullState"/>
+        <ExpandOutlined class="icon-svg" @click="handleScreenModel" v-else/>
     </div>
     <div class="right_menu-item">
         <SyncOutlined class="icon-svg"/>
@@ -32,11 +35,14 @@
             </template>
         </a-dropdown>
     </div>
-    <UserSetting ref="UserSetting"/>
+    <userSetting ref="userSetting"/>
 </template>
 <script lang="ts">
-import UserSetting from './user/setting.vue'
-import {defineComponent, ref,reactive} from 'vue'
+import userSetting from './user/setting.vue'
+import {defineComponent, nextTick, onMounted, ref} from 'vue'
+import {checkFull, fullscreenchange, switchScreen} from '@/packages/utils/screen.full'
+import {handleKeyBoard} from '@/packages/utils/keydown'
+import {notification} from 'ant-design-vue';
 import {
     BellOutlined,
     ClearOutlined,
@@ -50,7 +56,7 @@ import {
 
 export default defineComponent({
     components: {
-        UserSetting,
+        userSetting,
         BellOutlined,
         ClearOutlined,
         DownOutlined,
@@ -61,15 +67,62 @@ export default defineComponent({
         SyncOutlined
     },
     setup() {
-        const UserSetting = ref()
+        const userSetting = ref()
+        const searchActive = ref<string | null>(null);
+        const searchKey = ref<string>('');
+        const fullState = ref<boolean>(false)
 
         const handleOpenThemeSetting = () => {
-            UserSetting.value.showDrawer()
+            userSetting.value.showDrawer()
         }
 
+        /**
+         * 搜索
+         */
+        const handleSearch = () => {
+            if (searchKey.value) {
+
+            } else {
+                searchActive.value = searchActive.value ? null : 'search-active';
+            }
+        }
+
+        /**
+         * 全屏模式
+         */
+        const toggle = () => {
+            nextTick(() => {
+                fullState.value = checkFull();
+            })
+        }
+
+        const handleScreenModel = () => {
+            switchScreen()
+        }
+
+
+        const handleEnter = (e: KeyboardEvent) => {
+            notification['success']({
+                message: '搜索提示',
+                description: `嗨，您输入的关键词是：${searchKey.value}`
+            });
+        }
+
+
+        onMounted(() => {
+            fullscreenchange(toggle)
+        })
+
         return {
-            UserSetting,
-            handleOpenThemeSetting
+            userSetting,
+            searchActive,
+            searchKey,
+            fullState,
+            handleSearch,
+            handleOpenThemeSetting,
+            handleScreenModel,
+            handleKeyBoard,
+            handleEnter
         }
     }
 })
@@ -80,13 +133,40 @@ export default defineComponent({
     display: flex;
     align-items: center;
     cursor: pointer;
+    position: relative;
+
+    &:first-of-type {
+        margin-right: 15px;
+    }
 
     &:last-of-type {
         margin-right: 0;
     }
 
+    .key-input {
+        background: none;
+        outline: none;
+        border: 1px solid @primary-color;
+        border-radius: 36px;
+        padding: 3px 10px;
+        transition: all 0.5s;
+        opacity: 0;
+        width: 0;
+    }
+
+    .search-active {
+        width: 200px;
+        opacity: 1;
+    }
+
     .icon-svg {
         font-size: 15px;
+    }
+
+    .icon-search {
+        position: absolute;
+        right: 10px;
+        top: inherit;
     }
 
     .user-head {
