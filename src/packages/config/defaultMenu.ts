@@ -106,14 +106,6 @@ const arr = [
                 tabFix: false
             },
             {
-                name: '拖拽排序',
-                path: '/module/draggable',
-                icon: '',
-                isShow: 1,
-                tabHidden: false,
-                tabFix: false
-            },
-            {
                 name: '简洁图标',
                 path: '/module/icon/iconfont',
                 icon: '',
@@ -124,6 +116,14 @@ const arr = [
             {
                 name: '描述列表',
                 path: '/module/descriptions',
+                icon: '',
+                isShow: 1,
+                tabHidden: false,
+                tabFix: false
+            },
+            {
+                name: '滚动组件',
+                path: '/module/marquee',
                 icon: '',
                 isShow: 1,
                 tabHidden: false,
@@ -258,25 +258,9 @@ const arr = [
         ]
     },
     {
-        name: '异常收集',
-        path: '/error',
-        icon: 'BugOutlined',
-        isShow: 1,
-        tabHidden: false,
-        tabFix: false
-    },
-    {
         name: '通知页面',
         path: '/error',
         icon: 'MehOutlined',
-        isShow: 1,
-        tabHidden: false,
-        tabFix: false
-    },
-    {
-        name: '引导页',
-        path: '/error',
-        icon: 'NodeCollapseOutlined',
         isShow: 1,
         tabHidden: false,
         tabFix: false

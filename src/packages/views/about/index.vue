@@ -1,3 +1,5 @@
 <template>
-    about
+    <yxs-view>
+         关于
+    </yxs-view>
 </template>

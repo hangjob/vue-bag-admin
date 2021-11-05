@@ -9,6 +9,7 @@ import {setupStore} from '@/packages/store'
 import {setupGlobDirectives} from '@/packages/extend/directive'
 import {setVxeTable} from '@/packages/plugin/vxe-table'
 import {setupGlobComponents} from '@/packages/components'
+import {setupDraggable} from '@/packages/plugin/draggable'
 import '../../../mock'
 
 const setupInit = (app: App) => {
@@ -18,6 +19,7 @@ const setupInit = (app: App) => {
     setupAndDesignVue(app)
     setupGlobDirectives(app)
     setupGlobComponents(app)
+    setupDraggable(app)
 }
 
 export default setupInit;
