@@ -58,5 +58,9 @@ export default {
     isCustomStyles:{
         type: Boolean,
         default: false,
+    },
+    maskClosable:{
+        type: Boolean,
+        default: false,
     }
 }

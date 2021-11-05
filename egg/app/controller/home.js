@@ -23,16 +23,17 @@ class HomeController extends Controller {
         const {ctx} = this;
         const result = await ctx.model.Menu.destroy({
             where: {
-                id: 1
+                id: 7
             }
         })
+        console.log(result)
     }
 
-    async findOne(){
+    async findOne() {
         const {ctx} = this;
         const result = await ctx.model.Menu.findOne({
             where: {
-                id: 2
+                id: 6
             }
         })
         ctx.body = result;
@@ -42,6 +43,7 @@ class HomeController extends Controller {
     async findAll() {
         const {ctx} = this;
         const result = await ctx.model.Menu.findAll()
+        ctx.body = result;
         console.log(result)
     }
 }
