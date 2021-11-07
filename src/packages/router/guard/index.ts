@@ -56,8 +56,8 @@ const setupRouterGuard = (to: any, from: any, next: any) => {
     apiUserinfo().then((res) => {
         disposeRouter(to, from, next)
         setUserStoreData(to, from, next, res)
-        NProgress.done();
         next();
+        NProgress.done();
     })
 
 }

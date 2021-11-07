@@ -2,10 +2,8 @@
     <a-layout-content class="layout-container">
         <div class="layout-container-view">
             <div class="layout-container-view-content scroll">
-                <router-view v-slot="{ Component ,route }">
-                    <keep-alive :include="caches">
-                        <component :is="Component"/>
-                    </keep-alive>
+                <router-view v-slot="{ Component, route }">
+                    <component :is="Component"/>
                 </router-view>
             </div>
         </div>

@@ -1,12 +1,24 @@
-.fade-transform-leave-active,
-.fade-transform-enter-active {
-    transition: all 0.2s;
+.slide-right-enter-active,
+.slide-right-leave-active,
+.slide-left-enter-active,
+.slide-left-leave-active {
+    position: absolute; // 需要注意的地方
+    width: 100%; // 需要注意的地方，否则会出现页面渲染卡顿现象
+    will-change: transform;
+    transition: all 0.3s ease-out;
 }
-.fade-transform-enter {
+
+.slide-right-enter {
     opacity: 0;
-    transform: translateX(-30px);
+    transform: translate(-100%, 0);
 }
-.fade-transform-leave-to {
+
+.slide-right-leave-active {
     opacity: 0;
-    transform: translateX(30px);
+    transform: translate(0%, 0);
+}
+
+.slide-left-enter {
+    opacity: 0;
+    transform: translate(100%, 0);
 }
