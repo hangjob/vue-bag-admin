@@ -28,11 +28,13 @@
 </template>
 <script lang="ts">
 import {defineComponent, onMounted, ref} from 'vue'
+// @ts-ignore
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
 import {useRoute} from "vue-router"
 
 export default defineComponent({
+    name: 'module-rich',
     components: {
         Quill
     },
@@ -112,6 +114,7 @@ export default defineComponent({
 <style lang="less" scoped>
 .rich {
     box-sizing: border-box;
+
     /deep/ .editor-container {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;

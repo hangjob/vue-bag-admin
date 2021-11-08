@@ -6,5 +6,7 @@
 <script>
 import {defineComponent} from 'vue'
 
-export default defineComponent({})
+export default defineComponent({
+    name:'chart-echarts',
+})
 </script>

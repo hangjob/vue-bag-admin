@@ -9,6 +9,7 @@ import {defineComponent, ref} from 'vue';
 import Breakpoint from './breakpoint.vue'
 
 export default defineComponent({
+    name:'module-fileUpload',
     components: {
         Breakpoint
     },

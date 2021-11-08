@@ -243,6 +243,7 @@ const rowSelection = {
 };
 
 export default defineComponent({
+    name:'sys-menu',
     components: {
         add, edit
     },

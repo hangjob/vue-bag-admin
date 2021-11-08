@@ -8,7 +8,7 @@ const ignore = ["/login", "/403", "/404", "/500", "/502"];
 let userinfo: any = {};
 
 // 处理app-store数据
-function setAppStoreData(to: any, from: any, next: any): void {
+function setAppStoreData(to: any): void {
     const item: any = findChildrenDepth({
         key: 'path',
         value: to.path,
@@ -16,9 +16,6 @@ function setAppStoreData(to: any, from: any, next: any): void {
     }, store.getters['app/menuList']);
 
     store.commit("app/addProcessList", {
-        keepAlive: to.meta.keepAlive,
-        fullPath: to.fullPath,
-        path: to.path,
         ...item
     });
 
@@ -42,7 +39,7 @@ function disposeRouter(to: any, from: any, next: any): void {
         if (to.path.indexOf("/login") === 0) {
             return next("/");
         } else {
-            setAppStoreData(to, from, next)
+            setAppStoreData(to)
         }
     } else {
         if (!ignore.some((e: string) => to.path.indexOf(e) === 0)) {

@@ -24,6 +24,7 @@ import XEUtils from 'xe-utils'
 const columnList: any[] = []
 const dataList: any[] = []
 export default defineComponent({
+    name:'vxe-table-great-table',
     setup() {
         const gridOptions = reactive({
             border: true,

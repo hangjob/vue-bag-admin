@@ -230,6 +230,7 @@ import Dynamic from './dynamic.vue'
 
 
 export default defineComponent({
+    name:'home',
     components: {
         Returns,
         ProjectInfo,

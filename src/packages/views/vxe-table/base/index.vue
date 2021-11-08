@@ -46,6 +46,7 @@ import {
 } from 'vxe-table'
 import tableData from './data'
 export default defineComponent({
+    name:'vxe-table-base',
     setup() {
         const demo1 = reactive({
             loading: false,

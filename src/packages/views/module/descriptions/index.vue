@@ -41,6 +41,7 @@ import {defineComponent, ref} from 'vue'
 import designer from './designer.vue'
 
 export default defineComponent({
+    name:'module-descriptions',
     components: {
         designer
     },

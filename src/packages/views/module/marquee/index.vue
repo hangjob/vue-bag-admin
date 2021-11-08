@@ -49,9 +49,11 @@
 </template>
 <script lang="ts">
 import {defineComponent, reactive} from 'vue'
+// @ts-ignore
 import Vue3Marquee from "vue3-marquee";
 
 export default defineComponent({
+    name:'module-marquee',
     components: {
         Vue3Marquee
     },

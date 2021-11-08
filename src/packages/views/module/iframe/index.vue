@@ -13,6 +13,7 @@
 
 <script>
 export default {
+    name:'iframe',
     data() {
         return {
             loading: false,

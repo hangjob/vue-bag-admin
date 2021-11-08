@@ -78,6 +78,7 @@ import {toClipboard} from '@soerenmartius/vue3-clipboard'
 import {notification} from 'ant-design-vue';
 
 export default defineComponent({
+    name:'module-icon-iconfont',
     setup() {
 
         const activeKey = ref('1')

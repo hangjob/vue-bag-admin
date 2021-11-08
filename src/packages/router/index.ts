@@ -1,7 +1,8 @@
 import {createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw, RouterOptions} from 'vue-router'
 import {routerMode} from '@/packages/config';
 import {App} from 'vue';
-import {setupRouterGuard} from './guard'
+import {setupRouterGuard} from '@/packages/router/guard'
+import {setupBeforeStore} from "@/packages/router/beforeStore";
 // 定义路由
 const routes: Array<RouteRecordRaw> = [
     {
@@ -121,6 +122,7 @@ const router = createRouter({
 
 
 router.beforeEach((to: any, from: any, next: any) => {
+    setupBeforeStore()
     setupRouterGuard(to, from, next)
 });
 

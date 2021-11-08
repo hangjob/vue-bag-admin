@@ -122,6 +122,15 @@ const getBrowser = () => {
 }
 
 
+const repeat = (str: string, n: number) => {
+    let res = "";
+    for (let i = 0; i < n; i++) {
+        res += str;
+    }
+    return res;
+};
+
+
 // 生成随机id
 const randomId = () => {
     let str = "";

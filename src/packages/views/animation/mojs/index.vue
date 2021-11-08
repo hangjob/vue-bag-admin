@@ -70,6 +70,7 @@ const props = {
 }
 
 export default {
+    name:'animation-mojs',
     data() {
 
     },

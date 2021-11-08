@@ -66,6 +66,7 @@ let someJSONData = [
     }
 ]
 export default defineComponent({
+    name:'module-print',
     setup() {
         const handleJsonPrint = (fields: Array<string>) => {
             printJS({printable: someJSONData, properties: fields, type: 'json'})

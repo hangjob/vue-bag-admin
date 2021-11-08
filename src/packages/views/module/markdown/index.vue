@@ -20,16 +20,19 @@ import {defineComponent, ref} from 'vue'
 import '@kangc/v-md-editor/lib/style/base-editor.css';
 import '@kangc/v-md-editor/lib/theme/style/github.css';
 
+// @ts-ignore
 import VMdEditor from '@kangc/v-md-editor';
+// @ts-ignore
 import githubTheme from '@kangc/v-md-editor/lib/theme/github.js';
 
-// highlightjs
+// @ts-ignore
 import hljs from 'highlight.js';
 
 VMdEditor.use(githubTheme, {
     Hljs: hljs,
 });
 export default defineComponent({
+    name:'module-markdown',
     components: {
         VMdEditor
     },

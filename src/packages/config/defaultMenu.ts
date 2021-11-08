@@ -40,7 +40,8 @@ const arr = [
                 icon: '',
                 isShow: 1,
                 tabHidden: false,
-                tabFix: true
+                tabFix: true,
+                keepAlive:true
             }
         ]
     },
@@ -56,7 +57,8 @@ const arr = [
                 icon: '',
                 isShow: 1,
                 tabHidden: false,
-                tabFix: false
+                tabFix: false,
+                keepAlive:false
             },
             {
                 name: '富文本编辑器',
@@ -64,7 +66,8 @@ const arr = [
                 icon: '',
                 isShow: 1,
                 tabHidden: false,
-                tabFix: false
+                tabFix: false,
+                keepAlive:true
             },
             {
                 name: '解析Exel',
@@ -72,7 +75,8 @@ const arr = [
                 icon: '',
                 isShow: 1,
                 tabHidden: false,
-                tabFix: false
+                tabFix: false,
+                keepAlive:false
             },
             {
                 name: '上传',
@@ -86,7 +90,8 @@ const arr = [
                         icon: '',
                         isShow: 1,
                         tabHidden: false,
-                        tabFix: false
+                        tabFix: false,
+                        keepAlive:false
                     },
                     {
                         name: '文件上传',
@@ -94,7 +99,8 @@ const arr = [
                         icon: '',
                         isShow: 1,
                         tabHidden: false,
-                        tabFix: false
+                        tabFix: false,
+                        keepAlive:false
                     }
                 ]
             },
@@ -104,7 +110,8 @@ const arr = [
                 icon: '',
                 isShow: 1,
                 tabHidden: false,
-                tabFix: false
+                tabFix: false,
+                keepAlive:false
             },
             {
                 name: '简洁图标',
@@ -112,7 +119,8 @@ const arr = [
                 icon: '',
                 isShow: 1,
                 tabHidden: false,
-                tabFix: false
+                tabFix: false,
+                keepAlive:false
             },
             {
                 name: '描述列表',
@@ -120,7 +128,8 @@ const arr = [
                 icon: '',
                 isShow: 1,
                 tabHidden: false,
-                tabFix: false
+                tabFix: false,
+                keepAlive:false
             },
             {
                 name: '滚动组件',
@@ -128,7 +137,8 @@ const arr = [
                 icon: '',
                 isShow: 1,
                 tabHidden: false,
-                tabFix: false
+                tabFix: false,
+                keepAlive:true
             },
         ]
     },
@@ -162,7 +172,8 @@ const arr = [
                 icon: '',
                 isShow: 1,
                 tabHidden: false,
-                tabFix: false
+                tabFix: false,
+                keepAlive:true
             },
             {
                 name: '校验表格',
@@ -254,7 +265,7 @@ const arr = [
                 isShow: 1,
                 iframe: 'https://v3.cn.vuejs.org/',
                 tabHidden: false,
-                tabFix: false
+                tabFix: true
             }
         ]
     },
@@ -264,7 +275,7 @@ const arr = [
         icon: 'MehOutlined',
         isShow: 1,
         tabHidden: false,
-        tabFix: false
+        tabFix: true
     },
     {
         name: '打点吧',

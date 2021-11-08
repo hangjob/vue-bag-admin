@@ -1,5 +1,6 @@
 import {FileItem} from './file.type'
 import axios from 'axios';
+// @ts-ignore
 import _ from "lodash";
 import {randomId} from "@/packages/utils/utils";
 
@@ -16,6 +17,10 @@ class FileBreakpoint {
     private allChunksUploadStatus = [] // 切片状态
     private code = '1'; // 成功状态码
     private timeout = 3 * 60 * 1000
+    private opt = {} || undefined;
+    private success: any
+    private error: any
+    private fileChunks: any
 
     constructor(opt?: optItem) {
         if (opt?.chunkSize) {
@@ -63,7 +68,7 @@ class FileBreakpoint {
     /**
      * 获取切片
      */
-    getFileChunks(file: FileItem, success?, error?) {
+    getFileChunks(file: FileItem, success?: string, error?: string) {
         const {size} = file;
         this.success = success;
         this.error = error;

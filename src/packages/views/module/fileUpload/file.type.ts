@@ -3,6 +3,7 @@ interface FileItem {
     name?: string;
     status?: string;
     response?: string;
+    size:number,
     url?: string;
     preview?: string;
     originFileObj?: any;

@@ -48,6 +48,7 @@ interface FileInfo {
 }
 
 export default defineComponent({
+    name:'module-fileUploadImg',
     components: {
         PlusOutlined,
     },

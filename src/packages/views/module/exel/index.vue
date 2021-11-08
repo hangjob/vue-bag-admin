@@ -33,7 +33,7 @@ const readExcelToJson = (file: any) => {
     });
 }
 
-const generateTreeData = (arr: Array) => {
+const generateTreeData = (arr: Array<any>) => {
     const topLevelNodeMap = new Map();
     const secondLevelNodeMap = new Map();
     const thirdLevelNodeMap = new Map();
@@ -97,16 +97,17 @@ const generateTreeData = (arr: Array) => {
 
 
 export default defineComponent({
+    name: 'module-exel',
     components: {
         UploadOutlined,
         Table
     },
 
     setup() {
-        const fileList = ref([]);
+        const fileList = ref<any>([]);
         const uploading = ref(false);
         const tableData = ref([]);
-        const columns = ref([]);
+        const columns = ref<Array<any>>([]);
 
         const handleRemove = (file: any) => {
             const index = fileList.value.indexOf(file);
@@ -116,7 +117,7 @@ export default defineComponent({
         };
 
         const beforeUpload = (file: any) => {
-            readExcelToJson(file).then((res: Array) => {
+            readExcelToJson(file).then((res: any) => {
                 let firstData = res[0];
                 columns.value = Object.keys(firstData).map((item) => {
                     return {
@@ -127,7 +128,7 @@ export default defineComponent({
                     }
                 })
 
-                tableData.value = res.map((item, idx) => {
+                tableData.value = res.map((item: any, idx: number) => {
                     return {
                         ...item,
                         key: idx

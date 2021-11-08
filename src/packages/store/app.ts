@@ -1,18 +1,14 @@
-import { defaultMenu } from "@/packages/config/defaultMenu";
-import { find, findContainingObject, remove } from "@/packages/utils/lodash";
-import { getBrowser } from '@/packages/utils/utils'
-
-// 默认菜单
-const defaultTabFixs = () => {
-    return findContainingObject({ key: 'tabFix', value: true }, defaultMenu)
-}
+import {defaultMenu} from "@/packages/config/defaultMenu";
+import {find, remove} from "@/packages/utils/lodash";
+import {getBrowser} from '@/packages/utils/utils'
+import {defaultTabFix} from "@/packages/router/beforeStore";
 
 const app = {
     namespaced: true,
     state: {
         browser: {},
         menuList: defaultMenu,
-        processList: [].concat(defaultTabFixs()), // tab切换栏
+        processList: [], // tab切换栏
         currentRouter: {}, // 当前路由数据
         tabViewsPath: [], // 访问路经
         collapsed: false // 菜单是否折叠
@@ -38,7 +34,7 @@ const app = {
     mutations: {
         // 添加头部路由标签
         addProcessList(state: any, item: any) {
-            if (!find({ key: 'path', value: item.path }, state.processList)) {
+            if (!find({key: 'path', value: item.path}, state.processList)) {
                 state.processList.push(item);
             }
         },
@@ -52,7 +48,7 @@ const app = {
         },
         // 重置菜单
         resetProcessList(state: any) {
-            state.processList = [].concat(defaultTabFixs());
+            state.processList = defaultTabFix()
         },
         // 删除头部路由标签
         deleteProcessList(state: any, item: any) {
@@ -64,7 +60,7 @@ const app = {
             state.processList.map((obj: any) => {
                 if (obj.path === item.path) {
                     obj.active = true;
-                    state.currentRouter = { ...obj, ...item };
+                    state.currentRouter = {...obj, ...item};
                 } else {
                     obj.active = false;
                 }
@@ -74,6 +70,7 @@ const app = {
         updateTabViewsPath(state: any, arr: Array<any>) {
             state.tabViewsPath = arr.reverse()
         },
+        // 更新折叠
         updateCollapsed(state: any, bol: boolean) {
             state.collapsed = bol
         },

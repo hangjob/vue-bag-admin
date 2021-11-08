@@ -49,6 +49,7 @@ import {
 } from 'vxe-table'
 
 export default defineComponent({
+    name:'vxe-table-verify-table',
     setup() {
         const xTable = ref({} as VxeTableInstance)
 

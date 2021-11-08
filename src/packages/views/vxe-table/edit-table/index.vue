@@ -61,6 +61,7 @@ import { defineComponent, reactive, ref, nextTick } from 'vue'
 import { VXETable, VxeTableInstance, VxeToolbarInstance } from 'vxe-table'
 
 export default defineComponent({
+    name:'vxe-table-edit-table',
     setup() {
         const xToolbar = ref({} as VxeToolbarInstance)
         const xTable = ref({} as VxeTableInstance)
@@ -145,7 +146,7 @@ export default defineComponent({
                 removeRecords.length <= 0 &&
                 updateRecords.length <= 0
             ) {
-                VXETable.modal.message({
+                await VXETable.modal.message({
                     content: '数据未改动！',
                     status: 'warning',
                 })
@@ -160,13 +161,13 @@ export default defineComponent({
                 const body = { insertRecords, removeRecords, updateRecords }
                 console.log(body)
                 await loadList()
-                VXETable.modal.message({
+                await VXETable.modal.message({
                     content: `操作成功，新增 ${insertRecords.length} 条，更新 ${updateRecords.length} 条，删除 ${removeRecords.length} 条`,
                     status: 'success',
                 })
-            } catch (e) {
+            } catch (e:any) {
                 if (e && e.message) {
-                    VXETable.modal.message({
+                    await VXETable.modal.message({
                         content: e.message,
                         status: 'error',
                     })

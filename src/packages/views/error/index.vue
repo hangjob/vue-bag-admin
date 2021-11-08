@@ -107,6 +107,7 @@ import error404 from './404.vue'
 import error500 from './500.vue'
 
 export default defineComponent({
+    name:'error',
     setup() {
         return {
             activeKey: ref('1'),
