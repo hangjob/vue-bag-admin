@@ -3,7 +3,7 @@
         <a-form ref="formRef" :model="formState" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol">
             <a-row>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
-                    <a-form-item label="名称" name="name" >
+                    <a-form-item label="名称" name="name">
                         <a-input v-model:value="formState.name" placeholder="输入菜单名称"/>
                     </a-form-item>
                 </a-col>
@@ -96,13 +96,14 @@
 <script lang="ts">
 import {defineComponent, reactive, ref, toRaw, UnwrapRef} from 'vue';
 import {ValidateErrorEntity} from 'ant-design-vue/es/form/interface';
+import {apiAddMenu} from "@/packages/serve/app";
 
 interface FormState {
     name: string;
     icon: string,
     router?: string,
     filePath?: string,
-    httpFilePath?:string,
+    httpFilePath?: string,
     iframePath?: string,
     viewPath?: string,
     limits?: Array<any>,
@@ -121,7 +122,7 @@ export default defineComponent({
             icon: '',
             router: '',
             filePath: '',
-            httpFilePath:'',
+            httpFilePath: '',
             iframePath: '',
             viewPath: '',
             limits: [],
@@ -144,7 +145,12 @@ export default defineComponent({
         const onSubmit = () => {
             formRef.value.validate()
                 .then(() => {
-                    console.log('values', formState, toRaw(formState));
+                    let data = toRaw(formState);
+                    apiAddMenu().then(res => {
+                        console.log(res)
+                    }).catch((err) => {
+
+                    })
                 })
                 .catch((error: ValidateErrorEntity<FormState>) => {
                     console.log('error', error);
