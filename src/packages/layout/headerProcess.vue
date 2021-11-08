@@ -63,9 +63,13 @@ export default defineComponent({
         onMounted(() => {
         })
 
-        const toPath = () => {
+        const toPath = (path?: string) => {
             const active = processList.value.find((e: any) => e.active); // 查找是否含有是当前激活的菜单 否则去 跳转最后一个
-            if (!active) {
+            if (path) {
+                router.push(path);
+                return;
+            }
+            if (!active && !path) {
                 const next = last(processList.value);
                 router.push(next ? next.path : "/");
             }
@@ -92,14 +96,17 @@ export default defineComponent({
                 },
                 {
                     name: '关闭其他', data: item, callback: (res: any) => {
-                        const arr = processList.value.filter((e: any) => e.path == item.path || e.value == "/");
-                        console.log(arr)
+                        const arr = processList.value.filter((e: any) => {
+                            return (e.path == item.path || e.value == "/") || e.tabFix;
+                        });
+                        store.commit('app/setProcessList', arr);
                         toPath();
                     }
                 },
                 {
                     name: '关闭所有', data: item, callback: (res: any) => {
-                        toPath();
+                        store.commit('app/resetProcessList');
+                        toPath(store.getters['app/processList'][0].path);
                     }
                 }
             ]

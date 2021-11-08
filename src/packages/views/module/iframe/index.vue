@@ -23,7 +23,8 @@ export default {
     watch: {
         $route: {
             handler({ meta }) {
-                this.url = this.$store.getters['app/currentRouter'].iframe
+                this.url = this.$store.getters['app/currentRouter'].iframe;
+                this.loading = true
             },
             immediate: true,
         },
@@ -32,7 +33,6 @@ export default {
     mounted() {
         const iframe = this.$el.querySelector('iframe')
         this.loading = true
-
         iframe.onload = () => {
             this.loading = false
         }

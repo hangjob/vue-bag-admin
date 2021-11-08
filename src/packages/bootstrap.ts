@@ -9,8 +9,8 @@ const bootstrap = async (app: App) => {
     router.isReady().then(() => {
         app.mount('#app')
     })
+    // @ts-ignore
+    window.__app__ = app;
 }
 
 export default bootstrap;
-// @ts-ignore
-window.__app__ = app;

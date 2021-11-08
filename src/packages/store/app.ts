@@ -52,7 +52,7 @@ const app = {
         },
         // 重置菜单
         resetProcessList(state: any) {
-            state.list = [];
+            state.processList = [].concat(defaultTabFixs());
         },
         // 删除头部路由标签
         deleteProcessList(state: any, item: any) {

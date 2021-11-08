@@ -53,3 +53,4 @@ module.exports = app => {
     })
     return Menu;
 }
+

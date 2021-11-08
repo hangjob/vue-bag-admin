@@ -124,6 +124,13 @@ router.beforeEach((to: any, from: any, next: any) => {
     setupRouterGuard(to, from, next)
 });
 
+
+router.afterEach((to, from) => {
+    const toDepth = to.path.split('/').length
+    const fromDepth = from.path.split('/').length
+    to.meta.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+})
+
 const setupRouter = (app: App) => {
     app.use(router)
 }

@@ -25,6 +25,7 @@ const arr = [
         icon: 'HomeFilled',
         isShow: 1,
         tabHidden: false,
+        iframe:'',
         tabFix: true
     },
     {
