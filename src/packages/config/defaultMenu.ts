@@ -26,7 +26,8 @@ const arr = [
         isShow: 1,
         tabHidden: false,
         iframe:'',
-        tabFix: true
+        tabFix: true,
+        keepAlive:false
     },
     {
         name: '系统管理',
@@ -40,7 +41,7 @@ const arr = [
                 icon: '',
                 isShow: 1,
                 tabHidden: false,
-                tabFix: true,
+                tabFix: false,
                 keepAlive:true
             }
         ]
@@ -156,7 +157,8 @@ const arr = [
                 icon: '',
                 isShow: 1,
                 tabHidden: false,
-                tabFix: false
+                tabFix: false,
+                keepAlive:false
             },
             {
                 name: '海量数据',
@@ -164,7 +166,8 @@ const arr = [
                 icon: '',
                 isShow: 1,
                 tabHidden: false,
-                tabFix: false
+                tabFix: false,
+                keepAlive:false
             },
             {
                 name: '编辑表格',
@@ -181,7 +184,8 @@ const arr = [
                 icon: '',
                 isShow: 1,
                 tabHidden: false,
-                tabFix: false
+                tabFix: false,
+                keepAlive:false
             },
             {
                 name: 'vxe-table文档',
@@ -190,26 +194,8 @@ const arr = [
                 isShow: 1,
                 iframe: 'https://xuliangzhan_admin.gitee.io/vxe-table/v4/table/tree/basic',
                 tabHidden: false,
-                tabFix: false
-            }
-        ]
-    },
-    {
-        name: '动画',
-        path: '',
-        icon: 'SmileOutlined',
-        isShow: 1,
-        tabHidden: false,
-        tabFix: false,
-        children:[
-            {
-                name: 'Mo.js',
-                path: '/animation/mojs',
-                icon: '',
-                isShow: 1,
-                iframe: '',
-                tabHidden: false,
-                tabFix: false
+                tabFix: false,
+                keepAlive:false
             }
         ]
     },
@@ -228,7 +214,8 @@ const arr = [
                 isShow: 1,
                 iframe: '',
                 tabHidden: false,
-                tabFix: false
+                tabFix: false,
+                keepAlive:false
             },
             {
                 name: 'G2',
@@ -237,7 +224,8 @@ const arr = [
                 isShow: 1,
                 iframe: '',
                 tabHidden: false,
-                tabFix: false
+                tabFix: false,
+                keepAlive:false
             },
             {
                 name: 'G2plot',
@@ -246,13 +234,14 @@ const arr = [
                 isShow: 1,
                 iframe: '',
                 tabHidden: false,
-                tabFix: false
+                tabFix: false,
+                keepAlive:false
             }
         ]
     },
     {
         name: '开发文档',
-        path: '/permit',
+        path: '',
         icon: 'ReadOutlined',
         isShow: 1,
         tabHidden: false,
@@ -265,7 +254,8 @@ const arr = [
                 isShow: 1,
                 iframe: 'https://v3.cn.vuejs.org/',
                 tabHidden: false,
-                tabFix: true
+                tabFix: false,
+                keepAlive:false
             }
         ]
     },
@@ -275,15 +265,17 @@ const arr = [
         icon: 'MehOutlined',
         isShow: 1,
         tabHidden: false,
-        tabFix: true
+        tabFix: false,
+        keepAlive:false
     },
     {
         name: '打点吧',
-        path: '/error',
+        path: '/admire',
         icon: 'RedEnvelopeOutlined',
         isShow: 1,
         tabHidden: false,
-        tabFix: false
+        tabFix: false,
+        keepAlive:false
     },
     {
         name: '权限控制',
@@ -291,7 +283,8 @@ const arr = [
         icon: 'UserSwitchOutlined',
         isShow: 1,
         tabHidden: false,
-        tabFix: false
+        tabFix: false,
+        keepAlive:false
     },
     {
         name: '关于',
@@ -299,7 +292,8 @@ const arr = [
         icon: 'UserOutlined',
         isShow: 1,
         tabHidden: false,
-        tabFix: false
+        tabFix: false,
+        keepAlive:false
     },
 ]
 const defaultMenu = addUniqueId(arr)

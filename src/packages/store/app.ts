@@ -50,10 +50,6 @@ const app = {
         resetProcessList(state: any) {
             state.processList = defaultTabFix()
         },
-        // 删除头部路由标签
-        deleteProcessList(state: any, item: any) {
-            state.processList = remove(item, state.processList)
-        },
         // 选中的当前路由
         updateCurrentRouter(state: any, item: any) {
             // 激活当前的 processList 中的 active

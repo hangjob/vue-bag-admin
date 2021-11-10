@@ -14,13 +14,14 @@ class FileBreakpoint {
     protected chunkSize = 3 * 1024 * 1024; // 设置分片大小
     private chunksLength = 0;
     private dataChunks = [];
-    private allChunksUploadStatus = [] // 切片状态
+    private allChunksUploadStatus: any[] = [] // 切片状态
     private code = '1'; // 成功状态码
     private timeout = 3 * 60 * 1000
-    private opt = {} || undefined;
+    private opt: any
     private success: any
     private error: any
     private fileChunks: any
+    private uploadProcess: any
 
     constructor(opt?: optItem) {
         if (opt?.chunkSize) {
@@ -85,7 +86,7 @@ class FileBreakpoint {
      */
     calUploadProcess() {
         let uploadedCount = 0;
-        _.each(this.allChunksUploadStatus, (item) => {
+        _.each(this.allChunksUploadStatus, (item: any) => {
             if (item) uploadedCount++;
         });
         return Number(((uploadedCount * 100) / this.allChunksUploadStatus.length).toFixed(0).valueOf());
@@ -97,25 +98,25 @@ class FileBreakpoint {
     getFormDataChunks() {
         this.allChunksUploadStatus = _.fill(new Array(this.fileChunks.chunks.length), false);
         const formData = new FormData();
-        this.fileChunks.chunks.forEach((chunk, index) => {
+        this.fileChunks.chunks.forEach((chunk: any, index: number) => {
             formData.append("index", index + "");
             formData.append("chunk", this.fileChunks.file.slice(chunk.start, chunk.end));
             formData.append("name", this.fileChunks.file.name);
             formData.append("chunksLength", this.fileChunks.chunks.length + "");
             formData.append("uid", randomId());
-            this.postChunksAxios(formData)
+            this.postChunksAxios(formData, index)
         })
     }
 
     /**
      * 切片上传
      */
-    postChunksAxios(formData) {
+    postChunksAxios(formData: any, index: number) {
         axios.post(this.opt?.url, formData, {
             timeout: this.timeout,
         })
-            .then((res) => {
-                if (typeof res === "object" && res.data?.code === code) {
+            .then((res: any) => {
+                if (typeof res === "object" && res.data?.code === this.code) {
                     this.allChunksUploadStatus[index] = true; // 更新标记为
                     this.uploadProcess = this.calUploadProcess(); // 更新上传百分比
                     if (this.uploadProcess === 100) this.success?.()// 完成合并上传
@@ -129,12 +130,12 @@ class FileBreakpoint {
     /**
      * 直接上传
      */
-    postFileAxios(file) {
+    postFileAxios(file: any) {
         axios.post(this.opt?.url, file, {
             timeout: this.timeout,
         })
-            .then((res) => {
-                if (typeof res === "object" && res.data?.code === code) {
+            .then((res: any) => {
+                if (typeof res === "object" && res.data?.code === this.code) {
                     this.success?.()
                 }
             })

@@ -41,7 +41,6 @@
 </template>
 <script lang="ts">
 
-// @ts-ignore
 import printJS from "print-js"
 import {defineComponent} from 'vue'
 import invoice from '@/packages/assets/invoice.png'

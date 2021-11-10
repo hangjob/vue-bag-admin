@@ -28,7 +28,6 @@
 </template>
 <script lang="ts">
 import {defineComponent, onMounted, ref} from 'vue'
-// @ts-ignore
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
 import {useRoute} from "vue-router"

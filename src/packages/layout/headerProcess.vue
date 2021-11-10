@@ -12,7 +12,7 @@
                  @contextmenu.stop.prevent="handleContextMenu($event, item)"
             >
                 <span class="title">{{ item.name }}</span>
-                <CloseOutlined class="icon-svg" v-if="!item.tabFix"/>
+                <CloseOutlined class="icon-svg" v-if="!item.tabFix" @click.stop="handleColseCurrent(item)"/>
             </div>
         </div>
         <div class="tab-action tab-action-right" @click="handleScrollBar(true)">
@@ -60,20 +60,25 @@ export default defineComponent({
             scrollBar(tabContainer.value.scrollLeft + (t ? 100 : -100))
         }
 
-        onMounted(() => {
-        })
 
         const toPath = (path?: string) => {
-            const active = processList.value.find((e: any) => e.active); // 查找是否含有是当前激活的菜单 否则去 跳转最后一个
             if (path) {
                 router.push(path);
                 return;
             }
-            if (!active && !path) {
+            const active: any = processList.value.find((e: any) => e.active); // 查找是否含有是当前激活的菜单 否则去 跳转最后一个
+            if (!active) {
                 const next = last(processList.value);
-                router.push(next ? next.path : "/");
+                router.push(next ? next.path : '/');
             }
         }
+
+        const handleColseCurrent = (item: any) => {
+            const idx: number = processList.value.findIndex((e: any) => e.id == item.id)
+            store.commit('app/delProcessList', idx)
+            toPath();
+        }
+
 
         const handleContextMenu = (e: any, item: any) => {
             e.preventDefault(); // 阻止默认事件
@@ -89,22 +94,20 @@ export default defineComponent({
             appContextmenu.value.items = [
                 {
                     name: '关闭当前', data: item, callback: (res: any) => {
-                        const idx: number = processList.value.findIndex((e: any) => e.path == item.path)
-                        store.commit('app/delProcessList', idx)
-                        toPath();
+                        handleColseCurrent(res.data)
                     }
                 },
                 {
-                    name: '关闭其他', data: item, callback: (res: any) => {
+                    name: '关闭其他', data: item, callback: () => {
                         const arr = processList.value.filter((e: any) => {
-                            return (e.path == item.path || e.value == "/") || e.tabFix;
+                            return (e.id == item.id || e.path == "/") || e.tabFix;
                         });
                         store.commit('app/setProcessList', arr);
                         toPath();
                     }
                 },
                 {
-                    name: '关闭所有', data: item, callback: (res: any) => {
+                    name: '关闭所有', data: item, callback: () => {
                         store.commit('app/resetProcessList');
                         toPath(store.getters['app/processList'][0].path);
                     }
@@ -121,7 +124,8 @@ export default defineComponent({
             handleContextMenu,
             handleClickCutTap,
             tabContainer,
-            handleScrollBar
+            handleScrollBar,
+            handleColseCurrent
         }
     }
 })

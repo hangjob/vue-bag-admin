@@ -16,6 +16,7 @@
     "ant-design-vue": "^2.2.8",
     "antd-theme-generator": "^1.2.6",
     "axios": "^0.23.0",
+    "echarts": "^5.2.2",
     "jquery": "^3.6.0",
     "lodash": "^4.17.21",
     "minireset.css": "0.0.7",
@@ -33,6 +34,7 @@
     "xlsx": "^0.17.3"
   },
   "devDependencies": {
+    "@types/jquery": "^3.5.8",
     "@types/node": "^16.10.2",
     "@types/quill": "^2.0.9",
     "@types/webpack-env": "^1.16.3",

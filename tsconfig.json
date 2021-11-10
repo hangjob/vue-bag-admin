@@ -16,7 +16,9 @@
         "types": [
             "webpack-env",
             "node"
-        ]
+        ],
+        "typeRoots":["./typings"],
+      "allowSyntheticDefaultImports": true
     },
     "exclude": [
         "node_modules",

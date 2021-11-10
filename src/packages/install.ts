@@ -1,6 +1,8 @@
 import type {App} from 'vue';
 import router from '@/packages/router'
 import setupInit from '@/packages/base/index'
+import jquery from "jquery"
+
 
 const install = async (app: App) => {
     app.config.globalProperties.version = '0.0.1';
@@ -9,7 +11,7 @@ const install = async (app: App) => {
     router.isReady().then(() => {
         app.mount('#app')
     })
-    // @ts-ignore
+    window.$ = jquery;
     window.__app__ = app;
 }
 

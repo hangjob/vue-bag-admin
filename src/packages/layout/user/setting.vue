@@ -39,6 +39,7 @@ import {theme} from "@/packages/config";
 import {find} from "@/packages/utils/lodash";
 // @ts-ignore
 import darkVars from '@/config/dark.json';
+
 export default defineComponent({
     setup() {
         const placement = ref('right');
@@ -60,9 +61,9 @@ export default defineComponent({
         });
 
         const changeTheme = (path: string) => {
-            // @ts-ignore
+
             window['less'].modifyVars({
-                '@primary-color':'blue'
+                '@primary-color': 'blue'
             }).then(console.log);
         }
 

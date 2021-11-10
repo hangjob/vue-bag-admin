@@ -18,7 +18,7 @@
     </a-layout-content>
 </template>
 <script lang="ts">
-import {computed, defineComponent, ref, watch, watchEffect} from 'vue'
+import {computed, defineComponent, ref, watch} from 'vue'
 import {useRoute} from 'vue-router'
 import {useStore} from "vuex";
 
@@ -55,8 +55,7 @@ export default defineComponent({
             getIframes(menuList)
 
             iframeArr.forEach((item) => {
-                // @ts-ignore
-                __app__.component(item.path, import('@/packages/views/module/iframe/index.vue'));
+                window.__app__.component(item.path, import('@/packages/views/module/iframe/index.vue'));
             });
 
             hasOpenComponentsArr.value = iframeArr;

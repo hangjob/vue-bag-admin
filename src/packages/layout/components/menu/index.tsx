@@ -15,11 +15,12 @@ export default defineComponent({
         const selectedKeys = ref<string[]>([])
         const openKeys = ref<string[]>([])
         const menuList = computed(() => store.getters['app/menuList']);
+
         // 是否可见
         const visible = ref<boolean>(true);
         const goView = (url: string) => {
             if (url != route.path) {
-                router.push(url)
+                router.push(url).then()
             }
         }
 
