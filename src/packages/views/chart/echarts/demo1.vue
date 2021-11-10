@@ -10,7 +10,7 @@ let goOutSchool = ['2.4', '4.4', '1.8', '2.8', '2.4', '4.4', '1.8', '2.8', '2.4'
 let goOutSchool2 = ['12.4', '14.4', '11.8', '2.8', '2.4', '4.4', '1.8', '2.8', '2.4', '4.4', '1.8', '2.8'];
 
 let option = {
-    backgroundColor: '#013A54',
+    backgroundColor: '#ffff',
     tooltip: {
         trigger: 'axis',
         backgroundColor: 'transparent',
@@ -95,14 +95,13 @@ let option = {
         top: '5%',
         type: 'plain',
         textStyle: {
-            color: '#3CA1EC',
+            color: '#ddd',
             fontSize: 16,
         },
         // icon:'rect',
         itemGap: 25,
         itemWidth: 18,
         icon: 'path://M0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z',
-
         data: [
             {
                 name: '应用1',
@@ -118,7 +117,7 @@ let option = {
     grid: {
         top: '15%',
         left: '5%',
-        right: '5%',
+        right: '4%',
         bottom: '15%',
         // containLabel: true
     },
@@ -136,7 +135,7 @@ let option = {
             axisLabel: {
                 //坐标轴刻度标签的相关设置
                 textStyle: {
-                    color: '##E06148',
+                    color: '#13c2c2',
                     padding: 16,
                     fontSize: 14,
                 },
@@ -147,7 +146,7 @@ let option = {
             splitLine: {
                 show: true,
                 lineStyle: {
-                    color: '#192a44',
+                    color: '#ddd',
                 },
             },
             axisTick: {
@@ -168,13 +167,13 @@ let option = {
             splitLine: {
                 show: true,
                 lineStyle: {
-                    color: '#192a44',
+                    color: '#ddd',
                 },
             },
             axisLine: {
                 show: true,
                 lineStyle: {
-                    color: '#233653',
+                    color: '#ddd',
                 },
             },
             axisLabel: {

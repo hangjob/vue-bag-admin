@@ -49,7 +49,7 @@ const arr = [
     {
         name: '组件库',
         router: '',
-        icon: 'SendOutlined',
+        icon: 'SmileOutlined',
         isShow: 1,
         children: [
             {
@@ -144,9 +144,9 @@ const arr = [
         ]
     },
     {
-        name: '海量数据表格',
+        name: '数据表格',
         path: '',
-        icon: 'TableOutlined',
+        icon: 'BarChartOutlined',
         isShow: 1,
         tabHidden: false,
         tabFix: false,

@@ -5,6 +5,7 @@
 import * as echarts from "echarts";
 
 let option = {
+    backgroundColor:"white",
     legend: {
         top: 'bottom'
     },

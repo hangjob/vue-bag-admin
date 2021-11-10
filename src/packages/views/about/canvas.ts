@@ -38,6 +38,7 @@ export default class UserCanvasBg {
 
     // 绘制 圆形
     circle() {
+        // 在这一部编写
         this.loadImage(this.userInfo.userhead, (res: any) => {
             // let solar = ['水星','金星','地球','火星','木星','土星','天王星','海王星'];
             this.line({
@@ -53,8 +54,13 @@ export default class UserCanvasBg {
             })
             this.line({
                 lines: [{x: 30, y: 70}, {x: -50, y: 100}, {x: -200, y: 100}],
-                direction: 'left',
-                str: `${this.userInfo.usertime}，留下了你的脚印`
+            })
+            this.drawText({
+                str: `${this.userInfo.usertime}，留下了你的脚印`,
+                x: -630,
+                y: 106,
+                maxWidth: this.centerX - 280,
+                direction: 'right'
             })
 
             this.line({
@@ -66,14 +72,14 @@ export default class UserCanvasBg {
             this.line({
                 lines: [{x: 30, y: 70}, {x: 100, y: 100}, {x: 200, y: 100}],
             })
-            this.drawText({str: this.userInfo.description, x: -40, y: 106, direction: 'right'})
+            this.drawText({str: this.userInfo.description, x: 900, y: 106, direction: 'left'})
             this.circleImg(res)
         })
     }
 
     // 绘制 文本
     drawText(parame: any) {
-        let {str, x, y, size, direction, color = '#fff'} = parame;
+        let {str, x, y, size, direction, color = '#fff', maxWidth} = parame;
         x = this.centerX + x;
         y = this.centerY + y;
         //设置用户文本填充颜色
@@ -89,7 +95,10 @@ export default class UserCanvasBg {
             x = x + this.ctx.measureText(str).width + 20
         }
         this.ctx.textBaseline = 'center';
-        this.ctx.wrapText(str, x, y, 400);
+        if (!maxWidth) {
+            maxWidth = this.centerX - 200
+        }
+        this.ctx.wrapText(str, x, y, maxWidth);
     }
 
     // 处理img下载完成后在调用drawImage https://www.zhaokeli.com/article/8018.html
