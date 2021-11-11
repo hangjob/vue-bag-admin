@@ -2,7 +2,7 @@
 import Mock from "mockjs";
 import {resData} from './baseCommon'
 
-Mock.mock("/yxs/userinfo", 'post', (options: any) => {
+Mock.mock("/api/yxs/userinfo", 'post', (options: any) => {
     const data = Mock.mock({
         id: "@id",
         token: "@id",

@@ -11,9 +11,9 @@ module.exports = app => {
         await app.model.sync({ alter: true });//force  false 为不覆盖 true会删除再创建; alter true可以 添加或删除字段;
     });
     router.get('/', controller.home.index);
-    router.get('/test', controller.home.test);
-    router.get('/findAll', controller.home.findAll);
-    router.get('/addMenu', controller.home.addMenu);
-    router.get('/deleteMenu', controller.home.deleteMenu);
-    router.get('/findOne', controller.home.findOne);
+    router.all('/test', controller.home.test);
+    router.all('/findAll', controller.home.findAll);
+    router.all('/addMenu', controller.home.addMenu);
+    router.all('/deleteMenu', controller.home.deleteMenu);
+    router.all('/findOne', controller.home.findOne);
 };

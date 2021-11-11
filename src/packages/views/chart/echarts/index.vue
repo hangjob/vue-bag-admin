@@ -73,7 +73,7 @@ export default defineComponent({
     }
 })
 </script>
-<style lang="less">
+<style lang="less" scoped>
 h1{
     font-size: 26px;
     margin-bottom: 10px;

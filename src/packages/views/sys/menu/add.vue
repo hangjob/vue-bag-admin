@@ -10,23 +10,16 @@
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="选择图标" name="icon">
                         <a-input-search
-                                v-model:value="formState.icon"
-                                placeholder="选择icon图标"
-                                enter-button
-                                @search="visible = true"
+                            v-model:value="formState.icon"
+                            placeholder="选择icon图标"
+                            enter-button
+                            @search="visible = true"
                         />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
-                    <a-form-item label="选择类型" name="pid">
-                        <a-select v-model:value="formState.pid" placeholder="选择父级节点，不选择为一级菜单">
-
-                        </a-select>
-                    </a-form-item>
-                </a-col>
-                <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
-                    <a-form-item label="路由地址" name="router">
-                        <a-input v-model:value="formState.router" placeholder="输入路由地址"/>
+                    <a-form-item label="路由地址" name="path">
+                        <a-input v-model:value="formState.path" placeholder="输入路由地址"/>
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
@@ -35,8 +28,14 @@
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
-                    <a-form-item label="组件路径" name="filePath">
-                        <a-input v-model:value="formState.httpFilePath" placeholder="输入路由组件路径，为http网络组件"/>
+                    <a-form-item label="选择类型" name="pid">
+                        <a-select v-model:value="formState.pid" placeholder="选择父级节点，不选择为一级菜单">
+                        </a-select>
+                    </a-form-item>
+                </a-col>
+                <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
+                    <a-form-item label="网络组件" name="httpFilePath">
+                        <a-input v-model:value="formState.httpFilePath" placeholder="输入路由组件路径地址，为http网络组件"/>
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
@@ -52,11 +51,11 @@
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="权限" name="limits">
                         <a-select
-                                v-model:value="formState.limits"
-                                mode="multiple"
-                                style="width: 100%"
-                                placeholder="选择用户权限"
-                                :options="[{value:'admin',disabled:false},{value:'edit',disabled:false}]"
+                            v-model:value="formState.limits"
+                            mode="multiple"
+                            style="width: 100%"
+                            placeholder="选择用户权限"
+                            :options="[{value:'admin',disabled:false},{value:'edit',disabled:false}]"
                         />
                     </a-form-item>
                 </a-col>
@@ -96,106 +95,142 @@
         <div class="item-icons">
             <a-row>
                 <a-col class="item" :xs="12" :sm="8" :md="4" :lg="3" :xl="2" v-for="(item,idx) in icons">
-                    <component :is="item" :key="idx"></component>
+                    <div class="item-icon">
+                        <component :is="item" :key="idx" @click="handleSelected(item)"></component>
+                    </div>
                 </a-col>
             </a-row>
         </div>
     </a-modal>
 </template>
 <script lang="ts">
-    import {defineComponent, reactive, ref, toRaw, UnwrapRef} from 'vue';
-    import {ValidateErrorEntity} from 'ant-design-vue/es/form/interface';
-    import icons from './icons';
+import {defineComponent, reactive, ref, toRaw, UnwrapRef} from 'vue';
+import {ValidateErrorEntity} from 'ant-design-vue/es/form/interface';
+import {apiAddMenu} from '@/packages/service/app'
+import icons from './icons';
+import {validatPath, validatHttpFilePath, filePathRouter} from '@/packages/utils/validator'
 
-    interface FormState {
-        name: string;
-        icon: string,
-        router?: string,
-        filePath?: string,
-        httpFilePath?: string,
-        iframePath?: string,
-        viewPath?: string,
-        limits?: Array<any>,
-        keepAlive?: number | string,
-        tabHidden?: number | string,
-        tabFix?: number | string,
-        shows?: number | string
-    }
+interface FormState {
+    name: string;
+    icon: string,
+    router?: string,
+    filePath?: string,
+    httpFilePath?: string,
+    iframePath?: string,
+    viewPath?: string,
+    limits?: Array<any>,
+    keepAlive?: number | string,
+    tabHidden?: number | string,
+    tabFix?: number | string,
+    shows?: number | string
+}
 
-    export default defineComponent({
-        setup() {
-            const formRef = ref();
-            const visible = ref(false);
+export default defineComponent({
+    setup(props, {emit}) {
+        const formRef = ref();
+        const visible = ref(false);
 
-            const formState: UnwrapRef<FormState> = reactive({
-                name: '',
-                icon: '',
-                router: '',
-                filePath: '',
-                httpFilePath: '',
-                iframePath: '',
-                viewPath: '',
-                limits: [],
-                keepAlive: 0,
-                tabHidden: 0,
-                tabFix: 0,
-                shows: 1
-            });
+        const formState: UnwrapRef<FormState> = reactive({
+            name: '',
+            icon: '',
+            shows: 1,
+            router: '',
+            pid: '',
+            filePath: '',
+            httpFilePath: '',
+            iframePath: '',
+            viewPath: '',
+            limits: [],
+            keepAlive: 0,
+            tabHidden: 0,
+            tabFix: 0,
+        });
 
-            const rules = {
-                name: [
-                    {required: true, message: '名称为必填项', trigger: 'blur'},
-                    {min: 2, max: 6, message: '长度最小2，最大6', trigger: 'blur'},
-                ],
-                icon: [
-                    {required: true, message: 'icon为必填项', trigger: 'blur'},
-                ]
-            };
+        const rules = {
+            name: [
+                {required: true, message: '名称为必填项', trigger: 'blur'},
+                {min: 2, max: 6, message: '长度最小2，最大6', trigger: 'blur'},
+            ],
+            icon: [
+                {required: false, message: 'icon为必填项', trigger: 'blur'},
+            ],
+            path: [
+                {required: true, validator: validatPath, trigger: 'blur'}
+            ],
+            filePath: [
+                {validator: filePathRouter, trigger: 'blur'}
+            ],
+            httpFilePath: [
+                {validator: validatHttpFilePath, trigger: 'blur'}
+            ],
+            iframePath: [
+                {validator: validatHttpFilePath, trigger: 'blur'}
+            ],
+            viewPath: [
+                {validator: validatHttpFilePath, trigger: 'blur'}
+            ]
+        };
 
-            const onSubmit = () => {
-                formRef.value.validate()
-                    .then(() => {
-                        console.log('values', formState, toRaw(formState));
+        const onSubmit = async () => {
+            return formRef.value.validate()
+                .then(() => {
+                    apiAddMenu(toRaw(formState), {notify: true}).then(()=>{
+                        return Promise.resolve();
                     })
-                    .catch((error: ValidateErrorEntity<FormState>) => {
-                        console.log('error', error);
-                    });
-            };
+                })
+                .catch((error: ValidateErrorEntity<FormState>) => {
+                    console.log('error', error);
+                });
+        };
 
-            const onSearch = () => {
+        const onSearch = () => {
 
-            }
+        }
 
-            const handleOk = () => {
+        const handleOk = () => {
 
-            }
+        }
 
-            return {
-                labelCol: {
-                    span: 6,
-                },
-                wrapperCol: {
-                    span: 15,
-                },
-                formState,
-                rules,
-                formRef,
-                onSubmit,
-                onSearch,
-                visible,
-                handleOk,
-                icons
-            };
-        },
-    });
+        const handleSelected = (item: any) => {
+            visible.value = false;
+            formState.icon = item;
+        }
+        return {
+            labelCol: {
+                span: 6,
+            },
+            wrapperCol: {
+                span: 15,
+            },
+            formState,
+            rules,
+            formRef,
+            onSubmit,
+            onSearch,
+            visible,
+            handleOk,
+            icons,
+            handleSelected
+        };
+    },
+});
 </script>
 <style lang="less" scoped>
-    .item-icons{
-        .item{
-            text-align: center;
-            padding: 10px 0;
-            cursor: pointer;
-            font-size: 20px;
+.item-icons {
+    .item {
+        text-align: center;
+        padding: 10px 0;
+        cursor: pointer;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &-icon {
+            border: 1px solid #ddd;
+            width: 45px;
+            border-radius: 3px;
         }
     }
+}
 </style>

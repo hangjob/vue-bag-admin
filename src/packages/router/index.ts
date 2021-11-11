@@ -3,10 +3,12 @@ import {routerMode} from '@/packages/config';
 import {App} from 'vue';
 import {setupRouterGuard} from '@/packages/router/guard'
 import {setupBeforeStore} from "@/packages/router/beforeStore";
+import {setAddRoute} from '@/packages/router/addRoute'
 // 定义路由
 const routes: Array<RouteRecordRaw> = [
     {
         path: "/",
+        name: "admin",
         component: () => import('@/packages/layout/index.vue'),
         children: [
             {path: '', redirect: 'home'},
@@ -131,6 +133,10 @@ router.beforeEach((to: any, from: any, next: any) => {
 });
 
 
+/**
+ * router-view
+ * 添加动画
+ */
 router.afterEach((to, from) => {
     const toDepth = to.path.split('/').length
     const fromDepth = from.path.split('/').length
@@ -138,6 +144,7 @@ router.afterEach((to, from) => {
 })
 
 const setupRouter = (app: App) => {
+    setAddRoute(app)
     app.use(router)
 }
 

@@ -1,8 +1,8 @@
 'use strict';
 
-const Controller = require('egg').Controller;
+const baseController = require('./baseController');
 
-class HomeController extends Controller {
+class HomeController extends baseController {
     async index() {
         const {ctx} = this;
         ctx.body = 'hi, egg';
@@ -15,8 +15,8 @@ class HomeController extends Controller {
 
     async addMenu() {
         const {ctx} = this;
-        const result = await ctx.model.Menu.create({name: 'dad'})
-        console.log(result)
+        const result = await ctx.model.Menu.create({...ctx.request.body})
+        this.result({data: result})
     }
 
     async deleteMenu() {
@@ -43,8 +43,7 @@ class HomeController extends Controller {
     async findAll() {
         const {ctx} = this;
         const result = await ctx.model.Menu.findAll()
-        ctx.body = result;
-        console.log(result)
+        this.result({data: result})
     }
 }
 

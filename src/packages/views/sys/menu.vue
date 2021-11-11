@@ -243,7 +243,7 @@ const rowSelection = {
 };
 
 export default defineComponent({
-    name:'sys-menu',
+    name: 'sys-menu',
     components: {
         add, edit
     },
@@ -255,7 +255,9 @@ export default defineComponent({
 
 
         const handleOk = () => {
-            add.value.onSubmit()
+            add.value.onSubmit().then(() => {
+                visible.value = false;
+            })
         }
 
         return {

@@ -1,11 +1,10 @@
 import store from '@/packages/store'
 import {getAllParentArr} from "@/packages/utils/utils";
 import {findChildrenDepth} from "@/packages/utils/lodash";
-import {apiUserinfo} from "@/packages/serve/user";
+import {apiUserinfo} from "@/packages/service/user";
 import {NProgress} from '@/packages/plugin/nprogress'
 
 const ignore = ["/login", "/403", "/404", "/500", "/502"];
-let userinfo: any = {};
 
 // 处理app-store数据
 function setAppStoreData(to: any): void {

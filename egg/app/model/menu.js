@@ -1,6 +1,6 @@
 module.exports = app => {
     const {STRING, INTEGER} = app.Sequelize;
-    const Menu = app.model.define('menu', {
+    return app.model.define('menu', {
         id: {
             type: INTEGER,
             autoIncrement: true,
@@ -15,42 +15,56 @@ module.exports = app => {
         },
         shows: {
             type: INTEGER,
+            comment: '是否显示'
         },
-        router: {
+        path: {
             type: STRING,
+            comment: '路由名称'
         },
         viewPath: {
             type: STRING,
+            comment: '外部链接'
         },
         order: {
-            type: INTEGER
+            type: INTEGER,
+            comment: '排序'
         },
         pid: {
-            type: INTEGER
+            type: INTEGER,
+            comment: '父级id'
         },
         type: {
-            type: INTEGER
+            type: INTEGER,
+            comment: '类型'
         },
         filePath: {
-            type: STRING
+            type: STRING,
+            comment: '文件路径'
         },
         iframePath: {
-            type: STRING
+            type: STRING,
+            comment: 'iframe路径'
         },
         keepAlive: {
-            type: INTEGER
+            type: INTEGER,
+            comment: '是否缓存'
         },
         tabHidden: {
-            type: INTEGER
+            type: INTEGER,
+            comment: '是否隐藏tab路由'
         },
         tabFix: {
-            type: INTEGER
+            type: INTEGER,
+            comment: '固定菜单路由'
         },
+        httpFilePath: {
+            type: STRING,
+            comment: '网络组件'
+        }
     }, {
         createdAt: 'createTime', // 指定名字
         updatedAt: 'updateTime',
         tableName: 'yxs_menu' // 定义实际表名
-    })
-    return Menu;
+    });
 }
 
