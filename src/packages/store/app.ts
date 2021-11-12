@@ -1,5 +1,5 @@
 import {defaultMenu} from "@/packages/config/defaultMenu";
-import {find, remove} from "@/packages/utils/lodash";
+import {find, findUnsetDepth} from "@/packages/utils/lodash";
 import {getBrowser} from '@/packages/utils/utils'
 import {defaultTabFix} from "@/packages/router/beforeStore";
 
@@ -75,6 +75,12 @@ const app = {
             state.browser = getBrowser()
             if (state.browser.isMobile || state.browser.isMini) {
                 state.collapsed = true;
+            }
+        },
+        // 添加菜单
+        addMenuList(state: any, item: any) {
+            if (!findUnsetDepth({path: item.path}, state.menuList)) {
+                state.menuList.push(item);
             }
         }
     }

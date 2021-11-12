@@ -1,5 +1,5 @@
 module.exports = app => {
-    const {STRING, INTEGER} = app.Sequelize;
+    const {STRING, INTEGER, BOOLEAN} = app.Sequelize;
     return app.model.define('menu', {
         id: {
             type: INTEGER,
@@ -14,7 +14,7 @@ module.exports = app => {
             type: STRING,
         },
         shows: {
-            type: INTEGER,
+            type: BOOLEAN,
             comment: '是否显示'
         },
         path: {
@@ -46,16 +46,16 @@ module.exports = app => {
             comment: 'iframe路径'
         },
         keepAlive: {
-            type: INTEGER,
+            type: BOOLEAN,
             comment: '是否缓存'
         },
         tabHidden: {
-            type: INTEGER,
+            type: BOOLEAN,
             comment: '是否隐藏tab路由'
         },
         tabFix: {
-            type: INTEGER,
-            comment: '固定菜单路由'
+            type: BOOLEAN,
+            comment: '是否固定菜单路由'
         },
         httpFilePath: {
             type: STRING,

@@ -37,6 +37,7 @@ export default defineComponent({
         // }, {deep: false, immediate: true})
         // 二
         watchEffect(() => {
+            console.log(store.getters['app/tabViewsPath']);
             const tabPaths = JSON.parse(JSON.stringify(store.getters['app/tabViewsPath']));
             openKeys.value = tabPaths.map((item: any) => item.id);
             selectedKeys.value = [tabPaths.pop().id];
@@ -55,7 +56,7 @@ export default defineComponent({
 
         const deepMenu = function (list: Array<any>) {
             let html = null;
-            return list.filter((item: any) => item.isShow).map((item: any) => {
+            return list.filter((item: any) => item.shows).map((item: any) => {
                 if (item.children && item.children.length) {
                     html = h(
                         <a-sub-menu key={item.id}></a-sub-menu>,

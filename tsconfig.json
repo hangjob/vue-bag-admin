@@ -7,10 +7,14 @@
         "strict": true,
         "jsx": "preserve",
         "sourceMap": true,
+        "resolveJsonModule": true,
         "baseUrl": "./",
         "paths": {
             "@/*": [
                 "src/*"
+            ],
+            "__ROOT__/*": [
+                "*"
             ]
         },
         "types": [
@@ -18,7 +22,7 @@
             "node"
         ],
         "typeRoots":["./typings"],
-      "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true
     },
     "exclude": [
         "node_modules",

@@ -11,7 +11,7 @@ export default defineComponent({
     components: {
         Contextmenu
     },
-    setup(props, context: any) {
+    setup() {
         const contextmenu: any = ref(null)
         provide('appContextmenu', contextmenu)
         return {

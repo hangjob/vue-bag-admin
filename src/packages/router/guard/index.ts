@@ -8,6 +8,7 @@ const ignore = ["/login", "/403", "/404", "/500", "/502"];
 
 // 处理app-store数据
 function setAppStoreData(to: any): void {
+
     const item: any = findChildrenDepth({
         key: 'path',
         value: to.path,
