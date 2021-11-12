@@ -60,7 +60,7 @@ export default defineComponent({
 
             hasOpenComponentsArr.value = iframeArr;
         }
-        componentsIframe();
+        // componentsIframe();
 
         /**
          * keep-live 缓存

@@ -1,5 +1,6 @@
 <template>
     <yxs-form-table>
+        {{ projectName }}
         <div class="table-action">
             <div class="table-action-btn">
                 <a-space :size="20">
@@ -35,9 +36,10 @@
     </yxs-modal>
 </template>
 <script lang="ts">
-import {defineComponent, ref} from 'vue';
+import {computed, defineComponent, ref} from 'vue';
 import add from './menu/add.vue'
 import edit from './menu/edit.vue'
+import {useStore} from "vuex";
 
 const columns = [
     {
@@ -100,8 +102,8 @@ const columns = [
     },
     {
         title: '是否显示',
-        dataIndex: 'isShow',
-        key: 'isShow',
+        dataIndex: 'shows',
+        key: 'shows',
     },
     {
         title: '更新时间',
@@ -252,9 +254,13 @@ export default defineComponent({
         const add = ref();
         const visible = ref(false);
         const activeKey = ref('1');
-
-
+        const store = useStore();
+        const projectName = computed(() => store.state.web.config.name);
         const handleOk = () => {
+            console.log(store.state.web.config.name)
+            setTimeout(() => {
+                store.commit('web/updateConfig');
+            }, 2000)
             add.value.onSubmit().then(() => {
                 visible.value = false;
             })
@@ -268,7 +274,8 @@ export default defineComponent({
             value,
             visible,
             activeKey,
-            handleOk
+            handleOk,
+            projectName
         };
     },
 });

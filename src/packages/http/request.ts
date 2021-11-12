@@ -64,5 +64,6 @@ const get = (url: string, params?: any, config?: object) => {
 export default http;
 export {
     post,
-    get
+    get,
+    axios
 }

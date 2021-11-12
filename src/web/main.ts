@@ -1,12 +1,20 @@
-import {createApp} from 'vue'
+import {Component, createApp} from 'vue'
 import App from './App.vue'
 import install, {$pluginType} from '@/packages/install'
 import {apiFindAll} from '@/packages/service/app'
-
+import store from '@/web/store/index';
 
 const app = createApp(App)
 apiFindAll().then((res: any) => {
-    const $plugin: $pluginType = {routers: [...res]}
+
+    const locas: Record<string, Component> = import.meta.globEager("/src/web/view/**/*.vue")
+    const $plugin: $pluginType = {
+        router: {views: [...res], external: locas},
+        store: {
+            module: store
+        }
+    }
+
     install(app, $plugin).then(() => {
 
     })

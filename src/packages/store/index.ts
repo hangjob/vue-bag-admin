@@ -2,6 +2,7 @@ import type {App} from 'vue';
 import {createStore} from 'vuex'
 import user from './user'
 import app from './app'
+import {setAddStore} from "@/packages/store/addStore";
 
 
 const store: any = createStore({
@@ -13,6 +14,7 @@ const store: any = createStore({
 
 
 const setupStore = (app: App) => {
+    setAddStore(app, store)
     app.use(store)
 }
 

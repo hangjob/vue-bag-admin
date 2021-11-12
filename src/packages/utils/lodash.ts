@@ -3,7 +3,7 @@ import {uniqueId} from "lodash";
 
 /**
  * 查找
- * @param item 包含key value
+ * @param tag 包含key value
  * @param arr 数组
  */
 const find = (tag: any, arr: Array<any>) => {
@@ -29,13 +29,12 @@ const last = (arr: Array<any>) => {
  * @param data
  */
 const findUnsetDepth = (tag: any, data: any) => {
-    let result = _.chain(data)
+    return _.chain(data)
         .map('children')
         .flatten()
         .filter(tag)
         .sumBy()
-        .value()
-    return result;
+        .value();
 };
 
 
@@ -69,7 +68,7 @@ const addUniqueId = (arr: Array<any>, prefix?: string) => {
     arr.forEach((item: any) => {
         item.id = uniqueId(prefix);
         if (item.children) {
-            addUniqueId(item.children)
+            addUniqueId(item.children, prefix)
         }
     })
     return arr

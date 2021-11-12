@@ -13,7 +13,7 @@
 
 <script>
 export default {
-    name:'iframe',
+    name:'iframeView',
     data() {
         return {
             loading: false,

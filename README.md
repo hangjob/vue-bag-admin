@@ -21,6 +21,9 @@
 
 ### base目录作为基础块
 
+### menuList
+> 菜单列表
+
 ### 参考方向
 https://github.com/flipped-aurora/gin-vue-admin
 https://demo.gin-vue-admin.com/#/layout/admin/api
