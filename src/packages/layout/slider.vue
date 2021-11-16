@@ -61,7 +61,7 @@ export default defineComponent({
         flex: 1;
 
 
-        /deep/ ul {
+        ::v-deep  ul {
             border-right: none;
         }
     }

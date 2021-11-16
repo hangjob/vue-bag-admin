@@ -37,8 +37,7 @@ module.exports = appInfo => {
             paranoid: false, // 添加软删除
             freezeTableName: true, // 防止修改表名为复数
             underscored: false // 防止驼峰式字段被默认转为下划线
-        },
-        timezone: '+8:00', // 由于orm用的UTC时间，这里必须加上东八区，否则取出来的时间相差8小时
+        }
     }
 
     config.cors = {

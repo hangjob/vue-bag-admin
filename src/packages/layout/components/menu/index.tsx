@@ -1,6 +1,7 @@
 import {computed, defineComponent, h, ref, resolveComponent, watchEffect} from 'vue'
 import {useStore} from 'vuex'
 import {useRoute, useRouter} from "vue-router";
+import {toTree} from '@/packages/utils/utils'
 
 export default defineComponent({
     name: 'yxs-menu-slider',
@@ -14,18 +15,21 @@ export default defineComponent({
 
         const selectedKeys = ref<string[]>([])
         const openKeys = ref<string[]>([])
-        const menuList = computed(() => store.getters['app/menuList']);
-
+        const menuList = computed(() => toTree(store.getters['app/menuList']));
+        console.log(menuList)
         // 是否可见
         const visible = ref<boolean>(true);
-        const goView = (url: string) => {
-            if (url != route.path) {
-                router.push(url).then()
+        const goView = (item: any) => {
+            if (item.path && item.path != route.path) {
+                router.push(item.path).then()
+            }
+            if (item.httpViewPath) {
+                window.open(item.httpViewPath)
             }
         }
 
         const handleClick = (res: any) => {
-            goView(res.item['menu-info'].path);
+            goView(res.item['menu-info']);
         }
 
         // 监听菜单变化 - 两种方式

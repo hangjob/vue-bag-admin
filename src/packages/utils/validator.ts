@@ -3,7 +3,7 @@ import {RuleObject} from 'ant-design-vue/es/form/interface';
 // 验证字母开头，/ 数字和字母 组合
 const validatPath = async (rule: RuleObject, value: string) => {
     if (value !== '') {
-        let reg = /^([a-zA-Z]+[/])*[0-9a-zA-Z]+$/.test(value);
+        let reg = /^([\/]([a-zA-Z]+))*[0-9a-zA-Z]+$/.test(value);
         if (reg) {
             return Promise.resolve();
         } else {
@@ -33,7 +33,7 @@ const validatHttpFilePath = async (rule: RuleObject, value: string) => {
 // 验证字母开头，/ 数字和字母 组合
 const filePathRouter = async (rule: RuleObject, value: string) => {
     if (value !== '') {
-        let reg = /^([a-zA-Z]+[/])*[0-9a-zA-Z]+$/.test(value);
+        let reg = /^([\/]([a-zA-Z]+))*[0-9a-zA-Z]+$/.test(value);
         if (reg) {
             return Promise.resolve();
         } else {

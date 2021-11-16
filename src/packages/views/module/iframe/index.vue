@@ -24,7 +24,7 @@ export default {
     watch: {
         $route: {
             handler({ meta }) {
-                this.url = this.$store.getters['app/currentRouter'].iframe;
+                this.url = this.$store.getters['app/currentRouter'].iframePath;
                 this.loading = true
             },
             immediate: true,
@@ -44,7 +44,7 @@ export default {
 .spinning {
     height: 100%;
     width: 100%;
-    & /deep/ .ant-spin-container {
+    & ::v-deep .ant-spin-container {
         height: 100%;
         width: 100%;
     }

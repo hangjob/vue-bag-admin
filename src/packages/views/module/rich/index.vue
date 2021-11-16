@@ -114,7 +114,7 @@ export default defineComponent({
 .rich {
     box-sizing: border-box;
 
-    /deep/ .editor-container {
+    ::v-deep .editor-container {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -123,7 +123,7 @@ export default defineComponent({
         margin-top: 60px;
     }
 
-    /deep/ .ql-editor {
+    ::v-deep .ql-editor {
         min-height: 300px;
     }
 }

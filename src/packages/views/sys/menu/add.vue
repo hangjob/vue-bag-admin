@@ -8,6 +8,24 @@
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
+                    <a-form-item label="父级节点" name="pid">
+                        <a-tree-select
+                            v-model:value="formState.pid"
+                            style="width: 100%"
+                            :dropdown-style="{ maxHeight: '400px', overflow: 'auto' }"
+                            :tree-data="treeData"
+                            :replace-fields="{children:'children', key:'id', value: 'id', title: 'name'}"
+                            placeholder="选择父级节点，不选择为一级菜单"
+                            allow-clear
+                            tree-default-expand-all
+                        >
+                            <template #title="{ key, value,title }">
+                                <span>{{ title }}</span>
+                            </template>
+                        </a-tree-select>
+                    </a-form-item>
+                </a-col>
+                <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="选择图标" name="icon">
                         <a-input-search
                             v-model:value="formState.icon"
@@ -28,12 +46,6 @@
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
-                    <a-form-item label="选择类型" name="pid">
-                        <a-select v-model:value="formState.pid" placeholder="选择父级节点，不选择为一级菜单">
-                        </a-select>
-                    </a-form-item>
-                </a-col>
-                <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="网络组件" name="httpFilePath">
                         <a-input v-model:value="formState.httpFilePath" placeholder="输入路由组件路径地址，为http网络组件"/>
                     </a-form-item>
@@ -44,8 +56,8 @@
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
-                    <a-form-item label="外部链接" name="viewPath">
-                        <a-input v-model:value="formState.viewPath" placeholder="输入外部网络链接"/>
+                    <a-form-item label="外部链接" name="httpViewPath">
+                        <a-input v-model:value="formState.httpViewPath" placeholder="输入外部网络链接"/>
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
@@ -109,6 +121,7 @@ import {ValidateErrorEntity} from 'ant-design-vue/es/form/interface';
 import {apiAddMenu} from '@/packages/service/app'
 import icons from './icons';
 import {validatPath, validatHttpFilePath, filePathRouter} from '@/packages/utils/validator'
+import {toTree} from '@/packages/utils/utils'
 
 interface FormState {
     name: string;
@@ -117,7 +130,8 @@ interface FormState {
     filePath?: string,
     httpFilePath?: string,
     iframePath?: string,
-    viewPath?: string,
+    httpViewPath?: string,
+    pid?: string | number,
     limits?: Array<any>,
     keepAlive?: number | string,
     tabHidden?: number | string,
@@ -126,10 +140,15 @@ interface FormState {
 }
 
 export default defineComponent({
+    props: {
+        treeData: {
+            type: Array,
+        }
+    },
     setup(props, {emit}) {
         const formRef = ref();
         const visible = ref(false);
-
+        const treeData = ref();
         const formState: UnwrapRef<FormState> = reactive({
             name: '',
             icon: '',
@@ -139,13 +158,13 @@ export default defineComponent({
             filePath: '',
             httpFilePath: '',
             iframePath: '',
-            viewPath: '',
+            httpViewPath: '',
             limits: [],
             keepAlive: 0,
             tabHidden: 0,
             tabFix: 0,
         });
-
+        console.log(toTree(props.treeData));
         const rules = {
             name: [
                 {required: true, message: '名称为必填项', trigger: 'blur'},
@@ -166,20 +185,20 @@ export default defineComponent({
             iframePath: [
                 {validator: validatHttpFilePath, trigger: 'blur'}
             ],
-            viewPath: [
+            httpViewPath: [
                 {validator: validatHttpFilePath, trigger: 'blur'}
             ]
         };
-
+        treeData.value = toTree(props.treeData);
         const onSubmit = async () => {
             return formRef.value.validate()
                 .then(() => {
-                    apiAddMenu(toRaw(formState), {notify: true}).then(()=>{
+                    apiAddMenu(toRaw(formState), {notify: true}).then(() => {
                         return Promise.resolve();
                     })
                 })
                 .catch((error: ValidateErrorEntity<FormState>) => {
-                    console.log('error', error);
+                    return Promise.reject(error);
                 });
         };
 
@@ -210,7 +229,8 @@ export default defineComponent({
             visible,
             handleOk,
             icons,
-            handleSelected
+            handleSelected,
+            treeData
         };
     },
 });

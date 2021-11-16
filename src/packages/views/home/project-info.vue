@@ -58,12 +58,6 @@ export default defineComponent({
 </script>
 <style lang="less">
 .project-info {
-    /deep/ .column-title {
-        background-color: #f7f7f7 !important;
-        text-align: right;
-        padding-right: 20px !important;
-    }
-
     .down {
         display: flex;
         align-items: center;

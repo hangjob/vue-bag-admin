@@ -65,7 +65,7 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import('@/packages/views/vxe-table/verify-table/index.vue')
             },
             {
-                path: '/iframe/:name', name: 'iframeView', meta: {title: 'iframe'},
+                path: '/iframe/:name', name: 'iframe-view', meta: {title: 'iframe'},
                 component: () => import('@/packages/views/module/iframe/index.vue')
             },
             {

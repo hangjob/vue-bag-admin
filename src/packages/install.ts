@@ -1,9 +1,13 @@
 import type {App} from 'vue';
 import router from '@/packages/router'
 import setupInit from '@/packages/base/index'
-import jquery from "jquery"
 import mitt from "mitt";
 
+/**
+ * router: {views:[菜单],external:[菜单路由]}
+ *
+ * store:{module:{store对象},namespace:’命名空间，默认web‘}
+ */
 interface $pluginType {
     router?: {
         views: Array<any>, // 菜单
@@ -11,7 +15,7 @@ interface $pluginType {
     },
     store?: {
         module: object,
-        namespace ?: string
+        namespace?: string
     }
 }
 
@@ -23,9 +27,9 @@ const install = async (app: App, $plugin?: any) => {
     router.isReady().then(() => {
         app.mount('#app')
     })
-    window.$ = jquery;
     window.__app__ = app;
 }
+
 
 export default install;
 export {

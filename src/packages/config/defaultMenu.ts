@@ -192,7 +192,7 @@ const arr = [
                 path: '/iframe/xuliangzhan_admin',
                 icon: '',
                 shows: 1,
-                iframe: 'https://xuliangzhan_admin.gitee.io/vxe-table/v4/table/tree/basic',
+                iframePath: 'https://xuliangzhan_admin.gitee.io/vxe-table/v4/table/tree/basic',
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: false
@@ -252,7 +252,7 @@ const arr = [
                 path: '/iframe/Vue3',
                 icon: '',
                 shows: 1,
-                iframe: 'https://v3.cn.vuejs.org/',
+                iframePath: 'https://v3.cn.vuejs.org/',
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: false
