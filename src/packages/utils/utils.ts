@@ -165,6 +165,7 @@ const toTree = (data: any, idName?: string, parentIdName?: string) => {
             menu.push(item);
         }
     });
+    console.log(menu)
     return menu;
 }
 

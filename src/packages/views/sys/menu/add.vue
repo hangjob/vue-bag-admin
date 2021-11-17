@@ -164,7 +164,6 @@ export default defineComponent({
             tabHidden: 0,
             tabFix: 0,
         });
-        console.log(toTree(props.treeData));
         const rules = {
             name: [
                 {required: true, message: '名称为必填项', trigger: 'blur'},

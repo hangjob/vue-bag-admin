@@ -21,28 +21,46 @@ class HomeController extends baseController {
 
     async deleteMenu() {
         const {ctx} = this;
+        const {id} = ctx.request.body;
+        const result = await ctx.model.Menu.destroy({
+            where: {id}
+        })
+        this.result({data: result})
+    }
+
+    async deleteMenus() {
+        const {ctx} = this;
+        const {ids} = ctx.request.body;
         const result = await ctx.model.Menu.destroy({
             where: {
-                id: 7
+                id: [...ids]
             }
         })
-        console.log(result)
+        this.result({data: result})
     }
+
 
     async findOne() {
         const {ctx} = this;
+        const {id} = ctx.request.body;
         const result = await ctx.model.Menu.findOne({
-            where: {
-                id: 6
-            }
+            where: {id}
         })
-        ctx.body = result;
-        console.log(result)
+        this.result({data: result})
     }
 
     async findAll() {
         const {ctx} = this;
         const result = await ctx.model.Menu.findAll()
+        this.result({data: result})
+    }
+
+    async editMenu() {
+        const {ctx} = this;
+        const body = ctx.request.body;
+        const result = await ctx.model.Menu.update({
+            ...body
+        })
         this.result({data: result})
     }
 }

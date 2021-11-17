@@ -16,7 +16,6 @@ export default defineComponent({
         const selectedKeys = ref<string[]>([])
         const openKeys = ref<string[]>([])
         const menuList = computed(() => toTree(store.getters['app/menuList']));
-        console.log(menuList)
         // 是否可见
         const visible = ref<boolean>(true);
         const goView = (item: any) => {
@@ -41,7 +40,6 @@ export default defineComponent({
         // }, {deep: false, immediate: true})
         // 二
         watchEffect(() => {
-            console.log(store.getters['app/tabViewsPath']);
             const tabPaths = JSON.parse(JSON.stringify(store.getters['app/tabViewsPath']));
             openKeys.value = tabPaths.map((item: any) => item.id);
             selectedKeys.value = [tabPaths.pop().id];

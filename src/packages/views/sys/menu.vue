@@ -4,9 +4,9 @@
 			<div class="table-action-btn">
 				<a-space :size="20">
 					<a-button type="primary" size="middle">刷新</a-button>
-					<a-button class="yxs-button-color-green" size="middle" @click="visible = true,activeKey = '1'">新增
+					<a-button class="yxs-button-color-green" size="middle" @click="visibleAdd = true,activeKey = '1'">新增
 					</a-button>
-					<a-button type="primary" danger size="middle">删除</a-button>
+					<a-button type="primary" danger size="middle" @click="handleDeletes">删除</a-button>
 				</a-space>
 			</div>
 			<div class="table-action-search hidden-xs">
@@ -22,24 +22,43 @@
 			<template #icon="{ record }">
 				<component :is="record.icon"></component>
 			</template>
+			<template #type="{ record }">
+				<a-tag color="#2db7f5" v-if="record.children">目录</a-tag>
+				<a-tag color="#87d068" v-else>菜单</a-tag>
+			</template>
 			<template #action="{ record }">
 				<a-space>
-					<a-button type="primary" size="small">编辑</a-button>
-					<a-button type="primary" danger size="small">删除</a-button>
+					<a-button type="primary" size="small" @click="setVisibleEdit({record})">编辑</a-button>
+					<a-popconfirm
+						:title="`你确定删除 ${record.name} 嘛？`"
+						ok-text="确认"
+						cancel-text="关闭"
+						placement="topRight"
+						@confirm="handleDelete({record})"
+					>
+						<a-button type="primary" danger size="small">删除</a-button>
+					</a-popconfirm>
 				</a-space>
 			</template>
 		</a-table>
 	</yxs-form-table>
-	<yxs-modal v-model:visible="visible" title="新增" width="1000px" @ok="handleOk">
+	<yxs-modal v-model:visible="visibleAdd" title="新增" width="1000px" @ok="handleAddOk">
 		<add ref="add" :treeData="data"/>
+	</yxs-modal>
+	<yxs-modal v-model:visible="visibleEdit" title="新增" width="1000px" @ok="handleEditOk">
+		<add ref="add" :treeData="data" :id="id"/>
 	</yxs-modal>
 </template>
 <script lang="ts">
-import {defineComponent, ref} from 'vue';
+import {defineComponent, ref, reactive, toRefs} from 'vue';
 import add from './menu/add.vue'
 import edit from './menu/edit.vue'
-import {apiFindAll} from '@/packages/service/app'
+import {apiFindAll, apiDeleteMenu, apiDeleteMenus} from '@/packages/service/app'
 import {toTree} from '@/packages/utils/utils'
+
+import {ColumnProps} from 'ant-design-vue/es/table/interface';
+
+type Key = ColumnProps['key'];
 
 const formatter = (item: any) => {
 	return item.text === true ? '是' : '否'
@@ -62,11 +81,13 @@ const columns = [
 		slots: {customRender: 'icon'},
 	},
 	{
-		title: '类型',
+		title: '节点类型',
 		dataIndex: 'type',
 		key: 'type',
 		ellipsis: true,
 		align: 'center',
+		width: 80,
+		slots: {customRender: 'type'}
 	},
 	{
 		title: '节点路由',
@@ -154,18 +175,7 @@ const columns = [
 		slots: {customRender: 'action'},
 	}
 ];
-const rowSelection = {
-	onChange: (selectedRowKeys: (string | number)[], selectedRows: any) => {
-		console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-	},
-	onSelect: (record: any, selected: boolean, selectedRows: any) => {
-		console.log(record, selected, selectedRows);
-	},
-	onSelectAll: (selected: boolean, selectedRows: any, changeRows: any) => {
-		console.log(selected, selectedRows, changeRows);
-	},
-};
-const columns2 = JSON.parse(JSON.stringify(columns))
+
 export default defineComponent({
 	name: 'sys-menu',
 	components: {
@@ -175,36 +185,90 @@ export default defineComponent({
 		const value = ref('')
 		const data = ref();
 		const add = ref();
-		const visible = ref(false);
+		const visibleAdd = ref(false);
+		const visibleEdit = ref(false);
 		const activeKey = ref('1');
-		const handleOk = () => {
+		const id = ref('');
+
+		const state = reactive<{
+			selectedRowKeys: Key[];
+			loading: boolean;
+		}>({
+			selectedRowKeys: [],
+			loading: false,
+		});
+
+
+		const handleAddOk = () => {
 			add.value.onSubmit().then(() => {
-				visible.value = false;
+				visibleAdd.value = false;
 			}).catch((error: any) => {
 				console.log(error)
 			})
 		}
 
-		apiFindAll().then(res => {
-			data.value = toTree(res);
-			console.log(data.value)
-		})
+		const handleEditOk = () => {
+
+		}
+
+		const setVisibleEdit = ({record}: { record: any }) => {
+			visibleEdit.value = true;
+			id.value = record.id;
+		}
+
+		const rowSelection = {
+			onChange: (selectedRowKeys: (string | number)[], selectedRows: any) => {
+				state.selectedRowKeys = selectedRows;
+			},
+			onSelect: (record: any, selected: boolean, selectedRows: any) => {
+			},
+			onSelectAll: (selected: boolean, selectedRows: any, changeRows: any) => {
+			},
+		};
+
+		const getData = () => {
+			apiFindAll().then(res => {
+				data.value = toTree(res);
+			})
+		}
+		getData()
 
 		const expand = (expanded: boolean, record: any) => {
 
+		}
+
+		// 单个删除
+		const handleDelete = ({record}: { record: any }) => {
+			apiDeleteMenu({id: record.id}, {notify: true}).then((res) => {
+				getData()
+			})
+		}
+
+		// 多个删除
+		const handleDeletes = () => {
+			const ids = state.selectedRowKeys.map((item: any) => item.id);
+			apiDeleteMenus({ids}, {notify: true}).then((res) => {
+				getData()
+			})
 		}
 
 		return {
 			data,
 			add,
 			columns,
-			columns2,
+			id,
 			rowSelection,
+			...toRefs(state),
 			value,
-			visible,
+			visibleAdd,
 			activeKey,
-			handleOk,
+			visibleEdit,
+			handleAddOk,
+			handleEditOk,
 			expand,
+			handleDelete,
+			handleDeletes,
+			setVisibleEdit
 		};
 	},
 });
