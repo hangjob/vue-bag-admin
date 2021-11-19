@@ -3,7 +3,7 @@
 		<div class="table-action">
 			<div class="table-action-btn">
 				<a-space :size="20">
-					<a-button type="primary" size="middle">刷新</a-button>
+					<a-button type="primary" size="middle" :loading="loading" @click="refreshLoad">刷新</a-button>
 					<a-button class="yxs-button-color-green" size="middle" @click="visibleAdd = true,activeKey = '1'">新增
 					</a-button>
 					<a-button type="primary" danger size="middle" @click="handleDeletes">删除</a-button>
@@ -46,17 +46,17 @@
 		<add ref="add" :treeData="data"/>
 	</yxs-modal>
 	<yxs-modal v-model:visible="visibleEdit" title="新增" width="1000px" @ok="handleEditOk">
-		<add ref="add" :treeData="data" :id="id"/>
+		<edit ref="edit" :treeData="data" :id="id"/>
 	</yxs-modal>
 </template>
 <script lang="ts">
-import {defineComponent, ref, reactive, toRefs} from 'vue';
+import {defineComponent, ref, reactive, toRefs,inject} from 'vue';
 import add from './menu/add.vue'
 import edit from './menu/edit.vue'
 import {apiFindAll, apiDeleteMenu, apiDeleteMenus} from '@/packages/service/app'
 import {toTree} from '@/packages/utils/utils'
-
 import {ColumnProps} from 'ant-design-vue/es/table/interface';
+
 
 type Key = ColumnProps['key'];
 
@@ -129,12 +129,12 @@ const columns = [
 		}
 	},
 	{
-		title: 'Tab切换',
+		title: '是否隐藏Tab切换',
 		dataIndex: 'tabHidden',
 		key: 'tabHidden',
 		align: 'center',
 		ellipsis: true,
-		width: 90,
+		width: 150,
 		customRender: (item: any) => {
 			return formatter(item)
 		}
@@ -185,10 +185,14 @@ export default defineComponent({
 		const value = ref('')
 		const data = ref();
 		const add = ref();
+		const edit = ref();
 		const visibleAdd = ref(false);
 		const visibleEdit = ref(false);
 		const activeKey = ref('1');
 		const id = ref('');
+		const loading = ref(false);
+
+		const $mitt = inject<any>("$mitt");
 
 		const state = reactive<{
 			selectedRowKeys: Key[];
@@ -202,13 +206,19 @@ export default defineComponent({
 		const handleAddOk = () => {
 			add.value.onSubmit().then(() => {
 				visibleAdd.value = false;
+				getData()
 			}).catch((error: any) => {
 				console.log(error)
 			})
 		}
 
 		const handleEditOk = () => {
-
+			edit.value.onSubmit().then(() => {
+				visibleEdit.value = false;
+				getData()
+			}).catch((error: any) => {
+				console.log(error)
+			})
 		}
 
 		const setVisibleEdit = ({record}: { record: any }) => {
@@ -229,6 +239,7 @@ export default defineComponent({
 		const getData = () => {
 			apiFindAll().then(res => {
 				data.value = toTree(res);
+				loading.value = false;
 			})
 		}
 		getData()
@@ -239,9 +250,10 @@ export default defineComponent({
 
 		// 单个删除
 		const handleDelete = ({record}: { record: any }) => {
-			apiDeleteMenu({id: record.id}, {notify: true}).then((res) => {
-				getData()
-			})
+			// apiDeleteMenu({id: record.id}, {notify: true}).then((res) => {
+			// 	getData()
+			// })
+			notifyRefreshMenu()
 		}
 
 		// 多个删除
@@ -252,9 +264,21 @@ export default defineComponent({
 			})
 		}
 
+		const refreshLoad = () => {
+			loading.value = true;
+			getData();
+		}
+
+		// 通知刷新菜单
+		const notifyRefreshMenu = () => {
+			$mitt.emit('refreshMenu',{a:1})
+		}
+
+
 		return {
 			data,
 			add,
+			edit,
 			columns,
 			id,
 			rowSelection,
@@ -268,7 +292,9 @@ export default defineComponent({
 			expand,
 			handleDelete,
 			handleDeletes,
-			setVisibleEdit
+			setVisibleEdit,
+			refreshLoad,
+			loading
 		};
 	},
 });

@@ -13,6 +13,12 @@ class HomeController extends baseController {
         console.log(ctx.request)
     }
 
+    async appRouter() {
+        const {ctx} = this;
+        const result = await ctx.model.Menu.findAll()
+        this.result({data: result})
+    }
+
     async addMenu() {
         const {ctx} = this;
         const result = await ctx.model.Menu.create({...ctx.request.body})
@@ -58,8 +64,14 @@ class HomeController extends baseController {
     async editMenu() {
         const {ctx} = this;
         const body = ctx.request.body;
+        console.log(body)
         const result = await ctx.model.Menu.update({
-            ...body
+            ...body,
+
+        }, {
+            where: {
+                id: body.id
+            }
         })
         this.result({data: result})
     }

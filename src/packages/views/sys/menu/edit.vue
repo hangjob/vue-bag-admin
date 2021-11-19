@@ -77,26 +77,26 @@
 					</a-form-item>
 				</a-col>
 				<a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
-					<a-form-item label="是否添加tab切换" name="tabHidden">
-						<a-radio-group v-model:value="formState.tabHidden" button-style="solid">
-							<a-radio-button :value="1">开启</a-radio-button>
-							<a-radio-button :value="0">关闭</a-radio-button>
+					<a-form-item label="是否隐藏tab切换" name="tabHidden">
+						<a-radio-group v-model:value="formState.tabHidden">
+							<a-radio :value="false">显示</a-radio>
+							<a-radio :value="true">隐藏</a-radio>
 						</a-radio-group>
 					</a-form-item>
 				</a-col>
 				<a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
 					<a-form-item label="是否固定菜单" name="tabFix">
 						<a-radio-group v-model:value="formState.tabFix">
-							<a-radio :value="1">是</a-radio>
-							<a-radio :value="0">否</a-radio>
+							<a-radio :value="true">是</a-radio>
+							<a-radio :value="false">否</a-radio>
 						</a-radio-group>
 					</a-form-item>
 				</a-col>
 				<a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
 					<a-form-item label="是否显示" name="shows">
 						<a-radio-group v-model:value="formState.shows">
-							<a-radio :value="1">显示</a-radio>
-							<a-radio :value="0">隐藏</a-radio>
+							<a-radio :value="true">显示</a-radio>
+							<a-radio :value="false">隐藏</a-radio>
 						</a-radio-group>
 					</a-form-item>
 				</a-col>
@@ -116,9 +116,9 @@
 	</a-modal>
 </template>
 <script lang="ts">
-import {defineComponent, reactive, ref, toRaw, UnwrapRef} from 'vue';
+import {defineComponent, reactive, ref, toRaw, UnwrapRef, watch} from 'vue';
 import {ValidateErrorEntity} from 'ant-design-vue/es/form/interface';
-import {apiAddMenu, apiFindOne} from '@/packages/service/app'
+import {apiEditMenu, apiFindOne} from '@/packages/service/app'
 import icons from './icons';
 import {validatPath, validatHttpFilePath, filePathRouter} from '@/packages/utils/validator'
 import {toTree} from '@/packages/utils/utils'
@@ -126,17 +126,18 @@ import {toTree} from '@/packages/utils/utils'
 interface FormState {
 	name: string;
 	icon: string,
-	router?: string,
 	filePath?: string,
 	httpFilePath?: string,
 	iframePath?: string,
 	httpViewPath?: string,
 	pid?: string | number,
+	path?: string,
+	id?: string | number,
 	limits?: Array<any>,
-	keepAlive?: number | string,
-	tabHidden?: number | string,
-	tabFix?: number | string,
-	shows?: number | string
+	keepAlive?: number | string | boolean,
+	tabHidden?: number | string | boolean,
+	tabFix?: number | string | boolean,
+	shows?: number | string | boolean
 }
 
 export default defineComponent({
@@ -144,18 +145,16 @@ export default defineComponent({
 		treeData: {
 			type: Array,
 		},
-		id: {
-			type: String || Number
-		}
+		id: [Number, String]
 	},
 	setup(props, {emit}) {
 		const formRef = ref();
 		const visible = ref(false);
 		const treeData = ref();
-		const formState: UnwrapRef<FormState> = reactive({
+		const formState: any = reactive({
 			name: '',
 			icon: '',
-			shows: 1,
+			shows: false,
 			router: '',
 			pid: '',
 			filePath: '',
@@ -163,9 +162,11 @@ export default defineComponent({
 			iframePath: '',
 			httpViewPath: '',
 			limits: [],
-			keepAlive: 0,
-			tabHidden: 0,
-			tabFix: 0,
+			keepAlive: false,
+			tabHidden: false,
+			tabFix: false,
+			path: '',
+			id: ''
 		});
 		const rules = {
 			name: [
@@ -195,7 +196,7 @@ export default defineComponent({
 		const onSubmit = async () => {
 			return formRef.value.validate()
 				.then(() => {
-					apiAddMenu(toRaw(formState), {notify: true}).then(() => {
+					apiEditMenu(toRaw(formState), {notify: true}).then(() => {
 						return Promise.resolve();
 					})
 				})
@@ -205,13 +206,20 @@ export default defineComponent({
 		};
 
 
-		const getMenuData = (id: string) => {
-			apiFindOne({id}).then((res: any) => {
-
+		const getMenuData = () => {
+			apiFindOne({id: props.id}).then((res: any) => {
+				let {createTime, updateTime, type, ...profileData} = res
+				console.log(res);
+				Object.keys(formState).forEach((key: string) => {
+					formState[key] = profileData[key];
+				})
 			})
 		}
 
-		console.log(props.id)
+		watch(() => props.id, (newVal, oldVal) => {
+			getMenuData()
+		}, {immediate: true})
+
 
 		const onSearch = () => {
 

@@ -16,4 +16,5 @@ module.exports = app => {
     router.all('/deleteMenus', controller.home.deleteMenus);
     router.all('/editMenu', controller.home.editMenu)
     router.all('/findOne', controller.home.findOne);
+    router.all('/appRouter', controller.home.appRouter);
 };

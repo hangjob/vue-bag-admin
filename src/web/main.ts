@@ -1,11 +1,11 @@
 import {Component, createApp} from 'vue'
 import App from './App.vue'
 import install, {$pluginType} from '@/packages/install'
-import {apiFindAll} from '@/packages/service/app'
+import {apiAppRouter} from '@/packages/service/app'
 import store from '@/web/store/index';
 
 const app = createApp(App)
-apiFindAll().then((res: any) => {
+apiAppRouter().then((res: any) => {
 
     const locas: Record<string, Component> = import.meta.globEager("/src/web/view/**/*.vue")
     const $plugin: $pluginType = {

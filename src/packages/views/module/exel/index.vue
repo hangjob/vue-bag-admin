@@ -134,8 +134,6 @@ export default defineComponent({
                         key: idx
                     }
                 });
-                console.log(columns.value)
-                // console.log(generateTreeData(res))
             })
             return false;
         };

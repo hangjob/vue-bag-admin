@@ -1,10 +1,9 @@
 import store from '@/packages/store'
 import {findContainingObject} from "@/packages/utils/lodash";
-import {defaultMenu} from "@/packages/config/defaultMenu";
 
 // 默认菜单
 const defaultTabFix = () => {
-    return findContainingObject({key: 'tabFix', value: true}, defaultMenu)
+    return findContainingObject({key: 'tabFix', value: true}, store.state.app.menuList)
 }
 
 

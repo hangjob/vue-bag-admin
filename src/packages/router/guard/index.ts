@@ -15,6 +15,7 @@ function setAppStoreData(to: any): void {
         node: 'children'
     }, store.getters['app/menuList']);
 
+
     store.commit("app/addProcessList", {
         ...item
     });
@@ -53,7 +54,7 @@ const setupRouterGuard = (to: any, from: any, next: any) => {
     apiUserinfo().then((res) => {
         disposeRouter(to, from, next)
         setUserStoreData(to, from, next, res)
-        next();
+        next()
         NProgress.done();
     })
 

@@ -1,5 +1,11 @@
 import {post} from '@/packages/http/request'
 
+
+// 获取路由
+const apiAppRouter = (params?: object, config?: object) => {
+    return post('/appRouter', params, config);
+}
+
 // 添加菜单
 const apiAddMenu = (params?: object, config?: object) => {
     return post('/addMenu', params, config);
@@ -39,4 +45,5 @@ export {
     apiDeleteMenus,
     apiEditMenu,
     apiFindOne,
+    apiAppRouter
 }
