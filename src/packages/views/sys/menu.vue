@@ -11,13 +11,14 @@
 			</div>
 			<div class="table-action-search hidden-xs">
 				<a-input-search
-					v-model:value="value"
+					v-model:value="ks"
 					placeholder="输入关键词搜索"
 					enter-button
+					@search="handleSearch"
 				/>
 			</div>
 		</div>
-		<a-table rowKey="id" :columns="columns" size="middle" :bordered="true" :data-source="data"
+		<a-table rowKey="id" :scroll="{ x: 1500 }" :columns="columns" size="middle" :bordered="true" :data-source="data"
 				 :row-selection="rowSelection" @expand="expand">
 			<template #icon="{ record }">
 				<component :is="record.icon"></component>
@@ -50,7 +51,7 @@
 	</yxs-modal>
 </template>
 <script lang="ts">
-import {defineComponent, ref, reactive, toRefs,inject} from 'vue';
+import {defineComponent, ref, reactive, toRefs, inject} from 'vue';
 import add from './menu/add.vue'
 import edit from './menu/edit.vue'
 import {apiFindAll, apiDeleteMenu, apiDeleteMenus} from '@/packages/service/app'
@@ -172,6 +173,7 @@ const columns = [
 		title: '操作',
 		key: 'action',
 		align: 'center',
+		width: 150,
 		slots: {customRender: 'action'},
 	}
 ];
@@ -182,7 +184,6 @@ export default defineComponent({
 		add, edit
 	},
 	setup() {
-		const value = ref('')
 		const data = ref();
 		const add = ref();
 		const edit = ref();
@@ -191,7 +192,7 @@ export default defineComponent({
 		const activeKey = ref('1');
 		const id = ref('');
 		const loading = ref(false);
-
+		const ks = ref('');
 		const $mitt = inject<any>("$mitt");
 
 		const state = reactive<{
@@ -237,7 +238,7 @@ export default defineComponent({
 		};
 
 		const getData = () => {
-			apiFindAll().then(res => {
+			apiFindAll({ks: ks.value}).then(res => {
 				data.value = toTree(res);
 				loading.value = false;
 			})
@@ -250,10 +251,10 @@ export default defineComponent({
 
 		// 单个删除
 		const handleDelete = ({record}: { record: any }) => {
-			// apiDeleteMenu({id: record.id}, {notify: true}).then((res) => {
-			// 	getData()
-			// })
-			notifyRefreshMenu()
+			apiDeleteMenu({id: record.id}, {notify: true}).then((res) => {
+				getData()
+				notifyRefreshMenu()
+			})
 		}
 
 		// 多个删除
@@ -271,7 +272,12 @@ export default defineComponent({
 
 		// 通知刷新菜单
 		const notifyRefreshMenu = () => {
-			$mitt.emit('refreshMenu',{a:1})
+			$mitt.emit('refreshMenu', {a: 1})
+		}
+
+		// 搜素
+		const handleSearch = () => {
+			getData();
 		}
 
 
@@ -283,7 +289,6 @@ export default defineComponent({
 			id,
 			rowSelection,
 			...toRefs(state),
-			value,
 			visibleAdd,
 			activeKey,
 			visibleEdit,
@@ -294,7 +299,9 @@ export default defineComponent({
 			handleDeletes,
 			setVisibleEdit,
 			refreshLoad,
-			loading
+			loading,
+			handleSearch,
+			ks
 		};
 	},
 });

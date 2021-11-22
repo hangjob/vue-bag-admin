@@ -100,6 +100,7 @@ export default defineComponent({
 			height: 100%;
 			padding: 10px;
 			border-radius: 3px;
+			box-sizing: border-box;
 			//background-color: #f7f7f7;
 		}
 	}

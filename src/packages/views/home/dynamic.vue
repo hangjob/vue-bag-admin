@@ -8,28 +8,28 @@
         </template>
         <ul>
             <li>
-                <img src="@/packages/assets/yanghang.jpg" alt="">
+                <img src="@/packages/assets/image/yanghang.jpg" alt="">
                 <div class="des">
                     <p>羊先生 修复了 <span>菜单递归问题</span> 已经打包上传</p>
                     <time>2021-20-27 27:01:22</time>
                 </div>
             </li>
             <li>
-                <img src="@/packages/assets/yanghang.jpg" alt="">
+                <img src="@/packages/assets/image/yanghang.jpg" alt="">
                 <div class="des">
                     <p>羊先生 修复了 <span>菜单递归问题</span> 已经打包上传</p>
                     <time>2021-20-27 27:01:22</time>
                 </div>
             </li>
             <li>
-                <img src="@/packages/assets/yanghang.jpg" alt="">
+                <img src="@/packages/assets/image/yanghang.jpg" alt="">
                 <div class="des">
                     <p>羊先生 修复了 <span>菜单递归问题</span> 已经打包上传</p>
                     <time>2021-20-27 27:01:22</time>
                 </div>
             </li>
             <li>
-                <img src="@/packages/assets/yanghang.jpg" alt="">
+                <img src="@/packages/assets/image/yanghang.jpg" alt="">
                 <div class="des">
                     <p>羊先生 初始化 <span>Vite+Vue3.0+TypeScript</span> 项目，定位目标适合企业中后台管理系统</p>
                     <time>2021-10-08 10:01:22</time>

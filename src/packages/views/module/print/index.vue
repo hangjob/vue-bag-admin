@@ -43,9 +43,9 @@
 
 import printJS from "print-js"
 import {defineComponent} from 'vue'
-import invoice from '@/packages/assets/invoice.png'
-import invoice2 from '@/packages/assets/invoice2.jpg'
-import invoice3 from '@/packages/assets/invoice3.jpg'
+import invoice from '@/packages/assets/image/invoice.png'
+import invoice2 from '@/packages/assets/image/invoice2.jpg'
+import invoice3 from '@/packages/assets/image/invoice3.jpg'
 
 let someJSONData = [
     {

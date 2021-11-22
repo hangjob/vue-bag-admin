@@ -1,6 +1,8 @@
 'use strict';
 
 const baseController = require('./baseController');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 class HomeController extends baseController {
     async index() {
@@ -57,7 +59,14 @@ class HomeController extends baseController {
 
     async findAll() {
         const {ctx} = this;
-        const result = await ctx.model.Menu.findAll()
+        const {ks} = ctx.request.body;
+        const where = {}
+        if (ks) {
+            where.name = {[Op.like]: `%${ks}%`} // 模糊查詢 https://www.sequelize.com.cn/core-concepts/model-querying-basics
+        }
+        const result = await ctx.model.Menu.findAll({
+            where: {...where}
+        })
         this.result({data: result})
     }
 
