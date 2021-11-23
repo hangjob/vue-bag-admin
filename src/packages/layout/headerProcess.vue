@@ -169,10 +169,14 @@ export default defineComponent({
 	.tab-container {
 		width: 100%;
 		flex: 1;
-		overflow-x: hidden;
+		overflow-x: auto;
 		overflow-y: hidden;
 		white-space: nowrap;
 		scroll-behavior: smooth;
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
 	}
 
 	.app-process_item {
@@ -189,6 +193,7 @@ export default defineComponent({
 		cursor: pointer;
 		min-width: 60px;
 		justify-content: center;
+
 
 		&:last-of-type {
 			margin-right: 0;

@@ -1,4 +1,8 @@
-// 获取数据链
+/**
+ * 获取数据在数组对象的链
+ * @param list
+ * @param path
+ */
 const getAllParentArr = (list: any, path: any) => {
     for (let i in list) {
         if (list.hasOwnProperty(i)) {
@@ -17,7 +21,9 @@ const getAllParentArr = (list: any, path: any) => {
     }
 }
 
-// 获取设备信息
+/**
+ * 获取设备信息
+ */
 const getBrowser = () => {
     const {clientHeight, clientWidth} = document.documentElement;
 
@@ -131,7 +137,9 @@ const repeat = (str: string, n: number) => {
 };
 
 
-// 生成随机id
+/**
+ * 生成随机id
+ */
 const randomId = () => {
     let str = "";
     for (let i = 0; i < 4; i++) {
@@ -142,7 +150,12 @@ const randomId = () => {
     return str.length >= 32 ? str.substr(0, 32) : str + repeat("0", 32 - str.length);
 };
 
-// 生成树结构
+/**
+ * 生成树结构
+ * @param data
+ * @param idName
+ * @param parentIdName
+ */
 const toTree = (data: any, idName?: string, parentIdName?: string) => {
     const id = idName || "id";
     const parentId = parentIdName || "pid";

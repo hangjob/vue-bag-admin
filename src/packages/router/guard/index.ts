@@ -3,6 +3,7 @@ import {getAllParentArr} from "@/packages/utils/utils";
 import {findChildrenDepth} from "@/packages/utils/lodash";
 import {apiUserinfo} from "@/packages/service/user";
 import {NProgress} from '@/packages/plugin/nprogress'
+import locaStore from '@/packages/utils/persistence'
 
 const ignore = ["/login", "/403", "/404", "/500", "/502"];
 
@@ -36,7 +37,7 @@ function setUserStoreData(to: any, from: any, next: any, res: any): void {
 // 处理路由跳转
 function disposeRouter(to: any, from: any, next: any): void {
     const token = store.getters['user/token'];
-    if (token) {
+    if (token && !locaStore.isExpired('token')) {
         if (to.path.indexOf("/login") === 0) {
             return next("/");
         } else {

@@ -1,26 +1,21 @@
 <template>
 	<a-layout-content class="layout-container">
-		<div class="layout-container-view">
+		<div v-if="routerView" class="layout-container-view">
 			<div class="layout-container-view-content scroll">
 				<router-view v-slot="{ Component, route }">
 					<keep-alive :include="caches">
 						<component :is="Component"/>
 					</keep-alive>
 				</router-view>
-				<!--                <component-->
-				<!--                    v-for="item in hasOpenComponentsArr"-->
-				<!--                    :key="item.id"-->
-				<!--                    :is="item.name"-->
-				<!--                    v-show="$route.path === item.path"-->
-				<!--                ></component>-->
 			</div>
 		</div>
 	</a-layout-content>
 </template>
 <script lang="ts">
-import {computed, defineComponent, ref, watch} from 'vue'
+import {computed, defineComponent, ref, watch, inject, nextTick} from 'vue'
 import {useRoute} from 'vue-router'
 import {useStore} from "vuex";
+import {NProgress} from "@/packages/plugin/nprogress";
 
 export default defineComponent({
 	setup() {
@@ -31,6 +26,9 @@ export default defineComponent({
 		const hasOpenComponentsArr = ref<Array<any>>([])
 
 		const route = useRoute()
+		const $mitt: any = inject('$mitt');
+
+		const routerView = ref(true);
 
 		watch(
 			() => route.path,
@@ -42,6 +40,18 @@ export default defineComponent({
 				}
 			}
 		)
+
+		$mitt.on('reload-router-view', () => {
+			if (!NProgress.status) {
+				NProgress.start();
+				routerView.value = false
+				nextTick(() => {
+					routerView.value = true
+					NProgress.done()
+				})
+			}
+		})
+
 
 		/**
 		 * 缓存iframe
@@ -75,6 +85,7 @@ export default defineComponent({
 
 		return {
 			caches,
+			routerView,
 			transitionName,
 			hasOpenComponentsArr
 		}

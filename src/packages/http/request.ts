@@ -12,11 +12,6 @@ const http = axios.create({
 http.interceptors.request.use((config: any) => {
     const token = store.state.user.token
     const {url} = config;
-
-    if (!token) {
-        return window.location.href = '/';
-    }
-
     if (url) {
         if (httpIgnore.token.some((item) => url.includes(item))) {
             config.headers['authorization'] = token;

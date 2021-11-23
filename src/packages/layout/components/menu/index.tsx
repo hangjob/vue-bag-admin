@@ -49,10 +49,6 @@ export default defineComponent({
         })
 
 
-        $mitt.on('refreshMenu', () => {
-
-        })
-
         return {
             selectedKeys,
             menuList,

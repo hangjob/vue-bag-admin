@@ -1,13 +1,11 @@
-interface keyArray {
-    [v: string]: any;
-}
+import locaStore from '@/packages/utils/persistence'
 
 const user = {
     namespaced: true,
     state: {
         userinfo: {},
         roles: [],
-        token: '1',
+        token: locaStore.get('token'),
     },
     getters: {
         token: (state: any) => {
@@ -21,8 +19,8 @@ const user = {
         },
     },
     mutations: {
-        updateToken(state: any, str: string) {
-            state.token = str;
+        updateToken(state: any) {
+            state.token = locaStore.get('token');
         },
         updateRoles(state: any, arr: Array<any>) {
             state.roles = arr;

@@ -14,7 +14,6 @@ apiAppRouter().then((res: any) => {
             module: store
         }
     }
-
     install(app, $plugin).then(() => {
 
     })

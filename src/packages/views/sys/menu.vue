@@ -193,7 +193,6 @@ export default defineComponent({
 		const id = ref('');
 		const loading = ref(false);
 		const ks = ref('');
-		const $mitt = inject<any>("$mitt");
 
 		const state = reactive<{
 			selectedRowKeys: Key[];
@@ -253,7 +252,6 @@ export default defineComponent({
 		const handleDelete = ({record}: { record: any }) => {
 			apiDeleteMenu({id: record.id}, {notify: true}).then((res) => {
 				getData()
-				notifyRefreshMenu()
 			})
 		}
 
@@ -270,10 +268,6 @@ export default defineComponent({
 			getData();
 		}
 
-		// 通知刷新菜单
-		const notifyRefreshMenu = () => {
-			$mitt.emit('refreshMenu', {a: 1})
-		}
 
 		// 搜素
 		const handleSearch = () => {

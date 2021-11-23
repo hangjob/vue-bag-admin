@@ -42,6 +42,7 @@ const findUnsetDepth = (tag: any, data: any) => {
  * 固定查找
  * @param tag key(属性key) value(值) node(节点)
  * @param arr
+ * 列子[{name:'a'},{name:'b'},{name:'c',children:[{name:'d'}]}]
  */
 const findChildrenDepth = (tag: any, arr: Array<any>) => {
     let result;
