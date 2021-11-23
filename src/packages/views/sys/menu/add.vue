@@ -125,7 +125,7 @@ import {toTree} from '@/packages/utils/utils'
 
 interface FormState {
 	name: string;
-	icon: string,
+	icon?: string,
 	path?: string,
 	filePath?: string,
 	httpFilePath?: string,
