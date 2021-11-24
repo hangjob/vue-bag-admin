@@ -1,4 +1,4 @@
-import {computed, defineComponent, h, ref, resolveComponent, watchEffect, inject} from 'vue'
+import {computed, defineComponent, h, ref, resolveComponent, watchEffect} from 'vue'
 import {useStore} from 'vuex'
 import {useRoute, useRouter} from "vue-router";
 import {toTree} from '@/packages/utils/utils'
@@ -16,8 +16,6 @@ export default defineComponent({
         const selectedKeys = ref<string[]>([])
         const openKeys = ref<string[]>([])
         const menuList = computed(() => toTree(store.getters['app/menuList']));
-
-        const $mitt = inject<any>("$mitt");
 
         // 是否可见
         const visible = ref<boolean>(true);

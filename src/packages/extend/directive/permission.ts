@@ -9,6 +9,7 @@ function handlePermission(el: Element, binding: DirectiveBinding) {
         const hasPermission = roles.some((role: any) => {
             return value.includes(role)
         })
+        console.log(el); // 明天这里写针对不是按钮的，以及颗粒度权限的设计
         if (!hasPermission && arg) {
             return el.parentNode && el.parentNode.removeChild(el) // 条件不成立删除
         }

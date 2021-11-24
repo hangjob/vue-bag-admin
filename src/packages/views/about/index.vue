@@ -1,13 +1,13 @@
 <template>
 	<yxs-view class="about">
-		<!--<canvas class="canvas" ref="canvas"></canvas>-->
+		<canvas class="canvas" ref="canvas"></canvas>
 		<a-row :gutter="[16,16]">
 			<a-col :xs="24" :sm="24" :md="24" :lg="14" :xl="10">
 				<a-card title="关于我">
 					<div class="hand">
-						<img src="@/packages/assets/image/yanghang.jpg" alt="">
+						<img :src="userinfo.userhead" alt="">
 						<div class="hand-name">
-							<h6>羊先生</h6>
+							<h6>{{ userinfo.username }}</h6>
 							<a-button type="primary" shape="round" size="small">
 								<a-typography-link href="https://github.com/hangjob/vue-vite-admin-ts" target="_blank">
 									Like Me
@@ -22,7 +22,7 @@
 	</yxs-view>
 </template>
 <script lang="ts">
-import {defineComponent, getCurrentInstance, onMounted, ref, watch, nextTick} from 'vue'
+import {defineComponent, getCurrentInstance, ref, watch,onMounted, nextTick} from 'vue'
 import UserCanvasBg from './canvas';
 import {useStore} from 'vuex';
 
@@ -31,7 +31,8 @@ export default defineComponent({
 	setup() {
 		const canvas = ref();
 		const internalInstance: any = getCurrentInstance()
-
+		const $store = useStore()
+		const userinfo = $store.getters["user/userinfo"];
 		const userCanvasBg = () => {
 			let pw = internalInstance.ctx.$el.parentElement.offsetWidth - 50;
 			canvas.value.style.height = 340 + 'px';
@@ -39,30 +40,31 @@ export default defineComponent({
 			new UserCanvasBg({
 				el: canvas.value,
 				userInfo: {
-					userhead: 'http://192.168.1.24:8290/src/packages/assets/yanghang.jpg',
-					username: '羊先生',
+					userhead: userinfo.userhead,
+					username: userinfo.username,
 					sex: '男',
 					userhome: '来自地球',
-					usertime: '2021年11月09日 下午1点52分',
+					usertime: '2021年11月24日 下午1点52分',
 					description: '以前觉得挣钱不重要，现在才知道星辰和大海都需要门票，诗和远方的路费都很贵'
 				},
 				width: pw,
 				height: 340,
 			});
 		}
-		onMounted(() => {
-			// userCanvasBg()
+
+		onMounted(()=>{
+			userCanvasBg()
 		})
 
-		const $store = useStore()
-		watch(() => $store.state.app.collapsed, (val, old) => {
+		watch(() => $store.state.app.collapsed, () => {
 			nextTick().then(() => {
 				userCanvasBg();
 			})
 		})
 
 		return {
-			canvas
+			canvas,
+			userinfo
 		}
 	}
 })

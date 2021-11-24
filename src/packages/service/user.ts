@@ -4,6 +4,11 @@ const apiUserinfo = () => {
     return post('/yxs/userinfo')
 }
 
+const apiNotice = () => {
+    return post('/yxs/notice')
+}
+
 export {
-    apiUserinfo
+    apiUserinfo,
+    apiNotice
 }

@@ -1,7 +1,7 @@
 // @ts-ignore
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-import {App} from "vue";
+import type {App} from 'vue';
 
 // ease 可以设置css3动画
 // speed 是进度条从开始到结束的耗时

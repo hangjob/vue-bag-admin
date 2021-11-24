@@ -8,12 +8,10 @@
 		<a-popover v-model="visible" title="系统通知" trigger="click">
 			<template #content>
 				<div class="notice-content">
-					<p>11-23 23:59:59 xxx用户登录了系统</p>
-					<p>11-22 22:59:59 xxx用户登录了系统</p>
-					<p>11-21 21:59:59 xxx用户登录了系统</p>
+					<p v-for="item in noticeList" :key="item.id">{{ item.text }} {{ item.createTime }}</p>
 				</div>
 			</template>
-			<a-badge count="3">
+			<a-badge :count="noticeList.length">
 				<BellOutlined class="icon-svg"/>
 			</a-badge>
 		</a-popover>
@@ -25,14 +23,14 @@
 	<div class="right_menu-item">
 		<SyncOutlined class="icon-svg refresh" @click="handleRefresh"/>
 	</div>
-	<!--    <div class="right_menu-item" @click="handleOpenThemeSetting">-->
-	<!--        <ClearOutlined class="icon-svg"/>-->
-	<!--    </div>-->
+	<div class="right_menu-item" @click="handleOpenThemeSetting">
+		<ClearOutlined class="icon-svg"/>
+	</div>
 	<div class="right_menu-item hidden-xs">
 		<img class="user-head" src="@/packages/assets/image/yanghang.jpg" alt="">
 		<a-dropdown>
 			<a class="ant-dropdown-link" @click.prevent>
-				羊先生
+				{{userinfo.username}}
 				<DownOutlined/>
 			</a>
 			<template #overlay>
@@ -52,6 +50,7 @@ import {defineComponent, inject, nextTick, onMounted, ref} from 'vue'
 import {checkFull, fullscreenchange, switchScreen} from '@/packages/utils/screen.full'
 import {handleKeyBoard} from '@/packages/utils/keydown'
 import {notification} from 'ant-design-vue';
+import {apiNotice} from '@/packages/service/user'
 import {
 	BellOutlined,
 	ClearOutlined,
@@ -62,6 +61,7 @@ import {
 	SearchOutlined,
 	SyncOutlined
 } from '@ant-design/icons-vue';
+import {useStore} from "vuex";
 
 export default defineComponent({
 	components: {
@@ -82,6 +82,9 @@ export default defineComponent({
 		const fullState = ref<boolean>(false)
 		const $mitt: any = inject('$mitt');
 		const visible = ref(false);
+		const noticeList: any = ref([]);
+		const $store = useStore()
+		const userinfo = $store.getters["user/userinfo"];
 		const handleOpenThemeSetting = () => {
 			userSetting.value.showDrawer()
 		}
@@ -128,12 +131,18 @@ export default defineComponent({
 			fullscreenchange(toggle)
 		})
 
+		apiNotice().then((res) => {
+			noticeList.value = res;
+		})
+
 		return {
 			userSetting,
 			searchActive,
 			searchKey,
 			fullState,
+			userinfo,
 			visible,
+			noticeList,
 			handleSearch,
 			handleOpenThemeSetting,
 			handleScreenModel,
@@ -202,6 +211,7 @@ export default defineComponent({
 .notice-content {
 	p {
 		padding: 5px 0;
+		display: block;
 
 		&:last-child, &:first-child {
 			padding: 0;

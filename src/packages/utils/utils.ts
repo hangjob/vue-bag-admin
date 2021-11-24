@@ -182,9 +182,21 @@ const toTree = (data: any, idName?: string, parentIdName?: string) => {
 }
 
 
+/**
+ * 将中划线转驼峰
+ * @param name
+ */
+const toHump = (name: string) => {
+    return name.replace(/(\b[a-z])[-(\w)]/g, function ($, $1) {
+        return $1.toUpperCase();
+    }).replace(/-/g, '')
+}
+
+
 export {
     getAllParentArr,
     getBrowser,
     randomId,
     toTree,
+    toHump
 }

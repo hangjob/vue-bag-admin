@@ -209,7 +209,6 @@ export default defineComponent({
 		const getMenuData = () => {
 			apiFindOne({id: props.id}).then((res: any) => {
 				let {createTime, updateTime, type, ...profileData} = res
-				console.log(res);
 				Object.keys(formState).forEach((key: string) => {
 					formState[key] = profileData[key];
 				})

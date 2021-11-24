@@ -12,6 +12,7 @@ import {setupGlobDirectives} from '@/packages/extend/directive'
 import {setVxeTable} from '@/packages/plugin/vxe-table'
 import {setupGlobComponents} from '@/packages/components'
 import {setupDraggable} from '@/packages/plugin/draggable'
+import {setupIcons} from '@/packages/assets/icon/iconfont'
 import '../../../mock'
 
 const setupInit = (app: App) => {
@@ -22,6 +23,7 @@ const setupInit = (app: App) => {
     setupGlobDirectives(app)
     setupGlobComponents(app)
     setupDraggable(app)
+    setupIcons(app)
 }
 
 export default setupInit;

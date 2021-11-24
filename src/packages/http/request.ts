@@ -1,11 +1,20 @@
 import axios from 'axios'
 import store from "@/packages/store";
-import {httpIgnore} from "@/packages/config";
+import {httpNetwork} from "@/packages/config";
 import {message as messageModel} from 'ant-design-vue';
+
+
+const CancelToken = axios.CancelToken
+const source = CancelToken.source()
 
 const http = axios.create({
     baseURL: '/api',
-    timeout: 5000
+    timeout: httpNetwork.requestTimeout,
+    withCredentials: true,
+    headers: {
+        'content-type': httpNetwork.contentType
+    },
+    cancelToken: source.token
 })
 
 
@@ -13,7 +22,7 @@ http.interceptors.request.use((config: any) => {
     const token = store.state.user.token
     const {url} = config;
     if (url) {
-        if (httpIgnore.token.some((item) => url.includes(item))) {
+        if (httpNetwork.token.some((item) => url.includes(item))) {
             config.headers['authorization'] = token;
         }
     }
@@ -25,9 +34,9 @@ http.interceptors.request.use((config: any) => {
 http.interceptors.response.use((res: any) => {
     const {config} = res;
     const {code, data, message} = res.data;
-    if (code === 1) {
+    if (httpNetwork.successCode.indexOf(code) !== -1) {
         if (config.notify) {
-            messageModel.success(message, 2.5)
+            messageModel.success(message, httpNetwork.messageDuration)
         }
         return data;
     } else {
@@ -56,9 +65,15 @@ const get = (url: string, params?: any, config?: object) => {
 }
 
 
+const all = (request: Array<any>) => {
+    return axios.all(request)
+}
+
+
 export default http;
 export {
     post,
     get,
+    all,
     axios
 }
