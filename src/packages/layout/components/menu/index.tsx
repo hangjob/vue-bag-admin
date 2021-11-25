@@ -43,7 +43,9 @@ export default defineComponent({
         watchEffect(() => {
             const tabPaths = JSON.parse(JSON.stringify(store.getters['app/tabViewsPath']));
             openKeys.value = tabPaths.map((item: any) => item.id);
-            selectedKeys.value = [tabPaths.pop().id];
+            if (tabPaths.length) {
+                selectedKeys.value = [tabPaths.pop().id];
+            }
         })
 
 

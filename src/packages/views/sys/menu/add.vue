@@ -188,7 +188,7 @@ export default defineComponent({
 				{validator: validatHttpFilePath, trigger: 'blur'}
 			]
 		};
-		treeData.value = toTree(props.treeData);
+		treeData.value = toTree(props.treeData || []);
 		const onSubmit = async () => {
 			return formRef.value.validate()
 				.then(() => {

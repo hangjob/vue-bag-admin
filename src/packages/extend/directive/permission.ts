@@ -1,6 +1,11 @@
 import {App, Directive, DirectiveBinding} from 'vue'
 import store from "@/packages/store";
 
+
+const isButton = (el: Element) => {
+    return el.tagName.toLowerCase() === 'button';
+}
+
 // 权限指令
 function handlePermission(el: Element, binding: DirectiveBinding) {
     const {value, arg} = binding;
@@ -9,13 +14,18 @@ function handlePermission(el: Element, binding: DirectiveBinding) {
         const hasPermission = roles.some((role: any) => {
             return value.includes(role)
         })
-        console.log(el); // 明天这里写针对不是按钮的，以及颗粒度权限的设计
+
         if (!hasPermission && arg) {
             return el.parentNode && el.parentNode.removeChild(el) // 条件不成立删除
         }
+
         if (!hasPermission) {
-            el.classList.add('ant-btn-dashed');
-            el.setAttribute("disabled", 'disabled');
+            if (isButton(el)) {
+                el.classList.add('ant-btn-dashed');
+                el.setAttribute("disabled", 'disabled');
+            } else {
+                el.parentNode && el.parentNode.removeChild(el)
+            }
         }
     } else {
         console.error('权限控制使用例子 v-auth="[\'admin\',\'editor\']"')

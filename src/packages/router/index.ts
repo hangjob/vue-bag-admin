@@ -4,6 +4,7 @@ import {App} from 'vue';
 import {setupRouterGuard} from '@/packages/router/guard'
 import {setupBeforeStore} from "@/packages/router/beforeStore";
 import {setAddRoute} from '@/packages/router/addRoute'
+
 // 定义路由
 const routes: Array<RouteRecordRaw> = [
     {
@@ -101,6 +102,14 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import('@/packages/views/error/index.vue')
             },
             {
+                path: '/500', name: '500', meta: {title: '错误页面'},
+                component: () => import('@/packages/views/error/500.vue')
+            },
+            {
+                path: '/403', name: '403', meta: {title: '错误页面'},
+                component: () => import('@/packages/views/error/403.vue')
+            },
+            {
                 path: '/module/descriptions', name: 'module-descriptions', meta: {title: '描述列表'},
                 component: () => import('@/packages/views/module/descriptions/index.vue')
             },
@@ -117,7 +126,15 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: "/login", name: 'login', meta: {title: '登录'},
         component: () => import('@/packages/views/login/index.vue'),
-    }
+    },
+    {
+        path: '/404',
+        component: () => import('@/packages/views/error/404.vue'),
+    },
+    {
+        path: '/:catchAll(.*)*',    // 不识别的path自动匹配404
+        redirect: '/404',
+    },
 ]
 
 // 实列化router

@@ -7,8 +7,9 @@ import {message as messageModel} from 'ant-design-vue';
 const CancelToken = axios.CancelToken
 const source = CancelToken.source()
 
-const http = axios.create({
-    baseURL: '/api',
+
+const http: any = axios.create({
+    baseURL: httpNetwork.baseURL,
     timeout: httpNetwork.requestTimeout,
     withCredentials: true,
     headers: {
@@ -16,6 +17,9 @@ const http = axios.create({
     },
     cancelToken: source.token
 })
+
+http.defaults.retry = httpNetwork.retry;
+http.defaults.retryDelay = httpNetwork.retryDelay;
 
 
 http.interceptors.request.use((config: any) => {
@@ -27,7 +31,7 @@ http.interceptors.request.use((config: any) => {
         }
     }
     return config;
-}, (error) => {
+}, (error: any) => {
     return Promise.reject(error)
 })
 
@@ -42,12 +46,33 @@ http.interceptors.response.use((res: any) => {
     } else {
         return Promise.reject(res.data);
     }
-}, async (error) => {
-    if (error.response) {
-        const {status, config} = error.response;
-        console.log(status, config.url)
-    }
-    return Promise.reject(error.message);
+}, async (error: any) => {
+
+    const {config} = error.response || {};
+
+    // 如果config不存在或没有设置重试选项，请拒绝
+    if (!config || !config.retry) return Promise.reject(error.message);
+
+    // 设置用于跟踪重试计数的变量
+    config.__retryCount = config.__retryCount || 0;
+
+    // 检查重试次数是否达到最大值
+    if (config.__retryCount >= config.retry) return Promise.reject(error.message);
+
+    // 增加重试次数
+    config.__retryCount += 1;
+
+    // 创建新的Promise来处理
+    const backoff = new Promise(function (resolve: any) {
+        setTimeout(function () {
+            resolve();
+        }, config.retryDelay);
+    });
+
+    // 返回promise，其中调用axios来重试请求
+    return backoff.then(function () {
+        return http(config);
+    });
 })
 
 // 包装url

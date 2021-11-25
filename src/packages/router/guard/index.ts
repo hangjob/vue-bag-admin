@@ -24,8 +24,8 @@ function setAppStoreData(to: any): void {
     store.commit("app/updateCurrentRouter", {
         ...to
     })
-
-    store.commit('app/updateTabViewsPath', getAllParentArr(store.getters['app/menuList'], to.path))
+    const arr = getAllParentArr(store.getters['app/menuList'], to.path);
+    arr && store.commit('app/updateTabViewsPath', arr)
 }
 
 // 处理user-store数据

@@ -18,9 +18,15 @@ const httpNetwork = {
     //消息框消失时间
     messageDuration: 2.5,
     //最长请求时间
-    requestTimeout: 10000,
-    //操作正常code，支持String、Array、int多种类型
+    requestTimeout: 3000,
+    //操作正常code码
     successCode: [1, 1000],
+    // 重连间隔时间
+    retryDelay: 3000,
+    // 最大重试次数
+    retry: 3,
+    // 默认前缀url
+    baseURL: '/api'
 }
 
 
