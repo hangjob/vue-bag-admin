@@ -10,14 +10,16 @@
 				<a-typography-link href="//www.vipbic.com">www.vipbic.com</a-typography-link>
 			</div>
 		</a-layout>
+		{{ floatingMenu }}
 	</a-layout>
 </template>
 <script lang="ts">
-import {defineComponent} from 'vue';
+import {defineComponent, watchEffect, reactive, ref} from 'vue';
 import Slider from './slider.vue'
 import HeaderTop from './headerTop.vue'
 import HeaderProcess from './headerProcess.vue'
 import LayoutContainer from './layoutContainer.vue'
+import {useStore} from "vuex";
 
 export default defineComponent({
 	components: {
@@ -25,6 +27,16 @@ export default defineComponent({
 		HeaderTop,
 		HeaderProcess,
 		LayoutContainer
+	},
+	setup() {
+		const store = useStore();
+		const floatingMenu = ref(store.getters["app/getThemeConfig"].floatingMenu)
+		watchEffect(() => {
+			console.log()
+		})
+		return {
+			floatingMenu
+		}
 	}
 });
 </script>

@@ -37,5 +37,6 @@
       <option name="processComments" value="true" />
     </inspection_tool>
     <inspection_tool class="TypeScriptUnresolvedVariable" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="TypeScriptValidateJSTypes" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
   </profile>
 </component>

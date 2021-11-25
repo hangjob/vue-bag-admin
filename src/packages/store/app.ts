@@ -2,6 +2,7 @@ import {defaultMenu} from "@/packages/config/defaultMenu";
 import {find, findUnsetDepth} from "@/packages/utils/lodash";
 import {getBrowser} from '@/packages/utils/utils'
 import {defaultTabFix} from "@/packages/router/beforeStore";
+import {themeConfig} from '@/packages/config'
 
 const app = {
     namespaced: true,
@@ -11,7 +12,8 @@ const app = {
         processList: [], // tab切换栏
         currentRouter: {}, // 当前路由数据
         tabViewsPath: [], // 访问路经
-        collapsed: false // 菜单是否折叠
+        collapsed: false, // 菜单是否折叠
+        themeConfig: {} // 主题配置
     },
     // 定义getters 好处可以过滤数据
     getters: {
@@ -29,6 +31,9 @@ const app = {
         },
         getBrowser: (state: any) => {
             return state.browser;
+        },
+        getThemeConfig: (state: any) => {
+            return state.themeConfig;
         }
     },
     mutations: {
@@ -82,6 +87,10 @@ const app = {
             if (!findUnsetDepth({path: item.path}, state.menuList)) {
                 state.menuList.push(item);
             }
+        },
+        // 更新配置
+        updateThemeConfig(state: any, item: any) {
+            state.themeConfig[item.key] = item.value
         }
     }
 }

@@ -1,10 +1,12 @@
 const routerMode: String = "hash"; // 路由模式
+import store from '@/packages/store'
 
 /**
  * 主题设置
  */
-const theme = {
-    catchKey: 'themeName'
+const themeConfig = {
+    catchKey: 'themeName',
+    floatingMenu: false
 }
 
 /**
@@ -30,8 +32,13 @@ const httpNetwork = {
 }
 
 
+const setupConfig = () => {
+
+}
+
+
 export {
     routerMode,
-    theme,
+    themeConfig,
     httpNetwork
 }
