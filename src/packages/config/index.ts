@@ -1,5 +1,4 @@
 const routerMode: String = "hash"; // 路由模式
-import store from '@/packages/store'
 
 /**
  * 主题设置
@@ -29,11 +28,6 @@ const httpNetwork = {
     retry: 3,
     // 默认前缀url
     baseURL: '/api'
-}
-
-
-const setupConfig = () => {
-
 }
 
 

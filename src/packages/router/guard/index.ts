@@ -52,7 +52,7 @@ function disposeRouter(to: any, from: any, next: any): void {
 
 const setupRouterGuard = (to: any, from: any, next: any) => {
     NProgress.start();
-    apiUserinfo().then((res) => {
+    apiUserinfo().then((res:any) => {
         disposeRouter(to, from, next)
         setUserStoreData(to, from, next, res)
         next()

@@ -30,10 +30,13 @@ export default {
             immediate: true,
         },
     },
+	created() {
 
-    mounted() {
+	},
+	mounted() {
         const iframe = this.$el.querySelector('iframe')
         this.loading = true
+
         iframe.onload = () => {
             this.loading = false
         }

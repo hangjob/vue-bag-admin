@@ -13,7 +13,7 @@ const app = {
         currentRouter: {}, // 当前路由数据
         tabViewsPath: [], // 访问路经
         collapsed: false, // 菜单是否折叠
-        themeConfig: {} // 主题配置
+        themeConfig: {...themeConfig} // 主题配置
     },
     // 定义getters 好处可以过滤数据
     getters: {

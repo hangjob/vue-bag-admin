@@ -1,5 +1,5 @@
 <template>
-    <div class="slider-container" :class="$store.state.app.collapsed ? 'slider-is-collapse' : null">
+    <div class="slider-container" :class="layoutSliderClassName">
         <div class="left-slider">
             <div class="left-slider-logo">
                 <!--            YXS-ADMIN-->
@@ -13,6 +13,7 @@
 <script lang="ts">
 import {defineComponent} from 'vue';
 import YxsMenuSlider from '@/packages/layout/components/menu'
+import {themeHook} from '@/packages/hook'
 
 export default defineComponent({
     name: 'Slider',
@@ -20,7 +21,10 @@ export default defineComponent({
         YxsMenuSlider
     },
     setup() {
-
+        const {layoutSliderClassName} = themeHook()
+        return {
+            layoutSliderClassName
+        }
     }
 })
 </script>
@@ -61,9 +65,19 @@ export default defineComponent({
         flex: 1;
 
 
-        ::v-deep  ul {
+        ::v-deep ul {
             border-right: none;
         }
     }
 }
+
+
+.slider-is-collapse-floating {
+    position: absolute;
+    left: 0;
+    z-index: 9999;
+    transition: transform .3s cubic-bezier(.7, .3, .1, 1), box-shadow .3s cubic-bezier(.7, .3, .1, 1);
+    transform: translate(-100%);
+}
+
 </style>

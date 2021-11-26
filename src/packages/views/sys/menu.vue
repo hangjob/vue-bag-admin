@@ -237,7 +237,7 @@ export default defineComponent({
 		};
 
 		const getData = () => {
-			apiFindAll({ks: ks.value}).then(res => {
+			apiFindAll({ks: ks.value}).then((res:any) => {
 				data.value = toTree(res);
 				loading.value = false;
 			})
@@ -250,7 +250,7 @@ export default defineComponent({
 
 		// 单个删除
 		const handleDelete = ({record}: { record: any }) => {
-			apiDeleteMenu({id: record.id}, {notify: true}).then((res) => {
+			apiDeleteMenu({id: record.id}, {notify: true}).then(() => {
 				getData()
 			})
 		}
@@ -258,7 +258,7 @@ export default defineComponent({
 		// 多个删除
 		const handleDeletes = () => {
 			const ids = state.selectedRowKeys.map((item: any) => item.id);
-			apiDeleteMenus({ids}, {notify: true}).then((res) => {
+			apiDeleteMenus({ids}, {notify: true}).then(() => {
 				getData()
 			})
 		}

@@ -131,7 +131,7 @@ export default defineComponent({
 			fullscreenchange(toggle)
 		})
 
-		apiNotice().then((res) => {
+		apiNotice().then((res:any) => {
 			noticeList.value = res;
 		})
 
