@@ -5,7 +5,10 @@ const routerMode: String = "hash"; // 路由模式
  */
 const themeConfig = {
     catchKey: 'themeName',
-    floatingMenu: false
+    // 是否浮动菜单
+    floatingMenu: false,
+    // 菜单宽度
+    menuMaxWidth: 250
 }
 
 /**

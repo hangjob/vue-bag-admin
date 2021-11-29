@@ -13,7 +13,7 @@
                     <a-select-option v-for="item in themeList" :key="item.path">{{ item.name }}</a-select-option>
                 </a-select>
             </a-form-item>
-            <a-form-item labelAlign="left" label="移动屏悬浮左侧菜单">
+            <a-form-item labelAlign="left" label="是否悬浮左侧菜单">
                 <a-switch _key="floatingMenu" @change="changeSwitch" v-model:checked="formState.floatingMenu"/>
             </a-form-item>
         </a-form>
@@ -73,6 +73,7 @@ export default defineComponent({
 
         const changeSwitch = (checked: boolean | string | number, event: any) => {
             store.commit('app/updateThemeConfig', {key: event.target.getAttribute('_key'), value: checked})
+            store.commit('app/updateCollapsed', false);
         }
 
         return {

@@ -4,10 +4,10 @@
         <a-layout-header class="layout-header_top">
             <MenuFoldOutlined v-if="collapsed" @click="handleCollapsed(false)"/>
             <MenuUnfoldOutlined @click="handleCollapsed(true)" v-else/>
-            <a-breadcrumb style="height: 45px;line-height: 45px;margin-left: 10px" v-if="!collapsed">
+            <a-breadcrumb class="text-overflow breadcrumb" style="" v-if="!isMobile">
                 <a-breadcrumb-item v-for="(item,idx) in list" :key="idx">{{ item.name }}</a-breadcrumb-item>
             </a-breadcrumb>
-            <a-breadcrumb style="height: 45px;line-height: 45px;margin-left: 10px" v-else>
+            <a-breadcrumb class="text-overflow breadcrumb" v-else>
                 <a-breadcrumb-item>{{ list[list.length - 1].name }}</a-breadcrumb-item>
             </a-breadcrumb>
         </a-layout-header>
@@ -33,18 +33,22 @@ export default defineComponent({
 
         const store = useStore();
         const list = computed(() => store.getters['app/tabViewsPath']);
-        const browser = computed(() => store.getters['app/getBrowser'])
+        const isMobile = computed(() => store.getters['app/getBrowser'].isMobile)
         const collapsed = computed(() => store.state.app.collapsed)
 
         const handleCollapsed = (bol: boolean) => {
-            if (!browser.value.isMobile) {
+            if (store.state.app.themeConfig.floatingMenu) {
+                store.commit('app/updateCollapsed', false)
+            }else{
                 store.commit('app/updateCollapsed', bol)
             }
+            store.commit('app/updateFloatingVisible', !store.getters['app/getFloatingVisible'])
         }
 
         return {
             list,
             collapsed,
+            isMobile,
             handleCollapsed
         }
     }
@@ -56,6 +60,12 @@ export default defineComponent({
     background-color: #fff;
     align-items: center;
     padding-right: 10px;
+
+    .breadcrumb {
+        display: flex;
+        align-items: center;
+        margin-left: 10px
+    }
 
     &_top {
         display: flex;
@@ -71,8 +81,6 @@ export default defineComponent({
 
     &_right_menu {
         display: flex;
-
-
     }
 }
 </style>

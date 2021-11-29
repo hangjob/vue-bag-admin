@@ -102,7 +102,7 @@ export default defineComponent({
                     <a-menu
                         v-model:selectedKeys={ctx.selectedKeys}
                         v-model:openKeys={ctx.openKeys}
-                        inline-collapsed={ctx.browser.isMobile ? true : ctx.collapsed}
+                        inline-collapsed={ctx.collapsed}
                         mode="inline"
                         onClick={ctx.handleClick}
                         theme="light">

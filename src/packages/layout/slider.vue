@@ -1,19 +1,33 @@
 <template>
-    <div class="slider-container" :class="layoutSliderClassName">
-        <div class="left-slider">
-            <div class="left-slider-logo">
-                <!--            YXS-ADMIN-->
-            </div>
-            <div class="left-slider-menu scroll">
-                <YxsMenuSlider/>
+    <a-drawer
+        :closable="false"
+        :visible="visible"
+        :mask="mask"
+        placement="left"
+        :width="width"
+        wrapClassName="drawer"
+        :getContainer="false"
+        @close="close"
+    >
+        <template #title></template>
+        <div class="slider-container" :class="layoutSliderClassName">
+            <div class="left-slider">
+                <div class="left-slider-logo">
+                    <!--                    YXS-ADMIN-->
+                </div>
+                <div class="scroll">
+                    <YxsMenuSlider/>
+                </div>
             </div>
         </div>
-    </div>
+    </a-drawer>
 </template>
 <script lang="ts">
-import {defineComponent} from 'vue';
+import {computed, defineComponent, ref} from 'vue';
 import YxsMenuSlider from '@/packages/layout/components/menu'
 import {themeHook} from '@/packages/hook'
+import {useStore} from "vuex";
+
 
 export default defineComponent({
     name: 'Slider',
@@ -21,63 +35,65 @@ export default defineComponent({
         YxsMenuSlider
     },
     setup() {
+        const store = useStore()
+        const app = store.state.app
         const {layoutSliderClassName} = themeHook()
+        const mask = computed(() => app.themeConfig.floatingMenu)
+        const visible = computed(() => {
+            return mask.value ? app.floatingVisible : true
+        })
+        const width = computed(() => {
+            let menuMinWidth = 80 // 菜单最小宽度
+            if (!app.collapsed || app.themeConfig.floatingMenu) {
+                menuMinWidth = app.themeConfig.menuMaxWidth
+            }
+            return menuMinWidth
+        })
+
+        const close = () => {
+            store.commit('app/updateFloatingVisible', !store.getters['app/getFloatingVisible'])
+        }
+
         return {
-            layoutSliderClassName
+            layoutSliderClassName,
+            width,
+            visible,
+            mask,
+            close
         }
     }
 })
 </script>
 <style lang="less" scoped>
-.slider-container {
-    position: fixed;
-    left: 0;
-    height: 100%;
-    width: 250px;
-    background-color: #ffffff;
-    transition: all 0.4s;
-}
-
-.slider-is-collapse {
-    width: 80px;
-    border-right: 0;
-}
-
-.left-slider {
-    display: flex;
-    flex-direction: column;
-    height: calc(100% - 34px);
-
-    .left-slider-logo {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 80px;
-        cursor: pointer;
-        background-color: #2f3447;
-        color: #ffffff;
-        font-size: 28px;
-        font-weight: bold;
-    }
-
-    .left-slider-menu {
-        overflow: hidden auto;
-        flex: 1;
-
-
-        ::v-deep ul {
-            border-right: none;
+.slider {
+    &-container {
+        .left-slider {
+            .left-slider-logo {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 80px;
+                cursor: pointer;
+                background-color: #2f3447;
+                color: #ffffff;
+                font-size: 28px;
+                font-weight: bold;
+            }
         }
     }
 }
+</style>
+<style lang="less">
+.drawer {
+    .ant-drawer-body {
+        padding: 0;
+    }
 
-
-.slider-is-collapse-floating {
-    position: absolute;
-    left: 0;
-    z-index: 9999;
-    transition: transform .3s cubic-bezier(.7, .3, .1, 1), box-shadow .3s cubic-bezier(.7, .3, .1, 1);
-    transform: translate(-100%);
+    &.ant-drawer-open {
+        .ant-drawer-content-wrapper {
+            transition: all 0.3s;
+            box-shadow: none;
+        }
+    }
 }
-
 </style>

@@ -13,6 +13,7 @@ const app = {
         currentRouter: {}, // 当前路由数据
         tabViewsPath: [], // 访问路经
         collapsed: false, // 菜单是否折叠
+        floatingVisible: false, // 左侧菜单隐藏
         themeConfig: {...themeConfig} // 主题配置
     },
     // 定义getters 好处可以过滤数据
@@ -34,6 +35,9 @@ const app = {
         },
         getThemeConfig: (state: any) => {
             return state.themeConfig;
+        },
+        getFloatingVisible: (state: any) => {
+            return state.floatingVisible;
         }
     },
     mutations: {
@@ -91,6 +95,9 @@ const app = {
         // 更新配置
         updateThemeConfig(state: any, item: any) {
             state.themeConfig[item.key] = item.value
+        },
+        updateFloatingVisible(state: any, bol: boolean) {
+            state.floatingVisible = bol
         }
     }
 }

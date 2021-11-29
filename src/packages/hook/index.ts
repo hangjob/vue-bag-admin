@@ -12,13 +12,14 @@ import {useStore} from "vuex";
 
 const themeHook = function () {
     const store = useStore();
+
     const layoutClassName = computed(() => {
         let names: Array<any> = [];
-        if (store.state.app.collapsed) {
-            console.log(store.state.app.collapsed);
+        const app = store.state.app;
+        if (app.collapsed) {
             names.push('layout-is-collapse')
         }
-        if (store.state.app.themeConfig.floatingMenu) {
+        if (app.themeConfig.floatingMenu) {
             names.push('layout-is-collapse-floating')
         }
         return names.join(' ')
@@ -26,12 +27,10 @@ const themeHook = function () {
 
     const layoutSliderClassName = computed(() => {
         let names: Array<any> = [];
-        if (store.state.app.collapsed) {
-            names.push('slider-is-collapse')
-        }
-        if (store.state.app.themeConfig.floatingMenu) {
-            names.push('slider-is-collapse-floating')
-        }
+        const app = store.state.app;
+        // if (app.themeConfig.floatingMenu) {
+        //     names.push('slider-is-collapse-floating')
+        // }
         return names.join(' ')
     });
 

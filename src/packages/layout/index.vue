@@ -1,7 +1,7 @@
 <template>
     <a-layout style="height: 100%">
         <Slider/>
-        <a-layout class="layout" :class="layoutClassName">
+        <a-layout :style="{marginLeft}" class="layout" :class="layoutClassName">
             <HeaderTop/>
             <HeaderProcess/>
             <LayoutContainer/>
@@ -13,12 +13,13 @@
     </a-layout>
 </template>
 <script lang="ts">
-import {defineComponent, watchEffect, reactive, ref} from 'vue';
+import {defineComponent, watchEffect, reactive, ref, computed} from 'vue';
 import Slider from './slider.vue'
 import HeaderTop from './headerTop.vue'
 import HeaderProcess from './headerProcess.vue'
 import LayoutContainer from './layoutContainer.vue'
 import {themeHook} from '@/packages/hook'
+import {useStore} from "vuex";
 
 export default defineComponent({
     components: {
@@ -29,18 +30,20 @@ export default defineComponent({
     },
     setup() {
         const {layoutClassName} = themeHook()
+        const store = useStore();
+        const marginLeft = computed(() => store.state.app.themeConfig.menuMaxWidth + 'px')
         return {
-            layoutClassName
+            layoutClassName,
+            marginLeft
         }
     }
 });
 </script>
-<style lang="less" scoped>
+<style scoped lang="less">
 .layout {
     display: flex;
     flex-direction: column;
     height: 100%;
-    margin-left: 250px;
 
     &-footer {
         padding: 8px 0;
@@ -48,14 +51,14 @@ export default defineComponent({
         background-color: #ffffff;
         font-size: 12px;
     }
-}
 
-.layout-is-collapse {
-    margin-left: 80px;
-}
+    &.layout-is-collapse {
+        margin-left: 80px !important;
+    }
 
-
-.layout-is-collapse-floating {
-    margin-left: 0;
+    &.layout-is-collapse-floating {
+        margin-left: 0 !important;
+    }
 }
 </style>
+
