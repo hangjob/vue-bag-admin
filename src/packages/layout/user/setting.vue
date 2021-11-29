@@ -3,7 +3,7 @@
         title="设置主题"
         :placement="placement"
         :closable="false"
-        :width="400"
+        :width="width"
         :visible="visible"
         @close="onClose"
     >
@@ -36,7 +36,7 @@
     </a-drawer>
 </template>
 <script lang="ts">
-import {defineComponent, reactive, ref} from 'vue';
+import {computed, defineComponent, reactive, ref} from 'vue';
 import {themeList} from '@/packages/theme/utils'
 import {find} from "@/packages/utils/lodash";
 // @ts-ignore
@@ -76,6 +76,9 @@ export default defineComponent({
             store.commit('app/updateCollapsed', false);
         }
 
+        const width = computed(() => store.getters['app/getBrowser'].isMobile ? '80%' : 400)
+
+
         return {
             placement,
             visible,
@@ -90,7 +93,8 @@ export default defineComponent({
             formState,
             themeList,
             changeTheme,
-            changeSwitch
+            changeSwitch,
+            width
         };
     },
 });

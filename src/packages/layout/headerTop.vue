@@ -39,7 +39,7 @@ export default defineComponent({
         const handleCollapsed = (bol: boolean) => {
             if (store.state.app.themeConfig.floatingMenu) {
                 store.commit('app/updateCollapsed', false)
-            }else{
+            } else {
                 store.commit('app/updateCollapsed', bol)
             }
             store.commit('app/updateFloatingVisible', !store.getters['app/getFloatingVisible'])
