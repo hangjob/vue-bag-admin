@@ -42,6 +42,7 @@ export default ({mode}: { mode: any }) => {
         }
     }
     return defineConfig({
+        base: './',
         plugins: [vue(), vueJsx(), styleImport({
             libs: [
                 {
