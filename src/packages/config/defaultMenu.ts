@@ -41,7 +41,7 @@ const arr = [
                 icon: '',
                 shows: 1,
                 tabHidden: false,
-                tabFix: false,
+                tabFix: true,
                 keepAlive: true
             }
         ]
