@@ -2,22 +2,29 @@
 	<div class="login">
 		<div class="login-container">
 			<div class="login-content">
-				<div class="slide-left">1</div>
-				<div class="slide-right">
-					<h2>欢迎您登录</h2>
-					<p>你可以直接输入您的账号和密码登录</p>
-					<div class="login-input">
-						<i></i>
-						<input type="text" placeholder="输入你的账户">
-					</div>
-					<div class="login-input">
-						<i></i>
-						<input type="text" v-model="pas" placeholder="输入你的密码">
-					</div>
-					<div class="login-btn">
-						<button @click="handleLogin">登录</button>
-					</div>
-				</div>
+                <a-row :gutter="[30,16]">
+                    <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
+                        <div class="slide-left"><img src="@/packages/assets/image/01.jpg" alt=""></div>
+                    </a-col>
+                    <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
+                        <div class="slide-right">
+                            <h2>欢迎您登录</h2>
+                            <p>你可以直接输入您的账号和密码登录</p>
+                            <div class="login-input">
+                                <i></i>
+                                <input type="text" placeholder="输入你的账户">
+                            </div>
+                            <div class="login-input">
+                                <i></i>
+                                <input type="text" v-model="pas" placeholder="输入你的密码">
+                            </div>
+                            <div class="login-btn">
+                                <button @click="handleLogin">登录</button>
+                            </div>
+                        </div>
+                    </a-col>
+                </a-row>
+                <img class="embe" src="@/packages/assets/image/01.png" alt="">
 			</div>
 		</div>
 	</div>
@@ -53,12 +60,11 @@ export default defineComponent({
 .login {
 	width: 100vw;
 	height: 100vh;
-	background-color: #ff9595;
-
+    background: url("../../assets/image/02.jpg") no-repeat center center;
 	&-container {
 		width: 75%;
 		height: 80%;
-		background-color: #ffffff;
+		background-color: #fdfcfa;
 		border-radius: 40px;
 		position: absolute;
 		left: 50%;
@@ -69,11 +75,16 @@ export default defineComponent({
 	}
 
 	&-content {
-		display: flex;
-		width: 100%;
-		height: 100%;
 		padding: 100px;
 		box-sizing: border-box;
+        height: 100%;
+        position: relative;
+        .embe{
+            position: absolute;
+            bottom: 55px;
+            left: -75px;
+            width: 100px;
+        }
 
 		.slide-left {
 			flex: 1;
@@ -102,7 +113,7 @@ export default defineComponent({
 			margin-bottom: 20px;
 
 			input {
-				background-color: #fff9f9;
+				background-color: #fdeeed;
 				border-radius: 10px;
 				padding: 12px 10px;
 				width: 80%;
