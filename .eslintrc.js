@@ -4,7 +4,7 @@ module.exports = {
         es2021: true,
         node: true,
     },
-    extends: ['plugin:vue/vue3-recommended', 'airbnb-base'],
+    extends: ['plugin:vue/vue3-recommended'],
     parserOptions: {
         ecmaVersion: 12,
         parser: '@typescript-eslint/parser',
@@ -62,7 +62,7 @@ module.exports = {
 
         // 不允许有声明后未使用的变量或者参数
         'no-unused-vars': 2,
-        
+
 
         'import/no-unresolved': 'off',
 

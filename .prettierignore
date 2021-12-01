@@ -3,12 +3,11 @@
 /html
 /lib/*
 /public
-
+/src/web
 /test
 /mock
 /egg/*
 /dist
-/typings
 *.sh
 node_modules
 
@@ -17,4 +16,4 @@ iconfont.*
 *.scss
 *.woff
 *.ttf
-vite.config.ts
+vue.config.js

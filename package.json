@@ -1,59 +1,97 @@
 {
-  "name": "vue-vite-admin-ts",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lib": "vite build --mode lib",
-    "serve": "vite preview"
-  },
-  "dependencies": {
-    "@antv/g2": "^4.1.32",
-    "@antv/g2plot": "^2.3.39",
-    "@braks/revue-draggable": "^0.3.1",
-    "@kangc/v-md-editor": "^2.3.12",
-    "@mojs/core": "^1.2.1",
-    "@soerenmartius/vue3-clipboard": "^0.1.2",
-    "@vueuse/core": "^7.1.1",
-    "ant-design-vue": "^2.2.8",
-    "antd-theme-generator": "^1.2.6",
-    "axios": "^0.23.0",
-    "echarts": "^5.2.2",
-    "jquery": "^3.6.0",
-    "lodash": "^4.17.21",
-    "minireset.css": "0.0.7",
-    "mitt": "^3.0.0",
-    "mockjs": "^1.1.0",
-    "normalize.css": "^8.0.1",
-    "nprogress": "^0.2.0",
-    "print-js": "^1.6.0",
-    "quill": "^1.3.7",
-    "store": "^2.0.12",
-    "vue": "^3.2.16",
-    "vue-router": "^4.0.12",
-    "vue3-marquee": "^1.0.0",
-    "vuex": "^4.0.2",
-    "vxe-table": "^4.1.0",
-    "xe-utils": "^3.4.0",
-    "xlsx": "^0.17.3"
-  },
-  "devDependencies": {
-    "@types/jquery": "^3.5.8",
-    "@types/node": "^16.10.2",
-    "@types/quill": "^2.0.9",
-    "@types/store": "^2.0.2",
-    "@types/webpack-env": "^1.16.3",
-    "@vitejs/plugin-legacy": "^1.6.2",
-    "@vitejs/plugin-vue": "^1.9.2",
-    "@vitejs/plugin-vue-jsx": "^1.2.0",
-    "@zougt/vite-plugin-theme-preprocessor": "^1.2.0",
-    "eslint": "^8.3.0",
-    "less": "^4.1.2",
-    "typescript": "^4.4.3",
-    "vite": "^2.6.0",
-    "vite-plugin-antd-theme": "^1.1.3",
-    "vite-plugin-compression": "^0.3.5",
-    "vite-plugin-style-import": "^1.2.1",
-    "vue-tsc": "^0.3.0"
-  }
+    "name": "vue-vite-admin-ts",
+    "version": "0.0.1",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "lib": "vite build --mode lib",
+        "serve": "vite preview",
+        "lint": "eslint . --ext .ts",
+        "lint:fix": "eslint . --ext .ts --fix"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.{vue, ts}": [
+            "eslint --quiet",
+            "git add"
+        ]
+    },
+    "dependencies": {
+        "@antv/g2": "^4.1.32",
+        "@antv/g2plot": "^2.3.39",
+        "@braks/revue-draggable": "^0.3.1",
+        "@kangc/v-md-editor": "^2.3.12",
+        "@mojs/core": "^1.2.1",
+        "@soerenmartius/vue3-clipboard": "^0.1.2",
+        "@vueuse/core": "^7.1.1",
+        "ant-design-vue": "^2.2.8",
+        "antd-theme-generator": "^1.2.6",
+        "axios": "^0.23.0",
+        "echarts": "^5.2.2",
+        "jquery": "^3.6.0",
+        "lodash": "^4.17.21",
+        "minireset.css": "0.0.7",
+        "mitt": "^3.0.0",
+        "mockjs": "^1.1.0",
+        "normalize.css": "^8.0.1",
+        "nprogress": "^0.2.0",
+        "print-js": "^1.6.0",
+        "quill": "^1.3.7",
+        "store": "^2.0.12",
+        "vue": "^3.2.16",
+        "vue-router": "^4.0.12",
+        "vue3-marquee": "^1.0.0",
+        "vuex": "^4.0.2",
+        "vxe-table": "^4.1.0",
+        "xe-utils": "^3.4.0",
+        "xlsx": "^0.17.3"
+    },
+    "devDependencies": {
+        "@types/jquery": "^3.5.8",
+        "@types/node": "^16.10.2",
+        "@types/quill": "^2.0.9",
+        "@types/store": "^2.0.2",
+        "@types/webpack-env": "^1.16.3",
+        "@typescript-eslint/eslint-plugin": "^5.5.0",
+        "@typescript-eslint/parser": "^5.5.0",
+        "@vitejs/plugin-legacy": "^1.6.2",
+        "@vitejs/plugin-vue": "^1.9.2",
+        "@vitejs/plugin-vue-jsx": "^1.2.0",
+        "@zougt/vite-plugin-theme-preprocessor": "^1.2.0",
+        "eslint": "^8.3.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "eslint-plugin-vue": "^8.1.1",
+        "less": "^4.1.2",
+        "prettier": "^2.5.0",
+        "typescript": "^4.4.3",
+        "vite": "^2.6.0",
+        "vite-plugin-antd-theme": "^1.1.3",
+        "vite-plugin-compression": "^0.3.5",
+        "vite-plugin-style-import": "^1.2.1",
+        "vue-tsc": "^0.3.0"
+    },
+    "author": {
+        "name": "yanghang",
+        "email": "470193837@qq.com"
+    },
+    "bugs": {
+        "url": "https://github.com/hangjob/vue-vite-admin-ts/issues",
+        "email": "470193837@qq.com"
+    },
+    "keywords": [
+        "vue3",
+        "vite",
+        "typescript",
+        "yxs-admin"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/hangjob/vue-vite-admin-ts"
+    },
+    "license": "MIT"
 }
