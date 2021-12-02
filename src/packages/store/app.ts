@@ -1,4 +1,4 @@
-import {defaultMenu} from "@/packages/config/defaultMenu";
+import {defaultMenu, defaultPrjMenu} from "@/packages/config/defaultMenu";
 import {find, findUnsetDepth} from "@/packages/utils/lodash";
 import {getBrowser} from '@/packages/utils/utils'
 import {defaultTabFix} from "@/packages/router/beforeStore";
@@ -9,6 +9,7 @@ const app = {
     state: {
         browser: {},
         menuList: defaultMenu,
+        projectMenu: defaultPrjMenu, // 项目切换菜单
         processList: [], // tab切换栏
         currentRouter: {}, // 当前路由数据
         tabViewsPath: [], // 访问路经
@@ -38,6 +39,9 @@ const app = {
         },
         getFloatingVisible: (state: any) => {
             return state.floatingVisible;
+        },
+        getProjectMenu: (state: any) => {
+            return state.projectMenu;
         }
     },
     mutations: {
@@ -92,12 +96,20 @@ const app = {
                 state.menuList.push(item);
             }
         },
+        // 更新菜單
+        updateMenuList(state: any, arr: Array<any>) {
+            state.menuList = arr;
+        },
         // 更新配置
         updateThemeConfig(state: any, item: any) {
             state.themeConfig[item.key] = item.value
         },
         updateFloatingVisible(state: any, bol: boolean) {
             state.floatingVisible = bol
+        },
+        // 更新项目菜单
+        updateProjectMenu(state: any, arr: Array<any>) {
+            state.projectMenu = arr
         }
     }
 }

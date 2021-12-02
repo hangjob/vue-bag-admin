@@ -1,22 +1,8 @@
-// createTime: "2019-11-08 09:35:53"
-// icon: "icon-log"
-// id: 48
-// shows: 1
-// keepAlive: 1
-// name: "文档"
-// orderNum: 0
-// parentId: "47"
-// perms: null
-// router: "/tutorial/doc"
-// type: 1
-// updateTime: "2021-03-03 11:03:21"
-// viewPath: "https://www.vipbic.com"
-
 import {addUniqueId} from '@/packages/utils/lodash';
+// 看我写的文档字段介绍
 
 /**
- * tabHidden 是否显示tab栏
- * tabFix 是否固定 tab栏
+ * 默认菜单
  */
 const arr = [
     {
@@ -296,7 +282,28 @@ const arr = [
         keepAlive: false
     },
 ]
-const defaultMenu = addUniqueId(arr, '_loca')
+const defaultMenu = addUniqueId(arr, '_loca') // 增加个标识符
+
+/**
+ * 默认项目菜单
+ */
+let defaultPrjMenu = [
+    {
+        name: '工作平台',
+        icon: 'UserOutlined',
+        shows: 1,
+        menus: defaultMenu.slice(0, 3),
+    },
+    {
+        name: '租户管理',
+        icon: 'YsIonfontPckUOder',
+        shows: 1,
+        menus: defaultMenu.slice(-3)
+    },
+]
+defaultPrjMenu = addUniqueId(defaultPrjMenu, '_loca')
+
 export {
-    defaultMenu
+    defaultMenu,
+    defaultPrjMenu
 }

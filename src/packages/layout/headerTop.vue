@@ -11,6 +11,7 @@
                 <a-breadcrumb-item>{{ list[list.length - 1].name }}</a-breadcrumb-item>
             </a-breadcrumb>
         </a-layout-header>
+        <ProjectSwitch/>
         <div class="layout-header_right_menu">
             <HeaderTopRightUser/>
         </div>
@@ -21,13 +22,15 @@
 import {computed, defineComponent} from 'vue'
 import {useStore} from 'vuex'
 import HeaderTopRightUser from './headerTopRightUser.vue'
+import ProjectSwitch from './projectSwitch'
 import {MenuFoldOutlined, MenuUnfoldOutlined} from '@ant-design/icons-vue';
 
 export default defineComponent({
     components: {
         MenuFoldOutlined,
         MenuUnfoldOutlined,
-        HeaderTopRightUser
+        HeaderTopRightUser,
+        ProjectSwitch
     },
     setup() {
 
@@ -60,6 +63,7 @@ export default defineComponent({
     background-color: #fff;
     align-items: center;
     padding-right: 10px;
+    border-bottom: 1px solid #f0f0f0;
 
     .breadcrumb {
         display: flex;
@@ -70,7 +74,6 @@ export default defineComponent({
     &_top {
         display: flex;
         align-items: center;
-        border-bottom: 1px solid #f0f0f0;
         background-color: #fff;
         padding: 0 16px;
         box-sizing: border-box;
@@ -80,6 +83,7 @@ export default defineComponent({
     }
 
     &_right_menu {
+        height: 100%;
         display: flex;
     }
 }

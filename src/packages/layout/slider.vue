@@ -10,7 +10,7 @@
         @close="close"
     >
         <template #title></template>
-        <div class="slider-container" :class="layoutSliderClassName">
+        <div class="slider-container">
             <div class="left-slider">
                 <div class="left-slider-logo">
                     <!--                    YXS-ADMIN-->

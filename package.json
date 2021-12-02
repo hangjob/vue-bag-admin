@@ -37,6 +37,7 @@
         "minireset.css": "0.0.7",
         "mitt": "^3.0.0",
         "mockjs": "^1.1.0",
+        "nanoid": "^3.1.30",
         "normalize.css": "^8.0.1",
         "nprogress": "^0.2.0",
         "print-js": "^1.6.0",

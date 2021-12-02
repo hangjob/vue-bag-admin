@@ -7,7 +7,8 @@ const modules = import.meta.glob('./*-icons.ts')
 const iconComponent = (className: string) => {
     return defineComponent({
         render() {
-            return h(`i`, {class: className})
+            let html = h(`i`, {class: `${className}`})
+            return h('span', {class: 'anticon'}, html)
         }
     })
 }

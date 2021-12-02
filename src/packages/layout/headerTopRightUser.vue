@@ -5,6 +5,10 @@
         <SearchOutlined class="icon-svg icon-search" @click="handleSearch"/>
     </div>
     <div class="right_menu-item" v-if="isPC">
+        <CompressOutlined class="icon-svg" @click="handleScreenModel" v-if="fullState"/>
+        <ExpandOutlined class="icon-svg" @click="handleScreenModel" v-else/>
+    </div>
+    <div class="right_menu-item" v-if="isPC">
         <a-popover v-model="visible" title="系统通知" trigger="click">
             <template #content>
                 <div class="notice-content">
@@ -15,10 +19,6 @@
                 <BellOutlined class="icon-svg"/>
             </a-badge>
         </a-popover>
-    </div>
-    <div class="right_menu-item" v-if="isPC">
-        <CompressOutlined class="icon-svg" @click="handleScreenModel" v-if="fullState"/>
-        <ExpandOutlined class="icon-svg" @click="handleScreenModel" v-else/>
     </div>
     <div class="right_menu-item">
         <SyncOutlined class="icon-svg refresh" @click="handleRefresh"/>
@@ -158,19 +158,23 @@ export default defineComponent({
 </script>
 <style lang="less" scoped>
 .right_menu-item {
-    margin-right: 25px;
     display: flex;
     align-items: center;
     cursor: pointer;
     position: relative;
-
-    &:first-of-type {
-        margin-right: 15px;
+    min-width: 30px;
+    margin: 0 6px;
+    text-align: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+    &:hover {
+        background-color: rgba(0, 0, 0, .025);
     }
 
     &:last-of-type {
         margin-right: 0;
     }
+
 
     .key-input {
         background: none;

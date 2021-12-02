@@ -16,6 +16,9 @@ interface $pluginType {
     store?: {
         module: object,
         namespace?: string
+    },
+    prjlist?: {
+        list: Array<any>
     }
 }
 

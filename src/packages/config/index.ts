@@ -8,7 +8,11 @@ const themeConfig = {
     // 是否浮动菜单
     floatingMenu: false,
     // 菜单宽度
-    menuMaxWidth: 250
+    menuMaxWidth: 250,
+    // 页签样式 1默认 2圆点 3卡片
+    tabStyle: 1,
+    // 是否折叠项目菜单
+    foldPrjMenu: false
 }
 
 /**

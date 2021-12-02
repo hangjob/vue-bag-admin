@@ -25,19 +25,20 @@ const themeHook = function () {
         return names.join(' ')
     });
 
-    const layoutSliderClassName = computed(() => {
-        let names: Array<any> = [];
-        const app = store.state.app;
-        // if (app.themeConfig.floatingMenu) {
-        //     names.push('slider-is-collapse-floating')
-        // }
-        return names.join(' ')
-    });
-
+    const tabStlyeClassName = computed(() => {
+        const themeConfig = store.state.app.themeConfig;
+        if (themeConfig.tabStyle === 2) {
+            return 'tab-style-round'
+        }
+        if (themeConfig.tabStyle === 3) {
+            return 'tab-style-card'
+        }
+        return null;
+    })
 
     return {
         layoutClassName,
-        layoutSliderClassName,
+        tabStlyeClassName
     }
 }
 

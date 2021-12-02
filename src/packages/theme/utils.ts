@@ -1,4 +1,3 @@
-
 const themeList = [
     {
         name: '默认',
@@ -22,6 +21,15 @@ const themeList = [
     }
 ]
 
+
+const tabStyles = [
+    {name: '默认', value: 1},
+    {name: '圆点', value: 2},
+    {name: '卡片', value: 3}
+]
+
+
 export {
     themeList,
+    tabStyles
 }

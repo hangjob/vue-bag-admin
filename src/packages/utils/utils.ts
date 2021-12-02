@@ -193,10 +193,19 @@ const toHump = (name: string) => {
 }
 
 
+/**
+ * 是否是数组
+ */
+const isArray = (o: any) => {
+    return Object.prototype.toString.call(o).slice(8, -1) === 'Array'
+}
+
+
 export {
     getAllParentArr,
     getBrowser,
     randomId,
     toTree,
-    toHump
+    toHump,
+    isArray
 }

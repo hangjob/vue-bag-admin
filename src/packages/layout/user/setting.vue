@@ -8,13 +8,24 @@
         @close="onClose"
     >
         <a-form :model="formState" labelAlign="right" :label-col="labelCol" :wrapper-col="wrapperCol">
-            <a-form-item labelAlign="left" label="主题设置">
-                <a-select @change="changeTheme" v-model:value="formState.theme" placeholder="请选择主题">
-                    <a-select-option v-for="item in themeList" :key="item.path">{{ item.name }}</a-select-option>
-                </a-select>
-            </a-form-item>
+            <!--            <a-form-item labelAlign="left" label="主题设置">-->
+            <!--                <a-select @change="changeTheme" v-model:value="formState.theme" placeholder="请选择主题">-->
+            <!--                    <a-select-option v-for="item in themeList" :key="item.path">{{ item.name }}</a-select-option>-->
+            <!--                </a-select>-->
+            <!--            </a-form-item>-->
             <a-form-item labelAlign="left" label="是否悬浮左侧菜单">
-                <a-switch _key="floatingMenu" @change="changeSwitch" v-model:checked="formState.floatingMenu"/>
+                <a-switch @change="(check)=>{changeStyle(check,'floatingMenu')}"
+                          v-model:checked="formState.floatingMenu"/>
+            </a-form-item>
+            <a-form-item labelAlign="left" label="是否折叠项目菜单">
+                <a-switch @change="(check)=>{changeStyle(check,'foldPrjMenu')}"
+                          v-model:checked="formState.foldPrjMenu"/>
+            </a-form-item>
+            <a-form-item labelAlign="left" label="页签显示风格">
+                <a-select @change="(value)=>{changeStyle(value,'tabStyle')}" v-model:value="formState.tabStyle"
+                          placeholder="选择页签显示风格">
+                    <a-select-option v-for="item in tabStyles" :key="item.value">{{ item.name }}</a-select-option>
+                </a-select>
             </a-form-item>
         </a-form>
         <div
@@ -37,7 +48,7 @@
 </template>
 <script lang="ts">
 import {computed, defineComponent, reactive, ref} from 'vue';
-import {themeList} from '@/packages/theme/utils'
+import {themeList, tabStyles} from '@/packages/theme/utils'
 import {find} from "@/packages/utils/lodash";
 // @ts-ignore
 import darkVars from '@/config/dark.json';
@@ -61,7 +72,9 @@ export default defineComponent({
         let data = find({key: 'path', value: cacheTheme}, themeList)
         const formState = reactive({
             theme: data ? data.path : themeList[0].path,
-            floatingMenu: themeConfig.floatingMenu
+            floatingMenu: themeConfig.floatingMenu,
+            tabStyle: themeConfig.tabStyle,
+            foldPrjMenu: themeConfig.foldPrjMenu
         });
 
 
@@ -71,9 +84,10 @@ export default defineComponent({
             }).then(console.log);
         }
 
-        const changeSwitch = (checked: boolean | string | number, event: any) => {
-            store.commit('app/updateThemeConfig', {key: event.target.getAttribute('_key'), value: checked})
+        const changeStyle = (value: boolean | string | number, key: string) => {
+            store.commit('app/updateThemeConfig', {key, value})
             store.commit('app/updateCollapsed', false);
+            console.log(store.getters['app/getThemeConfig'])
         }
 
         const width = computed(() => store.getters['app/getBrowser'].isMobile ? '80%' : 400)
@@ -92,9 +106,10 @@ export default defineComponent({
             },
             formState,
             themeList,
+            tabStyles,
             changeTheme,
-            changeSwitch,
-            width
+            width,
+            changeStyle
         };
     },
 });

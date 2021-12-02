@@ -1,5 +1,6 @@
 import * as _ from "lodash";
 import {uniqueId} from "lodash";
+import {isArray} from "@/packages/utils/utils";
 
 /**
  * 查找
@@ -67,9 +68,13 @@ const findChildrenDepth = (tag: any, arr: Array<any>) => {
  */
 const addUniqueId = (arr: Array<any>, prefix?: string) => {
     arr.forEach((item: any) => {
-        item.id = uniqueId(prefix);
-        if (item.children) {
-            addUniqueId(item.children, prefix)
+        if (isArray(item)) {
+            addUniqueId(item, prefix)
+        } else {
+            item.id = uniqueId(prefix);
+            if (item.children) {
+                addUniqueId(item.children, prefix)
+            }
         }
     })
     return arr
