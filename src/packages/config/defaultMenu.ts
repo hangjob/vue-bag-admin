@@ -273,6 +273,15 @@ const arr = [
         keepAlive: false
     },
     {
+        name: '异步组件',
+        path: '/async',
+        icon: 'YsIonfontHmePge',
+        shows: 1,
+        tabHidden: false,
+        tabFix: false,
+        keepAlive: false
+    },
+    {
         name: '关于',
         path: '/about',
         icon: 'UserOutlined',

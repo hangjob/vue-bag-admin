@@ -120,6 +120,10 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: '/admire', name: 'admire', meta: {title: '打点吧'},
                 component: () => import('@/packages/views/admire/index.vue')
+            },
+            {
+                path: '/async', name: 'async', meta: {title: '异步组件'},
+                component: () => import('@/packages/views/async/index.vue')
             }
         ]
     },

@@ -38,6 +38,12 @@ const apiFindOne = (params?: object, config?: object) => {
     return post('/findOne ', params, config);
 }
 
+
+// 获取网络http异步组件
+const apiAppComponents = () => {
+    return post('/appComponents');
+}
+
 export {
     apiAddMenu,
     apiFindAll,
@@ -45,5 +51,6 @@ export {
     apiDeleteMenus,
     apiEditMenu,
     apiFindOne,
-    apiAppRouter
+    apiAppRouter,
+    apiAppComponents
 }
