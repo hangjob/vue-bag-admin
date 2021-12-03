@@ -12,7 +12,7 @@ const arr = [
         shows: 1,
         tabHidden: false,
         iframe: '',
-        tabFix: true,
+        tabFix: false,
         keepAlive: false
     },
     {
@@ -27,7 +27,7 @@ const arr = [
                 icon: '',
                 shows: 1,
                 tabHidden: false,
-                tabFix: true,
+                tabFix: false,
                 keepAlive: true
             }
         ]

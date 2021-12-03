@@ -82,7 +82,7 @@ export default defineComponent({
 				return item.path.substring(1, item.path.length).replace(/\//g, "-")
 			});
 		})
-
+        console.log(caches.value)
 		return {
 			caches,
 			routerView,
