@@ -38,6 +38,10 @@
                     <a-menu-item>
                         <a href="https://github.com/hangjob/vue-vite-admin-ts" target="_blank">嗨，你好</a>
                     </a-menu-item>
+                    <a-menu-item @click="handleQuit">
+                        <YsIonfontXaozhankuaisong/>
+                        退出
+                    </a-menu-item>
                 </a-menu>
             </template>
         </a-dropdown>
@@ -62,7 +66,8 @@ import {
     SyncOutlined
 } from '@ant-design/icons-vue';
 import {useStore} from "vuex";
-
+import locaStore from '@/packages/utils/persistence'
+import {useRouter} from "vue-router";
 export default defineComponent({
     components: {
         userSetting,
@@ -76,6 +81,7 @@ export default defineComponent({
         SyncOutlined,
     },
     setup() {
+        const router = useRouter();
         const userSetting = ref()
         const searchActive = ref<string | null>(null);
         const searchKey = ref<string>('');
@@ -137,6 +143,11 @@ export default defineComponent({
             noticeList.value = res;
         })
 
+        const  handleQuit = ()=>{
+            locaStore.clearAll();
+            router.push('/login')
+        }
+
         return {
             userSetting,
             searchActive,
@@ -151,7 +162,8 @@ export default defineComponent({
             handleKeyBoard,
             handleEnter,
             handleRefresh,
-            isPC
+            isPC,
+            handleQuit
         }
     }
 })
