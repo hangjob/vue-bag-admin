@@ -1,6 +1,5 @@
 <template>
     <yxs-view class="about">
-        1
         <testComponent/>
     </yxs-view>
 </template>

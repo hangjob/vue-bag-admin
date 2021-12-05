@@ -12,7 +12,8 @@
                  @contextmenu.stop.prevent="handleContextMenu($event, item)"
             >
                 <span class="title">{{ item.name }}</span>
-                <CloseOutlined class="icon-svg" v-if="!item.tabFix" @click.stop="handleColseCurrent(item)"/>
+                <CloseOutlined class="icon-svg" v-if="!item.tabFix && processList.length !== 1"
+                               @click.stop="handleColseCurrent(item)"/>
             </div>
         </div>
         <div class="tab-action tab-action-right" @click="handleScrollBar(true)">
@@ -83,7 +84,7 @@ export default defineComponent({
 
         const handleContextMenu = (e: any, item: any) => {
             e.preventDefault(); // 阻止默认事件
-            if (item.tabFix) {
+            if (item.tabFix || processList.value.length === 1) {
                 return false
             }
             //获取我们自定义的右键菜单
