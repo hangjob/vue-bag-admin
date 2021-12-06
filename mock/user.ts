@@ -16,7 +16,7 @@ Mock.mock("/api/yxs/userinfo", 'post', (options: any) => {
     }
     const data = Mock.mock({
         id: "@id",
-        token: "@id",
+        token: Mock.Random.string(30),
         username: '羊先生',
         createTime: "@datetime(yy-MM-dd HH:mm:ss)",
         text: "@cparagraph(5)",
@@ -25,6 +25,7 @@ Mock.mock("/api/yxs/userinfo", 'post', (options: any) => {
         "contentType|0-3": 0,
         "serviceUnreadCount|0-10": 0,
         userhead: userhead,
+        expiredTime: 3600 * 12,
         headimgurl() {
             return Mock.Random.image(
                 "40x40",

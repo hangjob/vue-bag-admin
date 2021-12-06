@@ -10,19 +10,18 @@
                         <div class="slide-right">
                             <h2>欢迎您登录</h2>
                             <p>你可以直接输入您的账号和密码登录</p>
-                            <a-form class="login-form" :layout="formState.layout" :model="formState">
-                                <a-form-item label="你的账户">
-                                    <a-input size="large" v-model:value="formState.username" placeholder="输入你的账户"/>
+                            <a-form :rules="rules" ref="formRef" class="login-form" :layout="formState.layout"
+                                    :model="formState">
+                                <a-form-item label="你的账户" name="username">
+                                    <a-input size="large" v-model:value="formState.username" placeholder="随意输入你的账户"/>
                                 </a-form-item>
-                                <a-form-item label="你的密码">
-                                    <a-input size="large" v-model:value="formState.password" placeholder="输入你的密码"/>
+                                <a-form-item label="你的密码" name="password">
+                                    <a-input size="large" v-model:value="formState.password" placeholder="随意输入你的密码"/>
                                 </a-form-item>
                                 <a-form-item>
                                     <div class="login-options">
-                                        <a-checkbox-group v-model:value="formState.password">
-                                            <a-checkbox value="1" name="type">记住我</a-checkbox>
-                                        </a-checkbox-group>
-                                        <span>忘记密码? 找回密码</span>
+                                        <a-checkbox v-model:checked="formState.rememberPas">七天记住我</a-checkbox>
+                                        <span class="hover-text-underline">忘记密码? 找回密码</span>
                                     </div>
                                 </a-form-item>
                                 <a-form-item>
@@ -36,23 +35,26 @@
                     </a-col>
                 </a-row>
                 <img class="embe embe1" src="@/packages/assets/image/01.png" alt="">
-                <img class="embe embe2" src="@/packages/assets/image/01.png" alt="">
+                <img class="embe embe2 hidden-xs" src="@/packages/assets/image/01.png" alt="">
                 <img class="logo hidden-xs hidden-sm" src="@/packages/assets/image/yanghang.jpg" alt="">
             </div>
         </div>
     </div>
 </template>
 <script lang="ts">
-import {inject, ref} from 'vue'
+import {inject, ref, toRaw} from 'vue'
 import {useStore} from "vuex";
 import {useRouter} from "vue-router";
 import locaStore from '@/packages/utils/persistence'
 import {computed, defineComponent, reactive, UnwrapRef} from 'vue';
+import {ValidateErrorEntity} from 'ant-design-vue/es/form/interface';
+import {apiUserinfo} from '@/packages/service/user';
 
 interface FormState {
     layout: 'horizontal' | 'vertical' | 'inline';
     username: string;
     password: string;
+    rememberPas: string | boolean
 }
 
 export default defineComponent({
@@ -61,24 +63,43 @@ export default defineComponent({
         const pas = ref('');
         const store = useStore()
         const router = useRouter();
+        const formRef = ref();
 
-        const handleLogin = () => {
-            if (formState.password) {
-                locaStore.set('token', formState.password, 3600 * 12);
-                store.commit('user/updateToken');
-                router.push('/home')
-            }
-        }
+        const rules = {
+            username: [
+                {required: true, message: '请随意输入你的用户名', trigger: 'blur'},
+                {min: 3, max: 10, message: '最小长度为3，最大长度10', trigger: 'blur'},
+            ],
+            password: [{required: true, message: '随意输入用户名密码', trigger: 'blur'}],
+        };
 
         const formState: UnwrapRef<FormState> = reactive({
             layout: 'vertical',
             username: '',
             password: '',
-        });
+            rememberPas: false
+        })
+
+        const handleLogin = () => {
+            formRef.value
+                .validate()
+                .then(() => {
+                    apiUserinfo().then((res: any) => {
+                        store.commit('user/updateUserinfo', res)
+                        router.push('/home')
+                    })
+                })
+                .catch((error: ValidateErrorEntity<FormState>) => {
+                    console.log('error', error);
+                });
+        }
+
         return {
             handleLogin,
             pas,
             formState,
+            rules,
+            formRef
         }
     }
 })
@@ -88,6 +109,7 @@ export default defineComponent({
     width: 100%;
     height: 100%;
     background: url("../../assets/image/02.jpg") no-repeat center center;
+
     &-container {
         width: 75%;
         height: 80%;
@@ -107,20 +129,24 @@ export default defineComponent({
         display: flex;
         justify-content: center;
         align-items: center;
+
         .embe {
             position: absolute;
             width: 100px;
         }
-        .embe1{
+
+        .embe1 {
             bottom: 55px;
             left: -75px;
         }
-        .embe2{
+
+        .embe2 {
             right: -80px;
             top: 40px;
             transform: rotate(180deg);
         }
-        .logo{
+
+        .logo {
             position: absolute;
             width: 60px;
             height: 60px;
@@ -135,7 +161,8 @@ export default defineComponent({
             align-items: center;
             justify-content: center;
             height: 100%;
-            img{
+
+            img {
                 width: 100%;
             }
         }
@@ -156,7 +183,7 @@ export default defineComponent({
             margin-top: 30px;
         }
 
-        .login-options{
+        .login-options {
             display: flex;
             justify-content: space-between;
         }
@@ -181,6 +208,7 @@ export default defineComponent({
 
         .login-btn {
             width: 100%;
+
             button {
                 background-image: linear-gradient(to right, #e34c44, #f59178);
                 border: none;

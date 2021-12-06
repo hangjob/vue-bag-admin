@@ -8,8 +8,8 @@ const user = {
         token: locaStore.get('token'),
     },
     getters: {
-        token: (state: any) => {
-            return state.token;
+        token: () => {
+            return locaStore.get('token');
         },
         roles: (state: any) => {
             return state.roles;
@@ -19,14 +19,16 @@ const user = {
         },
     },
     mutations: {
-        updateToken(state: any) {
-            state.token = locaStore.get('token');
+        updateToken(state: any, data: any) {
+            locaStore.set('token', data.token, data.expiredTime); // 续期token
         },
         updateRoles(state: any, arr: Array<any>) {
             state.roles = arr;
         },
         updateUserinfo(state: any, data: any) {
             state.userinfo = data;
+            state.roles = data.roles;
+            locaStore.set('token', data.token, data.expiredTime);
         }
     },
     actions: {},

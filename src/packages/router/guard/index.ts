@@ -28,37 +28,39 @@ function setAppStoreData(to: any): void {
     arr && store.commit('app/updateTabViewsPath', arr)
 }
 
-// 处理user-store数据
-function setUserStoreData(to: any, from: any, next: any, res: any): void {
-    store.commit('user/updateUserinfo', res)
-    store.commit('user/updateRoles', res.roles)
-}
 
 // 处理路由跳转
 function disposeRouter(to: any, from: any, next: any): void {
     const token = store.getters['user/token'];
+    const userinfo = store.getters['user/userinfo'];
+
     if (token && !locaStore.isExpired('token')) {
         if (to.path.indexOf("/login") === 0) {
             return next("/");
         } else {
             setAppStoreData(to)
+            if (Object.keys(userinfo).length) {
+                next()
+            } else {
+                apiUserinfo().then((res: any) => {
+                    store.commit('user/updateUserinfo', res)
+                    next()
+                })
+            }
         }
     } else {
         if (!ignore.some((e: string) => to.path.indexOf(e) === 0)) {
             return next("/login");
+        } else {
+            next()
         }
     }
 }
 
 const setupRouterGuard = (to: any, from: any, next: any) => {
     NProgress.start();
-    apiUserinfo().then((res:any) => {
-        disposeRouter(to, from, next)
-        setUserStoreData(to, from, next, res)
-        next()
-        NProgress.done();
-    })
-
+    disposeRouter(to, from, next)
+    NProgress.done();
 }
 
 export {

@@ -55,7 +55,6 @@ export default defineComponent({
             visible.value = false;
             apiUserinfo({type: radioValue.value}).then((res: any) => {
                 store.commit('user/updateUserinfo', res)
-                store.commit('user/updateRoles', res.roles)
                 visible.value = true;
             })
         })
