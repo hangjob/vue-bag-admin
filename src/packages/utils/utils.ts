@@ -1,3 +1,5 @@
+import {cloneDeep} from 'lodash';
+
 /**
  * 获取数据在数组对象的链
  * @param list
@@ -59,23 +61,23 @@ const getBrowser = () => {
     let prefix = "";
 
     switch (type) {
-    case "chrome":
-    case "safari":
-    case "mobile":
-        prefix = "webkit";
-        break;
-    case "msie":
-        prefix = "ms";
-        break;
-    case "firefox":
-        prefix = "Moz";
-        break;
-    case "opera":
-        prefix = "O";
-        break;
-    default:
-        prefix = "webkit";
-        break;
+        case "chrome":
+        case "safari":
+        case "mobile":
+            prefix = "webkit";
+            break;
+        case "msie":
+            prefix = "ms";
+            break;
+        case "firefox":
+            prefix = "Moz";
+            break;
+        case "opera":
+            prefix = "O";
+            break;
+        default:
+            prefix = "webkit";
+            break;
     }
 
     // 操作平台
@@ -157,9 +159,9 @@ const randomId = () => {
  * @param parentIdName
  */
 const toTree = (data: any, idName?: string, parentIdName?: string) => {
+    data = cloneDeep(data) // 防止对象引用
     const id = idName || "id";
     const parentId = parentIdName || "pid";
-
     // 将数据存储为 以 id 为 KEY 的 map 索引数据列
     const map: any = {};
     data.forEach(function (item: any) {

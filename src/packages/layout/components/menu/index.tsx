@@ -1,4 +1,4 @@
-import {computed, defineComponent, h, ref, resolveComponent, watchEffect} from 'vue'
+import {computed, defineComponent, ref, watchEffect} from 'vue'
 import {useStore} from 'vuex'
 import {useRoute, useRouter} from "vue-router";
 import {toTree} from '@/packages/utils/utils'
@@ -15,7 +15,7 @@ export default defineComponent({
         const collapsed = computed(() => store.state.app.collapsed)
 
         const selectedKeys = ref<string[]>([])
-        const openKeys = ref<string[]>([])
+        const openKeys = ref<string[]>([]);
         const menuList = computed(() => toTree(store.getters['app/menuList']));
 
         // 是否可见
@@ -61,8 +61,6 @@ export default defineComponent({
         }
     },
     render(ctx: any) {
-
-
         const children = deepMenu(ctx.menuList);
         return (
             ctx.visible && (

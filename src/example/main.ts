@@ -7,7 +7,7 @@ import store from '@/example/store/index';
 const app = createApp(App)
 apiAppRouter().then((res: any) => {
 
-    const locas: Record<string, Component> = import.meta.globEager("/src/web/views/**/*.vue")
+    const locas: Record<string, Component> = import.meta.globEager("/src/example/views/**/*.vue")
     const $plugin: $pluginType = {
         router: {views: [...res], external: locas},
         store: {

@@ -91,7 +91,7 @@ const columns = [
 		slots: {customRender: 'type'}
 	},
 	{
-		title: '节点路由',
+		title: '路由地址',
 		dataIndex: 'path',
 		key: 'path',
 		ellipsis: true,

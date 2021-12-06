@@ -3,7 +3,6 @@ import {find, findUnsetDepth} from "@/packages/utils/lodash";
 import {getBrowser} from '@/packages/utils/utils'
 import {defaultTabFix} from "@/packages/router/beforeStore";
 import {themeConfig} from '@/packages/config'
-
 const app = {
     namespaced: true,
     state: {
