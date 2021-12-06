@@ -19,7 +19,7 @@ export default ({mode}: { mode: any }) => {
     if (mode === 'production') {
         build.rollupOptions = {
             input: {
-                web: path.resolve(__dirname, 'index.html'), // 把页面放在外面，路径简短 防止src/packages/web/index.html ，建议vite把key(web、lib)可也阔以映射成页面路径，就避免这个问题
+                example: path.resolve(__dirname, 'index.html'), // 把页面放在外面，路径简短 防止src/packages/web/index.html ，建议vite把key(web、lib)可也阔以映射成页面路径，就避免这个问题
                 lib: path.resolve(__dirname, 'lib.html')
             },
             output: {

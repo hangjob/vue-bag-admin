@@ -2,7 +2,7 @@ import {Component, createApp} from 'vue'
 import App from './App.vue'
 import install, {$pluginType} from '@/packages/install'
 import {apiAppRouter} from '@/packages/service/app'
-import store from '@/web/store/index';
+import store from '@/example/store/index';
 
 const app = createApp(App)
 apiAppRouter().then((res: any) => {
