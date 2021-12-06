@@ -34,7 +34,7 @@ function handlePermission(el: Element, binding: DirectiveBinding) {
 
 const permission: Directive = {
     // 指令绑定元素挂载前
-    beforeMount(el: Element, binding: DirectiveBinding) {
+    beforeMount() {
 
     },
     // 指令绑定元素挂载后
@@ -46,11 +46,11 @@ const permission: Directive = {
         handlePermission(el, binding)
     },
     // 指令绑定元素销毁前
-    beforeUnmount(el: Element, binding: DirectiveBinding) {
+    beforeUnmount() {
 
     },
     // 指令绑定元素销毁后
-    unmounted(el: Element, binding: DirectiveBinding) {
+    unmounted() {
 
     }
 }

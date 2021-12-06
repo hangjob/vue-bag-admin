@@ -136,7 +136,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/packages/views/error/404.vue'),
     },
     {
-        path: '/:catchAll(.*)*',    // 不识别的path自动匹配404
+        path: '/:catchAll(.*)*', // 不识别的path自动匹配404
         redirect: '/404',
     },
 ]

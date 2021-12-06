@@ -61,8 +61,7 @@ module.exports = {
         'no-sparse-arrays': 2,
 
         // 不允许有声明后未使用的变量或者参数
-        'no-unused-vars': 2,
-
+        'no-unused-vars': 'off',
 
         'import/no-unresolved': 'off',
 
@@ -73,5 +72,7 @@ module.exports = {
         'global-require': 'off',
 
         'vue/script-setup-uses-vars': 'off',  // 如果使用 script-setup 可開啟
+
+        'vue/component-definition-name-casing': 'off' // 驼峰命名
     },
 }

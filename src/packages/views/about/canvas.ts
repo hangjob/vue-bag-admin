@@ -144,9 +144,9 @@ export default class UserCanvasBg {
             let x = this.centerX + item.x;
             let y = this.centerY + item.y;
             if (idx === 0) {
-                this.ctx.moveTo(x, y);  //设置路径起点坐标
+                this.ctx.moveTo(x, y); //设置路径起点坐标
             } else {
-                this.ctx.lineTo(x, y);  //定义终点坐标
+                this.ctx.lineTo(x, y); //定义终点坐标
             }
             if (idx === lines.length - 1) { // 最后一项
                 this.ctx.stroke();

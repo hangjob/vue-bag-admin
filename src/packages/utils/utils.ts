@@ -59,23 +59,23 @@ const getBrowser = () => {
     let prefix = "";
 
     switch (type) {
-        case "chrome":
-        case "safari":
-        case "mobile":
-            prefix = "webkit";
-            break;
-        case "msie":
-            prefix = "ms";
-            break;
-        case "firefox":
-            prefix = "Moz";
-            break;
-        case "opera":
-            prefix = "O";
-            break;
-        default:
-            prefix = "webkit";
-            break;
+    case "chrome":
+    case "safari":
+    case "mobile":
+        prefix = "webkit";
+        break;
+    case "msie":
+        prefix = "ms";
+        break;
+    case "firefox":
+        prefix = "Moz";
+        break;
+    case "opera":
+        prefix = "O";
+        break;
+    default:
+        prefix = "webkit";
+        break;
     }
 
     // 操作平台

@@ -4,14 +4,24 @@ import {resData} from './baseCommon'
 import userhead from '../src/packages/assets/image/yanghang.jpg';
 
 Mock.mock("/api/yxs/userinfo", 'post', (options: any) => {
+    let {body} = options;
+    let type = 'admin';
+    let roles = ['admin', 'editor'];
+    if (body) {
+        body = JSON.parse(body)
+        if (body.type !== 'admin') {
+            type = body.type
+            roles = [body.type]
+        }
+    }
     const data = Mock.mock({
         id: "@id",
         token: "@id",
         username: '羊先生',
         createTime: "@datetime(yy-MM-dd HH:mm:ss)",
         text: "@cparagraph(5)",
-        roles: ['admin', 'editor'],
-        type: 'admin',
+        roles: roles,
+        type: type,
         "contentType|0-3": 0,
         "serviceUnreadCount|0-10": 0,
         userhead: userhead,

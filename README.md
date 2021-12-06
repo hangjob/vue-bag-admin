@@ -24,16 +24,3 @@
 ### menuList
 > 菜单列表
 
-### 参考方向
-https://github.com/flipped-aurora/gin-vue-admin
-https://demo.gin-vue-admin.com/#/layout/admin/api
-
-https://github.com/cool-team-official/cool-admin-vue
-https://show.cool-admin.com/
-
-https://github.com/chuzhixin/vue-admin-beautiful-pro
-https://chu1204505056.gitee.io/admin-pro/#/index
-
-// 权限控制
-https://panjiachen.github.io/vue-element-admin/#/permission/directive
-

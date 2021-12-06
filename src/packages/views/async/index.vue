@@ -1,5 +1,6 @@
 <template>
     <yxs-view class="about">
+        <p>这里是http网络异步组件，请先打开服务</p>
         <testComponent/>
     </yxs-view>
 </template>

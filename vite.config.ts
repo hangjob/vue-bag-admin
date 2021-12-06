@@ -70,7 +70,7 @@ export default ({mode}: { mode: any }) => {
             proxy: {
                 '^/api': {
                     target: 'http://127.0.0.1:7001',
-                    changeOrigin: true, //开启代理
+                    changeOrigin: true,
                     rewrite: (path) => path.replace(/^\/api/, '')
                 }
             }

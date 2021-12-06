@@ -39,7 +39,7 @@
                         <a href="https://github.com/hangjob/vue-vite-admin-ts" target="_blank">嗨，你好</a>
                     </a-menu-item>
                     <a-menu-item @click="handleQuit">
-                        <YsIonfontXaozhankuaisong/>
+                        <LogoutOutlined />
                         退出
                     </a-menu-item>
                 </a-menu>

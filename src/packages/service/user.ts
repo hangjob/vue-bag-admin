@@ -1,7 +1,7 @@
 import {post} from '@/packages/http/request'
 
-const apiUserinfo = () => {
-    return post('/yxs/userinfo')
+const apiUserinfo = (params?: object) => {
+    return post('/yxs/userinfo', params)
 }
 
 const apiNotice = () => {

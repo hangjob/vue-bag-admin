@@ -7,7 +7,6 @@ import {message as messageModel} from 'ant-design-vue';
 const CancelToken = axios.CancelToken
 const source = CancelToken.source()
 
-
 const http: any = axios.create({
     baseURL: httpNetwork.baseURL,
     timeout: httpNetwork.requestTimeout,
@@ -51,13 +50,13 @@ http.interceptors.response.use((res: any) => {
     const {config} = error.response || {};
 
     // 如果config不存在或没有设置重试选项，请拒绝
-    if (!config || !config.retry) return Promise.reject(error.message);
+    if (!config || !config.retry) {return Promise.reject(error.message);}
 
     // 设置用于跟踪重试计数的变量
     config.__retryCount = config.__retryCount || 0;
 
     // 检查重试次数是否达到最大值
-    if (config.__retryCount >= config.retry) return Promise.reject(error.message);
+    if (config.__retryCount >= config.retry) {return Promise.reject(error.message);}
 
     // 增加重试次数
     config.__retryCount += 1;

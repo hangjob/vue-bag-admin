@@ -1,13 +1,14 @@
-import {defineComponent, ref, computed, getCurrentInstance} from 'vue'
+import {defineComponent, ref, computed} from 'vue'
 import {useStore} from 'vuex'
 import {deepMenu} from "@/packages/layout/common";
 import classes from './style/projectSwitch.module.less'
+import {useRouter} from "vue-router";
 
 export default defineComponent({
     name: 'ProjectSwitch',
     setup() {
-        const {ctx: _this}: any = getCurrentInstance() // 使用this
         const store = useStore();
+        const router = useRouter();
         const prjMenu = computed(() => store.getters['app/getProjectMenu']);
         const current = ref(null);
         const mode = ref('horizontal')
@@ -18,6 +19,7 @@ export default defineComponent({
         const handleSelect = (res: any) => {
             let data = res.item['menu-info'];
             store.commit('app/updateMenuList', data.menus);
+            router.push(data.menus[0].path)
         }
         const clssNames = computed(() => {
             const foldPrjMenu = store.getters['app/getThemeConfig'].foldPrjMenu

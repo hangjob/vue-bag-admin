@@ -51,15 +51,15 @@ export default {
         type: Boolean,
         default: false,
     },
-    dialogClass:{
+    dialogClass: {
         type: String,
         default: ''
     },
-    isCustomStyles:{
+    isCustomStyles: {
         type: Boolean,
         default: false,
     },
-    maskClosable:{
+    maskClosable: {
         type: Boolean,
         default: false,
     }

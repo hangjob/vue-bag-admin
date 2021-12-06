@@ -5,7 +5,7 @@ interface FileType {
     [key: string]: Component
 }
 
-const locaViews: Record<string, FileType> = import.meta.globEager("/src/packages/views/**/*.vue")  // 框架 所有页面
+const locaViews: Record<string, FileType> = import.meta.globEager("/src/packages/views/**/*.vue") // 框架 所有页面
 // 获取本地对应的 路径
 function findViewModule(filePath: string, external = {}) {
     if (filePath) {

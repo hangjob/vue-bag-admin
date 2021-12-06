@@ -70,7 +70,7 @@ export default defineComponent({
 
 			hasOpenComponentsArr.value = iframeArr;
 		}
-		// componentsIframe();
+		// componentsIframe(); 在考虑如何设计
 
 		/**
 		 * keep-live 缓存
@@ -82,7 +82,6 @@ export default defineComponent({
 				return item.path.substring(1, item.path.length).replace(/\//g, "-")
 			});
 		})
-        console.log(caches.value)
 		return {
 			caches,
 			routerView,

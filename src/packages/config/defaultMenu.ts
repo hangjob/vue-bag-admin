@@ -298,6 +298,12 @@ const defaultMenu = addUniqueId(arr, '_loca') // 增加个标识符
  */
 let defaultPrjMenu = [
     {
+        name: '系統菜单',
+        icon: 'UserOutlined',
+        shows: 1,
+        menus: defaultMenu,
+    },
+    {
         name: '工作平台',
         icon: 'UserOutlined',
         shows: 1,
