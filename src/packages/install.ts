@@ -19,7 +19,8 @@ interface $pluginType {
     },
     prjlist?: {
         list: Array<any>
-    }
+    },
+    config?: object
 }
 
 const install = async (app: App, $plugin?: any) => {

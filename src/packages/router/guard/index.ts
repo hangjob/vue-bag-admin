@@ -22,7 +22,6 @@ function checkError(to: any, from: any, next: any): void {
     !ignore.some((e: string) => to.path.indexOf(e) === 0) ? next("/login") : next()
 }
 
-
 function checkUserinfo(to: any, from: any, next: any): void {
     const userinfo = store.getters['user/userinfo'];
     setAppStoreData(to)
@@ -37,7 +36,6 @@ function checkUserinfo(to: any, from: any, next: any): void {
 }
 
 
-// 处理路由跳转
 function checkLogin(to: any, from: any, next: any): void {
     const token = store.getters['user/token'];
     if (token && !locaStore.isExpired('token')) {
