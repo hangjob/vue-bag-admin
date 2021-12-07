@@ -2,6 +2,7 @@ import type {App} from 'vue';
 import router from '@/packages/router'
 import setupInit from '@/packages/base/index'
 import mitt from "mitt";
+import * as $axios from '@/packages/http/request'
 
 /**
  * router: {views:[菜单],external:[菜单路由]}
@@ -37,5 +38,6 @@ const install = async (app: App, $plugin?: any) => {
 
 export default install;
 export {
-    $pluginType
+    $pluginType,
+    $axios
 }

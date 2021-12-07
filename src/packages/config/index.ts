@@ -1,4 +1,7 @@
-const routerMode: String = "hash"; // 路由模式
+/**
+ * 路由模式
+ */
+const routerMode: String = "hash";
 
 /**
  * 主题设置
