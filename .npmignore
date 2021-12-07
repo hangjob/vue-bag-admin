@@ -1,0 +1,10 @@
+node_modules
+.DS_Store
+dist
+dist-ssr
+egg
+mock
+*.local
+.idea
+package-lock.json
+笔记.md

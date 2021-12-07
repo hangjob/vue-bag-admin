@@ -13,7 +13,7 @@
         <div class="slider-container">
             <div class="left-slider">
                 <div class="left-slider-logo">
-                    <!--                    YXS-ADMIN-->
+                    vue-vite-admin-ts
                 </div>
                 <div class="scroll">
                     <YxsMenuSlider/>
@@ -76,7 +76,7 @@ export default defineComponent({
                 cursor: pointer;
                 background-color: #2f3447;
                 color: #ffffff;
-                font-size: 28px;
+                font-size: 26px;
                 font-weight: bold;
             }
         }

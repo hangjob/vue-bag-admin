@@ -20,6 +20,9 @@
             "git add"
         ]
     },
+    "private": false,
+    "description": "vue-vite-admin-ts采用Vite2.0、Vue3.2、TypeScript、JavaScript构建，适合企业中后台响应式管理系统",
+    "main": "lib/index.js",
     "dependencies": {
         "@antv/g2": "^4.1.32",
         "@antv/g2plot": "^2.3.39",
