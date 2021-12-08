@@ -1,5 +1,4 @@
 import type {App} from 'vue';
-import router from '@/packages/router'
 import setupInit from '@/packages/base/index'
 import mitt from "mitt";
 import * as $axios from '@/packages/http/request'
@@ -9,11 +8,12 @@ import * as $axios from '@/packages/http/request'
  *
  * store:{module:{store对象},namespace:’命名空间，默认web‘}
  */
-interface $pluginType {
-    router?: {
+interface $optionsType {
+    routerView?: {
         views: Array<any>, // 菜单
         external?: any, // 外接路由文件所在路径
     },
+    router?: any,
     store?: {
         module: object,
         namespace?: string
@@ -24,20 +24,17 @@ interface $pluginType {
     config?: object
 }
 
-const install = async (app: App, $plugin?: any) => {
-    app.config.globalProperties.$plugin = $plugin;
+const install = async (app: App, $options?: any) => {
+    app.config.globalProperties.$plugin = $options;
     app.provide("AppGlobal", {version: '0.0.1'}); // 具体请看官网 [https://v3.cn.vuejs.org/api/application-api.html#provide]
     app.provide("$mitt", mitt());
     setupInit(app)
-    router.isReady().then(() => {
-        app.mount('#app')
-    })
     window.__app__ = app;
 }
 
+export default install
 
-export default install;
 export {
-    $pluginType,
-    $axios
+    $optionsType,
+    $axios,
 }

@@ -37,7 +37,6 @@ export default defineComponent({
     setup() {
         const store = useStore()
         const app = store.state.app
-        const {layoutSliderClassName} = themeHook()
         const mask = computed(() => app.themeConfig.floatingMenu)
         const visible = computed(() => {
             return mask.value ? app.floatingVisible : true
@@ -55,7 +54,6 @@ export default defineComponent({
         }
 
         return {
-            layoutSliderClassName,
             width,
             visible,
             mask,

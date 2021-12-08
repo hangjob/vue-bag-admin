@@ -17,7 +17,7 @@ package-lock.json
 .npmignore
 .npmrc
 .prettierignore
-.prettierrc
+.prettierrc.js
 color.ts
 jsconfig.json
 tsconfig.json

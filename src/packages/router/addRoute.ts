@@ -19,7 +19,7 @@ function findViewModule(filePath: string, external = {}) {
 
 
 const setAddRoute = (app: App, router: any) => {
-    const {external = {}, views = []} = app.config.globalProperties.$plugin?.router || {};
+    const {external = {}, views = []} = app.config.globalProperties.$plugin?.routerView || {};
     views.forEach((item: any) => {
         let component = findViewModule(item.filePath, external);
         if (component) {

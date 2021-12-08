@@ -34,12 +34,31 @@ export default ({mode}: { mode: any }) => {
         }
     }
     if (mode === 'lib') {
+        build.emptyOutDir = true
         build.lib = {
             entry: path.resolve(__dirname, 'src/packages/install.ts'),
-            name: 'yxs-admin',
-            fileName: (format: any) => `yxs-admin.${format}.js`,
-            formats: ['es']
+            name: 'vueViteAdminTs',
+            formats: ['es'],
         }
+        // build.rollupOptions = {
+        //     plugins: [
+        //         {
+        //             name: 'remove-collection-handlers',
+        //             transform(code: any, id: any) {
+        //                 if (id.endsWith('reactivity.esm-bundler.js')) {
+        //                     return code
+        //                         .replace(`mutableCollectionHandlers,`, `null,`)
+        //                         .replace(`readonlyCollectionHandlers,`, `null,`)
+        //                 }
+        //             }
+        //         }
+        //     ]
+        // }
+        // build.rollupOptions = {
+        //     output: {
+        //         inlineDynamicImports: true,
+        //     }
+        // }
     }
     return defineConfig({
         base: './',
@@ -53,7 +72,7 @@ export default ({mode}: { mode: any }) => {
                 }
             ]
         }),
-            viteCompression(),
+            // viteCompression(), // 开启压缩
         ],
         resolve: {
             alias: {

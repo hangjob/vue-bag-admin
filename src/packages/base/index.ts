@@ -16,8 +16,8 @@ import {setupIcons} from '@/packages/assets/icon/iconfont'
 import '../../../mock'
 
 const setupInit = (app: App) => {
-    setupStore(app)
     setupRouter(app)
+    setupStore(app)
     setVxeTable(app)
     setupAndDesignVue(app)
     setupGlobDirectives(app)
