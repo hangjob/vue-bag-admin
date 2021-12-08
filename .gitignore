@@ -4,5 +4,4 @@ lib
 dist-ssr
 *.local
 .idea
-package-lock.json
 笔记.md
