@@ -5,7 +5,6 @@ import store from '@/example/store/index';
 import vueViteAdminTs, {$optionsType} from '@/packages/install'
 
 const app = createApp(App)
-
 apiAppRouter().then((res: any) => {
     const locas: Record<string, Component> = import.meta.globEager("/src/example/views/**/*.vue")
     const $options: $optionsType = {
@@ -14,6 +13,7 @@ apiAppRouter().then((res: any) => {
             module: store
         }
     }
+   console.log(res)
     app.use(vueViteAdminTs, $options)
     app.mount('#app');
 })

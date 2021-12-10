@@ -18,8 +18,8 @@ function findViewModule(filePath: string, external = {}) {
 }
 
 
-const setAddRoute = (app: App, router: any) => {
-    const {external = {}, views = []} = app.config.globalProperties.$plugin?.routerView || {};
+// 递归目录
+function recursiveViews(views: any, router: any) {
     views.forEach((item: any) => {
         let component = findViewModule(item.filePath, external);
         if (component) {
@@ -29,7 +29,15 @@ const setAddRoute = (app: App, router: any) => {
             })
         }
         store.commit('app/addMenuList', item)
+        if (item.children) {
+            recursiveViews(item.children, router)
+        }
     })
+}
+
+const setAddRoute = (app: App, router: any) => {
+    const {external = {}, views = []} = app.config.globalProperties.$plugin?.routerView || {};
+    recursiveViews(views, router)
 }
 export {
     setAddRoute
