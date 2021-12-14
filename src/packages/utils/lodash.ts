@@ -45,7 +45,13 @@ const findUnsetDepth = (tag: any, data: any) => {
  * @param arr
  * 列子[{name:'a'},{name:'b'},{name:'c',children:[{name:'d'}]}]
  */
-const findChildrenDepth = (tag: any, arr: Array<any>) => {
+interface tagType {
+    key: string,
+    value: string,
+    node: string
+}
+
+const findChildrenDepth = (tag: tagType, arr: Array<any>) => {
     let result;
     arr.some((o: any) => o[tag.key] === tag.value && (result = o) || (result = findChildrenDepth(tag, o[tag.node] || [])));
     return result;

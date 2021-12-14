@@ -203,11 +203,38 @@ const isArray = (o: any) => {
 }
 
 
+/**
+ * 下载
+ */
+const handleExport = (data: Blob, fileName?: string) => {
+    let blob = new Blob([data], {
+        type: "application/octet-stream",
+    });
+    if ("download" in document.createElement("a")) {
+        // 不是IE浏览器
+        let url = window.URL.createObjectURL(blob);
+        let link = document.createElement("a");
+        link.style.display = "none";
+        link.href = url;
+        link.setAttribute("download", typeof fileName === "string" ? fileName : '下载');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+    } else {
+        // IE10+
+        const navigator: any = window.navigator;
+        navigator.msSaveBlob(blob, typeof fileName === "string" ? fileName : '下载');
+    }
+}
+
+
 export {
     getAllParentArr,
     getBrowser,
     randomId,
     toTree,
     toHump,
-    isArray
+    isArray,
+    handleExport
 }

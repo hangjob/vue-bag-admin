@@ -5,8 +5,8 @@ import '@/packages/style/index'
 import '@/packages/extend/browser/canvas'
 
 import '@/packages/common/resize.ts'
-import {setupRouter} from '@/packages/router'
-import {setupStore} from '@/packages/store'
+import router, {setupRouter} from '@/packages/router'
+import store, {setupStore} from '@/packages/store'
 
 import {setupGlobDirectives} from '@/packages/extend/directive'
 import {setVxeTable} from '@/packages/plugin/vxe-table'
@@ -27,3 +27,8 @@ const setupInit = (app: App) => {
 }
 
 export default setupInit;
+
+export {
+    router,
+    store
+}

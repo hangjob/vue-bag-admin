@@ -14,3 +14,5 @@ const setupAndDesignVue = (app: App) => {
 export {
     setupAndDesignVue
 }
+
+export default Antd;

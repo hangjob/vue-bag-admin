@@ -38,7 +38,15 @@ export default ({mode}: { mode: any }) => {
         build.lib = {
             entry: path.resolve(__dirname, 'src/packages/install.ts'),
             name: 'vueViteAdminTs',
-            formats: ['es'],
+            fileName: (format: string) => `index.${format}.js`,
+            rollupOptions: {
+                external: ['vue','vue-router'],
+                output: {
+                    globals: {
+                        vue: 'Vue'
+                    }
+                }
+            }
         }
         // build.rollupOptions = {
         //     plugins: [
@@ -54,11 +62,11 @@ export default ({mode}: { mode: any }) => {
         //         }
         //     ]
         // }
-        // build.rollupOptions = {
-        //     output: {
-        //         inlineDynamicImports: true,
-        //     }
-        // }
+        build.rollupOptions = {
+            output: {
+                inlineDynamicImports: true,
+            }
+        }
     }
     return defineConfig({
         base: './',
