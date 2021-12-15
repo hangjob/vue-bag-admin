@@ -1,30 +1,36 @@
 <template>
     <a-row>
         <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-            <yxs-card>
-                <template v-slot:title>欢迎您</template>
-                <div class="welcome">
-                    <!--            <div class="head"><img src="@/assets/yanghang.jpg" alt=""></div>-->
-                    <div class="des">
-                        <h1>嗨，下午好，我是羊先生，准备吃什么呢?</h1>
-                        <p>前端工程师 |
-                            品茗股份，vue-vite-admin-ts，采用Vite2.0、Vue3.2、TypeScript、JavaScript构建，支持多种写法和调用，完整的框架体系，适合企业中后台响应式管理系统，支持现有业务各种扩展....</p>
+            <a-skeleton :loading="false" active>
+                <yxs-card>
+                    <template v-slot:title>欢迎您</template>
+                    <div class="welcome">
+                        <div class="head"><img src="@/packages/assets/image/yanghang.jpg" alt=""></div>
+                        <div class="des">
+                            <h1>嗨，下午好，我是羊先生，准备吃什么呢?</h1>
+                            <p>前端工程师 |
+                                品茗股份，vue-vite-admin-ts，采用Vite2.0、Vue3.2、TypeScript、JavaScript构建，支持多种写法和调用，完整的框架体系，适合企业中后台响应式管理系统，支持现有业务各种扩展....</p>
+                        </div>
                     </div>
-                </div>
-            </yxs-card>
+                </yxs-card>
+            </a-skeleton>
         </a-col>
     </a-row>
     <a-row :gutter="[16,0]">
         <a-col :xs="24" :sm="24" :md="24" :lg="10" :xl="10">
-            <Returns/>
+            <a-skeleton :loading="false" active>
+                <Returns/>
+            </a-skeleton>
         </a-col>
         <a-col :xs="24" :sm="24" :md="24" :lg="14" :xl="14">
-            <ProjectInfo/>
+            <a-skeleton :loading="false" active>
+                <ProjectInfo/>
+            </a-skeleton>
         </a-col>
     </a-row>
     <a-row :gutter="[16,0]">
         <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="8">
-            <yxs-card>
+            <yxs-card :loading="false">
                 <div class="money">
                     <div class="money-header">
                         <span class="label">2021全国销售额</span>
@@ -57,7 +63,7 @@
             </yxs-card>
         </a-col>
         <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="8">
-            <yxs-card>
+            <yxs-card :loading="false">
                 <div class="money">
                     <div class="money-header">
                         <span class="label">总销售额</span>
@@ -90,7 +96,7 @@
             </yxs-card>
         </a-col>
         <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="8">
-            <yxs-card>
+            <yxs-card :loading="false">
                 <div class="money">
                     <div class="money-header">
                         <span class="label">总销售额</span>
@@ -125,7 +131,7 @@
     </a-row>
     <a-row :gutter="[16,0]">
         <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="10">
-            <yxs-card class="profit">
+            <yxs-card :loading="loading" class="profit">
                 <template v-slot:title>
                     <div class="profit-header">
                         <div class="profit-header-title">项目盈利占比</div>
@@ -169,15 +175,19 @@
             </yxs-card>
         </a-col>
         <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="7">
-            <Ripple/>
+            <a-skeleton :loading="loading" active>
+                <Ripple/>
+            </a-skeleton>
         </a-col>
         <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="7">
-            <Dynamic/>
+            <a-skeleton :loading="loading" active>
+                <Dynamic/>
+            </a-skeleton>
         </a-col>
     </a-row>
     <a-row :gutter="[16,0]">
         <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="10">
-            <yxs-card>
+            <yxs-card  :loading="loading">
                 <template v-slot:title>项目进度</template>
                 <div class="schedule-strip">
                     <a-progress :percent="30"/>
@@ -189,7 +199,7 @@
             </yxs-card>
         </a-col>
         <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="8">
-            <yxs-card>
+            <yxs-card  :loading="loading">
                 <template v-slot:title>项目进度</template>
                 <div class="schedule-lop">
                     <a-row style="height: 100%" justify="center" align="middle" :wrap="true" :gutter="[32,16]">
@@ -207,7 +217,7 @@
             </yxs-card>
         </a-col>
         <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="6">
-            <yxs-card>
+            <yxs-card  :loading="loading">
                 <template v-slot:title>时间轴</template>
                 <div class="timeline">
                     <a-timeline pending="持续更新中..." :reverse="false">
@@ -222,20 +232,28 @@
     </a-row>
 </template>
 <script lang="ts">
-import {defineComponent} from 'vue'
+import {defineComponent, ref} from 'vue'
 import Returns from './returns.vue'
 import ProjectInfo from './project-info.vue'
 import Ripple from './ripple.vue'
 import Dynamic from './dynamic.vue'
 
-
 export default defineComponent({
-    name:'home',
+    name: 'home',
     components: {
         Returns,
         ProjectInfo,
         Ripple,
         Dynamic
+    },
+    setup() {
+        const loading = ref(true)
+        setTimeout(() => {
+            loading.value = false
+        }, 800)
+        return {
+            loading
+        }
     }
 })
 </script>

@@ -48,20 +48,6 @@ export default ({mode}: { mode: any }) => {
                 }
             }
         }
-        // build.rollupOptions = {
-        //     plugins: [
-        //         {
-        //             name: 'remove-collection-handlers',
-        //             transform(code: any, id: any) {
-        //                 if (id.endsWith('reactivity.esm-bundler.js')) {
-        //                     return code
-        //                         .replace(`mutableCollectionHandlers,`, `null,`)
-        //                         .replace(`readonlyCollectionHandlers,`, `null,`)
-        //                 }
-        //             }
-        //         }
-        //     ]
-        // }
         build.rollupOptions = {
             output: {
                 inlineDynamicImports: true,
