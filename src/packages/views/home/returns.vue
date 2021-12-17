@@ -1,5 +1,5 @@
 <template>
-    <yxs-card class="market">
+    <yxs-card>
         <template v-slot:title>
             <span class="active">收益额</span>
             <span>销售额</span>

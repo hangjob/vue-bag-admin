@@ -1,5 +1,10 @@
 import locaStore from '@/packages/utils/persistence'
 
+
+function setLocaStoreToken(data: any) {
+    locaStore.set('token', data.token, data.expiredTime); // 续期token
+}
+
 const user = {
     namespaced: true,
     state: {
@@ -20,7 +25,7 @@ const user = {
     },
     mutations: {
         updateToken(state: any, data: any) {
-            locaStore.set('token', data.token, data.expiredTime); // 续期token
+            setLocaStoreToken(data)
         },
         updateRoles(state: any, arr: Array<any>) {
             state.roles = arr;
@@ -28,7 +33,7 @@ const user = {
         updateUserinfo(state: any, data: any) {
             state.userinfo = data;
             state.roles = data.roles;
-            locaStore.set('token', data.token, data.expiredTime);
+            setLocaStoreToken(data)
         }
     },
     actions: {},

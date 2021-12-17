@@ -45,6 +45,16 @@ module.exports = appInfo => {
         allowMethods: 'GET, PUT, POST,DELETE, PATCH',
     };
 
+    config.io = {
+        init: { }, // passed to engine.io
+        namespace: {
+            '/': {
+                connectionMiddleware: ['auth'], // 这个是连接中间件， 只在connection的时候触发
+                packetMiddleware: ['filter'],  // 这个会在每次消息的时候触发
+            },
+        },
+    }
+
     return {
         ...config,
         ...userConfig,

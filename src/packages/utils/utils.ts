@@ -58,7 +58,7 @@ const getBrowser = () => {
     }
 
     // 浏览器内核
-    let prefix = "";
+    let prefix: string;
 
     switch (type) {
         case "chrome":
@@ -84,7 +84,7 @@ const getBrowser = () => {
     const plat = ua.indexOf("android") > 0 ? "android" : navigator.platform.toLowerCase();
 
     // 屏幕信息
-    let screen = "full";
+    let screen: string;
 
     if (clientWidth < 768) {
         screen = "xs";
@@ -108,7 +108,7 @@ const getBrowser = () => {
     const isPC = tag === "pc";
 
     // 是否移动端
-    const isMobile = isPC ? false : true;
+    const isMobile = !isPC;
 
     // 是否移动端 + 屏幕宽过小
     const isMini = screen === "xs" || isMobile;

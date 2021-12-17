@@ -71,6 +71,10 @@ export default {
      * 清理
      */
     clearAll() {
+        let encryptData = store.get('encryptData');
+        let encryptData_webtime = store.get('encryptData_webtime');
         store.clearAll();
+        store.set('encryptData', encryptData);
+        store.set('encryptData_webtime', encryptData_webtime)
     }
 }

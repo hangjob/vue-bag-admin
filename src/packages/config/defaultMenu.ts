@@ -279,7 +279,17 @@ const arr = [
         shows: 1,
         tabHidden: false,
         tabFix: false,
-        keepAlive: false
+        keepAlive: false,
+    },
+    {
+        name: '在线测试',
+        path: '/iframe/ceshi',
+        icon: 'RocketOutlined',
+        shows: 1,
+        tabHidden: false,
+        tabFix: false,
+        keepAlive: false,
+        iframePath: 'https://hoppscotch.io/cn'
     },
     {
         name: '关于',

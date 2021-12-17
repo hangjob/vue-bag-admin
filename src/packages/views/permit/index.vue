@@ -25,6 +25,12 @@
             <a-button type="primary" danger @click="handleUpdata">测试数据更改</a-button>
         </a-space>
         <br/><br/>
+        <a-space v-if="visible">
+            <p v-auth="['admin']">admin测试不是button元素</p><br/>
+            <p v-auth="['test']">test测试不是button元素</p><br/>
+            <p v-auth="['editor']">editor测试不是button元素</p><br/>
+            <p v-auth="['client']">client测试不是button元素</p><br/>
+        </a-space>
     </yxs-view>
 </template>
 <script lang="ts">

@@ -11,13 +11,18 @@ export default defineComponent({
         active: {
             type: Boolean,
             default: true
+        },
+        class: {
+            type: String || null,
+            default: null
         }
     },
     setup(props, {slots}) {
         const title = slots.title ? <div class={classes['yxs-card-title']}>{slots.title?.()}</div> : null;
+        const classNmae = classes['yxs-card'] + ' ' + props.class;
         return () => (
-            <a-skeleton loading={props.loading} active={props.active}>
-                <div class={classes['yxs-card']}>
+            <a-skeleton loading={props.loading}>
+                <div class={classNmae}>
                     {title}
                     <div class={classes['yxs-card-content']}>{slots.default?.()}</div>
                 </div>

@@ -6,7 +6,7 @@ import userhead from '../src/packages/assets/image/yanghang.jpg';
 Mock.mock("/api/yxs/userinfo", 'post', (options: any) => {
     let {body} = options;
     let type = 'admin';
-    let roles = ['admin', 'editor'];
+    let roles = ['admin', 'editor','test'];
     if (body) {
         body = JSON.parse(body)
         if (body.type !== 'admin') {

@@ -5,7 +5,7 @@ import {apiUserinfo} from "@/packages/service/user";
 import {NProgress} from '@/packages/plugin/nprogress'
 import locaStore from '@/packages/utils/persistence'
 
-const ignore = ["/login", "/403", "/404", "/500", "/502"];
+const ignore = ["/login", "/403", "/404", "/500", "/502",'/test'];
 
 // 处理app-store数据
 function setAppStoreData(to: any): void {

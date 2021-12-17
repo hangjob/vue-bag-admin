@@ -1,6 +1,6 @@
 <template>
     <yxs-view>
-        category分类
+        category分类111
         <input type="text">
     </yxs-view>
 </template>

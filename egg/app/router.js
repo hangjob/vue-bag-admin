@@ -2,7 +2,7 @@
  * @param {Egg.Application} app - egg application
  */
 module.exports = app => {
-    const {router, controller} = app;
+    const {router, controller, io} = app;
 
     // 模型添加字段同步数据库
     app.beforeStart(async () => {
@@ -18,4 +18,6 @@ module.exports = app => {
     router.all('/findOne', controller.home.findOne);
     router.all('/appRouter', controller.home.appRouter);
     router.all('/appComponents', controller.components.index)
+
+    io.of('/').route('/', io.controller.index.ping)
 };

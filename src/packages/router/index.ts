@@ -124,12 +124,20 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: '/async', name: 'async', meta: {title: '异步组件'},
                 component: () => import('@/packages/views/async/index.vue')
+            },
+            {
+                path: '/module/util', name: 'module-util', meta: {title: '工具库'},
+                component: () => import('@/packages/views/module/util/index.vue')
             }
         ]
     },
     {
         path: "/login", name: 'login', meta: {title: '登录'},
         component: () => import('@/packages/views/login/index.vue'),
+    },
+    {
+        path: "/test", name: 'test', meta: {title: '测试页面'},
+        component: () => import('@/packages/views/test/index.vue'),
     },
     {
         path: '/404',

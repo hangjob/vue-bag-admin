@@ -10,13 +10,15 @@
                         <div class="slide-right">
                             <h2>欢迎您登录</h2>
                             <p>你可以直接输入您的账号和密码登录</p>
-                            <a-form :rules="rules" ref="formRef" class="login-form" :layout="formState.layout"
+                            <a-form autocomplete="off" :rules="rules" ref="formRef" class="login-form"
+                                    :layout="formState.layout"
                                     :model="formState">
                                 <a-form-item label="你的账户" name="username">
                                     <a-input size="large" v-model:value="formState.username" placeholder="随意输入你的账户"/>
                                 </a-form-item>
                                 <a-form-item label="你的密码" name="password">
-                                    <a-input size="large" v-model:value="formState.password" placeholder="随意输入你的密码"/>
+                                    <a-input size="large" type="password" v-model:value="formState.password"
+                                             placeholder="随意输入你的密码"/>
                                 </a-form-item>
                                 <a-form-item>
                                     <div class="login-options">
@@ -48,6 +50,7 @@ import {useRouter} from "vue-router";
 import {computed, defineComponent, reactive, UnwrapRef} from 'vue';
 import {ValidateErrorEntity} from 'ant-design-vue/es/form/interface';
 import {apiUserinfo} from '@/packages/service/user';
+import locaStore from '@/packages/utils/persistence'
 
 interface FormState {
     layout: 'horizontal' | 'vertical' | 'inline';
@@ -55,6 +58,8 @@ interface FormState {
     password: string;
     rememberPas: string | boolean
 }
+
+import {Encrypt, Decrypt} from '@/packages/utils/crypto'
 
 export default defineComponent({
     name: 'login',
@@ -79,13 +84,22 @@ export default defineComponent({
             rememberPas: false
         })
 
+        const encryptData = locaStore.get('encryptData')
+        if (encryptData) {
+            let {username, password, rememberPas} = JSON.parse(Decrypt(encryptData));
+            formState.username = username;
+            formState.password = password
+            formState.rememberPas = rememberPas;
+        }
+
         const handleLogin = () => {
             formRef.value
                 .validate()
                 .then(() => {
+                    if (formState.rememberPas) locaStore.set('encryptData', Encrypt(JSON.stringify(formState)), 3600 * 24 * 7);
                     apiUserinfo().then((res: any) => {
                         store.commit('user/updateUserinfo', res)
-                        router.push('/home')
+                        router.push('/home') // 此处通过菜单节点去读取第一个，默认是跳转home
                     })
                 })
                 .catch((error: ValidateErrorEntity<FormState>) => {

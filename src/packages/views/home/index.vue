@@ -1,31 +1,27 @@
 <template>
     <a-row>
         <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-            <a-skeleton :loading="false" active>
-                <yxs-card>
-                    <template v-slot:title>欢迎您</template>
-                    <div class="welcome">
-                        <div class="head"><img src="@/packages/assets/image/yanghang.jpg" alt=""></div>
-                        <div class="des">
-                            <h1>嗨，下午好，我是羊先生，准备吃什么呢?</h1>
-                            <p>前端工程师 |
-                                品茗股份，vue-vite-admin-ts，采用Vite2.0、Vue3.2、TypeScript、JavaScript构建，支持多种写法和调用，完整的框架体系，适合企业中后台响应式管理系统，支持现有业务各种扩展....</p>
-                        </div>
+            <yxs-card>
+                <template v-slot:title>欢迎您</template>
+                <div class="welcome">
+                    <div class="head"><img src="@/packages/assets/image/yanghang.jpg" alt=""></div>
+                    <div class="des">
+                        <h1>嗨，{{ tleData.pam }}好，今天是{{ tleData.date }} {{ tleData.week }} {{
+                                tleData.time
+                            }}，准备吃什么呢?</h1>
+                        <p>前端工程师 |
+                            品茗股份，vue-vite-admin-ts，采用Vite2.0、Vue3.2、TypeScript、JavaScript构建，支持多种写法和调用，完整的框架体系，适合企业中后台响应式管理系统，支持现有业务各种扩展....</p>
                     </div>
-                </yxs-card>
-            </a-skeleton>
+                </div>
+            </yxs-card>
         </a-col>
     </a-row>
     <a-row :gutter="[16,0]">
         <a-col :xs="24" :sm="24" :md="24" :lg="10" :xl="10">
-            <a-skeleton :loading="false" active>
-                <Returns/>
-            </a-skeleton>
+            <Returns/>
         </a-col>
         <a-col :xs="24" :sm="24" :md="24" :lg="14" :xl="14">
-            <a-skeleton :loading="false" active>
-                <ProjectInfo/>
-            </a-skeleton>
+            <ProjectInfo/>
         </a-col>
     </a-row>
     <a-row :gutter="[16,0]">
@@ -187,7 +183,7 @@
     </a-row>
     <a-row :gutter="[16,0]">
         <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="10">
-            <yxs-card  :loading="loading">
+            <yxs-card :loading="loading">
                 <template v-slot:title>项目进度</template>
                 <div class="schedule-strip">
                     <a-progress :percent="30"/>
@@ -199,7 +195,7 @@
             </yxs-card>
         </a-col>
         <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="8">
-            <yxs-card  :loading="loading">
+            <yxs-card :loading="loading">
                 <template v-slot:title>项目进度</template>
                 <div class="schedule-lop">
                     <a-row style="height: 100%" justify="center" align="middle" :wrap="true" :gutter="[32,16]">
@@ -217,7 +213,7 @@
             </yxs-card>
         </a-col>
         <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="6">
-            <yxs-card  :loading="loading">
+            <yxs-card :loading="loading">
                 <template v-slot:title>时间轴</template>
                 <div class="timeline">
                     <a-timeline pending="持续更新中..." :reverse="false">
@@ -232,12 +228,12 @@
     </a-row>
 </template>
 <script lang="ts">
-import {defineComponent, ref} from 'vue'
+import {defineComponent, reactive, ref} from 'vue'
 import Returns from './returns.vue'
 import ProjectInfo from './project-info.vue'
 import Ripple from './ripple.vue'
 import Dynamic from './dynamic.vue'
-
+import * as dayjs from 'dayjs'
 export default defineComponent({
     name: 'home',
     components: {
@@ -251,8 +247,25 @@ export default defineComponent({
         setTimeout(() => {
             loading.value = false
         }, 800)
+
+
+        const tleData = reactive({
+            date: dayjs().format('YYYY年MM月DD日'),
+            time: dayjs().format('HH时mm分ss秒'),
+            week: '星期' + '日一二三四五六'.charAt(parseInt(dayjs().format('d'))),
+            pam: dayjs().format('A') === 'PM' ? '下午' : '上午',
+        })
+
+        let tleDataTime = function () {
+            setTimeout(() => {
+                tleData.time = dayjs().format('HH时mm分ss秒')
+                tleDataTime()
+            }, 1000)
+        }
+        tleDataTime()
         return {
-            loading
+            loading,
+            tleData
         }
     }
 })
