@@ -233,6 +233,9 @@ import Returns from './returns.vue'
 import ProjectInfo from './project-info.vue'
 import Ripple from './ripple.vue'
 import Dynamic from './dynamic.vue'
+import moment from "moment";
+import 'moment/dist/locale/zh-cn'
+moment.locale('zh-cn')
 export default defineComponent({
     name: 'home',
     components: {
@@ -249,15 +252,15 @@ export default defineComponent({
 
 
         const tleData = reactive({
-            date: window.dayjs().format('YYYY年MM月DD日'),
-            time: window.dayjs().format('HH时mm分ss秒'),
-            week: '星期' + '日一二三四五六'.charAt(parseInt(window.dayjs().format('d'))),
-            pam: window.dayjs().format('A') === 'PM' ? '下午' : '上午',
+            date: moment().format('YYYY年MM月DD日'),
+            time: moment().format('HH时mm分ss秒'),
+            week: '星期' + '日一二三四五六'.charAt(parseInt(moment().format('d'))),
+            pam: moment().format('A'),
         })
-
+        console.log(tleData)
         let tleDataTime = function () {
             setTimeout(() => {
-                tleData.time = window.dayjs().format('HH时mm分ss秒')
+                tleData.time = moment().format('HH时mm分ss秒')
                 tleDataTime()
             }, 1000)
         }
