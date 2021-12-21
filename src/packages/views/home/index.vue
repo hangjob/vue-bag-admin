@@ -233,7 +233,6 @@ import Returns from './returns.vue'
 import ProjectInfo from './project-info.vue'
 import Ripple from './ripple.vue'
 import Dynamic from './dynamic.vue'
-import * as dayjs from 'dayjs'
 export default defineComponent({
     name: 'home',
     components: {
@@ -250,15 +249,15 @@ export default defineComponent({
 
 
         const tleData = reactive({
-            date: dayjs().format('YYYY年MM月DD日'),
-            time: dayjs().format('HH时mm分ss秒'),
-            week: '星期' + '日一二三四五六'.charAt(parseInt(dayjs().format('d'))),
-            pam: dayjs().format('A') === 'PM' ? '下午' : '上午',
+            date: window.dayjs().format('YYYY年MM月DD日'),
+            time: window.dayjs().format('HH时mm分ss秒'),
+            week: '星期' + '日一二三四五六'.charAt(parseInt(window.dayjs().format('d'))),
+            pam: window.dayjs().format('A') === 'PM' ? '下午' : '上午',
         })
 
         let tleDataTime = function () {
             setTimeout(() => {
-                tleData.time = dayjs().format('HH时mm分ss秒')
+                tleData.time = window.dayjs().format('HH时mm分ss秒')
                 tleDataTime()
             }, 1000)
         }
