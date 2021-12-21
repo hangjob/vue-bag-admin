@@ -56,17 +56,8 @@ export default ({mode}: { mode: any }) => {
     }
     return defineConfig({
         base: './',
-        plugins: [vue(), vueJsx(), styleImport({
-            libs: [
-                {
-                    libraryName: 'vxe-table',
-                    esModule: true,
-                    resolveComponent: (name) => `vxe-table/es/${name}`,
-                    resolveStyle: (name) => `vxe-table/es/${name}/style.css`
-                }
-            ]
-        }),
-            // viteCompression(), // 开启压缩
+        plugins: [vue(), vueJsx(), 
+            viteCompression(), // 开启压缩
         ],
         resolve: {
             alias: {
