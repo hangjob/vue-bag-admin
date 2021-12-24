@@ -13,7 +13,7 @@
     </a-layout>
 </template>
 <script lang="ts">
-import {defineComponent, watchEffect, reactive, ref, computed} from 'vue';
+import {defineComponent, computed} from 'vue';
 import Slider from './slider.vue'
 import HeaderTop from './headerTop.vue'
 import HeaderProcess from './headerProcess.vue'
