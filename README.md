@@ -2,6 +2,11 @@
 
 🎉 Vue3+Vite2.6+TypeScript+ant-design-vue构建，提供基础的框架，快速搭建企业级中后台产品，响应式管理后台系统
 
+
+### 快速预览
+
+![vue-vite-admin-ts](https://s4.ax1x.com/2021/12/24/TYAcLT.jpg)
+
 ### 项目地址
 
 [Github](https://github.com/hangjob/vue-vite-admin-ts)
