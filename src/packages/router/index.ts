@@ -128,6 +128,10 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: '/module/util', name: 'module-util', meta: {title: '工具库'},
                 component: () => import('@/packages/views/module/util/index.vue')
+            },
+            {
+                path: '/module/debug', name: 'module-debug', meta: {title: '错误捕获'},
+                component: () => import('@/packages/views/module/debug/index.vue')
             }
         ]
     },

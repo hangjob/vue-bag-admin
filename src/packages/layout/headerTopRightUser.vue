@@ -20,6 +20,9 @@
             </a-badge>
         </a-popover>
     </div>
+    <div class="right_menu-item hidden-xs" @click="handleDebug">
+        <BugOutlined class="icon-svg"/>
+    </div>
     <div class="right_menu-item">
         <SyncOutlined class="icon-svg refresh" @click="handleRefresh"/>
     </div>
@@ -148,6 +151,10 @@ export default defineComponent({
             router.push('/login')
         }
 
+        const handleDebug = ()=>{
+            router.push('/module/debug')
+        }
+
         return {
             userSetting,
             searchActive,
@@ -163,7 +170,8 @@ export default defineComponent({
             handleEnter,
             handleRefresh,
             isPC,
-            handleQuit
+            handleQuit,
+            handleDebug
         }
     }
 })

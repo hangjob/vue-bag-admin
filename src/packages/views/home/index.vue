@@ -257,7 +257,7 @@ export default defineComponent({
             week: '星期' + '日一二三四五六'.charAt(parseInt(moment().format('d'))),
             pam: moment().format('A'),
         })
-        console.log(tleData)
+
         let tleDataTime = function () {
             setTimeout(() => {
                 tleData.time = moment().format('HH时mm分ss秒')

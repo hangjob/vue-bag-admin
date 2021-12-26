@@ -300,6 +300,15 @@ const arr = [
         tabFix: false,
         keepAlive: false
     },
+    {
+        name: '错误捕获',
+        path: '/module/debug',
+        icon: 'UserOutlined',
+        shows: 0,
+        tabHidden: false,
+        tabFix: false,
+        keepAlive: false
+    },
 ]
 const defaultMenu = addUniqueId(arr, '_loca') // 增加个标识符
 
