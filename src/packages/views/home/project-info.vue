@@ -9,9 +9,9 @@
                     <div class="down">
                         <p class="hidden-xs">快到碗里来</p>
                         <a-button-group>
-                            <a-button type="primary">使用文档</a-button>
-                            <a-button type="primary">GitHub</a-button>
-                            <a-button type="primary">点击下载</a-button>
+                            <a-button type="primary" @click="handleSkip('https://hangjob.github.io/docs/#/vue-vite-admin-ts/')">使用文档</a-button>
+                            <a-button type="primary" @click="handleSkip('https://github.com/hangjob/vue-vite-admin-ts')">GitHub</a-button>
+                            <a-button type="primary" @click="handleSkip('https://github.com/hangjob/vue-vite-admin-ts/archive/refs/heads/master.zip')">点击下载</a-button>
                         </a-button-group>
                     </div>
                 </template>
@@ -49,9 +49,13 @@ const data = [
 ];
 export default defineComponent({
     setup() {
+        const handleSkip = (url:string)=>{
+            window.open(url)
+        }
         return {
             data,
-            columns
+            columns,
+            handleSkip
         }
     }
 })
