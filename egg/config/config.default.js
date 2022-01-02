@@ -29,7 +29,7 @@ module.exports = appInfo => {
         dialect: 'mysql',
         host: '127.0.0.1',
         port: 3306,
-        username: 'root2', // 数据库用户名
+        username: 'itnavs', // 数据库用户名
         password: '123456', // 数据库密码
         database: 'egg',
         define: { // model的全局配置

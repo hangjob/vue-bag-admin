@@ -61,17 +61,6 @@
 					</a-form-item>
 				</a-col>
 				<a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
-					<a-form-item label="权限" name="limits">
-						<a-select
-							v-model:value="formState.limits"
-							mode="multiple"
-							style="width: 100%"
-							placeholder="选择用户权限"
-							:options="[{value:'admin',disabled:false},{value:'edit',disabled:false}]"
-						/>
-					</a-form-item>
-				</a-col>
-				<a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
 					<a-form-item label="开启路由缓存" name="keepAlive">
 						<a-switch checked-children="开" un-checked-children="关" v-model:checked="formState.keepAlive"/>
 					</a-form-item>
