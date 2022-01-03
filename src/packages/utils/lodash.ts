@@ -47,7 +47,7 @@ const findUnsetDepth = (tag: any, data: any) => {
  */
 interface tagType {
     key: string,
-    value: string | number,
+    value: String | Number,
     node: string
 }
 
@@ -94,7 +94,7 @@ const findContainingObject = (tag: any, arr: Array<any>) => {
             if (item[tag.key] === tag.value) {
                 result.push(item)
             }
-            item.children && deep(tag, item.children)
+            item[tag.node] && deep(tag, item[tag.node])
         })
     }
     deep(tag, arr)
@@ -113,7 +113,7 @@ const findParent = (tag: tagType, arr: Array<any>) => {
 
 
 /**
- * 查找父级数据-拼接秋来
+ * 查找父级数据-拼接起来
  * @param tag
  * @param arr
  */
@@ -132,6 +132,19 @@ const getParentId = (tag: tagType, arr: Array<any>) => {
 }
 
 
+const filterData = (tag: tagType, arr: Array<any>) => {
+    return arr.filter(item => {
+        return item[tag.key] !== tag.value;
+    }).map(item => {
+        item = Object.assign({}, item)
+        if (item.children) {
+            item.children = filterData(tag, item.children)
+        }
+        return item
+    })
+}
+
+
 export {
     find,
     remove,
@@ -141,5 +154,6 @@ export {
     addUniqueId,
     findContainingObject,
     findParent,
-    getParentId
+    getParentId,
+    filterData
 }

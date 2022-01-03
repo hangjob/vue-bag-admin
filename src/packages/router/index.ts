@@ -19,7 +19,19 @@ const routes: Array<RouteRecordRaw> = [
             },
             {
                 path: '/sys/menu', name: 'sys-menu', meta: {title: '菜单列表'},
-                component: () => import('@/packages/views/sys/menu.vue')
+                component: () => import('@/packages/views/sys/menu/index.vue')
+            },
+            {
+                path: '/sys/branch', name: 'sys-branch', meta: {title: '部门组织'},
+                component: () => import('@/packages/views/sys/branch/index.vue')
+            },
+            {
+                path: '/sys/member', name: 'sys-member', meta: {title: '用户管理'},
+                component: () => import('@/packages/views/sys/member/index.vue')
+            },
+            {
+                path: '/sys/role', name: 'sys-role', meta: {title: '角色管理'},
+                component: () => import('@/packages/views/sys/role/index.vue')
             },
             {
                 path: '/module/markdown', name: 'module-markdown', meta: {title: 'markdown编辑器'},

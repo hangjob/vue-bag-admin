@@ -1,6 +1,8 @@
 /**
  * @param {Egg.Application} app - egg application
  */
+
+
 module.exports = app => {
     const {router, controller, io} = app;
 
@@ -17,7 +19,8 @@ module.exports = app => {
     router.all('/editMenu', controller.home.editMenu)
     router.all('/findOne', controller.home.findOne);
     router.all('/appRouter', controller.home.appRouter);
-    router.all('/appComponents', controller.components.index)
-
     io.of('/').route('/', io.controller.index.ping)
+    require('./router/branch')(app);
+    require('./router/member')(app);
+    require('./router/role')(app);
 };

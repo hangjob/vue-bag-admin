@@ -57,9 +57,28 @@ const validatHttpFilePath = async (rule: RuleObject, value: string) => {
     }
 }
 
+/**
+ * 验证手机号
+ * @param rule
+ * @param value
+ */
+const validatPhone = async (rule: RuleObject, value: string) => {
+    if (value !== '' && value !== null && value !== undefined) {
+        let reg = /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/.test(value)
+        if (reg) {
+            return Promise.resolve();
+        } else {
+            return Promise.reject("请填写正确的手机号")
+        }
+    } else {
+        return Promise.resolve();
+    }
+}
+
 
 export {
     validatPath,
     validatHttpFilePath,
-    filePathRouter
+    filePathRouter,
+    validatPhone
 }
