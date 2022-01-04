@@ -25,7 +25,7 @@ module.exports = appInfo => {
     config.keys = appInfo.name + '_1634002379446_8360';
 
     // add your middleware config here
-    config.middleware = [];
+    config.middleware = ['verify'];
 
     // add your user config here
     const userConfig = {
@@ -69,6 +69,13 @@ module.exports = appInfo => {
             hostname: '0.0.0.0',
         }
     };
+
+    config.session = {
+        key: 'EGG_SESS_TOKEN',
+        maxAge: 1000 * 3600 * 1, // 1 天
+        httpOnly: true,
+        encrypt: true,
+    }
 
     return {
         ...config,

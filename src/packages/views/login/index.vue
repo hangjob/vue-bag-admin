@@ -99,13 +99,12 @@ export default defineComponent({
             formRef.value
                 .validate()
                 .then(() => {
-                    // apiLogin(formState).then((res: any) => {
-                    //     console.log(res)
-                    // })
-                    if (formState.rememberPas) locaStore.set('encryptData', Encrypt(JSON.stringify(formState)), 3600 * 24 * 7);
-                    apiUserinfo().then((res: any) => {
-                        store.commit('user/updateUserinfo', res)
-                        router.push('/home') // 此处通过菜单节点去读取第一个，默认是跳转home
+                    apiLogin(formState).then((res: any) => {
+                        if (formState.rememberPas) locaStore.set('encryptData', Encrypt(JSON.stringify(formState)), 3600 * 24 * 7);
+                        apiUserinfo().then((res: any) => {
+                            store.commit('user/updateUserinfo', res)
+                            router.push('/home') // 此处通过菜单节点去读取第一个，默认是跳转home
+                        })
                     })
                 })
                 .catch((error: ValidateErrorEntity<FormState>) => {

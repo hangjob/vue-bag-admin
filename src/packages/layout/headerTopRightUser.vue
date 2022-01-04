@@ -42,7 +42,7 @@
                         <a href="https://github.com/hangjob/vue-vite-admin-ts" target="_blank">嗨，你好</a>
                     </a-menu-item>
                     <a-menu-item @click="handleQuit">
-                        <LogoutOutlined />
+                        <LogoutOutlined/>
                         退出
                     </a-menu-item>
                 </a-menu>
@@ -57,7 +57,7 @@ import {computed, defineComponent, inject, nextTick, onMounted, ref} from 'vue'
 import {checkFull, fullscreenchange, switchScreen} from '@/packages/utils/screen.full'
 import {handleKeyBoard} from '@/packages/utils/keydown'
 import {notification} from 'ant-design-vue';
-import {apiNotice} from '@/packages/service/user'
+import {apiLogout, apiNotice} from '@/packages/service/user'
 import {
     BellOutlined,
     ClearOutlined,
@@ -71,6 +71,7 @@ import {
 import {useStore} from "vuex";
 import locaStore from '@/packages/utils/persistence'
 import {useRouter} from "vue-router";
+
 export default defineComponent({
     components: {
         userSetting,
@@ -146,12 +147,14 @@ export default defineComponent({
             noticeList.value = res;
         })
 
-        const  handleQuit = ()=>{
-            locaStore.clearAll();
-            router.push('/login')
+        const handleQuit = () => {
+            apiLogout().then(() => {
+                locaStore.clearAll();
+                router.push('/login')
+            })
         }
 
-        const handleDebug = ()=>{
+        const handleDebug = () => {
             router.push('/module/debug')
         }
 
@@ -187,6 +190,7 @@ export default defineComponent({
     text-align: center;
     justify-content: center;
     transition: background-color 0.3s;
+
     &:hover {
         background-color: rgba(0, 0, 0, .025);
     }

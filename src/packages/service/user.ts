@@ -17,8 +17,18 @@ const apiLogin = (params?: object) => {
     return post(`${prefix}/login`, params)
 }
 
+
+/**
+ * 退出
+ * @param params
+ */
+const apiLogout = () => {
+    return post(`${prefix}/logout`)
+}
+
 export {
     apiUserinfo,
     apiNotice,
-    apiLogin
+    apiLogin,
+    apiLogout
 }

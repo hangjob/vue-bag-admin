@@ -3,7 +3,8 @@ import store from "@/packages/store";
 import {httpNetwork} from "@/packages/config";
 import {message as messageModel} from 'ant-design-vue';
 import {handleExport} from "@/packages/utils/utils";
-
+import locaStore from "@/packages/utils/persistence";
+import router from '@/packages/router'
 
 const CancelToken = axios.CancelToken
 const source = CancelToken.source()
@@ -48,8 +49,11 @@ http.interceptors.response.use((res: any) => {
     }
 }, async (error: any) => {
 
-    const {config} = error.response || {};
-
+    const {config, status} = error.response || {};
+    if (status === 403) {
+        locaStore.clearAll();
+        return router.push('/login')
+    }
     // 如果config不存在或没有设置重试选项，请拒绝
     if (!config || !config.retry) {
         return Promise.reject(error.message);
