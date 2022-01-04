@@ -27,6 +27,7 @@
             </template>
             <template #action="{ record }">
                 <a-space>
+                    <a-button type="primary" size="small" @click="setPasswordEdit({record})">密码</a-button>
                     <a-button type="primary" size="small" @click="setVisibleEdit({record})">编辑</a-button>
                     <a-popconfirm
                         :title="`你确定删除 ${record.name} 嘛？`"
@@ -47,11 +48,15 @@
     <yxs-modal v-model:visible="visibleEdit" title="编辑" width="1000px" @ok="handleEditOk">
         <edit ref="edit" :treeData="data" :id="id"/>
     </yxs-modal>
+    <yxs-modal v-model:visible="visiblePas" title="更改密码" width="1000px" @ok="handlePasOk">
+        <pas ref="pas" :id="id" :record="recordItem"/>
+    </yxs-modal>
 </template>
 <script lang="ts">
 import {defineComponent, ref, reactive, toRefs, inject} from 'vue';
 import add from './add.vue'
 import edit from './edit.vue'
+import pas from './pas.vue'
 import {apiAll, apiDelete, apiDeletes} from '@/packages/service/member'
 import {toTree} from '@/packages/utils/utils'
 import {ColumnProps} from 'ant-design-vue/es/table/interface';
@@ -152,7 +157,7 @@ const columns = [
         title: '操作',
         key: 'action',
         align: 'center',
-        width: 150,
+        width: 200,
         slots: {customRender: 'action'},
     }
 ];
@@ -160,15 +165,18 @@ const columns = [
 export default defineComponent({
     name: 'sys-member',
     components: {
-        add, edit
+        add, edit, pas
     },
     setup() {
         const data = ref();
         const sourceData = ref();
         const add = ref();
         const edit = ref();
+        const pas = ref();
+        const recordItem = ref()
         const visibleAdd = ref(false);
         const visibleEdit = ref(false);
+        const visiblePas = ref(false)
         const id = ref('');
         const loading = ref(false);
         const ks = ref('');
@@ -262,6 +270,21 @@ export default defineComponent({
             return res && res.name
         }
 
+        const setPasswordEdit = ({record}: { record: any }) => {
+            id.value = record.id
+            recordItem.value = record
+            visiblePas.value = true
+        }
+
+        const handlePasOk = () => {
+            pas.value.onSubmit().then(() => {
+                visiblePas.value = false;
+                getData()
+            }).catch((error: any) => {
+                console.log(error)
+            })
+        }
+
 
         return {
             data,
@@ -283,7 +306,12 @@ export default defineComponent({
             loading,
             handleSearch,
             ks,
-            getPname
+            getPname,
+            pas,
+            visiblePas,
+            setPasswordEdit,
+            handlePasOk,
+            recordItem
         };
     },
 });

@@ -14,6 +14,13 @@ module.exports = appInfo => {
         }
     };
 
+
+    // 验证规则
+    config.validate = {
+        convert: true,
+        widelyUndefined: true
+    };
+
     // use for cookie sign key, should change to your own and keep security
     config.keys = appInfo.name + '_1634002379446_8360';
 

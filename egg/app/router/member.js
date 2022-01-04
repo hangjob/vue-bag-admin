@@ -6,4 +6,6 @@ module.exports = app => {
     router.all('/member/deletes', controller.member.deletes);
     router.all('/member/update', controller.member.update)
     router.all('/member/find', controller.member.find);
+    router.all('/member/updatePas', controller.member.updatePas);
+    router.all('/member/getPas', controller.member.getPas);
 };

@@ -5,7 +5,7 @@ export function configServer() {
         https: false,
         proxy: {
             '^/api': {
-                target: 'http://127.0.0.1:7001',
+                target: 'http://127.0.0.1:8001',
                 changeOrigin: true,
                 rewrite: (path: any) => path.replace(/^\/api/, '')
             }

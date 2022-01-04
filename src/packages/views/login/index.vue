@@ -49,7 +49,7 @@ import {useStore} from "vuex";
 import {useRouter} from "vue-router";
 import {computed, defineComponent, reactive, UnwrapRef} from 'vue';
 import {ValidateErrorEntity} from 'ant-design-vue/es/form/interface';
-import {apiUserinfo} from '@/packages/service/user';
+import {apiLogin, apiUserinfo} from '@/packages/service/user';
 import locaStore from '@/packages/utils/persistence'
 
 interface FormState {
@@ -99,6 +99,9 @@ export default defineComponent({
             formRef.value
                 .validate()
                 .then(() => {
+                    // apiLogin(formState).then((res: any) => {
+                    //     console.log(res)
+                    // })
                     if (formState.rememberPas) locaStore.set('encryptData', Encrypt(JSON.stringify(formState)), 3600 * 24 * 7);
                     apiUserinfo().then((res: any) => {
                         store.commit('user/updateUserinfo', res)

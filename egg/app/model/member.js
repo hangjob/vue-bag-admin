@@ -48,6 +48,10 @@ module.exports = app => {
             defaultValue: false,
             comment: '状态'
         },
+        token: {
+            type: STRING,
+            comment: 'token'
+        },
         describe: {
             type: STRING,
             comment: '描述',

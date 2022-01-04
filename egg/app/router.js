@@ -23,4 +23,5 @@ module.exports = app => {
     require('./router/branch')(app);
     require('./router/member')(app);
     require('./router/role')(app);
+    require('./router/user')(app);
 };

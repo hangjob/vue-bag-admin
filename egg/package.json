@@ -7,11 +7,14 @@
         "declarations": true
     },
     "dependencies": {
+        "crypto": "^1.0.1",
         "dayjs": "^1.10.7",
         "egg": "^2.15.1",
         "egg-scripts": "^2.11.0",
         "egg-sequelize": "^6.0.0",
         "egg-socket.io": "^4.1.6",
+        "egg-validate": "^2.0.2",
+        "jsonwebtoken": "^8.5.1",
         "mysql2": "^2.3.0"
     },
     "devDependencies": {

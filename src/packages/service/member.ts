@@ -35,3 +35,14 @@ export const apiDelete = (params?: object, config?: object) => {
 export const apiDeletes = (params?: object, config?: object) => {
     return post(`${prefix}/deletes`, params, config);
 }
+
+// 更新密码
+export const apiUpdatePas = (params?: object, config?: object) => {
+    return post(`${prefix}/updatePas`, params, config);
+}
+
+
+// 查看密码
+export const apiGetPas = (params?: object, config?: object) => {
+    return post(`${prefix}/getPas`, params, config);
+}
