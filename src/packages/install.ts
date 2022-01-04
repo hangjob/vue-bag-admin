@@ -3,6 +3,7 @@ import setupInit from '@/packages/base/index'
 import mitt from "mitt";
 import * as $axios from '@/packages/http/request'
 import {handleError} from '@/packages/debug'
+
 /**
  * router: {views:[菜单],external:[菜单路由]}
  *

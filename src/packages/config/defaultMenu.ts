@@ -127,6 +127,15 @@ const arr = [
                 tabFix: false,
                 keepAlive: true
             },
+            {
+                name: '课程表',
+                path: '/module/course',
+                icon: '',
+                shows: 1,
+                tabHidden: false,
+                tabFix: false,
+                keepAlive: true
+            },
         ]
     },
     {

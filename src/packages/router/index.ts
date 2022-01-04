@@ -132,6 +132,10 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: '/module/debug', name: 'module-debug', meta: {title: '错误捕获'},
                 component: () => import('@/packages/views/module/debug/index.vue')
+            },
+            {
+                path: '/module/course', name: 'module-course', meta: {title: '课程表'},
+                component: () => import('@/packages/views/module/course/index.vue')
             }
         ]
     },

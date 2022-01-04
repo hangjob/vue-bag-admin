@@ -5,6 +5,8 @@ import {configStyleImport} from './style-import'
 import {configViteCompression} from "./compression";
 import {configHtml} from "./html";
 import {configCDN} from "./cdn-import";
+import {configViteComponents} from "./components";
+import {configWindiCSS} from "./windicss";
 
 export default function createVitePlugins({variables}: { variables: any }) {
     const opt = {variables: variables}
@@ -13,7 +15,9 @@ export default function createVitePlugins({variables}: { variables: any }) {
         vueJsx(),
         configStyleImport(),
         configViteCompression(),
-        configCDN()
+        configCDN(),
+        configViteComponents(),
+        configWindiCSS()
     ];
     vitePlugins.push(configHtml(opt))
     return vitePlugins;
