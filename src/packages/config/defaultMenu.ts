@@ -29,6 +29,33 @@ const arr = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: true
+            },
+            {
+                name: '部门组织',
+                path: '/sys/branch',
+                icon: '',
+                shows: 1,
+                tabHidden: false,
+                tabFix: false,
+                keepAlive: true
+            },
+            {
+                name: '用户管理',
+                path: '/sys/member',
+                icon: '',
+                shows: 1,
+                tabHidden: false,
+                tabFix: false,
+                keepAlive: true
+            },
+            {
+                name: '角色管理',
+                path: '/sys/role',
+                icon: '',
+                shows: 1,
+                tabHidden: false,
+                tabFix: false,
+                keepAlive: true
             }
         ]
     },
