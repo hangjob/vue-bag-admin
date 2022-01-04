@@ -79,8 +79,8 @@ export default defineComponent({
 
         const formState: UnwrapRef<FormState> = reactive({
             layout: 'vertical',
-            username: '',
-            password: '',
+            username: 'admin',
+            password: '123456',
             rememberPas: false
         })
 
@@ -90,6 +90,9 @@ export default defineComponent({
             formState.username = username;
             formState.password = password
             formState.rememberPas = rememberPas;
+        } else {
+            formState.username = '';
+            formState.password = ''
         }
 
         const handleLogin = () => {
