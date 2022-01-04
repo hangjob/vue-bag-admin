@@ -1,18 +1,17 @@
-# vue-admin-serve
+# vue-admin-serve egg.js服务
 
-## QuickStart
-
-<!-- add docs here for user -->
-
-see [egg docs][egg] for more detail.
-
-### Development
+### 开始
 
 ```bash
+$ cd egg/ #先进入到这个目录
 $ npm i
 $ npm run dev
-$ open http://localhost:7001/
+$ open http://127.0.0.1:7001
 ```
+
+### 具体文档
+
+[查看具体开发文档](https://hangjob.github.io/docs/#/vue-vite-admin-ts/)
 
 ### Deploy
 
@@ -20,12 +19,3 @@ $ open http://localhost:7001/
 $ npm start
 $ npm stop
 ```
-
-### npm scripts
-
-- Use `npm run lint` to check code style.
-- Use `npm test` to run unit test.
-- Use `npm run autod` to auto detect dependencies upgrade, see [autod](https://www.npmjs.com/package/autod) for more
-  detail.
-
-[egg]: https://eggjs.org
