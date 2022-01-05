@@ -47,9 +47,10 @@
 import {inject, ref, toRaw} from 'vue'
 import {useStore} from "vuex";
 import {useRouter} from "vue-router";
-import {computed, defineComponent, reactive, UnwrapRef} from 'vue';
+import {defineComponent, reactive, UnwrapRef} from 'vue';
 import {ValidateErrorEntity} from 'ant-design-vue/es/form/interface';
-import {apiLogin, apiUserinfo} from '@/packages/service/user';
+import {apiLogin} from '@/packages/service/user';
+import {apiUserUserinfo} from '@/packages/service/user';
 import locaStore from '@/packages/utils/persistence'
 
 interface FormState {
@@ -99,9 +100,9 @@ export default defineComponent({
             formRef.value
                 .validate()
                 .then(() => {
-                    apiLogin(formState).then((res: any) => {
+                    apiLogin(formState).then(() => {
                         if (formState.rememberPas) locaStore.set('encryptData', Encrypt(JSON.stringify(formState)), 3600 * 24 * 7);
-                        apiUserinfo().then((res: any) => {
+                        apiUserUserinfo().then((res: any) => {
                             store.commit('user/updateUserinfo', res)
                             router.push('/home') // 此处通过菜单节点去读取第一个，默认是跳转home
                         })

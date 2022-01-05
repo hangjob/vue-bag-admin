@@ -47,7 +47,7 @@ const findUnsetDepth = (tag: any, data: any) => {
  */
 interface tagType {
     key: string,
-    value: String | Number,
+    value: string | number,
     node: string
 }
 

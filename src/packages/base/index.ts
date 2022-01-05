@@ -13,7 +13,7 @@ import {setVxeTable} from '@/packages/plugin/vxe-table'
 import {setupGlobComponents} from '@/packages/components'
 import {setupDraggable} from '@/packages/plugin/draggable'
 import {setupIcons} from '@/packages/assets/icon/iconfont'
-import '../../../mock'
+
 
 const setupInit = (app: App) => {
     setupRouter(app)

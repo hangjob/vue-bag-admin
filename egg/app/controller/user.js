@@ -3,8 +3,19 @@
 const baseController = require('./baseController');
 
 class UserController extends baseController {
-    userinfo() {
-
+    async userinfo() {
+        const {ctx} = this;
+        const token = ctx.cookies.get('token', {signed: false, encrypt: true})
+        if (token) {
+            const result = await ctx.model.Member.findOne({where: {password: token}})
+            if (result) {
+                this.result({data: result})
+            } else {
+                this.result({data: '', message: '没有找到该用户', code: 1002})
+            }
+        } else {
+            this.result({data: '', message: '缺少参数', code: 1001})
+        }
     }
 
     async login() {

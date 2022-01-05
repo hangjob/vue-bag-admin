@@ -40,9 +40,18 @@ const httpNetwork = {
     baseURL: '/api'
 }
 
+/**
+ * 路由设置
+ */
+const routerConfig = {
+    filter: ['/login'],
+    routerMode: 'hash'
+}
+
 
 export {
     routerMode,
     themeConfig,
-    httpNetwork
+    httpNetwork,
+    routerConfig
 }

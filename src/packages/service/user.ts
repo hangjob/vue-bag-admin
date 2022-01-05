@@ -2,14 +2,6 @@ import {post} from '@/packages/http/request'
 
 const prefix = '/user'
 
-const apiUserinfo = (params?: object) => {
-    return post('/yxs/userinfo', params)
-}
-
-const apiNotice = () => {
-    return post('/yxs/notice')
-}
-
 /**
  * 登录
  */
@@ -17,18 +9,24 @@ const apiLogin = (params?: object) => {
     return post(`${prefix}/login`, params)
 }
 
-
 /**
  * 退出
- * @param params
  */
 const apiLogout = () => {
     return post(`${prefix}/logout`)
 }
 
+
+/**
+ * 获取用户信息
+ */
+const apiUserUserinfo = () => {
+    return post(`${prefix}/userinfo`)
+}
+
+
 export {
-    apiUserinfo,
-    apiNotice,
     apiLogin,
-    apiLogout
+    apiLogout,
+    apiUserUserinfo
 }

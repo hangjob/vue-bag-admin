@@ -37,7 +37,7 @@
 import {computed, defineComponent, ref, watchEffect, watch} from 'vue'
 import {useStore} from "vuex";
 import {notification} from 'ant-design-vue';
-import {apiUserinfo} from '@/packages/service/user'
+import {apiUserUserinfo} from '@/packages/service/user'
 
 export default defineComponent({
     name: 'permit',
@@ -59,10 +59,8 @@ export default defineComponent({
 
         watch([radioValue], () => {
             visible.value = false;
-            apiUserinfo({type: radioValue.value}).then((res: any) => {
-                store.commit('user/updateUserinfo', res)
-                visible.value = true;
-            })
+            // store.commit('user/updateUserinfo', res) 切换用户信息
+            // visible.value = true;
         })
 
         return {

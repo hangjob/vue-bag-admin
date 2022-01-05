@@ -1,11 +1,10 @@
 import store from '@/packages/store'
 import {getAllParentArr} from "@/packages/utils/utils";
 import {findChildrenDepth} from "@/packages/utils/lodash";
-import {apiUserinfo} from "@/packages/service/user";
+import {apiUserUserinfo} from "@/packages/service/user";
 import {NProgress} from '@/packages/plugin/nprogress'
-import locaStore from '@/packages/utils/persistence'
 
-const ignore = ["/login", "/403", "/404", "/500", "/502",'/test'];
+const ignore = ["/login", "/403", "/404", "/500", "/502", '/test'];
 
 // 处理app-store数据
 function setAppStoreData(to: any): void {
@@ -18,7 +17,11 @@ function setAppStoreData(to: any): void {
 
 
 function checkError(to: any, from: any, next: any): void {
-    !ignore.some((e: string) => to.path.indexOf(e) === 0) ? next("/login") : next()
+    if (!ignore.some((e: string) => to.path.indexOf(e) === 0)) {
+        next(ignore[0])
+    } else {
+        next()
+    }
 }
 
 function checkUserinfo(to: any, from: any, next: any): void {
@@ -27,25 +30,22 @@ function checkUserinfo(to: any, from: any, next: any): void {
     if (Object.keys(userinfo).length) {
         next()
     } else {
-        apiUserinfo().then((res: any) => {
-            store.commit('user/updateUserinfo', res)
-            next()
-        })
+        if (ignore.some((e: string) => to.path.indexOf(e) === 0)) { //过滤这些页面不需要调用用户信息接口
+            checkError(to, from, next)
+        } else {
+            apiUserUserinfo().then((res: any) => {
+                store.commit('user/updateUserinfo', res)
+                next()
+            }).catch(() => {
+                checkError(to, from, next)
+            })
+        }
     }
 }
 
 
 function checkLogin(to: any, from: any, next: any): void {
-    const token = store.getters['user/token'];
-    if (token && !locaStore.isExpired('token')) {
-        if (to.path.indexOf("/login") === 0) {
-            return next("/");
-        } else {
-            checkUserinfo(to, from, next)
-        }
-    } else {
-        checkError(to, from, next)
-    }
+    checkUserinfo(to, from, next) // 采用服务端校验是否登录状态，当请求接口，在http请求拦截
 }
 
 const setupRouterGuard = (to: any, from: any, next: any) => {

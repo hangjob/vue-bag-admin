@@ -1,6 +1,6 @@
 import axios from 'axios'
 import store from "@/packages/store";
-import {httpNetwork} from "@/packages/config";
+import {httpNetwork, routerConfig} from "@/packages/config";
 import {message as messageModel} from 'ant-design-vue';
 import {handleExport} from "@/packages/utils/utils";
 import locaStore from "@/packages/utils/persistence";
@@ -49,18 +49,23 @@ http.interceptors.response.use((res: any) => {
     }
 }, async (error: any) => {
 
-    const {config, status} = error.response || {};
+    const {config, status, data} = error.response || {};
+    // 设置用于跟踪重试计数的变量
+    config.__retryCount = config.__retryCount || 0;
+
     if (status === 403) {
         locaStore.clearAll();
-        return router.push('/login')
+        if (config.__retryCount === 0) messageModel.warning(data.message, httpNetwork.messageDuration) // 避免错误重连也提示
+        const result = routerConfig.filter.findIndex(item => window.location.href.indexOf(item) > -1) !== -1;
+        if (!result) {
+            router.push(routerConfig.filter[0])
+        }
+        return Promise.reject(data);
     }
     // 如果config不存在或没有设置重试选项，请拒绝
     if (!config || !config.retry) {
         return Promise.reject(error.message);
     }
-
-    // 设置用于跟踪重试计数的变量
-    config.__retryCount = config.__retryCount || 0;
 
     // 检查重试次数是否达到最大值
     if (config.__retryCount >= config.retry) {

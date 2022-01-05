@@ -105,9 +105,9 @@
     </a-modal>
 </template>
 <script lang="ts">
-import {defineComponent, reactive, ref, toRaw, UnwrapRef, watch} from 'vue';
+import {defineComponent, reactive, ref, toRaw, watch} from 'vue';
 import {ValidateErrorEntity} from 'ant-design-vue/es/form/interface';
-import {apiEditMenu, apiFindOne} from '@/packages/service/app'
+import {apiUpdate, apiFind} from '@/packages/service/menu'
 import icons from './icons';
 import {validatPath, validatHttpFilePath, filePathRouter} from '@/packages/utils/validator'
 import {toTree} from '@/packages/utils/utils'
@@ -135,7 +135,10 @@ export default defineComponent({
         treeData: {
             type: Array,
         },
-        id: [Number, String]
+        id: {
+            required: true,
+            type: [Number, String]
+        }
     },
     setup(props, {emit}) {
         const formRef = ref();
@@ -185,7 +188,7 @@ export default defineComponent({
         const onSubmit = async () => {
             return formRef.value.validate()
                 .then(() => {
-                    apiEditMenu(toRaw(formState), {notify: true}).then(() => {
+                    apiUpdate(toRaw(formState), {notify: true}).then(() => {
                         return Promise.resolve();
                     })
                 })
@@ -196,7 +199,7 @@ export default defineComponent({
 
 
         const getMenuData = () => {
-            apiFindOne({id: props.id}).then((res: any) => {
+            apiFind({id: props.id}).then((res: any) => {
                 let {createTime, updateTime, type, ...profileData} = res
                 Object.keys(formState).forEach((key: string) => {
                     formState[key] = profileData[key];

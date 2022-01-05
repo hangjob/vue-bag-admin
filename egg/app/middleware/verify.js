@@ -1,8 +1,9 @@
 module.exports = options => {
     // 验证是否在登录状态下
     return async function verify(ctx, next) {
-        const filter = ['login'];
-        if (filter.indexOf(ctx.request.url) !== -1) {
+        const filter = ['/user/login', '/user/logout'];
+        const result = filter.findIndex(item => ctx.request.url.indexOf(item) > -1) !== -1;
+        if (result) {
             await next();
         } else {
             const token = ctx.cookies.get('token', {signed: false})

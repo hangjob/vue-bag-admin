@@ -107,7 +107,7 @@
 <script lang="ts">
 import {defineComponent, reactive, ref, toRaw, UnwrapRef} from 'vue';
 import {ValidateErrorEntity} from 'ant-design-vue/es/form/interface';
-import {apiAddMenu} from '@/packages/service/app'
+import {apiCreate} from '@/packages/service/menu'
 import icons from './icons';
 import {validatPath, validatHttpFilePath, filePathRouter} from '@/packages/utils/validator'
 import {toTree} from '@/packages/utils/utils'
@@ -181,7 +181,7 @@ export default defineComponent({
 		const onSubmit = async () => {
 			return formRef.value.validate()
 				.then(() => {
-					apiAddMenu(toRaw(formState), {notify: true}).then(() => {
+                    apiCreate(toRaw(formState), {notify: true}).then(() => {
 						return Promise.resolve();
 					})
 				})

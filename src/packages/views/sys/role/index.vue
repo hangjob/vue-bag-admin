@@ -48,10 +48,8 @@ import {defineComponent, ref, reactive, toRefs, inject} from 'vue';
 import add from './add.vue'
 import edit from './edit.vue'
 import {apiAll, apiDelete, apiDeletes} from '@/packages/service/role'
-import {toTree} from '@/packages/utils/utils'
 import {ColumnProps} from 'ant-design-vue/es/table/interface';
 import {message} from 'ant-design-vue';
-import {findChildrenDepth, findParent, getParentId} from "@/packages/utils/lodash";
 
 type Key = ColumnProps['key'];
 

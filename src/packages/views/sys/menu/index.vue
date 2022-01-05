@@ -54,7 +54,7 @@
 import {defineComponent, ref, reactive, toRefs, inject} from 'vue';
 import add from './add.vue'
 import edit from './edit.vue'
-import {apiFindAll, apiDeleteMenu, apiDeleteMenus} from '@/packages/service/app'
+import {apiAll, apiDelete, apiDeletes} from '@/packages/service/menu'
 import {toTree} from '@/packages/utils/utils'
 import {ColumnProps} from 'ant-design-vue/es/table/interface';
 import {message} from "ant-design-vue";
@@ -237,7 +237,7 @@ export default defineComponent({
         };
 
         const getData = () => {
-            apiFindAll({ks: ks.value}).then((res: any) => {
+            apiAll({ks: ks.value}).then((res: any) => {
                 data.value = toTree(res);
                 loading.value = false;
             })
@@ -250,7 +250,7 @@ export default defineComponent({
 
         // 单个删除
         const handleDelete = ({record}: { record: any }) => {
-            apiDeleteMenu({id: record.id}, {notify: true}).then(() => {
+            apiDelete({id: record.id}, {notify: true}).then(() => {
                 getData()
             })
         }
@@ -258,8 +258,8 @@ export default defineComponent({
         // 多个删除
         const handleDeletes = () => {
             const ids = state.selectedRowKeys.map((item: any) => item.id);
-            if (!ids.length) return  message.warning('请至少选择一个');
-            apiDeleteMenus({ids}, {notify: true}).then(() => {
+            if (!ids.length) return message.warning('请至少选择一个');
+            apiDeletes({ids}, {notify: true}).then(() => {
                 getData()
             })
         }

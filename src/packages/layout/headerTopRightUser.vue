@@ -57,7 +57,8 @@ import {computed, defineComponent, inject, nextTick, onMounted, ref} from 'vue'
 import {checkFull, fullscreenchange, switchScreen} from '@/packages/utils/screen.full'
 import {handleKeyBoard} from '@/packages/utils/keydown'
 import {notification} from 'ant-design-vue';
-import {apiLogout, apiNotice} from '@/packages/service/user'
+import {apiLogout} from '@/packages/service/user'
+import {apiAppNotice} from '@/packages/service/app'
 import {
     BellOutlined,
     ClearOutlined,
@@ -143,9 +144,9 @@ export default defineComponent({
             fullscreenchange(toggle)
         })
 
-        apiNotice().then((res: any) => {
-            noticeList.value = res;
-        })
+        // apiAppNotice().then((res: any) => {
+        //     noticeList.value = res;
+        // })
 
         const handleQuit = () => {
             apiLogout().then(() => {

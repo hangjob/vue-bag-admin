@@ -3,7 +3,7 @@ import Mock from "mockjs";
 import {resData} from './baseCommon'
 import userhead from '../src/packages/assets/image/yanghang.jpg';
 
-Mock.mock("/api/yxs/userinfo", 'post', (options: any) => {
+Mock.mock("/api/app/userinfo", 'post', (options: any) => {
     let {body} = options;
     let type = 'admin';
     let roles = ['admin', 'editor','test'];
@@ -43,7 +43,7 @@ Mock.mock("/api/yxs/userinfo", 'post', (options: any) => {
     return result;
 })
 
-Mock.mock("/api/yxs/notice", 'post', () => {
+Mock.mock("/api/app/notice", 'post', () => {
     const data = Mock.mock({
         "array|5": [
             {
