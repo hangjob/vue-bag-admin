@@ -55,7 +55,11 @@ http.interceptors.response.use((res: any) => {
 
     if (status === 403) {
         locaStore.clearAll();
-        if (config.__retryCount === 0) messageModel.warning(data.message, httpNetwork.messageDuration) // 避免错误重连也提示
+        if (config.__retryCount === 0) {
+            if (config.notify) {
+                messageModel.warning(data.message, httpNetwork.messageDuration) // 避免错误重连也提示
+            }
+        }
         const result = routerConfig.filter.findIndex(item => window.location.href.indexOf(item) > -1) !== -1;
         if (!result) {
             router.push(routerConfig.filter[0])

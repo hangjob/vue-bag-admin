@@ -126,10 +126,6 @@ const routes: Array<RouteRecordRaw> = [
                 component: () => import('@/packages/views/module/descriptions/index.vue')
             },
             {
-                path: '/module/marquee', name: 'module-marquee', meta: {title: '滚动组件'},
-                component: () => import('@/packages/views/module/marquee/index.vue')
-            },
-            {
                 path: '/admire', name: 'admire', meta: {title: '打点吧'},
                 component: () => import('@/packages/views/admire/index.vue')
             },

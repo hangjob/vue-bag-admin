@@ -24,10 +24,7 @@ function recursiveViews(app: App, router: any, views: any) {
     views.forEach((item: any) => {
         let component = findViewModule(item.filePath, external);
         if (component) {
-            router.addRoute('admin', {
-                path: item.path,
-                component
-            })
+            router.addRoute('admin', {path: item.path, component})
         }
         store.commit('app/addMenuList', item)
         if (item.children) {
@@ -37,7 +34,7 @@ function recursiveViews(app: App, router: any, views: any) {
 }
 
 const setAddRoute = (app: App, router: any) => {
-    const {views = []} = app.config.globalProperties.$plugin?.routerView || {};
+    const views: any = []; // 这里设置
     recursiveViews(app, router, views)
 }
 export {

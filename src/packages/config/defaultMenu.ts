@@ -22,8 +22,8 @@ const arr = [
         shows: 1,
         children: [
             {
-                name: '菜单列表',
-                path: '/sys/menu',
+                name: '用户管理',
+                path: '/sys/member',
                 icon: '',
                 shows: 1,
                 tabHidden: false,
@@ -40,15 +40,6 @@ const arr = [
                 keepAlive: true
             },
             {
-                name: '用户管理',
-                path: '/sys/member',
-                icon: '',
-                shows: 1,
-                tabHidden: false,
-                tabFix: false,
-                keepAlive: true
-            },
-            {
                 name: '角色管理',
                 path: '/sys/role',
                 icon: '',
@@ -56,7 +47,16 @@ const arr = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: true
-            }
+            },
+            {
+                name: '菜单列表',
+                path: '/sys/menu',
+                icon: '',
+                shows: 1,
+                tabHidden: false,
+                tabFix: false,
+                keepAlive: true
+            },
         ]
     },
     {
@@ -144,15 +144,6 @@ const arr = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: false
-            },
-            {
-                name: '滚动组件',
-                path: '/module/marquee',
-                icon: '',
-                shows: 1,
-                tabHidden: false,
-                tabFix: false,
-                keepAlive: true
             },
             {
                 name: '课程表',
@@ -316,16 +307,6 @@ const arr = [
         tabHidden: false,
         tabFix: false,
         keepAlive: false,
-    },
-    {
-        name: '在线测试',
-        path: '/iframe/ceshi',
-        icon: 'RocketOutlined',
-        shows: 1,
-        tabHidden: false,
-        tabFix: false,
-        keepAlive: false,
-        iframePath: 'https://hoppscotch.io/cn'
     },
     {
         name: '关于',

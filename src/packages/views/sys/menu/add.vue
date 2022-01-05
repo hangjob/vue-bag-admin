@@ -105,7 +105,7 @@
 	</a-modal>
 </template>
 <script lang="ts">
-import {defineComponent, reactive, ref, toRaw, UnwrapRef} from 'vue';
+import {defineComponent, onMounted, reactive, ref, toRaw, UnwrapRef} from 'vue';
 import {ValidateErrorEntity} from 'ant-design-vue/es/form/interface';
 import {apiCreate} from '@/packages/service/menu'
 import icons from './icons';
@@ -177,6 +177,12 @@ export default defineComponent({
 				{validator: validatHttpFilePath, trigger: 'blur'}
 			]
 		};
+
+        onMounted(() => {
+            console.log(1)
+            formRef.value.resetFields()
+        })
+
 		treeData.value = toTree(props.treeData || []);
 		const onSubmit = async () => {
 			return formRef.value.validate()

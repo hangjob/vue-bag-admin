@@ -51,7 +51,7 @@
     </yxs-modal>
 </template>
 <script lang="ts">
-import {defineComponent, ref, reactive, toRefs, inject} from 'vue';
+import {defineComponent, ref, reactive, toRefs, inject, onMounted} from 'vue';
 import add from './add.vue'
 import edit from './edit.vue'
 import {apiAll, apiDelete, apiDeletes} from '@/packages/service/menu'
@@ -201,7 +201,6 @@ export default defineComponent({
             selectedRowKeys: [],
             loading: false,
         });
-
 
         const handleAddOk = () => {
             add.value.onSubmit().then(() => {

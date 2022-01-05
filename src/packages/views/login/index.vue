@@ -92,8 +92,8 @@ export default defineComponent({
             formState.password = password
             formState.rememberPas = rememberPas;
         } else {
-            formState.username = '';
-            formState.password = ''
+            formState.username = 'admin';
+            formState.password = '123456'
         }
 
         const handleLogin = () => {

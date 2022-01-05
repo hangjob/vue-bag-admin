@@ -11,7 +11,6 @@ import {handleError} from '@/packages/debug'
  */
 interface $optionsType {
     routerView?: {
-        views: Array<any>, // 菜单
         external?: any, // 外接路由文件所在路径
     },
     router?: any,
