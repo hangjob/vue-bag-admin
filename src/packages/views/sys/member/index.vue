@@ -25,7 +25,7 @@
                 <a-tag color="blue" v-if="record.sex === 2">男</a-tag>
                 <a-tag color="cyan" v-if="record.sex === 0">保密</a-tag>
             </template>
-            <template #action="{ record }">
+            <template #action="{ record,index }">
                 <a-space>
                     <a-button type="primary" size="small" @click="setPasswordEdit({record})">密码</a-button>
                     <a-button type="primary" size="small" @click="setVisibleEdit({record})">编辑</a-button>
@@ -34,9 +34,12 @@
                         ok-text="确认"
                         cancel-text="关闭"
                         placement="topRight"
+                        :disabled="record.id <= 7"
                         @confirm="handleDelete({record})"
                     >
-                        <a-button type="primary" danger size="small">删除</a-button>
+                        <a-button type="primary" :disabled="record.id <= 7" danger size="small">
+                            删除
+                        </a-button>
                     </a-popconfirm>
                 </a-space>
             </template>
@@ -221,6 +224,10 @@ export default defineComponent({
             },
             onSelectAll: (selected: boolean, selectedRows: any, changeRows: any) => {
             },
+            getCheckboxProps: (record: any) => ({
+                disabled: record.id <= 7,
+                name: record.name,
+            }),
         };
 
         const getData = () => {

@@ -27,7 +27,7 @@
                 <a-tag color="#2db7f5" v-if="record.children">目录</a-tag>
                 <a-tag color="#87d068" v-else>菜单</a-tag>
             </template>
-            <template #action="{ record }">
+            <template #action="{ record ,index}">
                 <a-space>
                     <a-button type="primary" size="small" @click="setVisibleEdit({record})">编辑</a-button>
                     <a-popconfirm

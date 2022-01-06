@@ -6,10 +6,16 @@ module.exports = options => {
         if (result) {
             await next();
         } else {
-            const token = ctx.cookies.get('token', {signed: false})
+            const token = ctx.cookies.get('token', {signed: false, encrypt: true})
 
             if (token) {
-                await next();
+                const result = await ctx.model.Member.findOne({where: {password: token}})
+                if (result) {
+                    await next();
+                } else {
+                    ctx.response.status = 403;
+                    ctx.body = {code: 9999, data: '', message: '你的登录信息已过期，请重新登录'}
+                }
             } else {
                 ctx.response.status = 403;
                 ctx.body = {code: 9999, data: '', message: '你的登录信息已过期，请重新登录'}
