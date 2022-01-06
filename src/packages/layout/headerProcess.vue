@@ -76,7 +76,6 @@ export default defineComponent({
         }
 
         const handleColseCurrent = (item: any) => {
-            debugger
             const idx: number = processList.value.findIndex((e: any) => e.id == item.id)
             store.commit('app/delProcessList', idx)
             toPath();

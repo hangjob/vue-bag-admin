@@ -3,10 +3,10 @@ import Mock from "mockjs";
 import {resData} from './baseCommon'
 import userhead from '../src/packages/assets/image/yanghang.jpg';
 
-Mock.mock("/api/app/userinfo", 'post', (options: any) => {
+Mock.mock("/api/user/userinfo", 'post', (options: any) => {
     let {body} = options;
     let type = 'admin';
-    let roles = ['admin', 'editor','test'];
+    let roles = ['admin', 'editor', 'test'];
     if (body) {
         body = JSON.parse(body)
         if (body.type !== 'admin') {
@@ -61,7 +61,23 @@ Mock.mock("/api/app/notice", 'post', () => {
     return result;
 })
 
+Mock.mock("/api/user/login", 'post', () => {
+    const result: resData = {
+        code: 1,
+        message: '登录成功',
+        data: '',
+    }
+    return result;
+})
 
+Mock.mock("/api/user/logout", 'post', () => {
+    const result: resData = {
+        code: 1,
+        message: '退出成功',
+        data: '',
+    }
+    return result;
+})
 //数据延迟
 // Mock.setup({
 //     timeout: "500-800"
