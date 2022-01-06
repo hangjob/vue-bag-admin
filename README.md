@@ -2,18 +2,19 @@
 
 🎉 Vue3+Vite2.6+TypeScript+ant-design-vue构建，提供基础的框架，快速搭建企业级中后台产品，响应式管理后台系统
 
+### 两种预览
+
+[在线预览——Egg.js，MySQL数据库](https://vite.itnavs.com)
+
+[在线预览——前端mock数据](https://hangjob.github.io/vue-vite-admin-ts/dist/lib.html)
+
+### 教程
+
+[使用文档地址](https://hangjob.github.io/docs/#/vue-vite-admin-ts/)
 
 ### 快速预览
 
 ![vue-vite-admin-ts](https://s4.ax1x.com/2021/12/24/TYAcLT.jpg)
-
-### 项目地址
-
-[Github](https://github.com/hangjob/vue-vite-admin-ts)
-
-[演示地址](https://hangjob.github.io/vue-vite-admin-ts/dist/lib.html)
-
-[文档地址](https://hangjob.github.io/docs/#/vue-vite-admin-ts/)
 
 ## 使用项目
 
@@ -219,12 +220,9 @@ example目录公用packages依赖包，这种设计对于多种不同项目，�
 |── index.html                               // index.html
 ```
 
-
 #### 建议
 
 需要更多功能或者建议[issues](https://github.com/hangjob/vue-vite-admin-ts/issues)
-
-
 
 ### 使用
 
