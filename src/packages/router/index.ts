@@ -144,6 +144,14 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: '/module/course', name: 'module-course', meta: {title: '课程表'},
                 component: () => import('@/packages/views/module/course/index.vue')
+            },
+            {
+                path: '/module/winbox', name: 'module-winbox', meta: {title: 'WinBox弹窗'},
+                component: () => import('@/packages/views/module/winbox/index.vue')
+            },
+            {
+                path: '/module/media', name: 'module-media', meta: {title: '视频播放'},
+                component: () => import('@/packages/views/module/media/index.vue')
             }
         ]
     },

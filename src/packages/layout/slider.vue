@@ -13,7 +13,7 @@
         <div class="slider-container">
             <div class="left-slider">
                 <div class="left-slider-logo">
-                    {{logoTitle}}
+                    {{ logoTitle }}
                 </div>
                 <div class="scroll">
                     <YxsMenuSlider/>
@@ -49,7 +49,7 @@ export default defineComponent({
             return menuMinWidth
         })
 
-        const logoTitle = computed(()=> width.value === 80 ? 'admin' : 'vue-vite-admin-ts')
+        const logoTitle = computed(() => width.value === 80 ? 'admin' : 'vue-vite-admin-ts')
 
         const close = () => {
             store.commit('app/updateFloatingVisible', !store.getters['app/getFloatingVisible'])
@@ -86,6 +86,8 @@ export default defineComponent({
 </style>
 <style lang="less">
 .drawer {
+    z-index: 1;
+
     .ant-drawer-body {
         padding: 0;
     }

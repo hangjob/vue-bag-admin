@@ -154,6 +154,24 @@ const arr = [
                 tabFix: false,
                 keepAlive: true
             },
+            {
+                name: 'WinBox弹窗',
+                path: '/module/winbox',
+                icon: '',
+                shows: 1,
+                tabHidden: false,
+                tabFix: false,
+                keepAlive: true
+            },
+            {
+                name: '视频播放',
+                path: '/module/media',
+                icon: '',
+                shows: 1,
+                tabHidden: false,
+                tabFix: false,
+                keepAlive: true
+            },
         ]
     },
     {

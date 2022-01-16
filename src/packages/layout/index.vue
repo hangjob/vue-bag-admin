@@ -44,6 +44,7 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     height: 100%;
+    z-index: 1;
 
     &-footer {
         padding: 8px 0;

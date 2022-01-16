@@ -13,8 +13,8 @@ const apiAppRouter = (params?: object, config?: object) => {
 /**
  * 获取网络http异步组件
  */
-const apiAppComponents = () => {
-    return post('/app/components');
+const apiAppLibrary = () => {
+    return post('/app/library');
 }
 
 
@@ -27,6 +27,6 @@ const apiAppNotice = () => {
 
 export {
     apiAppRouter,
-    apiAppComponents,
+    apiAppLibrary,
     apiAppNotice
 }

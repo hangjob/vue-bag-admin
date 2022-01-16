@@ -18,6 +18,11 @@ class HomeController extends baseController {
         this.result({data: result})
     }
 
+    async library() {
+        let result = `<div class="async">这个是测试http网络异步的组件<YsIonfontDviceMna/><YsIonfontCrtAdit/></div>`
+        this.result({data: result})
+    }
+
 }
 
 module.exports = HomeController;

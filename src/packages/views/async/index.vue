@@ -1,16 +1,17 @@
 <template>
     <yxs-view class="about">
         <p>这里是http网络异步组件，请先打开服务</p>
-        <testComponent/>
+        <br/>
+        <libraryComponent/>
     </yxs-view>
 </template>
 <script lang="ts">
 import {defineComponent, defineAsyncComponent} from 'vue'
-import {apiAppComponents} from '@/packages/service/app'
+import {apiAppLibrary} from '@/packages/service/app'
 
-const testComponent = defineAsyncComponent(() =>
+const libraryComponent = defineAsyncComponent(() =>
     new Promise((resolve, reject) => {
-        apiAppComponents().then((res: any) => {
+        apiAppLibrary().then((res: any) => {
             // @ts-ignore
             resolve({template: res})
         })
@@ -18,7 +19,7 @@ const testComponent = defineAsyncComponent(() =>
 )
 export default defineComponent({
     components: {
-        testComponent
+        libraryComponent
     },
     setup() {
 

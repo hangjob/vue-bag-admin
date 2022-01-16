@@ -229,6 +229,56 @@ const handleExport = (data: Blob, fileName?: string) => {
 }
 
 
+const loadScript = (src: string) => {
+    return new Promise((resolve: any, reject: any) => {
+        let script = document.createElement('script');
+        script.type = "text/javascript";
+        script.src = src;
+        script.id = src;
+        if (document.getElementById(src)) return resolve();
+        document.body.appendChild(script);
+        script.onload = () => {
+            resolve();
+        }
+        script.onerror = () => {
+            reject();
+        }
+    })
+}
+
+/**
+ *
+ * loadCssCode('body{background-color:#f00}')
+ * @param code
+ */
+function loadCssCode(code: any) {
+    let style: any = document.createElement('style')
+    style.type = 'text/css'
+    style.rel = 'stylesheet'
+    try {
+        //for Chrome Firefox Opera Safari
+        style.appendChild(document.createTextNode(code))
+    } catch (ex) {
+        //for IE
+        style.styleSheet.cssText = code
+    }
+    let head = document.getElementsByTagName('head')[0]
+    head.appendChild(style)
+}
+
+
+function loadStyle(href: string) {
+    let link = document.createElement('link')
+    link.type = 'text/css'
+    link.rel = 'stylesheet'
+    link.href = href
+    link.id = href
+    let head = document.getElementsByTagName('head')[0];
+    if (document.getElementById(href)) return;
+    head.appendChild(link)
+}
+
+
 export {
     getAllParentArr,
     getBrowser,
@@ -236,5 +286,8 @@ export {
     toTree,
     toHump,
     isArray,
-    handleExport
+    handleExport,
+    loadScript,
+    loadCssCode,
+    loadStyle
 }

@@ -45,6 +45,7 @@ http.interceptors.response.use((res: any) => {
         }
         return data;
     } else {
+        if (config.notifyErroer) messageModel.warning(message, httpNetwork.messageDuration)
         return Promise.reject(res.data);
     }
 }, async (error: any) => {
