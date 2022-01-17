@@ -37,7 +37,7 @@
 import {computed, defineComponent, ref, watchEffect, watch} from 'vue'
 import {useStore} from "vuex";
 import {notification} from 'ant-design-vue';
-import {apiUserUserinfo} from '@/packages/service/user'
+import {toClipboard} from '@soerenmartius/vue3-clipboard'
 
 export default defineComponent({
     name: 'permit',
@@ -58,9 +58,34 @@ export default defineComponent({
         }
 
         watch([radioValue], () => {
-            visible.value = false;
-            // store.commit('user/updateUserinfo', res) 切换用户信息
-            // visible.value = true;
+            const obj: any = {}
+            if (radioValue.value === 'admin') {
+                obj.username = 'admin';
+                obj.password = '123456';
+                obj.name = '管理员'
+            }
+            if (radioValue.value === 'test') {
+                obj.username = '海洋花';
+                obj.password = '123456'
+                obj.name = '测试员'
+            }
+            if (radioValue.value === 'client') {
+                obj.username = '大鲸鱼';
+                obj.password = '123456'
+                obj.name = '查看员'
+            }
+            if (radioValue.value === 'editor') {
+                obj.username = '海洋花';
+                obj.password = '123456'
+                obj.name = '编辑员'
+            }
+            toClipboard(`账号：${obj.username}，密码：${obj.password}`).then(() => {
+                notification['success']({
+                    message: `已复制：${obj.name}账号`,
+                    duration: 10,
+                    description: `账号：${obj.username}，密码：${obj.password}`,
+                });
+            })
         })
 
         return {

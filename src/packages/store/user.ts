@@ -6,7 +6,7 @@ const user = {
     },
     getters: {
         roles: (state: any) => {
-            return state.roles;
+            return state.roles.split(',');
         },
         userinfo: (state: any) => {
             return state.userinfo;

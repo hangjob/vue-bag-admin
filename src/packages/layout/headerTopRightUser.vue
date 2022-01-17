@@ -29,6 +29,9 @@
     <div class="right_menu-item" @click="handleOpenThemeSetting">
         <ClearOutlined class="icon-svg"/>
     </div>
+    <div class="right_menu-item hidden-xs" @click="handleGithub">
+        <GithubOutlined class="icon-svg"/>
+    </div>
     <div class="right_menu-item hidden-xs">
         <img class="user-head" src="@/packages/assets/image/yanghang.jpg" alt="">
         <a-dropdown>
@@ -39,7 +42,7 @@
             <template #overlay>
                 <a-menu>
                     <a-menu-item>
-                        <a href="https://github.com/hangjob/vue-vite-admin-ts" target="_blank">嗨，你好</a>
+                        <a href="https://github.com/hangjob/vue-vite-admin-ts" target="_blank" >查看源码</a>
                     </a-menu-item>
                     <a-menu-item @click="handleQuit">
                         <LogoutOutlined/>
@@ -159,6 +162,10 @@ export default defineComponent({
             router.push('/module/debug')
         }
 
+        const handleGithub = () => {
+            window.open('https://github.com/hangjob/vue-vite-admin-ts')
+        }
+
         return {
             userSetting,
             searchActive,
@@ -175,7 +182,8 @@ export default defineComponent({
             handleRefresh,
             isPC,
             handleQuit,
-            handleDebug
+            handleDebug,
+            handleGithub
         }
     }
 })
