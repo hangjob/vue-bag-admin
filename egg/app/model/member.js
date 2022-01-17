@@ -22,7 +22,8 @@ module.exports = app => {
         },
         age: {
             type: INTEGER,
-            comment: '用户年龄'
+            comment: '用户年龄',
+            defaultValue: 27,
         },
         email: {
             type: STRING,

@@ -33,6 +33,7 @@
         "start": "egg-scripts start --daemon --title=egg-server-vue-admin-serve",
         "stop": "egg-scripts stop --title=egg-server-vue-admin-serve",
         "dev": "egg-bin dev",
+        "fake": "node ./initTableData.js",
         "debug": "egg-bin debug",
         "test": "npm run lint -- --fix && npm run test-local",
         "test-local": "egg-bin test",

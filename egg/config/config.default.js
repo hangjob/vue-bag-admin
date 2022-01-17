@@ -72,7 +72,7 @@ module.exports = appInfo => {
 
     config.session = {
         key: 'EGG_SESS_TOKEN',
-        maxAge: 1000 * 3600 * 1, // 1 天
+        maxAge: 1000 * 3600, // 1 天
         httpOnly: true,
         encrypt: true,
     }

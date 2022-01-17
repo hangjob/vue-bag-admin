@@ -7,7 +7,7 @@ module.exports = options => {
             await next();
         } else {
             const token = ctx.cookies.get('token', {signed: false, encrypt: true})
-
+            console.log(token)
             if (token) {
                 const result = await ctx.model.Member.findOne({where: {password: token}})
                 if (result) {
