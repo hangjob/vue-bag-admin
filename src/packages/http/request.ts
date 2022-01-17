@@ -23,6 +23,13 @@ http.defaults.retry = httpNetwork.retry;
 http.defaults.retryDelay = httpNetwork.retryDelay;
 
 
+interface resultErrorData {
+    message: string;
+    data?: any;
+    error?: any;
+    config?: any;
+}
+
 http.interceptors.request.use((config: any) => {
     const token = store.state.user.token
     const {url} = config;
@@ -46,35 +53,46 @@ http.interceptors.response.use((res: any) => {
         return data;
     } else {
         if (config.notifyErroer) messageModel.warning(message, httpNetwork.messageDuration)
-        return Promise.reject(res.data);
+        const rejectData: resultErrorData = {
+            message,
+            data: res.data,
+            config
+        }
+        return Promise.reject(rejectData);
     }
-}, async (error: any) => {
-
-    const {config, status, data} = error.response || {};
+}, async (err: any) => {
+    const error = err.response || err.toJSON();
+    const {config, status, data} = error;
     // 设置用于跟踪重试计数的变量
     config.__retryCount = config.__retryCount || 0;
 
     if (status === 403) {
         locaStore.clearAll();
-        if (config.__retryCount === 0) {
-            if (config.notify) {
-                messageModel.warning(data.message, httpNetwork.messageDuration) // 避免错误重连也提示
-            }
-        }
-        const result = routerConfig.filter.findIndex(item => window.location.href.indexOf(item) > -1) !== -1;
-        if (!result) {
-            router.push(routerConfig.filter[0])
-        }
-        return Promise.reject(data);
     }
+
+    const message = (config.__retryCount === 0 ? '发生错误：' : `正在重连 ${config.__retryCount} 次：`) + (data ? data.message : error.message);
+
+    const rejectData: resultErrorData = {
+        message,
+        error,
+        config
+    }
+
+    messageModel.warning(message, httpNetwork.messageDuration)
+
+    const result = routerConfig.filter.findIndex(item => window.location.href.indexOf(item) > -1) !== -1;
+    if (!result) {
+        router.push(routerConfig.filter[0])
+    }
+
     // 如果config不存在或没有设置重试选项，请拒绝
     if (!config || !config.retry) {
-        return Promise.reject(error.message);
+        return Promise.reject(rejectData);
     }
 
     // 检查重试次数是否达到最大值
     if (config.__retryCount >= config.retry) {
-        return Promise.reject(error.message);
+        return Promise.reject(rejectData);
     }
 
     // 增加重试次数
