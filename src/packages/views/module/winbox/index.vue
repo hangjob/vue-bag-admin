@@ -42,120 +42,121 @@ loadStyle('https://cdn.jsdelivr.net/npm/winbox@0.2.1/dist/css/winbox.min.css');
 
 export default defineComponent({
     setup() {
-
+        const buttons = ref();
+        const handleWinBox = ref();
         loadScript('https://cdn.jsdelivr.net/npm/winbox@0.2.1/dist/winbox.bundle.min.js').then(() => {
+            const winbox: any = ref();
+            handleWinBox.value = (type: number) => {
+                switch (type) {
+                    case 1:
+                        new WinBox("嘿嘿嘿-基本例子", {
+                            background: "#ff005d",
+                        });
+                        break;
+                    case 2:
+                        new WinBox("嘿嘿嘿-自定义展示的元素", {
+                            background: "#ff005d",
+                            root: document.body
+                        });
+                        break;
+                    case 3:
+                        new WinBox("嘿嘿嘿-自定义边界", {
+                            background: "#ff005d",
+                            border: "0.3em"
+                        });
+                        break;
+                    case 4:
+                        new WinBox("嘿嘿嘿-左边", {
+                            background: "#ff005d",
+                            right: "50%",
+                            max: true
+                        });
+                        new WinBox("嘿嘿嘿-右边", {
+                            background: "#ff005d",
+                            x: "100%",
+                            left: "50%",
+                            max: true
+                        });
+                        break;
+                    case 5:
+                        new WinBox({
+                            title: "嘿嘿嘿-自定义位置/大小",
+                            background: "#ff005d",
+                            x: "center",
+                            y: "center",
+                            width: "50%",
+                            height: "50%"
+                        });
+                        break;
+                    case 6:
+                        new WinBox("模态窗口", {
+                            modal: true,
+                            background: "#ff005d",
+                        });
+                        break;
+                    case 7:
+                        let DOM: any = document.getElementById("content");
+                        new WinBox("模态窗口", {
+                            background: "#ff005d",
+                            mount: DOM.cloneNode(true)
+                        });
+                        break;
+                    case 8:
+                        new WinBox("打开一个URL", {
+                            background: "#ff005d",
+                            url: "https://hangjob.github.io/winbox/index.html"
+                        });
+                        break;
+                    case 9:
+                        winbox.value = new WinBox("对话框", {
+                            background: "#ff005d",
+                            mount: document.getElementById("controls"),
+                            border: 4,
+                            onclose: function (force: any) {
+                                return !force && !confirm("是否关闭窗口?");
+                            }
+                        });
+                        break;
+                }
+            }
+            buttons.value = {
+                minimize: function () {
+                    winbox.value.minimize();
+                },
+                maximize: function () {
+                    winbox.value.maximize();
+                },
+                fullscreen: function () {
+                    winbox.value.fullscreen();
+                },
+                move: function () {
+                    winbox.value.move("center", "center");
+                },
+                resize: function () {
+                    winbox.value.resize("50%", "50%");
+                },
+                title: function () {
+                    winbox.value.setTitle("Title-" + Math.random());
+                },
+                color: function () {
+                    winbox.value.setBackground(
+                        "rgb(" + (Math.random() * 255 | 0) + "," +
+                        (Math.random() * 255 | 0) + "," +
+                        (Math.random() * 255 | 0) + ")"
+                    );
+                },
+                modal: function () {
+                    winbox.value.body.parentNode.classList.toggle("modal");
+                },
+                close: function () {
+                    winbox.value.close();
+                },
+                force_close: function () {
+                    winbox.value.close(true);
+                }
+            };
         })
-        const winbox: any = ref();
-        const handleWinBox = (type: number) => {
-            switch (type) {
-                case 1:
-                    new WinBox("嘿嘿嘿-基本例子", {
-                        background: "#ff005d",
-                    });
-                    break;
-                case 2:
-                    new WinBox("嘿嘿嘿-自定义展示的元素", {
-                        background: "#ff005d",
-                        root: document.body
-                    });
-                    break;
-                case 3:
-                    new WinBox("嘿嘿嘿-自定义边界", {
-                        background: "#ff005d",
-                        border: "0.3em"
-                    });
-                    break;
-                case 4:
-                    new WinBox("嘿嘿嘿-左边", {
-                        background: "#ff005d",
-                        right: "50%",
-                        max: true
-                    });
-                    new WinBox("嘿嘿嘿-右边", {
-                        background: "#ff005d",
-                        x: "100%",
-                        left: "50%",
-                        max: true
-                    });
-                    break;
-                case 5:
-                    new WinBox({
-                        title: "嘿嘿嘿-自定义位置/大小",
-                        background: "#ff005d",
-                        x: "center",
-                        y: "center",
-                        width: "50%",
-                        height: "50%"
-                    });
-                    break;
-                case 6:
-                    new WinBox("模态窗口", {
-                        modal: true,
-                        background: "#ff005d",
-                    });
-                    break;
-                case 7:
-                    let DOM: any = document.getElementById("content");
-                    new WinBox("模态窗口", {
-                        background: "#ff005d",
-                        mount: DOM.cloneNode(true)
-                    });
-                    break;
-                case 8:
-                    new WinBox("打开一个URL", {
-                        background: "#ff005d",
-                        url: "https://hangjob.github.io/winbox/index.html"
-                    });
-                    break;
-                case 9:
-                    winbox.value = new WinBox("对话框", {
-                        background: "#ff005d",
-                        mount: document.getElementById("controls"),
-                        border: 4,
-                        onclose: function (force: any) {
-                            return !force && !confirm("是否关闭窗口?");
-                        }
-                    });
-                    break;
-            }
-        }
 
-        const buttons = {
-            minimize: function () {
-                winbox.value.minimize();
-            },
-            maximize: function () {
-                winbox.value.maximize();
-            },
-            fullscreen: function () {
-                winbox.value.fullscreen();
-            },
-            move: function () {
-                winbox.value.move("center", "center");
-            },
-            resize: function () {
-                winbox.value.resize("50%", "50%");
-            },
-            title: function () {
-                winbox.value.setTitle("Title-" + Math.random());
-            },
-            color: function () {
-                winbox.value.setBackground(
-                    "rgb(" + (Math.random() * 255 | 0) + "," +
-                    (Math.random() * 255 | 0) + "," +
-                    (Math.random() * 255 | 0) + ")"
-                );
-            },
-            modal: function () {
-                winbox.value.body.parentNode.classList.toggle("modal");
-            },
-            close: function () {
-                winbox.value.close();
-            },
-            force_close: function () {
-                winbox.value.close(true);
-            }
-        };
         return {
             handleWinBox,
             buttons
