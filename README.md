@@ -43,6 +43,17 @@ npm run dev
 npm run build
 ```
 
+### 后端服务
+```bash
+cd /vue-vite-admin-ts/egg
+npm i # 安装依赖
+npm run dev # 启动服务
+npm run fake # 生成测试数据
+# 你也可以导入数据文件到mysql中,文件目录放置在 /vue-vite-admin-ts/egg/db
+```
+
+[具体文档](https://hangjob.github.io/docs/#/vue-vite-admin-ts/egg)
+
 ### 其他
 
 ```bash
