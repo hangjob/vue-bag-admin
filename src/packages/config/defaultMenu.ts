@@ -172,6 +172,24 @@ const arr = [
                 tabFix: false,
                 keepAlive: true
             },
+            {
+                name: '内容搜索',
+                path: '/module/fuse',
+                icon: '',
+                shows: 1,
+                tabHidden: false,
+                tabFix: false,
+                keepAlive: true
+            },
+            {
+                name: '导出文件',
+                path: '/module/fileSaver',
+                icon: '',
+                shows: 1,
+                tabHidden: false,
+                tabFix: false,
+                keepAlive: true
+            },
         ]
     },
     {
