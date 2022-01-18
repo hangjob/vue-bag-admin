@@ -3,7 +3,7 @@
 		<div v-if="routerView" class="layout-container-view">
 			<div class="layout-container-view-content scroll">
 				<router-view v-slot="{ Component, route }">
-					<keep-alive :include="caches">
+					<keep-alive :max="10" :include="caches">
 						<component :is="Component"/>
 					</keep-alive>
 				</router-view>
