@@ -52,7 +52,7 @@ http.interceptors.response.use((res: any) => {
         }
         return data;
     } else {
-        if (config.notifyErroer) messageModel.warning(message, httpNetwork.messageDuration)
+        if (config.notifyError) messageModel.warning(message, httpNetwork.messageDuration)
         const rejectData: resultErrorData = {
             message,
             data: res.data,
