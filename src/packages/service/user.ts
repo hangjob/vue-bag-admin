@@ -6,7 +6,7 @@ const prefix = '/user'
  * 登录
  */
 const apiLogin = (params?: object) => {
-    return post(`${prefix}/login`, params, {notifyErroer: true})
+    return post(`${prefix}/login`, params, {notifyError: true})
 }
 
 /**

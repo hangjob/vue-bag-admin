@@ -152,6 +152,14 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: '/module/media', name: 'module-media', meta: {title: '视频播放'},
                 component: () => import('@/packages/views/module/media/index.vue')
+            },
+            {
+                path: '/module/fuse', name: 'module-fuse', meta: {title: '内容搜索'},
+                component: () => import('@/packages/views/module/fuse/index.vue')
+            },
+            {
+                path: '/module/fileSaver', name: 'module-fileSaver', meta: {title: '导出文件'},
+                component: () => import('@/packages/views/module/fileSaver/index.vue')
             }
         ]
     },
