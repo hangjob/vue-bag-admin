@@ -2,7 +2,7 @@ import viteCompression from 'vite-plugin-compression' // 开启压缩
 
 export function configViteCompression() {
     // 开启压缩 [文档](https://github.com/anncwb/vite-plugin-compression/blob/main/README.zh_CN.md)
-    return  viteCompression({
+    return viteCompression({
         verbose: true,
         disable: false,
         // filter:()=>{}, // 那些资源不压缩

@@ -23,15 +23,18 @@
             <template #action="{ record }">
                 <a-space>
                     <a-button type="primary" size="small" @click="setVisibleEdit({record})">编辑</a-button>
-                    <a-popconfirm
-                        :title="`你确定删除 ${record.name} 嘛？`"
-                        ok-text="确认"
-                        cancel-text="关闭"
-                        placement="topRight"
-                        @confirm="handleDelete({record})"
-                    >
-                        <a-button type="primary" danger size="small">删除</a-button>
-                    </a-popconfirm>
+<!--                    <a-popconfirm-->
+<!--                        :title="`你确定删除 ${record.name} 嘛？`"-->
+<!--                        ok-text="确认"-->
+<!--                        cancel-text="关闭"-->
+<!--                        placement="topRight"-->
+<!--                        @confirm="handleDelete({record})"-->
+<!--                    >-->
+<!--                        <a-button type="primary" danger size="small">删除</a-button>-->
+<!--                    </a-popconfirm>-->
+                    <a-button type="primary" @click="handlePowerPoint" danger size="small">
+                        删除
+                    </a-button>
                 </a-space>
             </template>
         </a-table>
@@ -211,6 +214,11 @@ export default defineComponent({
             getData();
         }
 
+        const handlePowerPoint = () => {
+            message.warning('演示数据不作为删除');
+        }
+
+
         return {
             data,
             add,
@@ -231,6 +239,7 @@ export default defineComponent({
             loading,
             handleSearch,
             ks,
+            handlePowerPoint
         };
     },
 });

@@ -81,5 +81,6 @@ module.exports = app => {
         updatedAt: 'updateTime',
         tableName: 'yxs_menu' // 定义实际表名
     });
+    
 }
 

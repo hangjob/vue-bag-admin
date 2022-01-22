@@ -1,15 +1,8 @@
-import {Component, createApp} from 'vue'
+import { createApp } from 'vue'
 import App from './App.vue'
-import store from '@/example/store/index';
-import install, {$optionsType} from '@/packages/install'
+import '__ROOT__/mock'
+import install from '@/packages/install'
 
-const locas: Record<string, Component> = import.meta.globEager("/src/example/views/**/*.vue")
-const $options: $optionsType = {
-    routerView: {external: locas},
-    store: {
-        module: store
-    }
-}
 const app = createApp(App)
-app.use(install, $options).mount('#app');
+app.use(install).mount('#app')
 

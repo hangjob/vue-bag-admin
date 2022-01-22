@@ -1,11 +1,12 @@
-import path from "path";
+import path from 'path'
 
-const setProBuild = function () {
+const setProBuild = function() {
     return {
         rollupOptions: {
             input: {
                 example: path.resolve(process.cwd(), 'index.html'), // 把页面放在外面，路径简短 防止src/packages/web/index.html ，建议vite把key(web、lib)可也阔以映射成页面路径，就避免这个问题
-                lib: path.resolve(process.cwd(), 'lib.html')
+                lib: path.resolve(process.cwd(), 'lib.html'),
+                demo: path.resolve(process.cwd(), 'demo.html'),
             },
             // 两种方式 也可以指定包名打包
             // output: {
@@ -25,9 +26,9 @@ const setProBuild = function () {
                 assetFileNames: 'assets/static/[name]-[hash].[ext]',
                 manualChunks(id: any) {
                     if (id.includes('node_modules')) {
-                        return id.toString().split('node_modules/')[1].split('/')[0].toString();
+                        return id.toString().split('node_modules/')[1].split('/')[0].toString()
                     }
-                }
+                },
             },
         },
         terserOptions: {
@@ -36,8 +37,8 @@ const setProBuild = function () {
                 drop_console: true,
                 drop_debugger: true,
             },
-        }
-    };
+        },
+    }
 }
 
-export default setProBuild;
+export default setProBuild
