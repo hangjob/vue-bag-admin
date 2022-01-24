@@ -4,7 +4,7 @@
 
 ### 两种预览
 
-[在线预览——Egg.js，MySQL数据库](https://vite.itnavs.com)
+[在线预览——Egg.js，MySQL数据库](https://vite.itnavs.com/demo.html)
 
 [在线预览——前端mock数据](https://hangjob.github.io/vue-vite-admin-ts/dist/lib.html)
 
