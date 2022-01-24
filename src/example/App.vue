@@ -1,6 +1,5 @@
 <template>
     <router-view />
-    2
     <Contextmenu ref="contextmenu" />
 </template>
 <script lang="ts">
