@@ -3,10 +3,10 @@ import { z } from "./vue-types-e39ece55.js";
 import { o as omit } from "./omit.js-8aeb4109.js";
 import { i as index$k } from "./resize-observer-polyfill-41c23942.js";
 import { i as isPlainObject, o as omit$1, u as uniq, a as isNil, d as debounce$1, b as indexOf, c as isEqual$1, e as cloneDeep, f as find, g as intersection, h as isNumber, p as padEnd, j as padStart, k as get, m as merge, t as throttle, l as partition, n as findIndex, q as uniqBy } from "./lodash-es-23e4464f.js";
-import { C as Comment$1, F as Fragment, T as Text$2, i as isVNode, d as defineComponent, c as reactive, o as onMounted, e as onUpdated, f as onUnmounted, w as watch, g as getCurrentInstance, h as inject, j as computed, k as createVNode, p as provide, l as ref, n as nextTick, m as onBeforeUnmount, q as cloneVNode, s as watchEffect, t as withDirectives, u as createTextVNode, v as onBeforeUpdate, x as Transition$2, y as TransitionGroup$1, z as vShow, A as Teleport, B as onActivated, D as onDeactivated, E as toRaw, G as toRef, H as unref, I as createApp, J as render, K as onBeforeMount, L as markRaw } from "./@vue-39dade2e.js";
+import { C as Comment$1, F as Fragment, T as Text$2, i as isVNode, d as defineComponent, c as reactive, o as onMounted, e as onUpdated, f as onUnmounted, w as watch, g as getCurrentInstance, h as inject, j as computed, k as createVNode, p as provide, l as ref, n as nextTick, m as onBeforeUnmount, q as cloneVNode, s as watchEffect, t as withDirectives, u as createTextVNode, v as onBeforeUpdate, x as Transition$2, y as TransitionGroup$1, z as vShow, A as Teleport, B as onActivated, D as onDeactivated, E as toRaw, G as toRef, H as unref, I as createApp, J as render, K as onBeforeMount, L as markRaw } from "./@vue-e049e909.js";
 import { h as hooks } from "./moment-f39140d2.js";
 import { a as alignElement, b as alignPoint } from "./dom-align-9919c820.js";
-import { C as CloseCircleFilled, L as LoadingOutlined, a as CheckOutlined, b as CloseOutlined, S as SearchOutlined, D as DownOutlined, E as EyeOutlined, c as EyeInvisibleOutlined, d as CheckCircleFilled, I as InfoCircleFilled, e as ExclamationCircleFilled, f as CheckCircleOutlined, g as InfoCircleOutlined, h as CloseCircleOutlined, i as ExclamationCircleOutlined, V as VerticalAlignTopOutlined, j as EllipsisOutlined, R as RightOutlined, U as UpOutlined, k as LeftOutlined, P as PlusOutlined, l as RedoOutlined, m as CalendarOutlined, n as ClockCircleOutlined, Z as ZoomInOutlined, o as ZoomOutOutlined, p as RotateRightOutlined, q as RotateLeftOutlined, B as BarsOutlined, r as DoubleLeftOutlined, s as DoubleRightOutlined, A as ArrowRightOutlined, t as ArrowLeftOutlined, u as StarFilled, W as WarningFilled, F as FilterFilled, v as CaretUpFilled, w as CaretDownFilled, x as FileTwoTone, M as MinusSquareOutlined, y as PlusSquareOutlined, z as FolderOpenOutlined, G as FolderOutlined, H as CaretDownOutlined, J as EnterOutlined, K as EditOutlined, N as CopyOutlined, O as PaperClipOutlined, Q as PictureTwoTone, T as DeleteOutlined, X as DownloadOutlined } from "./@ant-design-9aa5e5ec.js";
+import { C as CloseCircleFilled, L as LoadingOutlined, a as CheckOutlined, b as CloseOutlined, S as SearchOutlined, D as DownOutlined, E as EyeOutlined, c as EyeInvisibleOutlined, d as CheckCircleFilled, I as InfoCircleFilled, e as ExclamationCircleFilled, f as CheckCircleOutlined, g as InfoCircleOutlined, h as CloseCircleOutlined, i as ExclamationCircleOutlined, V as VerticalAlignTopOutlined, j as EllipsisOutlined, R as RightOutlined, U as UpOutlined, k as LeftOutlined, P as PlusOutlined, l as RedoOutlined, m as CalendarOutlined, n as ClockCircleOutlined, Z as ZoomInOutlined, o as ZoomOutOutlined, p as RotateRightOutlined, q as RotateLeftOutlined, B as BarsOutlined, r as DoubleLeftOutlined, s as DoubleRightOutlined, A as ArrowRightOutlined, t as ArrowLeftOutlined, u as StarFilled, W as WarningFilled, F as FilterFilled, v as CaretUpFilled, w as CaretDownFilled, x as FileTwoTone, M as MinusSquareOutlined, y as PlusSquareOutlined, z as FolderOpenOutlined, G as FolderOutlined, H as CaretDownOutlined, J as EnterOutlined, K as EditOutlined, N as CopyOutlined, O as PaperClipOutlined, Q as PictureTwoTone, T as DeleteOutlined, X as DownloadOutlined } from "./@ant-design-2d8d3906.js";
 import { a as arrayTreeFilter } from "./array-tree-filter-7da04b0d.js";
 import { s as shallowEqualArrays } from "./shallow-equal-751ba107.js";
 import { S as Schema } from "./async-validator-f2a6c09d.js";
@@ -48908,37 +48908,34 @@ var components2 = /* @__PURE__ */ Object.freeze({
   UploadDragger,
   LocaleProvider: LocaleProvider$1
 });
-const _args = [
-  [
-    "ant-design-vue@2.2.8",
-    "D:\\github\\vue-vite-admin-ts"
-  ]
-];
-const _from = "ant-design-vue@2.2.8";
+const _from = "ant-design-vue@next";
 const _id = "ant-design-vue@2.2.8";
 const _inBundle = false;
-const _integrity = "sha1-+ofPaELY7poNivOT/0CZ7MQHLys=";
+const _integrity = "sha512-3graq9/gCfJQs6hznrHV6sa9oDmk/D1H3Oo0vLdVpPS/I61fZPk8NEyNKCHpNA6fT2cx6xx9U3QS63uuyikg/Q==";
 const _location = "/ant-design-vue";
 const _phantomChildren = {};
 const _requested = {
-  type: "version",
+  type: "tag",
   registry: true,
-  raw: "ant-design-vue@2.2.8",
+  raw: "ant-design-vue@next",
   name: "ant-design-vue",
   escapedName: "ant-design-vue",
-  rawSpec: "2.2.8",
+  rawSpec: "next",
   saveSpec: null,
-  fetchSpec: "2.2.8"
+  fetchSpec: "next"
 };
 const _requiredBy = [
+  "#USER",
   "/"
 ];
-const _resolved = "https://registry.npmmirror.com/ant-design-vue/download/ant-design-vue-2.2.8.tgz?cache=0&sync_timestamp=1633658431217&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fant-design-vue%2Fdownload%2Fant-design-vue-2.2.8.tgz";
-const _spec = "2.2.8";
+const _resolved = "https://registry.npmjs.org/ant-design-vue/-/ant-design-vue-2.2.8.tgz";
+const _shasum = "fa87cf6842d8ee9a0d8af393ff4099ecc4072f2b";
+const _spec = "ant-design-vue@next";
 const _where = "D:\\github\\vue-vite-admin-ts";
 const bugs = {
   url: "https://github.com/vueComponent/ant-design-vue/issues"
 };
+const bundleDependencies = false;
 const dependencies = {
   "@ant-design/icons-vue": "^6.0.0",
   "@babel/runtime": "^7.10.5",
@@ -48957,6 +48954,7 @@ const dependencies = {
   "vue-types": "^3.0.0",
   warning: "^4.0.0"
 };
+const deprecated = false;
 const description = "An enterprise-class UI design language and Vue-based implementation";
 const devDependencies = {
   "@babel/cli": "^7.8.4",
@@ -49173,7 +49171,6 @@ const vetur = {
   attributes: "vetur/attributes.json"
 };
 var pkg = {
-  _args,
   _from,
   _id,
   _inBundle,
@@ -49183,10 +49180,13 @@ var pkg = {
   _requested,
   _requiredBy,
   _resolved,
+  _shasum,
   _spec,
   _where,
   bugs,
+  bundleDependencies,
   dependencies,
+  deprecated,
   description,
   devDependencies,
   files,

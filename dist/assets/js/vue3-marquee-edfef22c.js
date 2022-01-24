@@ -1,4 +1,4 @@
-import { d as defineComponent, W as openBlock, X as createElementBlock, Y as createBaseVNode, Z as renderSlot, F as Fragment, _ as renderList, t as withDirectives, z as vShow, $ as normalizeStyle } from "./@vue-39dade2e.js";
+import { d as defineComponent, W as openBlock, X as createElementBlock, Y as createBaseVNode, Z as renderSlot, F as Fragment, _ as renderList, t as withDirectives, z as vShow, $ as normalizeStyle } from "./@vue-e049e909.js";
 var script = /* @__PURE__ */ defineComponent({
   name: "Vue3Marquee",
   props: {

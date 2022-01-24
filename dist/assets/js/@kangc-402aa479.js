@@ -1,5 +1,5 @@
 import { c as commonjsGlobal, a as getDefaultExportFromCjs } from "./mockjs-475bec84.js";
-import { v as vue } from "./vue-3d957193.js";
+import { v as vue } from "./vue-040306de.js";
 var baseEditor$1 = "";
 var github$1 = "";
 var baseEditor = { exports: {} };

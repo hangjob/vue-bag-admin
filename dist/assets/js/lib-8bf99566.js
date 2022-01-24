@@ -1,7 +1,7 @@
-import { C as Contextmenu, _ as _export_sfc, a as _imports_0, i as install } from "./install-95471936.js";
-import { d as defineComponent, l as ref, p as provide, R as resolveComponent, X as createElementBlock, k as createVNode, F as Fragment, W as openBlock, I as createApp } from "./@vue-39dade2e.js";
-import { M as Mock } from "./mockjs-475bec84.js";
-import "./ant-design-vue-7bb391d9.js";
+import { C as Contextmenu, _ as _export_sfc, i as install } from "./install-41f7cb8d.js";
+import { d as defineComponent, l as ref, p as provide, Q as resolveComponent, X as createElementBlock, k as createVNode, F as Fragment, W as openBlock, I as createApp } from "./@vue-e049e909.js";
+import "./user-63c46bfe.js";
+import "./ant-design-vue-fdd04231.js";
 import "./@babel-2ac7e3e5.js";
 import "./regenerator-runtime-5031f1e2.js";
 import "./vue-types-e39ece55.js";
@@ -10,18 +10,19 @@ import "./resize-observer-polyfill-41c23942.js";
 import "./lodash-es-23e4464f.js";
 import "./moment-f39140d2.js";
 import "./dom-align-9919c820.js";
-import "./@ant-design-9aa5e5ec.js";
+import "./@ant-design-2d8d3906.js";
 import "./@ctrl-61649d3f.js";
 import "./array-tree-filter-7da04b0d.js";
+import "./mockjs-475bec84.js";
 import "./shallow-equal-751ba107.js";
 import "./async-validator-f2a6c09d.js";
 import "./scroll-into-view-if-needed-c253da67.js";
 import "./compute-scroll-into-view-f5b2517a.js";
 import "./warning-cc941e3b.js";
 import "./dom-scroll-into-view-5e57096f.js";
-/* empty css                        */import "./vuex-7184d287.js";
+/* empty css                        */import "./vuex-e2e89b61.js";
 import "./lodash-b6c46e4a.js";
-import "./vue-router-d5b806b5.js";
+import "./vue-router-01acb1b4.js";
 import "./axios-0769891d.js";
 import "./store-697dbeb5.js";
 import "./nprogress-9d8acc3f.js";
@@ -47,17 +48,17 @@ import "./zrender-cdd1d9d2.js";
 import "./xlsx-31acc619.js";
 import "./file-saver-4f4235a0.js";
 import "./fuse.js-1fb2d2a0.js";
-import "./@kangc-13311aa6.js";
-import "./vue-3d957193.js";
+import "./@kangc-402aa479.js";
+import "./vue-040306de.js";
 import "./highlight.js-5d1de029.js";
-import "./vue3-marquee-280e79c7.js";
+import "./vue3-marquee-edfef22c.js";
 import "./jquery-8159147d.js";
 import "./print-js-5d24544a.js";
 import "./quill-15a337e4.js";
-import "./@vueuse-10713cf2.js";
-import "./vxe-table-5bbacb31.js";
+import "./@vueuse-4abd6e7f.js";
+import "./vxe-table-f054a188.js";
 import "./xe-utils-a3a4c73c.js";
-import "./@braks-c6b0a994.js";
+import "./@braks-03bbe884.js";
 import "./mitt-e6c86215.js";
 const _sfc_main = defineComponent({
   name: "App",
@@ -81,73 +82,6 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   ], 64);
 }
 var App = /* @__PURE__ */ _export_sfc(_sfc_main, [["render", _sfc_render]]);
-Mock.mock("/api/user/userinfo", "post", (options) => {
-  let { body } = options;
-  let type = "admin";
-  let roles = ["admin", "editor", "test"];
-  if (body) {
-    body = JSON.parse(body);
-    if (body.type !== "admin") {
-      type = body.type;
-      roles = [body.type];
-    }
-  }
-  const data = Mock.mock({
-    id: "@id",
-    token: Mock.Random.string(30),
-    username: "\u7F8A\u5148\u751F",
-    createTime: "@datetime(yy-MM-dd HH:mm:ss)",
-    text: "@cparagraph(5)",
-    roles,
-    type,
-    "contentType|0-3": 0,
-    "serviceUnreadCount|0-10": 0,
-    userhead: _imports_0,
-    expiredTime: 3600 * 12,
-    headimgurl() {
-      return Mock.Random.image("40x40", Mock.Random.color(), "#FFF", "png");
-    }
-  });
-  const result = {
-    code: 1,
-    message: "\u8BF7\u6C42\u6210\u529F",
-    data
-  };
-  return result;
-});
-Mock.mock("/api/app/notice", "post", () => {
-  const data = Mock.mock({
-    "array|5": [
-      {
-        id: "@id",
-        text: "@cword(10)",
-        createTime: "@datetime(MM-dd HH:mm:ss)"
-      }
-    ]
-  });
-  const result = {
-    code: 1,
-    message: "\u8BF7\u6C42\u6210\u529F",
-    data: data.array
-  };
-  return result;
-});
-Mock.mock("/api/user/login", "post", () => {
-  const result = {
-    code: 1,
-    message: "\u767B\u5F55\u6210\u529F",
-    data: ""
-  };
-  return result;
-});
-Mock.mock("/api/user/logout", "post", () => {
-  const result = {
-    code: 1,
-    message: "\u9000\u51FA\u6210\u529F",
-    data: ""
-  };
-  return result;
-});
 const app = createApp(App);
 app.use(install).mount("#app");
 window.__app__ = app;
