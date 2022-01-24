@@ -1,7 +1,7 @@
 const dayjs = require("dayjs");
 module.exports = app => {
     const {STRING, INTEGER, BOOLEAN, DATE} = app.Sequelize;
-    return app.model.define('role', {
+    return app.model.define('Role', {
         id: {
             type: INTEGER,
             autoIncrement: true,

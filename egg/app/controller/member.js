@@ -72,11 +72,31 @@ class MemberController extends baseController {
         if (ks) {
             where.name = {[Op.like]: `%${ks}%`} // 模糊查詢 https://www.sequelize.com.cn/core-concepts/model-querying-basics
         }
+        // attributes : 查询字段信息，可以通过 exclude 来指定不查询的字段，或者可以直接传入数组查询数组中的字段( attributes: ['id', 'nickname'] )
+        // include : 指定查询的关联，as 必须和定义关联关系的 as 相同，model 指定关联的模型
         const result = await ctx.model.Member.findAll({
-            where: {...where}
+            where: {...where},
+            include: [{model: ctx.model.Branch, as: 'branch'}]
         })
+
+        for (let i = 0; i < result.length; i++) {
+            const item = result[i];
+            if (item.roles) {
+                const arr = item.roles.split(',');
+                const roleResult = [];
+                for (let j = 0; j < arr.length; j++) {
+                    const obj = await ctx.model.Role.findOne({
+                        where: {tag: arr[j]}
+                    })
+                    roleResult.push(obj)
+                }
+                item.roles = roleResult;
+            }
+        }
+
         this.result({data: result})
     }
+
 
     /**
      * 编辑数据

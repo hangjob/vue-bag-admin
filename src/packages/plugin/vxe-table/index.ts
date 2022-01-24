@@ -1,4 +1,4 @@
-import type { App } from 'vue';
+import type { App } from 'vue'
 import XEUtils from 'xe-utils'
 import {
     // 核心
@@ -42,17 +42,17 @@ import {
     Pulldown,
 
     // 表格
-    Table
+    Table,
 } from 'vxe-table'
 
 import zhCN from 'vxe-table/es/locale/lang/zh-CN'
 
 // 按需加载的方式默认是不带国际化的，自定义国际化需要自行解析占位符 '{0}'，例如：
 VXETable.setup({
-    i18n: (key, args) => XEUtils.toFormatString(XEUtils.get(zhCN, key), args)
+    i18n: (key, args) => XEUtils.toFormatString(XEUtils.get(zhCN, key), args),
 })
 
-function useTable (app: App) {
+function useTable(app: App) {
     // 表格功能
     app.use(Header)
         .use(Footer)
@@ -64,7 +64,7 @@ function useTable (app: App) {
         .use(Keyboard)
         .use(Validator)
 
-    // 可选组件
+        // 可选组件
         .use(Column)
         .use(Colgroup)
         .use(Grid)
@@ -90,7 +90,7 @@ function useTable (app: App) {
         .use(List)
         .use(Pulldown)
 
-    // 安装表格
+        // 安装表格
         .use(Table)
 
     // 给 vue 实例挂载内部对象，例如：
@@ -100,10 +100,10 @@ function useTable (app: App) {
     // app.config.globalProperties.$XReadFile = VXETable.readFile
 }
 
-function setVxeTable(app:App){
+function setVxeTable(app: App) {
     app.use(useTable)
 }
 
 export {
-    setVxeTable
+    setVxeTable,
 }

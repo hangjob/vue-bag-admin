@@ -31,6 +31,7 @@
                             v-model:value="formState.icon"
                             placeholder="选择icon图标"
                             enter-button
+                            :readonly="true"
                             @search="visible = true"
                         />
                     </a-form-item>

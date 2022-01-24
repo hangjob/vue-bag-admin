@@ -1,15 +1,7 @@
-import {Component, createApp} from 'vue'
+import { createApp } from 'vue'
 import App from './App.vue'
-import store from '@/example/store/index';
-import install, {$optionsType} from '@/packages/install'
-
-const locas: Record<string, Component> = import.meta.globEager("/src/example/views/**/*.vue")
-const $options: $optionsType = {
-    routerView: {external: locas},
-    store: {
-        module: store
-    }
-}
+import install from '@/packages/install'
+import '../../mock'
+console.log('%c 此页面不需要后端服务，用的是mock数据','color:#ffacac;')
 const app = createApp(App)
-app.use(install, $options).mount('#app');
-
+app.use(install).mount('#app')

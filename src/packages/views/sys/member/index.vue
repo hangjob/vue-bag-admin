@@ -25,22 +25,36 @@
                 <a-tag color="blue" v-if="record.sex === 2">男</a-tag>
                 <a-tag color="cyan" v-if="record.sex === 0">保密</a-tag>
             </template>
+            <template #branch="{ record }">
+                <a-tag color="cyan" v-if="record.branch">{{ record.branch.name }}</a-tag>
+            </template>
+            <template #roles="{ record }">
+                <template v-if="record.roles">
+                    <template v-for="(item,idx) in record.roles">
+                        <a-tag color="orange" v-if="idx===0">{{ item.name }}</a-tag>
+                        <a-tag color="#87d068" v-if="idx===1" @click="handleRoles({record})">查看全部</a-tag>
+                    </template>
+                </template>
+            </template>
             <template #action="{ record,index }">
                 <a-space>
                     <a-button type="primary" size="small" @click="setPasswordEdit({record})">密码</a-button>
                     <a-button type="primary" size="small" @click="setVisibleEdit({record})">编辑</a-button>
-                    <a-popconfirm
-                        :title="`你确定删除 ${record.username} 嘛？`"
-                        ok-text="确认"
-                        cancel-text="关闭"
-                        placement="topRight"
-                        :disabled="record.id <= 7"
-                        @confirm="handleDelete({record})"
-                    >
-                        <a-button type="primary" :disabled="record.id <= 7" danger size="small">
-                            删除
-                        </a-button>
-                    </a-popconfirm>
+                    <!--                    <a-popconfirm-->
+                    <!--                        :title="`你确定删除 ${record.username} 嘛？`"-->
+                    <!--                        ok-text="确认"-->
+                    <!--                        cancel-text="关闭"-->
+                    <!--                        placement="topRight"-->
+                    <!--                        :disabled="record.id <= 7"-->
+                    <!--                        @confirm="handleDelete({record})"-->
+                    <!--                    >-->
+                    <!--                        <a-button type="primary" :disabled="record.id <= 7" danger size="small">-->
+                    <!--                            删除-->
+                    <!--                        </a-button>-->
+                    <!--                    </a-popconfirm>-->
+                    <a-button type="primary" @click="handlePowerPoint" danger size="small">
+                        删除
+                    </a-button>
                 </a-space>
             </template>
         </a-table>
@@ -53,6 +67,11 @@
     </yxs-modal>
     <yxs-modal v-model:visible="visiblePas" title="更改密码" width="1000px" @ok="handlePasOk">
         <pas ref="pas" :id="id" :record="recordItem"/>
+    </yxs-modal>
+    <yxs-modal v-model:visible="visibleRoles" :title="userRoleTile" width="1000px" @ok="visibleRoles=false">
+        <a-table rowKey="id" :pagination="false" :columns="rolesColumns" size="middle" :bordered="true"
+                 :data-source="rolesData">
+        </a-table>
     </yxs-modal>
 </template>
 <script lang="ts">
@@ -78,7 +97,7 @@ const columns = [
         key: 'index',
         align: 'center',
         ellipsis: true,
-        width: 80,
+        width: 70,
         customRender: ({index}: { index: number }) => {
             return index + 1
         }
@@ -97,6 +116,7 @@ const columns = [
         key: 'sex',
         ellipsis: true,
         align: 'center',
+        width: 80,
         slots: {customRender: 'sex'}
     },
     {
@@ -105,6 +125,7 @@ const columns = [
         key: 'age',
         ellipsis: true,
         align: 'center',
+        width: 80,
         slots: {customRender: 'age'}
     },
     {
@@ -121,6 +142,7 @@ const columns = [
         key: 'phone',
         ellipsis: true,
         align: 'center',
+        width: 120,
         slots: {customRender: 'phone'}
     },
     {
@@ -133,12 +155,12 @@ const columns = [
     },
     {
         title: '部门组织',
-        dataIndex: 'did',
-        key: 'did',
+        dataIndex: 'branch',
+        key: 'branch',
         ellipsis: true,
         align: 'center',
         width: 180,
-        slots: {customRender: 'did'}
+        slots: {customRender: 'branch'}
     },
     {
         title: '创建时间',
@@ -146,7 +168,7 @@ const columns = [
         key: 'createTime',
         align: 'center',
         ellipsis: true,
-        width: 200,
+        width: 180,
     },
     {
         title: '更新时间',
@@ -154,7 +176,7 @@ const columns = [
         key: 'updateTime',
         align: 'center',
         ellipsis: true,
-        width: 200,
+        width: 180,
     },
     {
         title: '操作',
@@ -164,7 +186,43 @@ const columns = [
         slots: {customRender: 'action'},
     }
 ];
-
+const rolesColumns = [
+    {
+        title: '序号',
+        dataIndex: 'index',
+        key: 'index',
+        align: 'center',
+        ellipsis: true,
+        width: 70,
+        customRender: ({index}: { index: number }) => {
+            return index + 1
+        }
+    },
+    {
+        title: '角色',
+        dataIndex: 'name',
+        key: 'name',
+        ellipsis: true,
+        align: 'center',
+        slots: {customRender: 'name'}
+    },
+    {
+        title: '标识',
+        dataIndex: 'tag',
+        key: 'tag',
+        ellipsis: true,
+        align: 'center',
+        slots: {customRender: 'tag'}
+    },
+    {
+        title: '创建时间',
+        dataIndex: 'createTime',
+        key: 'createTime',
+        ellipsis: true,
+        align: 'center',
+        slots: {customRender: 'createTime'}
+    },
+]
 export default defineComponent({
     name: 'sys-member',
     components: {
@@ -172,7 +230,9 @@ export default defineComponent({
     },
     setup() {
         const data = ref();
+        const rolesData = ref();
         const sourceData = ref();
+        const userRoleTile = ref();
         const add = ref();
         const edit = ref();
         const pas = ref();
@@ -180,6 +240,7 @@ export default defineComponent({
         const visibleAdd = ref(false);
         const visibleEdit = ref(false);
         const visiblePas = ref(false)
+        const visibleRoles = ref(false);
         const id = ref('');
         const loading = ref(false);
         const ks = ref('');
@@ -292,12 +353,22 @@ export default defineComponent({
             })
         }
 
+        const handleRoles = ({record}: { record: any }) => {
+            rolesData.value = record.roles;
+            userRoleTile.value = `${record.username} 当前角色列表`
+            visibleRoles.value = true;
+        }
+
+        const handlePowerPoint = () => {
+            message.warning('演示数据不作为删除');
+        }
 
         return {
             data,
             add,
             edit,
             columns,
+            rolesColumns,
             id,
             rowSelection,
             ...toRefs(state),
@@ -318,7 +389,12 @@ export default defineComponent({
             visiblePas,
             setPasswordEdit,
             handlePasOk,
-            recordItem
+            recordItem,
+            handleRoles,
+            rolesData,
+            visibleRoles,
+            userRoleTile,
+            handlePowerPoint
         };
     },
 });

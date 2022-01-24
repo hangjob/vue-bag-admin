@@ -1,20 +1,19 @@
-import {post} from '@/packages/http/request'
+import { post } from '@/packages/http/request'
 
 
 /**
  * 获取路由
  * @param params
- * @param config
  */
-const apiAppRouter = (params?: object, config?: object) => {
-    return post('/app/router', params, config);
+const apiAppRouter = (params?: object) => {
+    return post('/app/router', params, { relink: true })
 }
 
 /**
  * 获取网络http异步组件
  */
 const apiAppLibrary = () => {
-    return post('/app/library');
+    return post('/app/library')
 }
 
 
@@ -28,5 +27,5 @@ const apiAppNotice = () => {
 export {
     apiAppRouter,
     apiAppLibrary,
-    apiAppNotice
+    apiAppNotice,
 }

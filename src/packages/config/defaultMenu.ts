@@ -1,4 +1,4 @@
-import {addUniqueId} from '@/packages/utils/lodash';
+import { addUniqueId } from '@/packages/utils/lodash'
 // 看我写的文档字段介绍
 
 /**
@@ -12,8 +12,8 @@ const arr = [
         shows: 1,
         tabHidden: false,
         iframe: '',
-        tabFix: false,
-        keepAlive: false
+        tabFix: true,
+        keepAlive: false,
     },
     {
         name: '系统管理',
@@ -28,7 +28,7 @@ const arr = [
                 shows: 1,
                 tabHidden: false,
                 tabFix: false,
-                keepAlive: true
+                keepAlive: true,
             },
             {
                 name: '部门组织',
@@ -37,7 +37,7 @@ const arr = [
                 shows: 1,
                 tabHidden: false,
                 tabFix: false,
-                keepAlive: true
+                keepAlive: true,
             },
             {
                 name: '角色管理',
@@ -46,7 +46,7 @@ const arr = [
                 shows: 1,
                 tabHidden: false,
                 tabFix: false,
-                keepAlive: true
+                keepAlive: true,
             },
             {
                 name: '菜单列表',
@@ -55,9 +55,9 @@ const arr = [
                 shows: 1,
                 tabHidden: false,
                 tabFix: false,
-                keepAlive: true
+                keepAlive: true,
             },
-        ]
+        ],
     },
     {
         name: '组件库',
@@ -72,7 +72,7 @@ const arr = [
                 shows: 1,
                 tabHidden: false,
                 tabFix: false,
-                keepAlive: false
+                keepAlive: false,
             },
             {
                 name: '富文本编辑器',
@@ -81,7 +81,7 @@ const arr = [
                 shows: 1,
                 tabHidden: false,
                 tabFix: false,
-                keepAlive: true
+                keepAlive: true,
             },
             {
                 name: '解析Exel',
@@ -90,7 +90,7 @@ const arr = [
                 shows: 1,
                 tabHidden: false,
                 tabFix: false,
-                keepAlive: false
+                keepAlive: false,
             },
             {
                 name: '上传',
@@ -105,7 +105,7 @@ const arr = [
                         shows: 1,
                         tabHidden: false,
                         tabFix: false,
-                        keepAlive: false
+                        keepAlive: false,
                     },
                     {
                         name: '文件上传',
@@ -114,9 +114,9 @@ const arr = [
                         shows: 1,
                         tabHidden: false,
                         tabFix: false,
-                        keepAlive: false
-                    }
-                ]
+                        keepAlive: false,
+                    },
+                ],
             },
             {
                 name: '文件打印',
@@ -125,7 +125,7 @@ const arr = [
                 shows: 1,
                 tabHidden: false,
                 tabFix: false,
-                keepAlive: false
+                keepAlive: false,
             },
             {
                 name: '简洁图标',
@@ -134,7 +134,7 @@ const arr = [
                 shows: 1,
                 tabHidden: false,
                 tabFix: false,
-                keepAlive: false
+                keepAlive: false,
             },
             {
                 name: '描述列表',
@@ -143,7 +143,7 @@ const arr = [
                 shows: 1,
                 tabHidden: false,
                 tabFix: false,
-                keepAlive: false
+                keepAlive: false,
             },
             {
                 name: '课程表',
@@ -152,7 +152,7 @@ const arr = [
                 shows: 1,
                 tabHidden: false,
                 tabFix: false,
-                keepAlive: true
+                keepAlive: true,
             },
             {
                 name: 'WinBox弹窗',
@@ -161,7 +161,7 @@ const arr = [
                 shows: 1,
                 tabHidden: false,
                 tabFix: false,
-                keepAlive: true
+                keepAlive: true,
             },
             {
                 name: '视频播放',
@@ -170,7 +170,7 @@ const arr = [
                 shows: 1,
                 tabHidden: false,
                 tabFix: false,
-                keepAlive: true
+                keepAlive: true,
             },
             {
                 name: '内容搜索',
@@ -179,7 +179,7 @@ const arr = [
                 shows: 1,
                 tabHidden: false,
                 tabFix: false,
-                keepAlive: true
+                keepAlive: true,
             },
             {
                 name: '导出文件',
@@ -188,9 +188,19 @@ const arr = [
                 shows: 1,
                 tabHidden: false,
                 tabFix: false,
-                keepAlive: true
+                keepAlive: true,
             },
-        ]
+            {
+                name: '表单生成器',
+                path: '/iframe/form-generator',
+                icon: '',
+                shows: 1,
+                iframePath: 'https://demo.gin-vue-admin.com/form-generator',
+                tabHidden: false,
+                tabFix: false,
+                keepAlive: false,
+            },
+        ],
     },
     {
         name: '数据表格',
@@ -207,7 +217,7 @@ const arr = [
                 shows: 1,
                 tabHidden: false,
                 tabFix: false,
-                keepAlive: false
+                keepAlive: false,
             },
             {
                 name: '海量数据',
@@ -216,7 +226,7 @@ const arr = [
                 shows: 1,
                 tabHidden: false,
                 tabFix: false,
-                keepAlive: false
+                keepAlive: false,
             },
             {
                 name: '编辑表格',
@@ -225,7 +235,7 @@ const arr = [
                 shows: 1,
                 tabHidden: false,
                 tabFix: false,
-                keepAlive: true
+                keepAlive: true,
             },
             {
                 name: '校验表格',
@@ -234,7 +244,7 @@ const arr = [
                 shows: 1,
                 tabHidden: false,
                 tabFix: false,
-                keepAlive: false
+                keepAlive: false,
             },
             {
                 name: 'vxe-table文档',
@@ -244,9 +254,9 @@ const arr = [
                 iframePath: 'https://xuliangzhan_admin.gitee.io/vxe-table/v4/table/tree/basic',
                 tabHidden: false,
                 tabFix: false,
-                keepAlive: false
-            }
-        ]
+                keepAlive: false,
+            },
+        ],
     },
     {
         name: '数据图表',
@@ -264,7 +274,7 @@ const arr = [
                 iframe: '',
                 tabHidden: false,
                 tabFix: false,
-                keepAlive: false
+                keepAlive: false,
             },
             {
                 name: 'G2',
@@ -274,7 +284,7 @@ const arr = [
                 iframe: '',
                 tabHidden: false,
                 tabFix: false,
-                keepAlive: false
+                keepAlive: false,
             },
             {
                 name: 'G2plot',
@@ -284,9 +294,9 @@ const arr = [
                 iframe: '',
                 tabHidden: false,
                 tabFix: false,
-                keepAlive: false
-            }
-        ]
+                keepAlive: false,
+            },
+        ],
     },
     {
         name: '开发文档',
@@ -304,9 +314,9 @@ const arr = [
                 iframePath: 'https://v3.cn.vuejs.org/',
                 tabHidden: false,
                 tabFix: false,
-                keepAlive: false
-            }
-        ]
+                keepAlive: false,
+            },
+        ],
     },
     {
         name: '通知页面',
@@ -315,7 +325,7 @@ const arr = [
         shows: 1,
         tabHidden: false,
         tabFix: false,
-        keepAlive: false
+        keepAlive: false,
     },
     {
         name: '打点吧',
@@ -324,7 +334,7 @@ const arr = [
         shows: 1,
         tabHidden: false,
         tabFix: false,
-        keepAlive: false
+        keepAlive: false,
     },
     {
         name: '权限控制',
@@ -333,7 +343,7 @@ const arr = [
         shows: 1,
         tabHidden: false,
         tabFix: false,
-        keepAlive: false
+        keepAlive: false,
     },
     {
         name: '异步组件',
@@ -350,8 +360,8 @@ const arr = [
         icon: 'UserOutlined',
         shows: 1,
         tabHidden: false,
-        tabFix: false,
-        keepAlive: false
+        tabFix: true,
+        keepAlive: false,
     },
     {
         name: '错误捕获',
@@ -360,10 +370,10 @@ const arr = [
         shows: 0,
         tabHidden: false,
         tabFix: false,
-        keepAlive: false
+        keepAlive: false,
     },
 ]
-const defaultMenu = addUniqueId(arr, '_loca') // 增加个标识符
+const defaultMenu = addUniqueId(arr, '_local') // 增加个标识符
 
 /**
  * 默认项目菜单
@@ -385,12 +395,12 @@ let defaultPrjMenu = [
         name: '租户管理',
         icon: 'YsIonfontPckUOder',
         shows: 1,
-        menus: defaultMenu.slice(-3)
+        menus: defaultMenu.slice(-3),
     },
 ]
-defaultPrjMenu = addUniqueId(defaultPrjMenu, '_loca')
+defaultPrjMenu = addUniqueId(defaultPrjMenu, '_local')
 
 export {
     defaultMenu,
-    defaultPrjMenu
+    defaultPrjMenu,
 }

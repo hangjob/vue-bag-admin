@@ -1,7 +1,7 @@
 const dayjs = require("dayjs");
 module.exports = app => {
     const {STRING, INTEGER, BOOLEAN, DATE} = app.Sequelize;
-    return app.model.define('member', {
+    const Member = app.model.define('Member', {
         id: {
             type: INTEGER,
             autoIncrement: true,
@@ -38,7 +38,7 @@ module.exports = app => {
         },
         roles: {
             type: STRING,
-            comment: '用户角色'
+            comment: '用户角色',
         },
         did: {
             type: INTEGER,
@@ -77,7 +77,18 @@ module.exports = app => {
     }, {
         createdAt: 'createTime', // 指定名字
         updatedAt: 'updateTime',
-        tableName: 'yxs_member' // 定义实际表名
+        tableName: 'yxs_member', // 定义实际表名
     });
+
+    Member.associate = function () {
+        // sourceKey 主键为Member id
+        app.model.Member.belongsTo(app.model.Branch, {
+            foreignKey: 'did',
+            targetKey: 'id',
+            sourceKey: 'id',
+            as: 'branch'
+        })
+    }
+    return Member;
 }
 
