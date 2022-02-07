@@ -10,6 +10,9 @@
         "resolveJsonModule": true,
         "baseUrl": "./",
         "paths": {
+            "@www/*": [
+                "www/*"
+            ],
             "@/*": [
                 "src/*"
             ],
@@ -21,7 +24,9 @@
             "webpack-env",
             "node"
         ],
-        "typeRoots":["./typings"],
+        "typeRoots": [
+            "./typings"
+        ],
         "allowSyntheticDefaultImports": true
     },
     "exclude": [

@@ -33,9 +33,9 @@ export default ({ mode }: { mode: any }) => {
         resolve: {
             alias: {
                 // 如果报错__dirname找不到，需要安装node,执行yarn add @types/node --save-dev
+                '@www': path.resolve(__dirname, 'www'),
                 '@': path.resolve(__dirname, 'src'),
                 '__ROOT__': path.resolve(__dirname, ''),
-                'comps': path.resolve(__dirname, 'src/components'),
             },
         },
         server: configServer(),

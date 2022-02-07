@@ -18,7 +18,7 @@
                 />
             </div>
         </div>
-        <a-table rowKey="id" :scroll="{ x: 1500 }" :columns="columns" size="middle" :bordered="true" :data-source="data"
+        <a-table rowKey="id" :scroll="{ x: 1200 }" :columns="columns" size="middle" :bordered="true" :data-source="data"
                  :row-selection="rowSelection" @expand="expand">
             <template #sex="{ record }">
                 <a-tag color="red" v-if="record.sex === 1">女</a-tag>
@@ -171,18 +171,10 @@ const columns = [
         width: 180,
     },
     {
-        title: '更新时间',
-        dataIndex: 'updateTime',
-        key: 'updateTime',
-        align: 'center',
-        ellipsis: true,
-        width: 180,
-    },
-    {
         title: '操作',
         key: 'action',
         align: 'center',
-        width: 200,
+        width: 180,
         slots: {customRender: 'action'},
     }
 ];

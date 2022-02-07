@@ -2,26 +2,27 @@ const user = {
     namespaced: true,
     state: {
         userinfo: {},
-        roles: []
+        roles: [],
     },
     getters: {
         roles: (state: any) => {
-            return state.roles.split(',');
+            console.log(state)
+            return state.roles.split(',')
         },
         userinfo: (state: any) => {
-            return state.userinfo;
+            return state.userinfo
         },
     },
     mutations: {
         updateRoles(state: any, arr: Array<any>) {
-            state.roles = arr;
+            state.roles = arr
         },
         updateUserinfo(state: any, data: any) {
-            state.userinfo = data;
-            state.roles = data.roles;
-        }
+            state.userinfo = data
+            state.roles = data.roles
+        },
     },
     actions: {},
 }
 
-export default user;
+export default user

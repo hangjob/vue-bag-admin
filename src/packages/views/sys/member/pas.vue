@@ -11,13 +11,13 @@
                             :type="inputType ? 'password' : 'text'"
                         >
                             <template #enterButton>
-                                <EyeOutlined/>
+                                <EyeOutlined />
                             </template>
                         </a-input-search>
 
                     </a-form-item>
                     <a-form-item label="新密码" name="password">
-                        <a-input v-model:value="formState.password" placeholder="输入3~20位新密码"/>
+                        <a-input v-model:value="formState.password" placeholder="输入3~20位新密码" />
                     </a-form-item>
                 </a-col>
             </a-row>
@@ -25,51 +25,54 @@
     </div>
 </template>
 <script lang="ts">
-import {defineComponent, reactive, ref, toRaw} from 'vue';
-import {apiGetPas, apiUpdatePas} from '@/packages/service/member'
+import { defineComponent, reactive, ref, toRaw } from 'vue'
+import { apiGetPas, apiUpdatePas } from '@/packages/service/member'
+import { useStore } from 'vuex'
 
 
 export default defineComponent({
     props: {
         id: {
             required: true,
-            type: [Number, String]
+            type: [Number, String],
         },
         record: {
             required: true,
-            type: [Object]
-        }
+            type: [Object],
+        },
     },
-    setup(props, {emit}) {
-        const formRef = ref();
-        const visible = ref(false);
+    setup(props, { emit }) {
+        const formRef = ref()
+        const visible = ref(false)
         const inputType = ref(true)
         const formState: any = reactive({
             password: '',
             rawpassword: props.record.password,
             id: props.id,
-        });
+        })
         const rules = {
             password: [
-                {required: true, message: '请输入3~20位新密码', trigger: 'blur'}
+                { required: true, message: '请输入3~20位新密码', trigger: 'blur' },
             ],
-        };
+        }
         const onSubmit = async () => {
             return formRef.value.validate()
                 .then(() => {
-                    const formData: any = toRaw(formState);
-                    apiUpdatePas({...formData}, {notify: true}).then(() => {
-                        return Promise.resolve();
+                    const formData: any = toRaw(formState)
+                    apiUpdatePas({ ...formData, username: props.record.username }, { notify: true }).then(() => {
+                        return Promise.resolve()
                     })
                 })
                 .catch((error: any) => {
-                    return Promise.reject(error);
-                });
-        };
+                    return Promise.reject(error)
+                })
+        }
         const handleRawPass = () => {
             inputType.value = false
-            apiGetPas({password: props.record.password}).then((data: string) => {
-                formState.rawpassword = data
+            apiGetPas({ password: props.record.password }).then((data: any) => {
+                if (data) {
+                    formState.rawpassword = JSON.parse(data).password
+                }
             })
         }
         return {
@@ -85,8 +88,8 @@ export default defineComponent({
             onSubmit,
             visible,
             handleRawPass,
-            inputType
-        };
+            inputType,
+        }
     },
-});
+})
 </script>

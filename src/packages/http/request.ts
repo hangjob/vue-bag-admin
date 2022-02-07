@@ -82,15 +82,14 @@ http.interceptors.response.use((res: any) => {
         return Promise.reject(rejectData)
     }
 
-    if (status === 403) {
-        localStore.clearAll()
-        return Promise.reject(rejectData)
-    }
-
-
     const result = routerConfig.filter.findIndex(item => window.location.href.indexOf(item) > -1) !== -1
     if (!result) {
         router.push(routerConfig.filter[0]).then()
+    }
+
+    if (status === 403) {
+        localStore.clearAll()
+        return Promise.reject(rejectData)
     }
 
     // 如果config不存在或没有设置重试选项，请拒绝

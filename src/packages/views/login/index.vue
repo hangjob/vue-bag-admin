@@ -73,7 +73,7 @@ export default defineComponent({
         const rules = {
             username: [
                 {required: true, message: '请随意输入你的用户名', trigger: 'blur'},
-                {min: 3, max: 10, message: '最小长度为3，最大长度10', trigger: 'blur'},
+                {min: 2, max: 10, message: '最小长度为2，最大长度10', trigger: 'blur'},
             ],
             password: [{required: true, message: '随意输入用户名密码', trigger: 'blur'}],
         };
