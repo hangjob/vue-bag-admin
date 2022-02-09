@@ -325,7 +325,7 @@ export default defineComponent({
             getData();
         }
 
-        const getPname = ({record}: { record: any }) => {
+        const getName = ({record}: { record: any }) => {
             const res: any = findChildrenDepth({key: 'id', value: record.pid, node: 'children'}, sourceData.value);
             return res && res.name
         }
@@ -376,7 +376,7 @@ export default defineComponent({
             loading,
             handleSearch,
             ks,
-            getPname,
+            getName,
             pas,
             visiblePas,
             setPasswordEdit,
