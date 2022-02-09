@@ -1,6 +1,7 @@
 <template>
-    <header></header>
-    <nav></nav>
+    <header>
+        <LayoutNav/>
+    </header>
     <main>
         <div>
             <section></section>
@@ -14,6 +15,7 @@
     <footer></footer>
 </template>
 <script setup lang="ts">
+import LayoutNav from '@www/web/layout/nav.vue'
 import user from '@www/web/store/user'
 
 const userStore = user()
