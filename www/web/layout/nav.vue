@@ -175,7 +175,9 @@ const inputValue = ref()
 
         .nav-menu {
             flex-shrink: 0;
-
+            a{
+                padding-right: 0;
+            }
             ul li ul.dropdown-menu {
                 right: 0;
                 left: unset;

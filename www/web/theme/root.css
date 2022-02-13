@@ -3,7 +3,9 @@
     --yh-color-white: #ffffff;
     --yh-text-color-white: #ffffff;
     --yh-text-color-primary: #409eff;
+    --yh-text-hover-color-primary: #409eff;
     --yh-text-color-black: #333333;
+    --yh-text-color-brown: #616161;
     --yh-font-size-extra-large: 20px;
     --yh-font-size-large: 18px;
     --yh-font-size-medium: 16px;
@@ -11,4 +13,5 @@
     --yh-font-size-small: 13px;
     --yh-font-size-extra-small: 12px;
     --yh-font-weight-primary: 500;
+    --yh-margin-top: 20px;
 }

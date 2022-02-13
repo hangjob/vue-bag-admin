@@ -10,6 +10,7 @@ import 'element-plus/dist/index.css'
 import ElementPlus from 'element-plus'
 import { setupRouter } from '@www/web/router'
 import { setupStore } from '@www/web/store'
+import { setupGlobComponents } from '@www/web/components'
 import mitt from 'mitt'
 
 const app = createApp(App)
@@ -17,4 +18,5 @@ app.provide('$mitt', mitt())
 app.use(ElementPlus)
 setupRouter(app)
 setupStore(app)
+setupGlobComponents(app)
 app.use(Equal).mount('#app')
