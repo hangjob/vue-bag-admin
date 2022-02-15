@@ -3,7 +3,7 @@ import {routerMode} from '@/packages/config';
 import {App} from 'vue';
 import {setupRouterGuard} from '@/packages/router/guard'
 import {setupBeforeStore} from "@/packages/router/beforeStore";
-import {setAddRoute} from '@/packages/router/addRoute'
+import {setRoute} from '@/packages/router/route'
 
 // 定义路由
 const routes: Array<RouteRecordRaw> = [
@@ -205,7 +205,7 @@ router.afterEach((to, from) => {
 })
 
 const setupRouter = (app: App) => {
-    setAddRoute(app, router)
+    setRoute(app, router)
     app.use(router)
 }
 

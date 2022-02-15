@@ -33,10 +33,10 @@ function recursiveViews(app: App, router: any, paths: any) {
     })
 }
 
-const setAddRoute = (app: App, router: any) => {
+const setRoute = (app: App, router: any) => {
     const { paths = [] } = app.config.globalProperties.$plugin?.router || {}
     recursiveViews(app, router, paths)
 }
 export {
-    setAddRoute,
+    setRoute,
 }

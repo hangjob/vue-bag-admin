@@ -1,7 +1,7 @@
 <template>
     <div :class="['layout-header_scroller',tabStlyeClassName]">
         <div class="tab-action tab-action-left" @click="handleScrollBar(false)">
-            <CaretLeftFilled class="icon-svg"/>
+            <CaretLeftFilled class="icon-svg" />
         </div>
         <div class="tab-container" ref="tabContainer">
             <div class="app-process_item"
@@ -13,41 +13,42 @@
             >
                 <span class="title">{{ item.name }}</span>
                 <CloseOutlined class="icon-svg" v-if="!item.tabFix && processList.length !== 1"
-                               @click.stop="handleColseCurrent(item)"/>
+                               @click.stop="handleColseCurrent(item)"
+                />
             </div>
         </div>
         <div class="tab-action tab-action-right" @click="handleScrollBar(true)">
-            <CaretRightFilled class="icon-svg"/>
+            <CaretRightFilled class="icon-svg" />
         </div>
     </div>
 </template>
 <script lang="ts">
-import {computed, defineComponent, inject, onMounted, ref} from 'vue'
-import {useStore} from "vuex";
-import {CaretLeftFilled, CaretRightFilled, CloseOutlined} from '@ant-design/icons-vue';
-import {useRouter} from "vue-router";
-import {last} from '@/packages/utils/lodash'
-import {themeHook} from '@/packages/hook'
+import { computed, defineComponent, inject, ref } from 'vue'
+import { useStore } from 'vuex'
+import { CaretLeftFilled, CaretRightFilled, CloseOutlined } from '@ant-design/icons-vue'
+import { useRouter } from 'vue-router'
+import { last } from '@/packages/utils/lodash'
+import { themeHook } from '@/packages/hook'
 
 export default defineComponent({
     components: {
         CloseOutlined,
         CaretRightFilled,
-        CaretLeftFilled
+        CaretLeftFilled,
     },
     setup() {
         const store = useStore()
-        const router = useRouter();
-        const appContextmenu: any = inject('appContextmenu');
+        const router = useRouter()
+        const appContextmenu: any = inject('appContextmenu')
         const processList = computed(() => store.state.app.processList.filter((e: any) => e.tabHidden === false)) // 数据列表 // 使用computed 才触发视图更新
-        const tabContainer = ref<HTMLAreaElement | any>(null);
-        const {tabStlyeClassName} = themeHook()
+        const tabContainer = ref<HTMLAreaElement | any>(null)
+        const { tabStlyeClassName } = themeHook()
 
         function scrollBar(left: number) {
             tabContainer.value.scrollTo({
                 left,
-                behavior: "smooth"
-            });
+                behavior: 'smooth',
+            })
         }
 
         // 左右滚动
@@ -65,60 +66,60 @@ export default defineComponent({
 
         const toPath = (path?: string) => {
             if (path) {
-                router.push(path);
-                return;
+                router.push(path)
+                return
             }
-            const active: any = processList.value.find((e: any) => e.active); // 查找是否含有是当前激活的菜单 否则去 跳转最后一个
+            const active: any = processList.value.find((e: any) => e.active) // 查找是否含有是当前激活的菜单 否则去 跳转最后一个
             if (!active) {
-                const next = last(processList.value);
-                router.push(next ? next.path : '/');
+                const next = last(processList.value)
+                router.push(next ? next.path : '/')
             }
         }
 
         const handleColseCurrent = (item: any) => {
             const idx: number = processList.value.findIndex((e: any) => e.id == item.id)
             store.commit('app/delProcessList', idx)
-            toPath();
+            toPath()
         }
 
 
         const handleContextMenu = (e: any, item: any) => {
-            e.preventDefault(); // 阻止默认事件
+            e.preventDefault() // 阻止默认事件
             if (item.tabFix || processList.value.length === 1) {
                 return false
             }
             //获取我们自定义的右键菜单
-            let contextmenu: any = document.querySelector("#contextmenu");
+            let contextmenu: any = document.querySelector('#contextmenu')
             //根据事件对象中鼠标点击的位置，进行定位
-            contextmenu.style.left = e.clientX + 'px';
-            contextmenu.style.top = e.clientY + 'px';
-            contextmenu.style.display = "block"
+            contextmenu.style.left = e.clientX + 'px'
+            contextmenu.style.top = e.clientY + 'px'
+            contextmenu.style.display = 'block'
             appContextmenu.value.items = [
                 {
                     name: '关闭当前', data: item, callback: (res: any) => {
                         handleColseCurrent(res.data)
-                    }
+                    },
                 },
                 {
                     name: '关闭其他', data: item, callback: () => {
                         const arr = processList.value.filter((e: any) => {
-                            return (e.id == item.id || e.path == "/") || e.tabFix;
-                        });
-                        store.commit('app/setProcessList', arr);
-                        toPath();
-                    }
+                            return (e.id == item.id || e.path == '/') || e.tabFix
+                        })
+                        store.commit('app/setProcessList', arr)
+                        toPath()
+                    },
                 },
                 {
                     name: '关闭所有', data: item, callback: () => {
-                        store.commit('app/resetProcessList');
-                        toPath(store.getters['app/processList'][0].path);
-                    }
-                }
+                        store.commit('app/resetProcessList')
+                        toPath(store.getters['app/processList'][0].path)
+                    },
+                },
             ]
         }
 
         const handleClickCutTap = (item: any) => {
-            router.push(item.path);
+            router.push(item.path)
         }
 
         return {
@@ -128,9 +129,9 @@ export default defineComponent({
             tabContainer,
             handleScrollBar,
             handleColseCurrent,
-            tabStlyeClassName
+            tabStlyeClassName,
         }
-    }
+    },
 })
 </script>
 <!--suppress LessResolvedByNameOnly -->
