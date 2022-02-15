@@ -2,8 +2,8 @@
     <!--  菜单路径  -->
     <div class="layout-header">
         <a-layout-header class="layout-header_top">
-            <MenuFoldOutlined v-if="collapsed" @click="handleCollapsed(false)"/>
-            <MenuUnfoldOutlined @click="handleCollapsed(true)" v-else/>
+            <MenuFoldOutlined v-if="collapsed" @click="handleCollapsed(false)" />
+            <MenuUnfoldOutlined @click="handleCollapsed(true)" v-else />
             <a-breadcrumb class="text-overflow breadcrumb" style="" v-if="!isMobile">
                 <a-breadcrumb-item v-for="(item,idx) in list" :key="idx">{{ item.name }}</a-breadcrumb-item>
             </a-breadcrumb>
@@ -11,31 +11,31 @@
                 <a-breadcrumb-item>{{ list[list.length - 1].name }}</a-breadcrumb-item>
             </a-breadcrumb>
         </a-layout-header>
-        <ProjectSwitch/>
+        <CutSystems />
         <div class="layout-header_right_menu">
-            <HeaderTopRightUser/>
+            <ThemeBar />
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import {computed, defineComponent} from 'vue'
-import {useStore} from 'vuex'
-import HeaderTopRightUser from './headerTopRightUser.vue'
-import ProjectSwitch from './projectSwitch'
-import {MenuFoldOutlined, MenuUnfoldOutlined} from '@ant-design/icons-vue';
+import { computed, defineComponent } from 'vue'
+import { useStore } from 'vuex'
+import ThemeBar from './ThemeBar.vue'
+import CutSystems from './CutSystems'
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue'
 
 export default defineComponent({
     components: {
         MenuFoldOutlined,
         MenuUnfoldOutlined,
-        HeaderTopRightUser,
-        ProjectSwitch
+        ThemeBar,
+        CutSystems,
     },
     setup() {
 
-        const store = useStore();
-        const list = computed(() => store.getters['app/tabViewsPath']);
+        const store = useStore()
+        const list = computed(() => store.getters['app/tabViewsPath'])
         const isMobile = computed(() => store.getters['app/getBrowser'].isMobile)
         const collapsed = computed(() => store.state.app.collapsed)
 
@@ -52,9 +52,9 @@ export default defineComponent({
             list,
             collapsed,
             isMobile,
-            handleCollapsed
+            handleCollapsed,
         }
-    }
+    },
 })
 </script>
 <style lang="less" scoped>

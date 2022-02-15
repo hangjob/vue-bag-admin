@@ -16,23 +16,23 @@
                     {{ logoTitle }}
                 </div>
                 <div class="scroll">
-                    <YxsMenuSlider/>
+                    <MenuSlider />
                 </div>
             </div>
         </div>
     </a-drawer>
 </template>
 <script lang="ts">
-import {computed, defineComponent, ref} from 'vue';
-import YxsMenuSlider from '@/packages/layout/components/menu'
-import {themeHook} from '@/packages/hook'
-import {useStore} from "vuex";
+import { computed, defineComponent } from 'vue'
+import MenuSlider from './MenuSlider'
+import { themeHook } from '@/packages/hook'
+import { useStore } from 'vuex'
 
 
 export default defineComponent({
     name: 'Slider',
     components: {
-        YxsMenuSlider
+        MenuSlider,
     },
     setup() {
         const store = useStore()
@@ -60,9 +60,9 @@ export default defineComponent({
             visible,
             mask,
             close,
-            logoTitle
+            logoTitle,
         }
-    }
+    },
 })
 </script>
 <style lang="less" scoped>

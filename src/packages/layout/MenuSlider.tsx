@@ -1,25 +1,25 @@
-import {computed, defineComponent, ref, watchEffect} from 'vue'
-import {useStore} from 'vuex'
-import {useRoute, useRouter} from "vue-router";
-import {toTree} from '@/packages/utils/utils'
-import {deepMenu} from "@/packages/layout/common";
+import { computed, defineComponent, ref, watchEffect } from 'vue'
+import { useStore } from 'vuex'
+import { useRoute, useRouter } from 'vue-router'
+import { toTree } from '@/packages/utils/utils'
+import { deepMenu } from '@/packages/layout/common'
 
 export default defineComponent({
     name: 'yxs-menu-slider',
     setup() {
-        const store = useStore();
-        const router = useRouter();
-        const route = useRoute();
+        const store = useStore()
+        const router = useRouter()
+        const route = useRoute()
 
-        const browser = computed(() => store.getters['app/getBrowser']);
+        const browser = computed(() => store.getters['app/getBrowser'])
         const collapsed = computed(() => store.state.app.collapsed)
 
         const selectedKeys = ref<string[]>([])
-        const openKeys = ref<string[]>([]);
-        const menuList = computed(() => toTree(store.getters['app/menuList']));
+        const openKeys = ref<string[]>([])
+        const menuList = computed(() => toTree(store.getters['app/menuList']))
 
         // 是否可见
-        const visible = ref<boolean>(true);
+        const visible = ref<boolean>(true)
         const goView = (item: any) => {
             if (item.path && item.path != route.path) {
                 router.push(item.path).then()
@@ -30,7 +30,7 @@ export default defineComponent({
         }
 
         const handleClick = (res: any) => {
-            goView(res.item['menu-info']);
+            goView(res.item['menu-info'])
         }
 
         // 监听菜单变化 - 两种方式
@@ -42,10 +42,10 @@ export default defineComponent({
         // }, {deep: false, immediate: true})
         // 二
         watchEffect(() => {
-            const tabPaths = JSON.parse(JSON.stringify(store.getters['app/tabViewsPath']));
-            openKeys.value = tabPaths.map((item: any) => item.id);
+            const tabPaths = JSON.parse(JSON.stringify(store.getters['app/tabViewsPath']))
+            openKeys.value = tabPaths.map((item: any) => item.id)
             if (tabPaths.length) {
-                selectedKeys.value = [tabPaths.pop().id];
+                selectedKeys.value = [tabPaths.pop().id]
             }
         })
 
@@ -57,11 +57,11 @@ export default defineComponent({
             openKeys,
             visible,
             collapsed,
-            browser
+            browser,
         }
     },
     render(ctx: any) {
-        const children = deepMenu(ctx.menuList);
+        const children = deepMenu(ctx.menuList)
         return (
             ctx.visible && (
                 <div class="yxs-menu-slider">
@@ -71,11 +71,12 @@ export default defineComponent({
                         inline-collapsed={ctx.collapsed}
                         mode="inline"
                         onClick={ctx.handleClick}
-                        theme="light">
+                        theme="light"
+                    >
                         {children}
                     </a-menu>
                 </div>
             )
         )
-    }
+    },
 })

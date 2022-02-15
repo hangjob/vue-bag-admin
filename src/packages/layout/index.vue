@@ -1,10 +1,10 @@
 <template>
     <a-layout style="height: 100%">
-        <Slider/>
+        <Slider />
         <a-layout :style="{marginLeft}" class="layout" :class="layoutClassName">
-            <HeaderTop/>
-            <HeaderProcess/>
-            <LayoutContainer/>
+            <NavBar />
+            <TabBar />
+            <AppMain />
             <div class="layout-footer">
                 Yxs Admin ©2021
                 <a-typography-link href="//www.vipbic.com">www.vipbic.com</a-typography-link>
@@ -13,31 +13,31 @@
     </a-layout>
 </template>
 <script lang="ts">
-import {defineComponent, computed} from 'vue';
-import Slider from './slider.vue'
-import HeaderTop from './headerTop.vue'
-import HeaderProcess from './headerProcess.vue'
-import LayoutContainer from './layoutContainer.vue'
-import {themeHook} from '@/packages/hook'
-import {useStore} from "vuex";
+import { defineComponent, computed } from 'vue'
+import Slider from './Slider.vue'
+import NavBar from './NavBar.vue'
+import TabBar from './TabBar.vue'
+import AppMain from './AppMain.vue'
+import { themeHook } from '@/packages/hook'
+import { useStore } from 'vuex'
 
 export default defineComponent({
     components: {
         Slider,
-        HeaderTop,
-        HeaderProcess,
-        LayoutContainer
+        TabBar,
+        NavBar,
+        AppMain,
     },
     setup() {
-        const {layoutClassName} = themeHook()
-        const store = useStore();
+        const { layoutClassName } = themeHook()
+        const store = useStore()
         const marginLeft = computed(() => store.state.app.themeConfig.menuMaxWidth + 'px')
         return {
             layoutClassName,
-            marginLeft
+            marginLeft,
         }
-    }
-});
+    },
+})
 </script>
 <style scoped lang="less">
 .layout {
