@@ -7,15 +7,15 @@
 // 响应式api的使用风格保持统一，其实这也是整个项目风格统一的问题，对于setup里定义的数据做响应式处理，要么都用ref，要么都用reative，保持统一，这样在使用时不至于有的带.value有的不带。
 
 
-import {ref, onMounted, watch, watchEffect, computed, toRef} from 'vue'
-import {useStore} from "vuex";
+import { ref, onMounted, watch, watchEffect, computed, toRef } from 'vue'
+import { useStore } from 'vuex'
 
-const themeHook = function () {
-    const store = useStore();
+const themeHook = function() {
+    const store = useStore()
 
     const layoutClassName = computed(() => {
-        let names: Array<any> = [];
-        const app = store.state.app;
+        let names: Array<any> = []
+        const app = store.state.app
         if (app.collapsed) {
             names.push('layout-is-collapse')
         }
@@ -23,25 +23,25 @@ const themeHook = function () {
             names.push('layout-is-collapse-floating')
         }
         return names.join(' ')
-    });
+    })
 
-    const tabStlyeClassName = computed(() => {
-        const themeConfig = store.state.app.themeConfig;
+    const tabStyleClassName = computed(() => {
+        const themeConfig = store.state.app.themeConfig
         if (themeConfig.tabStyle === 2) {
             return 'tab-style-round'
         }
         if (themeConfig.tabStyle === 3) {
             return 'tab-style-card'
         }
-        return null;
+        return null
     })
 
     return {
         layoutClassName,
-        tabStlyeClassName
+        tabStyleClassName,
     }
 }
 
 export {
-    themeHook
+    themeHook,
 }

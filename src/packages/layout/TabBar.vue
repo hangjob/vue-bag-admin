@@ -1,5 +1,5 @@
 <template>
-    <div :class="['layout-header_scroller',tabStlyeClassName]">
+    <div :class="['layout-header_scroller',tabStyleClassName]">
         <div class="tab-action tab-action-left" @click="handleScrollBar(false)">
             <CaretLeftFilled class="icon-svg" />
         </div>
@@ -13,7 +13,7 @@
             >
                 <span class="title">{{ item.name }}</span>
                 <CloseOutlined class="icon-svg" v-if="!item.tabFix && processList.length !== 1"
-                               @click.stop="handleColseCurrent(item)"
+                               @click.stop="handleCloseCurrent(item)"
                 />
             </div>
         </div>
@@ -21,28 +21,31 @@
             <CaretRightFilled class="icon-svg" />
         </div>
     </div>
+    <Contextmenu ref="contextmenu" />
 </template>
 <script lang="ts">
-import { computed, defineComponent, inject, ref } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import { useStore } from 'vuex'
 import { CaretLeftFilled, CaretRightFilled, CloseOutlined } from '@ant-design/icons-vue'
 import { useRouter } from 'vue-router'
 import { last } from '@/packages/utils/lodash'
 import { themeHook } from '@/packages/hook'
+import Contextmenu from './Contextmenu.vue'
 
 export default defineComponent({
     components: {
         CloseOutlined,
         CaretRightFilled,
         CaretLeftFilled,
+        Contextmenu,
     },
     setup() {
         const store = useStore()
         const router = useRouter()
-        const appContextmenu: any = inject('appContextmenu')
+        const contextmenu: any = ref(null)
         const processList = computed(() => store.state.app.processList.filter((e: any) => e.tabHidden === false)) // 数据列表 // 使用computed 才触发视图更新
         const tabContainer = ref<HTMLAreaElement | any>(null)
-        const { tabStlyeClassName } = themeHook()
+        const { tabStyleClassName } = themeHook()
 
         function scrollBar(left: number) {
             tabContainer.value.scrollTo({
@@ -76,7 +79,7 @@ export default defineComponent({
             }
         }
 
-        const handleColseCurrent = (item: any) => {
+        const handleCloseCurrent = (item: any) => {
             const idx: number = processList.value.findIndex((e: any) => e.id == item.id)
             store.commit('app/delProcessList', idx)
             toPath()
@@ -89,15 +92,16 @@ export default defineComponent({
                 return false
             }
             //获取我们自定义的右键菜单
-            let contextmenu: any = document.querySelector('#contextmenu')
+            let condom: any = document.querySelector('#contextmenu')
             //根据事件对象中鼠标点击的位置，进行定位
-            contextmenu.style.left = e.clientX + 'px'
-            contextmenu.style.top = e.clientY + 'px'
-            contextmenu.style.display = 'block'
-            appContextmenu.value.items = [
+            condom.style.left = e.clientX + 'px'
+            condom.style.top = e.clientY + 'px'
+            condom.style.display = 'block'
+
+            contextmenu.value.items = [
                 {
                     name: '关闭当前', data: item, callback: (res: any) => {
-                        handleColseCurrent(res.data)
+                        handleCloseCurrent(res.data)
                     },
                 },
                 {
@@ -128,8 +132,9 @@ export default defineComponent({
             handleClickCutTap,
             tabContainer,
             handleScrollBar,
-            handleColseCurrent,
-            tabStlyeClassName,
+            handleCloseCurrent,
+            tabStyleClassName,
+            contextmenu,
         }
     },
 })

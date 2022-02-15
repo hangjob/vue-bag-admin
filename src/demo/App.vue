@@ -1,23 +1,11 @@
 <template>
     <router-view />
-    <Contextmenu ref="contextmenu" />
 </template>
 <script lang="ts">
-import Contextmenu from '@/packages/extend/contextmenu/index.vue'
-import { defineComponent, provide, ref } from 'vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
     name: 'App',
-    components: {
-        Contextmenu,
-    },
-    setup() {
-        const contextmenu: any = ref(null)
-        provide('appContextmenu', contextmenu)
-        return {
-            contextmenu,
-        }
-    },
 })
 </script>
 <style lang="less">

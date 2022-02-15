@@ -8,6 +8,7 @@ const setProBuild = function() {
                 lib: path.resolve(process.cwd(), 'lib.html'),
                 demo: path.resolve(process.cwd(), 'demo.html'),
                 web: path.resolve(process.cwd(), 'web.html'),
+                admin: path.resolve(process.cwd(), 'admin.html'),
             },
             // 两种方式 也可以指定包名打包
             // output: {
