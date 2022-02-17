@@ -6,13 +6,13 @@
                     <HomeSection />
                 </el-col>
                 <el-col :xs="8" :sm="24" :md="24" :lg="8" :xl="8">
-                    <HomeAside/>
+                    <HomeAside />
                 </el-col>
             </el-row>
         </div>
     </div>
 </template>
 <script lang="ts" setup>
-import HomeSection from './section.vue'
-import HomeAside from './aside.vue'
+import HomeSection from './Section.vue'
+import HomeAside from './Aside.vue'
 </script>
