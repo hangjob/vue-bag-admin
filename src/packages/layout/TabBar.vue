@@ -92,11 +92,11 @@ export default defineComponent({
                 return false
             }
             //获取我们自定义的右键菜单
-            let condom: any = document.querySelector('#contextmenu')
+            let conDom: any = document.querySelector('#contextmenu')
             //根据事件对象中鼠标点击的位置，进行定位
-            condom.style.left = e.clientX + 'px'
-            condom.style.top = e.clientY + 'px'
-            condom.style.display = 'block'
+            conDom.style.left = e.clientX + 'px'
+            conDom.style.top = e.clientY + 'px'
+            conDom.style.display = 'block'
 
             contextmenu.value.items = [
                 {
@@ -120,6 +120,14 @@ export default defineComponent({
                     },
                 },
             ]
+
+            document.addEventListener('click', removeClickFun)
+
+            // 隐藏掉右键菜单
+            function removeClickFun() {
+                conDom.style.display = 'none'
+                document.removeEventListener('click', removeClickFun)
+            }
         }
 
         const handleClickCutTap = (item: any) => {

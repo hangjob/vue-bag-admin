@@ -46,6 +46,7 @@
         "fuse.js": "^6.5.3",
         "jquery": "^3.6.0",
         "lodash": "^4.17.21",
+        "md-editor-v3": "^1.10.1",
         "minireset.css": "0.0.7",
         "mitt": "^3.0.0",
         "mockjs": "^1.1.0",

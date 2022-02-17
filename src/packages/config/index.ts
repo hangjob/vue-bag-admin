@@ -1,7 +1,7 @@
 /**
  * 路由模式
  */
-const routerMode: String = "hash";
+const routerMode: String = 'hash'
 
 /**
  * 主题设置
@@ -15,7 +15,7 @@ const themeConfig = {
     // 页签样式 1默认 2圆点 3卡片
     tabStyle: 1,
     // 是否折叠项目菜单
-    foldPrjMenu: false
+    foldPrjMenu: false,
 }
 
 /**
@@ -23,13 +23,13 @@ const themeConfig = {
  */
 const httpNetwork = {
     // 获取请求的时候的路由规则
-    token: ["/login", '/refreshToken'],
+    token: ['/login', '/refreshToken'],
     // 配后端数据的接收方式
     contentType: 'application/json;charset=UTF-8',
     //消息框消失时间
     messageDuration: 2.5,
     //最长请求时间
-    requestTimeout: 3000,
+    requestTimeout: 6000,
     //操作正常code码
     successCode: [1, 1000],
     // 重连间隔时间
@@ -37,15 +37,15 @@ const httpNetwork = {
     // 最大重试次数
     retry: 3,
     // 默认前缀url
-    baseURL: '/api'
+    baseURL: '/api',
 }
 
 /**
  * 路由设置
  */
-const routerConfig = {
-    filter: ['/login'],
-    routerMode: 'hash'
+const routerSet = {
+    mode: 'hash',
+    ignore: ['/login', '/403', '/404', '/500', '/502', '/test'],
 }
 
 
@@ -53,5 +53,5 @@ export {
     routerMode,
     themeConfig,
     httpNetwork,
-    routerConfig
+    routerSet,
 }

@@ -1,17 +1,22 @@
 import store from '@/packages/store'
-import {getAllParentArr} from "@/packages/utils/utils";
-import {findChildrenDepth} from "@/packages/utils/lodash";
-import {apiUserUserinfo} from "@/packages/service/user";
-import {NProgress} from '@/packages/plugin/nprogress'
+import { getAllParentArr } from '@/packages/utils/utils'
+import { findChildrenDepth } from '@/packages/utils/lodash'
+import { apiUserUserinfo } from '@/packages/service/user'
+import { NProgress } from '@/packages/plugin/nprogress'
+import { routerSet } from '@/packages/config'
 
-const ignore = ["/login", "/403", "/404", "/500", "/502", '/test'];
+const { ignore } = routerSet
 
 // 处理app-store数据
 function setAppStoreData(to: any): void {
-    const item: any = findChildrenDepth({key: 'path', value: to.path, node: 'children'}, store.getters['app/menuList']);
-    store.commit("app/addProcessList", {...item});
-    store.commit("app/updateCurrentRouter", {...to})
-    const arr = getAllParentArr(store.getters['app/menuList'], to.path);
+    const item: any = findChildrenDepth({
+        key: 'path',
+        value: to.path,
+        node: 'children',
+    }, store.getters['app/menuList'])
+    store.commit('app/addProcessList', { ...item })
+    store.commit('app/updateCurrentRouter', { ...to })
+    const arr = getAllParentArr(store.getters['app/menuList'], to.path)
     arr && store.commit('app/updateTabViewsPath', arr)
 }
 
@@ -25,7 +30,7 @@ function checkError(to: any, from: any, next: any): void {
 }
 
 function checkUserinfo(to: any, from: any, next: any): void {
-    const userinfo = store.getters['user/userinfo'];
+    const userinfo = store.getters['user/userinfo']
     setAppStoreData(to)
     if (Object.keys(userinfo).length) {
         next()
@@ -49,11 +54,11 @@ function checkLogin(to: any, from: any, next: any): void {
 }
 
 const setupRouterGuard = (to: any, from: any, next: any) => {
-    NProgress.start();
+    NProgress.start()
     checkLogin(to, from, next)
-    NProgress.done();
+    NProgress.done()
 }
 
 export {
-    setupRouterGuard
+    setupRouterGuard,
 }

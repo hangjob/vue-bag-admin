@@ -17,7 +17,6 @@ import { Component } from 'vue'
 interface $optionsType {
     router?: {
         file: Record<string, Component>, // 外接路由文件所在路径 import xxx from 'home.vue'
-        paths: Array<any> // 路由地址 列如：router.push(xxx)
     },
     store?: {
         module: object,

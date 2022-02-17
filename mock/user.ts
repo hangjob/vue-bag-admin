@@ -93,6 +93,15 @@ Mock.mock('/api/user/logout', 'post', () => {
     }
     return result
 })
+
+Mock.mock('/api/app/router', 'post', () => {
+    const result: resData = {
+        code: 1,
+        message: '请求成功',
+        data: [],
+    }
+    return result
+})
 //数据延迟
 Mock.setup({
     timeout: '500-800',

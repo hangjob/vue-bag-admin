@@ -6,23 +6,16 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
     setup() {
-
         const items = ref<Array<any>>([])
-
-        onMounted(() => {
-            window.onclick = function() {
-                let contextmenu: any = document.querySelector('#contextmenu')
-                contextmenu.style.display = 'none'
-            }
-        })
 
         const handleCallback = (item: any) => {
             item.callback && item.callback(item)
         }
+
         return {
             handleCallback,
             items,

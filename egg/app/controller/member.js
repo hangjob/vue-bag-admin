@@ -88,11 +88,20 @@ class MemberController extends baseController {
                     const obj = await ctx.model.Role.findOne({
                         where: { tag: arr[j] },
                     })
-                    roleResult.push(obj)
+                    if (obj) {
+                        roleResult.push(obj)
+                    }
                 }
                 item.roles = roleResult
             }
         }
+        //
+        // console.time('forNode');
+        //
+        // for(let i=0;i<100000000000;i++){
+        //
+        // }
+        // console.timeEnd('forNode');
 
         this.result({ data: result })
     }
