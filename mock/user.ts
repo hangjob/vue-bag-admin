@@ -102,7 +102,7 @@ Mock.mock('/api/app/router', 'post', () => {
     }
     return result
 })
-//数据延迟
-Mock.setup({
-    timeout: '500-800',
-})
+// //数据延迟
+// Mock.setup({
+//     timeout: '10-100',
+// })

@@ -3,7 +3,9 @@ import { routerSet } from '@/packages/config'
 import { App } from 'vue'
 import { setupRouterGuard } from '@/packages/router/guard'
 import { setupBeforeStore } from '@/packages/router/beforeStore'
-import { setAppRouter } from '@/packages/router/route'
+import store from '@/packages/store'
+import { NProgress } from '@/packages/plugin/nprogress'
+
 // 定义路由
 const routes: Array<RouteRecordRaw> = [
     {
@@ -174,28 +176,19 @@ const routes: Array<RouteRecordRaw> = [
         path: '/404',
         component: () => import('@/packages/views/error/404.vue'),
     },
-    {
-        path: '/:catchAll(.*)*', // 不识别的path自动匹配404
-        redirect: '/404',
-    },
 ]
-let file: Array<any> = []
+
 // 实列化router
 const router = createRouter({
     history: routerSet.mode === 'history' ? createWebHistory() : createWebHashHistory(),
     routes,
 } as RouterOptions)
 
-
 router.beforeEach((to: any, from: any, next: any) => {
-    setupBeforeStore()
-    setAppRouter(to, router, file).then(() => {
-        setupRouterGuard(to, from, next)
-    }).catch(() => {
-        setupRouterGuard(to, from, next)
-    })
+    NProgress.start()
+    setupBeforeStore(to)
+    setupRouterGuard(to, from, next)
 })
-
 
 /**
  * router-view
@@ -205,11 +198,15 @@ router.afterEach((to, from) => {
     const toDepth = to.path.split('/').length
     const fromDepth = from.path.split('/').length
     to.meta.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+    NProgress.done()
 })
 
 const setupRouter = (app: App) => {
-    file = app.config.globalProperties.$plugin?.router || []
+    store.commit('app/updateAppRouter', { key: 'file', value: app.config.globalProperties.$plugin?.router?.file || [] })
     app.use(router)
+    router.isReady().then(() => {
+        store.commit('app/updateAppRouter', { key: 'router', value: router })
+    })
 }
 
 export default router

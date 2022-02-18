@@ -1,3 +1,5 @@
+import { isArray } from '@/packages/utils/utils'
+
 const user = {
     namespaced: true,
     state: {
@@ -6,8 +8,7 @@ const user = {
     },
     getters: {
         roles: (state: any) => {
-            console.log(state)
-            return state.roles.split(',')
+            return state.roles
         },
         userinfo: (state: any) => {
             return state.userinfo
@@ -19,7 +20,11 @@ const user = {
         },
         updateUserinfo(state: any, data: any) {
             state.userinfo = data
-            state.roles = data.roles
+            if (isArray(data.roles)) {
+                state.roles = data.roles
+            } else {
+                state.roles = data.roles.split(',')
+            }
         },
     },
     actions: {},

@@ -44,8 +44,9 @@ const httpNetwork = {
  * 路由设置
  */
 const routerSet = {
-    mode: 'hash',
-    ignore: ['/login', '/403', '/404', '/500', '/502', '/test'],
+    mode: 'hash', // 路由模式
+    whiteList: ['/login', '/403', '/404', '/500', '/502', '/test'], // 白名单
+    resetPath: '/login', // 重置路由
 }
 
 

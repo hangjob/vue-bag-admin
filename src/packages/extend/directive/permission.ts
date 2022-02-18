@@ -1,16 +1,16 @@
-import {App, Directive, DirectiveBinding} from 'vue'
-import store from "@/packages/store";
+import { App, Directive, DirectiveBinding } from 'vue'
+import store from '@/packages/store'
 
 
 const isButton = (el: Element) => {
-    return el.tagName.toLowerCase() === 'button';
+    return el.tagName.toLowerCase() === 'button'
 }
 
 // 权限指令
 function handlePermission(el: Element, binding: DirectiveBinding) {
-    const {value, arg} = binding;
+    const { value, arg } = binding
     if (value && value instanceof Array) {
-        const roles = store.getters['user/roles'];
+        const roles = store.getters['user/roles']
         const hasPermission = roles.some((role: any) => {
             return value.includes(role)
         })
@@ -21,8 +21,8 @@ function handlePermission(el: Element, binding: DirectiveBinding) {
 
         if (!hasPermission) {
             if (isButton(el)) {
-                el.classList.add('ant-btn-dashed');
-                el.setAttribute("disabled", 'disabled');
+                el.classList.add('ant-btn-dashed')
+                el.setAttribute('disabled', 'disabled')
             } else {
                 el.parentNode && el.parentNode.removeChild(el)
             }
@@ -52,7 +52,7 @@ const permission: Directive = {
     // 指令绑定元素销毁后
     unmounted() {
 
-    }
+    },
 }
 
 const setupPermission = (app: App) => {

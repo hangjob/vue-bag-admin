@@ -2,7 +2,6 @@ import { Component, createApp } from 'vue'
 import App from './App.vue'
 import store from '@/demo/store/index'
 import install, { $optionsType } from '@/packages/install'
-
 const app = createApp(App)
 
 const file: Record<string, Component> = import.meta.globEager('/src/demo/views/**/*.vue')

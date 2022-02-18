@@ -51,12 +51,6 @@
                 <a-button style="margin-left: 10px" @click="resetForm">Reset</a-button>
             </a-form-item>
         </a-form>
-        <button class="btn">neutral</button>
-        <button class="btn btn-primary">primary</button>
-        <button class="btn btn-secondary">secondary</button>
-        <button class="btn btn-accent">accent</button>
-        <button class="btn btn-ghost">ghost</button>
-        <button class="btn btn-link">link</button>
     </yxs-view>
 </template>
 <script lang="ts">
