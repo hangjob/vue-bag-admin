@@ -6,7 +6,7 @@ import { setAsyncRouterComponents } from '@/packages/router/asyncRouter'
 const { resetPath, whiteList } = routerSet
 
 
-function hasUserinfo(to: any, from: any, next: any): void {
+function hasUserinfo(to: any, from: any, next: any) {
     const userinfo = store.getters['user/userinfo']
     if (Object.keys(userinfo).length) {
         next()
@@ -17,7 +17,7 @@ function hasUserinfo(to: any, from: any, next: any): void {
             apiUserUserinfo().then(async (res: any) => {
                 store.commit('user/updateUserinfo', res)
                 await setAsyncRouterComponents()
-                next({...to})
+                next({ ...to, replace: true })
             }).catch(() => {
                 next(resetPath)
             })

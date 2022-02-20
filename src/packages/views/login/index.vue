@@ -12,13 +12,15 @@
                             <p>你可以直接输入您的账号和密码登录</p>
                             <a-form autocomplete="off" :rules="rules" ref="formRef" class="login-form"
                                     :layout="formState.layout"
-                                    :model="formState">
+                                    :model="formState"
+                            >
                                 <a-form-item label="你的账户" name="username">
-                                    <a-input size="large" v-model:value="formState.username" placeholder="随意输入你的账户"/>
+                                    <a-input size="large" v-model:value="formState.username" placeholder="随意输入你的账户" />
                                 </a-form-item>
                                 <a-form-item label="你的密码" name="password">
                                     <a-input size="large" type="password" v-model:value="formState.password"
-                                             placeholder="随意输入你的密码"/>
+                                             placeholder="随意输入你的密码"
+                                    />
                                 </a-form-item>
                                 <a-form-item>
                                     <div class="login-options">
@@ -44,13 +46,13 @@
     </div>
 </template>
 <script lang="ts">
-import {inject, ref, toRaw} from 'vue'
-import {useStore} from "vuex";
-import {useRouter} from "vue-router";
-import {defineComponent, reactive, UnwrapRef} from 'vue';
-import {ValidateErrorEntity} from 'ant-design-vue/es/form/interface';
-import {apiLogin} from '@/packages/service/user';
-import {apiUserUserinfo} from '@/packages/service/user';
+import { inject, ref, toRaw } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+import { defineComponent, reactive, UnwrapRef } from 'vue'
+import { ValidateErrorEntity } from 'ant-design-vue/es/form/interface'
+import { apiLogin } from '@/packages/service/user'
+import { apiUserUserinfo } from '@/packages/service/user'
 import locaStore from '@/packages/utils/persistence'
 
 interface FormState {
@@ -60,39 +62,39 @@ interface FormState {
     rememberPas: string | boolean
 }
 
-import {Encrypt, Decrypt} from '@/packages/utils/crypto'
+import { Encrypt, Decrypt } from '@/packages/utils/crypto'
 
 export default defineComponent({
     name: 'login',
     setup() {
-        const pas = ref('');
+        const pas = ref('')
         const store = useStore()
-        const router = useRouter();
-        const formRef = ref();
+        const router = useRouter()
+        const formRef = ref()
 
         const rules = {
             username: [
-                {required: true, message: '请随意输入你的用户名', trigger: 'blur'},
-                {min: 2, max: 10, message: '最小长度为2，最大长度10', trigger: 'blur'},
+                { required: true, message: '请随意输入你的用户名', trigger: 'blur' },
+                { min: 2, max: 10, message: '最小长度为2，最大长度10', trigger: 'blur' },
             ],
-            password: [{required: true, message: '随意输入用户名密码', trigger: 'blur'}],
-        };
+            password: [{ required: true, message: '随意输入用户名密码', trigger: 'blur' }],
+        }
 
         const formState: UnwrapRef<FormState> = reactive({
             layout: 'vertical',
             username: 'admin',
             password: '123456',
-            rememberPas: false
+            rememberPas: false,
         })
 
         const encryptData = locaStore.get('encryptData')
         if (encryptData) {
-            let {username, password, rememberPas} = JSON.parse(Decrypt(encryptData));
-            formState.username = username;
+            let { username, password, rememberPas } = JSON.parse(Decrypt(encryptData))
+            formState.username = username
             formState.password = password
-            formState.rememberPas = rememberPas;
+            formState.rememberPas = rememberPas
         } else {
-            formState.username = 'admin';
+            formState.username = 'admin'
             formState.password = '123456'
         }
 
@@ -101,16 +103,15 @@ export default defineComponent({
                 .validate()
                 .then(() => {
                     apiLogin(formState).then(() => {
-                        if (formState.rememberPas) locaStore.set('encryptData', Encrypt(JSON.stringify(formState)), 3600 * 24 * 7);
-                        apiUserUserinfo().then((res: any) => {
-                            store.commit('user/updateUserinfo', res)
-                            router.push('/home') // 此处通过菜单节点去读取第一个，默认是跳转home
-                        })
+                        if (formState.rememberPas) {
+                            locaStore.set('encryptData', Encrypt(JSON.stringify(formState)), 3600 * 24 * 7)
+                        }
+                        router.push('/home') // 此处通过菜单节点去读取第一个，默认是跳转home
                     })
                 })
                 .catch((error: ValidateErrorEntity<FormState>) => {
-                    console.log('error', error);
-                });
+                    console.log('error', error)
+                })
         }
 
         return {
@@ -118,9 +119,9 @@ export default defineComponent({
             pas,
             formState,
             rules,
-            formRef
+            formRef,
         }
-    }
+    },
 })
 </script>
 <style lang="less" scoped>
@@ -139,6 +140,8 @@ export default defineComponent({
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
+        padding: 30px;
+        box-sizing: border-box;
     }
 
     &-content {

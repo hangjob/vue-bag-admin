@@ -6,7 +6,7 @@ import { handleError } from '@/packages/debug'
 import { Component } from 'vue'
 
 /**
- * router: {views:[菜单],file:[菜单路由文件]}
+ * router: {paths:[菜单],file:[菜单路由文件]},defaults:true,开启默认路由
  *
  * store:{module:{store对象},namespace:’命名空间，默认web‘}
  *
@@ -17,7 +17,8 @@ import { Component } from 'vue'
 interface $optionsType {
     router?: {
         file: Record<string, Component>, // 外接路由文件所在路径 import xxx from 'home.vue'
-        paths?: Array<any>
+        paths?: Array<any>,
+        defaults?: Boolean,
     },
     store?: {
         module: object,

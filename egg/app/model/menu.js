@@ -40,7 +40,7 @@ module.exports = app => {
         },
         filePath: {
             type: STRING,
-            comment: '文件路径'
+            comment: '组件路径'
         },
         iframePath: {
             type: STRING,
@@ -81,6 +81,6 @@ module.exports = app => {
         updatedAt: 'updateTime',
         tableName: 'yxs_menu' // 定义实际表名
     });
-    
+
 }
 

@@ -399,7 +399,6 @@ let defaultPrjMenu = [
     },
 ]
 defaultPrjMenu = addUniqueId(defaultPrjMenu, '_local')
-
 export {
     defaultMenu,
     defaultPrjMenu,

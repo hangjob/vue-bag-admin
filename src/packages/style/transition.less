@@ -1,24 +1,30 @@
-.slide-right-enter-active,
-.slide-right-leave-active,
+.fade-enter-active,
+.fade-leave-active {
+    transition-duration: 0.3s;
+    transition-property: height, opacity;
+    transition-timing-function: ease;
+    overflow: hidden;
+}
+.fade-enter,
+.fade-leave-active {
+    opacity: 0
+}
 .slide-left-enter-active,
-.slide-left-leave-active {
-    position: absolute; // 需要注意的地方
-    width: 100%; // 需要注意的地方，否则会出现页面渲染卡顿现象
-    will-change: transform;
-    transition: all 0.3s ease-out;
+.slide-left-leave-active,
+.slide-right-enter-active,
+.slide-right-leave-active {
+    transition-duration: 0.5s;
+    transition-property: height, opacity, transform;
+    transition-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
+    overflow: hidden;
 }
-
-.slide-right-enter {
-    opacity: 0;
-    transform: translate(-100%, 0);
-}
-
+.slide-left-enter,
 .slide-right-leave-active {
     opacity: 0;
-    transform: translate(0%, 0);
+    transform: translate(2em, 0);
 }
-
-.slide-left-enter {
+.slide-left-leave-active,
+.slide-right-enter {
     opacity: 0;
-    transform: translate(100%, 0);
+    transform: translate(-2em, 0);
 }

@@ -60,6 +60,7 @@
                                     <ul class="dropdown-menu">
                                         <li><a href="">登录</a></li>
                                         <li><a href="">注册</a></li>
+                                        <li><a target="_blank" href="/admin.html">后台管理</a></li>
                                     </ul>
                                 </li>
                             </ul>

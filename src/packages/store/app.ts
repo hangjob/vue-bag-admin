@@ -9,8 +9,8 @@ const app = {
     namespaced: true,
     state: {
         browser: {},
-        menuList: defaultMenu,
-        projectMenu: defaultPrjMenu, // 项目切换菜单
+        menuList: [],
+        projectMenu: [], // 项目切换菜单
         processList: [], // tab切换栏
         currentRouter: {}, // 当前路由数据
         tabViewsPath: [], // 访问路经
@@ -102,7 +102,7 @@ const app = {
                 state.menuList.push(item)
             }
         },
-        // 更新菜單
+        // 更新菜单
         updateMenuList(state: any, arr: Array<any>) {
             state.menuList = arr
         },

@@ -5,6 +5,7 @@ import { setupRouterGuard } from '@/packages/router/guard'
 import { setupBeforeStore } from '@/packages/router/beforeStore'
 import store from '@/packages/store'
 import { NProgress } from '@/packages/plugin/nprogress'
+import { defaultMenu, defaultPrjMenu } from '@/packages/config/defaultMenu'
 
 // 定义路由
 const routes: Array<RouteRecordRaw> = [
@@ -12,157 +13,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/',
         name: 'admin',
         component: () => import('@/packages/layout/index.vue'),
-        children: [
-            { path: '', redirect: 'home' },
-            {
-                path: '/home', name: 'home', meta: { title: '首页' },
-                component: () => import('@/packages/views/home/index.vue'),
-            },
-            {
-                path: '/sys/menu', name: 'sys-menu', meta: { title: '菜单列表' },
-                component: () => import('@/packages/views/sys/menu/index.vue'),
-            },
-            {
-                path: '/sys/branch', name: 'sys-branch', meta: { title: '部门组织' },
-                component: () => import('@/packages/views/sys/branch/index.vue'),
-            },
-            {
-                path: '/sys/member', name: 'sys-member', meta: { title: '用户管理' },
-                component: () => import('@/packages/views/sys/member/index.vue'),
-            },
-            {
-                path: '/sys/role', name: 'sys-role', meta: { title: '角色管理' },
-                component: () => import('@/packages/views/sys/role/index.vue'),
-            },
-            {
-                path: '/module/markdown', name: 'module-markdown', meta: { title: 'markdown编辑器' },
-                component: () => import('@/packages/views/module/markdown/index.vue'),
-            },
-            {
-                path: '/module/fileUploadImg', name: 'module-fileUploadImg', meta: { title: '图片上传' },
-                component: () => import('@/packages/views/module/fileUpload/fileUploadImg.vue'),
-            },
-            {
-                path: '/module/fileUpload', name: 'module-fileUpload', meta: { title: '文件上传' },
-                component: () => import('@/packages/views/module/fileUpload/fileUpload.vue'),
-            },
-            {
-                path: '/about', name: 'about', meta: { title: '关于' },
-                component: () => import('@/packages/views/about/index.vue'),
-            },
-            {
-                path: '/permit', name: 'permit', meta: { title: '权限管理' },
-                component: () => import('@/packages/views/permit/index.vue'),
-            },
-            {
-                path: '/module/exel', name: 'module-exel', meta: { title: '解析Exel' },
-                component: () => import('@/packages/views/module/exel/index.vue'),
-            },
-            {
-                path: '/module/rich', name: 'module-rich', meta: { title: '富文本编辑器' },
-                component: () => import('@/packages/views/module/rich/index.vue'),
-            },
-            {
-                path: '/vxe-table/base', name: 'vxe-table-base', meta: { title: '基础数据' },
-                component: () => import('@/packages/views/vxe-table/base/index.vue'),
-            },
-            {
-                path: '/vxe-table/great-table', name: 'vxe-table-great-table', meta: { title: '海量数据' },
-                component: () => import('@/packages/views/vxe-table/great-table/index.vue'),
-            },
-            {
-                path: '/vxe-table/edit-table', name: 'vxe-table-edit-table', meta: { title: '编辑表格' },
-                component: () => import('@/packages/views/vxe-table/edit-table/index.vue'),
-            },
-            {
-                path: '/vxe-table/verify-table', name: 'vxe-table-verify-table', meta: { title: '校验表格' },
-                component: () => import('@/packages/views/vxe-table/verify-table/index.vue'),
-            },
-            {
-                path: '/iframe/:name', name: 'iframe-view', meta: { title: 'iframe' },
-                component: () => import('@/packages/views/module/iframe/index.vue'),
-            },
-            {
-                path: '/module/print', name: 'module-print', meta: { title: 'print' },
-                component: () => import('@/packages/views/module/print/index.vue'),
-            },
-            {
-                path: '/module/icon/iconfont', name: 'module-icon-iconfont', meta: { title: '图标' },
-                component: () => import('@/packages/views/module/icon/iconfont/index.vue'),
-            },
-            {
-                path: '/animation/mojs', name: 'animation-mojs', meta: { title: '动画' },
-                component: () => import('@/packages/views/animation/mojs/index.vue'),
-            },
-            {
-                path: '/module/draggable', name: 'module-draggable', meta: { title: '拖拽排序' },
-                component: () => import('@/packages/views/module/draggable/index.vue'),
-            },
-            {
-                path: '/chart/echarts', name: 'chart-echarts', meta: { title: '百度Echarts' },
-                component: () => import('@/packages/views/chart/echarts/index.vue'),
-            },
-            {
-                path: '/chart/g2', name: 'chart-g2', meta: { title: 'G2' },
-                component: () => import('@/packages/views/chart/g2/index.vue'),
-            },
-            {
-                path: '/chart/g2plot', name: 'chart-g2plot', meta: { title: 'G2plot' },
-                component: () => import('@/packages/views/chart/g2plot/index.vue'),
-            },
-            {
-                path: '/error', name: 'error', meta: { title: '错误页面' },
-                component: () => import('@/packages/views/error/index.vue'),
-            },
-            {
-                path: '/500', name: '500', meta: { title: '错误页面' },
-                component: () => import('@/packages/views/error/500.vue'),
-            },
-            {
-                path: '/403', name: '403', meta: { title: '错误页面' },
-                component: () => import('@/packages/views/error/403.vue'),
-            },
-            {
-                path: '/module/descriptions', name: 'module-descriptions', meta: { title: '描述列表' },
-                component: () => import('@/packages/views/module/descriptions/index.vue'),
-            },
-            {
-                path: '/admire', name: 'admire', meta: { title: '打点吧' },
-                component: () => import('@/packages/views/admire/index.vue'),
-            },
-            {
-                path: '/async', name: 'async', meta: { title: '异步组件' },
-                component: () => import('@/packages/views/async/index.vue'),
-            },
-            {
-                path: '/module/util', name: 'module-util', meta: { title: '工具库' },
-                component: () => import('@/packages/views/module/util/index.vue'),
-            },
-            {
-                path: '/module/debug', name: 'module-debug', meta: { title: '错误捕获' },
-                component: () => import('@/packages/views/module/debug/index.vue'),
-            },
-            {
-                path: '/module/course', name: 'module-course', meta: { title: '课程表' },
-                component: () => import('@/packages/views/module/course/index.vue'),
-            },
-            {
-                path: '/module/winbox', name: 'module-winbox', meta: { title: 'WinBox弹窗' },
-                component: () => import('@/packages/views/module/winbox/index.vue'),
-            },
-            {
-                path: '/module/media', name: 'module-media', meta: { title: '视频播放' },
-                component: () => import('@/packages/views/module/media/index.vue'),
-            },
-            {
-                path: '/module/fuse', name: 'module-fuse', meta: { title: '内容搜索' },
-                component: () => import('@/packages/views/module/fuse/index.vue'),
-            },
-            {
-                path: '/module/fileSaver', name: 'module-fileSaver', meta: { title: '导出文件' },
-                component: () => import('@/packages/views/module/fileSaver/index.vue'),
-            },
-        ],
+        children: [{ path: '', redirect: 'home' }],
     },
     {
         path: '/login', name: 'login', meta: { title: '登录' },
@@ -201,8 +52,20 @@ router.afterEach((to, from) => {
     NProgress.done()
 })
 
+
+const setAppRouterStore = (app: App) => {
+    const { defaults = true, file = [], paths = [] } = app.config.globalProperties?.$plugin?.router || {}
+    if (defaults) {
+        store.commit('app/updateMenuList', defaultMenu)
+        store.commit('app/updateProjectMenu', defaultPrjMenu)
+    }
+    store.commit('app/updateAppRouter', { key: 'defaults', value: defaults })
+    store.commit('app/updateAppRouter', { key: 'file', value: file })
+    store.commit('app/updateAppRouter', { key: 'paths', value: paths })
+}
+
 const setupRouter = (app: App) => {
-    store.commit('app/updateAppRouter', { key: 'file', value: app.config.globalProperties.$plugin?.router?.file || [] })
+    setAppRouterStore(app)
     app.use(router)
     router.isReady().then(() => {
         store.commit('app/updateAppRouter', { key: 'router', value: router })
