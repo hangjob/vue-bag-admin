@@ -136,7 +136,7 @@ const columns = [
         key: 'tabHidden',
         align: 'center',
         ellipsis: true,
-        width: 150,
+        width: 200,
         customRender: (item: any) => {
             return formatter(item)
         }
@@ -174,7 +174,7 @@ const columns = [
         title: '操作',
         key: 'action',
         align: 'center',
-        width: 150,
+        width: 200,
         slots: {customRender: 'action'},
     }
 ];
