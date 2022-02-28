@@ -16,7 +16,7 @@ const router = createRouter({
                     component: () => import('@www/web/views/home/Index.vue'),
                 },
                 {
-                    path: '/article', name: 'article', meta: { title: '详情' },
+                    path: '/article/:id', name: 'article', meta: { title: '详情' },
                     component: () => import('@www/web/views/article/Index.vue'),
                 },
             ],

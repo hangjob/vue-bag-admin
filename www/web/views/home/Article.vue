@@ -275,7 +275,7 @@ const articles = ref([
                     &-user {
                         display: flex;
                         flex: 1;
-                        justify-content: end;
+                        justify-content: flex-end;
                         align-items: center;
 
                         > div {
