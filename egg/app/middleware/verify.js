@@ -2,6 +2,7 @@ module.exports = options => {
     // 验证是否在登录状态下
     return async function verify(ctx, next) {
         const filter = ['/user/login', '/user/logout']
+        // await next()
         const result = filter.findIndex(item => ctx.request.url.indexOf(item) > -1) !== -1
         if (result) {
             await next()

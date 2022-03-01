@@ -89,7 +89,11 @@ http.interceptors.response.use((res: any) => {
         return router.push(routerSet.resetPath).then()
     }
 
-    if ((!filter.timeout || filter.path)) {
+    if (status === 404) {
+        return Promise.reject(rejectData)
+    }
+
+    if ((filter.timeout || filter.path)) {
         return router.push(routerSet.resetPath).then()
     }
 

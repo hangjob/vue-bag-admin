@@ -285,6 +285,12 @@ function loadStyle(href: string) {
     head.appendChild(link)
 }
 
+function getBase64(img: Blob, callback: (base64Url: string) => void) {
+    const reader = new FileReader()
+    reader.addEventListener('load', () => callback(reader.result as string))
+    reader.readAsDataURL(img)
+}
+
 
 export {
     getAllParentArr,
@@ -297,4 +303,5 @@ export {
     loadScript,
     loadCssCode,
     loadStyle,
+    getBase64,
 }

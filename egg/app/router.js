@@ -11,4 +11,6 @@ module.exports = app => {
     require('./router/role')(app);
     require('./router/user')(app);
     require('./router/menu')(app);
+    require('./router/web/article')(app);
+    require('./router/web/channel')(app);
 };
