@@ -16,6 +16,7 @@
         "egg-socket.io": "^4.1.6",
         "egg-validate": "^2.0.2",
         "jsonwebtoken": "^8.5.1",
+        "mkdirp": "^1.0.4",
         "mysql2": "^2.3.0"
     },
     "devDependencies": {

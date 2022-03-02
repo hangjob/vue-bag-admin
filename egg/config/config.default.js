@@ -100,7 +100,7 @@ module.exports = appInfo => {
         fileSize: '10mb',
         // 允许上传的最大文件数
         files: 10,
-        whitelist: ['.txt', '.png', '.jpeg', '.jpg', '.zip', '.xls', '.ppt', '.doc', '.docx', '.pdf'],
+        whitelist: ['.txt', '.png', '.jpeg', '.jpg', '.zip', '.xls', '.ppt', '.doc', '.docx', '.pdf', '.xls', '.xlsx'],
     }
 
     return {

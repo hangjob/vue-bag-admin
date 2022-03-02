@@ -14,18 +14,15 @@ class UploadService extends Service {
         const { ctx } = this
         const parts = ctx.multipart({ autoFields: true })
         const urls = []
-        const base = path.join(this.config.baseDir, 'app/public/upload/image/')
-        await mkdirp(base)
-        const dir = path.join(base, dayjs().format('YYYY-MM-DD'))
-        await mkdirp(dir)  // 不存在就创建目录
-
+        const dir = path.join(this.config.baseDir, 'app/public/upload/image/', dayjs().format('YYYY-MM-DD'))
+        await mkdirp.sync(dir)
         let stream
         while ((stream = await parts()) != null) {
             const fileType = stream.mimeType.split('/')[1]
             const filename = dayjs().valueOf() + '.' + fileType || stream.filename.toLowerCase()
             const target = path.join(dir, filename)
             urls.push(`/public/upload/image/${filename}`)
-            const writeStream = fs.createWriteStream(target)
+            const writeStream = await fs.createWriteStream(target)
             await pump(stream, writeStream)
         }
         return urls[0]
@@ -36,15 +33,13 @@ class UploadService extends Service {
         const { ctx } = this
         const urls = []
         const stream = await ctx.getFileStream()
-        const base = path.join(this.config.baseDir, 'app/public/upload/file/')
-        await mkdirp(base)
-        const dir = path.join(base, dayjs().format('YYYY-MM-DD'))
-        await mkdirp(dir)  // 不存在就创建目录
+        const dir = path.join(this.config.baseDir, 'app/public/upload/file/', dayjs().format('YYYY-MM-DD'))
+        await mkdirp.sync(dir)
         const fileType = stream.filename.toLowerCase().split('.')
         const filename = dayjs().valueOf() + '.' + fileType[fileType.length - 1]
         // 生成写入路径
         const target = path.join(dir, filename)
-        const writeStream = fs.createWriteStream(target) // 写入流
+        const writeStream = await fs.createWriteStream(target) // 写入流
         stream.pipe(writeStream) // 以管道方式写入流
         await new Promise((resolve, reject) => {
             writeStream.on('finish', () => {
