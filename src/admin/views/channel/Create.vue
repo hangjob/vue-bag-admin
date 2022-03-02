@@ -23,7 +23,7 @@
                             list-type="picture-card"
                             class="avatar-uploader"
                             :show-upload-list="false"
-                            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                            action="/api/upload/uploadImg"
                             :before-upload="beforeUpload"
                             @change="handleChange"
                         >
@@ -33,6 +33,21 @@
                                 <plus-outlined v-else></plus-outlined>
                                 <div class="ant-upload-text">上传图片</div>
                             </div>
+                        </a-upload>
+                    </a-form-item>
+                </a-col>
+                <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
+                    <a-form-item label="描述" name="file">
+                        <a-upload
+                            list-type="picture"
+                            action="/api/upload/uploadFile"
+                            :preview-file="previewFile"
+                            v-model:file-list="fileList"
+                        >
+                            <a-button>
+                                <upload-outlined></upload-outlined>
+                                上传文件
+                            </a-button>
                         </a-upload>
                     </a-form-item>
                 </a-col>
@@ -50,7 +65,7 @@ import { defineComponent, reactive, ref, toRaw, UnwrapRef } from 'vue'
 import { ValidateErrorEntity } from 'ant-design-vue/es/form/interface'
 import { apiCreate } from '@/admin/service/channel'
 import { message } from 'ant-design-vue'
-import { getBase64 } from '@/packages/utils/utils'
+import { UploadOutlined } from '@ant-design/icons-vue'
 import { changeImage, fileImageVerify, FileItem, FileInfo } from '@/admin/common'
 
 interface FormState {
@@ -61,6 +76,9 @@ interface FormState {
 }
 
 export default defineComponent({
+    components: {
+        UploadOutlined,
+    },
     setup(props, { emit }) {
         const formRef = ref()
         const visible = ref(false)
@@ -112,6 +130,11 @@ export default defineComponent({
             })
         }
 
+        const previewFile = async (file: any): Promise<any> => {
+            console.log('Your upload file:', file)
+            return {}
+        }
+
         return {
             labelCol: {
                 span: 6,
@@ -129,6 +152,7 @@ export default defineComponent({
             beforeUpload,
             handleChange,
             fileLoading,
+            previewFile,
         }
     },
 })

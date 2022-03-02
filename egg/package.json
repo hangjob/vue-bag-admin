@@ -9,7 +9,7 @@
     "dependencies": {
         "crypto": "^1.0.1",
         "crypto-js": "^4.1.1",
-        "dayjs": "^1.10.7",
+        "dayjs": "^1.10.8",
         "egg": "^2.15.1",
         "egg-scripts": "^2.11.0",
         "egg-sequelize": "^6.0.0",

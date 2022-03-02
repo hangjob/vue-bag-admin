@@ -1,3 +1,4 @@
+const path = require('path')
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
@@ -10,27 +11,27 @@ module.exports = appInfo => {
         security: {
             csrf: {
                 enable: false,
-            }
-        }
-    };
+            },
+        },
+    }
 
 
     // 验证规则
     config.validate = {
         convert: true,
-        widelyUndefined: true
-    };
+        widelyUndefined: true,
+    }
 
     // use for cookie sign key, should change to your own and keep security
-    config.keys = appInfo.name + '_1634002379446_8360';
+    config.keys = appInfo.name + '_1634002379446_8360'
 
     // add your middleware config here
-    config.middleware = ['verify'];
+    config.middleware = ['verify']
 
     // add your user config here
     const userConfig = {
         // myAppName: 'egg',
-    };
+    }
 
     config.sequelize = {
         dialect: 'mysql',
@@ -43,14 +44,14 @@ module.exports = appInfo => {
             timestamps: true, // 添加create,update,delete时间戳
             paranoid: false, // 添加软删除
             freezeTableName: true, // 防止修改表名为复数
-            underscored: false // 防止驼峰式字段被默认转为下划线
-        }
+            underscored: false, // 防止驼峰式字段被默认转为下划线
+        },
     }
 
     config.cors = {
         origin: '*',
         allowMethods: 'GET, PUT, POST,DELETE, PATCH',
-    };
+    }
 
     config.io = {
         init: {}, // passed to engine.io
@@ -67,8 +68,8 @@ module.exports = appInfo => {
             path: '',
             port: 8001,
             hostname: '0.0.0.0',
-        }
-    };
+        },
+    }
 
     config.session = {
         key: 'EGG_SESS_TOKEN',
@@ -77,8 +78,33 @@ module.exports = appInfo => {
         encrypt: true,
     }
 
+    // 设置静态目录
+    config.static = {
+        prefix: '/public',
+        dir: [path.join(appInfo.baseDir, 'app/public')],
+        dynamic: true, // 如果当前访问的静态资源没有缓存，则缓存静态文件，和`preload`配合使用；
+        preload: false,
+        maxAge: 31536000, // in prod env, 0 in other envs
+        buffer: true, // in prod env, false in other envs
+        maxFiles: 1000,
+    }
+
+    config.multipart = {
+        // 表单 Field 文件名长度限制
+        fieldNameSize: 100,
+        // 表单 Field 内容大小
+        fieldSize: '100kb',
+        // 表单 Field 最大个数
+        fields: 10,
+        // 单个文件大小
+        fileSize: '10mb',
+        // 允许上传的最大文件数
+        files: 10,
+        whitelist: ['.txt', '.png', '.jpeg', '.jpg', '.zip', '.xls', '.ppt', '.doc', '.docx', '.pdf'],
+    }
+
     return {
         ...config,
         ...userConfig,
-    };
-};
+    }
+}
