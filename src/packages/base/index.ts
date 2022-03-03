@@ -14,7 +14,6 @@ import { setupGlobComponents } from '@/packages/components'
 import { setupDraggable } from '@/packages/plugin/draggable'
 import { setupIcons } from '@/packages/assets/icon/iconfont'
 
-
 const setupInit = (app: App) => {
     setupRouter(app)
     setupStore(app)

@@ -58,8 +58,8 @@ module.exports = appInfo => {
         namespace: {
             '/': {
                 connectionMiddleware: ['auth'], // 这个是连接中间件， 只在connection的时候触发
-                packetMiddleware: ['filter'],  // 这个会在每次消息的时候触发
-            },
+                packetMiddleware: ['auth'],  // 这个会在每次消息的时候触发
+            }
         },
     }
 

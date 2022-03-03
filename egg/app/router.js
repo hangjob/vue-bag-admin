@@ -3,7 +3,6 @@ module.exports = app => {
     app.beforeStart(async () => {
         await app.model.sync({alter: true});//force  false 为不覆盖 true会删除再创建; alter true可以 添加或删除字段;
     });
-    app.io.of('/').route('/', app.io.controller.index.ping)
     // 加载路由文件
     require('./router/branch')(app);
     require('./router/app')(app);
@@ -12,6 +11,7 @@ module.exports = app => {
     require('./router/user')(app);
     require('./router/menu')(app);
     require('./router/upload')(app);
+    require('./router/socket')(app);
     require('./router/web/article')(app);
     require('./router/web/channel')(app);
 };
