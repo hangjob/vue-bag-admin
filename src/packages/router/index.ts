@@ -74,5 +74,5 @@ const setupRouter = (app: App) => {
 
 export default router
 export {
-    setupRouter,
+    setupRouter
 }

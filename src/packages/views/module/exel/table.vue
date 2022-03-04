@@ -32,7 +32,9 @@ export default defineComponent({
         const windowHeight = ref(0)
         onMounted(() => {
             const internalInstance: any = getCurrentInstance()
-            windowHeight.value = internalInstance.ctx.$el.parentElement.offsetHeight - 150 // size 默认时，表格会大很多，撑开了外层滚动条，看起来不是很好看
+            if (internalInstance.ctx.$el) {
+                windowHeight.value = internalInstance.ctx.$el.parentElement.offsetHeight - 150 // size 默认时，表格会大很多，撑开了外层滚动条，看起来不是很好看
+            }
         })
         return {
             windowHeight,

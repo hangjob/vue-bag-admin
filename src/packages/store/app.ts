@@ -1,9 +1,7 @@
-import { defaultMenu, defaultPrjMenu } from '@/packages/config/defaultMenu'
 import { find, findUnsetDepth } from '@/packages/utils/lodash'
 import { getBrowser } from '@/packages/utils/utils'
 import { defaultTabFix } from '@/packages/router/beforeStore'
 import { themeConfig } from '@/packages/config'
-import router from '@/packages/router'
 
 const app = {
     namespaced: true,
