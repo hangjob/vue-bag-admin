@@ -3,36 +3,36 @@ export default {
     visible: {
         type: Boolean,
         default: false,
-        required: true
+        required: true,
     },
     title: {
         type: String || Number,
-        default: ''
+        default: '',
     },
     width: {
         type: String || Number,
-        default: 520
+        default: 520,
     },
     okText: {
         type: String || Number,
-        default: '确认'
+        default: '确认',
     },
     cancelText: {
         type: String || Number,
-        default: '关闭'
+        default: '关闭',
     },
     cancelButtonProps: {
         type: Object,
         default: () => {
             return {
                 danger: true,
-                type: 'primary'
+                type: 'primary',
             }
-        }
+        },
     },
     okType: {
         type: String,
-        default: 'primary'
+        default: 'primary',
     },
     keyboard: {
         type: Boolean,
@@ -49,7 +49,7 @@ export default {
     afterClose: {
         type: Function,
         default: () => {
-        }
+        },
     },
     confirmLoading: {
         type: Boolean,
@@ -57,7 +57,7 @@ export default {
     },
     dialogClass: {
         type: String,
-        default: ''
+        default: '',
     },
     isCustomStyles: {
         type: Boolean,
@@ -66,5 +66,5 @@ export default {
     maskClosable: {
         type: Boolean,
         default: false,
-    }
+    },
 }

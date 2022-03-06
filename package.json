@@ -60,6 +60,7 @@
         "socket.io-client": "^4.4.1",
         "store": "^2.0.12",
         "vue": "^3.2.16",
+        "vue-cropper": "^1.0.2",
         "vue-router": "^4.0.12",
         "vue3-marquee": "^1.0.0",
         "vuex": "^4.0.2",

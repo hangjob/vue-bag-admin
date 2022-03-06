@@ -32,7 +32,7 @@ interface $optionsType {
 
 const install = (app: App, $options?: any) => {
     app.config.globalProperties.$plugin = $options
-    app.provide('App', app)
+    app.provide('$App', app)
     app.provide('$mitt', mitt())
     handleError(app)
     setupInit(app)

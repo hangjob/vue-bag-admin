@@ -141,19 +141,20 @@ const get = (url: string, params?: any, config?: object) => {
     return http.get(rewriteUrl(url), { params: params, ...config })
 }
 
-
 const all = (request: Array<any>) => {
     return axios.all(request)
 }
 
-
-const upload = (url: string, params?: object) => {
+const upload = (url: string, file: File) => {
     let config = {
         headers: {
             'Content-Type': 'multipart/form-data',
         },
     }
-    return http.post(rewriteUrl(url), params, config)
+    let param = new FormData()  // 创建form对象
+    param.append('file', file, file.name)
+    // param.append('chunk', '0') // 添加form表单中其他数据
+    return http.post(rewriteUrl(url), param, config)
 }
 
 
