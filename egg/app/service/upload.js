@@ -14,14 +14,15 @@ class UploadService extends Service {
         const { ctx } = this
         const parts = ctx.multipart({ autoFields: true })
         const urls = []
-        const dir = path.join(this.config.baseDir, 'app/public/upload/image/', dayjs().format('YYYY-MM-DD'))
+        let targetDir = '/public/upload/image/' + dayjs().format('YYYY-MM-DD')
+        const dir = path.join(this.config.baseDir, 'app', targetDir)
         await mkdirp.sync(dir)
         let stream
         while ((stream = await parts()) != null) {
             const fileType = stream.mimeType.split('/')[1]
             const filename = dayjs().valueOf() + '.' + fileType || stream.filename.toLowerCase()
             const target = path.join(dir, filename)
-            urls.push(`/public/upload/image/${filename}`)
+            urls.push(`${targetDir}/${filename}`)
             const writeStream = await fs.createWriteStream(target)
             await pump(stream, writeStream)
         }
@@ -33,7 +34,8 @@ class UploadService extends Service {
         const { ctx } = this
         const urls = []
         const stream = await ctx.getFileStream()
-        const dir = path.join(this.config.baseDir, 'app/public/upload/file/', dayjs().format('YYYY-MM-DD'))
+        let targetDir = '/public/upload/file/' + dayjs().format('YYYY-MM-DD')
+        const dir = path.join(this.config.baseDir, 'app', targetDir)
         await mkdirp.sync(dir)
         const fileType = stream.filename.toLowerCase().split('.')
         const filename = dayjs().valueOf() + '.' + fileType[fileType.length - 1]
@@ -44,7 +46,7 @@ class UploadService extends Service {
         await new Promise((resolve, reject) => {
             writeStream.on('finish', () => {
                 // 监听写入完成事件
-                urls.push(`/public/upload/file/${filename}`)
+                urls.push(`${targetDir}/${filename}`)
                 resolve(stream.fields)
             })
             writeStream.on('error', async (err) => {

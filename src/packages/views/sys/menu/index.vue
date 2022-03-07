@@ -19,7 +19,8 @@
             </div>
         </div>
         <a-table rowKey="id" :scroll="{ x: 1500 }" :columns="columns" size="middle" :bordered="true" :data-source="data"
-                 :row-selection="rowSelection" @expand="expand">
+                 :row-selection="rowSelection" @expand="expand"
+        >
             <template #icon="{ record }">
                 <component :is="record.icon"></component>
             </template>
@@ -43,35 +44,31 @@
             </template>
         </a-table>
     </yxs-form-table>
-    <yxs-modal v-model:visible="visibleAdd" title="新增" width="1000px" @ok="handleAddOk">
-        <add ref="add" :treeData="data"/>
+    <yxs-modal v-model:visible="visibleAdd" title="新增" width="85%" @ok="handleAddOk">
+        <add ref="add" :treeData="data" />
     </yxs-modal>
-    <yxs-modal v-model:visible="visibleEdit" title="编辑" width="1000px" @ok="handleEditOk">
-        <edit ref="edit" :treeData="data" :id="id"/>
+    <yxs-modal v-model:visible="visibleEdit" title="编辑" width="85%" @ok="handleEditOk">
+        <edit ref="edit" :treeData="data" :id="id" />
     </yxs-modal>
 </template>
 <script lang="ts">
-import {defineComponent, ref, reactive, toRefs, inject, onMounted} from 'vue';
+import { defineComponent, ref, reactive, toRefs, inject, onMounted } from 'vue'
 import add from './add.vue'
 import edit from './edit.vue'
-import {apiAll, apiDelete, apiDeletes} from '@/packages/service/menu'
-import {toTree} from '@/packages/utils/utils'
-import {ColumnProps} from 'ant-design-vue/es/table/interface';
-import {message} from "ant-design-vue";
-
+import { apiAll, apiDelete, apiDeletes } from '@/packages/service/menu'
+import { toTree } from '@/packages/utils/utils'
+import { ColumnProps } from 'ant-design-vue/es/table/interface'
+import { message } from 'ant-design-vue'
 
 type Key = ColumnProps['key'];
 
-const formatter = (item: any) => {
-    return item.text === true ? '是' : '否'
-}
 const columns = [
     {
         title: '名称',
         dataIndex: 'name',
         key: 'name',
         align: 'center',
-        ellipsis: true
+        ellipsis: true,
     },
     {
         title: '图标',
@@ -80,7 +77,7 @@ const columns = [
         width: 80,
         align: 'center',
         ellipsis: true,
-        slots: {customRender: 'icon'},
+        slots: { customRender: 'icon' },
     },
     {
         title: '节点类型',
@@ -89,7 +86,7 @@ const columns = [
         ellipsis: true,
         align: 'center',
         width: 80,
-        slots: {customRender: 'type'}
+        slots: { customRender: 'type' },
     },
     {
         title: '路由地址',
@@ -127,8 +124,8 @@ const columns = [
         ellipsis: true,
         width: 90,
         customRender: (item: any) => {
-            return formatter(item)
-        }
+            return window.tableUtils.formatter(item)
+        },
     },
     {
         title: '是否隐藏Tab切换',
@@ -138,8 +135,8 @@ const columns = [
         ellipsis: true,
         width: 200,
         customRender: (item: any) => {
-            return formatter(item)
-        }
+            return window.tableUtils.formatter(item)
+        },
     },
     {
         title: '固定菜单',
@@ -149,8 +146,8 @@ const columns = [
         ellipsis: true,
         width: 90,
         customRender: (item: any) => {
-            return formatter(item)
-        }
+            return window.tableUtils.formatter(item)
+        },
     },
     {
         title: '是否显示',
@@ -159,8 +156,8 @@ const columns = [
         align: 'center',
         width: 90,
         customRender: (item: any) => {
-            return formatter(item)
-        }
+            return window.tableUtils.formatter(item)
+        },
     },
     {
         title: '更新时间',
@@ -168,31 +165,31 @@ const columns = [
         key: 'updateTime',
         align: 'center',
         ellipsis: true,
-        width: 200
+        width: 200,
     },
     {
         title: '操作',
         key: 'action',
         align: 'center',
         width: 200,
-        slots: {customRender: 'action'},
-    }
-];
+        slots: { customRender: 'action' },
+    },
+]
 
 export default defineComponent({
     name: 'sys-menu',
     components: {
-        add, edit
+        add, edit,
     },
     setup() {
-        const data = ref();
-        const add = ref();
-        const edit = ref();
-        const visibleAdd = ref(false);
-        const visibleEdit = ref(false);
-        const id = ref('');
-        const loading = ref(false);
-        const ks = ref('');
+        const data = ref()
+        const add = ref()
+        const edit = ref()
+        const visibleAdd = ref(false)
+        const visibleEdit = ref(false)
+        const id = ref('')
+        const loading = ref(false)
+        const ks = ref('')
 
         const state = reactive<{
             selectedRowKeys: Key[];
@@ -200,11 +197,11 @@ export default defineComponent({
         }>({
             selectedRowKeys: [],
             loading: false,
-        });
+        })
 
         const handleAddOk = () => {
             add.value.onSubmit().then(() => {
-                visibleAdd.value = false;
+                visibleAdd.value = false
                 getData()
             }).catch((error: any) => {
                 console.log(error)
@@ -213,32 +210,32 @@ export default defineComponent({
 
         const handleEditOk = () => {
             edit.value.onSubmit().then(() => {
-                visibleEdit.value = false;
+                visibleEdit.value = false
                 getData()
             }).catch((error: any) => {
                 console.log(error)
             })
         }
 
-        const setVisibleEdit = ({record}: { record: any }) => {
-            visibleEdit.value = true;
-            id.value = record.id;
+        const setVisibleEdit = ({ record }: { record: any }) => {
+            visibleEdit.value = true
+            id.value = record.id
         }
 
         const rowSelection = {
             onChange: (selectedRowKeys: (string | number)[], selectedRows: any) => {
-                state.selectedRowKeys = selectedRows;
+                state.selectedRowKeys = selectedRows
             },
             onSelect: (record: any, selected: boolean, selectedRows: any) => {
             },
             onSelectAll: (selected: boolean, selectedRows: any, changeRows: any) => {
             },
-        };
+        }
 
         const getData = () => {
-            apiAll({ks: ks.value}).then((res: any) => {
-                data.value = toTree(res);
-                loading.value = false;
+            apiAll({ ks: ks.value }).then((res: any) => {
+                data.value = toTree(res)
+                loading.value = false
             })
         }
         getData()
@@ -248,30 +245,32 @@ export default defineComponent({
         }
 
         // 单个删除
-        const handleDelete = ({record}: { record: any }) => {
-            apiDelete({id: record.id}, {notify: true}).then(() => {
+        const handleDelete = ({ record }: { record: any }) => {
+            apiDelete({ id: record.id }, { notify: true }).then(() => {
                 getData()
             })
         }
 
         // 多个删除
         const handleDeletes = () => {
-            const ids = state.selectedRowKeys.map((item: any) => item.id);
-            if (!ids.length) return message.warning('请至少选择一个');
-            apiDeletes({ids}, {notify: true}).then(() => {
+            const ids = state.selectedRowKeys.map((item: any) => item.id)
+            if (!ids.length) {
+                return message.warning('请至少选择一个')
+            }
+            apiDeletes({ ids }, { notify: true }).then(() => {
                 getData()
             })
         }
 
         const refreshLoad = () => {
-            loading.value = true;
-            getData();
+            loading.value = true
+            getData()
         }
 
 
         // 搜素
         const handleSearch = () => {
-            getData();
+            getData()
         }
 
 
@@ -294,10 +293,10 @@ export default defineComponent({
             refreshLoad,
             loading,
             handleSearch,
-            ks
-        };
+            ks,
+        }
     },
-});
+})
 </script>
 <style lang="less" scoped>
 .table-action {

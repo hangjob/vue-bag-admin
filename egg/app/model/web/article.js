@@ -88,6 +88,6 @@ module.exports = app => {
     }, {
         createdAt: 'createTime', // 指定名字
         updatedAt: 'updateTime',
-        tableName: 'yxs_web_article', // 定义实际表名
+        tableName: 'yxs_web_article', // 定义实际表名 文章表
     })
 }

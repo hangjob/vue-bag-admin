@@ -7,7 +7,6 @@ yarn.lock
 coverage/
 .idea/
 run/
-public/upload/*
 .DS_Store
 *.sw*
 *.un~

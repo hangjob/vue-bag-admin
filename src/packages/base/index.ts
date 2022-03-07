@@ -4,7 +4,7 @@ import '@/packages/style/index'
 
 import '@/packages/extend/browser/canvas'
 
-import '@/packages/common/resize.ts'
+import '@/packages/common/resize'
 import { setupRouter } from '@/packages/router'
 import { setupStore } from '@/packages/store'
 

@@ -7,10 +7,6 @@ module.exports = app => {
             autoIncrement: true,
             primaryKey: true,
         },
-        image: {
-            type: STRING,
-            comment: '缩略图',
-        },
         name: {
             type: STRING,
             comment: '栏目名称',
@@ -19,6 +15,10 @@ module.exports = app => {
             type: INTEGER,
             comment: '父级ID',
         },
+        image: {
+            type: STRING,
+            comment: '缩略图',
+        },
         url: {
             type: STRING,
             comment: '链接地址',
@@ -26,15 +26,39 @@ module.exports = app => {
         keywords: {
             type: STRING,
             comment: '关键词',
+            get() {
+                const keywords = this.getDataValue('keywords')
+                return keywords ? keywords.split(',') : []
+            },
+            set(value) {
+                if (value) {
+                    this.setDataValue('keywords', value.join(','))
+                } else {
+
+                }
+            },
         },
         order: {
             type: INTEGER,
             comment: '排序',
         },
+        is_contribute: {
+            type: BOOLEAN,
+            defaultValue: true,
+            comment: '是否允许投稿',
+            get() {
+                const is_contribute = this.getDataValue('is_contribute')
+                return is_contribute ? 1 : 0
+            },
+        },
         shows: {
             type: BOOLEAN,
             defaultValue: true,
             comment: '是否显示',
+            get() {
+                const shows = this.getDataValue('shows')
+                return shows ? 1 : 0
+            },
         },
         createTime: {
             type: DATE,

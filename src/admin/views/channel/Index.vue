@@ -21,6 +21,14 @@
         <a-table rowKey="id" :scroll="{ x: 1200 }" :columns="columns" size="middle" :bordered="true" :data-source="data"
                  :row-selection="rowSelection" @expand="expand"
         >
+            <template #image="{ record }">
+                <a-image
+                    v-if="record.image"
+                    height="95%"
+                    :width="100"
+                    :src="tableFormatterImage(record)"
+                />
+            </template>
             <template #action="{ record }">
                 <a-space>
                     <a-button type="primary" size="small" @click="setVisibleEdit({record})">编辑</a-button>
@@ -33,17 +41,14 @@
                     >
                         <a-button type="primary" danger size="small">删除</a-button>
                     </a-popconfirm>
-                    <a-button type="primary" @click="handlePowerPoint" danger size="small">
-                        删除
-                    </a-button>
                 </a-space>
             </template>
         </a-table>
     </yxs-form-table>
-    <yxs-modal v-model:visible="visibleAdd" title="新增" width="1000px" @ok="handleAddOk">
+    <yxs-modal v-model:visible="visibleAdd" title="新增" width="85%" @ok="handleAddOk">
         <Create ref="create" :treeData="data" />
     </yxs-modal>
-    <yxs-modal v-model:visible="visibleEdit" title="编辑" width="1000px" @ok="handleEditOk">
+    <yxs-modal v-model:visible="visibleEdit" title="编辑" width="85%" @ok="handleEditOk">
         <Edit ref="edit" :treeData="data" :id="id" />
     </yxs-modal>
 </template>
@@ -54,6 +59,8 @@ import Edit from './Edit.vue'
 import { apiAll, apiDelete, apiDeletes } from '@/admin/service/channel'
 import { ColumnProps } from 'ant-design-vue/es/table/interface'
 import { message } from 'ant-design-vue'
+import { toTree } from '@/packages/utils/utils'
+import { tableFormatterBooleConvertText, tableFormatterImage } from '@/packages/common/utils'
 
 type Key = ColumnProps['key'];
 
@@ -61,6 +68,17 @@ const formatter = (item: any) => {
     return item.text === true ? '是' : '否'
 }
 const columns = [
+    {
+        title: '序号',
+        dataIndex: 'index',
+        key: 'index',
+        align: 'center',
+        ellipsis: true,
+        width: 70,
+        customRender: ({ index }: { index: number }) => {
+            return index + 1
+        },
+    },
     {
         title: '栏目名称',
         dataIndex: 'name',
@@ -73,7 +91,15 @@ const columns = [
         dataIndex: 'pid',
         key: 'pid',
         ellipsis: true,
-        align: 'center'
+        align: 'center',
+    },
+    {
+        title: '图片',
+        dataIndex: 'image',
+        key: 'image',
+        ellipsis: true,
+        align: 'center',
+        slots: { customRender: 'image' },
     },
     {
         title: '是否显示',
@@ -81,7 +107,20 @@ const columns = [
         key: 'shows',
         ellipsis: true,
         align: 'center',
-        slots: { customRender: 'describe' },
+
+        customRender: (item: any) => {
+            return tableFormatterBooleConvertText(item)
+        },
+    },
+    {
+        title: '允许投稿',
+        dataIndex: 'is_contribute',
+        key: 'is_contribute',
+        ellipsis: true,
+        align: 'center',
+        customRender: (item: any) => {
+            return tableFormatterBooleConvertText(item)
+        },
     },
     {
         title: '排序',
@@ -95,14 +134,6 @@ const columns = [
         title: '创建时间',
         dataIndex: 'createTime',
         key: 'createTime',
-        align: 'center',
-        ellipsis: true,
-        width: 200,
-    },
-    {
-        title: '更新时间',
-        dataIndex: 'updateTime',
-        key: 'updateTime',
         align: 'center',
         ellipsis: true,
         width: 200,
@@ -123,7 +154,6 @@ export default defineComponent({
     },
     setup() {
         const data = ref()
-        const sourceData = ref()
         const create = ref()
         const edit = ref()
         const visibleAdd = ref(false)
@@ -175,8 +205,10 @@ export default defineComponent({
         }
 
         const getData = () => {
+            loading.value = true
             apiAll({ ks: ks.value }).then((res: any) => {
-                data.value = res
+                data.value = toTree(res)
+            }).finally(() => {
                 loading.value = false
             })
         }
@@ -205,7 +237,6 @@ export default defineComponent({
         }
 
         const refreshLoad = () => {
-            loading.value = true
             getData()
         }
 
@@ -214,11 +245,6 @@ export default defineComponent({
         const handleSearch = () => {
             getData()
         }
-
-        const handlePowerPoint = () => {
-            message.warning('演示数据不作为删除')
-        }
-
 
         return {
             data,
@@ -240,7 +266,7 @@ export default defineComponent({
             loading,
             handleSearch,
             ks,
-            handlePowerPoint,
+            tableFormatterImage,
         }
     },
 })

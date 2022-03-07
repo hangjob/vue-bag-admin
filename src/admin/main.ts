@@ -10,5 +10,5 @@ const app = createApp(App)
 const $options: $optionsType = {
     router: { file, paths, defaults: false },
 }
-setupSocket(app, { connection: 'ws://127.0.0.1:8001' })
+// setupSocket(app, { connection: 'ws://127.0.0.1:8001' })
 app.use(install, $options).mount('#app')
