@@ -1,5 +1,4 @@
 import { RuleObject } from 'ant-design-vue/es/form/interface'
-import { reg2 } from './regular'
 
 /**
  * 验证路由地址,必填项
@@ -8,7 +7,7 @@ import { reg2 } from './regular'
  */
 const validatPath = async (rule: RuleObject, value: string) => {
     if (value !== '' && value !== null && value !== undefined) {
-        let reg = reg2.test(value)
+        let reg = /^([\/]([a-zA-Z]+))*[0-9a-zA-Z]+$/.test(value)
         if (reg) {
             return Promise.resolve()
         } else {
@@ -27,7 +26,7 @@ const validatPath = async (rule: RuleObject, value: string) => {
  */
 const filePathRouter = async (rule: RuleObject, value: string) => {
     if (value !== '' && value !== null && value !== undefined) {
-        let reg = reg2.test(value)
+        let reg = /^([\/]([a-zA-Z]+))*[0-9a-zA-Z]+$/.test(value) // 开头，数字和字母 组合
         if (reg) {
             return Promise.resolve()
         } else {
