@@ -18,8 +18,9 @@
                 />
             </div>
         </div>
-        <a-table rowKey="id" :scroll="{ x: 1500 }" :columns="columns" size="middle" :bordered="true" :data-source="data"
-                 :row-selection="rowSelection" @expand="expand"
+        <a-table rowKey="id" :scroll="{ x: 1500 }" :columns="columns" size="middle" :bordered="true"
+                 :data-source="table.data"
+                 :row-selection="rowSelection"
         >
             <template #action="{ record }">
                 <a-space>
@@ -41,10 +42,10 @@
         </a-table>
     </yxs-form-table>
     <yxs-modal v-model:visible="visibleAdd" title="新增" width="1000px" @ok="handleAddOk">
-        <Create ref="create" :treeData="data" />
+        <Create ref="create" :treeData="table.data" />
     </yxs-modal>
     <yxs-modal v-model:visible="visibleEdit" title="编辑" width="1000px" @ok="handleEditOk">
-        <Edit ref="edit" :treeData="data" :id="id" />
+        <Edit ref="edit" :treeData="table.data" :id="id" />
     </yxs-modal>
 </template>
 <script lang="ts">
@@ -119,130 +120,97 @@ const columns = [
 ]
 
 export default defineComponent({
-    name: 'sys-role',
+    name: 'article',
     components: {
         Create, Edit,
     },
     setup() {
-        const data = ref()
-        const sourceData = ref()
         const create = ref()
         const edit = ref()
-        const visibleAdd = ref(false)
-        const visibleEdit = ref(false)
-        const id = ref('')
-        const loading = ref(false)
-        const ks = ref('')
-
-        const state = reactive<{
-            selectedRowKeys: Key[];
-            loading: boolean;
-        }>({
-            selectedRowKeys: [],
+        const table = reactive({
+            data: [],
             loading: false,
+            selectedRowKeys: [],
+            ks: '',
+            createModalVisible: false,
+            create: {
+                visible: false,
+                ref: ref(),
+                submit() {
+                    create.value.onSubmit().then(() => {
+                        table.create.visible = false
+                        table.get.handle()
+                    }).catch((error: any) => {
+                        console.log(error)
+                    })
+                },
+                change() {
+                    table.create.visible = true
+                },
+            },
+            edit: {
+                visible: false,
+                ref: ref(),
+                id: '',
+                submit() {
+                    edit.value.onSubmit().then(() => {
+                        table.edit.visible = false
+                        table.get.handle()
+                    }).catch((error: any) => {
+                        console.log(error)
+                    })
+                },
+                change({ record }: { record: any }) {
+                    table.edit.visible = true
+                    table.edit.id = record.id
+                },
+            },
+            get: {
+                ks: '',
+                handle() {
+                    apiAll({ ks: table.get.ks }).then((res: any) => {
+                        table.data = res
+                        table.loading = false
+                    })
+                },
+            },
+            delete: {
+                id: '',
+                handle({ record, mode = false }: { record?: any, mode?: boolean }) {
+                    if (mode) {
+                        const ids = table.selectedRowKeys.map((item: any) => item.id)
+                        if (!ids.length) {
+                            return message.warning('请至少选择一个')
+                        }
+                        apiDeletes({ ids }, { notify: true }).then(() => {
+                            table.get.handle()
+                        })
+                    } else {
+                        apiDelete({ id: record.id }, { notify: true }).then(() => {
+                            table.get.handle()
+                        })
+                    }
+
+                },
+            },
+            selection: {
+                onChange: (selectedRowKeys: (string | number)[], selectedRows: any) => {
+                    table.selectedRowKeys = selectedRows
+                },
+            },
+            refreshLoad() {
+                table.loading = true
+                table.get.handle()
+            },
+            handleSearch() {
+                table.get.handle()
+            },
         })
-
-
-        const handleAddOk = () => {
-            create.value.onSubmit().then(() => {
-                visibleAdd.value = false
-                getData()
-            }).catch((error: any) => {
-                console.log(error)
-            })
-        }
-
-        const handleEditOk = () => {
-            edit.value.onSubmit().then(() => {
-                visibleEdit.value = false
-                getData()
-            }).catch((error: any) => {
-                console.log(error)
-            })
-        }
-
-        const setVisibleEdit = ({ record }: { record: any }) => {
-            visibleEdit.value = true
-            id.value = record.id
-        }
-
-        const rowSelection = {
-            onChange: (selectedRowKeys: (string | number)[], selectedRows: any) => {
-                state.selectedRowKeys = selectedRows
-            },
-            onSelect: (record: any, selected: boolean, selectedRows: any) => {
-            },
-            onSelectAll: (selected: boolean, selectedRows: any, changeRows: any) => {
-            },
-        }
-
-        const getData = () => {
-            apiAll({ ks: ks.value }).then((res: any) => {
-                data.value = res
-                loading.value = false
-            })
-        }
-        getData()
-
-        const expand = (expanded: boolean, record: any) => {
-
-        }
-
-        // 单个删除
-        const handleDelete = ({ record }: { record: any }) => {
-            apiDelete({ id: record.id }, { notify: true }).then(() => {
-                getData()
-            })
-        }
-
-        // 多个删除
-        const handleDeletes = () => {
-            const ids = state.selectedRowKeys.map((item: any) => item.id)
-            if (!ids.length) {
-                return message.warning('请至少选择一个')
-            }
-            apiDeletes({ ids }, { notify: true }).then(() => {
-                getData()
-            })
-        }
-
-        const refreshLoad = () => {
-            loading.value = true
-            getData()
-        }
-
-
-        // 搜索
-        const handleSearch = () => {
-            getData()
-        }
-
-        const handlePowerPoint = () => {
-            message.warning('演示数据不作为删除')
-        }
-
-
         return {
-            data,
+            table,
             create,
             edit,
             columns,
-            id,
-            rowSelection,
-            ...toRefs(state),
-            visibleAdd,
-            visibleEdit,
-            handleAddOk,
-            handleEditOk,
-            expand,
-            handleDelete,
-            handleDeletes,
-            setVisibleEdit,
-            refreshLoad,
-            loading,
-            handleSearch,
-            ks,
-            handlePowerPoint,
         }
     },
 })
