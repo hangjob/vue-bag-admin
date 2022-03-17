@@ -1,6 +1,6 @@
 <template>
     <div>
-
+           111111 1
     </div>
 </template>
 <script lang="ts">
@@ -41,6 +41,8 @@ export default defineComponent({
     setup() {
         const result = getParentId({key: 'id', value: 893, node: 'pets'}, people)
         console.log(result)
+
+
     }
 })
 </script>

@@ -132,7 +132,6 @@ export default defineComponent({
             loading: false,
             selectedRowKeys: [],
             ks: '',
-            createModalVisible: false,
             create: {
                 visible: false,
                 ref: ref(),
