@@ -1,67 +1,85 @@
-import { ref } from 'vue'
+import { ref, toRaw } from 'vue'
+import { message } from 'ant-design-vue'
+import { post } from '@/packages/http/request'
 
-const TableCurd = {
-    data: [], // 表格数据
+const curd = {
+    tableData: [], // 表格数据
     loading: false, // loading
     selectedRowKeys: [], // 批量选择
     create: {
         visible: false, // 创建弹窗
-        ref: ref(),
-        submit(create: any) {
-            create.value.onSubmit().then(() => {
-                TableCurd.create.visible = false
-                // @ts-ignore
-                TableCurd.get.data()
+        submit(dom: any) {
+            dom.value.onSubmit().then(() => {
+                curd.create.visible = false
+                curd.get.data()
             }).catch((error: any) => {
                 console.log(error)
             })
         },
         change() {
-            TableCurd.create.visible = true
+            curd.create.visible = true
         },
     },
     get: {
         ks: '',
-        data(api: Function) {
-            eval(api + '({ ks: TableCurd.get.ks }).then((res: any) => { TableCurd.data = res ;TableCurd.loading = false});')
+        api: '',
+        data() {
+            post(curd.get.api, { ks: curd.get.ks }).then((res: any) => {
+                curd.tableData = res
+                curd.loading = false
+            })
         },
     },
-}
-
-class Curd {
-
-    data: any[]
-    loading: boolean
-    selectedRowKeys: any[]
-
-    constructor() {
-        this.data = []
-        this.loading = false
-        this.selectedRowKeys = []
-    }
-
-    create(create: any) {
-        const obj = {
-            visible: false,
-            ref: ref(),
-            submit() {
-                create.value.onSubmit().then(() => {
-                    obj.visible = false
-                }).catch((error: any) => {
-                    console.log(error)
-                })
-            },
-        }
-        return { ...obj }
-    }
-}
-
-const obj = Object.create(TableCurd, {
-    job: {
-        value: 'IT',
+    edit: {
+        visible: false,
+        id: '',
+        api: '',
+        submit(formState: any) {
+            post(curd.edit.api, toRaw(formState), { notify: true }).then(() => {
+                curd.edit.visible = false
+                curd.get.data()
+            })
+        },
+        change({ record }: { record: any }) {
+            curd.edit.visible = true
+            curd.edit.id = record.id
+        },
     },
-})
+    delete: {
+        id: '',
+        api: '',
+        handle({ record, mode = false }: { record?: any, mode?: boolean }) {
+            if (mode) {
+                const ids = curd.selectedRowKeys.map((item: any) => item.id)
+                if (!ids.length) {
+                    return message.warning('请至少选择一个')
+                }
+                post(curd.delete.api, { ids }, { notify: true }).then(() => {
+                    curd.get.data()
+                })
+            } else {
+                post(curd.delete.api, { id: record.id }, { notify: true }).then(() => {
+                    curd.get.data()
+                })
+            }
+        },
+    },
+    selection: {
+        onChange: (selectedRowKeys: (string | number)[], selectedRows: any) => {
+            curd.selectedRowKeys = selectedRows
+        },
+    },
+    refreshLoad() {
+        curd.loading = true
+        curd.get.data()
+    },
+    handleSearch() {
+        curd.get.data()
+    },
+}
 
-console.log(obj.getName())  // Jack
-console.log(obj.job)  // IT
-console.log(obj.__proto__ === TableCurd)  //true
+const TableCurd = function(data: object) {
+    return Object.assign(curd, data)
+}
+
+export default TableCurd
