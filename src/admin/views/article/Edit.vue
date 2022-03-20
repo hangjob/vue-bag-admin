@@ -1,25 +1,25 @@
 <template>
     <div class="add">
-        <a-form ref="formRef" :model="formState" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol">
+        <a-form ref="formRef" :model="formState" :rules="rules" :label-col="{span:6}" :wrapper-col="{span:15}">
             <a-row>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="名称" name="name">
-                        <a-input v-model:value="formState.name" placeholder="输入角色名称"/>
+                        <a-input v-model:value="formState.name" placeholder="输入角色名称" />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="标识符" name="tag">
-                        <a-input v-model:value="formState.tag" placeholder="输入标识符"/>
+                        <a-input v-model:value="formState.tag" placeholder="输入标识符" />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="描述" name="describe">
-                        <a-textarea v-model:value="formState.describe" placeholder="输入描述"/>
+                        <a-textarea v-model:value="formState.describe" placeholder="输入描述" />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="排序" name="order">
-                        <a-input v-model:value="formState.order" placeholder="输入排序号"/>
+                        <a-input v-model:value="formState.order" placeholder="输入排序号" />
                     </a-form-item>
                 </a-col>
             </a-row>
@@ -27,11 +27,8 @@
     </div>
 </template>
 <script lang="ts">
-import {defineComponent, reactive, ref, toRaw, UnwrapRef, watch} from 'vue';
-import {ValidateErrorEntity} from 'ant-design-vue/es/form/interface';
-import {apiUpdate, apiFind} from '@/packages/service/role'
-import {filterData} from "@/packages/utils/lodash";
-import {toTree} from "@/packages/utils/utils";
+import { defineComponent, reactive, ref, watch } from 'vue'
+import { post } from '@/packages/http/request'
 
 interface FormState {
     name: String;
@@ -45,68 +42,40 @@ export default defineComponent({
     props: {
         id: {
             required: true,
-            type: [Number, String]
-        }
+            type: [Number, String],
+        },
     },
-    setup(props, {emit}) {
-        const formRef = ref();
-        const visible = ref(false);
+    setup(props, { emit }) {
+        const formRef = ref()
         const formState: any = reactive({
             name: '',
             tag: '',
             order: '',
             describe: '',
-            id: ''
-        });
+            id: '',
+        })
         const rules = {
             name: [
-                {required: true, message: '名称为必填项', trigger: 'blur'}
-            ]
-        };
-        const onSubmit = async () => {
-            return formRef.value.validate()
-                .then(() => {
-                    apiUpdate(toRaw(formState), {notify: true}).then(() => {
-                        return Promise.resolve();
-                    })
-                })
-                .catch((error: ValidateErrorEntity<FormState>) => {
-                    return Promise.reject(error);
-                });
-        };
-
-        const getMenuData = () => {
-            apiFind({id: props.id}).then((res: any) => {
-                let {createTime, updateTime, ...profileData} = res
-                Object.keys(formState).forEach((key: string) => {
-                    formState[key] = profileData[key];
-                })
-            })
+                { required: true, message: '名称为必填项', trigger: 'blur' },
+            ],
         }
 
         watch(() => props.id, (newVal, oldVal) => {
-            getMenuData()
-        }, {immediate: true})
+            post('/web/article/find', { id: props.id }).then((res: any) => {
+                let { createTime, updateTime, ...profileData } = res
+                Object.keys(formState).forEach((key: string) => {
+                    formState[key] = profileData[key]
+                })
+            })
+        }, { immediate: true })
 
-        const handleSelected = (icon: string) => {
-            visible.value = false;
-        }
         return {
-            labelCol: {
-                span: 6,
-            },
-            wrapperCol: {
-                span: 15,
-            },
             formState,
             rules,
             formRef,
-            onSubmit,
-            visible,
-            handleSelected,
-        };
+        }
     },
-});
+})
 </script>
 <style lang="less" scoped>
 .item-icons {

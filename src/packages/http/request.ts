@@ -69,7 +69,8 @@ http.interceptors.response.use((res: any) => {
 
     // 设置用于跟踪重试计数的变量
     config.__retryCount = config.__retryCount || 0
-    const msg = (config.__retryCount === 0 ? '发生错误：' : `正在重连 ${config.__retryCount} 次：`) + (data ? data.message : error.message)
+    const _api = '，接口：' + config.baseURL + config.url
+    const msg = (config.__retryCount === 0 ? '发生错误：' : `正在重连 ${config.__retryCount} 次：`) + (data ? data.message + _api : error.message)
 
     const rejectData: resultErrorData = {
         message: msg,
