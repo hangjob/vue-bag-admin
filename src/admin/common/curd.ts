@@ -1,85 +1,113 @@
-import { ref, toRaw } from 'vue'
+import { toRaw } from 'vue'
 import { message } from 'ant-design-vue'
 import { post } from '@/packages/http/request'
+import { merge } from 'lodash'
 
 const curd = {
     tableData: [], // 表格数据
     loading: false, // loading
     selectedRowKeys: [], // 批量选择
+    apiPrefix: '',
     create: {
-        visible: false, // 创建弹窗
-        submit(dom: any) {
-            dom.value.onSubmit().then(() => {
-                curd.create.visible = false
-                curd.get.data()
-            }).catch((error: any) => {
-                console.log(error)
+        dom: '',
+        visible: false,
+        formState: '',
+        api: '',
+        handle() {
+            console.log(this)
+            this.api = this.api ? this.api : curd.apiPrefix + '/create'
+            post(this.api, toRaw(this.formState), { notify: true }).then(() => {
+                this.visible = false
+                curd.all.handle()
             })
         },
         change() {
-            curd.create.visible = true
+            this.visible = true
         },
     },
-    get: {
+    all: {
         ks: '',
         api: '',
-        data() {
-            post(curd.get.api, { ks: curd.get.ks }).then((res: any) => {
-                curd.tableData = res
+        tableData: [],
+        handle() {
+            this.api = this.api ? this.api : curd.apiPrefix + '/all'
+            console.log(this)
+            post(this.api, { ks: this.ks }).then((res: any) => {
+                this.tableData = res
+                curd.tableData = this.tableData
                 curd.loading = false
             })
         },
     },
-    edit: {
+    update: {
         visible: false,
         id: '',
         api: '',
-        submit(formState: any) {
-            post(curd.edit.api, toRaw(formState), { notify: true }).then(() => {
-                curd.edit.visible = false
-                curd.get.data()
+        formState: '',
+        handle({ record }: { record: any }) {
+            this.api = this.api ? this.api : curd.apiPrefix + '/update'
+            post(this.api, toRaw(this.formState), { notify: true }).then(() => {
+                this.visible = false
+                curd.all.handle()
             })
         },
         change({ record }: { record: any }) {
-            curd.edit.visible = true
-            curd.edit.id = record.id
+            this.visible = true
+            this.id = record.id
         },
     },
     delete: {
-        id: '',
         api: '',
-        handle({ record, mode = false }: { record?: any, mode?: boolean }) {
-            if (mode) {
-                const ids = curd.selectedRowKeys.map((item: any) => item.id)
-                if (!ids.length) {
-                    return message.warning('请至少选择一个')
-                }
-                post(curd.delete.api, { ids }, { notify: true }).then(() => {
-                    curd.get.data()
-                })
-            } else {
-                post(curd.delete.api, { id: record.id }, { notify: true }).then(() => {
-                    curd.get.data()
-                })
+        handle({ record }: { record: any }) {
+            this.api = this.api ? this.api : curd.apiPrefix + '/delete'
+            post(this.api, { id: record.id }, { notify: true }).then(() => {
+                curd.all.handle()
+            })
+        },
+    },
+    deletes: {
+        api: '',
+        handle() {
+            this.api = this.api ? this.api : curd.apiPrefix + '/deletes'
+            const ids = curd.selectedRowKeys.map((item: any) => item.id)
+            if (!ids.length) {
+                return message.warning('请至少选择一个')
             }
+            post(this.api, { ids }, { notify: true }).then(() => {
+                curd.all.handle()
+            })
         },
     },
     selection: {
-        onChange: (selectedRowKeys: (string | number)[], selectedRows: any) => {
+        onChange(selectedRowKeys: (string | number)[], selectedRows: any) {
             curd.selectedRowKeys = selectedRows
         },
     },
     refreshLoad() {
-        curd.loading = true
-        curd.get.data()
+        this.loading = true
+        this.all.handle()
     },
     handleSearch() {
-        curd.get.data()
+        this.all.handle()
     },
 }
 
-const TableCurd = function(data: object) {
-    return Object.assign(curd, data)
+
+const TableCurd = function(data?: object) {
+    return merge(curd, data)
 }
 
+
+const TableCurd1 = function() {
+
+}
+
+TableCurd1.prototype.curd = function(data?: object) {
+    let obj = merge(curd, data)
+    return obj
+}
 export default TableCurd
+export {
+    TableCurd1,
+}
+
