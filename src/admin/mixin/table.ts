@@ -33,6 +33,9 @@ const tableCurd = {
                 deletes: {
                     api: '',
                 },
+                detail: {
+                    api: '',
+                },
                 selection: {},
             },
         }
@@ -62,17 +65,21 @@ const tableCurd = {
         allHandle() {
             this.tableCurd.all.api = this.tableCurd.all.api ? this.tableCurd.all.api : this.tableCurd.apiPrefix + '/all'
             post(this.tableCurd.all.api, { ks: this.tableCurd.all.ks }).then((res: any) => {
-                this.tableCurd.tableData = res
+                if (this.tableDataParent) {
+                    this.tableDataParent(res)
+                } else {
+                    this.tableCurd.tableData = res
+                }
             }).finally(() => {
                 this.tableCurd.loading = false
             })
         },
-        updateHandle({ record, formState }: { record: any, formState: any }) {
+        updateHandle() {
             this.tableCurd.update.api = this.tableCurd.update.api ? this.tableCurd.update.api : this.tableCurd.apiPrefix + '/update'
             this.formEdit.formRef.validate().then(() => {
                 post(this.tableCurd.update.api, {
                     id: this.tableCurd.update.id,
-                    ...toRaw(formState),
+                    ...toRaw(this.formEdit.formState),
                 }, { notify: true }).then(() => {
                     this.tableCurd.update.visible = false
                     this.allHandle()
@@ -82,6 +89,7 @@ const tableCurd = {
         updateVisible({ record }: { record: any }) {
             this.tableCurd.update.visible = true
             this.tableCurd.update.id = record.id
+            this.detailFind({ record })
         },
         deleteHandle({ record }: { record: any }) {
             this.tableCurd.delete.api = this.tableCurd.delete.api ? this.tableCurd.delete.api : this.tableCurd.apiPrefix + '/delete'
@@ -97,6 +105,15 @@ const tableCurd = {
             }
             post(this.tableCurd.deletes.api, { ids }, { notify: true }).then(() => {
                 this.allHandle()
+            })
+        },
+        detailFind({ record }: { record: any }) {
+            this.tableCurd.detail.api = this.tableCurd.detail.api ? this.tableCurd.detail.api : this.tableCurd.apiPrefix + '/find'
+            post(this.tableCurd.detail.api, { id: record.id }).then((res: any) => {
+                let { createTime, updateTime, ...profileData } = res
+                Object.keys(this.formEdit.formState).forEach((key: string) => {
+                    this.formEdit.formState[key] = profileData[key]
+                })
             })
         },
         refreshTableCurdLoad() {

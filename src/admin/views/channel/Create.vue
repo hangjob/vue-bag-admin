@@ -79,7 +79,6 @@
 </template>
 <script lang="ts">
 import { defineComponent, reactive, ref, toRaw } from 'vue'
-import { apiCreate } from '@/admin/service/channel'
 
 export default defineComponent({
     props: {
@@ -87,7 +86,6 @@ export default defineComponent({
     },
     setup(props, { emit }) {
         const formRef = ref()
-        const visible = ref(false)
         const formState: any = reactive({
             name: '',
             image: '',
@@ -103,18 +101,6 @@ export default defineComponent({
                 { required: true, message: '名称为必填项', trigger: 'blur' },
             ],
         }
-        const onSubmit = async () => {
-            return formRef.value.validate()
-                .then(() => {
-                    const data = toRaw(formState)
-                    apiCreate(data, { notify: true }).then(() => {
-                        return Promise.resolve()
-                    })
-                })
-                .catch((error: any) => {
-                    return Promise.reject(error)
-                })
-        }
 
         const updateImage = (data: any) => {
             formState.image = data
@@ -126,8 +112,6 @@ export default defineComponent({
             formState,
             rules,
             formRef,
-            onSubmit,
-            visible,
             updateImage,
             keywords,
         }

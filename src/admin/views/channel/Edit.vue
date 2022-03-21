@@ -20,14 +20,14 @@
                             tree-default-expand-all
                         >
                             <template #title="{ key, value,title }">
-                                <span>{{ title }}</span>
+                                <span>{{ key }}</span>
                             </template>
                         </a-tree-select>
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="图片" name="image">
-                        <a-input v-model:value="formState.image"  placeholder="输入图片地址" />&nbsp;&nbsp;
+                        <a-input v-model:value="formState.image" placeholder="输入图片地址" />&nbsp;&nbsp;
                         <yxs-upload-file @update:image="updateImage" :image="formState.image" />
                     </a-form-item>
                 </a-col>
@@ -80,7 +80,6 @@
 </template>
 <script lang="ts">
 import { defineComponent, reactive, ref, toRaw, watch } from 'vue'
-import { apiUpdate, apiFind } from '@/admin/service/channel'
 
 export default defineComponent({
     props: {
@@ -94,7 +93,6 @@ export default defineComponent({
     },
     setup(props, { emit }) {
         const formRef = ref()
-        const visible = ref(false)
         const formState: any = reactive({
             name: '',
             image: '',
@@ -111,32 +109,9 @@ export default defineComponent({
                 { required: true, message: '名称为必填项', trigger: 'blur' },
             ],
         }
-        const onSubmit = async () => {
-            return formRef.value.validate()
-                .then(() => {
-                    const data = toRaw(formState)
-                    data.keywords = data.keywords.join(',')
-                    apiUpdate(data, { notify: true }).then(() => {
-                        return Promise.resolve()
-                    })
-                })
-                .catch((error: any) => {
-                    return Promise.reject(error)
-                })
-        }
-
         const updateImage = (data: any) => {
             formState.image = data
         }
-
-        watch(() => props.id, (newVal, oldVal) => {
-            apiFind({ id: props.id }).then((res: any) => {
-                let { createTime, updateTime, ...profileData } = res
-                Object.keys(formState).forEach((key: string) => {
-                    formState[key] = profileData[key]
-                })
-            })
-        }, { immediate: true })
 
         const keywords = ref([])
 
@@ -144,8 +119,6 @@ export default defineComponent({
             formState,
             rules,
             formRef,
-            onSubmit,
-            visible,
             updateImage,
             keywords,
         }

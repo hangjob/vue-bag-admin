@@ -28,7 +28,6 @@
 </template>
 <script lang="ts">
 import { defineComponent, reactive, ref, watch } from 'vue'
-import { post } from '@/packages/http/request'
 
 interface FormState {
     name: String;
@@ -59,15 +58,6 @@ export default defineComponent({
                 { required: true, message: '名称为必填项', trigger: 'blur' },
             ],
         }
-
-        watch(() => props.id, (newVal, oldVal) => {
-            post('/web/article/find', { id: props.id }).then((res: any) => {
-                let { createTime, updateTime, ...profileData } = res
-                Object.keys(formState).forEach((key: string) => {
-                    formState[key] = profileData[key]
-                })
-            })
-        }, { immediate: true })
 
         return {
             formState,
