@@ -50,8 +50,8 @@ const tableCurd = {
     methods: {
         createHandle() {
             this.tableCurd.create.api = this.tableCurd.create.api ? this.tableCurd.create.api : this.tableCurd.apiPrefix + '/create'
-            this.formCreate.formRef.validate().then(() => {
-                post(this.tableCurd.create.api, toRaw(this.formCreate.formState), { notify: true }).then(() => {
+            this.$refs.formCreate.$refs.formRef.validate().then(() => {
+                post(this.tableCurd.create.api, toRaw(this.$refs.formCreate.formState), { notify: true }).then(() => {
                     this.tableCurd.create.visible = false
                     this.allHandle()
                 })
@@ -76,10 +76,10 @@ const tableCurd = {
         },
         updateHandle() {
             this.tableCurd.update.api = this.tableCurd.update.api ? this.tableCurd.update.api : this.tableCurd.apiPrefix + '/update'
-            this.formEdit.formRef.validate().then(() => {
+            this.$refs.formEdit.$refs.formRef.validate().then(() => {
                 post(this.tableCurd.update.api, {
                     id: this.tableCurd.update.id,
-                    ...toRaw(this.formEdit.formState),
+                    ...toRaw(this.$refs.formEdit.formState),
                 }, { notify: true }).then(() => {
                     this.tableCurd.update.visible = false
                     this.allHandle()
@@ -111,8 +111,8 @@ const tableCurd = {
             this.tableCurd.detail.api = this.tableCurd.detail.api ? this.tableCurd.detail.api : this.tableCurd.apiPrefix + '/find'
             post(this.tableCurd.detail.api, { id: record.id }).then((res: any) => {
                 let { createTime, updateTime, ...profileData } = res
-                Object.keys(this.formEdit.formState).forEach((key: string) => {
-                    this.formEdit.formState[key] = profileData[key]
+                Object.keys(this.$refs.formEdit.formState).forEach((key: string) => {
+                    this.$refs.formEdit.formState[key] = profileData[key]
                 })
             })
         },

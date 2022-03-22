@@ -85,7 +85,6 @@ export default defineComponent({
         treeData: Array,
     },
     setup(props, { emit }) {
-        const formRef = ref()
         const formState: any = reactive({
             name: '',
             image: '',
@@ -111,7 +110,6 @@ export default defineComponent({
         return {
             formState,
             rules,
-            formRef,
             updateImage,
             keywords,
         }

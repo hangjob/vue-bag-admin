@@ -66,15 +66,10 @@ export default defineComponent({
     methods: {
         tableDataParent(res: any) {
             this.tableCurd.tableData = toTree(res)
-            console.log(this.tableCurd.tableData)
         },
     },
     setup() {
-        const formCreate = ref()
-        const formEdit = ref()
         return {
-            formCreate,
-            formEdit,
             columns,
         }
     },
