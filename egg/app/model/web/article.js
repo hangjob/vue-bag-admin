@@ -65,7 +65,7 @@ module.exports = app => {
         },
         title: {
             type: STRING,
-            comment: '权重',
+            comment: '标题',
         },
         title_style: {
             type: STRING,

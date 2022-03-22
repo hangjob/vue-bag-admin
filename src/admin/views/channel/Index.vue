@@ -38,10 +38,10 @@
             </template>
         </a-table>
     </yxs-form-table>
-    <yxs-modal v-model:visible="tableCurd.create.visible" title="新增" width="1000px" @ok="createHandle">
+    <yxs-modal v-model:visible="tableCurd.create.visible" title="新增" width="85%" @ok="createHandle">
         <Create ref="formCreate" :treeData="tableCurd.tableData" />
     </yxs-modal>
-    <yxs-modal v-model:visible="tableCurd.update.visible" title="编辑" width="1000px" @ok="updateHandle">
+    <yxs-modal v-model:visible="tableCurd.update.visible" title="编辑" width="85%" @ok="updateHandle">
         <Edit ref="formEdit" :treeData="tableCurd.tableData" :id="tableCurd.update.id" />
     </yxs-modal>
 </template>
