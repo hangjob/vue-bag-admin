@@ -9,7 +9,9 @@
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="标题样式" name="title_style">
-                        <a-textarea v-model:value="formState.title_style" placeholder="输入标题样式" showCount :maxlength="300"/>
+                        <a-textarea v-model:value="formState.title_style" placeholder="输入标题样式" showCount
+                                    :maxlength="300"
+                        />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
@@ -63,12 +65,16 @@
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="内容简述" name="description">
-                        <a-textarea v-model:value="formState.description" placeholder="输入内容简述" showCount :maxlength="300"/>
+                        <a-textarea v-model:value="formState.description" placeholder="输入内容简述" showCount
+                                    :maxlength="300"
+                        />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-                    <a-form-item :labelCol="{span:3,offset:0}" :wrapperCol="{span:19,offset:0}" label="内容简述" name="description">
-                        <a-textarea v-model:value="formState.description" placeholder="输入内容简述" showCount :maxlength="300"/>
+                    <a-form-item  :autoLink="false" :labelCol="{span:3,offset:0}" :wrapperCol="{span:19,offset:0}" label="内容"
+                                  name="content"
+                    >
+                        <md-editor v-model="content" />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
@@ -107,8 +113,16 @@
 </template>
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
+import MdEditor from 'md-editor-v3'
+import 'md-editor-v3/lib/style.css'
 
 export default defineComponent({
+    components: { MdEditor },
+    data() {
+        return {
+            content: '',
+        }
+    },
     setup(props, { emit }) {
         const formState: any = reactive({
             name: '',
