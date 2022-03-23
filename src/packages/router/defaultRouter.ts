@@ -13,7 +13,7 @@ export default [
     },
     {
         path: '/sys/member', name: 'sys-member', meta: { title: '用户管理' },
-        component: () => import('@/packages/views/sys/member/index.vue'),
+        component: () => import('@/packages/views/sys/member/Index.vue'),
     },
     {
         path: '/sys/role', name: 'sys-role', meta: { title: '角色管理' },

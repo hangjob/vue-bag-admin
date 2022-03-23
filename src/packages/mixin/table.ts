@@ -126,5 +126,4 @@ const tableCurd = {
     },
 }
 
-
 export default tableCurd

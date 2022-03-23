@@ -39,6 +39,24 @@ const paths = addUniqueId([
             },
         ],
     },
+    {
+        name: '用户管理',
+        router: '',
+        icon: 'SettingOutlined',
+        shows: 1,
+        children:[
+            {
+                name: '用户管理',
+                path: '/sys/member',
+                icon: '',
+                shows: 1,
+                tabHidden: false,
+                tabFix: false,
+                keepAlive: true,
+                filePath: '/packages/views/sys/member/Index.vue',
+            },
+        ]
+    }
 ], '_local')
 
 export default paths

@@ -50,7 +50,7 @@ import { defineComponent, ref, reactive } from 'vue'
 import Create from './Create.vue'
 import Edit from './Edit.vue'
 import columns from './columns'
-import tableCurd from '@/admin/mixin/table'
+import tableCurd from '@/packages/mixin/table'
 
 export default defineComponent({
     name: 'articleIndex',
