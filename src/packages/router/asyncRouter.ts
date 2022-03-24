@@ -45,7 +45,7 @@ const setAsyncRouterComponents = async () => {
     const paths: Array<any> = []
     if (store.state.app.appRouter.defaults) {
         defaultRouter.forEach((item) => {
-            router.addRoute('admin', { ...item })
+            // router.addRoute('admin', { ...item })
         })
         paths.push(...await apiAppRouter())
     }

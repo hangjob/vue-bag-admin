@@ -87,8 +87,7 @@ http.interceptors.response.use((res: any) => {
 
     if (status === 403) {
         localStore.clearAll()
-        console.log(router);
-        // return router.push(routerSet.resetPath).then()
+        return router.push(routerSet.resetPath).then()
     }
 
     if (status === 404) {
@@ -96,8 +95,7 @@ http.interceptors.response.use((res: any) => {
     }
 
     if ((filter.timeout || filter.path)) {
-        console.log(router)
-        // return router.push(routerSet.resetPath).then()
+        return router.push(routerSet.resetPath).then()
     }
 
     if (config && config.relink) { // 是否重连开启

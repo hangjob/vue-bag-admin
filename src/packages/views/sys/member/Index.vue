@@ -51,12 +51,8 @@ import Create from './Create.vue'
 import Edit from './Edit.vue'
 import columns from './columns'
 
-import tableCurd from '@/packages/mixin/table'
-
-console.log('tableCurd', tableCurd)
 export default defineComponent({
     name: 'articleIndex',
-    mixins: [tableCurd],
     components: {
         Create, Edit,
     },
