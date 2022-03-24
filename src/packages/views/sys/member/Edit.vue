@@ -1,6 +1,6 @@
 <template>
-    <div class="add">
-        <a-form ref="formRef" :model="formState" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol">
+    <div>
+        <a-form ref="formRef" :model="formState" :rules="rules" :label-col="{span: 6}" :wrapper-col="{ span: 15}">
             <a-row>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="部门组织" name="did">
@@ -114,7 +114,6 @@ export default defineComponent({
         }
     },
     setup(props, {emit}) {
-        const formRef = ref();
         const visible = ref(false);
         const treeData = ref();
         const rolesOptions = ref();
@@ -144,57 +143,48 @@ export default defineComponent({
         apiBranchAll().then((res: Array<any>) => {
             treeData.value = toTree(res);
         })
-        apiRoleAll().then((res: Array<any>) => {
-            rolesOptions.value = res.map((item) => {
-                return {
-                    ...item,
-                    value: item.tag
-                }
-            })
-        })
-        const onSubmit = async () => {
-            return formRef.value.validate()
-                .then(() => {
-                    const formData: any = toRaw(formState);
-                    apiUpdate({...formData, roles: formData.roles.join(',')}, {notify: true}).then(() => {
-                        return Promise.resolve();
-                    })
-                })
-                .catch((error: ValidateErrorEntity<FormState>) => {
-                    return Promise.reject(error);
-                });
-        };
-
-        const getMenuData = () => {
-            apiFind({id: props.id}).then((res: any) => {
-                let {createTime, updateTime, ...profileData} = res
-                Object.keys(formState).forEach((key: string) => {
-                    formState[key] = profileData[key];
-                })
-                formState.roles = formState.roles.split(',')
-            })
-        }
-
-        watch(() => props.id, (newVal, oldVal) => {
-            getMenuData()
-        }, {immediate: true})
-
-        const handleSelected = (icon: string) => {
-            visible.value = false;
-        }
+        // apiRoleAll().then((res: Array<any>) => {
+        //     rolesOptions.value = res.map((item) => {
+        //         return {
+        //             ...item,
+        //             value: item.tag
+        //         }
+        //     })
+        // })
+        // const onSubmit = async () => {
+        //     return formRef.value.validate()
+        //         .then(() => {
+        //             const formData: any = toRaw(formState);
+        //             apiUpdate({...formData, roles: formData.roles.join(',')}, {notify: true}).then(() => {
+        //                 return Promise.resolve();
+        //             })
+        //         })
+        //         .catch((error: ValidateErrorEntity<FormState>) => {
+        //             return Promise.reject(error);
+        //         });
+        // };
+        //
+        // const getMenuData = () => {
+        //     apiFind({id: props.id}).then((res: any) => {
+        //         let {createTime, updateTime, ...profileData} = res
+        //         Object.keys(formState).forEach((key: string) => {
+        //             formState[key] = profileData[key];
+        //         })
+        //         formState.roles = formState.roles.split(',')
+        //     })
+        // }
+        //
+        // watch(() => props.id, (newVal, oldVal) => {
+        //     getMenuData()
+        // }, {immediate: true})
+        //
+        // const handleSelected = (icon: string) => {
+        //     visible.value = false;
+        // }
         return {
-            labelCol: {
-                span: 6,
-            },
-            wrapperCol: {
-                span: 15,
-            },
             formState,
             rules,
-            formRef,
-            onSubmit,
             visible,
-            handleSelected,
             treeData,
             rolesOptions
         };

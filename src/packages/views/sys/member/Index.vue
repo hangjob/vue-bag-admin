@@ -46,13 +46,14 @@
     </yxs-modal>
 </template>
 <script lang="ts">
-import { defineComponent, ref, reactive } from 'vue'
+import { defineComponent } from 'vue'
 import Create from './Create.vue'
 import Edit from './Edit.vue'
 import columns from './columns'
-import tableCurd from '@/packages/mixin/table'
-import { toTree } from '@/packages/utils/utils'
 
+import tableCurd from '@/packages/mixin/table'
+
+console.log('tableCurd', tableCurd)
 export default defineComponent({
     name: 'articleIndex',
     mixins: [tableCurd],
@@ -61,11 +62,11 @@ export default defineComponent({
     },
     created() {
         this.tableCurd.apiPrefix = '/web/channel'
-        this.allHandle()
+        // this.allHandle()
     },
     methods: {
         tableDataParent(res: any) {
-            this.tableCurd.tableData = toTree(res)
+            this.tableCurd.tableData = res
         },
     },
     setup() {

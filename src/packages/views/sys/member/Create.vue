@@ -1,6 +1,6 @@
 <template>
-    <div class="add">
-        <a-form ref="formRef" :model="formState" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol">
+    <div>
+        <a-form ref="formRef" :model="formState" :rules="rules" :label-col="{span: 6}" :wrapper-col="{ span: 15}">
             <a-row>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="部门组织" name="did">
@@ -35,7 +35,7 @@
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="姓名" name="username">
-                        <a-input v-model:value="formState.username" placeholder="输入用户姓名"/>
+                        <a-input v-model:value="formState.username" placeholder="输入用户姓名" />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
@@ -53,17 +53,17 @@
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="年龄" name="age">
-                        <a-input v-model:value="formState.age" placeholder="输入年龄"/>
+                        <a-input v-model:value="formState.age" placeholder="输入年龄" />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="邮箱" name="email">
-                        <a-input v-model:value="formState.email" placeholder="输入邮箱"/>
+                        <a-input v-model:value="formState.email" placeholder="输入邮箱" />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="手机号" name="phone">
-                        <a-input v-model:value="formState.phone" placeholder="输入手机号"/>
+                        <a-input v-model:value="formState.phone" placeholder="输入手机号" />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
@@ -76,7 +76,7 @@
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="描述" name="describe">
-                        <a-textarea v-model:value="formState.describe" placeholder="输入描述"/>
+                        <a-textarea v-model:value="formState.describe" placeholder="输入描述" />
                     </a-form-item>
                 </a-col>
             </a-row>
@@ -84,13 +84,10 @@
     </div>
 </template>
 <script lang="ts">
-import {defineComponent, reactive, ref, toRaw, UnwrapRef} from 'vue';
-import {ValidateErrorEntity} from 'ant-design-vue/es/form/interface';
-import {apiCreate} from '@/packages/service/member'
-import {apiAll as apiBranchAll} from '@/packages/service/branch'
-import {apiAll as apiRoleAll} from '@/packages/service/role'
-import {toTree} from '@/packages/utils/utils'
-import {validatPhone} from "@/packages/utils/validator";
+import { defineComponent, reactive, ref, toRaw, UnwrapRef } from 'vue'
+import { apiAll as apiBranchAll } from '@/packages/service/branch'
+import { toTree } from '@/packages/utils/utils'
+import { validatPhone } from '@/packages/utils/validator'
 
 interface FormState {
     username: String,
@@ -105,11 +102,9 @@ interface FormState {
 }
 
 export default defineComponent({
-    setup(props, {emit}) {
-        const formRef = ref();
-        const visible = ref(false);
-        const treeData = ref();
-        const rolesOptions = ref();
+    setup(props, { emit }) {
+        const treeData = ref()
+        const rolesOptions = ref()
         const formState: UnwrapRef<FormState> = reactive({
             username: '',
             sex: 1,
@@ -120,63 +115,53 @@ export default defineComponent({
             describe: '',
             did: undefined,
             state: 1,
-        });
+        })
         const rules = {
             username: [
-                {required: true, message: '姓名为必填项', trigger: 'blur'}
+                { required: true, message: '姓名为必填项', trigger: 'blur' },
             ],
             phone: [
-                {required: true, validator: validatPhone, trigger: 'blur'}
+                { required: true, validator: validatPhone, trigger: 'blur' },
             ],
             describe: [
-                {trigger: 'blur', max: 200, message: '最大长度为200'}
-            ]
-        };
-        apiBranchAll().then((res: Array<any>) => {
-            treeData.value = toTree(res);
-        })
-        apiRoleAll().then((res: Array<any>) => {
-            rolesOptions.value = res.map((item) => {
-                return {
-                    ...item,
-                    value: item.tag
-                }
-            })
-        })
-        const onSubmit = async () => {
-            return formRef.value.validate()
-                .then(() => {
-                    const formData: any = toRaw(formState);
-                    apiCreate({...formData, roles: formData.roles.join(',')}, {notify: true}).then(() => {
-                        return Promise.resolve();
-                    })
-                })
-                .catch((error: ValidateErrorEntity<FormState>) => {
-                    return Promise.reject(error);
-                });
-        };
-
-        const handleSelected = (icon: string) => {
-            visible.value = false;
+                { trigger: 'blur', max: 200, message: '最大长度为200' },
+            ],
         }
+        apiBranchAll().then((res: Array<any>) => {
+            treeData.value = toTree(res)
+        })
+        // apiRoleAll().then((res: Array<any>) => {
+        //     rolesOptions.value = res.map((item) => {
+        //         return {
+        //             ...item,
+        //             value: item.tag
+        //         }
+        //     })
+        // })
+        // const onSubmit = async () => {
+        //     return formRef.value.validate()
+        //         .then(() => {
+        //             const formData: any = toRaw(formState);
+        //             apiCreate({...formData, roles: formData.roles.join(',')}, {notify: true}).then(() => {
+        //                 return Promise.resolve();
+        //             })
+        //         })
+        //         .catch((error: ValidateErrorEntity<FormState>) => {
+        //             return Promise.reject(error);
+        //         });
+        // };
+        //
+        // const handleSelected = (icon: string) => {
+        //     visible.value = false;
+        // }
         return {
-            labelCol: {
-                span: 6,
-            },
-            wrapperCol: {
-                span: 15,
-            },
             formState,
             rules,
-            formRef,
-            onSubmit,
-            visible,
-            handleSelected,
             treeData,
-            rolesOptions
-        };
+            rolesOptions,
+        }
     },
-});
+})
 </script>
 <style lang="less" scoped>
 .item-icons {
