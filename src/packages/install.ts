@@ -29,12 +29,10 @@ interface $optionsType {
     },
     config?: object
 }
-import mixin from  '@/packages/mixin/table'
 const install = (app: App, $options?: any) => {
     app.config.globalProperties.$plugin = $options
     app.provide('$App', app)
     app.provide('$mitt', mitt())
-    app.mixin(mixin)
     handleError(app)
     setupInit(app)
 }
