@@ -1,6 +1,6 @@
 <template>
     <div class="add">
-        <a-form ref="formRef" :model="formState" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol">
+        <a-form ref="formRef" :model="formState" :rules="rules" :label-col="{span:6}" :wrapper-col="{wrapperCol:15}">
             <a-row>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="名称" name="name">
@@ -35,14 +35,16 @@
     </div>
 </template>
 <script lang="ts">
-import {defineComponent, reactive, ref, toRaw, UnwrapRef} from 'vue';
+import {defineComponent, reactive, ref, toRaw, UnwrapRef, watch} from 'vue';
 import {ValidateErrorEntity} from 'ant-design-vue/es/form/interface';
-import {apiCreate} from '@/packages/service/branch'
+import {apiUpdate, apiFind} from '@/packages/service/branch'
 import {toTree} from '@/packages/utils/utils'
+import {filterData} from "@/packages/utils/lodash";
 
 interface FormState {
     name: String;
     pid?: String | Number,
+    id?: String | Number,
     order?: String | Number,
 }
 
@@ -50,15 +52,19 @@ export default defineComponent({
     props: {
         treeData: {
             type: Array,
+        },
+        id: {
+            required: true,
+            type: [Number, String]
         }
     },
     setup(props, {emit}) {
         const formRef = ref();
-        const visible = ref(false);
         const treeData = ref();
-        const formState: UnwrapRef<FormState> = reactive({
+        const formState: any = reactive({
             name: '',
             pid: '',
+            id: '',
             order: ''
         });
         const rules = {
@@ -66,35 +72,15 @@ export default defineComponent({
                 {required: true, message: '名称为必填项', trigger: 'blur'}
             ]
         };
-        treeData.value = toTree(props.treeData || []);
-        const onSubmit = async () => {
-            return formRef.value.validate()
-                .then(() => {
-                    apiCreate(toRaw(formState), {notify: true}).then(() => {
-                        return Promise.resolve();
-                    })
-                })
-                .catch((error: ValidateErrorEntity<FormState>) => {
-                    return Promise.reject(error);
-                });
-        };
 
-        const handleSelected = (icon: string) => {
-            visible.value = false;
-        }
+        watch(() => props.id, (newVal, oldVal) => {
+            treeData.value = filterData({key: 'id', value: props.id, node: 'children'}, toTree(props.treeData));
+        }, {immediate: true})
+
         return {
-            labelCol: {
-                span: 6,
-            },
-            wrapperCol: {
-                span: 15,
-            },
             formState,
             rules,
             formRef,
-            onSubmit,
-            visible,
-            handleSelected,
             treeData
         };
     },

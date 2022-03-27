@@ -53,14 +53,14 @@ const tableCurd = {
     methods: {
         createHandle() {
             this.tableCurd.create.api = this.tableCurd.create.api ? this.tableCurd.create.api : this.tableCurd.apiPrefix + '/create'
-            this.$refs.formCreate.$refs.formRef.validate().then(() => {
-                post(this.tableCurd.create.api, toRaw(this.$refs.formCreate.formState), ).then(() => {
-                    this.tableCurd.create.visible = false
-                    this.allHandle()
-                })
-            }).catch((err: any) => {
-                console.log(err)
-            })
+            // this.$refs.formCreate.$refs.formRef.validate().then(() => {
+            //     post(this.tableCurd.create.api, toRaw(this.$refs.formCreate.formState), ).then(() => {
+            //         this.tableCurd.create.visible = false
+            //         this.allHandle()
+            //     })
+            // }).catch((err: any) => {
+            //     console.log(err)
+            // })
         },
         // createChange() {
         //     this.tableCurd.create.visible = true

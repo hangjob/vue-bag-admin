@@ -1,6 +1,6 @@
 <template>
     <div class="add">
-        <a-form ref="formRef" :model="formState" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol">
+        <a-form ref="formRef" :model="formState" :rules="rules" :label-col="{span:6}" :wrapper-col="{wrapperCol:15}">
             <a-row>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="名称" name="name">
@@ -93,7 +93,7 @@
             </a-row>
         </a-form>
     </div>
-    <a-modal v-model:visible="visible" width="1000px" title="选择icon" @ok="handleOk" okText="确认" cancelText="关闭">
+    <a-modal v-model:visible="visibleIcon" width="1000px" title="选择icon" okText="确认" cancelText="关闭">
         <div class="item-icons">
             <a-row>
                 <a-col class="item" :xs="12" :sm="8" :md="4" :lg="3" :xl="2" v-for="(item,idx) in icons">
@@ -114,22 +114,6 @@ import {validatPath, validatHttpFilePath, filePathRouter} from '@/packages/utils
 import {toTree} from '@/packages/utils/utils'
 import {filterData} from "@/packages/utils/lodash";
 
-interface FormState {
-    name: string;
-    icon: string,
-    filePath?: string,
-    httpFilePath?: string,
-    iframePath?: string,
-    httpViewPath?: string,
-    pid?: string | number,
-    path?: string,
-    id?: string | number,
-    limits?: Array<any>,
-    keepAlive?: number | string | boolean,
-    tabHidden?: number | string | boolean,
-    tabFix?: number | string | boolean,
-    shows?: number | string | boolean
-}
 
 export default defineComponent({
     props: {
@@ -143,7 +127,7 @@ export default defineComponent({
     },
     setup(props, {emit}) {
         const formRef = ref();
-        const visible = ref(false);
+        const visibleIcon = ref(false);
         const treeData = ref();
         const formState: any = reactive({
             name: '',
@@ -186,64 +170,23 @@ export default defineComponent({
                 {validator: validatHttpFilePath, trigger: 'blur'}
             ]
         };
-        const onSubmit = async () => {
-            return formRef.value.validate()
-                .then(() => {
-                    apiUpdate(toRaw(formState), {notify: true}).then(() => {
-                        return Promise.resolve();
-                    })
-                })
-                .catch((error: ValidateErrorEntity<FormState>) => {
-                    return Promise.reject(error);
-                });
-        };
-
-
-        const getMenuData = () => {
-            apiFind({id: props.id}).then((res: any) => {
-                let {createTime, updateTime, type, ...profileData} = res
-                Object.keys(formState).forEach((key: string) => {
-                    formState[key] = profileData[key];
-                })
-            })
-        }
 
         watch(() => props.id, (newVal, oldVal) => {
             treeData.value = filterData({key: 'id', value: props.id, node: 'children'}, toTree(props.treeData));
-            getMenuData()
         }, {immediate: true})
 
-
-        const onSearch = () => {
-
-        }
-
-        const handleOk = () => {
-
-        }
-
         const handleSelected = (item: any) => {
-            visible.value = false;
+            visibleIcon.value = false;
             formState.icon = item;
         }
         return {
-            labelCol: {
-                span: 6,
-            },
-            wrapperCol: {
-                span: 15,
-            },
             formState,
             rules,
             formRef,
-            onSubmit,
-            onSearch,
-            visible,
-            handleOk,
             icons,
             handleSelected,
             treeData,
-            getMenuData
+            visibleIcon
         };
     },
 });

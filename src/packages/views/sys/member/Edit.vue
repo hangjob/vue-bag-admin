@@ -93,19 +93,6 @@ import {toTree} from '@/packages/utils/utils'
 import {validatPhone} from "@/packages/utils/validator";
 import {filterData} from "@/packages/utils/lodash";
 
-interface FormState {
-    username: String,
-    sex?: String | Number,
-    age?: String | Number,
-    email?: String | Number,
-    phone?: String | Number,
-    roles?: String | Array<any>,
-    describe?: String,
-    did?: String | Number | undefined,
-    state?: String | Number | Boolean,
-    id?: String | Number,
-}
-
 export default defineComponent({
     props: {
         id: {
@@ -114,9 +101,9 @@ export default defineComponent({
         }
     },
     setup(props, {emit}) {
-        const visible = ref(false);
         const treeData = ref();
         const rolesOptions = ref();
+        const formRef = ref();
         const formState: any = reactive({
             username: '',
             sex: 1,
@@ -143,50 +130,21 @@ export default defineComponent({
         apiBranchAll().then((res: Array<any>) => {
             treeData.value = toTree(res);
         })
-        // apiRoleAll().then((res: Array<any>) => {
-        //     rolesOptions.value = res.map((item) => {
-        //         return {
-        //             ...item,
-        //             value: item.tag
-        //         }
-        //     })
-        // })
-        // const onSubmit = async () => {
-        //     return formRef.value.validate()
-        //         .then(() => {
-        //             const formData: any = toRaw(formState);
-        //             apiUpdate({...formData, roles: formData.roles.join(',')}, {notify: true}).then(() => {
-        //                 return Promise.resolve();
-        //             })
-        //         })
-        //         .catch((error: ValidateErrorEntity<FormState>) => {
-        //             return Promise.reject(error);
-        //         });
-        // };
-        //
-        // const getMenuData = () => {
-        //     apiFind({id: props.id}).then((res: any) => {
-        //         let {createTime, updateTime, ...profileData} = res
-        //         Object.keys(formState).forEach((key: string) => {
-        //             formState[key] = profileData[key];
-        //         })
-        //         formState.roles = formState.roles.split(',')
-        //     })
-        // }
-        //
-        // watch(() => props.id, (newVal, oldVal) => {
-        //     getMenuData()
-        // }, {immediate: true})
-        //
-        // const handleSelected = (icon: string) => {
-        //     visible.value = false;
-        // }
+        apiRoleAll().then((res: Array<any>) => {
+            rolesOptions.value = res.map((item) => {
+                return {
+                    ...item,
+                    value: item.tag
+                }
+            })
+        })
+
         return {
             formState,
             rules,
-            visible,
             treeData,
-            rolesOptions
+            rolesOptions,
+            formRef
         };
     },
 });
