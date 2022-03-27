@@ -33,7 +33,7 @@ export default [
     },
     {
         path: '/about', name: 'about', meta: { title: '关于' },
-        component: () => import('@/packages/views/about/index.vue'),
+        component: () => import('@/packages/views/about/Index.vue'),
     },
     {
         path: '/permit', name: 'permit', meta: { title: '权限管理' },
@@ -113,7 +113,7 @@ export default [
     },
     {
         path: '/admire', name: 'admire', meta: { title: '打点吧' },
-        component: () => import('@/packages/views/admire/index.vue'),
+        component: () => import('@/packages/views/admire/Index.vue'),
     },
     {
         path: '/async', name: 'async', meta: { title: '异步组件' },

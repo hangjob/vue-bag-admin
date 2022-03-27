@@ -1,5 +1,5 @@
 import {defineComponent, h} from 'vue'
-import classes from './index.module.less'
+import classes from './Index.module.less'
 
 export default defineComponent({
     name: 'yxs-card',

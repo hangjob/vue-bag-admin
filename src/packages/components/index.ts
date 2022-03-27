@@ -1,8 +1,8 @@
-import type { App } from 'vue'
-import YxsCard from './yxs-card'
-import YxsFormTable from './yxs-form-table'
-import YxsModal from './yxs-modal'
-import YxsView from './yxs-view'
+import type {App} from 'vue'
+import YxsCard from './yxs-card/Index'
+import YxsFormTable from './yxs-form-table/Index'
+import YxsModal from './yxs-modal/Index'
+import YxsView from './yxs-view/Index'
 import YxsIconfont from './yxs-iconfont/index'
 import YxsUploadImage from './yxs-upload/UploadImage.vue'
 

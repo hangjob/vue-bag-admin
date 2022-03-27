@@ -1,8 +1,8 @@
-import { defineComponent, ref, computed } from 'vue'
-import { useStore } from 'vuex'
-import { deepMenu } from '@/packages/layout/common'
-import classes from './style/CutSystems.module.less'
-import { useRouter } from 'vue-router'
+import {defineComponent, ref, computed} from 'vue'
+import {useStore} from 'vuex'
+import {deepMenu} from '@/packages/layout/common'
+import classes from '@/packages/layout/style/CutSystems.module.less'
+import {useRouter} from 'vue-router'
 
 export default defineComponent({
     name: 'CutSystems',

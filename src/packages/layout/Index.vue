@@ -1,10 +1,10 @@
 <template>
     <a-layout style="height: 100%">
-        <Slider />
+        <Slider/>
         <a-layout :style="{marginLeft}" class="layout" :class="layoutClassName">
-            <NavBar />
-            <TabBar />
-            <AppMain />
+            <NavBar/>
+            <TabBar/>
+            <AppMain/>
             <div class="layout-footer">
                 Yxs Admin ©2021
                 <a-typography-link href="//www.vipbic.com">www.vipbic.com</a-typography-link>
@@ -13,13 +13,13 @@
     </a-layout>
 </template>
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
-import Slider from './Slider.vue'
-import NavBar from './NavBar.vue'
-import TabBar from './TabBar.vue'
-import AppMain from './AppMain.vue'
-import { themeHook } from '@/packages/hook'
-import { useStore } from 'vuex'
+import {defineComponent, computed} from 'vue'
+import Slider from './slider/Index.vue'
+import NavBar from './navbar/Index.vue'
+import TabBar from './tabbar/Index.vue'
+import AppMain from './main/Index.vue'
+import {themeHook} from '@/packages/hook'
+import {useStore} from 'vuex'
 
 export default defineComponent({
     components: {
@@ -29,7 +29,7 @@ export default defineComponent({
         AppMain,
     },
     setup() {
-        const { layoutClassName } = themeHook()
+        const {layoutClassName} = themeHook()
         const store = useStore()
         const marginLeft = computed(() => store.state.app.themeConfig.menuMaxWidth + 'px')
         return {

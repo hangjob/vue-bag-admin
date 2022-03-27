@@ -32,7 +32,7 @@
                             placeholder="选择icon图标"
                             enter-button
                             :readonly="true"
-                            @search="visible = true"
+                            @search="visibleIcon = true"
                         />
                     </a-form-item>
                 </a-col>

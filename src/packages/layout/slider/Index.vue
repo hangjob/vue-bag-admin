@@ -16,17 +16,16 @@
                     {{ logoTitle }}
                 </div>
                 <div class="scroll">
-                    <MenuSlider />
+                    <MenuSlider/>
                 </div>
             </div>
         </div>
     </a-drawer>
 </template>
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import {computed, defineComponent} from 'vue'
 import MenuSlider from './MenuSlider'
-import { themeHook } from '@/packages/hook'
-import { useStore } from 'vuex'
+import {useStore} from 'vuex'
 
 
 export default defineComponent({

@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw, RouterOptions } from 'vue-router'
 import { routerSet } from '@/packages/config'
 import { App } from 'vue'
-import { setupRouterGuard } from '@/packages/router/guard'
+import { setupRouterGuard } from '@/packages/router/guardRouter'
 import { setupBeforeStore } from '@/packages/router/beforeStore'
 import store from '@/packages/store'
 import { NProgress } from '@/packages/plugin/nprogress'
