@@ -1,8 +1,8 @@
-import { computed, defineComponent, ref, watchEffect } from 'vue'
-import { useStore } from 'vuex'
-import { useRoute, useRouter } from 'vue-router'
-import { toTree } from '@/packages/utils/utils'
-import { deepMenu } from '@/packages/layout/common'
+import {computed, defineComponent, ref, watchEffect} from 'vue'
+import {useStore} from 'vuex'
+import {useRoute, useRouter} from 'vue-router'
+import {toTree} from '@/packages/utils/utils'
+import {deepMenu} from '@/packages/layout/common'
 
 export default defineComponent({
     name: 'yxs-menu-slider',
@@ -21,11 +21,11 @@ export default defineComponent({
         // 是否可见
         const visible = ref<boolean>(true)
         const goView = (item: any) => {
+            if (item.httpViewPath) {
+                return window.open(item.httpViewPath)
+            }
             if (item.path && item.path != route.path) {
                 router.push(item.path).then()
-            }
-            if (item.httpViewPath) {
-                window.open(item.httpViewPath)
             }
         }
 

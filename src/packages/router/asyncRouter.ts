@@ -1,6 +1,6 @@
-import { Component } from 'vue'
+import {Component} from 'vue'
 import store from '@/packages/store'
-import { apiAppRouter } from '@/packages/service/app'
+import {apiAppRouter} from '@/packages/service/app'
 import router from '@/packages/router'
 import defaultRouter from '@/packages/router/defaultRouter'
 
@@ -25,11 +25,18 @@ function findComponent(filePath: string, file?: Array<any>) {
 // 循环目录
 function pathsFileRouterStore(paths: Array<any>) {
     let components: Array<any> = []
-    const loopFile = function(paths: Array<any>, file: Array<any>) {
+    const loopFile = function (paths: Array<any>, file: Array<any>) {
         for (let i = 0; i < paths.length; i++) {
-            let component = findComponent(paths[i].filePath, file)
-            if (component) {
-                router.addRoute('admin', { path: paths[i].path, component })
+            if (paths[i].iframePath) {
+                let component = findComponent('/iframe', file)
+                if (component) {
+                    router.addRoute('admin', {path: '/iframe' + paths[i].path, component})
+                }
+            } else {
+                let component = findComponent(paths[i].filePath, file)
+                if (component) {
+                    router.addRoute('admin', {path: paths[i].path, component})
+                }
             }
             store.commit('app/addMenuList', paths[i])
             if (paths[i].children) {
@@ -45,7 +52,7 @@ const setAsyncRouterComponents = async () => {
     const paths: Array<any> = []
     if (store.state.app.appRouter.defaults) {
         defaultRouter.forEach((item) => {
-            router.addRoute('admin', { ...item })
+            router.addRoute('admin', {...item})
         })
         paths.push(...await apiAppRouter())
     }

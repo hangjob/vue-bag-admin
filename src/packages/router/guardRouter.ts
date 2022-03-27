@@ -1,9 +1,9 @@
 import store from '@/packages/store'
-import { apiUserUserinfo } from '@/packages/service/user'
-import { routerSet } from '@/packages/config'
-import { setAsyncRouterComponents } from '@/packages/router/asyncRouter'
+import {apiUserUserinfo} from '@/packages/service/user'
+import {routerSet} from '@/packages/config'
+import {setAsyncRouterComponents} from '@/packages/router/asyncRouter'
 
-const { resetPath, whiteList } = routerSet
+const {resetPath, whiteList} = routerSet
 
 
 function hasUserinfo(to: any, from: any, next: any) {
@@ -17,7 +17,7 @@ function hasUserinfo(to: any, from: any, next: any) {
             apiUserUserinfo().then(async (res: any) => {
                 store.commit('user/updateUserinfo', res)
                 await setAsyncRouterComponents()
-                next({ ...to, replace: true })
+                next({...to, replace: true})
             }).catch(() => {
                 next(resetPath)
             })

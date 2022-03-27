@@ -145,9 +145,6 @@ export default defineComponent({
             icon: [
                 {required: false, message: 'icon为必填项', trigger: 'blur'},
             ],
-            path: [
-                {required: true, validator: validatPath, trigger: 'blur'},
-            ],
             filePath: [
                 {validator: filePathRouter, trigger: 'blur'},
             ],
