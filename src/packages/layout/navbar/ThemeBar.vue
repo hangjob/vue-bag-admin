@@ -62,7 +62,6 @@ import { checkFull, fullscreenchange, switchScreen } from '@/packages/utils/scre
 import { handleKeyBoard } from '@/packages/utils/keydown'
 import { notification } from 'ant-design-vue'
 import { apiLogout } from '@/packages/service/user'
-import { apiAppNotice } from '@/packages/service/app'
 import {
     BellOutlined,
     ClearOutlined,
