@@ -9,12 +9,12 @@ import { defaultMenu, defaultPrjMenu } from '@/packages/config/defaultMenu'
 
 // 定义路由
 const routes: Array<RouteRecordRaw> = [
-    {
-        path: '/',
-        name: 'admin',
-        component: () => import('@/packages/layout/index.vue'),
-        children: [{ path: '', redirect: 'home' }],
-    },
+    // {
+    //     path: '/',
+    //     name: 'admin',
+    //     component: () => import('@/packages/layout/index.vue'),
+    //     children: [{ path: '', redirect: 'home' }],
+    // },
     {
         path: '/login', name: 'login', meta: { title: '登录' },
         component: () => import('@/packages/views/login/index.vue'),
@@ -37,8 +37,9 @@ const router = createRouter({
 
 router.beforeEach((to: any, from: any, next: any) => {
     NProgress.start()
-    setupBeforeStore(to)
-    setupRouterGuard(to, from, next)
+    // setupBeforeStore(to)
+    // setupRouterGuard(to, from, next)
+    next()
 })
 
 
@@ -54,11 +55,11 @@ const setAppRouterStore = (app: App) => {
 }
 
 const setupRouter = (app: App) => {
-    setAppRouterStore(app)
+    // setAppRouterStore(app)
     app.use(router)
-    router.isReady().then(() => {
-        store.commit('app/updateAppRouter', { key: 'router', value: router })
-    })
+    // router.isReady().then(() => {
+    //     store.commit('app/updateAppRouter', { key: 'router', value: router })
+    // })
 }
 
 export default router
