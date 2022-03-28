@@ -10,7 +10,6 @@ class Framework {
         app.provide('$mitt', mitt())
         handleError(app)
         setupInit(app)
-        app.mount('#app')
     }
 }
 

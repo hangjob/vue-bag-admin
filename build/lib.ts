@@ -4,7 +4,7 @@ const setLibBuild = function() {
     return {
         emptyOutDir: true,
         lib: {
-            entry: path.resolve(process.cwd(), 'src/packages/framework.ts'),
+            entry: path.resolve(process.cwd(), 'src/packages/install.ts'),
             name: 'VueViteAdminTs', // 构建依赖包的时候， 对外暴露的名称
             fileName: (format: string) => `index.${format}.js`,
         },
