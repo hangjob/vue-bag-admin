@@ -2,8 +2,6 @@ import type { App } from 'vue'
 import { setupAndDesignVue } from '@/packages/plugin/ant-design-vue'
 import '@/packages/style/index'
 
-import '@/packages/extend/browser/canvas'
-
 import '@/packages/common/resize'
 import { setupRouter } from '@/packages/router'
 import { setupStore } from '@/packages/store'

@@ -1,5 +1,3 @@
-import { tableFormatterBooleConvertText } from '@/packages/common/utils'
-
 const columns = [
     {
         title: '序号',
@@ -42,7 +40,7 @@ const columns = [
         align: 'center',
 
         customRender: (item: any) => {
-            return tableFormatterBooleConvertText(item)
+            return item.text === true || item.text === 1 ? '是' : '否'
         },
     },
     {
@@ -52,7 +50,7 @@ const columns = [
         ellipsis: true,
         align: 'center',
         customRender: (item: any) => {
-            return tableFormatterBooleConvertText(item)
+            return item.text === true || item.text === 1 ? '是' : '否'
         },
     },
     {

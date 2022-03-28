@@ -1,0 +1,99 @@
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    &.title {
+        font-weight: bold;
+    }
+}
+
+h3 {
+    &.title {
+        font-size: 18px;
+    }
+}
+
+.break-word {
+    word-break: break-all;
+    word-wrap: break-word
+}
+
+.text-overflow {
+    overflow: hidden; //超出一行文字自动隐藏
+    text-overflow: ellipsis; //文字隐藏后添加省略号
+    white-space: nowrap; //强制不换行
+}
+
+.hover-text-underline {
+    &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}
+
+#app {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+
+/******************媒体查询****************************/
+@media (max-width: 767px) {
+    .ant-tabs-top-content {
+        padding: 30px;
+    }
+}
+
+// 扩展ant-design 布局设置
+@media (max-width: 767px) {
+    .hidden-xs {
+        display: none !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .hidden-sm {
+        display: none !important;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .hidden-md {
+        display: none !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .hidden-lg {
+        display: none !important;
+    }
+}
+
+
+/******************滚动条样式****************************/
+*::-webkit-scrollbar {
+    width: 0;
+    height: 6px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #9093994d;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    background-color: #9093994d;
+    border-radius: 6px;
+}
+
+.scroll::-webkit-scrollbar-track {
+    background: transparent;
+}
