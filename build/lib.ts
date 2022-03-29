@@ -12,8 +12,6 @@ const setLibBuild = function() {
         rollupOptions: {
             // 确保外部化处理那些你不想打包进库的依赖
             external: [
-                "@antv/g2",
-                "@antv/g2plot",
                 "@braks/revue-draggable",
                 "@element-plus/icons-vue",
                 "@kangc/v-md-editor",
@@ -29,7 +27,6 @@ const setLibBuild = function() {
                 "crypto-js",
                 "dayjs",
                 "default-passive-events",
-                "echarts",
                 "element-plus",
                 "equal-vue",
                 "file-saver",
@@ -37,7 +34,6 @@ const setLibBuild = function() {
                 "jquery",
                 "lodash",
                 "md-editor-v3",
-                "minireset.css",
                 "mitt",
                 "mockjs",
                 "moment",

@@ -7,7 +7,6 @@ import {setupRouter} from '@/packages/router'
 import {setupStore} from '@/packages/store'
 
 import {setupGlobDirectives} from '@/packages/extend/directive'
-import {setVxeTable} from '@/packages/plugin/vxe-table'
 import {setupGlobComponents} from '@/packages/components'
 import {setupDraggable} from '@/packages/plugin/draggable'
 import {setupIcons} from '@/packages/assets/icon/iconfont'
@@ -16,7 +15,6 @@ const setupInit = (app: App) => {
     setupRouter(app)
     setupAndDesignVue(app)
     setupStore(app)
-    setVxeTable(app)
     setupGlobDirectives(app)
     setupGlobComponents(app)
     setupDraggable(app)

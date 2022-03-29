@@ -12,9 +12,9 @@
             <br/>
             <br/>
             <a-button type="primary" @click="action.site.handleSave">保存图片</a-button>
-            <sapn> 在相同来源内使用URL只会使用a[download]。否则，它将首先检查它是否支持带有同步头请求的cors标头。如果是这样，它将下载数据并使用Blob
+            <span> 在相同来源内使用URL只会使用a[download]。否则，它将首先检查它是否支持带有同步头请求的cors标头。如果是这样，它将下载数据并使用Blob
                 URL保存。如果没有，它将尝试使用下载它a[download]
-            </sapn>
+            </span>
         </div>
         <br/>
         <div>
@@ -41,10 +41,10 @@ export default defineComponent({
         let canvas: any = null
         onMounted(() => {
             //在canvas上绘制矩形
-            canvas = document.getElementById("canvas");
-            const context = canvas.getContext("2d");
-            context.fillStyle = "#13c2c2"; //填充颜色
-            context.fillRect(50, 50, 200, 100); ////绘制实心矩形
+            // canvas = document.getElementById("canvas");
+            // const context = canvas.getContext("2d");
+            // context.fillStyle = "#13c2c2"; //填充颜色
+            // context.fillRect(50, 50, 200, 100); ////绘制实心矩形
         })
         const action = reactive({
             text: {
@@ -71,9 +71,9 @@ export default defineComponent({
                 value: 'Hello, world!',
                 handleSave: () => {
                     //将canvas内容保存为文件并下载
-                    canvas.toBlob(function (blob: any) {
-                        saveAs(blob, "hangge.png");
-                    });
+                    // canvas.toBlob(function (blob: any) {
+                    //     saveAs(blob, "hangge.png");
+                    // });
                 }
             }
         })
