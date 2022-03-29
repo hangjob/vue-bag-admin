@@ -14,7 +14,7 @@ import {setupIcons} from '@/packages/assets/icon/iconfont'
 
 const setupInit = (app: App) => {
     setupAndDesignVue(app)
-    // setupRouter(app)
+    setupRouter(app)
     setupStore(app)
     setVxeTable(app)
     setupGlobDirectives(app)

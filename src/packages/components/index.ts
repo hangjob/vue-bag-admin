@@ -3,7 +3,7 @@ import YxsCard from './yxs-card/Index'
 import YxsFormTable from './yxs-form-table/Index'
 import YxsModal from './yxs-modal/Index'
 import YxsView from './yxs-view/Index'
-import YxsIconfont from './yxs-iconfont/index'
+import YxsIconfont from './yxs-iconfont/Index'
 import YxsUploadImage from './yxs-upload/UploadImage.vue'
 
 const setupGlobComponents = (app: App) => {

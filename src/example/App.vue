@@ -1,4 +1,5 @@
 <template>
+     <a-button type="primary">Primary Button</a-button>
     <router-view />
 </template>
 <script lang="ts">
