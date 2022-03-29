@@ -48,22 +48,6 @@ export default [
         component: () => import('@/packages/views/module/rich/index.vue'),
     },
     {
-        path: '/vxe-table/base', name: 'vxe-table-base', meta: { title: '基础数据' },
-        component: () => import('@/packages/views/vxe-table/base/index.vue'),
-    },
-    {
-        path: '/vxe-table/great-table', name: 'vxe-table-great-table', meta: { title: '海量数据' },
-        component: () => import('@/packages/views/vxe-table/great-table/index.vue'),
-    },
-    {
-        path: '/vxe-table/edit-table', name: 'vxe-table-edit-table', meta: { title: '编辑表格' },
-        component: () => import('@/packages/views/vxe-table/edit-table/index.vue'),
-    },
-    {
-        path: '/vxe-table/verify-table', name: 'vxe-table-verify-table', meta: { title: '校验表格' },
-        component: () => import('@/packages/views/vxe-table/verify-table/index.vue'),
-    },
-    {
         path: '/iframe/:name', name: 'iframe-view', meta: { title: 'iframe' },
         component: () => import('@/packages/views/module/iframe/index.vue'),
     },
@@ -82,10 +66,6 @@ export default [
     {
         path: '/module/draggable', name: 'module-draggable', meta: { title: '拖拽排序' },
         component: () => import('@/packages/views/module/draggable/index.vue'),
-    },
-    {
-        path: '/chart/echarts', name: 'chart-echarts', meta: { title: '百度Echarts' },
-        component: () => import('@/packages/views/chart/echarts/index.vue'),
     },
     {
         path: '/chart/g2', name: 'chart-g2', meta: { title: 'G2' },

@@ -13,8 +13,8 @@ import {setupDraggable} from '@/packages/plugin/draggable'
 import {setupIcons} from '@/packages/assets/icon/iconfont'
 
 const setupInit = (app: App) => {
-    setupAndDesignVue(app)
     setupRouter(app)
+    setupAndDesignVue(app)
     setupStore(app)
     setVxeTable(app)
     setupGlobDirectives(app)

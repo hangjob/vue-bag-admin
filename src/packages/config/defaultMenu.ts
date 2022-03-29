@@ -266,16 +266,16 @@ const arr = [
         tabHidden: false,
         tabFix: false,
         children: [
-            {
-                name: 'Echarts',
-                path: '/chart/echarts',
-                icon: '',
-                shows: 1,
-                iframe: '',
-                tabHidden: false,
-                tabFix: false,
-                keepAlive: false,
-            },
+            // {
+            //     name: 'Echarts',
+            //     path: '/chart/echarts',
+            //     icon: '',
+            //     shows: 1,
+            //     iframe: '',
+            //     tabHidden: false,
+            //     tabFix: false,
+            //     keepAlive: false,
+            // },
             {
                 name: 'G2',
                 path: '/chart/g2',
