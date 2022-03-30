@@ -4,7 +4,7 @@ const setUtilsBuild = function () {
         emptyOutDir: true,
         sourcemap: true,
         lib: {
-            entry: path.resolve(process.cwd(), 'web-utils/index.ts'),
+            entry: path.resolve(process.cwd(), 'web-utils/index.ts'), //web工具化
             name: 'web-utils', // 构建依赖包的时候， 对外暴露的名称
             fileName: (format: string) => `utils.${format}.js`,
         },
