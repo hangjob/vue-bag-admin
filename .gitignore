@@ -11,3 +11,4 @@ dist
 .vscode
 egg/app/public/
 designMode
+lib-utils
