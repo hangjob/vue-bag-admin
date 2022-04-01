@@ -1,6 +1,6 @@
 import { find, findUnsetDepth } from '@/packages/utils/lodash'
 import { getBrowser } from '@/packages/utils/utils'
-import { defaultTabFix } from '@/packages/router/beforeStore'
+import { defaultTabFix } from '@/packages/router/setStore'
 import { themeConfig } from '@/packages/config'
 
 const app = {
@@ -15,11 +15,7 @@ const app = {
         collapsed: false, // 菜单是否折叠
         floatingVisible: false, // 左侧菜单隐藏
         themeConfig: { ...themeConfig }, // 主题配置
-        appRouter: {
-            paths: [],
-            file: [], // 文件
-            router: {}, // router实列
-        },
+        appRouter: {}, // 包含 paths file文件 router实列
     },
     // 定义getters 好处可以过滤数据
     getters: {
@@ -116,8 +112,8 @@ const app = {
             state.projectMenu = arr
         },
         // 更新信息
-        updateAppRouter(state: any, item: any) {
-            state.appRouter[item.key] = item.value
+        updateAppRouter(state: any, data: any) {
+            state.appRouter = data
         },
     },
 }

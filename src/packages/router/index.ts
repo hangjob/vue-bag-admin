@@ -1,13 +1,14 @@
 import { createRouter, createWebHashHistory, createWebHistory, RouteRecordRaw, RouterOptions } from 'vue-router'
 import { routerSet } from '@/packages/config'
 import { App } from 'vue'
-import { setupRouterGuard } from '@/packages/router/guardRouter'
-import { setupBeforeStore } from '@/packages/router/beforeStore'
-import store from '@/packages/store'
+import { hasUserinfo } from '@/packages/router/beforeEach'
 import { NProgress } from '@/packages/plugin/nprogress'
-import { defaultMenu, defaultPrjMenu } from '@/packages/config/defaultMenu'
+import { setAppRouterStore } from '@/packages/router/setStore'
+import { setDefaultRouterTabFix, setStoreProcessCurrent } from './setStore'
 
-// 定义路由
+/**
+ * 基础路由
+ */
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
@@ -29,7 +30,9 @@ const routes: Array<RouteRecordRaw> = [
     },
 ]
 
-// 实列化router
+/**
+ * 实列化router
+ */
 const router = createRouter({
     history: routerSet.mode === 'history' ? createWebHistory() : createWebHashHistory(),
     routes,
@@ -37,8 +40,9 @@ const router = createRouter({
 
 router.beforeEach((to: any, from: any, next: any) => {
     NProgress.start()
-    setupBeforeStore(to)
-    setupRouterGuard(to, from, next)
+    setDefaultRouterTabFix()
+    setStoreProcessCurrent(to)
+    hasUserinfo(to, from, next)
 })
 
 
@@ -50,23 +54,9 @@ router.afterEach((to, from) => {
 })
 
 
-const setAppRouterStore = (app: App) => {
-    const { defaults = true, file = [], paths = [] } = app.config.globalProperties?.$plugin?.router || {}
-    if (defaults) {
-        store.commit('app/updateMenuList', defaultMenu)
-        store.commit('app/updateProjectMenu', defaultPrjMenu)
-    }
-    store.commit('app/updateAppRouter', { key: 'defaults', value: defaults })
-    store.commit('app/updateAppRouter', { key: 'file', value: file })
-    store.commit('app/updateAppRouter', { key: 'paths', value: paths })
-}
-
 const setupRouter = (app: App) => {
-    setAppRouterStore(app)
     app.use(router)
-    router.isReady().then(() => {
-        store.commit('app/updateAppRouter', { key: 'router', value: router })
-    })
+    setAppRouterStore(app)
 }
 
 export default router

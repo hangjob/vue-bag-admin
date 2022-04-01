@@ -60,10 +60,6 @@ export default [
         component: () => import('@/packages/views/module/icon/iconfont/index.vue'),
     },
     {
-        path: '/animation/mojs', name: 'animation-mojs', meta: { title: '动画' },
-        component: () => import('@/packages/views/animation/mojs/index.vue'),
-    },
-    {
         path: '/module/draggable', name: 'module-draggable', meta: { title: '拖拽排序' },
         component: () => import('@/packages/views/module/draggable/index.vue'),
     },

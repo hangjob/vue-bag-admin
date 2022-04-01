@@ -29,10 +29,24 @@ interface $optionsType {
     },
     config?: object
 }
+
 const install = (app: App, $options?: any) => {
     app.config.globalProperties.$plugin = $options
-    app.provide('routerConfig',{a:1})
-    app.provide('$App', app)
+    app.config.globalProperties = {
+        configAppRouter: {
+            file: {},
+            paths: [],
+            defaults: true,
+        },
+        configAppStore: {
+            module: {},
+            namespace: '',
+        },
+        configAppPriest: {
+            list: [],
+        },
+        initAppConfig: {},
+    }
     app.provide('$mitt', mitt())
     handleError(app)
     setupInit(app)
