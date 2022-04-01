@@ -31,9 +31,9 @@
             <template #branch="{ record }">
                 <a-tag color="cyan" v-if="record.branch">{{ record.branch.name }}</a-tag>
             </template>
-            <template #roles="{ record }">
-                <template v-if="record.roles">
-                    <template v-for="(item,idx) in record.roles">
+            <template #rolesDetail="{ record }">
+                <template v-if="record.rolesDetail">
+                    <template v-for="(item,idx) in record.rolesDetail">
                         <a-tag color="orange" v-if="idx===0">{{ item.name }}</a-tag>
                         <a-tag color="#87d068" v-if="idx===1" @click="rolesData.handle({record})">查看全部</a-tag>
                     </template>
@@ -110,7 +110,7 @@ export default defineComponent({
             title: '',
             visible: false,
             handle: ({record}: { record: any }) => {
-                rolesData.data = record.roles;
+                rolesData.data = record.rolesDetail;
                 rolesData.title = `${record.username} 当前角色列表`
                 rolesData.visible = true
             }

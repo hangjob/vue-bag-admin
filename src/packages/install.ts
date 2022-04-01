@@ -1,9 +1,9 @@
-import type { App } from 'vue'
+import type {App} from 'vue'
 import setupInit from '@/packages/base'
 import mitt from 'mitt'
 import * as $axios from '@/packages/http/request'
-import { handleError } from '@/packages/debug'
-import { Component } from 'vue'
+import {handleError} from '@/packages/debug'
+import {Component} from 'vue'
 
 /**
  * router: {paths:[菜单],file:[菜单路由文件]},defaults:true,开启默认路由
@@ -30,23 +30,23 @@ interface $optionsType {
     config?: object
 }
 
-const install = (app: App, $options?: any) => {
-    app.config.globalProperties.$plugin = $options
+const install = (app: App, options?: $optionsType) => {
     app.config.globalProperties = {
         configAppRouter: {
-            file: {},
-            paths: [],
-            defaults: true,
+            file: options?.router?.file || [],
+            paths: options?.router?.paths || [],
+            defaults: options?.router?.defaults,
         },
         configAppStore: {
-            module: {},
-            namespace: '',
+            module: options?.store?.module || {},
+            namespace: options?.store?.namespace,
         },
         configAppPriest: {
-            list: [],
+            list: options?.priest?.list || [],
         },
-        initAppConfig: {},
+        initAppConfig: options?.config,
     }
+    console.log(app.config.globalProperties)
     app.provide('$mitt', mitt())
     handleError(app)
     setupInit(app)

@@ -55,11 +55,11 @@ const columns = [
     },
     {
         title: '角色',
-        dataIndex: 'roles',
-        key: 'roles',
+        dataIndex: 'rolesDetail',
+        key: 'rolesDetail',
         ellipsis: true,
         align: 'center',
-        slots: { customRender: 'roles' },
+        slots: { customRender: 'rolesDetail' },
     },
     {
         title: '部门组织',

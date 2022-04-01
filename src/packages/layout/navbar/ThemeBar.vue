@@ -3,11 +3,11 @@
         <input class="key-input" v-model="searchKey" @keydown.enter="handleKeyBoard($event,handleEnter)"
                :class="searchActive" type="text"
         >
-        <SearchOutlined class="icon-svg icon-search" @click="handleSearch" />
+        <SearchOutlined class="icon-svg icon-search" @click="handleSearch"/>
     </div>
     <div class="right_menu-item" v-if="isPC">
-        <CompressOutlined class="icon-svg" @click="handleScreenModel" v-if="fullState" />
-        <ExpandOutlined class="icon-svg" @click="handleScreenModel" v-else />
+        <CompressOutlined class="icon-svg" @click="handleScreenModel" v-if="fullState"/>
+        <ExpandOutlined class="icon-svg" @click="handleScreenModel" v-else/>
     </div>
     <div class="right_menu-item" v-if="isPC">
         <a-popover v-model="visible" title="系统通知" trigger="click">
@@ -17,28 +17,31 @@
                 </div>
             </template>
             <a-badge :count="noticeList.length">
-                <BellOutlined class="icon-svg" />
+                <BellOutlined class="icon-svg"/>
             </a-badge>
         </a-popover>
     </div>
     <div class="right_menu-item hidden-xs" @click="handleDebug">
-        <BugOutlined class="icon-svg" />
+        <BugOutlined class="icon-svg"/>
     </div>
     <div class="right_menu-item">
-        <SyncOutlined class="icon-svg refresh" @click="handleRefresh" />
+        <SyncOutlined class="icon-svg refresh" @click="handleRefresh"/>
     </div>
     <div class="right_menu-item" @click="handleOpenThemeSetting">
-        <ClearOutlined class="icon-svg" />
+        <ClearOutlined class="icon-svg"/>
     </div>
     <div class="right_menu-item hidden-xs" @click="handleGithub">
-        <GithubOutlined class="icon-svg" />
+        <GithubOutlined class="icon-svg"/>
+    </div>
+    <div class="right_menu-item hidden-xs" @click="handleOfficial">
+        <DribbbleOutlined class="icon-svg"/>
     </div>
     <div class="right_menu-item hidden-xs">
         <img class="user-head" src="@/packages/assets/image/yanghang.jpg" alt="">
         <a-dropdown>
             <a class="ant-dropdown-link" @click.prevent>
                 {{ userinfo.username }}
-                <DownOutlined />
+                <DownOutlined/>
             </a>
             <template #overlay>
                 <a-menu>
@@ -46,22 +49,22 @@
                         <a href="https://github.com/hangjob/vue-vite-admin-ts" target="_blank">查看源码</a>
                     </a-menu-item>
                     <a-menu-item @click="handleQuit">
-                        <LogoutOutlined />
+                        <LogoutOutlined/>
                         退出
                     </a-menu-item>
                 </a-menu>
             </template>
         </a-dropdown>
     </div>
-    <Setting ref="userSetting" />
+    <Setting ref="userSetting"/>
 </template>
 <script lang="ts">
 import Setting from './Setting.vue'
-import { computed, defineComponent, inject, nextTick, onMounted, ref } from 'vue'
-import { checkFull, fullscreenchange, switchScreen } from '@/packages/utils/screen.full'
-import { handleKeyBoard } from '@/packages/utils/keydown'
-import { notification } from 'ant-design-vue'
-import { apiLogout } from '@/packages/service/user'
+import {computed, defineComponent, inject, nextTick, onMounted, ref} from 'vue'
+import {checkFull, fullscreenchange, switchScreen} from '@/packages/utils/screen.full'
+import {handleKeyBoard} from '@/packages/utils/keydown'
+import {notification} from 'ant-design-vue'
+import {apiLogout} from '@/packages/service/user'
 import {
     BellOutlined,
     ClearOutlined,
@@ -72,9 +75,9 @@ import {
     SearchOutlined,
     SyncOutlined,
 } from '@ant-design/icons-vue'
-import { useStore } from 'vuex'
+import {useStore} from 'vuex'
 import locaStore from '@/packages/utils/persistence'
-import { useRouter } from 'vue-router'
+import {useRouter} from 'vue-router'
 
 export default defineComponent({
     components: {
@@ -166,6 +169,10 @@ export default defineComponent({
             window.open('https://github.com/hangjob/vue-vite-admin-ts')
         }
 
+        const handleOfficial = () => {
+            window.open('/web.html')
+        }
+
         return {
             userSetting,
             searchActive,
@@ -184,6 +191,7 @@ export default defineComponent({
             handleQuit,
             handleDebug,
             handleGithub,
+            handleOfficial
         }
     },
 })

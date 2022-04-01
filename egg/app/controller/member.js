@@ -81,19 +81,16 @@ class MemberController extends baseController {
 
         for (let i = 0; i < result.length; i++) {
             const item = result[i]
-            if (item.roles) {
-                const arr = item.roles.split(',')
-                const roleResult = []
-                for (let j = 0; j < arr.length; j++) {
-                    const obj = await ctx.model.Role.findOne({
-                        where: { tag: arr[j] },
-                    })
-                    if (obj) {
-                        roleResult.push(obj)
-                    }
+            const roleResult = []
+            for (let j = 0; j < item.roles.length; j++) {
+                const obj = await ctx.model.Role.findOne({
+                    where: { tag: item.roles[j] },
+                })
+                if (obj) {
+                    roleResult.push(obj)
                 }
-                item.roles = roleResult
             }
+            item.setDataValue('rolesDetail',roleResult)
         }
         this.result({ data: result })
     }

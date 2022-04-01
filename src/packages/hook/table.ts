@@ -98,7 +98,6 @@ export default function () {
                 tableCurd.detail.api = tableCurd.detail.api ? tableCurd.detail.api : tableCurd.apiPrefix + '/find';
                 post(tableCurd.detail.api, {id: record.id}).then((res: any) => {
                     let {createTime, updateTime, ...profileData} = res
-                    console.log(tableCurd.edit.refForm)
                     Object.keys(tableCurd.edit.refForm.formState).forEach((key: string) => {
                         tableCurd.edit.refForm.formState[key] = profileData[key]
                     })
