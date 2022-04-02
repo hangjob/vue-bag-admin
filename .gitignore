@@ -10,5 +10,5 @@ vc.md
 dist
 .vscode
 egg/app/public/
-designMode
+设计模式
 lib-utils

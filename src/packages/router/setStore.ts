@@ -46,10 +46,10 @@ const setStoreProcessCurrent = (to: any) => {
         value: to.path,
         node: 'children',
     }, store.getters['app/menuList'])
-
-    store.commit('app/addProcessList', { ...item })
-    store.commit('app/updateCurrentRouter', { ...to })
-
+    if (item) {
+        store.commit('app/addProcessList', item)
+    }
+    store.commit('app/updateCurrentRouter', to)
     const arr = getAllParentArr(store.getters['app/menuList'], to.path)
     arr && store.commit('app/updateTabViewsPath', arr)
 }

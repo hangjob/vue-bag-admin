@@ -1,7 +1,7 @@
 import { Component, createApp } from 'vue'
 import App from './App.vue'
 import install, { $optionsType } from '@/packages/install'
-import paths from '@/admin/router/index'
+import paths from '@www/admin/router'
 import { setupSocket } from '@/packages/socket'
 
 const file: Record<string, Component> = import.meta.globEager('/src/admin/views/**/*.vue')

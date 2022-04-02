@@ -1,9 +1,9 @@
-import type {App} from 'vue'
+import type { App } from 'vue'
 import setupInit from '@/packages/base'
 import mitt from 'mitt'
 import * as $axios from '@/packages/http/request'
-import {handleError} from '@/packages/debug'
-import {Component} from 'vue'
+import { handleError } from '@/packages/debug'
+import { Component } from 'vue'
 
 /**
  * router: {paths:[菜单],file:[菜单路由文件]},defaults:true,开启默认路由

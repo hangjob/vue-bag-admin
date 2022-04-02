@@ -1,4 +1,4 @@
-import app from '@/demo/store/app'
+import app from '@/example/store/app'
 
 const store: any = {
     app,

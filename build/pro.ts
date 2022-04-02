@@ -4,9 +4,8 @@ const setProBuild = function() {
     return {
         rollupOptions: {
             input: {
-                index: path.resolve(process.cwd(), 'public', 'index.html'), // 把页面放在外面，路径简短 防止src/packages/web/index.html ，建议vite把key(web、lib)可也阔以映射成页面路径，就避免这个问题
+                index: path.resolve(process.cwd(), 'public', 'example.html'), // 把页面放在外面，路径简短 防止src/packages/web/index.html ，建议vite把key(web、lib)可也阔以映射成页面路径，就避免这个问题
                 lib: path.resolve(process.cwd(), 'public', 'lib.html'),
-                demo: path.resolve(process.cwd(), 'public', 'demo.html'),
                 web: path.resolve(process.cwd(), 'public', 'web.html'),
                 admin: path.resolve(process.cwd(), 'public', 'admin.html'),
             },
