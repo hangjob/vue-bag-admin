@@ -44,7 +44,7 @@ const banners = ref([
 <style lang="less" scoped>
 .section {
     .banner {
-        margin-top: var(--yh-margin-top);
+        margin-top: var(--yh-margin-base);
 
         &-item {
             position: relative;

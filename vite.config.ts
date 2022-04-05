@@ -38,8 +38,9 @@ export default ({ mode }: { mode: any }) => {
         build.lib = lib
     }
     return defineConfig({
-        base: './',
+        base: '/',
         plugins: createVitePlugins({ variables: process.env }),
+        publicDir: 'public',
         resolve: {
             alias: {
                 // 如果报错__dirname找不到，需要安装node,执行yarn add @types/node --save-dev

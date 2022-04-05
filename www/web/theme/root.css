@@ -13,5 +13,7 @@
     --yh-font-size-small: 13px;
     --yh-font-size-extra-small: 12px;
     --yh-font-weight-primary: 500;
-    --yh-margin-top: 20px;
+    --yh-margin-base: 20px;
+    --yh-padding-base: 15px;
+    --yh-border-radius-base: 4px;
 }

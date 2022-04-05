@@ -4,7 +4,7 @@ import install, { $optionsType } from '@/packages/install'
 import paths from '@www/admin/router'
 import { setupSocket } from '@/packages/socket'
 
-const file: Record<string, Component> = import.meta.globEager('/src/admin/views/**/*.vue')
+const file: Record<string, Component> = import.meta.globEager('/www/admin/views/**/*.vue')
 const app = createApp(App)
 
 const $options: $optionsType = {

@@ -31,7 +31,7 @@ module.exports = app => {
             type: STRING,
             comment: '跳转链接-当需要外部跳转链接时',
         },
-        description: {
+        describe: {
             type: STRING,
             comment: '描述',
         },
@@ -71,18 +71,33 @@ module.exports = app => {
             type: STRING,
             comment: 'title样式',
         },
+        keywords: {
+            type: STRING,
+            comment: '关键词',
+            get() {
+                const keywords = this.getDataValue('keywords')
+                return keywords ? keywords.split(',') : []
+            },
+            set(value) {
+                if (value) {
+                    this.setDataValue('keywords', value.join(','))
+                } else {
+
+                }
+            },
+        },
         createTime: {
             type: DATE,
             comment: '创建时间',
             get() {
-                return dayjs(this.getDataValue('createTime')).format('YYYY/MM/DD HH:mm:ss')
+                return dayjs(this.getDataValue('createTime')).format('YYYY-MM-DD HH:mm:ss')
             },
         },
         updateTime: {
             type: DATE,
             comment: '更新时间',
             get() {
-                return dayjs(this.getDataValue('updateTime')).format('YYYY/MM/DD HH:mm:ss')
+                return dayjs(this.getDataValue('updateTime')).format('YYYY-MM-DD HH:mm:ss')
             },
         },
     }, {

@@ -22,18 +22,27 @@
                     上传图片
                 </a-button>
             </a-upload>&nbsp;
-            <a-button v-if="picture.previewFile" :href="picture.previewFile" target="_blank">
-                预览图片
-            </a-button>
+        </div>
+        <div class="preview">
+            <div style="margin-right: 10px;display: inline-block;margin-top: 10px;position: relative"
+                 v-for="(item,idx) in previewList"
+            >
+                <a-image style="object-fit:cover;height:100%;" :height="100" :width="100"
+                         :key="item" :src="item.url" alt=""
+                />
+                <DeleteOutlined style="position: absolute;top: 10px;right: 10px;cursor: pointer"
+                                @click="handleDeletePreview(idx)"
+                />
+            </div>
         </div>
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue'
+import {defineComponent, reactive, ref} from 'vue'
 import 'vue-cropper/dist/index.css'
-import { VueCropper } from 'vue-cropper'
-import { apiUploadImage } from '@/packages/service/upload'
-import { message } from 'ant-design-vue'
+import {VueCropper} from 'vue-cropper'
+import {apiUploadImage} from '@/packages/service/upload'
+import {message} from 'ant-design-vue'
 
 interface FileItem {
     uid: string;
@@ -58,7 +67,7 @@ const dataURLtoFile = (data: any, fileName: string) => {
     while (n--) {
         u8arr[n] = buster.charCodeAt(n)
     }
-    return new File([u8arr], fileName, { type: mime })
+    return new File([u8arr], fileName, {type: mime})
 }
 export default defineComponent({
     components: {
@@ -70,28 +79,35 @@ export default defineComponent({
             default: '',
         },
     },
-    setup(props, { emit }) {
+    setup(props, {emit}) {
         const visible = ref<boolean>(false)
         const confirmLoading = ref<boolean>(false)
         const cropper = ref()
+        const previewList = ref<any>([]);
         const picture = reactive({
             change: () => {
 
             },
             base64: '',
             fileName: '',
-            previewFile: '',
         })
-        picture.previewFile = `${window.location.origin}/api${props.image}`
+        const emitImages = () => {
+            const str = previewList.value.map(function (item: any) {
+                return item.source;
+            }).join(",");
+            emit('update:image', str)
+        }
+
         const handleOk = () => {
             confirmLoading.value = true
             cropper.value.getCropData((base64: any) => {
                 const file = dataURLtoFile(base64, picture.fileName)
                 apiUploadImage(file).then((data: any) => {
-                    picture.previewFile = `${window.location.origin}/api${data}`
+                    const url = `${window.location.origin}/api${data}`
                     visible.value = false
                     confirmLoading.value = false
-                    emit('update:image', data)
+                    previewList.value.push({url, source: data})
+                    emitImages()
                     message.success('上传成功')
                 })
             })
@@ -101,11 +117,17 @@ export default defineComponent({
             let reader = new FileReader()
             reader.readAsDataURL(file)
             picture.fileName = file.name
-            reader.onload = function(e: any) {
+            reader.onload = function (e: any) {
                 picture.base64 = e.target.result
                 visible.value = true
             }
         }
+
+        const handleDeletePreview = (idx: number) => {
+            previewList.value.splice(idx, 1);
+            emitImages()
+        }
+
 
         return {
             visible,
@@ -115,6 +137,8 @@ export default defineComponent({
             beforeUpload,
             confirmLoading,
             cropper,
+            previewList,
+            handleDeletePreview
         }
     },
 })
@@ -131,6 +155,12 @@ export default defineComponent({
     .action-btn {
         display: flex;
         margin-top: 5px;
+    }
+
+    .preview {
+        img {
+
+        }
     }
 }
 </style>

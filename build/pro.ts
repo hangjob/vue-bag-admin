@@ -1,6 +1,6 @@
 import path from 'path'
 
-const setProBuild = function() {
+const setProBuild = function () {
     return {
         rollupOptions: {
             input: {
