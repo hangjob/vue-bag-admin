@@ -25,13 +25,13 @@
         >
             <template #action="{ record }">
                 <a-space>
-                    <a-button type="primary" size="small" @click="tableCurd.edit.change({record})">编辑</a-button>
+                    <a-button type="primary" size="small" @click="tableCurd.edit.change(record)">编辑</a-button>
                     <a-popconfirm
                         :title="`你确定删除 ${record.name} 嘛？`"
                         ok-text="确认"
                         cancel-text="关闭"
                         placement="topRight"
-                        @confirm="tableCurd.delete.submit({record})"
+                        @confirm="tableCurd.delete.submit(record)"
                     >
                         <a-button type="primary" danger size="small">删除</a-button>
                     </a-popconfirm>

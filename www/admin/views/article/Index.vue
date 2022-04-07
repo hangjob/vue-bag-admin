@@ -25,13 +25,13 @@
         >
             <template #action="{ record }">
                 <a-space>
-                    <a-button type="primary" size="small" @click="tableCurd.edit.change({record})">编辑</a-button>
+                    <a-button type="primary" size="small" @click="tableCurd.edit.change(record)">编辑</a-button>
                     <a-popconfirm
                         :title="`你确定删除 ${record.name} 嘛？`"
                         ok-text="确认"
                         cancel-text="关闭"
                         placement="topRight"
-                        @confirm="tableCurd.delete.submit({record})"
+                        @confirm="tableCurd.delete.submit(record)"
                     >
                         <a-button type="primary" danger size="small">删除</a-button>
                     </a-popconfirm>
@@ -40,10 +40,10 @@
         </a-table>
     </yxs-form-table>
     <yxs-modal v-model:visible="tableCurd.create.visible" title="新增" width="85%" @ok="tableCurd.create.submit">
-        <Create ref="formCreate" :treeData="tableCurd.tableData"/>
+        <Create ref="formCreate"/>
     </yxs-modal>
     <yxs-modal v-model:visible="tableCurd.edit.visible" title="编辑" width="85%" @ok="tableCurd.edit.submit">
-        <Edit ref="formEdit" :treeData="tableCurd.tableData" :id="tableCurd.edit.id"/>
+        <Edit ref="formEdit" :id="tableCurd.edit.id"/>
     </yxs-modal>
 </template>
 <script lang="ts">

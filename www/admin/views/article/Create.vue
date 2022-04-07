@@ -4,7 +4,7 @@
             <a-row>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="标题" name="title">
-                        <a-input v-model:value="formState.title" placeholder="输入标题" />
+                        <a-input v-model:value="formState.title" placeholder="输入标题"/>
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
@@ -18,7 +18,7 @@
                     <a-form-item label="选择用户" name="user_id">
                         <a-select v-model:value="formState.user_id" placeholder="选择用户">
                             <a-select-option value="">请选择</a-select-option>
-                            <a-select-option v-for="item in users" :key="item.id" :value="item.username">
+                            <a-select-option v-for="item in users" :key="item.id" :value="item.id">
                                 {{ item.username }}
                             </a-select-option>
                         </a-select>
@@ -28,8 +28,8 @@
                     <a-form-item label="选择栏目" name="channel_id">
                         <a-select v-model:value="formState.channel_id" placeholder="选择栏目">
                             <a-select-option value="">请选择</a-select-option>
-                            <a-select-option value="shanghai">Zone one</a-select-option>
-                            <a-select-option value="beijing">Zone two</a-select-option>
+                            <a-select-option v-for="item in channels" :key="item.id" :value="item.id">{{ item.name }}
+                            </a-select-option>
                         </a-select>
                     </a-form-item>
                 </a-col>
@@ -62,9 +62,25 @@
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
-                    <a-form-item label="缩略图" name="image">
-                        <a-input v-model:value="formState.image" placeholder="输入图片地址" />&nbsp;&nbsp;
-                        <yxs-upload-file @update:image="updateImage" :image="formState.image" />
+                    <a-form-item label="封面图" name="image">
+                        <a-input v-model:value="formState.image" placeholder="输入封面图地址"/>&nbsp;&nbsp;
+                        <yxs-upload-image @update:image="updateImage" :image="formState.image"/>
+                    </a-form-item>
+                </a-col>
+                <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
+                    <a-form-item label="组图" name="images">
+                        <a-input v-model:value="formState.images" placeholder="输入组图地址"/>&nbsp;&nbsp;
+                        <yxs-upload-image @update:image="updateImage" :image="formState.images"/>
+                    </a-form-item>
+                </a-col>
+                <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
+                    <a-form-item label="组图样式" name="images_type">
+                        <a-select v-model:value="formState.images_type" placeholder="选择组图样式">
+                            <a-select-option value="">请选择</a-select-option>
+                            <a-select-option :value="1">Banner样式一</a-select-option>
+                            <a-select-option :value="2">Banner样式二</a-select-option>
+                            <a-select-option :value="3">Banner样式三</a-select-option>
+                        </a-select>
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
@@ -79,7 +95,7 @@
                                  label="内容"
                                  name="content"
                     >
-                        <md-editor v-model="formState.content" />
+                        <md-editor v-model="formState.content"/>
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
@@ -96,32 +112,32 @@
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="浏览次数" name="views">
-                        <a-input-number style="width: 100%" v-model:value="formState.views" placeholder="输入浏览次数" />
+                        <a-input-number style="width: 100%" v-model:value="formState.views" placeholder="输入浏览次数"/>
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="点赞次数" name="likes">
-                        <a-input-number style="width: 100%" v-model:value="formState.likes" placeholder="输入点赞次数" />
+                        <a-input-number style="width: 100%" v-model:value="formState.likes" placeholder="输入点赞次数"/>
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="点踩次数" name="dislikes">
-                        <a-input-number style="width: 100%" v-model:value="formState.dislikes" placeholder="输入点踩次数" />
+                        <a-input-number style="width: 100%" v-model:value="formState.dislikes" placeholder="输入点踩次数"/>
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="是否游客访问" name="is_guest">
-                        <a-switch v-model:checked="formState.is_guest" />
+                        <a-switch v-model:checked="formState.is_guest"/>
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="是否开启评论" name="is_guest">
-                        <a-switch v-model:checked="formState.is_comment" />
+                        <a-switch v-model:checked="formState.is_comment"/>
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="排序" name="order">
-                        <a-input-number style="width: 100%" v-model:value="formState.order" placeholder="输入排序号" />
+                        <a-input-number style="width: 100%" v-model:value="formState.order" placeholder="输入排序号"/>
                     </a-form-item>
                 </a-col>
             </a-row>
@@ -129,22 +145,23 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue'
+import {defineComponent, reactive, ref} from 'vue'
 import MdEditor from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
-import { apiAll } from '@www/admin/service/member'
-import { apiAll as apiAllChannel } from '@www/admin/service/channel'
+import {apiAll} from '@www/admin/service/member'
+import {apiAll as apiAllChannel} from '@www/admin/service/channel'
 
 export default defineComponent({
-    components: { MdEditor },
+    components: {MdEditor},
     data() {
         return {
             content: '',
         }
     },
-    setup(props, { emit }) {
+    setup(props, {emit}) {
         const formRef = ref()
         const users = ref<any>([])
+        const channels = ref<any>([]);
         const formState: any = reactive({
             title: '',
             content: '',
@@ -164,13 +181,13 @@ export default defineComponent({
         })
         const rules = {
             title: [
-                { required: true, message: '标题为必填项', trigger: 'blur' },
+                {required: true, message: '标题为必填项', trigger: 'blur'},
             ],
             describe: [
-                { required: true, message: '简述为必填项', trigger: 'blur' },
+                {required: true, message: '简述为必填项', trigger: 'blur'},
             ],
             content: [
-                { required: true, message: '内容为必填项', trigger: 'blur' },
+                {required: true, message: '内容为必填项', trigger: 'blur'},
             ],
         }
         const updateImage = (data: any) => {
@@ -182,7 +199,7 @@ export default defineComponent({
         })
 
         apiAllChannel().then((res: any) => {
-            console.log(res);
+            channels.value = res;
         })
 
         const keywords = ref([])
@@ -193,6 +210,7 @@ export default defineComponent({
             keywords,
             formRef,
             users,
+            channels
         }
     },
 })

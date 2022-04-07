@@ -1,6 +1,6 @@
 const dayjs = require('dayjs')
 module.exports = app => {
-    const { STRING, INTEGER, BOOLEAN, DATE, TEXT } = app.Sequelize
+    const {STRING, INTEGER, BOOLEAN, DATE, TEXT} = app.Sequelize
     return app.model.define('Article', {
         id: {
             type: INTEGER,
@@ -17,11 +17,15 @@ module.exports = app => {
         },
         image: {
             type: STRING,
-            comment: '缩略图',
+            comment: '封面图',
         },
         images: {
             type: STRING,
             comment: '组图',
+        },
+        images_type: {
+            type: INTEGER,
+            comment: '组图预览类型',
         },
         content: {
             type: TEXT('long'),

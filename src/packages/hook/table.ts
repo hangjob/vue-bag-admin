@@ -64,9 +64,9 @@ export default function () {
                 })
             },
             change(record: any) {
-                tableCurd.edit.visible = true
                 tableCurd.edit.id = record.id
                 tableCurd.detail.find(record)
+                tableCurd.edit.visible = true
             },
         },
         delete: {
@@ -97,7 +97,7 @@ export default function () {
             find(record: any) {
                 tableCurd.detail.api = tableCurd.detail.api ? tableCurd.detail.api : tableCurd.apiPrefix + '/find';
                 post(tableCurd.detail.api, {id: record.id}).then((res: any) => {
-                    let {createTime, updateTime, ...profileData} = res
+                    let {updateTime, ...profileData} = res
                     Object.keys(tableCurd.edit.refForm.formState).forEach((key: string) => {
                         tableCurd.edit.refForm.formState[key] = profileData[key]
                     })

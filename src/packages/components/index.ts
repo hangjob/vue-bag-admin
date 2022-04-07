@@ -12,7 +12,7 @@ const setupGlobComponents = (app: App) => {
     app.component('yxs-modal', YxsModal)
     app.component('yxs-view', YxsView)
     app.component('yxs-iconfont', YxsIconfont)
-    app.component('yxs-upload-file', YxsUploadImage)
+    app.component('yxs-upload-image', YxsUploadImage)
 }
 
 export {
