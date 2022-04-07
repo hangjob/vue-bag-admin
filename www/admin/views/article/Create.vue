@@ -4,7 +4,7 @@
             <a-row>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="标题" name="title">
-                        <a-input v-model:value="formState.title" placeholder="输入标题"/>
+                        <a-input v-model:value="formState.title" placeholder="输入标题" />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
@@ -63,8 +63,8 @@
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="缩略图" name="image">
-                        <a-input v-model:value="formState.image" placeholder="输入图片地址"/>&nbsp;&nbsp;
-                        <yxs-upload-file @update:image="updateImage" :image="formState.image"/>
+                        <a-input v-model:value="formState.image" placeholder="输入图片地址" />&nbsp;&nbsp;
+                        <yxs-upload-file @update:image="updateImage" :image="formState.image" />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
@@ -79,7 +79,7 @@
                                  label="内容"
                                  name="content"
                     >
-                        <md-editor v-model="formState.content"/>
+                        <md-editor v-model="formState.content" />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
@@ -96,32 +96,32 @@
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="浏览次数" name="views">
-                        <a-input-number style="width: 100%" v-model:value="formState.views" placeholder="输入浏览次数"/>
+                        <a-input-number style="width: 100%" v-model:value="formState.views" placeholder="输入浏览次数" />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="点赞次数" name="likes">
-                        <a-input-number style="width: 100%" v-model:value="formState.likes" placeholder="输入点赞次数"/>
+                        <a-input-number style="width: 100%" v-model:value="formState.likes" placeholder="输入点赞次数" />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="点踩次数" name="dislikes">
-                        <a-input-number style="width: 100%" v-model:value="formState.dislikes" placeholder="输入点踩次数"/>
+                        <a-input-number style="width: 100%" v-model:value="formState.dislikes" placeholder="输入点踩次数" />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="是否游客访问" name="is_guest">
-                        <a-switch v-model:checked="formState.is_guest"/>
+                        <a-switch v-model:checked="formState.is_guest" />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="是否开启评论" name="is_guest">
-                        <a-switch v-model:checked="formState.is_comment"/>
+                        <a-switch v-model:checked="formState.is_comment" />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="排序" name="order">
-                        <a-input-number style="width: 100%" v-model:value="formState.order" placeholder="输入排序号"/>
+                        <a-input-number style="width: 100%" v-model:value="formState.order" placeholder="输入排序号" />
                     </a-form-item>
                 </a-col>
             </a-row>
@@ -129,20 +129,21 @@
     </div>
 </template>
 <script lang="ts">
-import {defineComponent, reactive, ref} from 'vue'
+import { defineComponent, reactive, ref } from 'vue'
 import MdEditor from 'md-editor-v3'
 import 'md-editor-v3/lib/style.css'
-import {apiAll} from '@www/admin/service/member'
+import { apiAll } from '@www/admin/service/member'
+import { apiAll as apiAllChannel } from '@www/admin/service/channel'
 
 export default defineComponent({
-    components: {MdEditor},
+    components: { MdEditor },
     data() {
         return {
             content: '',
         }
     },
-    setup(props, {emit}) {
-        const formRef = ref();
+    setup(props, { emit }) {
+        const formRef = ref()
         const users = ref<any>([])
         const formState: any = reactive({
             title: '',
@@ -159,17 +160,17 @@ export default defineComponent({
             title_style: '',
             user_id: '',
             channel_id: '',
-            createTime: undefined
+            createTime: undefined,
         })
         const rules = {
             title: [
-                {required: true, message: '标题为必填项', trigger: 'blur'},
+                { required: true, message: '标题为必填项', trigger: 'blur' },
             ],
             describe: [
-                {required: true, message: '简述为必填项', trigger: 'blur'},
+                { required: true, message: '简述为必填项', trigger: 'blur' },
             ],
             content: [
-                {required: true, message: '内容为必填项', trigger: 'blur'},
+                { required: true, message: '内容为必填项', trigger: 'blur' },
             ],
         }
         const updateImage = (data: any) => {
@@ -177,7 +178,11 @@ export default defineComponent({
         }
 
         apiAll().then((res: any) => {
-            users.value = res;
+            users.value = res
+        })
+
+        apiAllChannel().then((res: any) => {
+            console.log(res);
         })
 
         const keywords = ref([])
@@ -187,7 +192,7 @@ export default defineComponent({
             updateImage,
             keywords,
             formRef,
-            users
+            users,
         }
     },
 })
