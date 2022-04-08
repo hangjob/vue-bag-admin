@@ -47,7 +47,7 @@ export default {
 .spinning {
     height: 100%;
     width: 100%;
-    & ::v-deep .ant-spin-container {
+    :deep(.ant-spin-container){
         height: 100%;
         width: 100%;
     }

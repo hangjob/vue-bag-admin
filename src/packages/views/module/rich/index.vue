@@ -3,18 +3,20 @@
         <a-row>
             <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                 <h3 class="title">官方API: <a href="https://github.com/quilljs/quill"
-                                            target="_blank">[Quill-富文本编辑器-文档]</a></h3>
+                                            target="_blank"
+                >[Quill-富文本编辑器-文档]</a></h3>
                 <div>
                     <div id="editor-container"></div>
                 </div>
             </a-col>
         </a-row>
-        <br/>
+        <br />
         <div>
             <h3 class="title">预览</h3>
             <p class="break-word"
                style="min-height: 100px;border-radius: 3px;border: 1px solid #ddd;padding: 10px;box-sizing: border-box"
-               v-html="content"></p>
+               v-html="content"
+            ></p>
         </div>
         <a-space :size="10">
             <a-button type="primary" :danger="redonly" @click="handleSetQuillDisable">{{
@@ -27,52 +29,52 @@
     </yxs-view>
 </template>
 <script lang="ts">
-import {defineComponent, onMounted, ref} from 'vue'
-import Quill from "quill";
-import "quill/dist/quill.snow.css";
-import {useRoute} from "vue-router"
+import { defineComponent, onMounted, ref } from 'vue'
+import Quill from 'quill'
+import 'quill/dist/quill.snow.css'
+import { useRoute } from 'vue-router'
 
 export default defineComponent({
     name: 'module-rich',
     components: {
-        Quill
+        Quill,
     },
     setup() {
         const rich = ref(null as HTMLInputElement | null)
-        let quill: any = null;
-        const route = useRoute(); // 获取router参数
+        let quill: any = null
+        const route = useRoute() // 获取router参数
         // 文本内容
-        const content = ref<string>("");
+        const content = ref<string>('')
 
         onMounted(() => {
             quill = new Quill('#editor-container', {
                 modules: {
                     toolbar: [
-                        ["bold", "italic", "underline", "strike"],
-                        ["blockquote", "code-block"],
-                        [{header: 1}, {header: 2}],
-                        [{list: "ordered"}, {list: "bullet"}],
-                        [{script: "sub"}, {script: "super"}],
-                        [{indent: "-1"}, {indent: "+1"}],
-                        [{direction: "rtl"}],
-                        [{size: ["small", false, "large", "huge"]}],
-                        [{header: [1, 2, 3, 4, 5, 6, false]}],
-                        [{color: []}, {background: []}],
-                        [{font: []}],
-                        [{align: []}],
-                        ["clean"],
-                        ["link", "image"]
-                    ]
+                        ['bold', 'italic', 'underline', 'strike'],
+                        ['blockquote', 'code-block'],
+                        [{ header: 1 }, { header: 2 }],
+                        [{ list: 'ordered' }, { list: 'bullet' }],
+                        [{ script: 'sub' }, { script: 'super' }],
+                        [{ indent: '-1' }, { indent: '+1' }],
+                        [{ direction: 'rtl' }],
+                        [{ size: ['small', false, 'large', 'huge'] }],
+                        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+                        [{ color: [] }, { background: [] }],
+                        [{ font: [] }],
+                        [{ align: [] }],
+                        ['clean'],
+                        ['link', 'image'],
+                    ],
                 },
                 placeholder: '输入需要编辑的内容',
                 readOnly: false,
-                theme: 'snow'
-            });
+                theme: 'snow',
+            })
             // document.querySelector('.ql-editor').style.height = (rich.value.$el.clientHeight - 200) + 'px';
             // 监听输入
-            quill.on("text-change", () => {
+            quill.on('text-change', () => {
                 content.value = quill.root.innerHTML
-            });
+            })
 
         })
 
@@ -81,16 +83,16 @@ export default defineComponent({
             console.log(quill.root.innerHTML)
         }
 
-        const redonly = ref<Boolean>(false);
+        const redonly = ref<Boolean>(false)
 
         // 设置禁用
         const handleSetQuillDisable = () => {
             if (quill.isEnabled()) {
-                quill.disable();
+                quill.disable()
                 redonly.value = true
             } else {
-                quill.enable();
-                redonly.value = false;
+                quill.enable()
+                redonly.value = false
             }
         }
 
@@ -107,14 +109,14 @@ export default defineComponent({
             handleSetQuillDisable,
             handleQuillConsole,
         }
-    }
+    },
 })
 </script>
 <style lang="less" scoped>
 .rich {
     box-sizing: border-box;
 
-    ::v-deep .editor-container {
+    :deep(.editor-container) {
         font-family: 'Avenir', Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -122,8 +124,8 @@ export default defineComponent({
         color: #2c3e50;
         margin-top: 60px;
     }
-
-    ::v-deep .ql-editor {
+    
+    :deep(.ql-editor) {
         min-height: 300px;
     }
 }
