@@ -27,7 +27,7 @@
                 <a-space>
                     <a-button type="primary" size="small" @click="tableCurd.edit.change(record)">编辑</a-button>
                     <a-popconfirm
-                        :title="`你确定删除 ${record.name} 嘛？`"
+                        :title="`你确定删除 ${record.title} 嘛？`"
                         ok-text="确认"
                         cancel-text="关闭"
                         placement="topRight"

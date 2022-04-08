@@ -1,6 +1,6 @@
 const dayjs = require('dayjs')
 module.exports = app => {
-    const {STRING, INTEGER, BOOLEAN, DATE, TEXT} = app.Sequelize
+    const { STRING, INTEGER, BOOLEAN, DATE, TEXT } = app.Sequelize
     return app.model.define('Article', {
         id: {
             type: INTEGER,
@@ -48,11 +48,11 @@ module.exports = app => {
             comment: '点赞次数',
         },
         is_guest: {
-            type: INTEGER,
+            type: BOOLEAN,
             comment: '是否游客访问',
         },
         is_comment: {
-            type: INTEGER,
+            type: BOOLEAN,
             comment: '是否开启评论',
         },
         flag: {
@@ -74,6 +74,10 @@ module.exports = app => {
         title_style: {
             type: STRING,
             comment: 'title样式',
+        },
+        order: {
+            type: INTEGER,
+            comment: '排序',
         },
         keywords: {
             type: STRING,

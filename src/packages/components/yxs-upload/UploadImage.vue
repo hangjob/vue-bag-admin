@@ -38,11 +38,11 @@
     </div>
 </template>
 <script lang="ts">
-import {defineComponent, reactive, ref} from 'vue'
+import { defineComponent, reactive, ref } from 'vue'
 import 'vue-cropper/dist/index.css'
-import {VueCropper} from 'vue-cropper'
-import {apiUploadImage} from '@/packages/service/upload'
-import {message} from 'ant-design-vue'
+import { VueCropper } from 'vue-cropper'
+import { apiUploadImage } from '@/packages/service/upload'
+import { message } from 'ant-design-vue'
 
 interface FileItem {
     uid: string;
@@ -67,7 +67,7 @@ const dataURLtoFile = (data: any, fileName: string) => {
     while (n--) {
         u8arr[n] = buster.charCodeAt(n)
     }
-    return new File([u8arr], fileName, {type: mime})
+    return new File([u8arr], fileName, { type: mime })
 }
 export default defineComponent({
     components: {
@@ -79,11 +79,11 @@ export default defineComponent({
             default: '',
         },
     },
-    setup(props, {emit}) {
+    setup(props, { emit }) {
         const visible = ref<boolean>(false)
         const confirmLoading = ref<boolean>(false)
         const cropper = ref()
-        const previewList = ref<any>([]);
+        const previewList = ref<any>([])
         const picture = reactive({
             change: () => {
 
@@ -92,9 +92,9 @@ export default defineComponent({
             fileName: '',
         })
         const emitImages = () => {
-            const str = previewList.value.map(function (item: any) {
-                return item.source;
-            }).join(",");
+            const str = previewList.value.map(function(item: any) {
+                return item.source
+            }).join(',')
             emit('update:image', str)
         }
 
@@ -106,7 +106,7 @@ export default defineComponent({
                     const url = `${window.location.origin}/api${data}`
                     visible.value = false
                     confirmLoading.value = false
-                    previewList.value.push({url, source: data})
+                    previewList.value.push({ url, source: data })
                     emitImages()
                     message.success('上传成功')
                 })
@@ -117,14 +117,14 @@ export default defineComponent({
             let reader = new FileReader()
             reader.readAsDataURL(file)
             picture.fileName = file.name
-            reader.onload = function (e: any) {
+            reader.onload = function(e: any) {
                 picture.base64 = e.target.result
                 visible.value = true
             }
         }
 
         const handleDeletePreview = (idx: number) => {
-            previewList.value.splice(idx, 1);
+            previewList.value.splice(idx, 1)
             emitImages()
         }
 
@@ -138,7 +138,7 @@ export default defineComponent({
             confirmLoading,
             cropper,
             previewList,
-            handleDeletePreview
+            handleDeletePreview,
         }
     },
 })

@@ -19,8 +19,8 @@
             ></p>
         </div>
         <a-space :size="10">
-            <a-button type="primary" :danger="redonly" @click="handleSetQuillDisable">{{
-                    redonly ? '设置编辑' : '设置只读'
+            <a-button type="primary" :danger="readonly" @click="handleSetQuillDisable">{{
+                    readonly ? '设置编辑' : '设置只读'
                 }}
             </a-button>
             <a-button type="primary" @click="handleGetQuillContent">获取所有内容</a-button>
@@ -83,16 +83,16 @@ export default defineComponent({
             console.log(quill.root.innerHTML)
         }
 
-        const redonly = ref<Boolean>(false)
+        const readonly = ref<Boolean>(false)
 
         // 设置禁用
         const handleSetQuillDisable = () => {
             if (quill.isEnabled()) {
                 quill.disable()
-                redonly.value = true
+                readonly.value = true
             } else {
                 quill.enable()
-                redonly.value = false
+                readonly.value = false
             }
         }
 
@@ -103,7 +103,7 @@ export default defineComponent({
 
         return {
             rich,
-            redonly,
+            readonly: readonly,
             content,
             handleGetQuillContent,
             handleSetQuillDisable,
@@ -124,7 +124,7 @@ export default defineComponent({
         color: #2c3e50;
         margin-top: 60px;
     }
-    
+
     :deep(.ql-editor) {
         min-height: 300px;
     }
