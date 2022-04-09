@@ -30,11 +30,11 @@ export default [
     },
     {
         title: '描述',
-        dataIndex: 'description',
-        key: 'description',
+        dataIndex: 'describe',
+        key: 'describe',
         ellipsis: true,
         align: 'center',
-        slots: { customRender: 'description' },
+        slots: { customRender: 'describe' },
     },
     {
         title: '浏览次数',
@@ -59,6 +59,9 @@ export default [
         ellipsis: true,
         align: 'center',
         width: 100,
+        customRender: (item: any) => {
+            return item.text ? '是' : '否'
+        },
     },
     {
         title: '是否评论',
@@ -67,6 +70,9 @@ export default [
         ellipsis: true,
         align: 'center',
         width: 100,
+        customRender: (item: any) => {
+            return item.text ? '是' : '否'
+        },
     },
     {
         title: '热度',

@@ -8,13 +8,6 @@
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
-                    <a-form-item label="标题样式" name="title_style">
-                        <a-textarea v-model:value="formState.title_style" placeholder="输入标题样式" showCount
-                                    :maxlength="300"
-                        />
-                    </a-form-item>
-                </a-col>
-                <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="选择用户" name="user_id">
                         <a-select v-model:value="formState.user_id" placeholder="选择用户">
                             <a-select-option value="">请选择</a-select-option>
@@ -22,6 +15,13 @@
                                 {{ item.username }}
                             </a-select-option>
                         </a-select>
+                    </a-form-item>
+                </a-col>
+                <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
+                    <a-form-item label="标题样式" name="title_style">
+                        <a-textarea v-model:value="formState.title_style" placeholder="输入标题样式" showCount
+                                    :maxlength="300"
+                        />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
@@ -65,13 +65,9 @@
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="封面图" name="image">
                         <a-input v-model:value="formState.image" placeholder="输入封面图地址" />&nbsp;&nbsp;
-                        <yxs-upload-image @update:image="baseResources.updateImage" :image="formState.image" />
-                    </a-form-item>
-                </a-col>
-                <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
-                    <a-form-item label="组图" name="images">
-                        <a-input v-model:value="formState.images" placeholder="输入组图地址" />&nbsp;&nbsp;
-                        <yxs-upload-image @update:image="baseResources.updateImages" :image="formState.images" />
+                        <yxs-upload-image :fixedBox="true" @update:image="baseResources.updateImage"
+                                          :image="formState.image"
+                        />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
@@ -82,6 +78,12 @@
                             <a-select-option :value="2">Banner样式二</a-select-option>
                             <a-select-option :value="3">Banner样式三</a-select-option>
                         </a-select>
+                    </a-form-item>
+                </a-col>
+                <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
+                    <a-form-item label="组图" name="images">
+                        <a-input v-model:value="formState.images" placeholder="输入组图地址" />&nbsp;&nbsp;
+                        <yxs-upload-image @update:image="baseResources.updateImages" :image="formState.images" />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
@@ -96,7 +98,7 @@
                                  label="内容"
                                  name="content"
                     >
-                        <md-editor v-model="formState.content" />
+                        <md-editor @onUploadImg="onUploadImg" v-model="formState.content" />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
@@ -159,12 +161,13 @@ export default defineComponent({
             rules,
             baseResources,
             formRef,
+            onUploadImg,
         } = hook()
-
         return {
             formState,
             rules,
             baseResources,
+            onUploadImg,
             formRef,
         }
     },

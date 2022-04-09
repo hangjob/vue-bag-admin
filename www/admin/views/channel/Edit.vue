@@ -28,7 +28,7 @@
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="图片" name="image">
                         <a-input v-model:value="formState.image" placeholder="输入图片地址" />&nbsp;&nbsp;
-                        <yxs-upload-image @update:image="updateImage" :image="formState.image" />
+                        <yxs-upload-image @update:image="baseResources.updateImage" :image="formState.image" />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
@@ -44,7 +44,7 @@
                             style="width: 100%"
                             placeholder="选择关键词"
                             option-label-prop="label"
-                            :options="keywords"
+                            :options="baseResources.keywords"
                         >
                             <template #option="{ value: val, label, icon }">
                                 <span role="img" :aria-label="val">{{ icon }}</span>
@@ -79,7 +79,8 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, ref, toRaw, watch } from 'vue'
+import { defineComponent } from 'vue'
+import hook from '@www/admin/views/channel/hook'
 
 export default defineComponent({
     props: {
@@ -91,34 +92,14 @@ export default defineComponent({
             type: Array,
         },
     },
-    setup(props, { emit }) {
-        const formState: any = reactive({
-            name: '',
-            image: '',
-            order: '',
-            url: '',
-            is_contribute: 1,
-            shows: 1,
-            keywords: [],
-            pid: null,
-            id: '',
-        })
-        const rules = {
-            name: [
-                { required: true, message: '名称为必填项', trigger: 'blur' },
-            ],
-        }
-        const updateImage = (data: any) => {
-            formState.image = data
-        }
-
-        const keywords = ref([])
+    setup() {
+        const { formState, rules, baseResources, formRef } = hook()
 
         return {
             formState,
             rules,
-            updateImage,
-            keywords,
+            baseResources,
+            formRef,
         }
     },
 })
