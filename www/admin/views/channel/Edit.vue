@@ -37,7 +37,7 @@
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
-                    <a-form-item label="链接地址" name="url">
+                    <a-form-item label="链接地址" name="keywords">
                         <a-select
                             v-model:value="formState.keywords"
                             mode="tags"
@@ -54,7 +54,7 @@
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
-                    <a-form-item label="是否允许投稿" name="order">
+                    <a-form-item label="是否允许投稿" name="is_contribute">
                         <a-radio-group v-model:value="formState.is_contribute">
                             <a-radio :value="1">允许投稿</a-radio>
                             <a-radio :value="0">禁止投稿</a-radio>
@@ -62,7 +62,7 @@
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
-                    <a-form-item label="是否显示" name="order">
+                    <a-form-item label="是否显示" name="shows">
                         <a-radio-group v-model:value="formState.shows">
                             <a-radio :value="1">显示</a-radio>
                             <a-radio :value="0">不显示</a-radio>

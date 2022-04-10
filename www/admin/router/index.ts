@@ -37,6 +37,16 @@ const paths = addUniqueId([
                 keepAlive: true,
                 filePath: '/admin/views/article/Index.vue',
             },
+            {
+                name: '关键词管理',
+                path: '/antistop',
+                icon: '',
+                shows: 1,
+                tabHidden: false,
+                tabFix: false,
+                keepAlive: true,
+                filePath: '/admin/views/antistop/Index.vue',
+            },
         ],
     },
     {
