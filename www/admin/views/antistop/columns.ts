@@ -17,6 +17,17 @@ const columns = [
         ellipsis: true,
         align: 'center',
         width: 150,
+        formData: {
+            name: 'user_id',
+            label: '用户ID',
+            element: 'a-input',
+            placeholder: '输入用户ID',
+            rules: [
+                {
+                    required: true, message: '用户ID为必填项', trigger: 'blur',type:'number',
+                }
+            ]
+        }
     },
     {
         title: '关键词',
@@ -24,6 +35,31 @@ const columns = [
         key: 'name',
         align: 'center',
         ellipsis: true,
+        formData: {
+            name: 'name',
+            label: '关键词',
+            element: 'a-input',
+            placeholder: '输入关键词',
+            rules: [
+                {
+                    required: true, message: '关键词为必填项', trigger: 'blur'
+                }
+            ]
+        }
+    },
+    {
+        title: '描述',
+        dataIndex: 'describe',
+        key: 'describe',
+        ellipsis: true,
+        align: 'center',
+        formData: {
+            name: 'describe',
+            label: '描述',
+            element: 'a-textarea',
+            placeholder: '输入描述',
+            maxlength: 300
+        }
     },
     {
         title: '排序',
@@ -32,6 +68,29 @@ const columns = [
         ellipsis: true,
         align: 'center',
         width: 80,
+        formData: {
+            name: 'order',
+            label: '排序',
+            element: 'a-input',
+            placeholder: '输入排序号',
+        }
+    },
+    {
+        title: '是否显示',
+        dataIndex: 'shows',
+        key: 'shows',
+        ellipsis: true,
+        align: 'center',
+        width: 80,
+        customRender: (item: any) => {
+            return item.text ? '是' : '否'
+        },
+        formData: {
+            name: 'shows',
+            label: '是否显示',
+            element: 'a-switch',
+            defaultValue: true
+        }
     },
     {
         title: '创建时间',

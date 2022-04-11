@@ -1,20 +1,11 @@
-import { reactive, ref } from 'vue'
+import {reactive, ref} from 'vue'
+import columns from './columns'
+import {createFormItem} from '@/packages/utils/form'
 
-export default function() {
+export default function () {
     const formRef = ref()
-    const formState: any = reactive({
-        name: '',
-        user_id: '',
-        order: '',
-        shows: true,
-    })
-    const rules = {
-        name: [
-            { required: true, message: '关键词为必填项', trigger: 'blur' },
-        ],
-    }
-
-
+    const {rules, fields, formItem} = createFormItem(columns)
+    const formState: any = reactive(fields)
     const baseResources = reactive({
         keywords: [],
         updateImage: (data: any) => {
@@ -27,5 +18,6 @@ export default function() {
         formState,
         rules,
         baseResources,
+        formItem
     }
 }
