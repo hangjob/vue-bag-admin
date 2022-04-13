@@ -38,7 +38,7 @@
 </template>
 <script>
 import {defineComponent, ref} from 'vue'
-import designer from './designer.vue'
+import designer from './Designer.vue'
 
 export default defineComponent({
     name:'module-descriptions',

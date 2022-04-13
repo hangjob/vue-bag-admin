@@ -229,10 +229,10 @@
 </template>
 <script lang="ts">
 import {defineComponent, reactive, ref} from 'vue'
-import Returns from './returns.vue'
-import ProjectInfo from './project-info.vue'
-import Ripple from './ripple.vue'
-import Dynamic from './dynamic.vue'
+import Returns from './Returns.vue'
+import ProjectInfo from './ProjectInfo.vue'
+import Ripple from './Ripple.vue'
+import Dynamic from './Dynamic.vue'
 import moment from "moment";
 import 'moment/dist/locale/zh-cn'
 moment.locale('zh-cn')

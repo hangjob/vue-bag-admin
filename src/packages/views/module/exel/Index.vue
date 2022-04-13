@@ -15,7 +15,7 @@ import {UploadOutlined} from '@ant-design/icons-vue';
 import {defineComponent, ref} from 'vue';
 // @ts-ignore
 import XLSX from "xlsx";
-import Table from "./table.vue";
+import Table from "./Table.vue";
 // 解析exel为json
 const readExcelToJson = (file: any) => {
     return new Promise((resolve, reject) => {

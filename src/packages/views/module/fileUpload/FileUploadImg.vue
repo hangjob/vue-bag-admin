@@ -19,9 +19,7 @@
     </yxs-view>
 </template>
 <script lang="ts">
-import {PlusOutlined} from '@ant-design/icons-vue';
 import {defineComponent, ref} from 'vue';
-
 function getBase64(file: File) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -49,9 +47,6 @@ interface FileInfo {
 
 export default defineComponent({
     name:'module-fileUploadImg',
-    components: {
-        PlusOutlined,
-    },
     setup() {
         const previewVisible = ref<boolean>(false);
         const previewImage = ref<string | undefined>('');
