@@ -54,6 +54,7 @@ class WebArticleController extends baseController {
         const { id } = ctx.request.body
         const result = await ctx.model.Web.Article.findOne({
             where: { id },
+            include: [{ model: ctx.model.Web.Channel, as: 'channel' },{ model: ctx.model.Member, as: 'member' }],
         })
         this.result({ data: result })
     }

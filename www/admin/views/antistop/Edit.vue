@@ -34,9 +34,6 @@ export default defineComponent({
     },
     setup() {
         const {formState, formItem, rules, baseResources, formRef} = hook()
-        setTimeout(()=>{
-            console.log(formState)
-        },3000)
         return {
             formState,
             rules,
