@@ -90,7 +90,7 @@ class MemberController extends baseController {
                     roleResult.push(obj)
                 }
             }
-            item.setDataValue('rolesDetail',roleResult)
+            item.setDataValue('rolesDetail', roleResult)
         }
         this.result({ data: result })
     }

@@ -1,4 +1,4 @@
-import serviceBase from '@www/admin/service/serviceBase'
+import serviceBase from '@/packages/service/serviceBase'
 
 const { apiAll, apiFind, apiCreate, apiUpdate, apiDelete, apiDeletes } = { ...serviceBase('/web/article') }
 

@@ -54,7 +54,7 @@ const routerSet = {
  */
 
 const imageConfig = {
-    prefix: `${window.location.origin}/api`
+    prefix: `${window.location.origin}/api`,
 }
 
 export {
@@ -62,5 +62,5 @@ export {
     themeConfig,
     httpNetwork,
     routerSet,
-    imageConfig
+    imageConfig,
 }

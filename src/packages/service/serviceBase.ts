@@ -1,4 +1,4 @@
-import {post} from '@/packages/http/request'
+import { post } from '@/packages/http/request'
 
 const serviceBase = (prefix: string) => {
     return {
@@ -25,10 +25,10 @@ const serviceBase = (prefix: string) => {
         // 删除 多条
         apiDeletes: (params?: object, config?: object) => {
             return post(`${prefix}/deletes`, params, config)
-        }
+        },
     }
 }
 
-export default serviceBase;
+export default serviceBase
 
 

@@ -5,7 +5,7 @@ import { httpNetwork, routerSet } from '@/packages/config'
 import { message as messageModel } from 'ant-design-vue'
 import { handleExport } from '@/packages/utils/utils'
 import localStore from '@/packages/utils/persistence'
-import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router'
 
 const CancelToken = axios.CancelToken
 const source = CancelToken.source()
@@ -87,7 +87,7 @@ http.interceptors.response.use((res: any) => {
 
     if (status === 403) {
         localStore.clearAll()
-        const router = useRouter();
+        const router = useRouter()
         return router.push(routerSet.resetPath).then()
     }
 
@@ -96,7 +96,7 @@ http.interceptors.response.use((res: any) => {
     }
 
     if ((filter.timeout || filter.path)) {
-        const router = useRouter();
+        const router = useRouter()
         return router.push(routerSet.resetPath).then()
     }
 
