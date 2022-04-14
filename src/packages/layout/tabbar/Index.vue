@@ -189,6 +189,7 @@ export default defineComponent({
         scroll-behavior: smooth;
         height: 42px;
         padding: 8px 0;
+        text-align: left;
 
         &::-webkit-scrollbar {
             display: none;

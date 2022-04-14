@@ -16,7 +16,7 @@ gulp.task('rename-utils', function () {
 })
 
 
-gulp.task("del", function (cb) {
+gulp.task("del", function () {
     return del('utils'); // 删除整个utils文件夹
 });
 
