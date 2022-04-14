@@ -114,7 +114,7 @@ module.exports = app => {
         tableName: 'yxs_web_article', // 定义实际表名 文章表
     })
     Article.associate = function() {
-        // sourceKey 主键为Member id
+        // sourceKey 主键为Channel id
         app.model.Web.Article.belongsTo(app.model.Web.Channel, {
             foreignKey: 'channel_id',
             targetKey: 'id',

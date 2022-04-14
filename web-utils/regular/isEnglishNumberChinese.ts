@@ -7,6 +7,4 @@ const isEnglishNumberChinese = (data: string) => {
     return reg.test(data)
 }
 
-export {
-    isEnglishNumberChinese
-}
+export default isEnglishNumberChinese;

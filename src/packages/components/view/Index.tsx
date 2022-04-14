@@ -2,7 +2,7 @@ import {defineComponent, h} from 'vue'
 import classes from './index.module.less'
 
 export default defineComponent({
-    name: 'yxs-card',
+    name: 'yxs-view',
     setup() {
 
     },

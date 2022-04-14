@@ -1,10 +1,10 @@
 import type { App } from 'vue'
-import YxsCard from './yxs-card/Index'
-import YxsFormTable from './yxs-form-table/Index'
-import YxsModal from './yxs-modal/Index'
-import YxsView from './yxs-view/Index'
-import YxsIconfont from './yxs-iconfont/Index'
-import YxsUploadImage from './yxs-upload/UploadImage.vue'
+import YxsCard from './card/Index'
+import YxsView from './view/Index'
+import YxsFormTable from './form-table/Index'
+import YxsModal from './modal/Index'
+import YxsIconfont from './iconfont/Index'
+import YxsUploadImage from './upload/UploadImage.vue'
 // import MdEditor from './editor/MdEditor.vue'
 
 const setupGlobComponents = (app: App) => {
