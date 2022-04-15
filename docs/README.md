@@ -1,14 +1,10 @@
-🎉 Vue3+Vite2.6+TypeScript+ant-design-vue构建，提供基础的框架，快速搭建企业级中后台产品，响应式管理后台系统
+🎉vue-bag-admin使用Vue3+Vite2.6+TypeScript+ant-design-vue构建，提供基础的框架，快速搭建企业级中后台产品，响应式管理后台系统
 
 ### 安装
 
 ```bash
 npm i vue-bag-admin
 ```
-
-### 引入mock数据
-
-
 
 ### 使用
 
@@ -18,8 +14,27 @@ import App from './App.vue'
 
 import install from 'vue-bag-admin'
 import 'vue-bag-admin/lib/style.css'
-
-import '../mock'
+import install from 'vue-bag-admin/mock' // 进入mock数据
 
 createApp(App).use(install).mount('#app')
+```
+
+#### 对接自己业务后端
+
+需要自己的完成对接相关API
+
+```javascript
+['/api/app/router', '/api/user/logout', '/api/user/login', '/api/user/userinfo'] 
+```
+
+返回数据格式如下：
+
+```typescript
+interface resultData {
+    readonly  code: number, // 只读 属性
+    readonly  message: string, // 只读 属性
+    data: any,
+
+    [propName: string]: any, // 可能会有的新的属性添加进来
+}
 ```

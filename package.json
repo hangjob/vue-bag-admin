@@ -4,7 +4,7 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "lib": "vite build --mode lib",
+        "lib": "vite build --mode lib && gulp lib",
         "utils": "vite build --mode utils && gulp style",
         "gulp:style": "gulp style",
         "gulp:lib": "gulp lib",

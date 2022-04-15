@@ -154,7 +154,7 @@ const upload = (url: string, file: File) => {
             'Content-Type': 'multipart/form-data',
         },
     }
-    let param = new FormData()  // 创建form对象
+    let param = new FormData() // 创建form对象
     param.append('file', file, file.name)
     // param.append('chunk', '0') // 添加form表单中其他数据
     return http.post(rewriteUrl(url), param, config)

@@ -54,7 +54,7 @@ const paths = addUniqueId([
         router: '',
         icon: 'SettingOutlined',
         shows: 1,
-        children:[
+        children: [
             {
                 name: '用户管理',
                 path: '/sys/member',

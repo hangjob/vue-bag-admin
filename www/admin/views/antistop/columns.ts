@@ -24,7 +24,7 @@ const columns = [
             placeholder: '输入用户ID',
             rules: [
                 {
-                    required: true, message: '用户ID为必填项', trigger: 'blur',type:'number',
+                    required: true, message: '用户ID为必填项', trigger: 'blur',type: 'number',
                 }
             ]
         }
@@ -58,7 +58,12 @@ const columns = [
             label: '描述',
             element: 'a-textarea',
             placeholder: '输入描述',
-            maxlength: 300
+            maxlength: 300,
+            rules: [
+                {
+                    required: true, message: '用户ID为必填项', trigger: 'blur',type: 'number',
+                }
+            ]
         }
     },
     {
