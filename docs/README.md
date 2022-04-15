@@ -3,7 +3,7 @@
 ### 安装
 
 ```bash
-npm i vue-vite-admin-ts
+npm i vue-bag-admin
 ```
 
 ### 引入mock数据
@@ -16,8 +16,8 @@ npm i vue-vite-admin-ts
 import { createApp } from 'vue'
 import App from './App.vue'
 
-import install from 'vue-vite-admin-ts'
-import 'vue-vite-admin-ts/lib/style.css'
+import install from 'vue-bag-admin'
+import 'vue-bag-admin/lib/style.css'
 
 import '../mock'
 

@@ -23,5 +23,6 @@ color.ts
 jsconfig.json
 tsconfig.json
 wx.jpg
-windi.config
+windi.config.ts
+public
 

@@ -9,9 +9,9 @@
                     <div class="down">
                         <p class="hidden-xs">快到碗里来</p>
                         <a-button-group>
-                            <a-button type="primary" @click="handleSkip('https://hangjob.github.io/docs/#/vue-vite-admin-ts/')">使用文档</a-button>
-                            <a-button type="primary" @click="handleSkip('https://github.com/hangjob/vue-vite-admin-ts')">GitHub</a-button>
-                            <a-button type="primary" @click="handleSkip('https://github.com/hangjob/vue-vite-admin-ts/archive/refs/heads/master.zip')">点击下载</a-button>
+                            <a-button type="primary" @click="handleSkip('https://hangjob.github.io/docs/#/vue-bag-admin/')">使用文档</a-button>
+                            <a-button type="primary" @click="handleSkip('https://github.com/hangjob/vue-bag-admin')">GitHub</a-button>
+                            <a-button type="primary" @click="handleSkip('https://github.com/hangjob/vue-bag-admin/archive/refs/heads/master.zip')">点击下载</a-button>
                         </a-button-group>
                     </div>
                 </template>

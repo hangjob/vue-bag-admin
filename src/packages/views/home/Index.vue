@@ -10,7 +10,7 @@
                                 tleData.time
                             }}，准备吃什么呢?</h1>
                         <p>前端工程师 |
-                            品茗股份，vue-vite-admin-ts，采用Vite2.0、Vue3.2、TypeScript、JavaScript构建，支持多种写法和调用，完整的框架体系，适合企业中后台响应式管理系统，支持现有业务各种扩展....</p>
+                            品茗股份，vue-bag-admin，采用Vite2.0、Vue3.2、TypeScript、JavaScript构建，支持多种写法和调用，完整的框架体系，适合企业中后台响应式管理系统，支持现有业务各种扩展....</p>
                     </div>
                 </div>
             </yxs-card>

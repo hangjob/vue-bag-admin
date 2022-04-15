@@ -1,4 +1,4 @@
-# vue-vite-admin-ts
+# vue-bag-admin
 
 🎉 Vue3+Vite2.6+TypeScript+ant-design-vue构建，提供基础的框架，快速搭建企业级中后台产品，响应式管理后台系统
 
@@ -6,21 +6,21 @@
 
 [在线预览——Egg.js，MySQL数据库](https://vite.itnavs.com/demo.html)
 
-[在线预览——前端mock数据](https://hangjob.github.io/vue-vite-admin-ts/dist/lib.html)
+[在线预览——前端mock数据](https://hangjob.github.io/vue-bag-admin/dist/lib.html)
 
 ### 教程
 
-[使用文档地址](https://hangjob.github.io/docs/#/vue-vite-admin-ts/)
+[使用文档地址](https://hangjob.github.io/docs/#/vue-bag-admin/)
 
 ### 快速预览
 
-![vue-vite-admin-ts](https://s4.ax1x.com/2021/12/24/TYAcLT.jpg)
+![vue-bag-admin](https://s4.ax1x.com/2021/12/24/TYAcLT.jpg)
 
 ## 使用项目
 
 ```bash
 # 克隆项目
-git clone https://github.com/hangjob/vue-vite-admin-ts.git
+git clone https://github.com/hangjob/vue-bag-admin.git
 ```
 
 ### 安装依赖
@@ -45,14 +45,14 @@ npm run build
 
 ### 后端服务
 ```bash
-cd /vue-vite-admin-ts/egg
+cd /vue-bag-admin/egg
 npm i # 安装依赖
 npm run dev # 启动服务
 npm run fake # 生成测试数据
-# 你也可以导入数据文件到mysql中,文件目录放置在 /vue-vite-admin-ts/egg/db
+# 你也可以导入数据文件到mysql中,文件目录放置在 /vue-bag-admin/egg/db
 ```
 
-[具体文档](https://hangjob.github.io/docs/#/vue-vite-admin-ts/egg)
+[具体文档](https://hangjob.github.io/docs/#/vue-bag-admin/egg)
 
 ### 其他
 
@@ -233,7 +233,7 @@ example目录公用packages依赖包，这种设计对于多种不同项目，�
 
 #### 建议
 
-需要更多功能或者建议[issues](https://github.com/hangjob/vue-vite-admin-ts/issues)
+需要更多功能或者建议[issues](https://github.com/hangjob/vue-bag-admin/issues)
 
 ### 使用
 

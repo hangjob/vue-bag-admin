@@ -44,7 +44,7 @@
             <template #overlay>
                 <a-menu>
                     <a-menu-item>
-                        <a href="https://github.com/hangjob/vue-vite-admin-ts" target="_blank">查看源码</a>
+                        <a href="https://github.com/hangjob/vue-bag-admin" target="_blank">查看源码</a>
                     </a-menu-item>
                     <a-menu-item @click="handleQuit">
                         <LogoutOutlined />
@@ -131,7 +131,7 @@ export default defineComponent({
         }
 
         const handleGithub = () => {
-            window.open('https://github.com/hangjob/vue-vite-admin-ts')
+            window.open('https://github.com/hangjob/vue-bag-admin')
         }
 
         return {

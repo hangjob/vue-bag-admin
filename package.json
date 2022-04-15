@@ -1,17 +1,19 @@
 {
-    "name": "vue-vite-admin-ts",
-    "version": "3.0.0",
+    "name": "vue-bag-admin",
+    "version": "1.0.0",
     "scripts": {
         "dev": "vite",
         "build": "vite build",
         "lib": "vite build --mode lib",
         "utils": "vite build --mode utils && gulp style",
+        "gulp:style": "gulp style",
+        "gulp:lib": "gulp lib",
         "serve": "vite preview",
         "lint": "eslint . --ext .ts",
         "lint:fix": "eslint . --ext .ts --fix"
     },
     "private": false,
-    "description": "vue-vite-admin-ts采用Vite2.0、Vue3.2、TypeScript、JavaScript构建，适合企业中后台响应式管理系统",
+    "description": "vue-bag-admin采用Vite2.0、Vue3.2、TypeScript、JavaScript构建，适合企业中后台响应式管理系统，快速安装 npm i vue-bag-admin",
     "main": "lib/index.es.js",
     "dependencies": {
         "@antv/g2": "^4.1.32",
@@ -81,6 +83,7 @@
         "eslint-plugin-prettier": "^4.0.0",
         "eslint-plugin-vue": "^8.1.1",
         "gulp": "^4.0.2",
+        "gulp-clean-css": "^4.3.0",
         "gulp-rename": "^2.0.0",
         "gulp-uglify": "^3.0.2",
         "less": "^3.12.2",
@@ -104,18 +107,20 @@
         "email": "470193837@qq.com"
     },
     "bugs": {
-        "url": "https://github.com/hangjob/vue-vite-admin-ts/issues",
+        "url": "https://github.com/hangjob/vue-bag-admin/issues",
         "email": "470193837@qq.com"
     },
     "keywords": [
         "vue3",
         "vite",
+        "vue-admin",
+        "vue-bag-admin",
         "typescript",
-        "yxs-admin"
+        "javascript"
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/hangjob/vue-vite-admin-ts"
+        "url": "https://github.com/hangjob/vue-bag-admin"
     },
     "license": "MIT"
 }

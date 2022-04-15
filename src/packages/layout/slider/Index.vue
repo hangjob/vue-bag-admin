@@ -48,7 +48,7 @@ export default defineComponent({
             return menuMinWidth
         })
 
-        const logoTitle = computed(() => width.value === 80 ? 'admin' : 'vue-vite-admin-ts')
+        const logoTitle = computed(() => width.value === 80 ? 'admin' : 'vue-bag-admin')
 
         const close = () => {
             store.commit('app/updateFloatingVisible', !store.getters['app/getFloatingVisible'])

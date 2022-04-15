@@ -28,7 +28,7 @@ import {defineComponent} from 'vue'
 export default defineComponent({
     setup() {
         const handleGithub = () => {
-            window.open('https://github.com/hangjob/vue-vite-admin-ts')
+            window.open('https://github.com/hangjob/vue-bag-admin')
         }
         return {
             handleGithub
