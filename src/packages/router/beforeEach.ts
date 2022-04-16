@@ -63,7 +63,11 @@ const setAsyncRouterComponents = async () => {
         defaultRouter.forEach((item) => {
             router.addRoute('admin', item)
         })
-        paths.push(...await apiAppRouter())
+        try {
+            paths.push(...await apiAppRouter())
+        } catch (err) {
+            console.log(err)
+        }
     }
     pathsFileRouterStore(paths.concat(store.state.app.appRouter.paths))
 }

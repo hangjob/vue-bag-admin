@@ -36,7 +36,6 @@ const setLibBuild = function() {
                 "md-editor-v3",
                 "mitt",
                 "mockjs",
-                "moment",
                 "nanoid",
                 "normalize.css",
                 "nprogress",

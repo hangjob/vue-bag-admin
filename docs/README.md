@@ -3,7 +3,7 @@
 ### 安装
 
 ```bash
-npm i vue-bag-admin
+npm i vue-bag-admin -save
 ```
 
 ### 使用

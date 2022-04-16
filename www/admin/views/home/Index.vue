@@ -19,24 +19,21 @@
 </template>
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
-import moment from 'moment'
-import 'moment/dist/locale/zh-cn'
-
-moment.locale('zh-cn')
+import * as dayjs from 'dayjs'
 export default defineComponent({
     name: 'home',
     setup() {
 
         const tleData = reactive({
-            date: moment().format('YYYY年MM月DD日'),
-            time: moment().format('HH时mm分ss秒'),
-            week: '星期' + '日一二三四五六'.charAt(parseInt(moment().format('d'))),
-            pam: moment().format('A'),
+            date: dayjs().format('YYYY年MM月DD日'),
+            time: dayjs().format('HH时mm分ss秒'),
+            week: '星期' + '日一二三四五六'.charAt(parseInt(dayjs().format('d'))),
+            pam: dayjs().format('A'),
         })
 
         let tleDataTime = function() {
             setTimeout(() => {
-                tleData.time = moment().format('HH时mm分ss秒')
+                tleData.time = dayjs().format('HH时mm分ss秒')
                 tleDataTime()
             }, 1000)
         }

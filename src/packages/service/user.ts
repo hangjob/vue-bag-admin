@@ -1,4 +1,4 @@
-import { post } from '@/packages/http/request'
+import {post} from '@/packages/http/request'
 
 const prefix = '/user'
 
@@ -6,7 +6,7 @@ const prefix = '/user'
  * 登录
  */
 const apiLogin = (params?: object) => {
-    return post(`${prefix}/login`, params, { notifyError: true, relink: true })
+    return post(`${prefix}/login`, params, {notifyError: true, relink: true})
 }
 
 /**
