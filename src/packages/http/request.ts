@@ -5,7 +5,7 @@ import { httpNetwork, routerSet } from '@/packages/config'
 import { message as messageModel } from 'ant-design-vue'
 import { handleExport } from '@/packages/utils/utils'
 import localStore from '@/packages/utils/persistence'
-import { useRouter } from 'vue-router'
+import { useRouter,useRoute } from 'vue-router'
 
 const CancelToken = axios.CancelToken
 const source = CancelToken.source()
@@ -93,11 +93,6 @@ http.interceptors.response.use((res: any) => {
 
     if (status === 404) {
         return Promise.reject(rejectData)
-    }
-
-    if ((filter.timeout || filter.path)) {
-        const router = useRouter()
-        return router.push(routerSet.resetPath).then()
     }
 
     if (config && config.relink) { // 是否重连开启

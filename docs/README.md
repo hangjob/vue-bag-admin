@@ -31,10 +31,8 @@ createApp(App).use(install).mount('#app')
 
 ```typescript
 interface resultData {
-    readonly  code: number, // 只读 属性
-    readonly  message: string, // 只读 属性
+    code: number,
+    message: string,
     data: any,
-
-    [propName: string]: any, // 可能会有的新的属性添加进来
 }
 ```

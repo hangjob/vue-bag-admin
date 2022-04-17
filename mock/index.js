@@ -38,7 +38,7 @@ Mock.mock('/api/user/userinfo', 'post', () => {
         data,
     }
 })
-
+//
 const baseApis = ['/api/app/router', '/api/user/logout', '/api/user/login'] // 在使用时候，这些基础API需要配置
 
 const apis = ['/api/member/all', '/api/branch/all', '/api/role/all', '/api/menu/all', ...baseApis]

@@ -3,7 +3,7 @@ import {Component, createApp} from 'vue'
 import App from './App.vue'
 import store from '@/example/store/index'
 import install, {$optionsType} from '@/packages/install'
-
+// import '../../mock/index'
 //@ts-ignore
 // import install,{$optionsType} from '../../lib/index.es.js'
 // import '../../lib/style.css'
