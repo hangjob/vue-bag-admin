@@ -9,11 +9,11 @@ import install, {$optionsType} from '@/packages/install'
 // import '../../lib/style.css'
 
 const app = createApp(App)
-// const file: Record<string, Component> = import.meta.globEager('/src/demo/views/**/*.vue')
-// const $options: $optionsType = {
-//     router: {file},
-//     store: {
-//         module: store,
-//     },
-// }
+const file: Record<string, Component> = import.meta.globEager('/src/demo/views/**/*.vue')
+const $options: $optionsType = {
+    router: {file},
+    store: {
+        module: store,
+    },
+}
 app.use(install).mount('#app')

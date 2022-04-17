@@ -34,8 +34,8 @@
                         ok-text="确认"
                         cancel-text="关闭"
                         placement="topRight"
-                        @confirm="tableCurd.delete.submit(record)"
                     >
+<!--                        @confirm="tableCurd.delete.submit(record)"-->
                         <a-button type="primary" danger size="small">删除</a-button>
                     </a-popconfirm>
                 </a-space>
