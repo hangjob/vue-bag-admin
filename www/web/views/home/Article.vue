@@ -8,7 +8,7 @@
                             <div class="article-item mod1" v-if="idx !== 3">
                                 <div class="article-item-body">
                                     <div class="article-item-body-left">
-                                        <a href=""><img :src="item.img" alt=""></a>
+                                        <router-link to="/article/1"><img :src="item.img" alt=""></router-link>
                                     </div>
                                     <div class="article-item-body-right">
                                         <h3>{{ item.title }}</h3>

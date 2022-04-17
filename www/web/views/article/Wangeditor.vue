@@ -1,20 +1,27 @@
 <template>
     <div id="editor">
-        <p>初始化的内容</p>
-        <p>初始化的内容</p>
+        <md-editor v-if="detailData" v-model="detailData.content" previewOnly/>
     </div>
 </template>
 <script lang="ts">
-import E from 'wangeditor'
-import { defineComponent, onMounted } from 'vue'
+import {defineComponent, onMounted} from 'vue'
+import MdEditor from 'md-editor-v3'
+import 'md-editor-v3/lib/style.css'
 
 export default defineComponent({
+    props: {
+        detailData: {
+            type: Object,
+            default: {}
+        }
+    },
+    components: {
+        MdEditor
+    },
     setup() {
-        onMounted(() => {
-            const editor = new E('#editor')
-            editor.create()
-            console.log(editor.txt.html())
-        })
+        return {
+            content: '# 哎哎哎'
+        }
     },
 })
 </script>

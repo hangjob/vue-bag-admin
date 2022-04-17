@@ -14,4 +14,5 @@ module.exports = app => {
     require('./router/socket')(app);
     require('./router/web/article')(app);
     require('./router/web/channel')(app);
+    require('./router/web/antistop')(app);
 };

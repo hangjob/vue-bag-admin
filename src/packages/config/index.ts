@@ -35,7 +35,7 @@ const httpNetwork = {
     // 重连间隔时间
     retryDelay: 3000,
     // 最大重试次数
-    retry: 3,
+    retry: 1,
     // 默认前缀url
     baseURL: '/api',
 }
@@ -49,10 +49,18 @@ const routerSet = {
     resetPath: '/login', // 重置路由
 }
 
+/**
+ * 图片地址
+ */
+
+const imageConfig = {
+    prefix: `${window.location.origin}/api`,
+}
 
 export {
     routerMode,
     themeConfig,
     httpNetwork,
     routerSet,
+    imageConfig,
 }

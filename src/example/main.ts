@@ -1,7 +1,19 @@
-import { createApp } from 'vue'
+import 'default-passive-events'
+import {Component, createApp} from 'vue'
 import App from './App.vue'
-import install from '@/packages/install'
-import '../../mock'
-console.log('%c 此页面不需要后端服务，用的是mock数据','color:#ffacac;')
+import store from '@/example/store/index'
+import install, {$optionsType} from '@/packages/install'
+// import '../../mock/index'
+//@ts-ignore
+// import install,{$optionsType} from '../../lib/index.es.js'
+// import '../../lib/style.css'
+
 const app = createApp(App)
+// const file: Record<string, Component> = import.meta.globEager('/src/demo/views/**/*.vue')
+// const $options: $optionsType = {
+//     router: {file},
+//     store: {
+//         module: store,
+//     },
+// }
 app.use(install).mount('#app')

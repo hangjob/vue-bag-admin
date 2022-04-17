@@ -1,14 +1,13 @@
 import path from 'path'
 
-const setProBuild = function() {
+const setProBuild = function () {
     return {
         rollupOptions: {
             input: {
-                example: path.resolve(process.cwd(), 'index.html'), // 把页面放在外面，路径简短 防止src/packages/web/index.html ，建议vite把key(web、lib)可也阔以映射成页面路径，就避免这个问题
-                lib: path.resolve(process.cwd(), 'lib.html'),
-                demo: path.resolve(process.cwd(), 'demo.html'),
-                web: path.resolve(process.cwd(), 'web.html'),
-                admin: path.resolve(process.cwd(), 'admin.html'),
+                index: path.resolve(process.cwd(), 'index.html'), // 把页面放在外面，路径简短 防止src/packages/web/index.html ，建议vite把key(web、lib)可也阔以映射成页面路径，就避免这个问题
+                lib: path.resolve(process.cwd(), 'public', 'lib.html'),
+                web: path.resolve(process.cwd(), 'public', 'web.html'),
+                admin: path.resolve(process.cwd(), 'public', 'admin.html'),
             },
             // 两种方式 也可以指定包名打包
             // output: {

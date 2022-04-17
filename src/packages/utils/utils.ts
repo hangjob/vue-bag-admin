@@ -170,7 +170,7 @@ const toTree = (data: any, idName?: string, parentIdName?: string) => {
     data.forEach(function(item: any) {
         map[item[id]] = item
     })
-    const menu: Array<any> = []
+    const menu: any = []
     data.forEach(function(item: any) {
         // 在map中找到当前项的父级菜单
         const parent = map[item[parentId]]

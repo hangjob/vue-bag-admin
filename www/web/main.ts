@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import Equal from 'equal-vue'
-import '@www/web/style/reset.less'
+import '@www/web/style/index.less'
 import 'equal-vue/dist/style.css'
 import '@www/web/theme/root.css'
 import 'element-plus/theme-chalk/display.css'

@@ -5,7 +5,7 @@ import { httpNetwork, routerSet } from '@/packages/config'
 import { message as messageModel } from 'ant-design-vue'
 import { handleExport } from '@/packages/utils/utils'
 import localStore from '@/packages/utils/persistence'
-import router from '@/packages/router'
+import { useRouter,useRoute } from 'vue-router'
 
 const CancelToken = axios.CancelToken
 const source = CancelToken.source()
@@ -69,7 +69,8 @@ http.interceptors.response.use((res: any) => {
 
     // 设置用于跟踪重试计数的变量
     config.__retryCount = config.__retryCount || 0
-    const msg = (config.__retryCount === 0 ? '发生错误：' : `正在重连 ${config.__retryCount} 次：`) + (data ? data.message : error.message)
+    const _api = '，接口：' + config.baseURL + config.url
+    const msg = (config.__retryCount === 0 ? '发生错误：' : `正在重连 ${config.__retryCount} 次：`) + (data ? data.message + _api : error.message)
 
     const rejectData: resultErrorData = {
         message: msg,
@@ -86,15 +87,12 @@ http.interceptors.response.use((res: any) => {
 
     if (status === 403) {
         localStore.clearAll()
+        const router = useRouter()
         return router.push(routerSet.resetPath).then()
     }
 
     if (status === 404) {
         return Promise.reject(rejectData)
-    }
-
-    if ((filter.timeout || filter.path)) {
-        return router.push(routerSet.resetPath).then()
     }
 
     if (config && config.relink) { // 是否重连开启
@@ -151,7 +149,7 @@ const upload = (url: string, file: File) => {
             'Content-Type': 'multipart/form-data',
         },
     }
-    let param = new FormData()  // 创建form对象
+    let param = new FormData() // 创建form对象
     param.append('file', file, file.name)
     // param.append('chunk', '0') // 添加form表单中其他数据
     return http.post(rewriteUrl(url), param, config)

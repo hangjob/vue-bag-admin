@@ -1,7 +1,7 @@
 const dayjs = require('dayjs')
 module.exports = app => {
     const { STRING, INTEGER, BOOLEAN, DATE, TEXT } = app.Sequelize
-    return app.model.define('Article', {
+    const Article = app.model.define('Article', {
         id: {
             type: INTEGER,
             autoIncrement: true,
@@ -17,11 +17,15 @@ module.exports = app => {
         },
         image: {
             type: STRING,
-            comment: '缩略图',
+            comment: '封面图',
         },
         images: {
             type: STRING,
             comment: '组图',
+        },
+        images_type: {
+            type: INTEGER,
+            comment: '组图预览类型',
         },
         content: {
             type: TEXT('long'),
@@ -31,7 +35,7 @@ module.exports = app => {
             type: STRING,
             comment: '跳转链接-当需要外部跳转链接时',
         },
-        description: {
+        describe: {
             type: STRING,
             comment: '描述',
         },
@@ -44,11 +48,11 @@ module.exports = app => {
             comment: '点赞次数',
         },
         is_guest: {
-            type: INTEGER,
+            type: BOOLEAN,
             comment: '是否游客访问',
         },
         is_comment: {
-            type: INTEGER,
+            type: BOOLEAN,
             comment: '是否开启评论',
         },
         flag: {
@@ -65,24 +69,43 @@ module.exports = app => {
         },
         title: {
             type: STRING,
-            comment: '权重',
+            comment: '标题',
         },
         title_style: {
             type: STRING,
             comment: 'title样式',
         },
+        order: {
+            type: INTEGER,
+            comment: '排序',
+        },
+        keywords: {
+            type: STRING,
+            comment: '关键词',
+            get() {
+                const keywords = this.getDataValue('keywords')
+                return keywords ? keywords.split(',') : []
+            },
+            set(value) {
+                if (value) {
+                    this.setDataValue('keywords', value.join(','))
+                } else {
+
+                }
+            },
+        },
         createTime: {
             type: DATE,
             comment: '创建时间',
             get() {
-                return dayjs(this.getDataValue('createTime')).format('YYYY/MM/DD HH:mm:ss')
+                return dayjs(this.getDataValue('createTime')).format('YYYY-MM-DD HH:mm:ss')
             },
         },
         updateTime: {
             type: DATE,
             comment: '更新时间',
             get() {
-                return dayjs(this.getDataValue('updateTime')).format('YYYY/MM/DD HH:mm:ss')
+                return dayjs(this.getDataValue('updateTime')).format('YYYY-MM-DD HH:mm:ss')
             },
         },
     }, {
@@ -90,4 +113,20 @@ module.exports = app => {
         updatedAt: 'updateTime',
         tableName: 'yxs_web_article', // 定义实际表名 文章表
     })
+    Article.associate = function() {
+        // sourceKey 主键为Channel id
+        app.model.Web.Article.belongsTo(app.model.Web.Channel, {
+            foreignKey: 'channel_id',
+            targetKey: 'id',
+            sourceKey: 'id',
+            as: 'channel',
+        })
+        app.model.Web.Article.belongsTo(app.model.Member, {
+            foreignKey: 'user_id',
+            targetKey: 'id',
+            sourceKey: 'id',
+            as: 'member',
+        })
+    }
+    return Article;
 }

@@ -17,33 +17,52 @@
                             </div>
                             <div class="metas-action">
                                 <div>
-                                    <it-icon color="#546173" name="sentiment_satisfied" outlined />
+                                    <it-icon color="#546173" name="sentiment_satisfied" outlined/>
                                     <span>2163阅读</span>
                                 </div>
                                 <div>
-                                    <it-icon color="#546173" name="sentiment_satisfied" outlined />
+                                    <it-icon color="#546173" name="sentiment_satisfied" outlined/>
                                     <span>789评论</span>
                                 </div>
                                 <div>
-                                    <it-icon color="#546173" name="sentiment_satisfied" outlined />
+                                    <it-icon color="#546173" name="sentiment_satisfied" outlined/>
                                     <span>697点赞</span>
                                 </div>
                             </div>
                             <div class="text">
-                                <wangeditor/>
+                                <Wangeditor :detailData="detailData"/>
+                                <Sweet/>
                             </div>
                         </div>
                     </div>
+                    <Praise/>
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="24" :lg="8" :xl="8">
-                    1
+                    <Author/>
+                    <Qrcode/>
+                    <HotTags/>
                 </el-col>
             </el-row>
         </div>
     </div>
 </template>
 <script lang="ts" setup>
-import wangeditor from './Wangeditor.vue'
+import Wangeditor from './Wangeditor.vue'
+import {useRoute} from 'vue-router'
+import Author from './Author.vue'
+import Qrcode from './Qrcode.vue'
+import HotTags from './HotTags.vue'
+import Praise from './Praise.vue'
+import Sweet from './Sweet.vue'
+import {apiFind} from '@www/admin/service/article'
+import {ref} from "vue";
+
+const route = useRoute()
+const detailData = ref(null);
+apiFind({id: route.params.id}).then((res: any) => {
+    detailData.value = res;
+})
+
 </script>
 <style lang="less" scoped>
 .article {
@@ -53,12 +72,14 @@ import wangeditor from './Wangeditor.vue'
     &-body {
         position: relative;
         background-color: var(--yh-color-white);
+        border-radius: var(--yh-border-radius-base);
+        overflow: hidden;
 
         .breadcrumb {
             background-color: var(--yh-color-white);
             font-size: var(--yh-font-size-extra-small);
             margin-bottom: 0;
-            padding: 15px;
+            padding: var(--yh-padding-base);
             border-bottom: 1px solid #f5f5f5;
 
             li {
@@ -79,7 +100,7 @@ import wangeditor from './Wangeditor.vue'
         }
 
         .content {
-            padding: 15px;
+            padding: var(--yh-padding-base);
 
             .metas {
 
