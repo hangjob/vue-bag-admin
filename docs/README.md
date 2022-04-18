@@ -8,6 +8,15 @@ npm i vue-bag-admin -save
 
 ### 使用
 
+#### App.vue
+
+```vue
+<template>
+    <router-view></router-view>
+</template>
+```
+
+#### main.js
 ```typescript
 import { createApp } from 'vue'
 import App from './App.vue'

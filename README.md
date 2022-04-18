@@ -8,6 +8,15 @@ npm i vue-bag-admin -save
 
 ### 使用
 
+#### App.vue
+
+```vue
+<template>
+    <router-view></router-view>
+</template>
+```
+
+#### main.js
 ```typescript
 import { createApp } from 'vue'
 import App from './App.vue'
@@ -19,9 +28,6 @@ import install from 'vue-bag-admin/mock' // 进入mock数据
 createApp(App).use(install).mount('#app')
 ```
 
-```html
-<router-view />
-```
 
 #### 对接自己业务后端
 
