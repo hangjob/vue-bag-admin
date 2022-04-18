@@ -8,7 +8,7 @@ npm i vue-bag-admin -save
 
 ### 使用
 
-#### App.vue
+### App.vue
 
 ```vue
 <template>
@@ -16,7 +16,7 @@ npm i vue-bag-admin -save
 </template>
 ```
 
-#### main.js
+### main.js
 ```typescript
 import { createApp } from 'vue'
 import App from './App.vue'

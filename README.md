@@ -8,7 +8,7 @@ npm i vue-bag-admin -save
 
 ### 使用
 
-#### App.vue
+### App.vue
 
 ```vue
 <template>
@@ -16,7 +16,7 @@ npm i vue-bag-admin -save
 </template>
 ```
 
-#### main.js
+### main.js
 ```typescript
 import { createApp } from 'vue'
 import App from './App.vue'
@@ -27,7 +27,6 @@ import install from 'vue-bag-admin/mock' // 进入mock数据
 
 createApp(App).use(install).mount('#app')
 ```
-
 
 #### 对接自己业务后端
 
