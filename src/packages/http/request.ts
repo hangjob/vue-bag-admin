@@ -5,7 +5,7 @@ import { httpNetwork, routerSet } from '@/packages/config'
 import { message as messageModel } from 'ant-design-vue'
 import { handleExport } from '@/packages/utils/utils'
 import localStore from '@/packages/utils/persistence'
-import { useRouter,useRoute } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 
 const CancelToken = axios.CancelToken
 const source = CancelToken.source()
@@ -132,11 +132,11 @@ const rewriteUrl = (url: string) => {
 
 
 const post = (url: string, params?: any, config?: object) => {
-    return http.post(rewriteUrl(url), params, config)
+    return http.post(rewriteUrl(url), params, config).catch((err: any) => Promise.reject(err))
 }
 
 const get = (url: string, params?: any, config?: object) => {
-    return http.get(rewriteUrl(url), { params: params, ...config })
+    return http.get(rewriteUrl(url), { params: params, ...config }).catch((err: any) => Promise.reject(err))
 }
 
 const all = (request: Array<any>) => {
