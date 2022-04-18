@@ -6,13 +6,17 @@
                        :xl="item.xl"
                 >
                     <a-form-item :label="item.formData.label" :name="item.formData.name">
-                        <component v-if="item.formData.element === 'a-input'" :is="item.formData.element" v-model:value="formState[item.formData.name]"
+                        <component v-if="item.formData.element === 'a-input'" :is="item.formData.element"
+                                   v-model:value="formState[item.formData.name]"
                                    :placeholder="item.formData.placeholder"
                         ></component>
-                        <component v-if="item.formData.element === 'a-switch'" :is="item.formData.element" v-model:checked="formState[item.formData.name]"
+                        <component v-if="item.formData.element === 'a-switch'" :is="item.formData.element"
+                                   v-model:checked="formState[item.formData.name]"
                                    :placeholder="item.formData.placeholder"
                         ></component>
-                        <component v-if="item.formData.element === 'a-textarea'" showCount :maxlength="item.formData.maxlength" :is="item.formData.element" v-model:value="formState[item.formData.name]"
+                        <component v-if="item.formData.element === 'a-textarea'" showCount
+                                   :maxlength="item.formData.maxlength" :is="item.formData.element"
+                                   v-model:value="formState[item.formData.name]"
                                    :placeholder="item.formData.placeholder"
                         ></component>
                     </a-form-item>
@@ -22,19 +26,19 @@
     </div>
 </template>
 <script lang="ts">
-import {defineComponent, reactive, ref, toRaw} from 'vue'
+import { defineComponent } from 'vue'
 import hook from './hook'
 
 export default defineComponent({
     setup() {
-        const {formState, formItem, rules, baseResources, formRef} = hook()
+        const { formState, formItem, rules, baseResources, formRef } = hook()
 
         return {
             formState,
             rules,
             baseResources,
             formRef,
-            formItem
+            formItem,
         }
     },
 })

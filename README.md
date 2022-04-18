@@ -19,6 +19,10 @@ import install from 'vue-bag-admin/mock' // 进入mock数据
 createApp(App).use(install).mount('#app')
 ```
 
+```html
+<router-view />
+```
+
 #### 对接自己业务后端
 
 需要自己的完成对接相关API
