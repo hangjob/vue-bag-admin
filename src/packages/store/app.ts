@@ -1,7 +1,6 @@
-import { find, findUnsetDepth } from '@/packages/utils/lodash'
-import { getBrowser } from '@/packages/utils/utils'
-import { defaultTabFix } from '@/packages/router/setStore'
-import { themeConfig } from '@/packages/config'
+import {find, findUnsetDepth} from '@/packages/utils/lodash'
+import {getBrowser} from '@/packages/utils/utils'
+import {defaultTabFix} from '@/packages/router/setStore'
 
 const app = {
     namespaced: true,
@@ -14,7 +13,7 @@ const app = {
         tabViewsPath: [], // 访问路经
         collapsed: false, // 菜单是否折叠
         floatingVisible: false, // 左侧菜单隐藏
-        themeConfig: { ...themeConfig }, // 主题配置
+        themeConfig: {}, // 主题配置
         appRouter: {}, // 包含 paths file文件 router实列
     },
     // 定义getters 好处可以过滤数据
@@ -47,7 +46,7 @@ const app = {
     mutations: {
         // 添加头部路由标签
         addProcessList(state: any, item: any) {
-            if (!find({ key: 'path', value: item.path }, state.processList)) {
+            if (!find({key: 'path', value: item.path}, state.processList)) {
                 state.processList.push(item)
             }
         },
@@ -69,7 +68,7 @@ const app = {
             state.processList.map((obj: any) => {
                 if (obj.path === item.path) {
                     obj.active = true
-                    state.currentRouter = { ...obj, ...item }
+                    state.currentRouter = {...obj, ...item}
                 } else {
                     obj.active = false
                 }
@@ -92,7 +91,7 @@ const app = {
         },
         // 添加菜单
         addMenuList(state: any, item: any) {
-            if (!findUnsetDepth({ path: item.path }, state.menuList)) {
+            if (!findUnsetDepth({path: item.path}, state.menuList)) {
                 state.menuList.push(item)
             }
         },
@@ -102,7 +101,11 @@ const app = {
         },
         // 更新配置
         updateThemeConfig(state: any, item: any) {
-            state.themeConfig[item.key] = item.value
+            if (item.isReset) {
+                state.themeConfig = item;
+            } else {
+                state.themeConfig[item.key] = item.value
+            }
         },
         updateFloatingVisible(state: any, bol: boolean) {
             state.floatingVisible = bol

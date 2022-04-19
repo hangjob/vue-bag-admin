@@ -15,15 +15,18 @@
             <!--            </a-form-item>-->
             <a-form-item labelAlign="left" label="是否悬浮左侧菜单">
                 <a-switch @change="(check)=>{changeStyle(check,'floatingMenu')}"
-                          v-model:checked="formState.floatingMenu"/>
+                          v-model:checked="formState.floatingMenu"
+                />
             </a-form-item>
             <a-form-item labelAlign="left" label="是否折叠项目菜单">
                 <a-switch @change="(check)=>{changeStyle(check,'foldPrjMenu')}"
-                          v-model:checked="formState.foldPrjMenu"/>
+                          v-model:checked="formState.foldPrjMenu"
+                />
             </a-form-item>
             <a-form-item labelAlign="left" label="页签显示风格">
                 <a-select @change="(value)=>{changeStyle(value,'tabStyle')}" v-model:value="formState.tabStyle"
-                          placeholder="选择页签显示风格">
+                          placeholder="选择页签显示风格"
+                >
                     <a-select-option v-for="item in tabStyles" :key="item.value">{{ item.name }}</a-select-option>
                 </a-select>
             </a-form-item>
@@ -87,7 +90,6 @@ export default defineComponent({
         const changeStyle = (value: boolean | string | number, key: string) => {
             store.commit('app/updateThemeConfig', {key, value})
             store.commit('app/updateCollapsed', false);
-            console.log(store.getters['app/getThemeConfig'])
         }
 
         const width = computed(() => store.getters['app/getBrowser'].isMobile ? '80%' : 400)

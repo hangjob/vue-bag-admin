@@ -58,7 +58,7 @@ const install = (app: App, options?: $optionsType) => {
         configAppLayout: {
             themeBar: options?.layout?.themeBar,
         },
-        configInitApp: {
+        configApp: {
             themeConfig: { ...themeConfig, ...options?.config?.themeConfig },
             httpNetwork: { ...httpNetwork, ...options?.config?.httpNetwork },
             routerSet: { ...routerSet, ...options?.config?.routerSet },

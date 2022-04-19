@@ -1,8 +1,8 @@
 import 'default-passive-events'
-import { Component, createApp } from 'vue'
+import {Component, createApp} from 'vue'
 import App from './App.vue'
 import store from '@/example/store/index'
-import install, { $optionsType } from '@/packages/install'
+import install, {$optionsType} from '@/packages/install'
 
 // import '../../mock/index'
 //@ts-ignore
@@ -14,7 +14,7 @@ const file: Record<string, Component> = import.meta.globEager('/src/demo/views/*
 const $options: $optionsType = {
     router: {
         file,
-        replaceRouter: [{ name: 'login', path: '/login', component: () => import('@/example/views/login/Index.vue') }],
+        // replaceRouter: [{ name: 'login', path: '/login', component: () => import('@/example/views/login/Index.vue') }],
     },
     store: {
         module: store,
