@@ -1,9 +1,4 @@
 /**
- * 路由模式
- */
-const routerMode: String = 'hash'
-
-/**
  * 主题设置
  */
 const themeConfig = {
@@ -24,8 +19,10 @@ const themeConfig = {
 const httpNetwork = {
     // 获取请求的时候的路由规则
     token: ['/login', '/refreshToken'],
-    // 配后端数据的接收方式
-    contentType: 'application/json;charset=UTF-8',
+    // 请求头
+    headers: {
+        'content-type': 'application/json;charset=UTF-8',
+    },
     //消息框消失时间
     messageDuration: 2.5,
     //最长请求时间
@@ -58,7 +55,6 @@ const imageConfig = {
 }
 
 export {
-    routerMode,
     themeConfig,
     httpNetwork,
     routerSet,

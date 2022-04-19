@@ -55,8 +55,12 @@ router.afterEach((to, from) => {
 
 
 const setupRouter = (app: App) => {
-    app.use(router)
+    let { replaceRouter } = app.config.globalProperties?.configAppRouter || {} // 替换路由，自定义内置路由
+    replaceRouter.forEach((item: any) => {
+        router.addRoute(item)
+    })
     setAppRouterStore(app)
+    app.use(router)
 }
 
 export default router

@@ -1,11 +1,10 @@
 import axios from 'axios'
 import store from '@/packages/store'
 import { httpNetwork, routerSet } from '@/packages/config'
-// @ts-ignore
 import { message as messageModel } from 'ant-design-vue'
 import { handleExport } from '@/packages/utils/utils'
 import localStore from '@/packages/utils/persistence'
-import { useRouter, useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
 
 const CancelToken = axios.CancelToken
 const source = CancelToken.source()
@@ -14,9 +13,7 @@ const http: any = axios.create({
     baseURL: httpNetwork.baseURL,
     timeout: httpNetwork.requestTimeout,
     withCredentials: true,
-    headers: {
-        'content-type': httpNetwork.contentType,
-    },
+    headers: httpNetwork.headers,
     cancelToken: source.token,
 })
 

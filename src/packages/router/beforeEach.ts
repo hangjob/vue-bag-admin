@@ -1,10 +1,10 @@
-import {Component} from 'vue'
+import { Component } from 'vue'
 import store from '@/packages/store'
-import {apiAppRouter} from '@/packages/service/app'
+import { apiAppRouter } from '@/packages/service/app'
 import router from '@/packages/router'
 import defaultRouter from '@/packages/config/defaultRouter'
-import {apiUserUserinfo} from '@/packages/service/user'
-import {routerSet} from '@/packages/config'
+import { apiUserUserinfo } from '@/packages/service/user'
+import { routerSet } from '@/packages/config'
 
 interface FileType {
     [key: string]: Component
@@ -31,17 +31,17 @@ function findComponent(filePath: string, file?: Array<any>) {
  * @param paths
  */
 function pathsFileRouterStore(paths: Array<any>) {
-    const loopFile = function (paths: Array<any>) {
+    const loopFile = function(paths: Array<any>) {
         for (let i = 0; i < paths.length; i++) {
             if (paths[i].iframePath) {
                 let component = findComponent('/iframe', store.state.app.appRouter.file) // iframe
                 if (component) {
-                    router.addRoute('admin', {path: '/iframe' + paths[i].path, component})
+                    router.addRoute('admin', { path: '/iframe' + paths[i].path, component })
                 }
             } else {
                 let component = findComponent(paths[i].filePath, store.state.app.appRouter.file)
                 if (component) {
-                    router.addRoute('admin', {path: paths[i].path, component})
+                    router.addRoute('admin', { path: paths[i].path, component })
                 }
             }
             store.commit('app/addMenuList', paths[i])
@@ -74,7 +74,7 @@ const setAsyncRouterComponents = async () => {
 
 
 const hasUserinfo = (to: any, from: any, next: any) => {
-    const {resetPath, whiteList} = routerSet
+    const { resetPath, whiteList } = routerSet
     const userinfo = store.getters['user/userinfo']
     if (Object.keys(userinfo).length) {
         next()
@@ -85,7 +85,7 @@ const hasUserinfo = (to: any, from: any, next: any) => {
             apiUserUserinfo().then(async (res: any) => {
                 store.commit('user/updateUserinfo', res)
                 await setAsyncRouterComponents()
-                next({...to, replace: true})
+                next({ ...to, replace: true })
             }).catch(() => {
                 next(resetPath)
             })

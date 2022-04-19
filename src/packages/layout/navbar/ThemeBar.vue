@@ -72,8 +72,8 @@ export default defineComponent({
         Setting,
     },
     setup() {
-        const { configAppHeader } = <any>inject('$configAppOptions')
-        const { themeBar } = configAppHeader
+        const { configAppLayout } = <any>inject('$configAppOptions')
+        const { themeBar } = configAppLayout
         const router = useRouter()
         const userSetting = ref()
         const searchActive = ref<string | null>(null)

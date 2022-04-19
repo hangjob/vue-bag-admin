@@ -19,6 +19,7 @@ interface $optionsType {
         file: Record<string, Component>, // 外接路由文件所在路径 import xxx from 'home.vue'
         paths?: Array<any>,
         defaults?: Boolean,
+        replaceRouter?: Array<any> // 可以替换内部路由
     },
     store?: {
         module: object,
@@ -27,7 +28,7 @@ interface $optionsType {
     priest?: {
         list: Array<any>
     },
-    header?: {
+    layout?: {
         themeBar: any // 接受一个组件
     },
     config?: object
@@ -39,6 +40,7 @@ const install = (app: App, options?: $optionsType) => {
             file: options?.router?.file || [],
             paths: options?.router?.paths || [],
             defaults: options?.router?.defaults,
+            replaceRouter: options?.router?.replaceRouter || [],
         },
         configAppStore: {
             module: options?.store?.module || {},
@@ -47,8 +49,8 @@ const install = (app: App, options?: $optionsType) => {
         configAppPriest: {
             list: options?.priest?.list || [],
         },
-        configAppHeader: {
-            themeBar: options?.header?.themeBar,
+        configAppLayout: {
+            themeBar: options?.layout?.themeBar,
         },
         configInitApp: options?.config,
     }
