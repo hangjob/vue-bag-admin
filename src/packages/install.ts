@@ -4,6 +4,7 @@ import mitt from 'mitt'
 import * as $axios from '@/packages/http/request'
 import { handleError } from '@/packages/debug'
 import { Component, readonly } from 'vue'
+import { themeConfig, routerSet, httpNetwork, imageConfig } from '@/packages/config'
 
 /**
  * router: {paths:[菜单],file:[菜单路由文件]},defaults:true,开启默认路由
@@ -31,7 +32,12 @@ interface $optionsType {
     layout?: {
         themeBar: any // 接受一个组件
     },
-    config?: object
+    config?: {
+        themeConfig?: object,
+        httpNetwork?: object,
+        routerSet?: object,
+        imageConfig?: object,
+    }
 }
 
 const install = (app: App, options?: $optionsType) => {
@@ -52,8 +58,14 @@ const install = (app: App, options?: $optionsType) => {
         configAppLayout: {
             themeBar: options?.layout?.themeBar,
         },
-        configInitApp: options?.config,
+        configInitApp: {
+            themeConfig: { ...themeConfig, ...options?.config?.themeConfig },
+            httpNetwork: { ...httpNetwork, ...options?.config?.httpNetwork },
+            routerSet: { ...routerSet, ...options?.config?.routerSet },
+            imageConfig: { ...imageConfig, ...options?.config?.imageConfig },
+        },
     }
+    console.log('_options', _options)
     app.config.globalProperties = _options
     app.provide('$configAppOptions', readonly(_options))
     app.provide('$mitt', mitt())

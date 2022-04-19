@@ -2,7 +2,6 @@
  * 主题设置
  */
 const themeConfig = {
-    catchKey: 'themeName',
     // 是否浮动菜单
     floatingMenu: false,
     // 菜单宽度
