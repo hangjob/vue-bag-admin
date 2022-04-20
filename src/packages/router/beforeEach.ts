@@ -4,7 +4,6 @@ import { apiAppRouter } from '@/packages/service/app'
 import router from '@/packages/router'
 import defaultRouter from '@/packages/config/defaultRouter'
 import { apiUserUserinfo } from '@/packages/service/user'
-import { routerSet } from '@/packages/config'
 
 interface FileType {
     [key: string]: Component
@@ -74,7 +73,7 @@ const setAsyncRouterComponents = async () => {
 
 
 const hasUserinfo = (to: any, from: any, next: any) => {
-    const { resetPath, whiteList } = routerSet
+    const { resetPath, whiteList } = store.state.app.httpNetwork;
     const userinfo = store.getters['user/userinfo']
     if (Object.keys(userinfo).length) {
         next()

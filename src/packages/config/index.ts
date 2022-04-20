@@ -40,26 +40,7 @@ const httpNetwork = {
     resetPath: '/login',
 }
 
-/**
- * 路由设置
- */
-const routerSet = {
-    mode: 'hash', // 路由模式
-    whiteList: ['/login', '/403', '/404', '/500', '/502', '/test'], // 白名单
-    resetPath: '/login', // 重置路由
-}
-
-/**
- * 图片地址
- */
-
-const imageConfig = {
-    prefix: `${window.location.origin}/api`,
-}
-
 export {
     themeConfig,
     httpNetwork,
-    routerSet,
-    imageConfig,
 }

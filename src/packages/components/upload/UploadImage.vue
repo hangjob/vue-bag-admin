@@ -45,7 +45,6 @@ import 'vue-cropper/dist/index.css'
 import { VueCropper } from 'vue-cropper'
 import { apiUploadImage } from '@/packages/service/upload'
 import { message } from 'ant-design-vue'
-import { imageConfig } from '@/packages/config'
 import base64ToFile from '__ROOT__/web-utils/file/base64ToFile'
 import fileToBase64 from '__ROOT__/web-utils/file/fileToBase64'
 
@@ -131,7 +130,7 @@ export default defineComponent({
         watch(() => props.image, (newVal) => {
             if (newVal) {
                 preview.list = newVal?.split(',').map((item: any) => {
-                    return { url: `${imageConfig.prefix}${item}`, source: item }
+                    return { url: item, source: item }
                 })
             }
         })
