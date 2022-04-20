@@ -1,6 +1,7 @@
-import {find, findUnsetDepth} from '@/packages/utils/lodash'
-import {getBrowser} from '@/packages/utils/utils'
-import {defaultTabFix} from '@/packages/router/setStore'
+import { find, findUnsetDepth } from '@/packages/utils/lodash'
+import { getBrowser } from '@/packages/utils/utils'
+import { defaultTabFix } from '@/packages/router/setStore'
+import { routerSet } from '@/packages/config'
 
 const app = {
     namespaced: true,
@@ -14,6 +15,7 @@ const app = {
         collapsed: false, // 菜单是否折叠
         floatingVisible: false, // 左侧菜单隐藏
         themeConfig: {}, // 主题配置
+        httpNetwork: {}, // 网络配置
         appRouter: {}, // 包含 paths file文件 router实列
     },
     // 定义getters 好处可以过滤数据
@@ -46,7 +48,7 @@ const app = {
     mutations: {
         // 添加头部路由标签
         addProcessList(state: any, item: any) {
-            if (!find({key: 'path', value: item.path}, state.processList)) {
+            if (!find({ key: 'path', value: item.path }, state.processList)) {
                 state.processList.push(item)
             }
         },
@@ -68,7 +70,7 @@ const app = {
             state.processList.map((obj: any) => {
                 if (obj.path === item.path) {
                     obj.active = true
-                    state.currentRouter = {...obj, ...item}
+                    state.currentRouter = { ...obj, ...item }
                 } else {
                     obj.active = false
                 }
@@ -91,7 +93,7 @@ const app = {
         },
         // 添加菜单
         addMenuList(state: any, item: any) {
-            if (!findUnsetDepth({path: item.path}, state.menuList)) {
+            if (!findUnsetDepth({ path: item.path }, state.menuList)) {
                 state.menuList.push(item)
             }
         },
@@ -102,7 +104,7 @@ const app = {
         // 更新配置
         updateThemeConfig(state: any, item: any) {
             if (item.isReset) {
-                state.themeConfig = item;
+                state.themeConfig = item
             } else {
                 state.themeConfig[item.key] = item.value
             }
@@ -117,6 +119,10 @@ const app = {
         // 更新信息
         updateAppRouter(state: any, data: any) {
             state.appRouter = data
+        },
+        // 更新网络配置
+        updateHttpNetwork(state: any, data: any) {
+            state.httpNetwork = data
         },
     },
 }

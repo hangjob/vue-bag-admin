@@ -1,8 +1,8 @@
 import 'default-passive-events'
-import {Component, createApp} from 'vue'
+import { Component, createApp } from 'vue'
 import App from './App.vue'
 import store from '@/example/store/index'
-import install, {$optionsType} from '@/packages/install'
+import install, { $optionsType } from '@/packages/install'
 
 // import '../../mock/index'
 //@ts-ignore
@@ -18,6 +18,12 @@ const $options: $optionsType = {
     },
     store: {
         module: store,
-    }
+    },
+    config: {
+        httpNetwork: {
+            retry: 3,
+            requestTimeout:3000,
+        },
+    },
 }
 app.use(install, $options).mount('#app')

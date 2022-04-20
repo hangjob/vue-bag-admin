@@ -1,6 +1,5 @@
 import axios from 'axios'
 import store from '@/packages/store'
-import { httpNetwork, routerSet } from '@/packages/config'
 import { message as messageModel } from 'ant-design-vue'
 import { handleExport } from '@/packages/utils/utils'
 import localStore from '@/packages/utils/persistence'
@@ -10,16 +9,36 @@ const CancelToken = axios.CancelToken
 const source = CancelToken.source()
 
 const http: any = axios.create({
-    baseURL: httpNetwork.baseURL,
-    timeout: httpNetwork.requestTimeout,
     withCredentials: true,
-    headers: httpNetwork.headers,
     cancelToken: source.token,
 })
 
-http.defaults.retry = httpNetwork.retry
-http.defaults.retryDelay = httpNetwork.retryDelay
-
+const getHttpNetworkConfig = () => {
+    const {
+        baseURL,
+        requestTimeout,
+        headers,
+        retry,
+        retryDelay,
+        successCode,
+        messageDuration,
+        filterUrlToken,
+        whiteList,
+        resetPath,
+    } = store.state.app.httpNetwork
+    return {
+        baseURL,
+        timeout: requestTimeout,
+        headers,
+        retry,
+        retryDelay,
+        successCode,
+        messageDuration,
+        filterUrlToken,
+        whiteList,
+        resetPath,
+    }
+}
 
 interface resultErrorData {
     message: string;
@@ -29,29 +48,36 @@ interface resultErrorData {
 }
 
 http.interceptors.request.use((config: any) => {
-    const token = store.state.user.token
+    const { retry, retryDelay, timeout, baseURL, headers, filterUrlToken = [] } = getHttpNetworkConfig()
     const { url } = config
     if (url) {
-        if (httpNetwork.token.some((item) => url.includes(item))) {
-            config.headers['authorization'] = token
+        if (filterUrlToken.some((item: any) => url.includes(item))) {
+            config.headers['authorization'] = store.state.user.token
         }
     }
+    config.baseURL = baseURL
+    config.timeout = timeout
+    config.headers = { ...headers }
+    config.retry = retry
+    config.retryDelay = retryDelay
+    console.log(config)
     return config
 }, (error: any) => {
     return Promise.reject(error)
 })
 
 http.interceptors.response.use((res: any) => {
+    const { successCode, messageDuration } = getHttpNetworkConfig()
     const { config } = res
     const { code, data, message } = res.data
-    if (httpNetwork.successCode.indexOf(code) !== -1) {
+    if (successCode.indexOf(code) !== -1) {
         if (config.notify) {
-            messageModel.success(message, httpNetwork.messageDuration)
+            messageModel.success(message, messageDuration)
         }
         return data
     } else {
         if (config.notifyError) {
-            messageModel.warning(message, httpNetwork.messageDuration)
+            messageModel.warning(message, messageDuration)
         }
         const rejectData: resultErrorData = {
             message,
@@ -63,7 +89,7 @@ http.interceptors.response.use((res: any) => {
 }, async (err: any) => {
     const error = err.response || err.toJSON()
     const { config, status, data, code, message = '' } = error
-
+    const { messageDuration, whiteList, resetPath } = getHttpNetworkConfig()
     // 设置用于跟踪重试计数的变量
     config.__retryCount = config.__retryCount || 0
     const _api = '，接口：' + config.baseURL + config.url
@@ -75,17 +101,17 @@ http.interceptors.response.use((res: any) => {
         config,
     }
 
-    messageModel.warning(msg, httpNetwork.messageDuration)
+    messageModel.warning(msg, messageDuration)
 
     const filter = {
         timeout: code === 'ECONNABORTED' || message === 'timeout' || message.includes('timeout'), // 超时
-        path: routerSet.whiteList.indexOf(window.location.href) !== -1,
+        path: whiteList.indexOf(window.location.href) !== -1,
     }
 
     if (status === 403) {
         localStore.clearAll()
         const router = useRouter()
-        return router.push(routerSet.resetPath).then()
+        return router.push(resetPath).then()
     }
 
     if (status === 404) {
@@ -136,10 +162,6 @@ const get = (url: string, params?: any, config?: object) => {
     return http.get(rewriteUrl(url), { params: params, ...config }).catch((err: any) => Promise.reject(err))
 }
 
-const all = (request: Array<any>) => {
-    return axios.all(request)
-}
-
 const upload = (url: string, file: File) => {
     let config = {
         headers: {
@@ -153,19 +175,15 @@ const upload = (url: string, file: File) => {
 }
 
 
-const download = (url: string, params?: object, config?: any) => {
-    return axios({
+const download = (url: string, data?: any, config?: object) => {
+    return http({
         method: 'post',
         url: rewriteUrl(url), //后端下载接口地址
         responseType: 'blob', // 设置接受的流格式
-        data: {
-            ...params,
-        },
-        params: {
-            ...params,
-        },
+        data: data,
+        ...config,
     }).then((res: any) => {
-        handleExport(res.data, config.fileName)
+        handleExport(res.data, data?.fileName)
     })
 }
 
@@ -174,7 +192,6 @@ export default http
 export {
     post,
     get,
-    all,
     upload,
     download,
     axios,

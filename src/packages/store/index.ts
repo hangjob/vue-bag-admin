@@ -1,8 +1,8 @@
-import type {App} from 'vue'
-import {createStore} from 'vuex'
+import type { App } from 'vue'
+import { createStore } from 'vuex'
 import user from './user'
 import app from './app'
-import {setStore} from '@/packages/store/store'
+import { setStore } from '@/packages/store/store'
 
 
 const store: any = createStore({
@@ -12,19 +12,24 @@ const store: any = createStore({
     },
 })
 
-
-const setConfigStore = (app: App) => {
-    const {configApp} = app.config.globalProperties;
-    store.commit('app/updateThemeConfig', {isReset: true, ...configApp.themeConfig})
+/**
+ * 初始配置store
+ * @param app
+ */
+const initConfigStore = (app: App) => {
+    const { configApp } = app.config.globalProperties
+    store.commit('app/updateThemeConfig', { isReset: true, ...configApp.themeConfig })
+    store.commit('app/updateHttpNetwork', configApp.httpNetwork)
 }
 
 const setupStore = (app: App) => {
     setStore(app, store)
-    setConfigStore(app)
+    initConfigStore(app)
     app.use(store)
 }
 
 export {
     setupStore,
 }
+
 export default store
