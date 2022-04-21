@@ -1,7 +1,7 @@
 vue-bag-admin使用Vue3+Vite2.6+TypeScript+ant-design-vue构建，提供基础的框架，快速搭建企业级中后台产品，响应式管理后台系统，
 使用构建依赖包的形式，开发只需引入依赖即可
 
-[在线体验](https://vite.itnavs.com/)
+[在线体验](https://vite.itnavs.com/)，[开发文档](https://hangjob.github.io/vue-bag-admin/#/)
 
 ### 🎉
 
@@ -41,7 +41,7 @@ createApp(App).use(install).mount('#app')
 
 ### 🌐 文档
 
-[在线文档](https://hangjob.github.io/vue-bag-admin/#/)
+[开发文档](https://hangjob.github.io/vue-bag-admin/#/)
 
 #### 对接自己业务后端
 
