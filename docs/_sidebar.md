@@ -1,2 +1,3 @@
 * [开始](/README.md)
-* [更多参数](/options.md)
+* [主题配置](/themeConfig.md)
+* [网络配置](/httpNetwork.md)

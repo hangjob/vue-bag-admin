@@ -2,7 +2,6 @@ import { reactive, ref } from 'vue'
 import { apiAll } from '@www/admin/service/member'
 import { apiAll as apiAllChannel } from '@www/admin/service/channel'
 import { apiUploadImage } from '@/packages/service/upload'
-import { imageConfig } from '@/packages/config'
 import { message } from 'ant-design-vue'
 
 export default function() {
@@ -71,7 +70,7 @@ export default function() {
                         message.error(`文件小于${2}MB`)
                     } else {
                         apiUploadImage(file).then((data: any) => {
-                            rev(`${imageConfig.prefix}${data}`)
+                            rev(data)
                         }).catch((err: any) => {
                             rej(err)
                         })

@@ -1,4 +1,5 @@
 import { defineConfig, loadEnv } from 'vite'
+import analyze from 'rollup-plugin-visualizer';
 import setProBuild from './build/pro'
 import setLibBuild from './build/lib'
 import setUtilsBuild from './build/utils'
@@ -39,7 +40,7 @@ export default ({ mode }: { mode: any }) => {
     }
     return defineConfig({
         base: './',
-        plugins: createVitePlugins({ variables: process.env }),
+        plugins: [...createVitePlugins({ variables: process.env }),analyze],
         publicDir: 'public',
         resolve: {
             alias: {

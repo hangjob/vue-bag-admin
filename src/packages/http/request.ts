@@ -60,7 +60,6 @@ http.interceptors.request.use((config: any) => {
     config.headers = { ...headers }
     config.retry = retry
     config.retryDelay = retryDelay
-    console.log(config)
     return config
 }, (error: any) => {
     return Promise.reject(error)
