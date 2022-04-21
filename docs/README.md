@@ -23,7 +23,7 @@ import App from './App.vue'
 
 import install from 'vue-bag-admin'
 import 'vue-bag-admin/lib/style.css'
-import install from 'vue-bag-admin/mock' // 进入mock数据
+import 'vue-bag-admin/mock' // 进入mock数据
 
 createApp(App).use(install).mount('#app')
 ```
