@@ -1,5 +1,5 @@
 <template>
-    <yxs-card>
+    <bag-card>
         <template v-slot:title>
             <div class="title">
                 <span>动态</span>
@@ -36,7 +36,7 @@
                 </div>
             </li>
         </ul>
-    </yxs-card>
+    </bag-card>
 </template>
 <script lang="ts">
 

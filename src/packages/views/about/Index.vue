@@ -1,5 +1,5 @@
 <template>
-    <yxs-view>
+    <bag-view>
         <div class="about">
             <p>
                 今天的阳光很温顺，也许是我很久没出去走走了吧，看着阳外的天气，我靠在沙发睡着了...<br/>
@@ -20,7 +20,7 @@
                 <HeartTwoTone @click="handleGithub" twoToneColor="#eb2f96" style="font-size: 45px;cursor: pointer"/>
             </div>
         </div>
-    </yxs-view>
+    </bag-view>
 </template>
 <script lang="ts">
 import {defineComponent} from 'vue'

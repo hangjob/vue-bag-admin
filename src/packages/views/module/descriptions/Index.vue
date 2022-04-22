@@ -1,5 +1,5 @@
 <template>
-    <yxs-view>
+    <bag-view>
         <a-descriptions bordered title="商品信息" size="small">
             <template #extra>
                 <a-button type="primary">编辑</a-button>
@@ -19,7 +19,7 @@
         <br/>
         <a-descriptions title="用户信息" layout="vertical" bordered>
             <template #extra>
-                <a-button class="yxs-button-color-green" type="primary">确认发货</a-button>
+                <a-button class="bag-button-color-green" type="primary">确认发货</a-button>
             </template>
             <a-descriptions-item label="姓名">羊先生</a-descriptions-item>
             <a-descriptions-item label="年龄">26</a-descriptions-item>
@@ -34,7 +34,7 @@
             <a-descriptions-item label="红包抵扣">$299.00</a-descriptions-item>
             <a-descriptions-item label="地址">浙江省杭州市西湖区天堂软件园</a-descriptions-item>
         </a-descriptions>
-    </yxs-view>
+    </bag-view>
 </template>
 <script>
 import {defineComponent, ref} from 'vue'

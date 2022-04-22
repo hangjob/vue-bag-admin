@@ -1,9 +1,9 @@
 <template>
-    <yxs-view class="about">
+    <bag-view class="about">
         <p>这里是http网络异步组件，请先打开服务</p>
         <br/>
         <libraryComponent/>
-    </yxs-view>
+    </bag-view>
 </template>
 <script lang="ts">
 import {defineComponent, defineAsyncComponent} from 'vue'

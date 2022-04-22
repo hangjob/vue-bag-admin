@@ -1,5 +1,5 @@
 <template>
-    <yxs-view>
+    <bag-view>
         <a-typography-title :level="3">socket</a-typography-title>
         <pre>
             <code>
@@ -11,7 +11,7 @@
             })
         </code>
         </pre>
-    </yxs-view>
+    </bag-view>
 </template>
 <script>
 import {useWebSocket} from '@vueuse/core'

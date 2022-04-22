@@ -1,5 +1,5 @@
 <template>
-    <yxs-view>
+    <bag-view>
         <a-typography-title :level="3">该页面已开启缓存</a-typography-title>
         <br/>
         <a-form
@@ -51,7 +51,7 @@
                 <a-button style="margin-left: 10px" @click="resetForm">Reset</a-button>
             </a-form-item>
         </a-form>
-    </yxs-view>
+    </bag-view>
 </template>
 <script lang="ts">
 import { ValidateErrorEntity } from 'ant-design-vue/es/form/interface'

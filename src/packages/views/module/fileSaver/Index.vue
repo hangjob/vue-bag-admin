@@ -1,5 +1,5 @@
 <template>
-    <yxs-view>
+    <bag-view>
         <div>
             <a-input-search v-model:value="action.text.value" placeholder="Hello, world!" size="large"/>
             <br/>
@@ -29,7 +29,7 @@
             <br/>
             <a-button type="primary" @click="action.canvas.handleSave">保存画布</a-button>
         </div>
-    </yxs-view>
+    </bag-view>
 </template>
 <script lang="ts">
 import {defineComponent, reactive, ref, onMounted} from 'vue'

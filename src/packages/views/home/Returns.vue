@@ -1,5 +1,5 @@
 <template>
-    <yxs-card>
+    <bag-card>
         <template v-slot:title>
             <span class="active">收益额</span>
             <span>销售额</span>
@@ -7,7 +7,7 @@
         <div class="market-info">
             <div id="container" ref="mountNode"></div>
         </div>
-    </yxs-card>
+    </bag-card>
 </template>
 <script lang="ts">
 import {defineComponent, onMounted} from 'vue'

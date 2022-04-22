@@ -1,5 +1,5 @@
 <template>
-    <yxs-view>
+    <bag-view>
         <div class="clearfix">
             <a-upload
                 action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
@@ -16,7 +16,7 @@
                 <img alt="example" style="width: 100%" :src="previewImage"/>
             </a-modal>
         </div>
-    </yxs-view>
+    </bag-view>
 </template>
 <script lang="ts">
 import {defineComponent, ref} from 'vue';

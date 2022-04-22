@@ -1,5 +1,5 @@
 <template>
-    <yxs-view>
+    <bag-view>
         <div class="fuse">
             <div>
                 <code>
@@ -24,7 +24,7 @@
                 </code>
             </div>
         </div>
-    </yxs-view>
+    </bag-view>
 </template>
 <script lang="ts">
 import {defineComponent, ref} from 'vue'

@@ -1,5 +1,5 @@
 <template>
-    <yxs-view>
+    <bag-view>
         <template v-slot:action>
             <a-upload :file-list="fileList" :remove="handleRemove" :before-upload="beforeUpload">
                 <a-button type="primary">
@@ -8,7 +8,7 @@
             </a-upload>
         </template>
         <Table :columns="columns" :data="tableData"/>
-    </yxs-view>
+    </bag-view>
 </template>
 <script lang="ts">
 import {UploadOutlined} from '@ant-design/icons-vue';

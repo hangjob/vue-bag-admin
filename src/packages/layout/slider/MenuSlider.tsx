@@ -5,7 +5,7 @@ import {toTree} from '@/packages/utils/utils'
 import {deepMenu} from '@/packages/layout/common'
 
 export default defineComponent({
-    name: 'yxs-menu-slider',
+    name: 'bag-menu-slider',
     setup() {
         const store = useStore()
         const router = useRouter()
@@ -64,7 +64,7 @@ export default defineComponent({
         const children = deepMenu(ctx.menuList)
         return (
             ctx.visible && (
-                <div class="yxs-menu-slider">
+                <div class="bag-menu-slider">
                     <a-menu
                         v-model:selectedKeys={ctx.selectedKeys}
                         v-model:openKeys={ctx.openKeys}

@@ -1,7 +1,7 @@
 <template>
-    <yxs-view>
+    <bag-view>
         category分类111
-    </yxs-view>
+    </bag-view>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'

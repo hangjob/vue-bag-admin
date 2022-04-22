@@ -1,5 +1,5 @@
 <template>
-    <yxs-view>
+    <bag-view>
         <a-typography-title :level="5">账号切换</a-typography-title>
         <a-radio-group v-model:value="radioValue" button-style="solid">
             <a-radio-button value="admin">管理员</a-radio-button>
@@ -32,7 +32,7 @@
             <p v-auth="['editor']">editor测试不是button元素</p><br />
             <p v-auth="['client']">client测试不是button元素</p><br />
         </a-space>
-    </yxs-view>
+    </bag-view>
 </template>
 <script lang="ts">
 import { computed, defineComponent, ref, watchEffect, watch } from 'vue'

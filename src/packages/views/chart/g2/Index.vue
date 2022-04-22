@@ -1,5 +1,5 @@
 <template>
-    <yxs-view>
+    <bag-view>
         <h1>G2 简介</h1>
         <p>G2 是一套基于图形语法理论的可视化底层引擎，以数据驱动，提供图形语法与交互语法，具有高度的易用性和扩展性。使用 G2，你可以无需关注图表各种繁琐的实现细节，一条语句即可使用 Canvas 或 SVG 构建出各种各样的可交互的统计图表</p>
         <br/>
@@ -12,7 +12,7 @@
         <p>🛡 全面拥抱 TypeScript：提供完整的类型定义文件。</p>
         <br/>
         <a-typography-link href="https://g2.antv.vision/zh/examples/gallery" target="_blank">查看官方[更多參考例子]</a-typography-link>
-    </yxs-view>
+    </bag-view>
 </template>
 <script>
 import {defineComponent} from 'vue'

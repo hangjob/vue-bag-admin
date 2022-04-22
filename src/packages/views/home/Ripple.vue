@@ -1,8 +1,8 @@
 <template>
-    <yxs-card class="profit">
+    <bag-card class="profit">
         <template v-slot:title>盈利率/占比</template>
         <div id="dom1"></div>
-    </yxs-card>
+    </bag-card>
 </template>
 <script lang="ts">
 import {defineComponent, onMounted} from "vue";

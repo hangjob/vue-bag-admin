@@ -1,5 +1,5 @@
 <template>
-    <yxs-view class="rich" ref="rich">
+    <bag-view class="rich" ref="rich">
         <a-row>
             <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                 <h3 class="title">官方API: <a href="https://github.com/quilljs/quill"
@@ -26,7 +26,7 @@
             <a-button type="primary" @click="handleGetQuillContent">获取所有内容</a-button>
             <a-button type="primary" class="hidden-xs" @click="handleQuillConsole">打印Quill实列</a-button>
         </a-space>
-    </yxs-view>
+    </bag-view>
 </template>
 <script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue'

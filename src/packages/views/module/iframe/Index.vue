@@ -1,5 +1,5 @@
 <template>
-    <yxs-view>
+    <bag-view>
         <a-spin
             wrapperClassName="spinning"
             style="height:100%;width:100%"
@@ -8,7 +8,7 @@
         >
             <iframe style="width:100%;height:99.0%" :src="url" frameborder="0"></iframe>
         </a-spin>
-    </yxs-view>
+    </bag-view>
 </template>
 
 <script>

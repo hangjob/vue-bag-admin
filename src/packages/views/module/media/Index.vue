@@ -1,12 +1,12 @@
 <template>
-    <yxs-view>
+    <bag-view>
         <div class="media">
             <h3>西瓜视频播放器-支持直播-点播-WebRtc-Mp4-Flv-Hls-Dash</h3>
             <div class="media-container">
                 <div id="video" class="video"></div>
             </div>
         </div>
-    </yxs-view>
+    </bag-view>
 </template>
 <script lang="ts">
 import {defineComponent, ref} from 'vue'

@@ -1,19 +1,19 @@
 import type { App } from 'vue'
-import YxsCard from './card/Index'
-import YxsView from './view/Index'
-import YxsFormTable from './form-table/Index'
-import YxsModal from './modal/Index'
-import YxsIconfont from './iconfont/Index'
-import YxsUploadImage from './upload/UploadImage.vue'
+import card from './card/Index'
+import formTable from './form-table/Index'
+import modal from './modal/Index'
+import view from './view/Index'
+import iconfont from './iconfont/Index'
+import uploadImage from './upload/UploadImage.vue'
 // import MdEditor from './editor/MdEditor.vue'
 
 const setupGlobComponents = (app: App) => {
-    app.component('yxs-card', YxsCard)
-    app.component('yxs-form-table', YxsFormTable)
-    app.component('yxs-modal', YxsModal)
-    app.component('yxs-view', YxsView)
-    app.component('yxs-iconfont', YxsIconfont)
-    app.component('yxs-upload-image', YxsUploadImage)
+    app.component('bag-card', card)
+    app.component('bag-form-table', formTable)
+    app.component('bag-modal', modal)
+    app.component('bag-view', view)
+    app.component('bag-iconfont', iconfont)
+    app.component('bag-upload-image', uploadImage)
     // app.component('MdEditor', MdEditor)
 }
 

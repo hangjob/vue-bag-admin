@@ -1,5 +1,5 @@
 <template>
-    <yxs-view>
+    <bag-view>
         <a-table :columns="columns" :data-source="data" bordered>
             <template #name="{ text }">
                 <a>{{ text }}</a>
@@ -10,7 +10,7 @@
                                                                                                    href="https://docs.bugsnag.com/platforms/javascript/vue/">Bugsnag </a>使用此选项提供官方集成
             </template>
         </a-table>
-    </yxs-view>
+    </bag-view>
 </template>
 <script lang="ts">
 import {defineComponent} from 'vue';

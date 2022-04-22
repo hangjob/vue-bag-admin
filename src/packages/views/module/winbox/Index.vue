@@ -1,5 +1,5 @@
 <template>
-    <yxs-view>
+    <bag-view>
         <a-space :size="8">
             <a-button @click="handleWinBox(1)" type="primary">基本例子</a-button>
             <a-button @click="handleWinBox(2)" type="primary">自定义展示的元素</a-button>
@@ -32,7 +32,7 @@
                 <a-button @click="buttons.close()">Close</a-button>
             </a-space>
         </div>
-    </yxs-view>
+    </bag-view>
 </template>
 <script lang="ts">
 import {defineComponent, ref} from 'vue'

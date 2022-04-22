@@ -1,5 +1,5 @@
 <template>
-    <yxs-view>
+    <bag-view>
         <a-tabs v-model:activeKey="activeKey">
             <a-tab-pane key="1">
                 <template #tab>
@@ -97,7 +97,7 @@
                 <error500/>
             </a-tab-pane>
         </a-tabs>
-    </yxs-view>
+    </bag-view>
 </template>
 <script lang="ts">
 import {AndroidOutlined, AppleOutlined} from '@ant-design/icons-vue';

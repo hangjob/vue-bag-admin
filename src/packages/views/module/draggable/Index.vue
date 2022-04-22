@@ -1,5 +1,5 @@
 <template>
-    <yxs-view>
+    <bag-view>
         <a-row>
             <a-col :xs="24" :sm="24" :md="12" :lg="8" :xl="6" :xxl="4">
                 <Draggable axis="x">
@@ -22,7 +22,7 @@
                 </Draggable>
             </a-col>
         </a-row>
-    </yxs-view>
+    </bag-view>
 </template>
 
 <script lang="ts">

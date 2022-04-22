@@ -1,5 +1,5 @@
 <template>
-	<yxs-view>
+	<bag-view>
 		<a-result status="403" title="抱歉" sub-title="对不起，您访问的页面权限不足.">
 			<template #extra>
 				<a-space>
@@ -8,7 +8,7 @@
 				</a-space>
 			</template>
 		</a-result>
-	</yxs-view>
+	</bag-view>
 </template>
 <script lang="ts">
 import {defineComponent} from 'vue'

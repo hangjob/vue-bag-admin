@@ -1,5 +1,5 @@
 <template>
-	<yxs-view class="icons">
+	<bag-view class="icons">
 		<a-tabs v-model:activeKey="activeKey">
 			<a-tab-pane key="2" tab="日常图标库" force-render>
 				<a-row :gutter="[15,20]">
@@ -63,7 +63,7 @@
 			</a-tab-pane>
 		</a-tabs>
 
-	</yxs-view>
+	</bag-view>
 </template>
 <script lang="ts">
 import {defineComponent, h, ref} from 'vue'
@@ -86,7 +86,7 @@ export default defineComponent({
 		const activeKey = ref('1')
 
 		const filterPrefix = (item: string) => {
-			return item.split('yxs-iconfont-')[1];
+			return item.split('bag-iconfont-')[1];
 		}
 
 		const handleToClipboard = (str: string) => {

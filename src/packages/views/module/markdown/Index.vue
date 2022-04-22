@@ -1,5 +1,5 @@
 <template>
-    <yxs-view class="markdown">
+    <bag-view class="markdown">
         <a-row>
             <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                 <h3 class="title">官方API: <a href="https://ckang1229.gitee.io/vue-markdown-editor/zh/" target="_blank">[Markdown编辑器-文档]</a>
@@ -13,7 +13,7 @@
             <a-button  class="hidden-xs" type="primary" :class="activeClass('editable')" @click="handleSetMode('editable')">编辑与预览模式</a-button>
             <a-button type="primary" :class="activeClass('preview')" @click="handleSetMode('preview')">纯预览模式</a-button>
         </a-space>
-    </yxs-view>
+    </bag-view>
 </template>
 <script lang="ts">
 import {defineComponent, ref} from 'vue'
@@ -43,7 +43,7 @@ export default defineComponent({
             mode.value = str
         }
         const activeClass = (str: string) => {
-            return str === mode.value ? 'yxs-button-color-green' : null;
+            return str === mode.value ? 'bag-button-color-green' : null;
         }
         return {
             content,

@@ -2,7 +2,7 @@ import {defineComponent, h} from 'vue'
 import classes from './Index.module.less'
 
 export default defineComponent({
-    name: 'yxs-card',
+    name: 'bag-card',
     props: {
         loading: {
             type: Boolean,
@@ -18,13 +18,13 @@ export default defineComponent({
         }
     },
     setup(props, {slots}) {
-        const title = slots.title ? <div class={classes['yxs-card-title']}>{slots.title?.()}</div> : null;
-        const className = classes['yxs-card'] + ' ' + props.class;
+        const title = slots.title ? <div class={classes['bag-card-title']}>{slots.title?.()}</div> : null;
+        const className = classes['bag-card'] + ' ' + props.class;
         return () => (
             <a-skeleton loading={props.loading}>
                 <div class={className}>
                     {title}
-                    <div class={classes['yxs-card-content']}>{slots.default?.()}</div>
+                    <div class={classes['bag-card-content']}>{slots.default?.()}</div>
                 </div>
             </a-skeleton>
         )
@@ -33,11 +33,11 @@ export default defineComponent({
     // render(ctx: any) {
     //     const html = [];
     //     if (ctx.$slots.title) {
-    //         html.push(h('div', {class: classes['yxs-card-title']}, [ctx.$slots.title?.()]));
+    //         html.push(h('div', {class: classes['bag-card-title']}, [ctx.$slots.title?.()]));
     //     }
     //     if (ctx.$slots.default) {
-    //         html.push(h('div', {class: classes['yxs-card-content']}, ctx.$slots.default?.()));
+    //         html.push(h('div', {class: classes['bag-card-content']}, ctx.$slots.default?.()));
     //     }
-    //     return h('div', {class: classes['yxs-card'], loading: true}, [html]);
+    //     return h('div', {class: classes['bag-card'], loading: true}, [html]);
     // }
 })

@@ -1,5 +1,5 @@
 <template>
-    <yxs-view>
+    <bag-view>
         <a-row>
             <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                 <a-space :size="8" style="margin-bottom: 10px">
@@ -37,7 +37,7 @@
                 </div>
             </a-col>
         </a-row>
-    </yxs-view>
+    </bag-view>
 </template>
 <script lang="ts">
 

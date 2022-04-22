@@ -1,5 +1,5 @@
 <template>
-    <yxs-card>
+    <bag-card>
         <template v-slot:title>信息</template>
         <div class="project-info">
             <a-table :showHeader="false" size="small" :columns="columns" :data-source="data" bordered
@@ -17,7 +17,7 @@
                 </template>
             </a-table>
         </div>
-    </yxs-card>
+    </bag-card>
 </template>
 <script lang="ts">
 import {defineComponent} from "vue";

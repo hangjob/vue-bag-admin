@@ -10,7 +10,7 @@
 }
 </style>
 <template>
-    <yxs-view>
+    <bag-view>
         <table class="table">
             <tr height="50px">
                 <th bgcolor="LightSalmon" colspan="2" width="16%">时间</th>
@@ -161,7 +161,7 @@
                 <td rowspan="1" bgcolor="Lavender"></td>
             </tr>
         </table>
-    </yxs-view>
+    </bag-view>
 </template>
 <script>
 import {defineComponent} from 'vue'

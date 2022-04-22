@@ -1,12 +1,12 @@
 <template>
-    <yxs-form-table>
+    <bag-form-table>
         <div class="table-action">
             <div class="table-action-btn">
                 <a-space :size="20">
                     <a-button type="primary" size="middle" :loading="tableCurd.loading" @click="tableCurd.refreshTable">
                         刷新
                     </a-button>
-                    <a-button class="yxs-button-color-green" size="middle" @click="tableCurd.create.visible = true">新增
+                    <a-button class="bag-button-color-green" size="middle" @click="tableCurd.create.visible = true">新增
                     </a-button>
                     <a-button type="primary" danger size="middle" @click="tableCurd.deletes.submit">删除</a-button>
                 </a-space>
@@ -37,13 +37,13 @@
                 </a-space>
             </template>
         </a-table>
-    </yxs-form-table>
-    <yxs-modal v-model:visible="tableCurd.create.visible" title="新增" width="85%" @ok="tableCurd.create.submit">
+    </bag-form-table>
+    <bag-modal v-model:visible="tableCurd.create.visible" title="新增" width="85%" @ok="tableCurd.create.submit">
         <Create ref="formCreate" :treeData="tableCurd.tableData"/>
-    </yxs-modal>
-    <yxs-modal v-model:visible="tableCurd.edit.visible" title="编辑" width="85%" @ok="tableCurd.edit.submit">
+    </bag-modal>
+    <bag-modal v-model:visible="tableCurd.edit.visible" title="编辑" width="85%" @ok="tableCurd.edit.submit">
         <Edit ref="formEdit" :treeData="tableCurd.tableData" :id="tableCurd.edit.id"/>
-    </yxs-modal>
+    </bag-modal>
 </template>
 <script lang="ts">
 import {defineComponent, ref} from 'vue';

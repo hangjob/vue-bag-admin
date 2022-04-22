@@ -1,9 +1,9 @@
 <template>
-    <yxs-view>
+    <bag-view>
         <div class="qrcode-container">
             <div class="qrcode"><img src="@/packages/assets/image/zfb.jpg" alt=""></div>
         </div>
-    </yxs-view>
+    </bag-view>
 </template>
 <script lang="ts"></script>
 <style lang="less">

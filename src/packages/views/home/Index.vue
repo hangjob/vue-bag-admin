@@ -1,7 +1,7 @@
 <template>
     <a-row>
         <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-            <yxs-card>
+            <bag-card>
                 <template v-slot:title>欢迎您</template>
                 <div class="welcome">
                     <div class="head"><img src="@/packages/assets/image/yanghang.jpg" alt=""></div>
@@ -13,7 +13,7 @@
                             品茗股份，vue-bag-admin，采用Vite2.0、Vue3.2、TypeScript、JavaScript构建，支持多种写法和调用，完整的框架体系，适合企业中后台响应式管理系统，支持现有业务各种扩展....</p>
                     </div>
                 </div>
-            </yxs-card>
+            </bag-card>
         </a-col>
     </a-row>
     <a-row :gutter="[16,0]">
@@ -26,7 +26,7 @@
     </a-row>
     <a-row :gutter="[16,0]">
         <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="8">
-            <yxs-card :loading="false">
+            <bag-card :loading="false">
                 <div class="money">
                     <div class="money-header">
                         <span class="label">2021全国销售额</span>
@@ -56,10 +56,10 @@
                         <span class="value">￥1362.00</span>
                     </div>
                 </div>
-            </yxs-card>
+            </bag-card>
         </a-col>
         <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="8">
-            <yxs-card :loading="false">
+            <bag-card :loading="false">
                 <div class="money">
                     <div class="money-header">
                         <span class="label">总销售额</span>
@@ -89,10 +89,10 @@
                         <span class="value">￥1298.00</span>
                     </div>
                 </div>
-            </yxs-card>
+            </bag-card>
         </a-col>
         <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="8">
-            <yxs-card :loading="false">
+            <bag-card :loading="false">
                 <div class="money">
                     <div class="money-header">
                         <span class="label">总销售额</span>
@@ -122,12 +122,12 @@
                         <span class="value">￥1298.00</span>
                     </div>
                 </div>
-            </yxs-card>
+            </bag-card>
         </a-col>
     </a-row>
     <a-row :gutter="[16,0]">
         <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="10">
-            <yxs-card :loading="loading" class="profit">
+            <bag-card :loading="loading" class="profit">
                 <template v-slot:title>
                     <div class="profit-header">
                         <div class="profit-header-title">项目盈利占比</div>
@@ -168,7 +168,7 @@
                         </li>
                     </ul>
                 </div>
-            </yxs-card>
+            </bag-card>
         </a-col>
         <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="7">
             <a-skeleton :loading="loading" active>
@@ -183,7 +183,7 @@
     </a-row>
     <a-row :gutter="[16,0]">
         <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="10">
-            <yxs-card :loading="loading">
+            <bag-card :loading="loading">
                 <template v-slot:title>项目进度</template>
                 <div class="schedule-strip">
                     <a-progress :percent="30"/>
@@ -192,10 +192,10 @@
                     <a-progress :percent="100"/>
                     <a-progress :percent="50" :show-info="false"/>
                 </div>
-            </yxs-card>
+            </bag-card>
         </a-col>
         <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="8">
-            <yxs-card :loading="loading">
+            <bag-card :loading="loading">
                 <template v-slot:title>项目进度</template>
                 <div class="schedule-lop">
                     <a-row style="height: 100%" justify="center" align="middle" :wrap="true" :gutter="[32,16]">
@@ -210,10 +210,10 @@
                         </a-col>
                     </a-row>
                 </div>
-            </yxs-card>
+            </bag-card>
         </a-col>
         <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="6">
-            <yxs-card :loading="loading">
+            <bag-card :loading="loading">
                 <template v-slot:title>时间轴</template>
                 <div class="timeline">
                     <a-timeline pending="持续更新中..." :reverse="false">
@@ -223,7 +223,7 @@
                         <a-timeline-item>持续更新中...</a-timeline-item>
                     </a-timeline>
                 </div>
-            </yxs-card>
+            </bag-card>
         </a-col>
     </a-row>
 </template>

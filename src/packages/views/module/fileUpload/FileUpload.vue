@@ -1,8 +1,8 @@
 <template>
-    <yxs-view>
+    <bag-view>
         <a-divider orientation="left">大文件上传</a-divider>
         <Breakpoint/>
-    </yxs-view>
+    </bag-view>
 </template>
 <script lang="ts">
 import {defineComponent, ref} from 'vue';

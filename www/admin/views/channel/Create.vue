@@ -28,7 +28,7 @@
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="图片" name="image">
                         <a-input v-model:value="formState.image" placeholder="输入图片地址" />&nbsp;&nbsp;
-                        <yxs-upload-image @update:image="baseResources.updateImage" :image="formState.image" />
+                        <bag-upload-image @update:image="baseResources.updateImage" :image="formState.image" />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">

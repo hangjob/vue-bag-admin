@@ -1,12 +1,12 @@
 <template>
-    <yxs-view>
+    <bag-view>
         <div id="main" style="width: 630px;">
             <div style="height: 452px; top: 0px; left: 0px;" v-for="(item,index) in items" :key="index">
                 <img src="https://www.jq22.com/demo/jQueryPbl201705071653/imgs/3.png">
                 <p>{{ index }}</p>
             </div>
         </div>
-    </yxs-view>
+    </bag-view>
 </template>
 <script>
 import {defineComponent} from 'vue'
