@@ -2,28 +2,14 @@
 
 ```js
 const $options = {
-    // 获取请求的时候的路由规则
-    token: ['/login', '/refreshToken'],
-    // 请求头
-    headers: {
-        'content-type': 'application/json;charset=UTF-8',
+    config: {
+        httpNetwork: {
+            retry: 3,
+            requestTimeout: 3000,
+            baseURL: '/api',
+            resetPath: '/login',
+        },
     },
-    //消息框消失时间
-    messageDuration: 2.5,
-    //最长请求时间
-    requestTimeout: 6000,
-    //操作正常code码
-    successCode: [1, 1000],
-    // 重连间隔时间
-    retryDelay: 3000,
-    // 最大重试次数
-    retry: 2,
-    // 默认前缀url
-    baseURL: '/api',
-    // 白名单
-    whiteList: ['/login', '/403', '/404', '/500', '/502', '/test'],
-    // 重置路由
-    resetPath: '/login',
 }
 app.use(install, $options).mount('#app')
 ```

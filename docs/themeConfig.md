@@ -1,3 +1,17 @@
+### 具体用法
+
+```js
+const $options = {
+    config: {
+        themeConfig: {
+            menuMaxWidth: 250,
+            tabStyle: 1,
+        }
+    },
+}
+app.use(install, $options).mount('#app')
+```
+
 #### floatingMenu
 
 ?>类型：Boolean
