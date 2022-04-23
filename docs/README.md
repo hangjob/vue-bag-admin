@@ -27,21 +27,3 @@ import 'vue-bag-admin/mock' // 进入mock数据
 
 createApp(App).use(install).mount('#app')
 ```
-
-#### 对接自己业务后端
-
-需要自己的完成对接相关API
-
-```javascript
-['/api/app/router', '/api/user/logout', '/api/user/login', '/api/user/userinfo'] 
-```
-
-返回数据格式如下：
-
-```typescript
-interface resultData {
-    code: number,
-    message: string,
-    data: any,
-}
-```

@@ -10,7 +10,7 @@ const app = createApp(App)
 
 const $options: $optionsType = {
     router: { file, paths, defaults: false },
-    header: {
+    layout: {
         themeBar: shallowRef(ThemeBar),
     },
 }

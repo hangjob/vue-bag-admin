@@ -2,6 +2,8 @@
     <bag-view>
         <a-typography-title :level="3">该页面已开启缓存</a-typography-title>
         <br/>
+        <a-button @click="handleStore">测试store</a-button>
+        <br/>
         <a-form
             ref="formRef"
             :model="formState"
@@ -56,7 +58,7 @@
 <script lang="ts">
 import { ValidateErrorEntity } from 'ant-design-vue/es/form/interface'
 import { defineComponent, reactive, ref, toRaw, UnwrapRef } from 'vue'
-
+import {useStore} from 'vuex'
 interface FormState {
     name: string;
     region: string | undefined;
@@ -111,6 +113,10 @@ export default defineComponent({
         const resetForm = () => {
             formRef.value.resetFields()
         }
+        const store = useStore()
+        const handleStore = ()=>{
+            console.log(store)
+        }
         return {
             formRef,
             labelCol: { span: 4 },
@@ -118,6 +124,7 @@ export default defineComponent({
             other: '',
             formState,
             rules,
+            handleStore,
             onSubmit,
             resetForm,
         }

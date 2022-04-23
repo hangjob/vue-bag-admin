@@ -49,11 +49,11 @@ module.exports = app => {
     });
 };
 ```
+
 ?>至此，后端服务已经部署完成，剩下的数据逻辑
 
 在这个vue-bag-admin中后端服务，我写了一个完整的增删的改查，使用的`sequelize`
 ，它可以帮你很好的写sql查询语句，因为它全部帮你封装好了，我们只需要调用即可，比如简单的增删改查，复杂的点的关联查询，一对多，多对一，多对多，多表关联，查插件已经帮我们内置了，我们使用只需要配置关联字段即可
-
 
 ?> 此处我写一个完整的增删改查
 
@@ -159,3 +159,27 @@ module.exports = MenuController;
 不同的同学，请看我egg.js教程，继承baseController，是因为我需要做很多公共的事情，方便子集继承调用
 
 关于不同ES6 class 语法的同学，强烈推荐看[阮一峰-Class 基本教程](https://es6.ruanyifeng.com/#docs/class)
+
+### 自己后端业务对接
+
+?>不管你的服务是Java还是php也好，需要完成以下4个相关接口
+
+```javascript
+['/api/user/userinfo'] 
+```
+
+?>/api/user/userinfo接口详见mock数据返回结构
+
+```javascript
+['/api/app/router', '/api/user/logout', '/api/user/login']
+```
+
+返回数据格式如下：
+
+```typescript
+interface resultData {
+    code: number,
+    message: string,
+    data: any,
+}
+```
