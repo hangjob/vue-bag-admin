@@ -54,14 +54,11 @@ import Qrcode from './Qrcode.vue'
 import HotTags from './HotTags.vue'
 import Praise from './Praise.vue'
 import Sweet from './Sweet.vue'
-import {apiFind} from '@www/admin/service/article'
 import {ref} from "vue";
 
 const route = useRoute()
 const detailData = ref(null);
-apiFind({id: route.params.id}).then((res: any) => {
-    detailData.value = res;
-})
+
 
 </script>
 <style lang="less" scoped>

@@ -8,6 +8,10 @@ import 'element-plus/theme-chalk/display.css'
 import 'bootstrap/dist/css/bootstrap-grid.min.css'
 import 'element-plus/dist/index.css'
 import ElementPlus from 'element-plus'
+// @ts-ignore
+import Vuesax from 'vuesax3'
+import 'vuesax3/dist/vuesax.css'
+import 'material-icons/iconfont/material-icons.css';
 import { setupRouter } from '@www/web/router'
 import { setupStore } from '@www/web/store'
 import { setupGlobComponents } from '@www/web/components'
@@ -19,4 +23,4 @@ app.use(ElementPlus)
 setupRouter(app)
 setupStore(app)
 setupGlobComponents(app)
-app.use(Equal).mount('#app')
+app.use(Equal).use(Vuesax).mount('#app')

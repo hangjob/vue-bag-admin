@@ -1,5 +1,5 @@
 // 实列化router
-import {createRouter, createWebHashHistory, createWebHistory, RouterOptions} from 'vue-router'
+import {createRouter, createWebHashHistory, RouterOptions} from 'vue-router'
 import type {App} from 'vue'
 
 const router = createRouter({
