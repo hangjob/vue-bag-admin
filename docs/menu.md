@@ -1,4 +1,78 @@
+### 具体用法
+
+```js
+import install from '@/packages/install'
+
+const file = import.meta.globEager('/www/admin/views/**/*.vue')
+const paths = [
+    {
+        name: '首页',
+        path: '/home',
+        icon: '',
+        shows: 1,
+        tabHidden: false,
+        tabFix: false,
+        id: 123,
+        keepAlive: true,
+        filePath: '/admin/views/home/Index.vue',
+    },
+    {
+        name: 'CMS管理',
+        router: '',
+        icon: 'SettingOutlined',
+        shows: 1,
+        id: 678,
+        children: [
+            {
+                name: '栏目管理',
+                path: '/channel',
+                icon: '',
+                id: 345,
+                shows: 1,
+                tabHidden: false,
+                tabFix: false,
+                keepAlive: true,
+                filePath: '/admin/views/channel/Index.vue',
+            },
+        ],
+    }
+]
+const $options: $optionsType = {
+    router: {file, paths, defaults: false},
+}
+app.use(install, $options).mount('#app')
+```
+
+#### file
+
+?>类型：Array
+
+?>传递文件路径、框架会自动根据`filePath`加载相对应该的file文件
+
+#### paths
+
+?>类型：Array
+
+?>框架菜单，包含一些必要的，具体参数请看下放
+
+#### defaults
+
+?>类型：Boolean
+
+?>是否开启默认菜单
+
+#### replaceRouter
+
+?> 类型：Array
+
+?> 替换内置路由，内置路由包含`['/login','/404']`
+
+```ts
+replaceRouter: [{name: 'login', path: '/login', component: () => import('@/example/views/login/Index.vue')}],
+```
+
 ### 添加菜单
+
 ```ts
 const columns = [
     {
@@ -103,7 +177,9 @@ const columns = [
 ]
 export default columns
 ```
+
 ### 数据库模型
+
 ```js
 const dayjs = require('dayjs');
 module.exports = app => {

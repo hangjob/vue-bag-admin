@@ -1,10 +1,10 @@
-import type { App } from 'vue'
+import type {App} from 'vue'
 import setupInit from '@/packages/base'
 import mitt from 'mitt'
 import * as $axios from '@/packages/http/request'
-import { handleError } from '@/packages/debug'
-import { Component, readonly } from 'vue'
-import { themeConfig, httpNetwork } from '@/packages/config'
+import {handleError} from '@/packages/debug'
+import {Component, readonly} from 'vue'
+import {themeConfig, httpNetwork} from '@/packages/config'
 
 /**
  * router: {paths:[菜单],file:[菜单路由文件]},defaults:true,开启默认路由
@@ -24,10 +24,6 @@ interface $optionsType {
     },
     store?: {
         module: object,
-        namespace?: string
-    },
-    priest?: {
-        list: Array<any>
     },
     layout?: {
         themeBar: any // 接受一个组件
@@ -48,17 +44,13 @@ const install = (app: App, options?: $optionsType) => {
         },
         configAppStore: {
             module: options?.store?.module || {},
-            namespace: options?.store?.namespace,
-        },
-        configAppPriest: {
-            list: options?.priest?.list || [],
         },
         configAppLayout: {
             themeBar: options?.layout?.themeBar,
         },
         configApp: {
-            themeConfig: { ...themeConfig, ...options?.config?.themeConfig },
-            httpNetwork: { ...httpNetwork, ...options?.config?.httpNetwork },
+            themeConfig: {...themeConfig, ...options?.config?.themeConfig},
+            httpNetwork: {...httpNetwork, ...options?.config?.httpNetwork},
         },
     }
     console.log('_options', _options)

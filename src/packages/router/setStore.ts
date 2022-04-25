@@ -1,28 +1,28 @@
-import { App } from 'vue'
+import {App} from 'vue'
 import store from '@/packages/store'
-import { defaultMenu, defaultPrjMenu } from '@/packages/config/defaultMenu'
+import {defaultMenu, defaultPrjMenu} from '@/packages/config/defaultMenu'
 import router from '@/packages/router/index'
-import { findChildrenDepth, findContainingObject } from '@/packages/utils/lodash'
-import { getAllParentArr } from '@/packages/utils/utils'
+import {findChildrenDepth, findContainingObject} from '@/packages/utils/lodash'
+import {getAllParentArr} from '@/packages/utils/utils'
 
 /**
  * defaults=true 设置默认菜单
  * @param app
  */
 const setAppRouterStore = (app: App) => {
-    const { defaults = true, file = [], paths = [] } = app.config.globalProperties?.configAppRouter || {}
+    const {defaults = true, file = [], paths = []} = app.config.globalProperties?.configAppRouter || {}
     if (defaults) {
         store.commit('app/updateMenuList', defaultMenu)
         store.commit('app/updateProjectMenu', defaultPrjMenu)
     }
-    store.commit('app/updateAppRouter', { defaults, file, paths, router })
+    store.commit('app/updateAppRouter', {defaults, file, paths, router})
 }
 
 /**
  * 获取固定菜单
  */
 const defaultTabFix = () => {
-    return findContainingObject({ key: 'tabFix', value: true }, store.state.app.menuList)
+    return findContainingObject({key: 'tabFix', value: true}, store.state.app.menuList)
 }
 
 

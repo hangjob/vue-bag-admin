@@ -1,6 +1,7 @@
 ### 具体用法
 
 ```js
+import install from '@/packages/install'
 const $options = {
     config: {
         themeConfig: {
