@@ -59,7 +59,6 @@ import {ref} from "vue";
 const route = useRoute()
 const detailData = ref(null);
 
-
 </script>
 <style lang="less" scoped>
 .article {

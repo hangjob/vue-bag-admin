@@ -45,8 +45,8 @@ import 'vue-cropper/dist/index.css'
 import { VueCropper } from 'vue-cropper'
 import { apiUploadImage } from '@/packages/service/upload'
 import { message } from 'ant-design-vue'
-import base64ToFile from '__ROOT__/web-utils/file/base64ToFile'
-import fileToBase64 from '__ROOT__/web-utils/file/fileToBase64'
+import base64ToFile from '__ROOT__/bag-utils/file/base64ToFile'
+import fileToBase64 from '__ROOT__/bag-utils/file/fileToBase64'
 
 
 interface FileItem {
