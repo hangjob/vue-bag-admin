@@ -3,7 +3,7 @@ node_modules
 dist
 dist-ssr
 egg
-web-utils
+bag-utils
 www
 设计模式
 *.local
