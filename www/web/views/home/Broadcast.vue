@@ -92,9 +92,9 @@ export default defineComponent({
     height: 300px;
     background: #fff url("/www/web/assets/image/adEBooks.png") no-repeat center bottom;
     text-align: center;
-    border-radius: var(--yh-border-radius-base);
+    border-radius: var(--bag-border-radius-base);
     padding-top: 30px;
-    margin-top: var(--yh-margin-base);
+    margin-top: var(--bag-margin-base);
     h3 {
         font-size: 38px;
         line-height: 40px;
@@ -119,12 +119,12 @@ export default defineComponent({
 
 .banner-ib {
     position: relative;
-    margin-top: var(--yh-margin-base);
+    margin-top: var(--bag-margin-base);
     &::before {
         content: '';
         position: absolute;
         z-index: 0;
-        border-radius: var(--yh-border-radius-base);
+        border-radius: var(--bag-border-radius-base);
         top: 1px;
         right: 1px;
         bottom: 1px;
@@ -166,7 +166,7 @@ export default defineComponent({
     background: linear-gradient(to bottom right,
     rgba(71, 114, 217, 0.92),
     rgba(109, 71, 217, 0.92));
-    border-radius: var(--yh-border-radius-base);
+    border-radius: var(--bag-border-radius-base);
     text-align: center;
     color: #282828;
     width: 100%;
@@ -234,14 +234,14 @@ export default defineComponent({
     flex-direction: column;
     width: 100%;
     height: calc(100% - 20px);
-    margin-top: var(--yh-margin-base);
+    margin-top: var(--bag-margin-base);
     .update-number {
         background: linear-gradient(135deg,
         rgba(71, 114, 217, 0.92),
         rgba(0, 220, 175, 0.92)),
         url("/www/web/assets/image/mdbg.svg") no-repeat 50%;
         position: relative;
-        border-radius: var(--yh-border-radius-base);
+        border-radius: var(--bag-border-radius-base);
         color: #282828;
         display: flex;
         flex-direction: column;
@@ -257,7 +257,7 @@ export default defineComponent({
             content: '';
             position: absolute;
             z-index: 0;
-            border-radius: var(--yh-border-radius-base);
+            border-radius: var(--bag-border-radius-base);
             top: 1px;
             right: 1px;
             bottom: 1px;

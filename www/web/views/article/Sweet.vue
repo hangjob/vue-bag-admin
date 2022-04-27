@@ -14,7 +14,7 @@ export default defineComponent({
 </script>
 <style lang="less" scoped>
 .sweet{
-    margin-top: var(--yh-margin-base);
+    margin-top: var(--bag-margin-base);
     display: flex;
     justify-content: flex-end;
 

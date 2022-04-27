@@ -33,10 +33,10 @@ export default defineComponent({
 </script>
 <style lang="less" scoped>
 .toplevel {
-    border-radius: var(--yh-border-radius-base);
+    border-radius: var(--bag-border-radius-base);
     border: 1px solid #f9f7f7;
-    padding: var(--yh-padding-base);
-    margin-top: var(--yh-margin-base);
+    padding: var(--bag-padding-base);
+    margin-top: var(--bag-margin-base);
     background-color: #fff;
 
     ul {

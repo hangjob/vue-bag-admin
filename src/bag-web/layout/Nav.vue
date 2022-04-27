@@ -3,7 +3,7 @@
         <div class="container">
             <el-row>
                 <el-col :xs="24" :sm="1" :md="2" :lg="1" :xl="1">
-                    <div class="nav-logo"><img src="@www/web/assets/image/logo.png" alt=""></div>
+                    <div class="nav-logo"><img src="@/bag-web/assets/image/logo.png" alt=""></div>
                 </el-col>
                 <el-col :xs="24" :sm="20" :md="18" :lg="15" :xl="15">
                     <div class="nav-menu">
@@ -73,7 +73,6 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
-
 const inputValue = ref()
 </script>
 <style lang="less" scoped>
@@ -89,7 +88,6 @@ const inputValue = ref()
     }
 
     &-menu {
-        height: @nah;
         display: flex;
         align-items: center;
 

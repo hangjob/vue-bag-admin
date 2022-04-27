@@ -41,7 +41,7 @@ export default defineComponent({
     border-radius: 2px;
     background-clip: padding-box;
     background-color: #fff;
-    margin-top: var(--yh-margin-base);
+    margin-top: var(--bag-margin-base);
 
     &-heading {
         position: relative;
@@ -52,7 +52,7 @@ export default defineComponent({
 
         &-title {
             h3 {
-                color: var(--yh-text-color-black);
+                color: var(--bag-text-color-black);
                 font-size: 16px;
             }
         }
@@ -68,10 +68,10 @@ export default defineComponent({
                     margin-left: 15px;
                     a {
                         text-decoration: none;
-                        color: var(--yh-text-color-black);
+                        color: var(--bag-text-color-black);
 
                         &:hover {
-                            color: var(--yh-text-hover-color-primary);
+                            color: var(--bag-text-hover-color-primary);
                         }
                     }
                 }

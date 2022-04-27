@@ -13,6 +13,6 @@ export default defineComponent({
 <style lang="less">
 html, body {
     background: #f4f6f8;
-    font-size: var(--yh-font-size-base);
+    font-size: var(--bag-font-size-base);
 }
 </style>

@@ -213,13 +213,13 @@ const articles = ref([
             display: flex;
 
             h3 {
-                font-size: var(--yh-font-size-large);
-                color: var(--yh-text-color-black);
+                font-size: var(--bag-font-size-large);
+                color: var(--bag-text-color-black);
                 margin-bottom: 10px;
                 &:hover {
                     text-decoration: underline;
                     cursor: pointer;
-                    color: var(--yh-text-hover-color-primary);
+                    color: var(--bag-text-hover-color-primary);
                 }
             }
             a {

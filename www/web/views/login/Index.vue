@@ -132,12 +132,12 @@ export default defineComponent({
         box-sizing: border-box;
         margin: auto;
         background-color: #FFFFFF;
-        border-radius: var(--yh-border-radius-base);
+        border-radius: var(--bag-border-radius-base);
         width: 400px;
         position: relative;
 
         .tab {
-            padding: 0 var(--yh-padding-base);
+            padding: 0 var(--bag-padding-base);
 
             ul {
                 li {
@@ -167,7 +167,7 @@ export default defineComponent({
         }
 
         .tab-content {
-            padding: 0 var(--yh-padding-base);
+            padding: 0 var(--bag-padding-base);
 
             .phone-group {
                 display: flex;
@@ -228,7 +228,7 @@ export default defineComponent({
             padding: 12px 24px;
             color: grey;
             font-size: 13px;
-            margin-top: var(--yh-margin-base);
+            margin-top: var(--bag-margin-base);
         }
 
         .sign-social {
@@ -238,7 +238,7 @@ export default defineComponent({
             color: #8590a6;
             height: 60px;
             line-height: 60px;
-            padding: 0 var(--yh-padding-base);
+            padding: 0 var(--bag-padding-base);
 
             .social-group {
                 display: flex;

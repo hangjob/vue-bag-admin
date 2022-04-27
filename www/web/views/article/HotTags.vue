@@ -27,7 +27,7 @@ export default defineComponent({
 </script>
 <style lang="less" scoped>
 .HotTags {
-    background-color: var(--yh-color-white);
+    background-color: var(--bag-color-white);
     padding: 15px 15px 5px 15px;
     margin-top: 20px;
     &-head {

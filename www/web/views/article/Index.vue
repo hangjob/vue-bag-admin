@@ -67,15 +67,15 @@ const detailData = ref(null);
 
     &-body {
         position: relative;
-        background-color: var(--yh-color-white);
-        border-radius: var(--yh-border-radius-base);
+        background-color: var(--bag-color-white);
+        border-radius: var(--bag-border-radius-base);
         overflow: hidden;
 
         .breadcrumb {
-            background-color: var(--yh-color-white);
-            font-size: var(--yh-font-size-extra-small);
+            background-color: var(--bag-color-white);
+            font-size: var(--bag-font-size-extra-small);
             margin-bottom: 0;
-            padding: var(--yh-padding-base);
+            padding: var(--bag-padding-base);
             border-bottom: 1px solid #f5f5f5;
 
             li {
@@ -96,16 +96,16 @@ const detailData = ref(null);
         }
 
         .content {
-            padding: var(--yh-padding-base);
+            padding: var(--bag-padding-base);
 
             .metas {
 
                 h1 {
                     line-height: 1.45;
                     margin-bottom: 5px;
-                    font-size: var(--yh-font-size-large);
+                    font-size: var(--bag-font-size-large);
                     font-weight: bold;
-                    color: var(--yh-text-color-primary);
+                    color: var(--bag-text-color-primary);
                 }
 
                 &-action {

@@ -20,9 +20,9 @@
 <style lang="less" scoped>
 .footer {
     background: #1f2730;
-    color: var(--yh-color-white);
+    color: var(--bag-color-white);
     padding: 10px 0;
-    margin-top: var(--yh-margin-base);
+    margin-top: var(--bag-margin-base);
 
     .list-unsettled {
         li {
@@ -32,7 +32,7 @@
 
             a {
                 text-decoration: none;
-                color: var(--yh-color-white);
+                color: var(--bag-color-white);
             }
         }
     }

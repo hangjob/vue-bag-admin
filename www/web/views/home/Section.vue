@@ -44,7 +44,7 @@ const banners = ref([
 <style lang="less" scoped>
 .section {
     .banner {
-        margin-top: var(--yh-margin-base);
+        margin-top: var(--bag-margin-base);
 
         &-item {
             position: relative;
@@ -69,7 +69,7 @@ const banners = ref([
                 background: rgba(0, 0, 0, 0.3);
                 bottom: 0;
                 width: 100%;
-                color: var(--yh-text-color-white);
+                color: var(--bag-text-color-white);
                 padding: 10px;
             }
         }
@@ -108,7 +108,7 @@ const banners = ref([
                 font-weight: normal;
                 padding-top: 15px;
                 padding-bottom: 15px;
-                color: var(--yh-text-color-brown);
+                color: var(--bag-text-color-brown);
             }
         }
     }

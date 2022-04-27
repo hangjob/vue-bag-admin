@@ -59,11 +59,11 @@ const items = ref([{}, {}, {}, {}, {}, {}, {}, {}, {}, {}])
                 }
 
                 a {
-                    color: var(--yh-text-color-black);
+                    color: var(--bag-text-color-black);
                     text-decoration: none;
 
                     &:hover {
-                        color: var(--yh-text-hover-color-primary);
+                        color: var(--bag-text-hover-color-primary);
                         text-decoration: underline;
                     }
                 }

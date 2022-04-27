@@ -1,16 +1,18 @@
-import type { App } from 'vue'
+import type {App} from 'vue'
 import mitt from 'mitt'
 import Equal from 'equal-vue'
-import '@/bag-web/theme/root.css'
+import ElementPlus from 'element-plus'
+import '@/bag-web/style/index.less'
 import 'equal-vue/dist/style.css'
-// @ts-ignore
-import Vuesax from 'vuesax3'
-import 'vuesax3/dist/vuesax.css'
-import 'material-icons/iconfont/material-icons.css'
+import '@/bag-web/theme/root.css'
+import 'element-plus/theme-chalk/display.css'
 import 'bootstrap/dist/css/bootstrap-grid.min.css'
-import { readonly } from 'vue'
-import { setupGlobComponents } from '@/bag-web/components'
-import { setupStore } from '@/bag-web/store'
+import 'element-plus/dist/index.css'
+import 'material-icons/iconfont/material-icons.css';
+import {readonly} from 'vue'
+import {setupGlobComponents} from '@/bag-web/components'
+import {setupStore} from '@/bag-web/store'
+import {setupRouter} from "@/bag-web/router";
 
 interface $optionsType {
     router?: {
@@ -21,7 +23,7 @@ interface $optionsType {
 const install = (app: App, options?: $optionsType) => {
     const _options = {
         configAppRouter: {
-            file: options?.router?.routes || [],
+            routes: options?.router?.routes || [],
         },
     }
     console.log('_options', _options)
@@ -29,10 +31,13 @@ const install = (app: App, options?: $optionsType) => {
     app.provide('$configAppOptions', readonly(_options))
     app.provide('$mitt', mitt())
     app.use(Equal)
-    app.use(Vuesax)
+    app.use(ElementPlus)
     app.use(setupGlobComponents)
     app.use(setupStore)
-    app.mount('#app')
+    app.use(setupRouter)
 }
 
 export default install
+export {
+    $optionsType
+}

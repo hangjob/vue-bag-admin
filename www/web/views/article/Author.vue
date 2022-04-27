@@ -33,9 +33,9 @@ export default defineComponent({})
 </script>
 <style lang="less" scoped>
 .author {
-    background-color: var(--yh-color-white);
-    border-radius: var(--yh-border-radius-base);
-    padding-bottom:  var(--yh-padding-base);
+    background-color: var(--bag-color-white);
+    border-radius: var(--bag-border-radius-base);
+    padding-bottom:  var(--bag-padding-base);
     &-head {
         background-position: 0 50%;
         background-size: 100% auto;

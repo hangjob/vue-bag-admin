@@ -24,10 +24,10 @@ export default defineComponent({
 </script>
 <style lang="less">
 .praise {
-    background-color: var(--yh-color-white);
-    padding: var(--yh-padding-base);
-    margin-top: var(--yh-margin-base);
-    border-radius: var(--yh-border-radius-base);
+    background-color: var(--bag-color-white);
+    padding: var(--bag-padding-base);
+    margin-top: var(--bag-margin-base);
+    border-radius: var(--bag-border-radius-base);
 
     &-head {
         font-size: 14px;
@@ -40,7 +40,7 @@ export default defineComponent({
             display: inline-block;
             text-align: center;
             position: relative;
-            margin-top: var(--yh-margin-base);
+            margin-top: var(--bag-margin-base);
             img {
                 object-fit: cover;
                 width: 45px;
@@ -49,7 +49,7 @@ export default defineComponent({
             }
 
             p {
-                color: var(--yh-text-color-brown);
+                color: var(--bag-text-color-brown);
             }
             .weight{
                 position: absolute;

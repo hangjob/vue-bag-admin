@@ -79,7 +79,7 @@ const inputValue = ref()
 <style lang="less" scoped>
 @nah: 60px;
 .nav {
-    background-color: var(--yh-color-white);
+    background-color: var(--bag-color-white);
 
     &-logo {
         display: flex;
@@ -105,7 +105,7 @@ const inputValue = ref()
                 }
 
                 a {
-                    color: var(--yh-text-color-black);
+                    color: var(--bag-text-color-black);
                     text-decoration: none;
                     display: flex;
                     align-items: center;
@@ -119,7 +119,7 @@ const inputValue = ref()
                         vertical-align: top;
 
                         &:hover {
-                            color: var(--yh-text-color-primary);
+                            color: var(--bag-text-color-primary);
                         }
                     }
                 }
@@ -134,8 +134,8 @@ const inputValue = ref()
                         z-index: 1000;
                         min-width: 160px;
                         list-style: none;
-                        color: var(--yh-text-color-primary);
-                        background-color: var(--yh-color-white);
+                        color: var(--bag-text-color-primary);
+                        background-color: var(--bag-color-white);
                         border-radius: 3px;
                         box-shadow: 0 20px 30px rgb(83 88 93 / 5%), 0 0 30px rgb(83 88 93 / 10%);
                         background-clip: padding-box;

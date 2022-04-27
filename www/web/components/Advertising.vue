@@ -15,7 +15,7 @@ const props = defineProps({
 </script>
 <style lang="less" scoped>
 .advertising {
-    background-color: var(--yh-color-white);
+    background-color: var(--bag-color-white);
 
     &-body {
         width: 100%;

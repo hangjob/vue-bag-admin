@@ -14,11 +14,11 @@ export default defineComponent({})
 </script>
 <style lang="less" scoped>
 .qrcode{
-    background-color: var(--yh-color-white);
-    padding: var(--yh-padding-base);
-    margin-top: var(--yh-margin-base);
+    background-color: var(--bag-color-white);
+    padding: var(--bag-padding-base);
+    margin-top: var(--bag-margin-base);
     display: flex;
-    border-radius: var(--yh-border-radius-base);
+    border-radius: var(--bag-border-radius-base);
     img{
         width: 100px;
         height: 100px;
