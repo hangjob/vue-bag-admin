@@ -3,14 +3,6 @@
         <LayoutNav/>
     </header>
     <main>
-<!--        <div>-->
-<!--            <section></section>-->
-<!--            <article></article>-->
-<!--        </div>-->
-<!--        <div>-->
-<!--            <aside></aside>-->
-<!--            <figure></figure>-->
-<!--        </div>-->
         <router-view />
     </main>
     <footer>
@@ -21,7 +13,7 @@
 import LayoutNav from '@www/web/layout/Nav.vue'
 import LayoutFooter from '@www/web/layout/Footer.vue'
 import user from '@www/web/store/user'
-
+layout
 const userStore = user()
 
 const handleUpdate = () => {

@@ -1,0 +1,19 @@
+:root {
+    --bag-color-primary: #409eff;
+    --bag-color-white: #ffffff;
+    --bag-text-color-white: #ffffff;
+    --bag-text-color-primary: #409eff;
+    --bag-text-hover-color-primary: #409eff;
+    --bag-text-color-black: #333333;
+    --bag-text-color-brown: #616161;
+    --bag-font-size-extra-large: 20px;
+    --bag-font-size-large: 18px;
+    --bag-font-size-medium: 16px;
+    --bag-font-size-base: 14px;
+    --bag-font-size-small: 13px;
+    --bag-font-size-extra-small: 12px;
+    --bag-font-weight-primary: 500;
+    --bag-margin-base: 20px;
+    --bag-padding-base: 15px;
+    --bag-border-radius-base: 4px;
+}
