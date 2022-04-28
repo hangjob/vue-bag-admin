@@ -6,10 +6,10 @@ import 'vuesax3/dist/vuesax.css'
 import install from "@/bag-web/install";
 import {$optionsType} from "@/bag-web/install";
 import routes from "@www/web/router";
-
+import {setupGlobComponents} from '@www/web/components'
 const app = createApp(App)
 
 const $options: $optionsType = {
     router: {routes},
 }
-app.use(install, $options).mount('#app')
+app.use(setupGlobComponents).use(install,$options).mount('#app')

@@ -10,11 +10,7 @@ const routes = [
                 component: () => import('@www/web/views/article/Index.vue'),
             },
         ],
-    },
-    {
-        path: '/login', name: 'login', meta: {title: '登录'},
-        component: () => import('@www/web/views/login/Index.vue'),
-    },
+    }
 ];
 
 export default routes;

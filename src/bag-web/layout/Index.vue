@@ -1,15 +1,15 @@
 <template>
     <header>
-        <LayoutNav/>
+        <LayoutNav />
     </header>
     <main>
-        <router-view />
+        <router-view></router-view>
     </main>
     <footer>
-        <LayoutFooter/>
+        <LayoutFooter />
     </footer>
 </template>
 <script setup lang="ts">
-import LayoutNav from '@www/web/layout/Nav.vue'
-import LayoutFooter from '@www/web/layout/Footer.vue'
+import LayoutNav from '@/bag-web/layout/Nav.vue'
+import LayoutFooter from '@/bag-web/layout/Footer.vue'
 </script>
