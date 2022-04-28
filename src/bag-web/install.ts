@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap-grid.min.css'
 import 'element-plus/dist/index.css'
 import 'material-icons/iconfont/material-icons.css';
 import {readonly} from 'vue'
-
+import {setupGlobComponents} from '@/bag-web/components'
 import {setupStore} from '@/bag-web/store'
 import {setupRouter} from "@/bag-web/router";
 
@@ -33,6 +33,7 @@ const install = (app: App, options?: $optionsType) => {
     app.use(Equal)
     app.use(ElementPlus)
     app.use(setupStore)
+    app.use(setupGlobComponents)
     app.use(setupRouter)
 }
 
