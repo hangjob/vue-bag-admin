@@ -7,5 +7,6 @@ declare global {
         WinBox: any;
         Player: any;
         utils: any;
+        BAGCONFIG: any;
     }
 }

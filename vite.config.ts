@@ -38,7 +38,7 @@ export default ({mode}: { mode: any }) => {
         build.lib = lib
     }
     return defineConfig({
-        base: './',
+        base: '/',
         plugins: createVitePlugins({variables: process.env}),
         publicDir: 'public',
         resolve: {

@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory, createWebHistory, RouterOptions } f
 import type { App } from 'vue'
 
 const router = createRouter({
-    history: createWebHistory('/web.html'),
+    history: createWebHashHistory(),
     routes: [
         {
             path: '/',
