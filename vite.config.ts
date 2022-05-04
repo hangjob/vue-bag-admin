@@ -2,6 +2,7 @@ import {defineConfig, loadEnv} from 'vite'
 import setProBuild from './build/pro'
 import setLibBuild from './build/lib'
 import setUtilsBuild from './build/utils'
+import setWebBuild from './build/web'
 import createVitePlugins from './build/plugin/index'
 import {configServer} from './build/server/index'
 import {configCss} from './build/css/index'
@@ -31,6 +32,11 @@ export default ({mode}: { mode: any }) => {
         build.emptyOutDir = emptyOutDir
         build.lib = lib
         build.rollupOptions = rollupOptions
+    }
+    if (mode === 'web') {
+        const {emptyOutDir, lib} = setWebBuild()
+        build.emptyOutDir = emptyOutDir
+        build.lib = lib
     }
     if (mode === 'utils') {
         const {emptyOutDir, lib} = setUtilsBuild()

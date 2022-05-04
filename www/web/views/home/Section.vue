@@ -10,7 +10,7 @@
                 </el-carousel-item>
             </el-carousel>
         </aside>
-        <web-card class="hot" title="热门图集" :more="[{name:'查看更多'}]">
+        <bag-card class="hot" title="热门图集" :more="[{name:'查看更多'}]">
             <template v-slot:body>
                 <el-row :gutter="15">
                     <el-col v-for="item in banners" :key="item" :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
@@ -21,7 +21,7 @@
                     </el-col>
                 </el-row>
             </template>
-        </web-card>
+        </bag-card>
         <Article />
     </div>
 </template>

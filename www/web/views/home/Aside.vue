@@ -1,6 +1,7 @@
 <template>
     <div class="aside">
-        <web-card class="hot" title="最新更新">
+        <Join/>
+        <bag-card class="hot" title="最新更新">
             <template v-slot:body>
                 <ul class="list">
                     <li v-for="(item,idx) in items" :key="idx">
@@ -9,9 +10,9 @@
                     </li>
                 </ul>
             </template>
-        </web-card>
-        <Advertising height="150px" :images="banner1" />
-        <web-card class="hot" title="推荐资讯">
+        </bag-card>
+        <bag-advertising height="150px" :images="banner1" />
+        <bag-card class="hot" title="推荐资讯">
             <template v-slot:body>
                 <ul class="list">
                     <li v-for="(item,idx) in items" :key="idx">
@@ -20,9 +21,9 @@
                     </li>
                 </ul>
             </template>
-        </web-card>
-        <Advertising height="300px" :images="banner2" />
-        <web-card class="hot" title="推荐资讯">
+        </bag-card>
+        <bag-advertising height="300px" :images="banner2" />
+        <bag-card class="hot" title="推荐资讯">
             <template v-slot:body>
                 <ul class="list">
                     <li v-for="(item,idx) in items" :key="idx">
@@ -31,14 +32,14 @@
                     </li>
                 </ul>
             </template>
-        </web-card>
+        </bag-card>
     </div>
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
 import banner1 from '@www/web/assets/image/banner-1.jpg'
 import banner2 from '@www/web/assets/image/banner-2.jpg'
-
+import Join from '@www/web/views/home/Join.vue'
 const items = ref([{}, {}, {}, {}, {}, {}, {}, {}, {}, {}])
 </script>
 <style lang="less" scoped>

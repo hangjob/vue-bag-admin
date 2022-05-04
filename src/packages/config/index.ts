@@ -32,7 +32,7 @@ const httpNetwork = {
     retryDelay: 3000,
     // 最大重试次数
     retry: 2,
-    // 默认前缀url
+    // 默认请求前缀url
     baseURL: '/api',
     // 白名单
     whiteList: ['/login', '/403', '/404', '/500', '/502', '/test'],

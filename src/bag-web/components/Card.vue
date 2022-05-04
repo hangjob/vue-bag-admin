@@ -41,7 +41,7 @@ export default defineComponent({
     border-radius: 2px;
     background-clip: padding-box;
     background-color: #fff;
-    margin-top: var(--yh-margin-base);
+    margin-top: var(--bag-margin-base);
 
     &-heading {
         position: relative;

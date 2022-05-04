@@ -65,8 +65,8 @@ const paths = addUniqueId([
                 keepAlive: true,
                 filePath: '/packages/views/sys/member/Index.vue',
             },
-        ]
-    }
+        ],
+    },
 ], '_local')
 
 export default paths

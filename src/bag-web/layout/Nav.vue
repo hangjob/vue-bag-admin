@@ -8,35 +8,19 @@
                 <el-col :xs="24" :sm="20" :md="18" :lg="15" :xl="15">
                     <div class="nav-menu">
                         <ul>
-                            <li>
-                                <div><a href="">首页</a></div>
-                            </li>
-                            <li>
+                            <li v-for="item in menuList" :key="item.id">
                                 <div>
-                                    <a href="">绩效管理
-                                        <it-icon name="arrow_drop_down" outlined />
-                                    </a>
+                                    <router-link to="">{{ item.name }}
+                                        <it-icon v-if="item.children && item.children.length" name="arrow_drop_down"
+                                                 outlined
+                                        />
+                                    </router-link>
                                 </div>
-                                <ul class="dropdown-menu">
-                                    <li><a href="">工时登记</a></li>
-                                    <li><a href="">工作日志</a></li>
-                                    <li><a href="">绩效列表</a></li>
+                                <ul class="dropdown-menu" v-if="item.children && item.children.length">
+                                    <li v-for="todo in item.children">
+                                        <router-link to="">{{ todo.name }}</router-link>
+                                    </li>
                                 </ul>
-                            </li>
-                            <li>
-                                <div><a href="">博客</a></div>
-                            </li>
-                            <li>
-                                <div><a href="">网址管理</a></div>
-                            </li>
-                            <li>
-                                <div><a href="">统计</a></div>
-                            </li>
-                            <li>
-                                <div><a href="">讨论</a></div>
-                            </li>
-                            <li>
-                                <div><a href="">我的工位</a></div>
                             </li>
                         </ul>
                     </div>
@@ -58,7 +42,9 @@
                                         </a>
                                     </div>
                                     <ul class="dropdown-menu">
-                                        <li><router-link to="/login">登录</router-link></li>
+                                        <li>
+                                            <router-link to="/login">登录</router-link>
+                                        </li>
                                         <li><a href="">注册</a></li>
                                         <li><a target="_blank" href="/admin.html">后台管理</a></li>
                                     </ul>
@@ -73,7 +59,14 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
+import { webChannelAll } from '@/bag-web/service/app'
+import { toTree } from '@/packages/utils/utils'
+
 const inputValue = ref()
+const menuList = ref([])
+webChannelAll().then((res: Array<any>) => {
+    menuList.value = toTree(res)
+})
 </script>
 <style lang="less" scoped>
 @nah: 60px;
@@ -174,9 +167,11 @@ const inputValue = ref()
 
         .nav-menu {
             flex-shrink: 0;
-            a{
+
+            a {
                 padding-right: 0;
             }
+
             ul li ul.dropdown-menu {
                 right: 0;
                 left: unset;

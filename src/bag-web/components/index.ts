@@ -3,8 +3,8 @@ import Card from './Card.vue'
 import Advertising from './Advertising.vue'
 
 const setupGlobComponents = (app: App) => {
-    app.component('WebCard', Card)
-    app.component('Advertising', Advertising)
+    app.component('bag-card', Card)
+    app.component('bag-advertising', Advertising)
 }
 
 

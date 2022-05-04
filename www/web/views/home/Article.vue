@@ -1,5 +1,5 @@
 <template>
-    <web-card class="hot" title="最近更新" :more="[{name:'网络工具'},{name:'媒体工具'},{name:'应用软件'}]">
+    <bag-card class="hot" title="最近更新" :more="[{name:'网络工具'},{name:'媒体工具'},{name:'应用软件'}]">
         <template v-slot:body>
             <el-row>
                 <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
@@ -87,7 +87,7 @@
                 </el-col>
             </el-row>
         </template>
-    </web-card>
+    </bag-card>
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'

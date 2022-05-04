@@ -70,7 +70,7 @@ const validatPhone = async (rule: RuleObject, value: string) => {
             return Promise.reject('请填写正确的手机号')
         }
     } else {
-        return Promise.resolve()
+        return Promise.reject('填写手机号')
     }
 }
 

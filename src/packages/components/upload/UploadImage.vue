@@ -29,7 +29,7 @@
                  v-for="(item,idx) in preview.list"
             >
                 <a-image style="object-fit:cover;height:100%;" :height="100" :width="100"
-                         :key="item" :src="item.url" alt=""
+                         :key="item" :src="baseURL + item.url" alt=""
                 />
                 <DeleteOutlined
                     style="position: absolute;top: 0;right: 0;cursor: pointer;background-color: #36cfc9;padding: 5px;color:#fff"
@@ -40,13 +40,13 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, ref, watch } from 'vue'
+import { defineComponent, inject, reactive, ref, watch } from 'vue'
 import 'vue-cropper/dist/index.css'
 import { VueCropper } from 'vue-cropper'
 import { apiUploadImage } from '@/packages/service/upload'
 import { message } from 'ant-design-vue'
-import base64ToFile from '__ROOT__/bag-utils/file/base64ToFile'
-import fileToBase64 from '__ROOT__/bag-utils/file/fileToBase64'
+import base64ToFile from '@/bag-utils/file/base64ToFile'
+import fileToBase64 from '@/bag-utils/file/fileToBase64'
 
 
 interface FileItem {
@@ -93,6 +93,8 @@ export default defineComponent({
     },
     setup(props, { emit }) {
         const cropper = ref()
+        const { configApp } = <any>inject('$configAppOptions')
+        const { baseURL } = configApp?.httpNetwork;
 
         const preview = reactive({
             list: <any>[],
@@ -162,6 +164,7 @@ export default defineComponent({
             cropper,
             tailor,
             preview,
+            baseURL
         }
     },
 })

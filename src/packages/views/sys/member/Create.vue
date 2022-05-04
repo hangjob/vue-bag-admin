@@ -35,7 +35,7 @@
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="姓名" name="username">
-                        <a-input v-model:value="formState.username" placeholder="输入用户姓名"/>
+                        <a-input v-model:value="formState.username" placeholder="输入用户姓名" />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
@@ -53,17 +53,17 @@
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="年龄" name="age">
-                        <a-input v-model:value="formState.age" placeholder="输入年龄"/>
+                        <a-input v-model:value="formState.age" placeholder="输入年龄" />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="邮箱" name="email">
-                        <a-input v-model:value="formState.email" placeholder="输入邮箱"/>
+                        <a-input v-model:value="formState.email" placeholder="输入邮箱" />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="手机号" name="phone">
-                        <a-input v-model:value="formState.phone" placeholder="输入手机号"/>
+                        <a-input v-model:value="formState.phone" placeholder="输入手机号" />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
@@ -76,7 +76,7 @@
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="描述" name="describe">
-                        <a-textarea v-model:value="formState.describe" placeholder="输入描述"/>
+                        <a-textarea v-model:value="formState.describe" placeholder="输入描述" />
                     </a-form-item>
                 </a-col>
             </a-row>
@@ -84,17 +84,17 @@
     </div>
 </template>
 <script lang="ts">
-import {defineComponent, reactive, ref, toRaw, UnwrapRef} from 'vue'
-import {apiAll as apiBranchAll} from '@/packages/service/branch'
-import {toTree} from '@/packages/utils/utils'
-import {validatPhone} from '@/packages/utils/validator'
-import {apiAll as apiRoleAll} from '@/packages/service/role'
+import { defineComponent, reactive, ref } from 'vue'
+import { apiAll as apiBranchAll } from '@/packages/service/branch'
+import { toTree } from '@/packages/utils/utils'
+import { validatPhone } from '@/packages/utils/validator'
+import { apiAll as apiRoleAll } from '@/packages/service/role'
 
 export default defineComponent({
-    setup(props, {emit}) {
+    setup() {
         const treeData = ref()
         const rolesOptions = ref()
-        const formRef = ref();
+        const formRef = ref()
         const formState: any = reactive({
             username: '',
             sex: 1,
@@ -108,13 +108,13 @@ export default defineComponent({
         })
         const rules = {
             username: [
-                {required: true, message: '姓名为必填项', trigger: 'blur'},
+                { required: true, message: '姓名为必填项', trigger: 'blur' },
             ],
             phone: [
-                {required: true, validator: validatPhone, trigger: 'blur'},
+                { required: true, validator: validatPhone, trigger: 'blur' },
             ],
             describe: [
-                {trigger: 'blur', max: 200, message: '最大长度为200'},
+                { trigger: 'blur', max: 200, message: '最大长度为200' },
             ],
         }
         apiBranchAll().then((res: Array<any>) => {
@@ -124,7 +124,7 @@ export default defineComponent({
             rolesOptions.value = res.map((item) => {
                 return {
                     ...item,
-                    value: item.tag
+                    value: item.tag,
                 }
             })
         })
@@ -133,7 +133,7 @@ export default defineComponent({
             rules,
             treeData,
             rolesOptions,
-            formRef
+            formRef,
         }
     },
 })

@@ -24,7 +24,7 @@ class UserController extends baseController {
         try {
             this.ctx.validate({
                 username: { type: 'string', min: 2, max: 20, require: true },
-                password: { type: 'string', min: 2, max: 20, require: true },
+                password: { type: 'string', min: 6, max: 20, require: true },
             })
             const token = ctx.setToken({ password: body.password, username: body.username })
             const result = await ctx.model.Member.findOne({
@@ -32,6 +32,7 @@ class UserController extends baseController {
                     username: body.username,
                     password: token,
                 },
+                attributes: { exclude: ['password'] }, // 排除该字段显示
             })
             if (result) {
                 this.ctx.cookies.set('token', token, {

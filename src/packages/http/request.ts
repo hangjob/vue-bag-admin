@@ -4,6 +4,7 @@ import { message as messageModel } from 'ant-design-vue'
 import { handleExport } from '@/packages/utils/utils'
 import localStore from '@/packages/utils/persistence'
 import { useRouter } from 'vue-router'
+import { rewriteUrl } from '@/common'
 
 const CancelToken = axios.CancelToken
 const source = CancelToken.source()
@@ -146,11 +147,6 @@ http.interceptors.response.use((res: any) => {
         return http(config)
     })
 })
-
-// 包装url
-const rewriteUrl = (url: string) => {
-    return url
-}
 
 
 const post = (url: string, params?: any, config?: object) => {

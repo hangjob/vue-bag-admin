@@ -9,27 +9,27 @@
                     </li>
                 </ul>
             </div>
-            <div class="tab-content" v-if="form.active === form.tabs[0].name">
+            <div class="tab-content" v-if="form.active === form.tabs[1].name">
                 <div class="phone-group">
                     <div class="prefix">
-                        <span>中国 +86</span>
+                        <span>账号</span>
                     </div>
                     <div class="line-show"></div>
                     <div class="phone-input">
                         <input :class="form.usernameClass" @blur="form.handleBlurUsername" v-model="form.username"
-                               type="text" placeholder="手机号"
+                               type="text" placeholder="输入您的账号昵称2~20个字符"
                         >
                     </div>
                 </div>
                 <div class="phone-group">
                     <div class="phone-input">
                         <input :class="form.captchaClass" @blur="form.handleBlurCaptcha" v-model="form.password"
-                               type="text"
-                               placeholder="输入短信6位验证码"
+                               type="password"
+                               placeholder="输入6位以上的密码"
                         >
                     </div>
                     <div class="msg-btn">
-                        获取短信验证码
+                        生成随机密码
                     </div>
                 </div>
                 <it-button @click="form.register" style="margin-top: 20px;padding-top: 10px;padding-bottom: 10px"
@@ -37,11 +37,15 @@
                 >注册/登录
                 </it-button>
             </div>
-            <div class="tab-content" v-if="form.active === form.tabs[1].name">
+            <div class="tab-content" v-if="form.active === form.tabs[0].name">
                 <div class="phone-group">
+                    <div class="prefix">
+                        <span>账号</span>
+                    </div>
+                    <div class="line-show"></div>
                     <div class="phone-input">
                         <input :class="form.usernameClass" @blur="form.handleBlurUsername" v-model="form.username"
-                               type="text" placeholder="手机号"
+                               type="text" placeholder="输入您的账号"
                         >
                     </div>
                 </div>
@@ -49,7 +53,7 @@
                     <div class="phone-input">
                         <input :class="form.passwordClass" @blur="form.handleBlurPassword" v-model="form.password"
                                type="password"
-                               placeholder="输入密码"
+                               placeholder="输入您的密码"
                         >
                     </div>
                 </div>
@@ -59,7 +63,7 @@
                 </it-button>
             </div>
             <div class="tab-tip">
-                未注册手机验证后自动登录，注册即代表同意
+                未注册昵称验证后自动登录，注册即代表同意
             </div>
             <div class="sign-social">
                 <div class="social-title">社交帐号登录</div>
@@ -73,18 +77,19 @@
     </div>
 </template>
 <script lang="ts">
-import {defineComponent, reactive} from 'vue'
+import { defineComponent, reactive } from 'vue'
+import { memberCreate, userLogin } from '@/bag-web/service/app'
 
 export default defineComponent({
     setup() {
         const form = reactive({
-            tabs: [{name: '免密码登录'}, {name: '密码登录'}],
-            active: '免密码登录',
+            tabs: [{ name: '密码登录' }, { name: '账号注册' }],
+            active: '密码登录',
             usernameClass: '',
             passwordClass: '',
             captchaClass: '',
             activeClass: (item: any) => {
-                return item.name === form.active ? 'active' : null;
+                return item.name === form.active ? 'active' : null
             },
             username: '',
             password: '',
@@ -105,16 +110,25 @@ export default defineComponent({
                 }
             },
             submit: () => {
+                if (form.username && form.password) {
+                    userLogin({ username: form.username, password: form.password }).then(() => {
+
+                    })
+                }
 
             },
             register: () => {
-
-            }
+                if (form.username && form.password) {
+                    memberCreate({ username: form.username, password: form.password }).then(() => {
+                        form.submit()
+                    })
+                }
+            },
         })
         return {
-            form
+            form,
         }
-    }
+    },
 })
 </script>
 <style lang="less" scoped>

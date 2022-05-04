@@ -12,11 +12,38 @@ class MemberController extends baseController {
      */
     async create() {
         const { ctx } = this
-        const result = await ctx.model.Member.create({
-            ...ctx.request.body,
-            password: ctx.setToken({ password: ctx.randomString(), username: ctx.request.body.username }),
-        })
-        this.result({ data: result })
+        const body = ctx.request.body
+        try {
+            this.ctx.validate({
+                username: { type: 'string', min: 2, max: 20, require: true },
+            })
+
+            const resultUsername = await ctx.model.Member.findOne({
+                where: {
+                    username: body.username,
+                },
+            })
+            if (resultUsername) {
+                this.result({ data: '', message: '该用户名已存在', code: 1003 })
+            } else {
+                let password = body.password
+                if (password) {
+                    this.ctx.validate({
+                        password: { type: 'string', min: 2, max: 20, require: true },
+                    })
+                } else {
+                    password = ctx.randomString()
+                }
+                const result = await ctx.model.Member.create({
+                    ...ctx.request.body,
+                    password: ctx.setToken({ password: password, username: ctx.request.body.username }),
+                })
+                this.result({ data: result })
+            }
+        } catch (error) {
+            const { errors = [] } = error
+            this.result({ data: '', message: errors[0].field + ' ' + errors[0].message, code: 1001 })
+        }
     }
 
     /**
@@ -26,10 +53,14 @@ class MemberController extends baseController {
     async delete() {
         const { ctx } = this
         const { id } = ctx.request.body
-        const result = await ctx.model.Member.destroy({
-            where: { id },
-        })
-        this.result({ data: result })
+        if (Number(id) === 1) {
+            this.result({ data: '', message: '禁止删除该条数据', code: 1001 })
+        } else {
+            const result = await ctx.model.Member.destroy({
+                where: { id },
+            })
+            this.result({ data: result })
+        }
     }
 
     /**
@@ -134,7 +165,7 @@ class MemberController extends baseController {
             this.result({ data: result })
         } catch (error) {
             const { errors = [] } = error
-            this.result({ data: '', message: errors[0], code: 1001 })
+            this.result({ data: '', message: errors[0].field + ' ' + errors[0].message, code: 1001 })
         }
     }
 
@@ -148,7 +179,7 @@ class MemberController extends baseController {
             this.result({ data: ctx.getDecodeToken(body.password) })
         } catch (error) {
             const { errors = [] } = error
-            this.result({ data: '', message: errors[0], code: 1001 })
+            this.result({ data: '', message: errors[0].field + ' ' + errors[0].message, code: 1001 })
         }
     }
 }

@@ -6,7 +6,7 @@ const setLibBuild = function() {
         sourcemap: true,
         lib: {
             entry: path.resolve(process.cwd(), 'src/packages/install.ts'),
-            name: 'VueBagAdmin', // 构建依赖包的时候， 对外暴露的名称
+            name: 'BagAdmin', // 构建依赖包的时候， 对外暴露的名称
             fileName: (format: string) => `index.${format}.js`,
         },
         rollupOptions: {

@@ -26,6 +26,7 @@ class UploadService extends Service {
             const writeStream = await fs.createWriteStream(target)
             await pump(stream, writeStream)
         }
+        console.log(ctx.request)
         return urls[0]
     }
 
