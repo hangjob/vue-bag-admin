@@ -33,6 +33,7 @@ const install = (app: App, options?: $optionsType) => {
     app.use(Equal)
     app.use(ElementPlus)
     app.use(setupStore)
+    app.use(setupGlobComponents)
     app.use(setupRouter)
     app.use(setupGlobComponents)
 
