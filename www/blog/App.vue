@@ -1,12 +1,15 @@
 <template>
     <div>
-        2
+        <Nav/>
     </div>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-
+import Nav from '@www/blog/components/Nav.vue'
 export default defineComponent({
+    components:{
+        Nav
+    },
     setup() {
 
     },

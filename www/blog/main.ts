@@ -1,7 +1,10 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-// @ts-ignore
-import Vuesax from 'vuesax3'
-import 'vuesax3/dist/vuesax.css'
+import ElementPlus from "element-plus";
+import '@/bag-web/theme/root.css'
+import 'minireset.css/minireset.css'
+import 'element-plus/theme-chalk/display.css'
+import 'bootstrap/dist/css/bootstrap-grid.min.css'
+import 'element-plus/dist/index.css'
 
-createApp(App).use(Vuesax).mount('#app')
+createApp(App).use(ElementPlus).mount('#app')
