@@ -4,7 +4,6 @@ import {vueJsx} from './vue-jsx'
 import {configStyleImport} from './style-import'
 import {configViteCompression} from "./compression";
 import {configHtml} from "./html";
-import {configCDN} from "./cdn-import";
 import {configViteComponents} from "./components";
 import {configWindiCSS} from "./windicss";
 
@@ -15,7 +14,6 @@ export default function createVitePlugins({variables}: { variables: any }) {
         vueJsx(),
         configStyleImport(),
         configViteCompression(),
-        configCDN(),
         configViteComponents(),
         configWindiCSS()
     ];

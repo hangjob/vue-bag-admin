@@ -1,0 +1,31 @@
+<template>
+    <section class="section section-container">
+        <h2>如果您是一个Bag的全新使用者，您可能会遇到一些问题，我们建议您阅读文档</h2>
+        <div class="action">
+            <vs-button color="success" size="large" type="filled" icon="downloading">下载程序</vs-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <vs-button color="danger" size="large" type="filled" icon="text_snippet">查看文档</vs-button>
+        </div>
+    </section>
+</template>
+<script>
+
+</script>
+<style lang="less" scoped>
+.section{
+    padding:80px 30px;
+    background: rgba(52, 210, 147, 0.8);
+    position: relative;
+    overflow: hidden;
+    color: #FFFFFF;
+    text-align: center;
+    h2{
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .action{
+        display: flex;
+        justify-content: center;
+        margin-top: 50px;
+    }
+}
+</style>
