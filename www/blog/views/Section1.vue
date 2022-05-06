@@ -12,7 +12,8 @@
 </script>
 <style lang="less" scoped>
 .section{
-    padding: 220px 0;
+    padding-top: 220px;
+    padding-bottom: 220px;
     background: rgba(0, 0, 0, 0.5);
     position: relative;
     overflow: hidden;
