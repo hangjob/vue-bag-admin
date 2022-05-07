@@ -10,9 +10,8 @@
 </template>
 <script lang="ts">
 import {defineComponent, ref} from 'vue'
-import {loadScript, loadStyle} from "@/packages/utils/utils";
 import $ from 'jquery';
-
+import loadScript from '@/bag-utils/load/loadScript'
 window.$ = $;
 export default defineComponent({
     setup() {

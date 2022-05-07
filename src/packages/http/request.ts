@@ -1,7 +1,7 @@
 import axios from 'axios'
 import store from '@/packages/store'
 import { message as messageModel } from 'ant-design-vue'
-import { handleExport } from '@/packages/utils/utils'
+import fileDownload  from '@/bag-utils/file/fileDownload'
 import localStore from '@/packages/utils/persistence'
 import { useRouter } from 'vue-router'
 import { rewriteUrl } from '@/common'
@@ -178,7 +178,7 @@ const download = (url: string, data?: any, config?: object) => {
         data: data,
         ...config,
     }).then((res: any) => {
-        handleExport(res.data, data?.fileName)
+        fileDownload(res.data, data?.fileName)
     })
 }
 

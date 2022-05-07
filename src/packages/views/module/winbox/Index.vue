@@ -36,8 +36,8 @@
 </template>
 <script lang="ts">
 import {defineComponent, ref} from 'vue'
-import {loadScript, loadStyle} from "@/packages/utils/utils";
-
+import loadScript from '@/bag-utils/load/loadScript'
+import loadStyle from '@/bag-utils/load/loadStyle'
 loadStyle('https://cdn.jsdelivr.net/npm/winbox@0.2.1/dist/css/winbox.min.css');
 
 export default defineComponent({

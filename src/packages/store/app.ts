@@ -1,5 +1,5 @@
 import { find, findUnsetDepth } from '@/packages/utils/lodash'
-import { getBrowser } from '@/packages/utils/utils'
+import getBrowser from '@/bag-utils/device/getBrowser'
 import { defaultTabFix } from '@/packages/router/setStore'
 
 const app = {

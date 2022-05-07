@@ -23,112 +23,6 @@ const getAllParentArr = (list: any, path: any) => {
     }
 }
 
-/**
- * 获取设备信息
- */
-const getBrowser = () => {
-    const { clientHeight, clientWidth } = document.documentElement
-
-    // 浏览器信息
-    const ua = navigator.userAgent.toLowerCase()
-
-    // 浏览器类型
-    let type = (ua.match(/firefox|chrome|safari|opera/g) || 'other')[0]
-
-    if ((ua.match(/msie|trident/g) || [])[0]) {
-        type = 'msie'
-    }
-
-    // 平台标签
-    let tag = ''
-
-    const isTocuh = 'ontouchstart' in window || ua.indexOf('touch') !== -1 || ua.indexOf('mobile') !== -1
-    if (isTocuh) {
-        if (ua.indexOf('ipad') !== -1) {
-            tag = 'pad'
-        } else if (ua.indexOf('mobile') !== -1) {
-            tag = 'mobile'
-        } else if (ua.indexOf('android') !== -1) {
-            tag = 'androidPad'
-        } else {
-            tag = 'pc'
-        }
-    } else {
-        tag = 'pc'
-    }
-
-    // 浏览器内核
-    let prefix: string
-
-    switch (type) {
-    case 'chrome':
-    case 'safari':
-    case 'mobile':
-        prefix = 'webkit'
-        break
-    case 'msie':
-        prefix = 'ms'
-        break
-    case 'firefox':
-        prefix = 'Moz'
-        break
-    case 'opera':
-        prefix = 'O'
-        break
-    default:
-        prefix = 'webkit'
-        break
-    }
-
-    // 操作平台
-    const plat = ua.indexOf('android') > 0 ? 'android' : navigator.platform.toLowerCase()
-
-    // 屏幕信息
-    let screen: string
-
-    if (clientWidth < 768) {
-        screen = 'xs'
-    } else if (clientWidth < 992) {
-        screen = 'sm'
-    } else if (clientWidth < 1200) {
-        screen = 'md'
-    } else if (clientWidth < 1920) {
-        screen = 'xl'
-    } else {
-        screen = 'full'
-    }
-
-    // 是否 ios
-    const isIOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)
-
-    // 浏览器版本
-    const version = (ua.match(/[\s\S]+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [])[1]
-
-    // 是否 PC 端
-    const isPC = tag === 'pc'
-
-    // 是否移动端
-    const isMobile = !isPC
-
-    // 是否移动端 + 屏幕宽过小
-    const isMini = screen === 'xs' || isMobile
-
-    return {
-        height: clientHeight,
-        width: clientWidth,
-        version,
-        type,
-        plat,
-        tag,
-        prefix,
-        isMobile,
-        isIOS,
-        isPC,
-        isMini,
-        screen,
-    }
-}
-
 
 const repeat = (str: string, n: number) => {
     let res = ''
@@ -206,85 +100,6 @@ const isArray = (o: any) => {
 }
 
 
-/**
- * 下载
- */
-const handleExport = (data: Blob, fileName?: string) => {
-    let blob = new Blob([data], {
-        type: 'application/octet-stream',
-    })
-    if ('download' in document.createElement('a')) {
-        // 不是IE浏览器
-        let url = window.URL.createObjectURL(blob)
-        let link = document.createElement('a')
-        link.style.display = 'none'
-        link.href = url
-        link.setAttribute('download', typeof fileName === 'string' ? fileName : '下载')
-        document.body.appendChild(link)
-        link.click()
-        document.body.removeChild(link)
-        window.URL.revokeObjectURL(url)
-    } else {
-        // IE10+
-        const navigator: any = window.navigator
-        navigator.msSaveBlob(blob, typeof fileName === 'string' ? fileName : '下载')
-    }
-}
-
-
-const loadScript = (src: string) => {
-    return new Promise((resolve: any, reject: any) => {
-        let script = document.createElement('script')
-        script.type = 'text/javascript'
-        script.src = src
-        script.id = src
-        if (document.getElementById(src)) {
-            return resolve()
-        }
-        document.body.appendChild(script)
-        script.onload = () => {
-            resolve()
-        }
-        script.onerror = () => {
-            reject()
-        }
-    })
-}
-
-/**
- *
- * loadCssCode('body{background-color:#f00}')
- * @param code
- */
-function loadCssCode(code: any) {
-    let style: any = document.createElement('style')
-    style.type = 'text/css'
-    style.rel = 'stylesheet'
-    try {
-        //for Chrome Firefox Opera Safari
-        style.appendChild(document.createTextNode(code))
-    } catch (ex) {
-        //for IE
-        style.styleSheet.cssText = code
-    }
-    let head = document.getElementsByTagName('head')[0]
-    head.appendChild(style)
-}
-
-
-function loadStyle(href: string) {
-    let link = document.createElement('link')
-    link.type = 'text/css'
-    link.rel = 'stylesheet'
-    link.href = href
-    link.id = href
-    let head = document.getElementsByTagName('head')[0]
-    if (document.getElementById(href)) {
-        return
-    }
-    head.appendChild(link)
-}
-
 function getBase64(img: Blob, callback: (base64Url: string) => void) {
     const reader = new FileReader()
     reader.addEventListener('load', () => callback(reader.result as string))
@@ -294,14 +109,9 @@ function getBase64(img: Blob, callback: (base64Url: string) => void) {
 
 export {
     getAllParentArr,
-    getBrowser,
     randomId,
     toTree,
     toHump,
     isArray,
-    handleExport,
-    loadScript,
-    loadCssCode,
-    loadStyle,
     getBase64,
 }

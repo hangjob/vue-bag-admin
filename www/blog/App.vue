@@ -1,4 +1,5 @@
 <template>
+    <img class="vegas" src="" alt="">
     <div>
         <Nav />
         <div>
@@ -7,7 +8,7 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onMounted } from 'vue'
 import Nav from '@www/blog/components/Nav.vue'
 
 const files: any = import.meta.globEager('./views/*.vue')
@@ -25,6 +26,9 @@ export default defineComponent({
         ...comps,
     },
     setup() {
+        onMounted(()=>{
+
+        })
         return {
             compsName: Object.keys(comps).map((item: string) => item),
         }
