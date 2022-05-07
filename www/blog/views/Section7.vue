@@ -2,7 +2,7 @@
     <section class="section section-container">
         <div class="section-title">
             <h1>下载</h1>
-            <p>以下是里程密近期版本的下载.</p>
+            <p>以下是Bag近期版本的下载.</p>
         </div>
         <el-row :gutter="20">
             <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
@@ -16,7 +16,7 @@
                     </div>
                     <ul>
                         <li>时间：2016-10-20</li>
-                        <li>简介：一个新的里程密</li>
+                        <li>简介：一个新的Bag</li>
                         <li>简介：后台更新</li>
                         <li>简介：前台简介</li>
                         <li style="display: flex;justify-content: center">
@@ -39,7 +39,7 @@
                     </div>
                     <ul>
                         <li>时间：2016-10-20</li>
-                        <li>简介：一个新的里程密</li>
+                        <li>简介：一个新的Bag</li>
                         <li>简介：后台更新</li>
                         <li>简介：前台简介</li>
                         <li style="display: flex;justify-content: center">
@@ -62,7 +62,7 @@
                     </div>
                     <ul>
                         <li>时间：2016-10-20</li>
-                        <li>简介：一个新的里程密</li>
+                        <li>简介：一个新的Bag</li>
                         <li>简介：后台更新</li>
                         <li>简介：前台简介</li>
                         <li style="display: flex;justify-content: center">
@@ -85,7 +85,7 @@
                     </div>
                     <ul>
                         <li>时间：2016-10-20</li>
-                        <li>简介：一个新的里程密</li>
+                        <li>简介：一个新的Bag</li>
                         <li>简介：后台更新</li>
                         <li>简介：前台简介</li>
                         <li style="display: flex;justify-content: center">
@@ -114,7 +114,6 @@
 
     &-title {
         text-align: center;
-        margin-bottom: 40px;
     }
 
     h1 {
@@ -127,6 +126,7 @@
         border-radius: 4px;
         overflow: hidden;
         background-color: #FFFFFF;
+        margin-top: 40px;
         &-header {
             height: 82px;
             background-color: #e96656;
