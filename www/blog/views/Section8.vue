@@ -5,8 +5,8 @@
             <p>如果您不想下载可以在下方输入您的邮箱，系统会将最新的源码发送给您..</p>
         </div>
         <div class="action">
-            <vs-input size="large" placeholder="输入邮箱" v-model="value1" style="margin-right: 5px" />
-            <vs-button color="success" type="filled" icon="downloading">发送</vs-button>
+            <vs-input size="large"    placeholder="输入您的邮箱" v-model="value1" style="margin-right: 5px;" />
+            <vs-button color="success" type="filled" icon="forward_to_inbox">发送</vs-button>
         </div>
     </section>
 </template>
@@ -28,20 +28,21 @@ export default defineComponent({
     background: rgba(0, 0, 0, 0.5);
     position: relative;
     overflow: hidden;
-    color: #333333;
-    text-align: center;
-    h1{
-        font-size: 50px;
-        font-weight: bold;
-    }
+    color: #FFFFFF;
+
     &-title {
         text-align: center;
         margin-bottom: 40px;
+        text-align: center;
+        h1{
+            font-size: 50px;
+            font-weight: bold;
+        }
     }
     .action{
         display: flex;
         justify-content: center;
-        margin-top: 80px;
+        margin-top: 60px;
     }
 }
 </style>

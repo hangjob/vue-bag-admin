@@ -26,7 +26,7 @@ import {defineComponent, ref} from 'vue'
 export default defineComponent({
     setup() {
         const menuList = ref([
-            {name: '主页', url: ''},
+            {name: '主页', url: '#home'},
             {name: '特点', url: ''},
             {name: '博文', url: ''},
             {name: '下载', url: ''},
@@ -45,7 +45,8 @@ export default defineComponent({
 @nah: 60px;
 .nav {
     background-color: #FFFFFF;
-
+    position: relative;
+    z-index: 1000;
     &-logo {
         display: flex;
         height: @nah;

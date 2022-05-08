@@ -4,39 +4,39 @@
         <p>相对于其他的博客系统，Bag一直保持着自己的风格.</p>
         <el-row :gutter="20">
             <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
-                <div class="service-icon">
+                <div class="service-icon service-icon1">
                     <div class="circle">
-                        <vs-icon icon="mood"></vs-icon>
+                        <vs-icon  size="70px" color="#e96656"  icon="webhook"></vs-icon>
                     </div>
-                    <h5>简单易用</h5>
-                    <p class="indent">框架后台完全傻瓜式操作，所有后台功能，即看即会，无需任何功底，无需掌握任何技术，谁都可以是个人站长.</p>
+                    <h5>功能强大</h5>
+                    <p class="indent">博客所有内容均可以在后台进行修改，整个博客360无死角，并且带有邮件发送系统，会员注册，数据备份恢复，在线升级等.</p>
                 </div>
             </el-col>
             <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
-                <div class="service-icon">
+                <div class="service-icon service-icon2">
                     <div class="circle">
-                        <vs-icon icon="mood"></vs-icon>
+                        <vs-icon  size="70px" color="#34d293"  icon="catching_pokemon"></vs-icon>
                     </div>
                     <h5>简单易用</h5>
-                    <p class="indent">框架后台完全傻瓜式操作，所有后台功能，即看即会，无需任何功底，无需掌握任何技术，谁都可以是个人站长.</p>
+                    <p class="indent">博客后台完全傻瓜式操作，所有后台功能，即看即会，无需任何功底，无需掌握任何技术，谁都可以是个人站长.</p>
                 </div>
             </el-col>
             <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
-                <div class="service-icon">
+                <div class="service-icon service-icon3">
                     <div class="circle">
-                        <vs-icon icon="mood"></vs-icon>
+                        <vs-icon size="70px" color="#3ab0e2" icon="broken_image"></vs-icon>
                     </div>
-                    <h5>简单易用</h5>
-                    <p class="indent">框架后台完全傻瓜式操作，所有后台功能，即看即会，无需任何功底，无需掌握任何技术，谁都可以是个人站长.</p>
+                    <h5>灵活轻巧</h5>
+                    <p class="indent">Bag开源博客系统代码仅3M左右（不含样式文件，包含框架文件），采用市面主流框架Thinkphp，易读，易用.</p>
                 </div>
             </el-col>
             <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
-                <div class="service-icon">
+                <div class="service-icon service-icon4">
                     <div class="circle">
-                        <vs-icon size="70px" icon="mood"></vs-icon>
+                        <vs-icon size="70px" color="#f7d861" icon="design_services"></vs-icon>
                     </div>
-                    <h5>简单易用</h5>
-                    <p class="indent">框架后台完全傻瓜式操作，所有后台功能，即看即会，无需任何功底，无需掌握任何技术，谁都可以是个人站长.</p>
+                    <h5>模板灵活</h5>
+                    <p class="indent">Bag开源博客系统支持主题的一键切换，不需要自己动任何一行代码，也能有绚丽的博客，随时随地，想用哪套用哪套.</p>
                 </div>
             </el-col>
         </el-row>
@@ -60,25 +60,6 @@
         font-weight: bold;
     }
 
-    h5 {
-        font-weight: bold;
-        font-size: 17px;
-        position: relative;
-        margin-top: 20px;
-        margin-bottom: 30px;
-
-        &::before {
-            position: absolute;
-            z-index: 1;
-            content: "";
-            width: 20%;
-            height: 2px;
-            background: #f7d861;
-            bottom: -10px;
-            left: 50%;
-            transform: translate(-50%, 0);
-        }
-    }
 
     p {
         font-size: 14px;
@@ -103,6 +84,74 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.3s;
+        }
+        h5 {
+            font-weight: bold;
+            font-size: 17px;
+            position: relative;
+            margin-top: 20px;
+            margin-bottom: 30px;
+
+            &::before {
+                position: absolute;
+                z-index: 1;
+                content: "";
+                width: 20%;
+                height: 2px;
+                background-color: #e96656;
+                bottom: -10px;
+                left: 50%;
+                transform: translate(-50%, 0);
+            }
+        }
+        &.service-icon1{
+            h5{
+                &::before{
+                    background-color: #e96656;
+                }
+            }
+            .circle{
+                &:hover{
+                    border-color: #e96656;
+                }
+            }
+        }
+        &.service-icon2{
+            h5{
+                &::before{
+                    background-color: #34d293;
+                }
+            }
+            .circle{
+                &:hover{
+                    border-color: #34d293;
+                }
+            }
+        }
+        &.service-icon3{
+            h5{
+                &::before{
+                    background-color: #3ab0e2;
+                }
+            }
+            .circle{
+                &:hover{
+                    border-color: #3ab0e2;
+                }
+            }
+        }
+        &.service-icon4{
+            h5{
+                &::before{
+                    background-color: #f7d861;
+                }
+            }
+            .circle{
+                &:hover{
+                    border-color: #f7d861;
+                }
+            }
         }
     }
 }

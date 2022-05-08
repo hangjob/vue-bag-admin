@@ -4,9 +4,9 @@
             <h1>下载</h1>
             <p>以下是Bag近期版本的下载.</p>
         </div>
-        <el-row :gutter="20">
+        <el-row :gutter="30">
             <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
-                <div class="package">
+                <div class="package" style="margin-top: 25px">
                     <div class="package-header">
                         <h4>V2.3</h4>
                         <p>最新版本</p>
@@ -20,17 +20,17 @@
                         <li>简介：后台更新</li>
                         <li>简介：前台简介</li>
                         <li style="display: flex;justify-content: center">
-                            <vs-button color="success"  type="filled" icon="downloading">下载程序</vs-button>
+                            <vs-button color="#337ab7"  type="filled" icon="wind_power">查看介绍</vs-button>
                         </li>
                     </ul>
                     <div class="action">
-                        <vs-button color="success" size="large"  type="filled" icon="downloading">下载程序</vs-button>
+                        <vs-button color="#e96656" size="large"  type="filled" icon="downloading">下载程序</vs-button>
                     </div>
                 </div>
             </el-col>
             <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
                 <div class="package">
-                    <div class="package-header">
+                    <div class="package-header"  style="background-color: #E7AC44">
                         <h4>V2.3</h4>
                         <p>最新版本</p>
                     </div>
@@ -43,17 +43,17 @@
                         <li>简介：后台更新</li>
                         <li>简介：前台简介</li>
                         <li style="display: flex;justify-content: center">
-                            <vs-button color="success"  type="filled" icon="downloading">下载程序</vs-button>
+                            <vs-button color="#337ab7"  type="filled" icon="wind_power">查看介绍</vs-button>
                         </li>
                     </ul>
                     <div class="action">
-                        <vs-button color="success" size="large"  type="filled" icon="downloading">下载程序</vs-button>
+                        <vs-button color="#e96656" size="large"  type="filled" icon="downloading">下载程序</vs-button>
                     </div>
                 </div>
             </el-col>
             <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
                 <div class="package">
-                    <div class="package-header">
+                    <div class="package-header" style="background-color: #3ab0e2">
                         <h4>V2.3</h4>
                         <p>最新版本</p>
                     </div>
@@ -66,17 +66,17 @@
                         <li>简介：后台更新</li>
                         <li>简介：前台简介</li>
                         <li style="display: flex;justify-content: center">
-                            <vs-button color="success"  type="filled" icon="downloading">下载程序</vs-button>
+                            <vs-button color="#337ab7"  type="filled" icon="wind_power">查看介绍</vs-button>
                         </li>
                     </ul>
                     <div class="action">
-                        <vs-button color="success" size="large"  type="filled" icon="downloading">下载程序</vs-button>
+                        <vs-button color="#e96656" size="large"  type="filled" icon="downloading">下载程序</vs-button>
                     </div>
                 </div>
             </el-col>
             <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
                 <div class="package">
-                    <div class="package-header">
+                    <div class="package-header" style="background-color: #34d293">
                         <h4>V2.3</h4>
                         <p>最新版本</p>
                     </div>
@@ -89,11 +89,11 @@
                         <li>简介：后台更新</li>
                         <li>简介：前台简介</li>
                         <li style="display: flex;justify-content: center">
-                            <vs-button color="success"  type="filled" icon="downloading">下载程序</vs-button>
+                            <vs-button color="#337ab7"  type="filled" icon="wind_power">查看介绍</vs-button>
                         </li>
                     </ul>
                     <div class="action">
-                        <vs-button color="success" size="large"  type="filled" icon="downloading">下载程序</vs-button>
+                        <vs-button color="#e96656" size="large"  type="filled" icon="downloading">下载程序</vs-button>
                     </div>
                 </div>
             </el-col>
@@ -114,19 +114,19 @@
 
     &-title {
         text-align: center;
+        margin-bottom: 30px;
     }
 
     h1 {
         font-size: 50px;
         font-weight: bold;
-
     }
 
     .package {
         border-radius: 4px;
         overflow: hidden;
         background-color: #FFFFFF;
-        margin-top: 40px;
+        margin-top: 60px;
         &-header {
             height: 82px;
             background-color: #e96656;
@@ -149,13 +149,14 @@
         }
 
         &-price {
-            line-height: 120px;
             height: 100px;
             color: #FFF;
             font-weight: 400;
             background-color: #404040;
             text-align: center;
-
+            display: flex;
+            align-items: center;
+            justify-content: center;
             h4 {
                 display: inline;
                 font-size: 40px;

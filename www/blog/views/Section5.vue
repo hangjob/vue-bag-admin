@@ -4,7 +4,7 @@
             <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
                 <div class="service-icon">
                     <div class="circle">
-                        <vs-icon size="50px" icon="mood"></vs-icon>
+                        <vs-icon size="50px" color="#e96656" icon="design_services"></vs-icon>
                     </div>
                     <h5>1234,6</h5>
                     <p class="indent">Projects Completed</p>
@@ -13,28 +13,28 @@
             <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
                 <div class="service-icon">
                     <div class="circle">
-                        <vs-icon size="50px" icon="mood"></vs-icon>
+                        <vs-icon size="50px" color="#34d293" icon="groups"></vs-icon>
                     </div>
                     <h5>1534,6</h5>
-                    <p class="indent">Projects Completed</p>
+                    <p class="indent">Happy Clients</p>
                 </div>
             </el-col>
             <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
                 <div class="service-icon">
                     <div class="circle">
-                        <vs-icon size="50px" icon="mood"></vs-icon>
+                        <vs-icon size="50px" color="#3ab0e2" icon="mark_email_read"></vs-icon>
                     </div>
                     <h5>18234,6</h5>
-                    <p class="indent">Projects Completed</p>
+                    <p class="indent">Mail Conversation</p>
                 </div>
             </el-col>
             <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
                 <div class="service-icon">
                     <div class="circle">
-                        <vs-icon size="50px" icon="mood"></vs-icon>
+                        <vs-icon size="50px" color="#f7d861" icon="filter"></vs-icon>
                     </div>
                     <h5>11234,6</h5>
-                    <p class="indent">Projects Completed</p>
+                    <p class="indent">Photos Taken</p>
                 </div>
             </el-col>
         </el-row>
@@ -45,7 +45,7 @@
 </script>
 <style lang="less" scoped>
 .section {
-    padding-top: 120px;
+    padding-top: 90px;
     padding-bottom: 120px;
     background: rgba(0, 0, 0, 0.5);
     clear: both;
@@ -53,11 +53,6 @@
     overflow: hidden;
     color: #FFFFFF;
     text-align: center;
-
-    h1 {
-        font-size: 50px;
-        font-weight: bold;
-    }
 
     h5 {
         font-weight: bold;
@@ -79,6 +74,7 @@
         }
     }
     .service-icon{
+        margin-top: 30px;
         .indent{
             color: #d1d1d1;
         }

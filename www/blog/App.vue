@@ -1,14 +1,26 @@
 <template>
-    <img class="vegas" src="" alt="">
+    <img class="vegas" src="https://lcm.wang/Public/image/bg5.jpg" alt="">
     <div>
-        <Nav />
+        <Nav/>
         <div>
-            <component v-for="(item,idx) of compsName" :is="item" :key="idx"></component>
+            <!--            <component v-for="(item,idx) of compsName" :is="item" :key="idx"></component>-->
+            <Section1/>
+            <Section2/>
+            <Section3/>
+            <Section4/>
+            <Section12/>
+            <Section5/>
+            <Section6/>
+            <Section7/>
+            <Section8/>
+            <Section9/>
+            <Section10/>
+            <Section11/>
         </div>
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+import {defineComponent, onMounted} from 'vue'
 import Nav from '@www/blog/components/Nav.vue'
 
 const files: any = import.meta.globEager('./views/*.vue')
@@ -26,7 +38,7 @@ export default defineComponent({
         ...comps,
     },
     setup() {
-        onMounted(()=>{
+        onMounted(() => {
 
         })
         return {
@@ -39,5 +51,14 @@ export default defineComponent({
 html, body {
     background: #f4f6f8;
     font-size: var(--bag-font-size-base);
+}
+
+.vegas {
+    position: fixed;
+    left: 0;
+    right: 0;
+    height: 850px;
+    width: 100%;
+    object-fit: cover;
 }
 </style>

@@ -3,6 +3,10 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+.section-container {
+    padding-left: 280px;
+    padding-right: 280px;
+}
 
 /*********媒体查询******************/
 @media (max-width: 767px) {
@@ -26,11 +30,19 @@ body {
     }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1200px) and (max-width: 1399px) {
+    .section-container {
+        padding-left: 200px;
+        padding-right: 200px;
+    }
+}
+
+@media (min-width: 1400px) {
     .section-container {
         padding-left: 280px;
         padding-right: 280px;
     }
 }
+
 
 /************媒体查询结束***********************/
