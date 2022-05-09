@@ -3,33 +3,22 @@
     <div>
         <Nav/>
         <div>
-            <!--            <component v-for="(item,idx) of compsName" :is="item" :key="idx"></component>-->
-            <Section1/>
-            <Section2/>
-            <Section3/>
-            <Section4/>
-            <Section12/>
-            <Section5/>
-            <Section6/>
-            <Section7/>
-            <Section8/>
-            <Section9/>
-            <Section10/>
-            <Section11/>
+            <component :id="item.components" v-for="(item,idx) of menuList" :is="item.components" :key="idx"></component>
         </div>
     </div>
 </template>
 <script lang="ts">
 import {defineComponent, onMounted} from 'vue'
 import Nav from '@www/blog/components/Nav.vue'
-
+import menuList from "@www/blog/config/menu";
 const files: any = import.meta.globEager('./views/*.vue')
 const comps: any = []
 for (const c of Object.keys(files)) {
     const component = files[c]?.default
-    const name = c.match(/S.*?(?=.vue)/)
+    // @ts-ignore
+    const name = c.match(/[a-zA-Z].*?(?=.vue)/)[0].split('/')[1]
     if (name) {
-        comps[component.name || name[0]] = component
+        comps[component.name || name] = component
     }
 }
 export default defineComponent({
@@ -42,7 +31,7 @@ export default defineComponent({
 
         })
         return {
-            compsName: Object.keys(comps).map((item: string) => item),
+            menuList
         }
     },
 })

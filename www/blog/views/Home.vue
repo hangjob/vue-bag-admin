@@ -5,7 +5,7 @@
         </div>
         <div class="action">
             <vs-button color="success" size="large" type="filled" icon="downloading">下载程序</vs-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <vs-button color="danger" size="large" type="filled" icon="text_snippet">查看文档</vs-button>
+            <vs-button target :href="{url: 'https://hangjob.github.io/vue-bag-admin/'}" color="danger" size="large" type="filled" icon="text_snippet">查看文档</vs-button>
         </div>
     </section>
 </template>

@@ -8,11 +8,13 @@
                 <el-col :xs="24" :sm="18" :md="20" :lg="20" :xl="20">
                     <div class="nav-menu">
                         <ul>
-                            <li v-for="item in menuList" :key="item.id">
-                                <div>
-                                    <a href="">{{ item.name }}</a>
-                                </div>
-                            </li>
+                            <template v-for="item in menuList">
+                                <li @click="handleScrollTo(item.components,$event)" v-if="item.name" :key="item.id">
+                                    <div>
+                                        <a href="javascript:;">{{ item.name }}</a>
+                                    </div>
+                                </li>
+                            </template>
                         </ul>
                     </div>
                 </el-col>
@@ -20,23 +22,37 @@
         </div>
     </div>
 </template>
-<script>
-import {defineComponent, ref} from 'vue'
+<script lang="ts">
+import {defineComponent, onMounted, ref} from 'vue'
+import menuList from "@www/blog/config/menu";
+
+function heightToTop(ele: any) {
+    //ele为指定跳转到该位置的DOM节点
+    let root = document.body;
+    let height = 0;
+    do {
+        height += ele.offsetTop;
+        ele = ele.offsetParent;
+    } while (ele !== root)
+    return height;
+}
 
 export default defineComponent({
     setup() {
-        const menuList = ref([
-            {name: '主页', url: '#home'},
-            {name: '特点', url: ''},
-            {name: '博文', url: ''},
-            {name: '下载', url: ''},
-            {name: '开发', url: ''},
-            {name: '主题', url: ''},
-            {name: '评价', url: ''},
-            {name: '留言', url: ''},
-        ])
+
+
+        const handleScrollTo = (id: string, e: any) => {
+            if (document.getElementById(id)) {
+                window.scrollTo({
+                    top: heightToTop(document.getElementById(id)),
+                    behavior: 'smooth'
+                })
+            }
+        }
+
         return {
-            menuList
+            menuList,
+            handleScrollTo
         }
     }
 })
@@ -47,6 +63,7 @@ export default defineComponent({
     background-color: #FFFFFF;
     position: relative;
     z-index: 1000;
+
     &-logo {
         display: flex;
         height: @nah;
@@ -58,6 +75,7 @@ export default defineComponent({
         display: flex;
         align-items: center;
         justify-content: end;
+
         ul {
             li {
                 display: inline-block;
@@ -82,6 +100,7 @@ export default defineComponent({
                         height: @nah;
                         line-height: 1;
                         vertical-align: top;
+
                         &:hover {
                             color: var(--bag-text-color-primary);
                         }
