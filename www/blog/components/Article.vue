@@ -109,7 +109,7 @@ export default defineComponent({
             a.scroll-box {
                 transform: translate3d(-50%, -23%, 0) rotate(15deg);
                 animation: auto-scroll 20s linear infinite;
-                width: 454px;
+                width: 100%;
                 height: 640px;
                 position: relative;
                 left: 50%;

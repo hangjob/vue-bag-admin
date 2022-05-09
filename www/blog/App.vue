@@ -1,5 +1,5 @@
 <template>
-    <img class="vegas" src="https://lcm.wang/Public/image/bg5.jpg" alt="">
+    <img class="vegas" src="@www/blog/assets/bg5.jpg" alt="">
     <div>
         <Nav/>
         <div>
