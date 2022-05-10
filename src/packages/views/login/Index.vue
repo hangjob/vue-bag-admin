@@ -230,7 +230,8 @@ export default defineComponent({
 
         .login-btn {
             width: 100%;
-
+            position: relative;
+            z-index: 100;
             button {
                 background-image: linear-gradient(to right, #e34c44, #f59178);
                 border: none;

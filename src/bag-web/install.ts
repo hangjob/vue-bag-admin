@@ -5,6 +5,7 @@ import ElementPlus from 'element-plus'
 import '@/bag-web/style/index.less'
 import 'equal-vue/dist/style.css'
 import '@/bag-web/theme/root.css'
+import "ant-design-vue/dist/antd.less";
 import 'element-plus/theme-chalk/display.css'
 import 'bootstrap/dist/css/bootstrap-grid.min.css'
 import 'element-plus/dist/index.css'

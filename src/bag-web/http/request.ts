@@ -1,8 +1,8 @@
-import axios, { AxiosRequestConfig } from 'axios'
-import { rewriteUrl, getHttpNetworkConfig } from '@/common/http'
-import { ElNotification } from 'element-plus'
+import axios, {AxiosError, AxiosRequestConfig, AxiosResponse} from 'axios'
+import {rewriteUrl, getHttpNetworkConfig} from '@/common/http'
+import {ElNotification} from 'element-plus'
 import appStore from '@/bag-web/store/app'
-
+import {responseSuccess, ResponseData, responseError, requestSuccess} from '@/common/http/request'
 
 const CancelToken = axios.CancelToken
 const source = CancelToken.source()
@@ -12,56 +12,28 @@ const http: any = axios.create({
     cancelToken: source.token,
 })
 
-
 http.interceptors.request.use((config: AxiosRequestConfig) => {
     const store = appStore()
-    const { timeout, baseURL, headers } = getHttpNetworkConfig(store.httpNetwork)
-    config.baseURL = baseURL
-    config.timeout = timeout
-    config.headers = { ...headers }
-    return config
+    return requestSuccess(config, {httpNetwork: store.httpNetwork})
 }, (error: any) => {
     return Promise.reject(error)
 })
 
-http.interceptors.response.use((res: any) => {
+http.interceptors.response.use((res: AxiosResponse<ResponseData>) => {
     const store = appStore()
-    const { code, data, message } = res.data
-    const { successCode, messageDuration } = getHttpNetworkConfig(store.httpNetwork)
-    const { config } = res
-
-    // if (code === 1) {
-    //     return data
-    // } else {
-    //     ElNotification({
-    //         type: 'error',
-    //         title: '发生错误',
-    //         message,
-    //     })
-    //     return Promise.reject(res)
-    // }
-}, async (err: any) => {
-    const error = err.response || err.toJSON()
-    const { status, statusText, message } = error
-    let text = statusText
-    if (!status) {
-        text = message
-    }
-    ElNotification({
-        type: 'error',
-        title: '请求出错',
-        message: text,
-    })
-    return Promise.reject(err)
+    return responseSuccess(res, {httpNetwork: store.httpNetwork})
+}, async (err: AxiosError) => {
+    const store = appStore()
+    return responseError(err, {httpNetwork: store.httpNetwork, http})
 })
 
+
 const post = (url: string, params?: any, config?: AxiosRequestConfig) => {
-    console.log(config)
     return http.post(rewriteUrl(url), params, config).catch((err: any) => Promise.reject(err))
 }
 
 const get = (url: string, params?: any, config?: AxiosRequestConfig) => {
-    return http.get(rewriteUrl(url), { params: params, ...config }).catch((err: any) => Promise.reject(err))
+    return http.get(rewriteUrl(url), {params: params, ...config}).catch((err: any) => Promise.reject(err))
 }
 
 export {

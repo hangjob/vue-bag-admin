@@ -1,4 +1,4 @@
-import { post } from '@/bag-web/http/request'
+import {post} from '@/bag-web/http/request'
 
 
 // 获取菜单
@@ -8,7 +8,7 @@ const webChannelAll = (params?: object) => {
 
 // 添加用户
 const memberCreate = (params?: object) => {
-    return post('/member/create', params)
+    return post('/member/create', params, {notifyError: true})
 }
 
 // 登录
