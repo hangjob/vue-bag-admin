@@ -37,9 +37,9 @@
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
-import banner1 from '@www/web/assets/image/banner-1.jpg'
-import banner2 from '@www/web/assets/image/banner-2.jpg'
-import Join from '@www/web/views/home/Join.vue'
+import banner1 from '@/bag-web/assets/image/banner-1.jpg'
+import banner2 from '@/bag-web/assets/image/banner-2.jpg'
+import Join from './Join.vue'
 const items = ref([{}, {}, {}, {}, {}, {}, {}, {}, {}, {}])
 </script>
 <style lang="less" scoped>

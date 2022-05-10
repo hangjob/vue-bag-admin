@@ -26,8 +26,8 @@
                     <div class="circle">
                         <vs-icon size="70px" color="#3ab0e2" icon="broken_image"></vs-icon>
                     </div>
-                    <h5>灵活轻巧</h5>
-                    <p class="indent">一键安装，快速方便，采用市面主流框Vue3、Vite、TypeScript，</p>
+                    <h5>社区强大</h5>
+                    <p class="indent">采用市面主流技术Vue3、Vite、TypeScript、Gulp、Node.js 、Egg.js 、MySQL以及周边的优秀的插件搭建，不用担心自己业务所受框架有限的瓶颈</p>
                 </div>
             </el-col>
             <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
@@ -35,8 +35,8 @@
                     <div class="circle">
                         <vs-icon size="70px" color="#f7d861" icon="design_services"></vs-icon>
                     </div>
-                    <h5>社区强大</h5>
-                    <p class="indent">Bag系统支持主题的一键切换，不需要自己动任何一行代码，也能有绚丽的博客，随时随地，想用哪套用哪套.</p>
+                    <h5>适合人群</h5>
+                    <p class="indent">1.正在以及想使用框架快速开发网站系统，有过前端开发经验 1 年+,2.熟悉 Vue.js 技术栈，使用它开发过几个实际项目，3.热爱技术，爱学习，想进阶和提升的同学</p>
                 </div>
             </el-col>
         </el-row>

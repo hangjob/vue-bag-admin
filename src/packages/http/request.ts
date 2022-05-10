@@ -1,10 +1,11 @@
-import axios from 'axios'
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 import store from '@/packages/store'
 import { message as messageModel } from 'ant-design-vue'
-import fileDownload  from '@/bag-utils/file/fileDownload'
-import localStore from '@/packages/utils/persistence'
+import fileDownload from '@/bag-utils/file/fileDownload'
+import localStore from '@/common/utils/persistence'
 import { useRouter } from 'vue-router'
-import { rewriteUrl } from '@/common'
+import { rewriteUrl, getHttpNetworkConfig } from '@/common/http'
+import { responseSuccess, ResponseData } from '@/common/http/request'
 
 const CancelToken = axios.CancelToken
 const source = CancelToken.source()
@@ -14,32 +15,6 @@ const http: any = axios.create({
     cancelToken: source.token,
 })
 
-const getHttpNetworkConfig = () => {
-    const {
-        baseURL,
-        requestTimeout,
-        headers,
-        retry,
-        retryDelay,
-        successCode,
-        messageDuration,
-        filterUrlToken,
-        whiteList,
-        resetPath,
-    } = store.state.app.httpNetwork
-    return {
-        baseURL,
-        timeout: requestTimeout,
-        headers,
-        retry,
-        retryDelay,
-        successCode,
-        messageDuration,
-        filterUrlToken,
-        whiteList,
-        resetPath,
-    }
-}
 
 interface resultErrorData {
     message: string;
@@ -49,12 +24,17 @@ interface resultErrorData {
 }
 
 http.interceptors.request.use((config: any) => {
-    const { retry, retryDelay, timeout, baseURL, headers, filterUrlToken = [] } = getHttpNetworkConfig()
+    const {
+        retry,
+        retryDelay,
+        timeout,
+        baseURL,
+        headers,
+        filterUrlToken = [],
+    } = getHttpNetworkConfig(store.state.app.httpNetwork)
     const { url } = config
-    if (url) {
-        if (filterUrlToken.some((item: any) => url.includes(item))) {
-            config.headers['authorization'] = store.state.user.token
-        }
+    if (url && filterUrlToken.some((item: any) => url.includes(item))) {
+        config.headers['authorization'] = store.state.user.token
     }
     config.baseURL = baseURL
     config.timeout = timeout
@@ -66,30 +46,12 @@ http.interceptors.request.use((config: any) => {
     return Promise.reject(error)
 })
 
-http.interceptors.response.use((res: any) => {
-    const { successCode, messageDuration } = getHttpNetworkConfig()
-    const { config } = res
-    const { code, data, message } = res.data
-    if (successCode.indexOf(code) !== -1) {
-        if (config.notify) {
-            messageModel.success(message, messageDuration)
-        }
-        return data
-    } else {
-        if (config.notifyError) {
-            messageModel.warning(message, messageDuration)
-        }
-        const rejectData: resultErrorData = {
-            message,
-            data: res.data,
-            config,
-        }
-        return Promise.reject(rejectData)
-    }
+http.interceptors.response.use((res: AxiosResponse<ResponseData>) => {
+    return responseSuccess(res, { httpNetwork: store.state.app.httpNetwork })
 }, async (err: any) => {
     const error = err.response || err.toJSON()
     const { config, status, data, code, message = '' } = error
-    const { messageDuration, whiteList, resetPath } = getHttpNetworkConfig()
+    const { messageDuration, whiteList, resetPath } = getHttpNetworkConfig(store.state.app.httpNetwork)
     // 设置用于跟踪重试计数的变量
     config.__retryCount = config.__retryCount || 0
     const _api = '，接口：' + config.baseURL + config.url
@@ -149,11 +111,11 @@ http.interceptors.response.use((res: any) => {
 })
 
 
-const post = (url: string, params?: any, config?: object) => {
+const post = (url: string, params?: any, config?: AxiosRequestConfig) => {
     return http.post(rewriteUrl(url), params, config).catch((err: any) => Promise.reject(err))
 }
 
-const get = (url: string, params?: any, config?: object) => {
+const get = (url: string, params?: any, config?: AxiosRequestConfig) => {
     return http.get(rewriteUrl(url), { params: params, ...config }).catch((err: any) => Promise.reject(err))
 }
 
@@ -163,9 +125,8 @@ const upload = (url: string, file: File) => {
             'Content-Type': 'multipart/form-data',
         },
     }
-    let param = new FormData() // 创建form对象
+    let param = new FormData()
     param.append('file', file, file.name)
-    // param.append('chunk', '0') // 添加form表单中其他数据
     return http.post(rewriteUrl(url), param, config)
 }
 
@@ -173,8 +134,8 @@ const upload = (url: string, file: File) => {
 const download = (url: string, data?: any, config?: object) => {
     return http({
         method: 'post',
-        url: rewriteUrl(url), //后端下载接口地址
-        responseType: 'blob', // 设置接受的流格式
+        url: rewriteUrl(url),
+        responseType: 'blob',
         data: data,
         ...config,
     }).then((res: any) => {

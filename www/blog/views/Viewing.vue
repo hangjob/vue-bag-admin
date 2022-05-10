@@ -2,7 +2,7 @@
     <section class="section section-container">
         <h2>如果您是一个Bag的全新使用者，您可能会遇到一些问题，我们建议您阅读文档</h2>
         <div class="action">
-            <vs-button color="danger" size="large" type="filled" icon="text_snippet">查看文档</vs-button>
+            <vs-button target :href="{url: 'https://hangjob.github.io/vue-bag-admin/'}" color="danger" size="large" type="filled" icon="text_snippet">查看文档</vs-button>
         </div>
     </section>
 </template>

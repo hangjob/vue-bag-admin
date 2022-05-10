@@ -33,7 +33,7 @@
     <div class="right_menu-item hidden-xs" @click="handleGithub">
         <GithubOutlined class="icon-svg" />
     </div>
-    <component :is="themeBar" v-if="themeBar"></component>
+    <component :is="ThemeBar" v-if="ThemeBar"></component>
     <div class="right_menu-item hidden-xs">
         <img class="user-head" src="@/packages/assets/image/yanghang.jpg" alt="">
         <a-dropdown>
@@ -63,7 +63,7 @@ import { handleKeyBoard } from '@/packages/utils/keydown'
 import { notification } from 'ant-design-vue'
 import { apiLogout } from '@/packages/service/user'
 import { useStore } from 'vuex'
-import locaStore from '@/packages/utils/persistence'
+import locaStore from '@/common/utils/persistence'
 import { useRouter } from 'vue-router'
 import { useFullscreen } from '@vueuse/core'
 
@@ -72,8 +72,8 @@ export default defineComponent({
         Setting,
     },
     setup() {
-        const { configAppLayout } = <any>inject('$configAppOptions')
-        const { themeBar } = configAppLayout
+        const { configAppComps } = <any>inject('$configAppOptions')
+        const { ThemeBar } = configAppComps
         const router = useRouter()
         const userSetting = ref()
         const searchActive = ref<string | null>(null)
@@ -151,7 +151,7 @@ export default defineComponent({
             handleDebug,
             handleGithub,
             toggle,
-            themeBar,
+            ThemeBar,
             isFullscreen,
         }
     },

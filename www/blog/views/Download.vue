@@ -20,17 +20,17 @@
                         <li>简介：后台更新</li>
                         <li>简介：前台简介</li>
                         <li style="display: flex;justify-content: center">
-                            <vs-button color="#337ab7"  type="filled" icon="wind_power">查看介绍</vs-button>
+                            <vs-button color="#337ab7" type="filled" icon="wind_power">查看介绍</vs-button>
                         </li>
                     </ul>
                     <div class="action">
-                        <vs-button color="#e96656" size="large"  type="filled" icon="downloading">下载程序</vs-button>
+                        <vs-button color="#e96656" size="large" type="filled" icon="downloading">下载程序</vs-button>
                     </div>
                 </div>
             </el-col>
             <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
                 <div class="package">
-                    <div class="package-header"  style="background-color: #E7AC44">
+                    <div class="package-header" style="background-color: #E7AC44">
                         <h4>V2.3</h4>
                         <p>最新版本</p>
                     </div>
@@ -43,11 +43,11 @@
                         <li>简介：后台更新</li>
                         <li>简介：前台简介</li>
                         <li style="display: flex;justify-content: center">
-                            <vs-button color="#337ab7"  type="filled" icon="wind_power">查看介绍</vs-button>
+                            <vs-button color="#337ab7" type="filled" icon="wind_power">查看介绍</vs-button>
                         </li>
                     </ul>
                     <div class="action">
-                        <vs-button color="#e96656" size="large"  type="filled" icon="downloading">下载程序</vs-button>
+                        <vs-button color="#e96656" size="large" type="filled" icon="downloading">下载程序</vs-button>
                     </div>
                 </div>
             </el-col>
@@ -66,11 +66,11 @@
                         <li>简介：后台更新</li>
                         <li>简介：前台简介</li>
                         <li style="display: flex;justify-content: center">
-                            <vs-button color="#337ab7"  type="filled" icon="wind_power">查看介绍</vs-button>
+                            <vs-button color="#337ab7" type="filled" icon="wind_power">查看介绍</vs-button>
                         </li>
                     </ul>
                     <div class="action">
-                        <vs-button color="#e96656" size="large"  type="filled" icon="downloading">下载程序</vs-button>
+                        <vs-button color="#e96656" size="large" type="filled" icon="downloading">下载程序</vs-button>
                     </div>
                 </div>
             </el-col>
@@ -89,11 +89,11 @@
                         <li>简介：后台更新</li>
                         <li>简介：前台简介</li>
                         <li style="display: flex;justify-content: center">
-                            <vs-button color="#337ab7"  type="filled" icon="wind_power">查看介绍</vs-button>
+                            <vs-button color="#337ab7" type="filled" icon="wind_power">查看介绍</vs-button>
                         </li>
                     </ul>
                     <div class="action">
-                        <vs-button color="#e96656" size="large"  type="filled" icon="downloading">下载程序</vs-button>
+                        <vs-button color="#e96656" size="large" type="filled" icon="downloading">下载程序</vs-button>
                     </div>
                 </div>
             </el-col>
@@ -107,7 +107,7 @@
 .section {
     padding-top: 80px;
     padding-bottom: 80px;
-    background: rgba(0, 0, 0, 0.5);
+    background-color: #3f5256;
     position: relative;
     overflow: hidden;
     color: #FFFFFF;
@@ -127,6 +127,7 @@
         overflow: hidden;
         background-color: #FFFFFF;
         margin-top: 60px;
+
         &-header {
             height: 82px;
             background-color: #e96656;
@@ -157,6 +158,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+
             h4 {
                 display: inline;
                 font-size: 40px;
@@ -175,12 +177,14 @@
                 color: #333333;
                 text-align: center;
                 overflow: hidden;
-                &:last-child{
+
+                &:last-child {
                     border-bottom: none;
                 }
             }
         }
-        .action{
+
+        .action {
             overflow: hidden;
             display: flex;
             justify-content: center;

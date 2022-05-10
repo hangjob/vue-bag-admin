@@ -91,10 +91,10 @@
 </template>
 <script lang="ts" setup>
 import { ref } from 'vue'
-import banner1 from '@www/web/assets/image/banner-1.jpg'
-import banner2 from '@www/web/assets/image/banner-2.jpg'
-import banner3 from '@www/web/assets/image/banner-3.jpg'
-import banner4 from '@www/web/assets/image/banner-4.jpg'
+import banner1 from '@/bag-web/assets/image/banner-1.jpg'
+import banner2 from '@/bag-web/assets/image/banner-2.jpg'
+import banner3 from '@/bag-web/assets/image/banner-3.jpg'
+import banner4 from '@/bag-web/assets/image/banner-4.jpg'
 
 const articles = ref([
     {

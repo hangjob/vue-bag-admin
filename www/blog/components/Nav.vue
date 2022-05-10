@@ -23,38 +23,37 @@
     </div>
 </template>
 <script lang="ts">
-import {defineComponent, onMounted, ref} from 'vue'
-import menuList from "@www/blog/config/menu";
+import { defineComponent, onMounted, ref } from 'vue'
+import menuList from '@www/blog/config/menu'
 
 function heightToTop(ele: any) {
     //ele为指定跳转到该位置的DOM节点
-    let root = document.body;
-    let height = 0;
+    let root = document.body
+    let height = 0
     do {
-        height += ele.offsetTop;
-        ele = ele.offsetParent;
+        height += ele.offsetTop
+        ele = ele.offsetParent
     } while (ele !== root)
-    return height;
+    return height
 }
 
 export default defineComponent({
     setup() {
 
-
-        const handleScrollTo = (id: string, e: any) => {
+        const handleScrollTo = (id: string, $event: Event) => {
             if (document.getElementById(id)) {
                 window.scrollTo({
                     top: heightToTop(document.getElementById(id)),
-                    behavior: 'smooth'
+                    behavior: 'smooth',
                 })
             }
         }
 
         return {
             menuList,
-            handleScrollTo
+            handleScrollTo,
         }
-    }
+    },
 })
 </script>
 <style lang="less" scoped>

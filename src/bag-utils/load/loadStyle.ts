@@ -1,3 +1,7 @@
+/**
+ * 加载样式
+ * @param href
+ */
 function loadStyle(href: string) {
     let link = document.createElement('link')
     link.type = 'text/css'

@@ -1,11 +1,17 @@
 import { App } from 'vue'
+import { createPinia } from 'pinia' // https://pinia.web3doc.top/
+import appStore from '@/bag-web/store/app'
 
-// https://blog.csdn.net/qq_28550263/article/details/120721160 参考文档
-// https://pinia.vuejs.org/core-concepts/#using-the-store 官方文档
-import { createPinia } from 'pinia'
+
+const initConfigStore = ((app: App) => {
+    const { configApp } = app.config.globalProperties
+    const store = appStore()
+    store.updateHttpNetwork(configApp.httpNetwork)
+})
 
 const setupStore = (app: App) => {
     app.use(createPinia())
+    initConfigStore(app)
 }
 
 

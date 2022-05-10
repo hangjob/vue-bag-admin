@@ -1,3 +1,7 @@
+/**
+ * 加载脚本
+ * @param src
+ */
 const loadScript = (src: string) => {
     return new Promise((resolve: any, reject: any) => {
         let script = document.createElement('script')

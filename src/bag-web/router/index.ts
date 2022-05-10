@@ -14,6 +14,10 @@ const router = createRouter({
                     path: '/home', name: 'home', meta: { title: '首页' },
                     component: () => import('@/bag-web/views/home/Index.vue'),
                 },
+                {
+                    path: '/article/:id', name: 'article', meta: {title: '详情'},
+                    component: () => import('@/bag-web/views/article/Index.vue'),
+                },
             ],
         },
         {

@@ -53,7 +53,7 @@ import { defineComponent, reactive, UnwrapRef } from 'vue'
 import { ValidateErrorEntity } from 'ant-design-vue/es/form/interface'
 import { apiLogin } from '@/packages/service/user'
 import { apiUserUserinfo } from '@/packages/service/user'
-import locaStore from '@/packages/utils/persistence'
+import locaStore from '@/common/utils/persistence'
 
 interface FormState {
     layout: 'horizontal' | 'vertical' | 'inline';

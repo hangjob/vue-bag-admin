@@ -4,25 +4,30 @@
             <div class="item-img">
                 <a href="javascript:;" class="scroll-box" v-if="itemSumData.length">
                     <template v-for="(todo,j) in itemSumData">
-                        <img v-if="j < 12" :key="j" :src="todo.pic">
+                        <img v-if="j < 12" :key="j" :src="todo.pic" alt="itemData.title">
                     </template>
                 </a>
                 <a class="background" href="javascript:;" :style="{backgroundImage:'url(' + itemData.pic + ')'}" v-else
                 ></a>
                 <a class="item-img-body">
-                    <div class="tpye">2020年2月25日</div>
-                    <div class="title"><h3>闪灵CMS学校建站系统(含小程序)</h3></div>
+                    <div class="tpye">{{ formatTime() }}</div>
+                    <div class="title"><h3>{{ itemData.title }}</h3></div>
                 </a>
             </div>
             <div class="item-userimg">
-                <img src="https://www.vipbic.com/uploads/20190321/e561b9dbf43336c22e277169027c8add.jpg">
+                <img src="https://www.vipbic.com/uploads/20190321/e561b9dbf43336c22e277169027c8add.jpg"
+                     :alt="itemData.title"
+                >
             </div>
             <div class="item-meta">
-                <div><span class="d"></span><span class="t">PHP源码</span></div>
-                <div><span class="d"></span><span class="t">商务商城</span></div>
+                <div><span class="d"></span><span class="t">{{ itemData.category.name }}</span></div>
+                <template v-for="(todo,index) in itemData.keywords">
+                    <div :key="index" v-if="index<1"><span class="d"></span><span class="t"
+                    >{{ todo }}</span></div>
+                </template>
             </div>
             <div class="item-body">
-                <p>115cms综合内容管理系统是一款采用当前最流行的ThinkPHP框架开发的高效开源的内容管</p>
+                <p>{{ formatTitle() }}</p>
             </div>
             <div class="item-det">
                 <a class="btn" target="_blank">点击查看</a>
@@ -30,20 +35,52 @@
         </div>
     </div>
 </template>
-<script>
-import {defineComponent, ref} from 'vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import dayjs from 'dayjs'
+// @ts-ignore
+import { solar2lunar } from 'solarlunar'
 
 export default defineComponent({
     props: {
         itemData: {
             type: Object,
-            default: {}
+            default: {},
         },
         itemSumData: {
             type: Array,
-            default: []
+            default: [],
+        },
+    },
+    setup(props) {
+        const dateTime = parseInt(props.itemData.time) * 1000
+        const year = dayjs(dateTime).format('YYYY')
+        const month = dayjs(dateTime).format('MM')
+        const day = dayjs(dateTime).format('DD')
+        const {
+            yearCn,
+            gzYear,
+            monthCn,
+            gzMonth,
+            gzDay,
+            dayCn,
+            cDay,
+            ncWeek,
+            animal,
+        } = solar2lunar(parseInt(year), parseInt(month), parseInt(day)) // 输入的日子为公历
+        console.log(solar2lunar(parseInt(year), parseInt(month), parseInt(day)))
+        const formatTime = () => {
+            return `${monthCn}  ${cDay}日  ${yearCn} · ${ncWeek}`
         }
-    }
+
+        const formatTitle = () => {
+            return `作者：${props.itemData.member.username} ,标题：${props.itemData.title} ,关键词：${props.itemData.keywords.join(',')} ,发布时间：${gzYear}[${animal}] ${gzMonth}月 ${gzDay}日 ${ncWeek}`
+        }
+        return {
+            formatTime,
+            formatTitle,
+        }
+    },
 })
 </script>
 <style lang="less" scoped>
@@ -171,6 +208,7 @@ export default defineComponent({
                 align-items: center;
                 flex-direction: row;
                 margin-right: 10px;
+                flex-shrink: 0;
             }
 
             .d {

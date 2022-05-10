@@ -25,8 +25,8 @@ interface $optionsType {
     store?: {
         module: object,
     },
-    layout?: {
-        themeBar: any // 接受一个组件
+    comps?: {
+        ThemeBar?: any // 接受一个组件
     },
     config?: {
         themeConfig?: object,
@@ -45,8 +45,8 @@ const install = (app: App, options?: $optionsType) => {
         configAppStore: {
             module: options?.store?.module || {},
         },
-        configAppLayout: {
-            themeBar: options?.layout?.themeBar,
+        configAppComps: {
+            ThemeBar: options?.comps?.ThemeBar,
         },
         configApp: {
             themeConfig: {...themeConfig, ...options?.config?.themeConfig},

@@ -10,8 +10,8 @@ const app = createApp(App)
 
 const $options: $optionsType = {
     router: { file, paths, defaults: false },
-    layout: {
-        themeBar: shallowRef(ThemeBar),
+    comps: {
+        ThemeBar: shallowRef(ThemeBar),
     },
 }
 // setupSocket(app, { connection: 'ws://127.0.0.1:8001' })
