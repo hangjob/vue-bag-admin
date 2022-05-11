@@ -7,45 +7,47 @@
         <el-row :gutter="40">
             <el-col :xs="24" :sm="12" :md="24" :lg="12" :xl="12" style="margin-top: 50px">
                 <p>
-                    Bag最初只是我的私人博客作品，后来发现大家很喜欢，所以就开源化，我希望每个人都有一个心灵栖息的地方，从工作到感情，心中那份小而美一直存在。
-                    感谢：本套程序使用了ThinkPHP,BootStrap,以及网络上一些插件，在这里感谢ThinkPHP,BootStrap的开源，为本套博客带来了很强大的程序基础，也感谢为Bag提出建议，提供优化的广大网友，谢谢！
-                    <br/>1.Bag官网网址：Bag 作者：MonkeyCode<br/>
-                    2.感谢您选择Bag，希望我们的努力能为您提供一个简单、强大的博客系统。<br/>
-                    3.如果您对Bag有BUG提交或者功能建议 可以发送邮件到作者邮箱lcm1475@aliyun.com或者在官网留言<br/>
-                    4.我们希望您在使用过程中可以加入Bag讨论群分享使用经验（交流群在官网查看）<br/>
-                    5.Bag是一个开源产品，简单的一句话，懂的都懂，不懂的就不懂<br/>
-                    6.我们希望与大家把Bag变得更好<br/>
-                    7.用户须知：本协议是您与顶想公司之间关于您使用Bag产品及服务的法律协议。无论您是个人或组织、盈利与否、用途如何（包括以学习和研究为目的），均需仔细阅读本协议，包括免除或者限制顶想责任的免责条款及对您的权利限制。请您审阅并接受或不接受本服务条款。如您不同意本服务条款及/或顶想随时对其的修改，您应不使用或主动取消Bag。否则，您的任何对Bag的相关服务的注册、登陆、下载、查看等使用行为将被视为您对本服务条款全部的完全接受，包括接受顶想对服务条款随时所做的任何修改。
+                    Bag最初我只是设计的一个开源后台管理系统，后来发大家对管理系统还是很喜欢，但是往往对接企业项目，风格和使用规范又有些偏差或者很不符合现有业务，不能带动用户去使用它，如是我又开发了Bag-web，为大家提供一个博客网站，那么就可以去使用这个系统管理你自己的博客了。
+                    感谢：本套开源代码使用了Vue3,Vite,Gulp,Ant-Design-Vue,Vuesax3,Axios...,以及网络上一些插件，在这里感谢这些框架和插件的开源，为本套程序带来了很强大的程序基础！
+                    <br />
+                    1.官网<a href="https://vite.itnavs.com/">网址</a>，作者：羊先生<br />
+                    2.感谢您选择使用Bag，希果您对Bag有BUG提交或者功能建议 可以发送邮件到作者邮箱470193837@qq.com或者在官网留言。<br />
+                    3.希望您在使用过程中可以加入Bag讨论群分享使用经验（交流群在官网查看）<br />
+                    4.Bag是一个开源产品，把一切使用变的如此简单<br />
+                    5.我希望能与大家把Bag变得更好<br />
+                    6.用户须知：Bag使用MIT协议，MIT 内容与三条款 BSD 许可证（3-clause BSD
+                    license）内容颇为近似，但是赋予软体被授权人更大的权利与更少的限制，被授权人可根据程式的需要修改授权条款为适当的内容。被授权人有权利使用、复制、修改、合并、出版发行、散布、再授权及贩售软体及软体的副本。在软件和软件的所有副本中都必须包含版权声明和许可声明。
+                    特此声明：用户利用平台发布虚假、侵犯他人隐私、侵犯他人知识产权、侮辱他人、造谣诽谤等违反法律法规或公序良俗的内容从而给平台方、其他用户或第三方造成损害的，由前述用户承担全部法律后果及赔偿责任
                 </p>
             </el-col>
             <el-col :xs="24" :sm="12" :md="24" :lg="12" :xl="12" style="margin-top: 50px">
                 <div class="skill">
                     <div class="skill-count">
-                        <el-progress :width="60" type="circle" :percentage="80"/>
+                        <el-progress :width="60" type="circle" :percentage="80" />
                         <div style="margin-left: 10px">
-                            <h6>成熟</h6>
-                            <p>Bag还只是一个孩子，不成熟的地方还有很多，需要大家一起来帮忙调教.</p>
+                            <h6>成长</h6>
+                            <p>Bag还在成长，不成熟的地方还有很多，需要大家一起来帮忙纠正</p>
                         </div>
                     </div>
                     <div class="skill-count">
-                        <el-progress :width="60" type="circle" status="success" :percentage="80"/>
+                        <el-progress :width="60" type="circle" status="success" :percentage="80" />
                         <div style="margin-left: 10px">
                             <h6>灵活</h6>
-                            <p>Bag所有的可视化全可由后台进行修改，主题可一键进行切换，想变随时变.</p>
+                            <p>Bag所有的可视化全可由后台进行修改，路由管理，请求管理，状态管理，主题等等...</p>
                         </div>
                     </div>
                     <div class="skill-count">
-                        <el-progress :width="60" type="circle" status="exception" :percentage="80"/>
+                        <el-progress :width="60" type="circle" status="exception" :percentage="80" />
                         <div style="margin-left: 10px">
                             <h6>稳定</h6>
-                            <p>Bag拥有高度的稳定性，别看广告看疗效.</p>
+                            <p>Bag拥有高度的稳定性，使用主流技术，不用担心技术瓶颈</p>
                         </div>
                     </div>
                     <div class="skill-count">
-                        <el-progress :width="60" type="circle" status="warning" :percentage="80"/>
+                        <el-progress :width="60" type="circle" status="warning" :percentage="80" />
                         <div style="margin-left: 10px">
-                            <h6>安全</h6>
-                            <p>封杀所有注入点 关闭DEBUG 不会有报错情况出现 所以也就不会有注入点 所有错误请自行到日志进行查看.</p>
+                            <h6>特性</h6>
+                            <p>npm快速安装、Vite零秒启动、一键build、跨平台 PC、手机端、平板</p>
                         </div>
                     </div>
                 </div>
@@ -65,9 +67,20 @@
     overflow: hidden;
     color: #8f8f8f;
 
+    p {
+        font-size: 14px;
+        line-height: 26px;
+        word-break: break-all;
+        text-align: justify;
+    }
+
     &-title {
         text-align: center;
         color: #FFFFFF;
+
+        p {
+            text-align: center;
+        }
 
         h1 {
             font-size: 50px;
@@ -76,11 +89,6 @@
         }
     }
 
-
-    p {
-        font-size: 14px;
-        line-height: 26px;
-    }
 
     .skill {
         display: flex;

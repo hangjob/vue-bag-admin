@@ -2,7 +2,7 @@
     <section class="section section-container">
         <div class="section-title">
             <h1>主题开发</h1>
-            <p>Bag是一个开源的系统，更希望有更多的人和我们一起开发主题.</p>
+            <p>Bag是一个开源的系统，更希望有更多的人和我一起开发主题.</p>
         </div>
         <div>
             <el-row :gutter="20">
@@ -11,7 +11,7 @@
                         <vs-icon size="50px" icon="handyman" color="#3ab0e2"></vs-icon>
                         <div>
                             <h5>懂技术</h5>
-                            <p>掌握PHP语言，掌握THINKPHP框架，能够熟练应用Linux操作系统，了解Apache、nginx工作原理，良好的数据库知识.</p>
+                            <p>掌握JavaScript/Node语言，掌握Vue/Egg.js框架，能够熟练应用Vue生态插件，了解webpack、gulp、nginx工作原理，良好的数据库知识</p>
                         </div>
                     </div>
                 </el-col>
@@ -19,8 +19,8 @@
                     <div class="feature">
                         <vs-icon size="50px" icon="local_florist"  color="#e96656"></vs-icon>
                         <div>
-                            <h5>有逼格</h5>
-                            <p>对于每件事有自己独立的看法，不随波逐流，这样你设计出来的主题才能做小众里的大众.</p>
+                            <h5>好动手</h5>
+                            <p>我专注的领域对于每件事有自己独立的看法，亲自动手去尝试，看是否符合自己的预期.</p>
                         </div>
                     </div>
                 </el-col>
@@ -28,8 +28,17 @@
                     <div class="feature">
                         <vs-icon size="50px" icon="psychology_alt"  color="#34d293"></vs-icon>
                         <div>
-                            <h5>有脑子</h5>
-                            <p>能想到如何设计模板主题更为合理，并且可以发现Bag程序的不足，提出来进行改正.</p>
+                            <h5>小机灵</h5>
+                            <p>看到好的设计，能想到如何设计一个好的模板，并且在设计的过程中发现Bag的程序的不足，提出来进行更正</p>
+                        </div>
+                    </div>
+                </el-col>
+                <el-col :xs="24" :sm="24" :md="8" :lg="12" :xl="12">
+                    <div class="feature">
+                        <vs-icon size="50px" icon="history_edu"  color="#409eff"></vs-icon>
+                        <div>
+                            <h5>好奇心</h5>
+                            <p>好奇心的程序员不断致力于创新技术，喜欢思考，爱钻研，善于解决问题</p>
                         </div>
                     </div>
                 </el-col>
@@ -38,16 +47,7 @@
                         <vs-icon size="50px" icon="face_retouching_natural"  color="#FFCA28"></vs-icon>
                         <div>
                             <h5>有审美</h5>
-                            <p>懂得色彩搭配，网站布局，模块合理性的摆放，说白了，就是不要太傻.</p>
-                        </div>
-                    </div>
-                </el-col>
-                <el-col :xs="24" :sm="24" :md="8" :lg="12" :xl="12">
-                    <div class="feature">
-                        <vs-icon size="50px" icon="history_edu"  color="#409eff"></vs-icon>
-                        <div>
-                            <h5>责任心</h5>
-                            <p>如果你愿意参加开源程序的开发，就不要半途而废，有些事不是看到希望才坚持，而是坚持了才能看到希望.</p>
+                            <p>懂有色彩搭配，网站布局的技巧，模块合理性的摆放，利用CSS3和JavaScript制作简单用户回馈动画.</p>
                         </div>
                     </div>
                 </el-col>
@@ -56,7 +56,7 @@
                         <vs-icon size="50px" icon="rowing"  color="#4FC3F7"></vs-icon>
                         <div>
                             <h5>有耐心</h5>
-                            <p>众口难调，自己做出来的菜一定有人说好吃，有人说不好吃，不要一味的与给你意见的人对喷，没有意义 .</p>
+                            <p>制作的一个好的主题，就像木匠一样，需要细心打磨，耐心、细心、用心，有些事不是看到希望才坚持，而是坚持了才能看到希望</p>
                         </div>
                     </div>
                 </el-col>

@@ -46,10 +46,10 @@ export default defineComponent({
     background-color: #FFFFFF;
     position: relative;
     overflow: hidden;
-    text-align: center;
 
     &-title {
         margin-bottom: 30px;
+        text-align: center;
 
         h1 {
             font-size: 50px;

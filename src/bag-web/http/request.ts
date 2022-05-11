@@ -6,7 +6,7 @@ import {responseSuccess, responseError, requestSuccess} from '@/common/http/requ
 const CancelToken = axios.CancelToken
 const source = CancelToken.source()
 
-const http = axios.create({
+const http:AxiosInstance = axios.create({
     withCredentials: true,
     cancelToken: source.token,
 })
