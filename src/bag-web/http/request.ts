@@ -1,13 +1,12 @@
-import axios, {AxiosError, AxiosRequestConfig, AxiosResponse} from 'axios'
-import {rewriteUrl, getHttpNetworkConfig} from '@/common/http'
-import {ElNotification} from 'element-plus'
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
+import {rewriteUrl} from '@/common/http'
 import appStore from '@/bag-web/store/app'
-import {responseSuccess, ResponseData, responseError, requestSuccess} from '@/common/http/request'
+import {responseSuccess, responseError, requestSuccess} from '@/common/http/request'
 
 const CancelToken = axios.CancelToken
 const source = CancelToken.source()
 
-const http: any = axios.create({
+const http = axios.create({
     withCredentials: true,
     cancelToken: source.token,
 })
@@ -19,7 +18,7 @@ http.interceptors.request.use((config: AxiosRequestConfig) => {
     return Promise.reject(error)
 })
 
-http.interceptors.response.use((res: AxiosResponse<ResponseData>) => {
+http.interceptors.response.use((res: AxiosResponse<any>) => {
     const store = appStore()
     return responseSuccess(res, {httpNetwork: store.httpNetwork})
 }, async (err: AxiosError) => {
