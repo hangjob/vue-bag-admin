@@ -4,11 +4,17 @@
             <h1>与我联系</h1>
             <p>如果您有其他的问题请在下方提交留言与我联系（博客使用类问题请加交流群或看手册文档）.</p>
         </div>
-        <div class="action">
-            <vs-input size="large" color="rgb(233, 102, 86)" label-placeholder="RGB: rgb(233, 102, 86)" placeholder="你的名字" v-model="value1" />
-            <vs-input size="large" color="rgb(233, 102, 86)" label-placeholder="RGB: rgb(233, 102, 86)"  placeholder="你的邮件" v-model="value1" />
-            <vs-input size="large" color="rgb(233, 102, 86)" label-placeholder="RGB: rgb(233, 102, 86)"  placeholder="主题" v-model="value1" />
-        </div>
+        <el-row :gutter="30">
+            <el-col :xs="24" :sm="8" :md="8" :lg="8" :xl="8" class="message-input">
+                <vs-input size="large" color="rgb(233, 102, 86)" label-placeholder="RGB: rgb(233, 102, 86)" placeholder="你的名字" v-model="value1" />
+            </el-col>
+            <el-col :xs="24" :sm="8" :md="8" :lg="8" :xl="8" class="message-input">
+                <vs-input size="large" color="rgb(233, 102, 86)" label-placeholder="RGB: rgb(233, 102, 86)"  placeholder="你的邮件" v-model="value1" />
+            </el-col>
+            <el-col :xs="24" :sm="8" :md="8" :lg="8" :xl="8" class="message-input">
+                <vs-input size="large" color="rgb(233, 102, 86)" label-placeholder="RGB: rgb(233, 102, 86)"  placeholder="主题" v-model="value1" />
+            </el-col>
+        </el-row>
         <div class="action">
             <vs-textarea style="background-color: #fff" label="留言内容" height="200px" />
         </div>
@@ -53,6 +59,14 @@ export default defineComponent({
     .sbumit{
         display: flex;
         justify-content: end;
+    }
+}
+</style>
+<style lang="less">
+.message-input{
+    margin-bottom: 10px;
+    >div{
+        width: 100%;
     }
 }
 </style>

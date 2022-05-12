@@ -8,7 +8,8 @@ import 'element-plus/theme-chalk/display.css'
 import 'bootstrap/dist/css/bootstrap-grid.min.css'
 import 'element-plus/dist/index.css'
 import 'material-icons/iconfont/material-icons.css';
+import setupPrimevue from '@www/blog/plugin/primevue'
 // @ts-ignore
 import Vuesax from 'vuesax3'
 import 'vuesax3/dist/vuesax.css'
-createApp(App).use(Vuesax).use(ElementPlus).mount('#app')
+createApp(App).use(Vuesax).use(setupPrimevue).use(ElementPlus).mount('#app')

@@ -68,7 +68,6 @@ export default defineComponent({
             ncWeek,
             animal,
         } = solar2lunar(parseInt(year), parseInt(month), parseInt(day)) // 输入的日子为公历
-        console.log(solar2lunar(parseInt(year), parseInt(month), parseInt(day)))
         const formatTime = () => {
             return `${monthCn}  ${cDay}日  ${yearCn} · ${ncWeek}`
         }
@@ -123,7 +122,7 @@ export default defineComponent({
 
                 img {
                     width: 100%;
-                    height: 165px;
+                    height: 100px;
                     object-fit: cover;
                 }
             }
@@ -147,13 +146,13 @@ export default defineComponent({
                 transform: translate3d(-50%, -23%, 0) rotate(15deg);
                 animation: auto-scroll 20s linear infinite;
                 width: 100%;
-                height: 640px;
+                height: 380px;
                 position: relative;
                 left: 50%;
                 top: 50%;
 
                 img {
-                    width: 125px;
+                    width: 28%;
                     margin: 7px;
                     border-radius: 5px;
                 }

@@ -2,10 +2,10 @@
     <section class="section section-container">
         <div class="section-title">
             <h1>不想下载？</h1>
-            <p>如果您不想下载可以在下方输入您的邮箱，系统会将最新的源码发送给您..</p>
+            <p>如果您不想下载可以在下方输入您的邮箱，系统会将最新的源码发送给您...</p>
         </div>
         <div class="action">
-            <vs-input size="large"    placeholder="输入您的邮箱" v-model="value1" style="margin-right: 5px;" />
+            <vs-input size="large"  color="rgb(103, 194, 58)"   placeholder="输入您的邮箱" v-model="value1" style="margin-right: 5px;" />
             <vs-button color="success" type="filled" icon="forward_to_inbox">发送</vs-button>
         </div>
     </section>

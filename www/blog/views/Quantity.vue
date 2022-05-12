@@ -6,7 +6,7 @@
                     <div class="circle">
                         <vs-icon size="50px" color="#e96656" icon="design_services"></vs-icon>
                     </div>
-                    <h5>1234,6</h5>
+                    <h5><CountTo :startVal="0" :endVal="12288" :duration="1800"></CountTo></h5>
                     <p class="indent">Projects Completed</p>
                 </div>
             </el-col>
@@ -15,7 +15,7 @@
                     <div class="circle">
                         <vs-icon size="50px" color="#34d293" icon="groups"></vs-icon>
                     </div>
-                    <h5>1534,6</h5>
+                    <h5><CountTo :startVal="0" :endVal="2288" :duration="1800"></CountTo></h5>
                     <p class="indent">Happy Clients</p>
                 </div>
             </el-col>
@@ -24,7 +24,7 @@
                     <div class="circle">
                         <vs-icon size="50px" color="#3ab0e2" icon="mark_email_read"></vs-icon>
                     </div>
-                    <h5>18234,6</h5>
+                    <h5><CountTo :startVal="0" :endVal="18234" :duration="1800"></CountTo></h5>
                     <p class="indent">Mail Conversation</p>
                 </div>
             </el-col>
@@ -33,7 +33,7 @@
                     <div class="circle">
                         <vs-icon size="50px" color="#f7d861" icon="filter"></vs-icon>
                     </div>
-                    <h5>11234,6</h5>
+                    <h5><CountTo :startVal="0" :endVal="1093" :duration="1800"></CountTo></h5>
                     <p class="indent">Photos Taken</p>
                 </div>
             </el-col>
@@ -41,7 +41,13 @@
     </section>
 </template>
 <script>
-
+import {defineComponent} from 'vue'
+import { CountTo } from 'vue3-count-to'
+export default defineComponent({
+    components: {
+        CountTo
+    },
+})
 </script>
 <style lang="less" scoped>
 .section {

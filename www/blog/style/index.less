@@ -14,12 +14,21 @@ body {
         padding-left: 30px;
         padding-right: 30px;
     }
+
+    .download-release {
+        width: 90%;
+    }
+
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
     .section-container {
         padding-left: 50px;
         padding-right: 50px;
+    }
+
+    .download-release {
+        width: 85%;
     }
 }
 
@@ -28,12 +37,20 @@ body {
         padding-left: 80px;
         padding-right: 80px;
     }
+
+    .download-release {
+        width: 70%;
+    }
 }
 
 @media (min-width: 1200px) and (max-width: 1399px) {
     .section-container {
         padding-left: 200px;
         padding-right: 200px;
+    }
+
+    .download-release {
+        width: 60%;
     }
 }
 
@@ -42,7 +59,17 @@ body {
         padding-left: 280px;
         padding-right: 280px;
     }
+
+    .download-release {
+        width: 50%;
+    }
 }
 
 
 /************媒体查询结束***********************/
+
+.clearfix::after {
+    display: block;
+    clear: both;
+    content: ""
+}

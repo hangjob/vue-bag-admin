@@ -22,7 +22,7 @@ export default ({mode}: { mode: any }) => {
         const {rollupOptions} = setProBuild()
         build.rollupOptions = rollupOptions
     }
-    if (mode === 'production') {
+    if (mode  == 'production') {
         const {rollupOptions, terserOptions} = setProBuild()
         build.rollupOptions = rollupOptions
         build.terserOptions = terserOptions
