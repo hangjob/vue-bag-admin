@@ -67,6 +67,24 @@ const paths = addUniqueId([
             },
         ],
     },
+    {
+        name: '配置管理',
+        router: '',
+        icon: 'SettingOutlined',
+        shows: 1,
+        children: [
+            {
+                name: '网站配置',
+                path: '/webconfig',
+                icon: '',
+                shows: 1,
+                tabHidden: false,
+                tabFix: false,
+                keepAlive: true,
+                filePath: '/admin/views/webconfig/Index.vue',
+            },
+        ],
+    },
 ], '_local')
 
 export default paths
