@@ -23,7 +23,7 @@ export default defineComponent({
             {value: 'Top热榜', icon: 'icon-redu', color: '#f56c6c', url: '/hot'},
             {value: 'Web前端', icon: 'icon-kaifaguanli', color: '#6869dc', url: '/category/8'},
             {value: 'UI设计', icon: 'icon-shejishi2', color: '#e91e63', url: '/category/4'},
-            {value: '给我留言', icon: 'icon-xinjian', color: '#f8ce58', url: '', url: '/intera'}, // 弹个窗 然后 发送邮件， 填写用户邮箱，我回复
+            {value: '给我留言', icon: 'icon-xinjian', color: '#f8ce58', url: '/intera'}, // 弹个窗 然后 发送邮件， 填写用户邮箱，我回复
         ]
         return {
             items

@@ -27,7 +27,7 @@
                 <a-space>
                     <a-button type="primary" size="small" @click="tableCurd.edit.change(record)">编辑</a-button>
                     <a-popconfirm
-                        :title="`你确定删除 ${record.title} 嘛？`"
+                        :title="`你确定删除 ${record.name} 嘛？`"
                         ok-text="确认"
                         cancel-text="关闭"
                         placement="topRight"
@@ -47,14 +47,13 @@
     </bag-modal>
 </template>
 <script lang="ts">
-import {defineComponent, ref, reactive} from 'vue'
+import {defineComponent, ref} from 'vue'
 import Create from './Create.vue'
 import Edit from './Edit.vue'
 import columns from './columns'
 import tableHock from "@/packages/hook/table";
 
 export default defineComponent({
-    name: 'articleIndex',
     components: {
         Create, Edit,
     },
@@ -64,7 +63,7 @@ export default defineComponent({
         const formCreate = ref()
         const formEdit = ref()
         const {tableCurd} = tableHock()
-        tableCurd.apiPrefix = '/web/article'
+        tableCurd.apiPrefix = '/web/website'
         tableCurd.create.refForm = formCreate;
         tableCurd.edit.refForm = formEdit;
         tableCurd.all.handle();

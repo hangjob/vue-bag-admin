@@ -63,7 +63,8 @@ const setAsyncRouterComponents = async () => {
             router.addRoute('admin', item)
         })
         try {
-            paths.push(...await apiAppRouter())
+            const data: any = await apiAppRouter()
+            paths.push(...data)
         } catch (err) {
             console.log(err)
         }
@@ -73,7 +74,7 @@ const setAsyncRouterComponents = async () => {
 
 
 const hasUserinfo = (to: any, from: any, next: any) => {
-    const { resetPath, whiteList } = store.state.app.httpNetwork;
+    const { resetPath, whiteList } = store.state.app.httpNetwork
     const userinfo = store.getters['user/userinfo']
     if (Object.keys(userinfo).length) {
         next()

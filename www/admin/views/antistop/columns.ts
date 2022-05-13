@@ -30,24 +30,6 @@ const columns = [
         }
     },
     {
-        title: '关键词',
-        dataIndex: 'name',
-        key: 'name',
-        align: 'center',
-        ellipsis: true,
-        formData: {
-            name: 'name',
-            label: '关键词',
-            element: 'a-input',
-            placeholder: '输入关键词',
-            rules: [
-                {
-                    required: true, message: '关键词为必填项', trigger: 'blur'
-                }
-            ]
-        }
-    },
-    {
         title: '描述',
         dataIndex: 'describe',
         key: 'describe',

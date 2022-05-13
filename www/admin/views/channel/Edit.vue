@@ -37,7 +37,7 @@
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
-                    <a-form-item label="链接地址" name="keywords">
+                    <a-form-item label="关键词" name="keywords">
                         <a-select
                             v-model:value="formState.keywords"
                             mode="tags"

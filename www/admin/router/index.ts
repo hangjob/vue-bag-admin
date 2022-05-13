@@ -75,13 +75,13 @@ const paths = addUniqueId([
         children: [
             {
                 name: '网站配置',
-                path: '/webconfig',
+                path: '/website',
                 icon: '',
                 shows: 1,
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: true,
-                filePath: '/admin/views/webconfig/Index.vue',
+                filePath: '/admin/views/website/Index.vue',
             },
         ],
     },

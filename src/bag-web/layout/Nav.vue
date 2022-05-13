@@ -3,7 +3,7 @@
         <div class="container">
             <el-row>
                 <el-col :xs="24" :sm="1" :md="2" :lg="1" :xl="1">
-                    <div class="nav-logo"><img src="@/bag-web/assets/image/logo.png" alt=""></div>
+                    <div class="nav-logo"><img :src="baseURL+appConfig.logo" alt=""></div>
                 </el-col>
                 <el-col :xs="24" :sm="20" :md="18" :lg="15" :xl="15">
                     <div class="nav-menu">
@@ -58,13 +58,18 @@
     </nav>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
+import { inject, ref } from 'vue'
 import { webChannelAll } from '@/bag-web/service/app'
 import { toTree } from '@/packages/utils/utils'
+import appStore from '@/bag-web/store/app'
 
+const { configApp } = <any>inject('$configAppOptions')
+const { baseURL } = configApp?.httpNetwork
+const store = appStore()
+const { appConfig } = store
 const inputValue = ref()
 const menuList = ref([])
-webChannelAll().then((res: Array<any>) => {
+webChannelAll().then((res: any) => {
     menuList.value = toTree(res)
 })
 </script>
