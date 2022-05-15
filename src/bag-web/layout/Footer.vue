@@ -6,7 +6,7 @@
                     <div>欢迎你</div>
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="18" :lg="21" :xl="22">
-                    <p>Copyrights © 2017-2020. All rights reserved 鄂ICP备17016349号</p>
+                    <p>{{appConfig.record}}</p>
                     <ul class="list-unsettled">
                         <li><a href="">关于我们</a></li>
                         <li><a href="">用户协议</a></li>
@@ -17,6 +17,19 @@
         </div>
     </div>
 </template>
+<script lang="ts">
+import {defineComponent} from 'vue'
+import appStore from "@/bag-web/store/app";
+export default defineComponent({
+    setup(){
+        const store = appStore()
+        const { appConfig } = store
+        return {
+            appConfig
+        }
+    }
+})
+</script>
 <style lang="less" scoped>
 .footer {
     background: #1f2730;

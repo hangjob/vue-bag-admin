@@ -89,6 +89,21 @@ export default [
         },
     },
     {
+        title: '备案号',
+        dataIndex: 'record',
+        key: 'record',
+        align: 'center',
+        ellipsis: true,
+        visible:false,
+        formData: {
+            name: 'record',
+            label: '备案号',
+            element: 'a-textarea',
+            placeholder: '输入备案号',
+            maxlength: 300,
+        },
+    },
+    {
         title: '创建时间',
         dataIndex: 'createTime',
         key: 'createTime',

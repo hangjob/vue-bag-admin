@@ -32,7 +32,9 @@
                         生成随机密码
                     </div>
                 </div>
-                <it-button @click="form.register" style="margin-top: 20px;padding-top: 10px;padding-bottom: 10px"
+                <it-button v-debounce="{ func: form.register}" :disabled="form.loading" :loading="form.loading"
+                           @click="form.register"
+                           style="margin-top: 20px;padding-top: 10px;padding-bottom: 10px"
                            type="primary" block
                 >注册/登录
                 </it-button>
@@ -57,7 +59,8 @@
                         >
                     </div>
                 </div>
-                <it-button @click="form.submit" style="margin-top: 20px;padding-top: 10px;padding-bottom: 10px"
+                <it-button v-debounce="{ func: form.submit, params: {title:'登录成功'}}" :loading="form.loading"
+                           style="margin-top: 20px;padding-top: 10px;padding-bottom: 10px"
                            type="primary" block
                 >登录
                 </it-button>
@@ -77,13 +80,15 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
-import { memberCreate, userLogin } from '@/bag-web/service/app'
-
+import {defineComponent, reactive} from 'vue'
+import {memberCreate, userLogin} from '@/bag-web/service/app'
+import {useRouter} from "vue-router";
+import { ElNotification } from 'element-plus'
 export default defineComponent({
     setup() {
+        const router = useRouter()
         const form = reactive({
-            tabs: [{ name: '密码登录' }, { name: '账号注册' }],
+            tabs: [{name: '密码登录'}, {name: '账号注册'}],
             active: '密码登录',
             usernameClass: '',
             passwordClass: '',
@@ -94,6 +99,7 @@ export default defineComponent({
             username: '',
             password: '',
             captcha: '',
+            loading: false,
             handleBlurUsername: () => {
                 if (form.username === '') {
                     form.usernameClass = 'error-mask'
@@ -109,18 +115,26 @@ export default defineComponent({
                     form.passwordClass = 'error-mask'
                 }
             },
-            submit: () => {
+            submit: ({title}: { title: string }) => {
                 if (form.username && form.password) {
-                    userLogin({ username: form.username, password: form.password }).then(() => {
-
+                    form.loading = true
+                    userLogin({username: form.username, password: form.password}).then(() => {
+                        ElNotification({
+                            title,
+                            duration:1000,
+                            type: 'success',
+                            message: `${form.username} 账户登录成功`,
+                        })
+                        router.push('/home').then()
+                    }).finally(() => {
+                        form.loading = false
                     })
                 }
-
             },
             register: () => {
                 if (form.username && form.password) {
-                    memberCreate({ username: form.username, password: form.password }).then(() => {
-                        form.submit()
+                    memberCreate({username: form.username, password: form.password}).then(() => {
+                        form.submit({title: '注册成功'})
                     })
                 }
             },

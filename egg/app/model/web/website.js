@@ -23,6 +23,10 @@ module.exports = app => {
             type: STRING,
             comment: '网站描述',
         },
+        record: {
+            type: STRING,
+            comment: '备案号',
+        },
         keywords: {
             type: STRING,
             comment: '关键词',

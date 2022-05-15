@@ -3,10 +3,10 @@ import {
     createWebHashHistory,
     RouteLocationNormalized,
     NavigationGuardNext,
-    RouterOptions,
+    RouterOptions, createWebHistory,
 } from 'vue-router'
 import type { App } from 'vue'
-import { setAppConfig } from '@/bag-web/router/setPinia'
+import { setPinia } from '@/bag-web/router/setPinia'
 
 /**
  * 基础路由
@@ -35,7 +35,7 @@ const routes = [
 ]
 
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHashHistory('/web.html'),
     routes,
 } as RouterOptions)
 
@@ -56,7 +56,7 @@ const addRoutes = function(app: App) {
 }
 
 router.beforeEach((to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
-    setAppConfig(to, from, next)
+    setPinia(to, from, next)
 })
 
 const setupRouter = (app: App) => {

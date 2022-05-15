@@ -14,6 +14,7 @@ import { setupGlobComponents } from '@/bag-web/components'
 import { setupStore } from '@/bag-web/store'
 import { setupRouter } from '@/bag-web/router'
 import { httpNetwork } from '@/packages/config'
+import {setupGlobDirectives} from "@/common/extend/directive";
 
 interface $optionsType {
     router?: {
@@ -43,6 +44,7 @@ const install = (app: App, options?: $optionsType) => {
     app.use(setupGlobComponents)
     app.use(setupRouter)
     app.use(setupGlobComponents)
+    app.use(setupGlobDirectives)
 }
 
 export default install

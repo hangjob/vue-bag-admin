@@ -7,14 +7,14 @@ class UserController extends baseController {
         const { ctx } = this
         const token = ctx.cookies.get('token', { signed: false, encrypt: true })
         if (token) {
-            const result = await ctx.model.Member.findOne({ where: { password: token } })
+            const result = await ctx.model.Member.findOne({ where: { password: token } , attributes: { exclude: ['password'] }})
             if (result) {
                 this.result({ data: result })
             } else {
                 this.result({ data: '', message: '没有找到该用户', code: 1002 })
             }
         } else {
-            this.result({ data: '', message: '缺少参数', code: 1001 })
+            this.result({ data: '', message: '亲，您还未登录', code: 1001 })
         }
     }
 
@@ -47,7 +47,7 @@ class UserController extends baseController {
             }
         } catch (error) {
             const { errors = [] } = error
-            this.result({ data: '', message: errors[0], code: 1001 })
+            this.result({ data: '', message: errors[0].message, code: 1001 })
         }
     }
 

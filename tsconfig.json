@@ -27,6 +27,8 @@
         "typeRoots": [
             "./typings"
         ],
+        "noImplicitAny": false,
+        "noImplicitThis": false,
         "allowSyntheticDefaultImports": true
     },
     "exclude": [

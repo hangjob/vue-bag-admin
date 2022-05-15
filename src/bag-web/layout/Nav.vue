@@ -2,10 +2,11 @@
     <nav class="nav">
         <div class="container">
             <el-row>
-                <el-col :xs="24" :sm="1" :md="2" :lg="1" :xl="1">
-                    <div class="nav-logo"><img :src="baseURL+appConfig.logo" alt=""></div>
+                <el-col :xs="24" :sm="1" :md="2" :lg="2" :xl="2">
+                    <div class="nav-logo"><img @error="errorChange" ref="logoDom" :src="baseURL+appConfig.logo" alt="">
+                    </div>
                 </el-col>
-                <el-col :xs="24" :sm="20" :md="18" :lg="15" :xl="15">
+                <el-col :xs="24" :sm="20" :md="18" :lg="14" :xl="14">
                     <div class="nav-menu">
                         <ul>
                             <li v-for="item in menuList" :key="item.id">
@@ -29,7 +30,7 @@
                     <div class="nav-right">
                         <div class="nav-right-search hidden-md-and-down">
                             <div class="keyword">
-                                <it-input v-model="inputValue" prefix-icon="search" />
+                                <it-input v-model="inputValue" prefix-icon="search"/>
                             </div>
                             <it-button type="primary" style="margin-left: 15px;flex-shrink: 0;">搜索</it-button>
                         </div>
@@ -37,15 +38,20 @@
                             <ul>
                                 <li>
                                     <div>
-                                        <a href="">个人中心
-                                            <it-icon name="arrow_drop_down" outlined />
+                                        <a href="">{{ userinfo.username ? userinfo.username : '个人中心' }}
+                                            <it-icon name="arrow_drop_down" outlined/>
                                         </a>
                                     </div>
                                     <ul class="dropdown-menu">
-                                        <li>
-                                            <router-link to="/login">登录</router-link>
-                                        </li>
-                                        <li><a href="">注册</a></li>
+                                        <template v-if="userinfo.username">
+                                            <li><a @click="handleLogout" href="javascript:;">退出</a></li>
+                                        </template>
+                                        <template v-else>
+                                            <li>
+                                                <router-link to="/login">登录</router-link>
+                                            </li>
+                                            <li><a href="">注册</a></li>
+                                        </template>
                                         <li><a target="_blank" href="/admin.html">后台管理</a></li>
                                     </ul>
                                 </li>
@@ -58,20 +64,36 @@
     </nav>
 </template>
 <script setup lang="ts">
-import { inject, ref } from 'vue'
-import { webChannelAll } from '@/bag-web/service/app'
-import { toTree } from '@/packages/utils/utils'
+import {inject, ref} from 'vue'
+import {webChannelAll, userLogout} from '@/bag-web/service/app'
+import {toTree} from '@/packages/utils/utils'
 import appStore from '@/bag-web/store/app'
+import logo from '@/common/assets/image/bag.jpg'
+import userStore from "@/bag-web/store/user";
+import {useRouter} from "vue-router";
 
-const { configApp } = <any>inject('$configAppOptions')
-const { baseURL } = configApp?.httpNetwork
-const store = appStore()
-const { appConfig } = store
+const {configApp} = <any>inject('$configAppOptions')
+const {baseURL, resetPath} = configApp?.httpNetwork
+const {appConfig} = appStore()
+const store = userStore()
+const userinfo = store.userinfo;
 const inputValue = ref()
+const logoDom = ref();
 const menuList = ref([])
 webChannelAll().then((res: any) => {
     menuList.value = toTree(res)
 })
+const errorChange = () => {
+    logoDom.value.src = logo
+}
+const router = useRouter()
+const handleLogout = () => {
+    userLogout().then(() => {
+        router.push(resetPath).then(() => {
+            store.userinfo = {}
+        })
+    })
+}
 </script>
 <style lang="less" scoped>
 @nah: 60px;
@@ -83,6 +105,10 @@ webChannelAll().then((res: any) => {
         height: @nah;
         align-items: center;
         vertical-align: top;
+
+        img {
+            max-height: 70%;
+        }
     }
 
     &-menu {
@@ -175,6 +201,7 @@ webChannelAll().then((res: any) => {
 
             a {
                 padding-right: 0;
+                text-transform: capitalize
             }
 
             ul li ul.dropdown-menu {
