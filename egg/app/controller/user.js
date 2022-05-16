@@ -7,7 +7,10 @@ class UserController extends baseController {
         const { ctx } = this
         const token = ctx.cookies.get('token', { signed: false, encrypt: true })
         if (token) {
-            const result = await ctx.model.Member.findOne({ where: { password: token } , attributes: { exclude: ['password'] }})
+            const result = await ctx.model.Member.findOne({
+                where: { password: token },
+                attributes: { exclude: ['password'] },
+            })
             if (result) {
                 this.result({ data: result })
             } else {
@@ -58,6 +61,15 @@ class UserController extends baseController {
 
     register() {
 
+    }
+
+    async sendEmail() {
+        const res = await this.ctx.email.sendEmail({ userEmail: '470193837@qq.com', title: '测试标题' })
+        if (res.messageTime === 200) {
+            this.result({ data: res })
+        } else {
+            this.result({ data: '', message: res, code: 1001 })
+        }
     }
 }
 

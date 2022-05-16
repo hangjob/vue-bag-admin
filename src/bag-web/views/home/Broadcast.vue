@@ -10,7 +10,7 @@
             <div class="banner-ib">
                 <i class="icon-qushi"></i>
                 <h3>
-                    <CountTo :startVal="0" :endVal="obj.all" :duration="3000"></CountTo>
+                    <CountTo :startVal="0" :endVal="processing.all" :duration="3000"></CountTo>
                 </h3>
                 <p style="margin-bottom: 20px;">资源总数</p>
                 <p>互联网职员，找导航，就上全栈导航</p>
@@ -25,13 +25,13 @@
                 <div class="update-number">
                     <div class="number-top">
                         <div class="total">
-                            <CountTo :startVal="0" :endVal="obj.lastMonth" :duration="2500"></CountTo>
+                            <CountTo :startVal="0" :endVal="processing.lastMonth" :duration="2500"></CountTo>
                         </div>
                         <div class="change">
                             <p>
                             <span>
                                 +
-                                <CountTo :startVal="0" :endVal="obj.lastWeek" :duration="1800"></CountTo>
+                                <CountTo :startVal="0" :endVal="processing.lastWeek" :duration="1800"></CountTo>
                             </span>
                             </p>
                             <p class="new-work">上一周新增</p>
@@ -45,11 +45,11 @@
                 <div class="update-number">
                     <div class="number-top">
                         <div class="total">
-                            <CountTo :startVal="0" :endVal="obj.userAll" :duration="2500"></CountTo>
+                            <CountTo :startVal="0" :endVal="processing.userAll" :duration="2500"></CountTo>
                         </div>
                         <div class="change">
                             <p>
-                                <span>+<CountTo :startVal="0" :endVal="obj.userLastMonth" :duration="1800"
+                                <span>+<CountTo :startVal="0" :endVal="processing.userLastMonth" :duration="1800"
                                 ></CountTo></span>
                             </p>
                             <p class="new-work">注册用户</p>
@@ -73,7 +73,7 @@ export default defineComponent({
         CountTo
     },
     setup() {
-        const obj = reactive({
+        const processing = reactive({
             all: 30056,
             lastMonth: 30056,
             userAll: 30056,
@@ -81,7 +81,7 @@ export default defineComponent({
             lastWeek: 30056
         })
         return {
-            obj
+            processing
         }
     }
 })

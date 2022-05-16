@@ -28,11 +28,11 @@ http.interceptors.response.use((res: AxiosResponse<any>) => {
 
 
 const post = (url: string, params?: any, config?: AxiosRequestConfig) => {
-    return http.post(rewriteUrl(url), params, config).catch((err: any) => Promise.reject(err))
+    return http.post(rewriteUrl(url), params, config)
 }
 
 const get = (url: string, params?: any, config?: AxiosRequestConfig) => {
-    return http.get(rewriteUrl(url), {params: params, ...config}).catch((err: any) => Promise.reject(err))
+    return http.get(rewriteUrl(url), {params: params, ...config})
 }
 
 export {

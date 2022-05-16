@@ -5,24 +5,32 @@
             <p>如果您不想下载可以在下方输入您的邮箱，系统会将最新的源码发送给您...</p>
         </div>
         <div class="action">
-            <vs-input size="large"  color="rgb(103, 194, 58)"   placeholder="输入您的邮箱" v-model="value1" style="margin-right: 5px;" />
-            <vs-button color="success" type="filled" icon="forward_to_inbox">发送</vs-button>
+            <vs-input size="large" color="rgb(103, 194, 58)" placeholder="输入您的邮箱" v-model="email"
+                      style="margin-right: 5px;"
+            />
+            <vs-button @click="handleSendEmail" color="success" type="filled" icon="forward_to_inbox">发送</vs-button>
         </div>
     </section>
 </template>
 <script>
-import {defineComponent, ref} from 'vue'
+import { defineComponent, ref } from 'vue'
+import { userSendEmail } from '@www/blog/service'
+
 export default defineComponent({
-    setup(){
-        const value1 = ref('')
-        return {
-            value1
+    setup() {
+        const email = ref('')
+        const handleSendEmail = () => {
+            userSendEmail()
         }
-    }
+        return {
+            email,
+            handleSendEmail
+        }
+    },
 })
 </script>
 <style lang="less" scoped>
-.section{
+.section {
     padding-top: 30px;
     padding-bottom: 30px;
     background: rgba(0, 0, 0, 0.5);
@@ -33,13 +41,14 @@ export default defineComponent({
     &-title {
         text-align: center;
         margin-bottom: 40px;
-        text-align: center;
-        h1{
+
+        h1 {
             font-size: 50px;
             font-weight: bold;
         }
     }
-    .action{
+
+    .action {
         display: flex;
         justify-content: center;
         margin-top: 60px;

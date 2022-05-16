@@ -53,7 +53,6 @@ const install = (app: App, options?: $optionsType) => {
             httpNetwork: {...httpNetwork, ...options?.config?.httpNetwork},
         },
     }
-    console.log('_options', _options)
     app.config.globalProperties = _options
     app.provide('$configAppOptions', readonly(_options))
     app.provide('$mitt', mitt())

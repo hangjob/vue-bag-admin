@@ -10,10 +10,24 @@ module.exports = app => {
         user_id: {
             type: INTEGER,
             comment: '用户id',
+            set(value) {
+                if (value) {
+                    this.setDataValue('user_id', value)
+                } else {
+                    this.setDataValue('user_id', 1)
+                }
+            },
         },
         channel_id: {
             type: INTEGER,
             comment: '栏目id',
+            set(value) {
+                if (value) {
+                    this.setDataValue('channel_id', value)
+                } else {
+                    this.setDataValue('channel_id', 1)
+                }
+            },
         },
         image: {
             type: STRING,
@@ -128,5 +142,5 @@ module.exports = app => {
             as: 'member',
         })
     }
-    return Article;
+    return Article
 }

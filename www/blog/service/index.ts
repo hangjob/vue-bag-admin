@@ -2,6 +2,7 @@ import axios from 'axios';
 import { aes_decrypt, aes_encrypt } from '@www/blog/utils/crypto'
 import { nanoid } from 'nanoid'
 
+// 获取文章
 const v1IndexArticle = () => {
     const vipbic = 'vipbic'
     const version = '1'
@@ -11,6 +12,15 @@ const v1IndexArticle = () => {
             return Promise.resolve(JSON.parse(aes_decrypt(res.data.data)))
         })
 }
+
+// 发送邮件
+const userSendEmail = ()=>{
+    return axios.post('/user/sendEmail',{},{baseURL:'/api'}).then((res)=>{
+        console.log(res)
+    })
+}
+
 export {
     v1IndexArticle,
+    userSendEmail
 }

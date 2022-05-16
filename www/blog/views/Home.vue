@@ -1,7 +1,7 @@
 <template>
     <section class="section section-container">
         <div class="section-title">
-            <h1>优秀的你，才能遇到优秀的世界<br/>Bag开源企业/门户/博客开源门户系统</h1>
+            <h1>优秀的你，才能遇到优秀的世界<br/>Bag博客开源门户系统</h1>
         </div>
         <div class="action">
             <vs-button color="success" size="large" type="filled" icon="downloading">下载程序</vs-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
