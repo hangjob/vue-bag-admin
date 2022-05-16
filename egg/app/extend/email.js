@@ -13,13 +13,13 @@ const transporter = nodemailer.createTransport({
 })
 
 module.exports = {
-    async sendEmail({ userEmail, title, message }) {
+    async sendEmail({userEmail, title}) {
         const mailOptions = {
             from: 'vipbic@163.com', // 发送者,与上面的user一致
             to: userEmail, // 接收者,可以同时发送多个,以逗号隔开
             subject: title, // 标题
             // text: '测试内容', // 文本
-            html: emailTmp({ userEmail: '31231313@qq.com' }),
+            html: emailTmp({userEmail, downloads: 1000}),
         }
         return await transporter.sendMail(mailOptions)
     },

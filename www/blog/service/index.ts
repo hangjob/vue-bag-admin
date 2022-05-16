@@ -14,8 +14,8 @@ const v1IndexArticle = () => {
 }
 
 // 发送邮件
-const userSendEmail = ()=>{
-    return axios.post('/user/sendEmail',{},{baseURL:'/api'}).then((res)=>{
+const userSendEmail = (params)=>{
+    return axios.post('/user/sendEmail',params,{baseURL:'/api'}).then((res)=>{
         console.log(res)
     })
 }

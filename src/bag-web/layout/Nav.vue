@@ -68,7 +68,7 @@ import {inject, ref} from 'vue'
 import {webChannelAll, userLogout} from '@/bag-web/service/app'
 import {toTree} from '@/packages/utils/utils'
 import appStore from '@/bag-web/store/app'
-import logo from '@/common/assets/image/bag.jpg'
+import logo from '@/common/assets/image/bag2.png'
 import userStore from "@/bag-web/store/user";
 import {useRouter} from "vue-router";
 
