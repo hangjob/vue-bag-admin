@@ -30,7 +30,6 @@ export default defineComponent({
     setup() {
         const items = ref([])
         v1IndexArticle().then((res) => {
-            console.log(res)
             items.value = res.data
         })
         return {

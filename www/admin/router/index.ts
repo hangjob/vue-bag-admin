@@ -83,6 +83,16 @@ const paths = addUniqueId([
                 keepAlive: true,
                 filePath: '/admin/views/website/Index.vue',
             },
+            {
+                name: '留言管理',
+                path: '/leave',
+                icon: '',
+                shows: 1,
+                tabHidden: false,
+                tabFix: false,
+                keepAlive: true,
+                filePath: '/admin/views/leave/Index.vue',
+            },
         ],
     },
 ], '_local')

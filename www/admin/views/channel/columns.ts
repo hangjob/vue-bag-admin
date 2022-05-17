@@ -38,7 +38,6 @@ const columns = [
         key: 'shows',
         ellipsis: true,
         align: 'center',
-
         customRender: (item: any) => {
             return item.text === true || item.text === 1 ? '是' : '否'
         },

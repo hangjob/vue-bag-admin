@@ -16,4 +16,5 @@ module.exports = app => {
     require('./router/web/channel')(app);
     require('./router/web/antistop')(app);
     require('./router/web/website')(app);
+    require('./router/web/leave')(app);
 };

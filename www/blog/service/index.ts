@@ -14,13 +14,23 @@ const v1IndexArticle = () => {
 }
 
 // 发送邮件
-const userSendEmail = (params)=>{
-    return axios.post('/user/sendEmail',params,{baseURL:'/api'}).then((res)=>{
-        console.log(res)
-    })
+const userSendEmail = (params={})=>{
+    return axios.post('/user/sendEmail',params,{baseURL:'/api'})
+}
+
+// 保存留言
+const webLeaveCreate = (params={})=>{
+    return axios.post('/web/leave/create',params,{baseURL:'/api'})
+}
+
+// 获取留言
+const webLeaveAll = (params={})=>{
+    return axios.post('/web/leave/all',params,{baseURL:'/api'})
 }
 
 export {
     v1IndexArticle,
-    userSendEmail
+    userSendEmail,
+    webLeaveCreate,
+    webLeaveAll
 }

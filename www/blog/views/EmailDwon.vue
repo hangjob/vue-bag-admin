@@ -5,20 +5,23 @@
             <p>如果您不想下载可以在下方输入您的邮箱，系统会将最新的源码发送给您...</p>
         </div>
         <div class="action">
-            <vs-input size="large" color="rgb(103, 194, 58)" placeholder="输入您的邮箱" v-model="email"
-                      style="margin-right: 5px;"
+            <el-input
+                v-model="email"
+                placeholder="输入你的邮箱"
+                size="large"
+                style="width:200px;margin-right:10px"
             />
-            <vs-button @click="handleSendEmail" color="success" type="filled" icon="forward_to_inbox">发送</vs-button>
+            <vs-button style="flex-shrink: 0;" @click="handleSendEmail" color="success" type="filled" icon="forward_to_inbox">发送</vs-button>
         </div>
     </section>
 </template>
-<script>
+<script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { userSendEmail } from '@www/blog/service'
 import { ElNotification } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import isEmail from '@/bag-utils/regular/isEmail'
-
+import { Search } from '@element-plus/icons-vue'
 export default defineComponent({
     setup() {
         const email = ref('')
@@ -28,7 +31,7 @@ export default defineComponent({
                 if (!isEmail(email.value)) {
                     return ElMessage.error('请输入正确的邮箱格式')
                 }
-                userSendEmail({ userEmail: email.value }).then((res) => {
+                userSendEmail({ userEmail: email.value }).then((res:any) => {
                     if (res.data.code === 1) {
                         ElNotification({
                             title: '邮件通知',
@@ -56,6 +59,7 @@ export default defineComponent({
         return {
             email,
             handleSendEmail,
+            Search
         }
     },
 })
@@ -83,6 +87,7 @@ export default defineComponent({
         display: flex;
         justify-content: center;
         margin-top: 60px;
+        align-items: center;
     }
 }
 </style>

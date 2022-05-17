@@ -166,7 +166,6 @@ export default defineComponent({
                 position: relative;
                 width: 100%;
                 height: 100%;
-                background: rgba(0, 0, 0, 0.25);
                 z-index: 10;
                 vertical-align: middle;
                 transition: all 0.3s;
@@ -202,6 +201,11 @@ export default defineComponent({
             flex-direction: row;
             padding: 5px 15px 0 15px;
 
+            &:last-of-type{
+                .d{
+                    background-color: #8bc34a;
+                }
+            }
             > div {
                 display: flex;
                 align-items: center;
@@ -225,7 +229,7 @@ export default defineComponent({
 
             & > div:last-of-type {
                 .d {
-                    background-color: #e96656;
+                    background-color: #8bc34a;
                 }
             }
         }
@@ -258,7 +262,6 @@ export default defineComponent({
 
         &-userimg {
             position: relative;
-            z-index: 9;
             display: block;
             width: 100px;
             height: 36px;
