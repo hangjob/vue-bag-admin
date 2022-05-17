@@ -13,41 +13,49 @@
     </section>
 </template>
 <script>
-import {defineComponent, ref} from 'vue'
-import {userSendEmail} from '@www/blog/service'
-import {ElNotification} from 'element-plus'
+import { defineComponent, ref } from 'vue'
+import { userSendEmail } from '@www/blog/service'
+import { ElNotification } from 'element-plus'
+import { ElMessage } from 'element-plus'
+import isEmail from '@/bag-utils/regular/isEmail'
+
 export default defineComponent({
     setup() {
         const email = ref('')
 
         const handleSendEmail = () => {
             if (email.value) {
-                userSendEmail({userEmail:email.value}).then((res) => {
-                    if(res.data.code === 1){
+                if (!isEmail(email.value)) {
+                    return ElMessage.error('请输入正确的邮箱格式')
+                }
+                userSendEmail({ userEmail: email.value }).then((res) => {
+                    if (res.data.code === 1) {
                         ElNotification({
                             title: '邮件通知',
                             message: `发送成功，${email.value}`,
                             type: 'success',
                         })
-                    }else {
+                    } else {
                         ElNotification({
                             title: '邮件通知',
                             message: `发送失败，请检查邮箱是否填写正确，${email.value}`,
                             type: 'error',
                         })
                     }
-                }).catch(()=>{
+                }).catch(() => {
                     ElNotification({
                         title: '邮件通知',
                         message: `发送失败，请检查邮箱是否填写正确，${email.value}`,
                         type: 'error',
                     })
                 })
+            } else {
+                ElMessage.error('请输入邮箱')
             }
         }
         return {
             email,
-            handleSendEmail
+            handleSendEmail,
         }
     },
 })
