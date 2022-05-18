@@ -1,6 +1,6 @@
 const dayjs = require('dayjs')
 module.exports = app => {
-    const { STRING, INTEGER, BOOLEAN, DATE, TEXT } = app.Sequelize
+    const {STRING, INTEGER, BOOLEAN, DATE, TEXT} = app.Sequelize
     return app.model.define('Website', {
         id: {
             type: INTEGER,
@@ -22,6 +22,10 @@ module.exports = app => {
         slogan: {
             type: STRING,
             comment: '网站描述',
+        },
+        qrcode: {
+            type: STRING,
+            comment: '二维码地址',
         },
         record: {
             type: STRING,

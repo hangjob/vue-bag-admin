@@ -3,7 +3,7 @@
         <div class="container">
             <el-row>
                 <el-col :xs="24" :sm="6" :md="4" :lg="4" :xl="4">
-                    <div class="nav-logo"><img src="@/bag-web/assets/image/logo.png" alt=""></div>
+                    <div class="nav-logo"><img src="@/common/assets/image/logo3.png" alt=""></div>
                 </el-col>
                 <el-col :xs="24" :sm="18" :md="20" :lg="20" :xl="20">
                     <div class="nav-menu">
@@ -68,6 +68,9 @@ export default defineComponent({
         height: @nah;
         align-items: center;
         vertical-align: top;
+        img{
+            height:30px
+        }
     }
 
     &-menu {

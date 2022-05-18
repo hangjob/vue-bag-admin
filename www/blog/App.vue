@@ -1,16 +1,18 @@
 <template>
-    <img class="vegas" src="@www/blog/assets/bg5.jpg" alt="">
+    <img class="vegas" ref="vegas1" src="@www/blog/assets/bg1.jpg" alt="">
     <div>
         <Nav/>
         <div>
-            <component :id="item.components" v-for="(item,idx) of menuList" :is="item.components" :key="idx"></component>
+            <component :id="item.components" v-for="(item,idx) of menuList" :is="item.components" :key="idx"
+            ></component>
         </div>
     </div>
 </template>
 <script lang="ts">
-import {defineComponent, onMounted} from 'vue'
+import {defineComponent, onMounted, ref} from 'vue'
 import Nav from '@www/blog/components/Nav.vue'
 import menuList from "@www/blog/config/menu";
+
 const files: any = import.meta.globEager('./views/*.vue')
 const comps: any = []
 for (const c of Object.keys(files)) {
@@ -21,17 +23,27 @@ for (const c of Object.keys(files)) {
         comps[component.name || name] = component
     }
 }
+const images = import.meta.globEager('@www/blog/assets/*.jpg')
+const imgs = [];
+for (const c of Object.keys(images)) {
+    const img = images[c]?.default
+    // @ts-ignore
+    imgs.push(img)
+}
+
 export default defineComponent({
     components: {
         Nav,
         ...comps,
     },
     setup() {
+        const vegas = ref();
         onMounted(() => {
 
         })
         return {
-            menuList
+            menuList,
+            vegas,
         }
     },
 })

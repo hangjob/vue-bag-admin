@@ -3,10 +3,16 @@
         <el-row :gutter="20">
             <el-col :xs="24" :sm="24" :md="6" :lg="6" :xl="6">
                 <div class="item">
+                    <QrcodeVue :value="qrcode" style="border-radius: 5px;" :margin="5" :size="80" level="H"/>
+                    <p>扫一扫吧</p>
+                </div>
+
+            </el-col>
+            <el-col :xs="24" :sm="24" :md="6" :lg="6" :xl="6">
+                <div class="item">
                     <vs-icon size="34px" color="#46c93a" icon="qr_code"></vs-icon>
                     <p>微信号：<span>itnavs</span></p>
                 </div>
-
             </el-col>
             <el-col :xs="24" :sm="24" :md="6" :lg="6" :xl="6">
                 <div class="item">
@@ -14,19 +20,23 @@
                     <p>470193837@qq.com</p>
                 </div>
             </el-col>
-            <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+            <el-col :xs="24" :sm="24" :md="6" :lg="6" :xl="6">
                 <div class="item">
-                    <div>
-                        <vs-icon color="#e96656" size="34px" icon="location_on"></vs-icon>
-                        <p>备案号码：<span>鄂ICP备17016349号-3</span></p>
-                    </div>
+                    <vs-icon color="#e96656" size="34px" icon="location_on"></vs-icon>
+                    <p><span>鄂ICP备17016349号-3</span></p>
                 </div>
             </el-col>
         </el-row>
     </section>
 </template>
-<script>
-
+<script lang="ts" setup>
+import QrcodeVue from 'qrcode.vue'
+import {ref} from "vue";
+import {webWebsiteFind} from "@www/blog/service";
+const qrcode = ref('');
+webWebsiteFind().then((res:any)=>{
+    qrcode.value = res.data.data.qrcode
+})
 </script>
 <style lang="less" scoped>
 .section {
@@ -47,6 +57,11 @@
     .item{
         margin-top: 20px;
         text-align: center;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
     }
 }
 </style>

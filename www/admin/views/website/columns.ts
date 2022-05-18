@@ -36,24 +36,17 @@ export default [
         },
     },
     {
-        title: '网站logo',
-        dataIndex: 'logo',
-        key: 'logo',
-        ellipsis: true,
+        title: '二维码地址',
+        dataIndex: 'qrcode',
+        key: 'qrcode',
         align: 'center',
-        slots: { customRender: 'image' },
+        ellipsis: true,
         formData: {
-            name: 'logo',
-            label: '网站logo',
-            element: 'bag-upload-image',
-            placeholder: '上传图片',
-            maxlength: 300,
-            rules: [
-                {
-                    required: true, message: '图片为必填项', trigger: 'blur'
-                }
-            ]
-        }
+            name: 'qrcode',
+            label: '二维码地址',
+            element: 'a-input',
+            placeholder: '二维码地址',
+        },
     },
     {
         title: '网站描述',
@@ -86,6 +79,7 @@ export default [
             label: '关键词',
             element: 'a-select',
             placeholder: '输入关键词',
+            defaultValue: Array()
         },
     },
     {
@@ -94,7 +88,7 @@ export default [
         key: 'record',
         align: 'center',
         ellipsis: true,
-        visible:false,
+        visible: false,
         formData: {
             name: 'record',
             label: '备案号',
@@ -102,6 +96,26 @@ export default [
             placeholder: '输入备案号',
             maxlength: 300,
         },
+    },
+    {
+        title: '网站logo',
+        dataIndex: 'logo',
+        key: 'logo',
+        ellipsis: true,
+        align: 'center',
+        slots: {customRender: 'image'},
+        formData: {
+            name: 'logo',
+            label: '网站logo',
+            element: 'bag-upload-image',
+            placeholder: '上传图片',
+            maxlength: 300,
+            rules: [
+                {
+                    required: true, message: '图片为必填项', trigger: 'blur'
+                }
+            ]
+        }
     },
     {
         title: '创建时间',
@@ -116,6 +130,6 @@ export default [
         key: 'action',
         align: 'center',
         width: 200,
-        slots: { customRender: 'action' },
+        slots: {customRender: 'action'},
     },
 ]
