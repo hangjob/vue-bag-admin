@@ -1,4 +1,4 @@
-import { reactive, ref } from 'vue'
+import { inject, reactive, ref } from 'vue'
 import { apiAll } from '@www/admin/service/member'
 import { apiAll as apiAllChannel } from '@www/admin/service/channel'
 import { apiUploadImage } from '@/packages/service/upload'
@@ -28,6 +28,7 @@ export default function() {
         images_type: '',
     })
 
+    const { configApp } = <any>inject('$configAppOptions')
 
     const rules = {
         title: [
@@ -70,7 +71,8 @@ export default function() {
                         message.error(`文件小于${2}MB`)
                     } else {
                         apiUploadImage(file).then((data: any) => {
-                            rev(data)
+                            const { baseURL } = configApp?.httpNetwork;
+                            rev(baseURL + data)
                         }).catch((err: any) => {
                             rej(err)
                         })

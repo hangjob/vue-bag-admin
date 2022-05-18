@@ -1,4 +1,4 @@
-import {post} from '@/bag-web/http/request'
+import { post } from '@/bag-web/http/request'
 
 
 // 获取菜单
@@ -8,12 +8,12 @@ const webChannelAll = (params?: object) => {
 
 // 添加用户
 const memberCreate = (params?: object) => {
-    return post('/member/create', params, {notifyError: true})
+    return post('/member/create', params, { notifyError: true })
 }
 
 // 登录
 const userLogin = (params?: object) => {
-    return post('/user/login', params, {notifyError: true})
+    return post('/user/login', params, { notifyError: true })
 }
 
 // 获取用户信息
@@ -28,7 +28,12 @@ const userLogout = (params?: object) => {
 
 // 获取网站配置
 const webWebsiteFind = () => {
-    return post('/web/website/find', {url: 'http://192.168.1.24:8290/'})
+    return post('/web/website/find', { url: 'http://192.168.1.24:8290/' })
+}
+
+// 文章
+const webArticleFind = (params?: object) => {
+    return post('/web/article/find', params)
 }
 
 export {
@@ -37,5 +42,6 @@ export {
     userLogin,
     webWebsiteFind,
     userUserinfo,
-    userLogout
+    userLogout,
+    webArticleFind,
 }

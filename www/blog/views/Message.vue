@@ -42,19 +42,20 @@
             />
         </div>
         <div class="sbumit">
-            <el-button @click="handleSave" :icon="Edit" type="success" size="large" :disabled="disabled">提交留言
+            <el-button @click="handleSave" :icon="Edit" type="success" size="large" :disabled="disabled">
+                {{text}}
             </el-button>
         </div>
     </section>
 </template>
 <script lang="ts">
-import {defineComponent, reactive, ref} from 'vue'
-import {webLeaveCreate} from "@www/blog/service";
-import {ElNotification} from "element-plus";
+import { defineComponent, reactive, ref } from 'vue'
+import { webLeaveCreate } from '@www/blog/service'
+import { ElNotification } from 'element-plus'
 import {
     Edit,
 } from '@element-plus/icons-vue'
-import isEmail from "@/bag-utils/regular/isEmail";
+import isEmail from '@/bag-utils/regular/isEmail'
 
 export default defineComponent({
     setup() {
@@ -62,10 +63,11 @@ export default defineComponent({
             email: '',
             name: '',
             url: '',
-            message: ''
+            message: '',
         })
-        const disabled = ref(true);
-        const handleSave = function () {
+        const text = ref('提交留言')
+        const disabled = ref(true)
+        const handleSave = function() {
             webLeaveCreate(fromData).then((res: any) => {
                 if (res.data.code === 1) {
                     ElNotification({
@@ -73,7 +75,7 @@ export default defineComponent({
                         message: `留言成功，感谢你的提交，我会尽快反馈`,
                         type: 'success',
                     })
-                    fromData.message = '';
+                    fromData.message = ''
                     inputFromData()
                 } else {
                     ElNotification({
@@ -91,18 +93,22 @@ export default defineComponent({
             })
         }
         const inputFromData = () => {
-            if (fromData.email && isEmail(fromData.email) && fromData.name && fromData.message) {
-                disabled.value = false;
-            } else {
-                disabled.value = true;
+            if (fromData.email) {
+                if (!isEmail(fromData.email)) {
+                    text.value = '邮箱格式不正确'
+                } else {
+                    text.value = '提交留言'
+                }
             }
+            disabled.value = !(fromData.email && isEmail(fromData.email) && fromData.name && fromData.message)
         }
         return {
             fromData,
             handleSave,
             Edit,
             inputFromData,
-            disabled
+            disabled,
+            text,
         }
     },
 })

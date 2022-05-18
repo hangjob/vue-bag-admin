@@ -17,30 +17,30 @@
                             </div>
                             <div class="metas-action">
                                 <div>
-                                    <it-icon color="#546173" name="sentiment_satisfied" outlined/>
+                                    <it-icon color="#546173" name="sentiment_satisfied" outlined />
                                     <span>2163阅读</span>
                                 </div>
                                 <div>
-                                    <it-icon color="#546173" name="sentiment_satisfied" outlined/>
+                                    <it-icon color="#546173" name="sentiment_satisfied" outlined />
                                     <span>789评论</span>
                                 </div>
                                 <div>
-                                    <it-icon color="#546173" name="sentiment_satisfied" outlined/>
+                                    <it-icon color="#546173" name="sentiment_satisfied" outlined />
                                     <span>697点赞</span>
                                 </div>
                             </div>
                             <div class="text">
-                                <Wangeditor :detailData="detailData"/>
-                                <Sweet/>
+                                <Wangeditor :detailData="detailData" />
+                                <Sweet />
                             </div>
                         </div>
                     </div>
-                    <Praise/>
+                    <Praise />
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="24" :lg="8" :xl="8">
-                    <Author/>
-                    <Qrcode/>
-                    <HotTags/>
+                    <Author />
+                    <Qrcode />
+                    <HotTags />
                 </el-col>
             </el-row>
         </div>
@@ -48,17 +48,20 @@
 </template>
 <script lang="ts" setup>
 import Wangeditor from './Wangeditor.vue'
-import {useRoute} from 'vue-router'
+import { useRoute } from 'vue-router'
 import Author from './Author.vue'
 import Qrcode from './Qrcode.vue'
 import HotTags from './HotTags.vue'
 import Praise from './Praise.vue'
 import Sweet from './Sweet.vue'
-import {ref} from "vue";
+import { ref } from 'vue'
+import { webArticleFind } from '@/bag-web/service/app'
 
 const route = useRoute()
-const detailData = ref(null);
-
+const detailData = ref(null)
+webArticleFind({ id: route.params.id }).then((res: any) => {
+    detailData.value = res
+})
 </script>
 <style lang="less" scoped>
 .article {
