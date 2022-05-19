@@ -96,7 +96,7 @@
                                  label="内容"
                                  name="content"
                     >
-                        <md-editor @onUploadImg="onUploadImg" v-model="formState.content" />
+                        <md-editor previewTheme="mk-cute" codeTheme="paraiso" @onUploadImg="onUploadImg" v-model="formState.content" />
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">

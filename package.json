@@ -41,7 +41,7 @@
         "jquery": "^3.6.0",
         "lodash": "^4.17.21",
         "material-icons": "^1.10.8",
-        "md-editor-v3": "^1.11.3",
+        "md-editor-v3": "^2.0.0",
         "minireset.css": "0.0.7",
         "mitt": "^3.0.0",
         "mockjs": "^1.1.0",

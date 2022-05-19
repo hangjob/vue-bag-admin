@@ -1,6 +1,6 @@
 <template>
     <div class="article">
-        <div class="container">
+        <div class="container" v-if="detailData">
             <el-row :gutter="20">
                 <el-col :xs="24" :sm="24" :md="24" :lg="16" :xl="16">
                     <div class="article-body">
@@ -13,42 +13,42 @@
                         </div>
                         <div class="content">
                             <div class="metas">
-                                <h1>品茗信息科技有限公司-羊先生</h1>
+                                <h1 :style="{...detailData.title_style}">品茗信息科技有限公司-羊先生</h1>
                             </div>
                             <div class="metas-action">
                                 <div>
-                                    <it-icon color="#546173" name="sentiment_satisfied" outlined />
+                                    <it-icon color="#409eff" style="font-size:21px" name="remove_red_eye"/>
                                     <span>2163阅读</span>
                                 </div>
                                 <div>
-                                    <it-icon color="#546173" name="sentiment_satisfied" outlined />
+                                    <it-icon color="#409eff" style="font-size:20px" name="design_services" outlined/>
                                     <span>789评论</span>
                                 </div>
                                 <div>
-                                    <it-icon color="#546173" name="sentiment_satisfied" outlined />
+                                    <it-icon color="#409eff" style="font-size:20px" name="local_florist" outlined/>
                                     <span>697点赞</span>
                                 </div>
                             </div>
                             <div class="text">
-                                <Wangeditor :detailData="detailData" />
-                                <Sweet />
+                                <Wangeditor :detailData="detailData"/>
+                                <Sweet/>
                             </div>
                         </div>
                     </div>
-                    <Praise />
+                    <Praise/>
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="24" :lg="8" :xl="8">
-                    <Author />
-                    <Qrcode />
-                    <HotTags />
+                    <Author/>
+                    <Qrcode/>
+                    <HotTags/>
                 </el-col>
             </el-row>
         </div>
     </div>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { useRoute } from 'vue-router'
+import {ref} from 'vue'
+import {useRoute} from 'vue-router'
 
 import Wangeditor from './Wangeditor.vue'
 import Author from './Author.vue'
@@ -57,13 +57,19 @@ import HotTags from './HotTags.vue'
 import Praise from './Praise.vue'
 import Sweet from './Sweet.vue'
 
-import { webArticleFind } from '@/bag-web/service/app'
+import {webArticleFind} from '@/bag-web/service/app'
 
 const route = useRoute()
 const detailData = ref(null)
-webArticleFind({ id: route.params.id }).then((res: any) => {
+webArticleFind({id: route.params.id}).then((res: any) => {
+    try {
+        res.title_style = res.title_style ? JSON.parse(res.title_style.replace(/'/g, '"')) : {};
+    } catch (err) {
+        console.log(err)
+    }
     detailData.value = res
 })
+
 </script>
 <style lang="less" scoped>
 .article {
@@ -107,8 +113,8 @@ webArticleFind({ id: route.params.id }).then((res: any) => {
 
                 h1 {
                     line-height: 1.45;
-                    margin-bottom: 5px;
-                    font-size: var(--bag-font-size-large);
+                    margin-bottom: 10px;
+                    font-size: 24px;
                     font-weight: bold;
                     color: var(--bag-text-color-primary);
                 }
@@ -121,6 +127,11 @@ webArticleFind({ id: route.params.id }).then((res: any) => {
                         display: flex;
                         align-items: center;
                         margin-right: 30px;
+
+                        span {
+                            color: #b5b5b5;
+                            margin-left: 5px;
+                        }
                     }
                 }
             }

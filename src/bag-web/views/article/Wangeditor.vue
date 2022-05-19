@@ -1,6 +1,6 @@
 <template>
     <div id="editor">
-        <md-editor v-if="detailData" v-model="detailData.content" previewOnly/>
+        <md-editor previewTheme="mk-cute" codeTheme="paraiso"  v-if="detailData"  v-model="detailData.content" previewOnly/>
     </div>
 </template>
 <script lang="ts">
