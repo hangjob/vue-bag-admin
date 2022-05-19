@@ -35,7 +35,7 @@ import {ref} from "vue";
 import {webWebsiteFind} from "@www/blog/service";
 const qrcode = ref('');
 webWebsiteFind().then((res:any)=>{
-    qrcode.value = res.data.data.qrcode
+    qrcode.value = res.data.data.qrcode || ''
 })
 </script>
 <style lang="less" scoped>

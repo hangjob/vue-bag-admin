@@ -4,7 +4,7 @@ const baseController = require('../baseController')
 const Sequelize = require('sequelize')
 const Op = Sequelize.Op
 
-class WebArticleController extends baseController {
+class WebLikeController extends baseController {
 
     /**
      * 添加数据
@@ -12,7 +12,7 @@ class WebArticleController extends baseController {
      */
     async create() {
         const { ctx } = this
-        const result = await ctx.model.Web.Article.create({ ...ctx.request.body })
+        const result = await ctx.model.Web.Like.create({ ...ctx.request.body })
         this.result({ data: result })
     }
 
@@ -23,7 +23,7 @@ class WebArticleController extends baseController {
     async delete() {
         const { ctx } = this
         const { id } = ctx.request.body
-        const result = await ctx.model.Web.Article.destroy({
+        const result = await ctx.model.Web.Like.destroy({
             where: { id },
         })
         this.result({ data: result })
@@ -36,7 +36,7 @@ class WebArticleController extends baseController {
     async deletes() {
         const { ctx } = this
         const { ids } = ctx.request.body
-        const result = await ctx.model.Web.Article.destroy({
+        const result = await ctx.model.Web.Like.destroy({
             where: {
                 id: [...ids],
             },
@@ -51,12 +51,9 @@ class WebArticleController extends baseController {
      */
     async find() {
         const { ctx } = this
-        const { id } = ctx.request.body
-        const result = await ctx.model.Web.Article.findOne({
-            where: { id },
-            include: [{ model: ctx.model.Web.Channel, as: 'channel' },{ model: ctx.model.Web.Like, as: 'like' }, { model: ctx.model.Member, as: 'member',
-                attributes: { exclude: ['password','nanoid','email','phone'] },
-            }],
+        const param = ctx.request.body
+        const result = await ctx.model.Web.Like.findOne({
+            where: param,
         })
         this.result({ data: result })
     }
@@ -67,12 +64,12 @@ class WebArticleController extends baseController {
      */
     async all() {
         const { ctx } = this
-        const { ks } = ctx.request.body
+        const param = ctx.request.body || {};
         const where = {}
-        if (ks) {
-            where.name = { [Op.like]: `%${ks}%` } // 模糊查詢 https://www.sequelize.com.cn/core-concepts/model-querying-basics
+        for (const paramKey in param) {
+            where[paramKey] = { [Op.like]: `%${param[paramKey]}%` } // 模糊查找
         }
-        const result = await ctx.model.Web.Article.findAll({
+        const result = await ctx.model.Web.Like.findAll({
             where: { ...where },
         })
         this.result({ data: result })
@@ -85,7 +82,7 @@ class WebArticleController extends baseController {
     async update() {
         const { ctx } = this
         const body = ctx.request.body
-        const result = await ctx.model.Web.Article.update({
+        const result = await ctx.model.Web.Like.update({
             ...body,
         }, {
             where: {
@@ -96,4 +93,4 @@ class WebArticleController extends baseController {
     }
 }
 
-module.exports = WebArticleController
+module.exports = WebLikeController

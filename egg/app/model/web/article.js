@@ -141,6 +141,11 @@ module.exports = app => {
             sourceKey: 'id',
             as: 'member',
         })
+        app.model.Web.Article.hasMany(app.model.Web.Like, {
+            foreignKey: 'article_id',
+            sourceKey: 'id',
+            as:'like'
+        })
     }
     return Article
 }

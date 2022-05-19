@@ -47,14 +47,16 @@
     </div>
 </template>
 <script lang="ts" setup>
-import Wangeditor from './Wangeditor.vue'
+import { ref } from 'vue'
 import { useRoute } from 'vue-router'
+
+import Wangeditor from './Wangeditor.vue'
 import Author from './Author.vue'
 import Qrcode from './Qrcode.vue'
 import HotTags from './HotTags.vue'
 import Praise from './Praise.vue'
 import Sweet from './Sweet.vue'
-import { ref } from 'vue'
+
 import { webArticleFind } from '@/bag-web/service/app'
 
 const route = useRoute()
