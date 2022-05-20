@@ -8,7 +8,7 @@ const transporter = nodemailer.createTransport({
     port: 994, // SMTP端口
     auth: {
         user: 'vipbic@163.com', // 账号
-        pass: 'YH1234567890', // SMTP授权码
+        pass: '', // SMTP授权码
     },
 })
 

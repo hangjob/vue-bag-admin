@@ -88,6 +88,16 @@ module.exports = app => {
         title_style: {
             type: STRING,
             comment: 'title样式',
+            get(){
+                let str = this.getDataValue('title_style')
+                try {
+                    str = str ? JSON.parse(str.replace(/'/g, '"')) : {};
+                } catch (err) {
+                    console.log(err)
+                }
+                return str;
+            }
+
         },
         order: {
             type: INTEGER,
@@ -97,8 +107,8 @@ module.exports = app => {
             type: STRING,
             comment: '关键词',
             get() {
-                const keywords = this.getDataValue('keywords')
-                return keywords ? keywords.split(',') : []
+                const str = this.getDataValue('keywords')
+                return str ? str.split(',') : []
             },
             set(value) {
                 if (value) {

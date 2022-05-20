@@ -62,11 +62,6 @@ import {webArticleFind} from '@/bag-web/service/app'
 const route = useRoute()
 const detailData = ref(null)
 webArticleFind({id: route.params.id}).then((res: any) => {
-    try {
-        res.title_style = res.title_style ? JSON.parse(res.title_style.replace(/'/g, '"')) : {};
-    } catch (err) {
-        console.log(err)
-    }
     detailData.value = res
 })
 

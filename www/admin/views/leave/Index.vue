@@ -71,7 +71,7 @@ export default defineComponent({
             tableCurd,
             formCreate,
             formEdit,
-            columns: columns.filter((item) => item.visible !== false)
+            columns: columns.filter((item:any) => item.visible !== false)
         }
     },
 })
