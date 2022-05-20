@@ -11,9 +11,9 @@ class WebArticleController extends baseController {
      * @returns {Promise<void>}
      */
     async create() {
-        const { ctx } = this
-        const result = await ctx.model.Web.Article.create({ ...ctx.request.body })
-        this.result({ data: result })
+        const {ctx} = this
+        const result = await ctx.model.Web.Article.create({...ctx.request.body})
+        this.result({data: result})
     }
 
     /**
@@ -21,12 +21,12 @@ class WebArticleController extends baseController {
      * @returns {Promise<void>}
      */
     async delete() {
-        const { ctx } = this
-        const { id } = ctx.request.body
+        const {ctx} = this
+        const {id} = ctx.request.body
         const result = await ctx.model.Web.Article.destroy({
-            where: { id },
+            where: {id},
         })
-        this.result({ data: result })
+        this.result({data: result})
     }
 
     /**
@@ -34,14 +34,14 @@ class WebArticleController extends baseController {
      * @returns {Promise<void>}
      */
     async deletes() {
-        const { ctx } = this
-        const { ids } = ctx.request.body
+        const {ctx} = this
+        const {ids} = ctx.request.body
         const result = await ctx.model.Web.Article.destroy({
             where: {
                 id: [...ids],
             },
         })
-        this.result({ data: result })
+        this.result({data: result})
     }
 
 
@@ -50,15 +50,22 @@ class WebArticleController extends baseController {
      * @returns {Promise<void>}
      */
     async find() {
-        const { ctx } = this
-        const { id } = ctx.request.body
+        const {ctx} = this
+        const {id} = ctx.request.body
         const result = await ctx.model.Web.Article.findOne({
-            where: { id },
-            include: [{ model: ctx.model.Web.Channel, as: 'channel' },{ model: ctx.model.Web.Like, as: 'like' }, { model: ctx.model.Member, as: 'member',
-                attributes: { exclude: ['password','nanoid','email','phone'] },
-            }],
+            where: {id},
+            include: [
+                {model: ctx.model.Web.Channel, as: 'channel'},
+                {model: ctx.model.Web.Like, as: 'like'},
+                {
+                    model: ctx.model.Member,
+                    as: 'member',
+                    include: [{model: ctx.model.Web.Article, as: 'article'}],
+                    attributes: {exclude: ['password', 'nanoid', 'email', 'phone']}
+                },
+            ],
         })
-        this.result({ data: result })
+        this.result({data: result})
     }
 
     /**
@@ -66,16 +73,16 @@ class WebArticleController extends baseController {
      * @returns {Promise<void>}
      */
     async all() {
-        const { ctx } = this
-        const { ks } = ctx.request.body
+        const {ctx} = this
+        const {ks} = ctx.request.body
         const where = {}
         if (ks) {
-            where.name = { [Op.like]: `%${ks}%` } // 模糊查詢 https://www.sequelize.com.cn/core-concepts/model-querying-basics
+            where.name = {[Op.like]: `%${ks}%`} // 模糊查詢 https://www.sequelize.com.cn/core-concepts/model-querying-basics
         }
         const result = await ctx.model.Web.Article.findAll({
-            where: { ...where },
+            where: {...where},
         })
-        this.result({ data: result })
+        this.result({data: result})
     }
 
     /**
@@ -83,7 +90,7 @@ class WebArticleController extends baseController {
      * @returns {Promise<void>}
      */
     async update() {
-        const { ctx } = this
+        const {ctx} = this
         const body = ctx.request.body
         const result = await ctx.model.Web.Article.update({
             ...body,
@@ -92,7 +99,7 @@ class WebArticleController extends baseController {
                 id: body.id,
             },
         })
-        this.result({ data: result })
+        this.result({data: result})
     }
 }
 

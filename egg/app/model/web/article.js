@@ -152,7 +152,7 @@ module.exports = app => {
             as: 'member',
         })
         app.model.Web.Article.hasMany(app.model.Web.Like, {
-            foreignKey: 'article_id',
+            foreignKey: 'pid',
             sourceKey: 'id',
             as:'like'
         })

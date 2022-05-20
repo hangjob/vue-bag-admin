@@ -17,16 +17,24 @@
                             </div>
                             <div class="metas-action">
                                 <div>
-                                    <it-icon color="#409eff" style="font-size:21px" name="remove_red_eye"/>
-                                    <span>2163阅读</span>
+                                    <it-icon color="#65b1ff" style="font-size:20px" name="remove_red_eye"/>
+                                    <span>{{detailData.views}} 阅读</span>
                                 </div>
                                 <div>
-                                    <it-icon color="#409eff" style="font-size:20px" name="design_services" outlined/>
-                                    <span>789评论</span>
+                                    <it-icon color="#65b1ff" style="font-size:18px" name="design_services" outlined/>
+                                    <span>{{detailData.views}} 评论</span>
                                 </div>
                                 <div>
-                                    <it-icon color="#409eff" style="font-size:20px" name="local_florist" outlined/>
-                                    <span>697点赞</span>
+                                    <it-icon color="#65b1ff" style="font-size:18px" name="local_florist" outlined/>
+                                    <span>{{detailData.likes}} 点赞</span>
+                                </div>
+                                <div>
+                                    <it-icon color="#65b1ff" style="font-size:18px" name="schedule" outlined/>
+                                    <span>{{detailData.likes}}分钟 阅读时长</span>
+                                </div>
+                                <div>
+                                    <it-icon color="#65b1ff" style="font-size:18px" name="date_range" outlined/>
+                                    <span>{{detailData.updateTime}}</span>
                                 </div>
                             </div>
                             <div class="text">
@@ -38,7 +46,7 @@
                     <Praise/>
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="24" :lg="8" :xl="8">
-                    <Author/>
+                    <Author :detail-data="detailData"/>
                     <Qrcode/>
                     <HotTags/>
                 </el-col>

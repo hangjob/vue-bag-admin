@@ -11,9 +11,9 @@ module.exports = app => {
             type: INTEGER,
             comment: '用户id',
         },
-        article_id: {
+        pid: {
             type: INTEGER,
-            comment: '文章ID',
+            comment: '文章ID/其他ID',
         },
         type: {
             type: INTEGER,

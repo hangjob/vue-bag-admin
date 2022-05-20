@@ -1,14 +1,14 @@
 <template>
-    <div class="author">
+    <div class="author" v-if="detailData.member">
         <div class="author-head"
              style="background-image:url('https://www.vipbic.com/uploads/20220327/9816c6c457fb9e0bee39bd59cd625c84.jpg');"
         ></div>
         <div class="author-avatar">
-            <a href="">羊</a>
+            <a href="">{{ getStrFirst(detailData.member.username) }}</a>
         </div>
         <div class="author-basic">
-            <h5>羊先生</h5>
-            <p>这家伙很懒，什么也没写！</p>
+            <h5>{{ detailData.member.username }}</h5>
+            <p>{{ detailData.member.describe ? detailData.member.describe : '这家伙很懒，什么也没写！' }}</p>
         </div>
         <div class="author-mess">
             <div class="item">
@@ -16,26 +16,39 @@
                 <p>1</p>
             </div>
             <div class="item">
-                <h6>评论</h6>
+                <h6>声望</h6>
                 <p>12</p>
             </div>
             <div class="item">
-                <h6>加入时间</h6>
-                <p>1</p>
+                <h6>注册时间</h6>
+                <p>{{ dayjs(detailData.member.createTime).format('YYYY年MM月DD日') }}</p>
             </div>
         </div>
     </div>
 </template>
-<script>
-import {defineComponent} from 'vue'
+<script lang="ts" setup>
+import {defineComponent, toRefs} from 'vue'
+import * as dayjs from 'dayjs'
 
-export default defineComponent({})
+const props = defineProps({
+    detailData: [Object],
+})
+
+const getStrFirst = (str:string) => {
+    return str.substring(0,1)
+}
+
+const {
+    detailData
+} = toRefs(props)
+
 </script>
 <style lang="less" scoped>
 .author {
     background-color: var(--bag-color-white);
     border-radius: var(--bag-border-radius-base);
-    padding-bottom:  var(--bag-padding-base);
+    padding-bottom: var(--bag-padding-base);
+
     &-head {
         background-position: 0 50%;
         background-size: 100% auto;
@@ -76,6 +89,8 @@ export default defineComponent({})
 
         h5 {
             font-size: 18px;
+            color:#333333;
+            font-weight: bold;
         }
 
         p {
@@ -87,18 +102,22 @@ export default defineComponent({})
     &-mess {
         display: flex;
         justify-content: space-around;
-        .item{
+
+        .item {
             display: flex;
             justify-content: center;
             flex-direction: column;
             align-items: center;
             min-width: 100px;
-            h6{
+
+            h6 {
                 color: #777;
                 margin-bottom: 5px;
             }
-            p{
+
+            p {
                 font-weight: bold;
+                color: #333333;
             }
         }
     }
