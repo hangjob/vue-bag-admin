@@ -1,7 +1,7 @@
 <template>
     <div class="author" v-if="detailData.member">
         <div class="author-head"
-             style="background-image:url('https://www.vipbic.com/uploads/20220327/9816c6c457fb9e0bee39bd59cd625c84.jpg');"
+             :style="{backgroundImage:`url(${getImageFullPath(detailData.image)})`}"
         ></div>
         <div class="author-avatar">
             <a href="">{{ getStrFirst(detailData.member.username) }}</a>
@@ -13,11 +13,11 @@
         <div class="author-mess">
             <div class="item">
                 <h6>文章</h6>
-                <p>1</p>
+                <p>{{ detailData.article_count }}</p>
             </div>
             <div class="item">
                 <h6>声望</h6>
-                <p>12</p>
+                <p>{{ reputation(detailData.article_count) }}</p>
             </div>
             <div class="item">
                 <h6>注册时间</h6>
@@ -27,16 +27,32 @@
     </div>
 </template>
 <script lang="ts" setup>
-import {defineComponent, toRefs} from 'vue'
+import {defineComponent, inject, toRefs} from 'vue'
 import * as dayjs from 'dayjs'
 
 const props = defineProps({
     detailData: [Object],
 })
 
-const getStrFirst = (str:string) => {
-    return str.substring(0,1)
+const reputation = (number: number) => {
+    if (number <= 5) {
+        return number * 20
+    } else if (number <= 10) {
+        return number * 30
+    } else if (number <= 15) {
+        return number * 40
+    } else if (number <= 20) {
+        return number * 50
+    } else {
+        return number * 80
+    }
 }
+
+const getStrFirst = (str: string) => {
+    return str.substring(0, 1)
+}
+
+const {getImageFullPath} = inject<any>('bagGlobal')
 
 const {
     detailData
@@ -51,7 +67,7 @@ const {
 
     &-head {
         background-position: 0 50%;
-        background-size: 100% auto;
+        background-size: cover;
         border-bottom: 1px solid #e1e8ed;
         border-radius: 4px 4px 0 0;
         height: 100px;
@@ -89,7 +105,7 @@ const {
 
         h5 {
             font-size: 18px;
-            color:#333333;
+            color: #333333;
             font-weight: bold;
         }
 

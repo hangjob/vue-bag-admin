@@ -7,7 +7,7 @@
                         <div class="breadcrumb">
                             <ol>
                                 <li>首页</li>
-                                <li>新闻中心</li>
+                                <li>{{detailData.channel.name}}</li>
                                 <li>互联网</li>
                             </ol>
                         </div>
@@ -18,37 +18,37 @@
                             <div class="metas-action">
                                 <div>
                                     <it-icon color="#65b1ff" style="font-size:20px" name="remove_red_eye"/>
-                                    <span>{{detailData.views}} 阅读</span>
+                                    <span>{{ detailData.views }} 阅读</span>
                                 </div>
                                 <div>
                                     <it-icon color="#65b1ff" style="font-size:18px" name="design_services" outlined/>
-                                    <span>{{detailData.views}} 评论</span>
+                                    <span>暂无 评论</span>
                                 </div>
                                 <div>
                                     <it-icon color="#65b1ff" style="font-size:18px" name="local_florist" outlined/>
-                                    <span>{{detailData.likes}} 点赞</span>
+                                    <span>{{ detailData.like.length }} 点赞</span>
                                 </div>
                                 <div>
                                     <it-icon color="#65b1ff" style="font-size:18px" name="schedule" outlined/>
-                                    <span>{{detailData.likes}}分钟 阅读时长</span>
+                                    <span>{{ readingTime(detailData.content) }}分钟 阅读时长</span>
                                 </div>
                                 <div>
                                     <it-icon color="#65b1ff" style="font-size:18px" name="date_range" outlined/>
-                                    <span>{{detailData.updateTime}}</span>
+                                    <span>{{ detailData.updateTime }}</span>
                                 </div>
                             </div>
                             <div class="text">
                                 <Wangeditor :detailData="detailData"/>
-                                <Sweet/>
+                                <Sweet :detailData="detailData"/>
                             </div>
                         </div>
                     </div>
-                    <Praise/>
+                    <Praise :detail-data="detailData"/>
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="24" :lg="8" :xl="8">
                     <Author :detail-data="detailData"/>
-                    <Qrcode/>
-                    <HotTags/>
+                    <Qrcode :detail-data="detailData"/>
+                    <HotTags :detail-data="detailData"/>
                 </el-col>
             </el-row>
         </div>
@@ -72,6 +72,11 @@ const detailData = ref(null)
 webArticleFind({id: route.params.id}).then((res: any) => {
     detailData.value = res
 })
+
+const readingTime = (str: string) => {
+    let len:any = str.length / 500;
+    return parseFloat(len).toFixed(1)
+}
 
 </script>
 <style lang="less" scoped>

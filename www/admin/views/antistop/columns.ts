@@ -11,20 +11,20 @@ const columns = [
         },
     },
     {
-        title: '用户ID',
-        dataIndex: 'user_id',
-        key: 'user_id',
+        title: '关键词',
+        dataIndex: 'name',
+        key: 'name',
         ellipsis: true,
         align: 'center',
-        width: 150,
+        width: 200,
         formData: {
-            name: 'user_id',
-            label: '用户ID',
+            name: 'name',
+            label: '关键词',
             element: 'a-input',
-            placeholder: '输入用户ID',
+            placeholder: '输入关键词',
             rules: [
                 {
-                    required: true, message: '用户ID为必填项', trigger: 'blur',type: 'number',
+                    required: true, message: '关键词为必填项', trigger: 'blur',
                 }
             ]
         }
@@ -40,12 +40,6 @@ const columns = [
             label: '描述',
             element: 'a-textarea',
             placeholder: '输入描述',
-            maxlength: 300,
-            rules: [
-                {
-                    required: true, message: '用户ID为必填项', trigger: 'blur',type: 'number',
-                }
-            ]
         }
     },
     {

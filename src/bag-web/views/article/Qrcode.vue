@@ -2,15 +2,24 @@
     <div class="qrcode">
         <img src="https://www.vipbic.com/public/www/pc/img/7.cc9a928e.png" alt="">
         <div class="qrcode-des">
-            <h3>vipbic-分享你我快乐</h3>
-            <p>帮助设计开发者寻找互联网优秀的资源和工具</p>
+            <h3>{{appConfig.name}}</h3>
+            <p>{{appConfig.slogan}}</p>
         </div>
     </div>
 </template>
-<script>
-import {defineComponent} from 'vue'
+<script lang="ts">
+import { defineComponent } from 'vue'
+import appStore from '@/bag-web/store/app'
 
-export default defineComponent({})
+export default defineComponent({
+    setup() {
+        const store = appStore()
+        const { appConfig } = store
+        return {
+            appConfig,
+        }
+    },
+})
 </script>
 <style lang="less" scoped>
 .qrcode{
@@ -35,6 +44,11 @@ export default defineComponent({})
         p{
             font-size: 14px;
             color: #909090;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            display:-webkit-box;
+            -webkit-box-orient:vertical;
+            -webkit-line-clamp:2;
         }
     }
 }

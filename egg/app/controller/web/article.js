@@ -56,15 +56,37 @@ class WebArticleController extends baseController {
             where: {id},
             include: [
                 {model: ctx.model.Web.Channel, as: 'channel'},
-                {model: ctx.model.Web.Like, as: 'like'},
+                {
+                    model: ctx.model.Web.Like,
+                    as: 'like',
+                    include: [{
+                        model: ctx.model.Member,
+                        as: 'member',
+                        attributes: {exclude: ['password', 'nanoid', 'email', 'phone']}
+                    }]
+                },
                 {
                     model: ctx.model.Member,
                     as: 'member',
-                    include: [{model: ctx.model.Web.Article, as: 'article'}],
+                    // include: [{model: ctx.model.Web.Article, as: 'article'}],
                     attributes: {exclude: ['password', 'nanoid', 'email', 'phone']}
                 },
             ],
         })
+        const {count} = await ctx.model.Web.Article.findAndCountAll({
+            where: {'user_id': result.user_id},
+        });
+        const userinfo = await ctx.service.user.getUserinfo()
+        if (userinfo) {
+            const isLike = await ctx.model.Web.Like.findOne({
+                where: {type: 1, pid: result.id, user_id: userinfo.id},
+            })
+            result.setDataValue('isLike', isLike);
+        } else {
+            result.setDataValue('isLike', false);
+        }
+        await ctx.model.Web.Article.increment({views: parseInt(Math.random() * 10)}, {where: {id}})
+        result.setDataValue('article_count', count);
         this.result({data: result})
     }
 

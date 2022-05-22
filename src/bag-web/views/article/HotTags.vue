@@ -4,24 +4,25 @@
             <h4>热门标签</h4>
         </div>
         <div class="tags">
-            <a href="">前端</a>
-            <a href="">文档</a>
-            <a href="">Vue</a>
-            <a href="">在线工具</a>
-            <a href="">UI框架</a>
-            <a href="">字体下载</a>
-            <a href="">Vue</a>
-            <a href="">在线工具</a>
-            <a href="">Windows</a>
+            <a href="" :style="{backgroundColor:colors[idx].color}" v-for="(item,idx) in keywords" :key="item.id">{{item.name}}</a>
         </div>
     </div>
 </template>
-<script>
-import {defineComponent} from 'vue'
-
+<script lang="ts">
+import {defineComponent, ref} from 'vue'
+import {webAntistopAll} from "@/bag-web/service/app";
+import colors from '@/bag-web/utils/colors'
 export default defineComponent({
     setup() {
+        const keywords =  ref([]);
+        webAntistopAll().then((res:any)=>{
+            keywords.value = res;
+        })
 
+        return {
+            keywords,
+            colors
+        }
     }
 })
 </script>

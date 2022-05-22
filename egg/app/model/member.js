@@ -13,6 +13,11 @@ module.exports = app => {
             type: STRING,
             comment: '姓名',
         },
+        userhead: {
+            type: STRING,
+            comment: '用户头像',
+            defaultValue:`/public/upload/image/2022-03-05/${parseInt(Math.random() * 21)}.png`
+        },
         password: {
             type: STRING,
             comment: '密码',
@@ -54,6 +59,16 @@ module.exports = app => {
             type: INTEGER,
             comment: '部门id',
         },
+        login_number: {
+            type: INTEGER,
+            comment: '登录次数',
+            defaultValue: 1
+        },
+        bag_money: {
+            type: INTEGER,
+            comment: 'bag币',
+            defaultValue: 100
+        },
         state: {
             type: BOOLEAN,
             defaultValue: false,
@@ -77,6 +92,7 @@ module.exports = app => {
             get() {
                 return dayjs(this.getDataValue('createTime')).format('YYYY-MM-DD HH:mm:ss')
             },
+            hidden: true
         },
         updateTime: {
             type: DATE,
@@ -84,6 +100,7 @@ module.exports = app => {
             get() {
                 return dayjs(this.getDataValue('updateTime')).format('YYYY-MM-DD HH:mm:ss')
             },
+            hidden: true
         },
     }, {
         createdAt: 'createTime', // 指定名字
