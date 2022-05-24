@@ -15,6 +15,7 @@ import { setupStore } from '@/bag-web/store'
 import { setupRouter } from '@/bag-web/router'
 import { httpNetwork } from '@/packages/config'
 import {setupGlobDirectives} from "@/common/extend/directive";
+import setupGlobal from "@/common/global";
 
 interface $optionsType {
     router?: {
@@ -39,6 +40,7 @@ const install = (app: App, options?: $optionsType) => {
     app.provide('$mitt', mitt())
     app.use(Equal)
     app.use(ElementPlus)
+    app.use(setupGlobal)
     app.use(setupStore)
     app.use(setupGlobComponents)
     app.use(setupRouter)

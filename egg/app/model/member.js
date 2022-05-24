@@ -1,8 +1,8 @@
 const dayjs = require('dayjs')
-const { customAlphabet } = require('nanoid')
+const {customAlphabet} = require('nanoid')
 const nanoid = customAlphabet('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', 22)
 module.exports = app => {
-    const { STRING, INTEGER, BOOLEAN, DATE } = app.Sequelize
+    const {STRING, INTEGER, BOOLEAN, DATE} = app.Sequelize
     const Member = app.model.define('Member', {
         id: {
             type: INTEGER,
@@ -12,6 +12,11 @@ module.exports = app => {
         username: {
             type: STRING,
             comment: '姓名',
+        },
+        userhead: {
+            type: STRING,
+            comment: '用户头像',
+            defaultValue:`/public/upload/image/2022-03-05/${parseInt(Math.random() * 21)}.png`
         },
         password: {
             type: STRING,
@@ -54,6 +59,16 @@ module.exports = app => {
             type: INTEGER,
             comment: '部门id',
         },
+        login_number: {
+            type: INTEGER,
+            comment: '登录次数',
+            defaultValue: 1
+        },
+        bag_money: {
+            type: INTEGER,
+            comment: 'bag币',
+            defaultValue: 100
+        },
         state: {
             type: BOOLEAN,
             defaultValue: false,
@@ -75,15 +90,17 @@ module.exports = app => {
             type: DATE,
             comment: '创建时间',
             get() {
-                return dayjs(this.getDataValue('createTime')).format('YYYY/MM/DD HH:mm:ss')
+                return dayjs(this.getDataValue('createTime')).format('YYYY-MM-DD HH:mm:ss')
             },
+            hidden: true
         },
         updateTime: {
             type: DATE,
             comment: '更新时间',
             get() {
-                return dayjs(this.getDataValue('updateTime')).format('YYYY/MM/DD HH:mm:ss')
+                return dayjs(this.getDataValue('updateTime')).format('YYYY-MM-DD HH:mm:ss')
             },
+            hidden: true
         },
     }, {
         createdAt: 'createTime', // 指定名字
@@ -91,13 +108,18 @@ module.exports = app => {
         tableName: 'yxs_member', // 定义实际表名
     })
 
-    Member.associate = function() {
+    Member.associate = function () {
         // sourceKey 主键为Member id
         app.model.Member.belongsTo(app.model.Branch, {
             foreignKey: 'did',
             targetKey: 'id',
             sourceKey: 'id',
             as: 'branch',
+        })
+        app.model.Member.hasMany(app.model.Web.Article, {
+            foreignKey: 'user_id',
+            sourceKey: 'id',
+            as: 'article'
         })
     }
     return Member

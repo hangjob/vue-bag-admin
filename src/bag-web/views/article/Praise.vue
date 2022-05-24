@@ -1,26 +1,23 @@
 <template>
-    <div class="praise">
-        <div class="praise-head">10点赞</div>
+    <div class="praise" v-if="detailData.like">
+        <div class="praise-head">{{detailData.like.length}}点赞</div>
         <div class="praise-users">
-            <a href="" v-for="(item,idx) in users" :key="idx">
-                <img src="@/bag-web/assets/image/banner-1.jpg" alt="">
-                <p>羊先生</p>
-                <span class="weight">3421</span>
+            <a href="" v-for="(item,idx) in detailData.like" :key="idx">
+                <img :src="getImageFullPath(item.member.userhead)" alt="">
+                <p>{{ item.member.username }}</p>
+                <span class="weight">{{ item.member.login_number }}</span>
             </a>
         </div>
     </div>
 </template>
-<script>
-import {defineComponent,ref} from 'vue'
+<script lang="ts" setup>
+import {defineComponent, ref, defineProps, inject} from 'vue'
 
-export default defineComponent({
-    setup() {
-        const users = ref(20)
-        return {
-            users
-        }
-    }
+const props = defineProps({
+    detailData: [Object],
 })
+
+const {getImageFullPath} = inject<any>('bagGlobal')
 </script>
 <style lang="less">
 .praise {
@@ -41,6 +38,7 @@ export default defineComponent({
             text-align: center;
             position: relative;
             margin-top: var(--bag-margin-base);
+
             img {
                 object-fit: cover;
                 width: 45px;
@@ -51,7 +49,8 @@ export default defineComponent({
             p {
                 color: var(--bag-text-color-brown);
             }
-            .weight{
+
+            .weight {
                 position: absolute;
                 display: inline-block;
                 right: -5px;

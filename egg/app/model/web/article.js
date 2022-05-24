@@ -1,6 +1,6 @@
 const dayjs = require('dayjs')
 module.exports = app => {
-    const { STRING, INTEGER, BOOLEAN, DATE, TEXT } = app.Sequelize
+    const {STRING, INTEGER, BOOLEAN, DATE, TEXT} = app.Sequelize
     const Article = app.model.define('Article', {
         id: {
             type: INTEGER,
@@ -56,10 +56,7 @@ module.exports = app => {
         views: {
             type: INTEGER,
             comment: '浏览次数',
-        },
-        likes: {
-            type: INTEGER,
-            comment: '点赞次数',
+            defaultValue: 1
         },
         is_guest: {
             type: BOOLEAN,
@@ -88,7 +85,7 @@ module.exports = app => {
         title_style: {
             type: STRING,
             comment: 'title样式',
-            get(){
+            get() {
                 let str = this.getDataValue('title_style')
                 try {
                     str = str ? JSON.parse(str.replace(/'/g, '"')) : {};
@@ -137,7 +134,7 @@ module.exports = app => {
         updatedAt: 'updateTime',
         tableName: 'yxs_web_article', // 定义实际表名 文章表
     })
-    Article.associate = function() {
+    Article.associate = function () {
         // sourceKey 主键为Channel id
         app.model.Web.Article.belongsTo(app.model.Web.Channel, {
             foreignKey: 'channel_id',
@@ -152,9 +149,9 @@ module.exports = app => {
             as: 'member',
         })
         app.model.Web.Article.hasMany(app.model.Web.Like, {
-            foreignKey: 'article_id',
+            foreignKey: 'pid',
             sourceKey: 'id',
-            as:'like'
+            as: 'like'
         })
     }
     return Article

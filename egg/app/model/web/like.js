@@ -1,7 +1,7 @@
 const dayjs = require('dayjs')
 module.exports = app => {
     const { STRING, INTEGER, BOOLEAN, DATE, TEXT } = app.Sequelize
-    return app.model.define('Like', {
+    const Like =  app.model.define('Like', {
         id: {
             type: INTEGER,
             autoIncrement: true,
@@ -11,9 +11,9 @@ module.exports = app => {
             type: INTEGER,
             comment: '用户id',
         },
-        article_id: {
+        pid: {
             type: INTEGER,
-            comment: '文章ID',
+            comment: '1是文章ID/其他ID',
         },
         type: {
             type: INTEGER,
@@ -42,4 +42,15 @@ module.exports = app => {
         updatedAt: 'updateTime',
         tableName: 'yxs_web_like', // 定义实际表名 文章表
     })
+
+    Like.associate = function() {
+        app.model.Web.Like.belongsTo(app.model.Member, {
+            foreignKey: 'user_id',
+            targetKey: 'id',
+            sourceKey: 'id',
+            as: 'member',
+        })
+    }
+
+    return Like;
 }

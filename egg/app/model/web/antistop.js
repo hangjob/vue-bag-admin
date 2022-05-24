@@ -7,10 +7,6 @@ module.exports = app => {
             autoIncrement: true,
             primaryKey: true,
         },
-        user_id: {
-            type: INTEGER,
-            comment: '用户id',
-        },
         name: {
             type: STRING,
             comment: '关键词',
