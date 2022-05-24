@@ -6,7 +6,7 @@
         </div>
         <div>
             <el-row :gutter="20">
-                <el-col :xs="24" :sm="24" :md="8" :lg="12" :xl="12">
+                <el-col class="wow animate__animated animate__fadeInTopLeft" data-wow-duration="1.0s" data-wow-delay="0.2s"  :xs="24" :sm="24" :md="8" :lg="12" :xl="12">
                     <div class="feature">
                         <vs-icon size="50px" icon="handyman" color="#3ab0e2"></vs-icon>
                         <div>
@@ -15,7 +15,7 @@
                         </div>
                     </div>
                 </el-col>
-                <el-col :xs="24" :sm="24" :md="8" :lg="12" :xl="12">
+                <el-col class="wow animate__animated animate__fadeInTopRight" data-wow-duration="1.0s" data-wow-delay="0.2s" :xs="24" :sm="24" :md="8" :lg="12" :xl="12">
                     <div class="feature">
                         <vs-icon size="50px" icon="local_florist"  color="#e96656"></vs-icon>
                         <div>
@@ -24,7 +24,7 @@
                         </div>
                     </div>
                 </el-col>
-                <el-col :xs="24" :sm="24" :md="8" :lg="12" :xl="12">
+                <el-col class="wow animate__animated animate__fadeInLeft" data-wow-duration="1.0s" data-wow-delay="0.2s" :xs="24" :sm="24" :md="8" :lg="12" :xl="12">
                     <div class="feature">
                         <vs-icon size="50px" icon="psychology_alt"  color="#34d293"></vs-icon>
                         <div>
@@ -33,7 +33,7 @@
                         </div>
                     </div>
                 </el-col>
-                <el-col :xs="24" :sm="24" :md="8" :lg="12" :xl="12">
+                <el-col class="wow animate__animated animate__fadeInRight" data-wow-duration="1.0s" data-wow-delay="0.2s" :xs="24" :sm="24" :md="8" :lg="12" :xl="12">
                     <div class="feature">
                         <vs-icon size="50px" icon="history_edu"  color="#409eff"></vs-icon>
                         <div>
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                 </el-col>
-                <el-col :xs="24" :sm="24" :md="8" :lg="12" :xl="12">
+                <el-col class="wow animate__animated animate__fadeInBottomLeft" data-wow-duration="1.0s" data-wow-delay="0.2s" :xs="24" :sm="24" :md="8" :lg="12" :xl="12">
                     <div class="feature">
                         <vs-icon size="50px" icon="face_retouching_natural"  color="#FFCA28"></vs-icon>
                         <div>
@@ -51,7 +51,7 @@
                         </div>
                     </div>
                 </el-col>
-                <el-col :xs="24" :sm="24" :md="8" :lg="12" :xl="12">
+                <el-col class="wow animate__animated animate__fadeInBottomRight" data-wow-duration="1.0s" data-wow-delay="0.2s" :xs="24" :sm="24" :md="8" :lg="12" :xl="12">
                     <div class="feature">
                         <vs-icon size="50px" icon="rowing"  color="#4FC3F7"></vs-icon>
                         <div>

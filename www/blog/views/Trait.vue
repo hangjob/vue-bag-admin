@@ -3,7 +3,7 @@
         <h1>特点</h1>
         <p>相对于其他的系统，Bag一直保持着自己的风格.</p>
         <el-row :gutter="20">
-            <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
+            <el-col  class="wow animate__animated animate__bounceInLeft" data-wow-duration="1.0s" data-wow-delay="0.5" :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
                 <div class="service-icon service-icon1">
                     <div class="circle">
                         <vs-icon  size="70px" color="#e96656"  icon="webhook"></vs-icon>
@@ -12,7 +12,7 @@
                     <p class="indent">Bag所有内容均可以在后台进行修改，整个网站360无死角，前端/后台可定制化开发，并且带有邮件发送系统，会员注册，数据备份恢复，在线升级等.</p>
                 </div>
             </el-col>
-            <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
+            <el-col class="wow animate__animated animate__bounceInLeft" data-wow-duration="1.5s" data-wow-delay="0.5" :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
                 <div class="service-icon service-icon2">
                     <div class="circle">
                         <vs-icon  size="70px" color="#34d293"  icon="catching_pokemon"></vs-icon>
@@ -21,7 +21,7 @@
                     <p class="indent">Bagt通过简单npm命令安装，前端/后台CURD完全傻瓜式操作，所有功能，即看即会，无需任何功底，无需掌握任何技术，谁都可以是个人站长.</p>
                 </div>
             </el-col>
-            <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
+            <el-col class="wow animate__animated animate__bounceInRight" data-wow-duration="1.5s" data-wow-delay="0.5" :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
                 <div class="service-icon service-icon3">
                     <div class="circle">
                         <vs-icon size="70px" color="#3ab0e2" icon="broken_image"></vs-icon>
@@ -30,7 +30,7 @@
                     <p class="indent">采用市面主流技术Vue3、Vite、TypeScript、Gulp、Node.js 、Egg.js 、MySQL以及周边的优秀的插件搭建，不用担心自己业务所受框架有限的瓶颈</p>
                 </div>
             </el-col>
-            <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
+            <el-col class="wow animate__animated animate__bounceInRight" data-wow-duration="1.0s" data-wow-delay="0.5" :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
                 <div class="service-icon service-icon4">
                     <div class="circle">
                         <vs-icon size="70px" color="#f7d861" icon="design_services"></vs-icon>
@@ -42,7 +42,7 @@
         </el-row>
     </section>
 </template>
-<script>
+<script lang="ts" setup>
 
 </script>
 <style lang="less" scoped>

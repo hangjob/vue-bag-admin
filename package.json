@@ -24,6 +24,7 @@
         "@mojs/core": "^1.2.1",
         "@soerenmartius/vue3-clipboard": "^0.1.2",
         "@vueuse/core": "^7.3.0",
+        "animate.css": "^4.1.1",
         "ant-design-vue": "^2.2.8",
         "antd-theme-generator": "^1.2.6",
         "axios": "^0.23.0",
@@ -66,6 +67,7 @@
         "vuex": "^4.0.2",
         "vxe-table": "^4.1.0",
         "wangeditor": "^4.7.11",
+        "wow.js": "^1.2.2",
         "xe-utils": "^3.4.0",
         "xlsx": "^0.17.3"
     },

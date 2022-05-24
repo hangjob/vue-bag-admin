@@ -65,3 +65,8 @@ webWebsiteFind().then((res:any)=>{
     }
 }
 </style>
+<style>
+canvas{
+    -webkit-touch-callout : none;
+}
+</style>

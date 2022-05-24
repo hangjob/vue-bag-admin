@@ -5,7 +5,7 @@
             <p>以下是Bag近期版本的下载.</p>
         </div>
         <el-row :gutter="30">
-            <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
+            <el-col  class="wow animate__animated animate__slideInRight" data-wow-duration="2.0s" data-wow-delay="0.5s" :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
                 <div class="package" style="margin-top: 25px">
                     <div class="package-header">
                         <h4>V3.1</h4>
@@ -28,7 +28,7 @@
                     </div>
                 </div>
             </el-col>
-            <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
+            <el-col  class="wow animate__animated animate__slideInRight" data-wow-duration="1.8s" data-wow-delay="0.5" :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
                 <div class="package">
                     <div class="package-header" style="background-color: #E7AC44">
                         <h4>v3.0</h4>
@@ -51,7 +51,7 @@
                     </div>
                 </div>
             </el-col>
-            <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
+            <el-col  class="wow animate__animated animate__slideInRight" data-wow-duration="1.4s" data-wow-delay="0.5" :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
                 <div class="package">
                     <div class="package-header" style="background-color: #3ab0e2">
                         <h4>V2.0</h4>
@@ -76,7 +76,7 @@
                     </div>
                 </div>
             </el-col>
-            <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
+            <el-col class="wow animate__animated animate__slideInRight" data-wow-duration="1.0s" data-wow-delay="0.5" :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
                 <div class="package">
                     <div class="package-header" style="background-color: #34d293">
                         <h4>v1.0</h4>

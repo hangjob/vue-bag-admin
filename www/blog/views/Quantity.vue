@@ -3,37 +3,37 @@
         <el-row :gutter="20">
             <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
                 <div class="service-icon">
-                    <div class="circle">
+                    <div class="circle wow animate__animated animate__slideInLeft" data-wow-duration="1.0s" data-wow-delay="0.5">
                         <vs-icon size="50px" color="#e96656" icon="design_services"></vs-icon>
                     </div>
-                    <h5><CountTo :startVal="0" :endVal="12288" :duration="1800"></CountTo></h5>
+                    <h5  class="wow animate__animated animate__slideInRight" data-wow-duration="1.0s" data-wow-delay="0.5"><CountTo :startVal="0" :endVal="12288" :duration="1800"></CountTo></h5>
                     <p class="indent">Projects Completed</p>
                 </div>
             </el-col>
             <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
                 <div class="service-icon">
-                    <div class="circle">
+                    <div class="circle wow animate__animated animate__slideInLeft" data-wow-duration="1.0s" data-wow-delay="0.5">
                         <vs-icon size="50px" color="#34d293" icon="groups"></vs-icon>
                     </div>
-                    <h5><CountTo :startVal="0" :endVal="2288" :duration="1800"></CountTo></h5>
+                    <h5 class="wow animate__animated animate__slideInRight" data-wow-duration="1.4s" data-wow-delay="0.5"><CountTo :startVal="0" :endVal="2288" :duration="1800"></CountTo></h5>
                     <p class="indent">Happy Clients</p>
                 </div>
             </el-col>
             <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
                 <div class="service-icon">
-                    <div class="circle">
+                    <div class="circle wow animate__animated animate__slideInLeft" data-wow-duration="1.0s" data-wow-delay="0.5">
                         <vs-icon size="50px" color="#3ab0e2" icon="mark_email_read"></vs-icon>
                     </div>
-                    <h5><CountTo :startVal="0" :endVal="18234" :duration="1800"></CountTo></h5>
+                    <h5 class="wow animate__animated animate__slideInRight" data-wow-duration="1.4s" data-wow-delay="0.5"><CountTo :startVal="0" :endVal="18234" :duration="1800"></CountTo></h5>
                     <p class="indent">Mail Conversation</p>
                 </div>
             </el-col>
             <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
                 <div class="service-icon">
-                    <div class="circle">
+                    <div class="circle wow animate__animated animate__slideInLeft" data-wow-duration="1.0s" data-wow-delay="0.5">
                         <vs-icon size="50px" color="#f7d861" icon="filter"></vs-icon>
                     </div>
-                    <h5><CountTo :startVal="0" :endVal="1093" :duration="1800"></CountTo></h5>
+                    <h5 class="wow animate__animated animate__slideInRight" data-wow-duration="1.0s" data-wow-delay="0.5"><CountTo :startVal="0" :endVal="1093" :duration="1800"></CountTo></h5>
                     <p class="indent">Photos Taken</p>
                 </div>
             </el-col>

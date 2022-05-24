@@ -1,17 +1,18 @@
 <template>
     <section class="section section-container">
         <div class="section-title">
-            <h1>不想下载？</h1>
+            <h1 class="wow animate__animated animate__bounce" data-wow-duration="1.0s" data-wow-delay="0.2s">不想下载？</h1>
             <p>如果您不想下载可以在下方输入您的邮箱，系统会将最新的源码发送给您...</p>
         </div>
         <div class="action">
             <el-input
+                class="wow animate__animated animate__headShake" data-wow-duration="1.0s" data-wow-delay="0.2s"
                 v-model="email"
                 placeholder="输入你的邮箱"
                 size="large"
                 style="width:200px;margin-right:10px"
             />
-            <vs-button style="flex-shrink: 0;" @click="handleSendEmail" color="success" type="filled" icon="forward_to_inbox">发送</vs-button>
+            <vs-button class="wow animate__animated animate__headShake" data-wow-duration="1.0s" data-wow-delay="0.2s" style="flex-shrink: 0;" @click="handleSendEmail" color="success" type="filled" icon="forward_to_inbox">发送</vs-button>
         </div>
     </section>
 </template>
@@ -29,7 +30,11 @@ export default defineComponent({
         const handleSendEmail = () => {
             if (email.value) {
                 if (!isEmail(email.value)) {
-                    return ElMessage.error('请输入正确的邮箱格式')
+                    return ElNotification({
+                        title: '提示',
+                        message: `请输入正确的邮箱格式`,
+                        type: 'error',
+                    })
                 }
                 userSendEmail({ userEmail: email.value }).then((res:any) => {
                     if (res.data.code === 1) {
@@ -53,7 +58,11 @@ export default defineComponent({
                     })
                 })
             } else {
-                ElMessage.error('请输入邮箱')
+                return ElNotification({
+                    title: '提示',
+                    message: `你输入的到邮箱地址是空`,
+                    type: 'error',
+                })
             }
         }
         return {

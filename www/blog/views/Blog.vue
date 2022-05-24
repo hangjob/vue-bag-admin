@@ -6,7 +6,10 @@
         </div>
         <div class="article">
             <el-row :gutter="20">
-                <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="6" v-for="(item,index) in items" :key="index">
+                <el-col class="wow animate__animated animate__zoomIn" data-wow-duration="1.0s"
+                        :data-wow-delay="index/8+'s'"
+                        :xs="24" :sm="12" :md="8" :lg="6" :xl="6" v-for="(item,index) in items" :key="index"
+                >
                     <template v-if="index === 0">
                         <Article :item-data="item" :item-sum-data="items" />
                     </template>

@@ -5,7 +5,7 @@
             <p>这里介绍了Bag是由何而来的经过.</p>
         </div>
         <el-row :gutter="40">
-            <el-col :xs="24" :sm="12" :md="24" :lg="12" :xl="12" style="margin-top: 50px">
+            <el-col class="wow animate__animated animate__fadeInLeft" data-wow-duration="1.0s" data-wow-delay="0.2s" :xs="24" :sm="12" :md="24" :lg="12" :xl="12" style="margin-top: 50px">
                 <p>
                     Bag最初我只是设计的一个开源后台管理系统，后来发大家对管理系统还是很喜欢，但是往往对接企业项目，风格和使用规范又有些偏差或者很不符合现有业务，不能带动用户去使用它，如是我又开发了Bag-web，为大家提供一个博客网站，那么就可以去使用这个系统管理你自己的博客了。
                     感谢：本套开源代码使用了Vue3,Vite,Gulp,Ant-Design-Vue,Element-Plus,Axios...,以及网络上一些插件，在这里感谢这些框架和插件的开源，为本套程序带来了很强大的程序基础！
@@ -20,7 +20,7 @@
                     特此声明：用户利用平台发布虚假、侵犯他人隐私、侵犯他人知识产权、侮辱他人、造谣诽谤等违反法律法规或公序良俗的内容从而给平台方、其他用户或第三方造成损害的，由前述用户承担全部法律后果及赔偿责任
                 </p>
             </el-col>
-            <el-col :xs="24" :sm="12" :md="24" :lg="12" :xl="12" style="margin-top: 50px">
+            <el-col class="wow animate__animated animate__fadeInRight" data-wow-duration="1.0s" data-wow-delay="0.2s" :xs="24" :sm="12" :md="24" :lg="12" :xl="12" style="margin-top: 50px">
                 <div class="skill">
                     <div class="skill-count">
                         <el-progress :width="60" type="circle" :percentage="80" />

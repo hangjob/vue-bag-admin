@@ -5,7 +5,9 @@
             <p>如果您有其他的问题请在下方提交留言与我联系（博客使用类问题请加交流群或看手册文档）.</p>
         </div>
         <el-row :gutter="30">
-            <el-col :xs="24" :sm="8" :md="8" :lg="8" :xl="8" class="message-input">
+            <el-col class="message-input wow animate__animated animate__bounce" data-wow-duration="1.0s"
+                    data-wow-delay="0.2s" :xs="24" :sm="8" :md="8" :lg="8" :xl="8"
+            >
                 <el-input
                     v-model="fromData.name"
                     placeholder="你的名字"
@@ -13,7 +15,9 @@
                     @input="inputFromData"
                 />
             </el-col>
-            <el-col :xs="24" :sm="8" :md="8" :lg="8" :xl="8" class="message-input">
+            <el-col class="message-input wow animate__animated animate__bounce" data-wow-duration="1.4s"
+                    data-wow-delay="0.2s" :xs="24" :sm="8" :md="8" :lg="8" :xl="8"
+            >
                 <el-input
                     v-model="fromData.email"
                     placeholder="你的邮箱"
@@ -21,7 +25,9 @@
                     @input="inputFromData"
                 />
             </el-col>
-            <el-col :xs="24" :sm="8" :md="8" :lg="8" :xl="8" class="message-input">
+            <el-col class="message-input wow animate__animated animate__bounce" data-wow-duration="1.8s"
+                    data-wow-delay="0.2s" :xs="24" :sm="8" :md="8" :lg="8" :xl="8"
+            >
                 <el-input
                     v-model="fromData.url"
                     placeholder="你的站点/可为空"
@@ -32,6 +38,7 @@
         </el-row>
         <div class="action">
             <el-input
+                class="wow animate__animated animate__fadeInUp" data-wow-duration="1.0s" data-wow-delay="0.2s"
                 v-model="fromData.message"
                 :rows="6"
                 type="textarea"
@@ -42,8 +49,10 @@
             />
         </div>
         <div class="sbumit">
-            <el-button @click="handleSave" :icon="Edit" type="success" size="large" :disabled="disabled">
-                {{text}}
+            <el-button class="wow animate__animated animate__fadeInUp" data-wow-duration="1.4s" data-wow-delay="0.2s"
+                       @click="handleSave" :icon="Edit" type="success" size="large" :disabled="disabled"
+            >
+                {{ text }}
             </el-button>
         </div>
     </section>
