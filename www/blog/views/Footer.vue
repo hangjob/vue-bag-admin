@@ -4,6 +4,7 @@
             <el-col :xs="24" :sm="24" :md="6" :lg="6" :xl="6">
                 <div class="item">
                     <QrcodeVue :value="qrcode" style="border-radius: 5px;" :margin="5" :size="80" level="H"/>
+                    <img src=""  id="img" alt="">
                     <p>扫一扫吧</p>
                 </div>
 
@@ -35,7 +36,22 @@ import {ref} from "vue";
 import {webWebsiteFind} from "@www/blog/service";
 const qrcode = ref('');
 webWebsiteFind().then((res:any)=>{
-    qrcode.value = res.data.data.qrcode || ''
+    qrcode.value = res.data.data.qrcode || '';
+    // const img = document.getElementById( 'img' );
+    // const cas = document.createElement( 'canvas' );
+    // const ctx = cas.getContext( '2d' );
+    //
+    // cas.width = 100, cas.height = 100;
+    // ctx.fillStyle = 'pink';
+    // ctx.fillRect( 0, 0, 100, 100 );
+    //
+    // // 把画布的内容转换为base64编码格式的图片
+    // const data = cas.toDataURL( 'image/png', 1 );  //1表示质量(无损压缩)
+    //
+    // img.src = data;
+    //
+    // // 把画布的内容转换为base64编码格式的图片
+    // console.log(cvs.toDataURL( 'image/png' ));
 })
 </script>
 <style lang="less" scoped>

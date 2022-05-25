@@ -16,3 +16,11 @@ exports.validate = {
     enable: true,
     package: 'egg-validate',
 }
+
+
+module.exports = {
+    redis: {
+        enable: true,
+        package: 'egg-redis',
+    },
+};

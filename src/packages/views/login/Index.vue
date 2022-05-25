@@ -40,7 +40,7 @@
                 </a-row>
                 <img class="embe embe1" src="@/packages/assets/image/01.png" alt="">
                 <img class="embe embe2 hidden-xs" src="@/packages/assets/image/01.png" alt="">
-                <img class="logo hidden-xs hidden-sm" src="@/packages/assets/image/yanghang.jpg" alt="">
+                <img class="logo hidden-xs hidden-sm" src="@/common/assets/image/logo3.png" alt="">
             </div>
         </div>
     </div>
@@ -170,11 +170,10 @@ export default defineComponent({
 
         .logo {
             position: absolute;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
             left: 50px;
             top: 50px;
+            height: 40px;
+            object-fit: cover;
         }
 
         .slide-left {
@@ -232,6 +231,7 @@ export default defineComponent({
             width: 100%;
             position: relative;
             z-index: 100;
+
             button {
                 background-image: linear-gradient(to right, #e34c44, #f59178);
                 border: none;
