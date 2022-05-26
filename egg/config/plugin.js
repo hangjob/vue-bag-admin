@@ -18,9 +18,7 @@ exports.validate = {
 }
 
 
-module.exports = {
-    redis: {
-        enable: true,
-        package: 'egg-redis',
-    },
+exports.redis = {
+    enable: true,
+    package: 'egg-redis',
 };

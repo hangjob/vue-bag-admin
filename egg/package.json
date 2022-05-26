@@ -11,6 +11,7 @@
         "crypto-js": "^4.1.1",
         "dayjs": "^1.10.8",
         "egg": "^2.15.1",
+        "egg-redis": "^2.4.0",
         "egg-scripts": "^2.11.0",
         "egg-sequelize": "^6.0.0",
         "egg-socket.io": "^4.1.6",
@@ -19,6 +20,7 @@
         "mkdirp": "^1.0.4",
         "mysql2": "^2.3.0",
         "nanoid": "^3.3.2",
+        "node-rsa": "^1.1.1",
         "nodemailer": "^6.7.5"
     },
     "devDependencies": {

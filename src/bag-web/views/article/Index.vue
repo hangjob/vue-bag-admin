@@ -1,5 +1,10 @@
 <template>
-    <div class="article">
+    <div
+        class="article"
+        v-loading="loading"
+        element-loading-text="数据正在加载中..."
+        element-loading-background="rgba(122, 122, 122, 0.1)"
+    >
         <div class="container" v-if="detailData">
             <el-row :gutter="20">
                 <el-col :xs="24" :sm="24" :md="24" :lg="16" :xl="16">
@@ -66,11 +71,14 @@ import Praise from './Praise.vue'
 import Sweet from './Sweet.vue'
 
 import {webArticleFind} from '@/bag-web/service/app'
-
+import { ElLoading } from 'element-plus'
 const route = useRoute()
 const detailData = ref(null)
+const loading = ref(true)
 webArticleFind({id: route.params.id}).then((res: any) => {
     detailData.value = res
+}).finally(()=>{
+    loading.value = false;
 })
 
 const readingTime = (str: string) => {
@@ -83,7 +91,7 @@ const readingTime = (str: string) => {
 .article {
     margin-top: 30px;
     margin-bottom: 30px;
-
+    min-height: 400px;
     &-body {
         position: relative;
         background-color: var(--bag-color-white);

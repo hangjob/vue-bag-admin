@@ -18,7 +18,7 @@
                         <vs-icon  size="70px" color="#34d293"  icon="catching_pokemon"></vs-icon>
                     </div>
                     <h5>简单易用</h5>
-                    <p class="indent">Bagt通过简单npm命令安装，前端/后台CURD完全傻瓜式操作，所有功能，即看即会，无需任何功底，无需掌握任何技术，谁都可以是个人站长.</p>
+                    <p class="indent">Bag通过简单npm命令安装，前端/后台CURD完全傻瓜式操作，所有功能，即看即会，无需任何功底，无需掌握任何技术，谁都可以是个人站长.</p>
                 </div>
             </el-col>
             <el-col class="wow animate__animated animate__bounceInRight" data-wow-duration="1.5s" data-wow-delay="0.5" :xs="24" :sm="12" :md="8" :lg="6" :xl="6">

@@ -11,7 +11,10 @@ const setPinia = (to: RouteLocationNormalized, from: RouteLocationNormalized, ne
         if (!userinfo.id) {
             webWebsiteFind().then(async (res: any) => {
                 app.appConfig = res
-                user.userinfo = await userUserinfo();
+                userUserinfo().then((res) => {
+                    user.userinfo = res
+                }).catch(() => {
+                })
             }).finally(() => {
                 next()
             })

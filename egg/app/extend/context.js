@@ -16,9 +16,10 @@ const CryptoJS = require('crypto-js')
 const key = CryptoJS.enc.Utf8.parse('1234123412QWERTY')  //十六位十六进制数作为密钥
 const iv = CryptoJS.enc.Utf8.parse('QWERTY1234123412')   //十六位十六进制数作为密钥偏移量
 const email = require('./email')
+const nodersa = require('./nodersa')
 module.exports = {
-    setToken({ password, username }) {
-        let str = CryptoJS.enc.Utf8.parse(JSON.stringify({ password, username }))
+    setToken({password, username}) {
+        let str = CryptoJS.enc.Utf8.parse(JSON.stringify({password, username}))
         let encrypted = CryptoJS.AES.encrypt(str, key, {
             iv: iv,
             mode: CryptoJS.mode.CBC,
@@ -29,7 +30,7 @@ module.exports = {
     getDecodeToken(token) {
         let encryptedHexStr = CryptoJS.enc.Hex.parse(token)
         let str = CryptoJS.enc.Base64.stringify(encryptedHexStr)
-        let decrypt = CryptoJS.AES.decrypt(str, key, { iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7 })
+        let decrypt = CryptoJS.AES.decrypt(str, key, {iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7})
         let decryptedStr = decrypt.toString(CryptoJS.enc.Utf8)
         return decryptedStr.toString()
     },
@@ -41,5 +42,6 @@ module.exports = {
         }
         return result
     },
-    email
+    email,
+    nodersa
 }

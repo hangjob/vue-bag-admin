@@ -3,8 +3,8 @@
         <div class="container">
             <el-row>
                 <el-col :xs="24" :sm="1" :md="2" :lg="2" :xl="2">
-                    <div class="nav-logo"><img @error="errorChange" ref="logoDom" :src="baseURL+appConfig.logo" alt="">
-                    </div>
+                    <router-link to="/home"  class="nav-logo"><img @error="errorChange" ref="logoDom" :src="baseURL+appConfig.logo" :alt="appConfig.name">
+                    </router-link>
                 </el-col>
                 <el-col :xs="24" :sm="20" :md="18" :lg="14" :xl="14">
                     <div class="nav-menu">

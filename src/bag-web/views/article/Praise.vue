@@ -1,7 +1,7 @@
 <template>
-    <div class="praise" v-if="detailData.like">
-        <div class="praise-head">{{detailData.like.length}}点赞</div>
-        <div class="praise-users">
+    <div class="praises" v-if="detailData.like">
+        <div class="praises-head">{{detailData.like.length}}点赞</div>
+        <div class="praises-users">
             <a href="" v-for="(item,idx) in detailData.like" :key="idx">
                 <img :src="getImageFullPath(item.member.userhead)" alt="">
                 <p>{{ item.member.username }}</p>
@@ -20,7 +20,7 @@ const props = defineProps({
 const {getImageFullPath} = inject<any>('bagGlobal')
 </script>
 <style lang="less">
-.praise {
+.praises {
     background-color: var(--bag-color-white);
     padding: var(--bag-padding-base);
     margin-top: var(--bag-margin-base);
