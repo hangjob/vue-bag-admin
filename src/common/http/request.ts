@@ -1,9 +1,10 @@
-import { AxiosResponse, AxiosError, AxiosRequestConfig, AxiosInstance } from 'axios'
+import { AxiosResponse, AxiosError, AxiosRequestConfig } from 'axios'
 import { getHttpNetworkConfig } from '@/common/http/index'
 import localStore from '@/common/utils/persistence'
 import { useRouter } from 'vue-router'
 import { message as messageModel } from 'ant-design-vue'
-
+import { rsaEncrypt } from '@/packages/utils/crypto'
+import { nanoid } from 'nanoid'
 // 扩展类型
 declare module 'axios' {
     export interface AxiosRequestConfig {
@@ -45,7 +46,8 @@ function requestSuccess(config: AxiosRequestConfig, { httpNetwork = {} }: { http
     } = getHttpNetworkConfig(httpNetwork)
     config.baseURL = baseURL
     config.timeout = timeout
-    config.headers = { ...headers }
+    const sign = rsaEncrypt(JSON.stringify({ name: 'bag', id: nanoid() }))
+    config.headers = { ...headers, sign }
     config.retry = retry
     config.retryDelay = retryDelay
     return config

@@ -2,7 +2,21 @@ module.exports = options => {
     // 验证是否在登录状态下
     return async function verify(ctx, next) {
         const filter = ['/user/login', '/user/logout']
-        await next()
+        await console.log(1, ctx.get('sign'))
+        const sign = await ctx.get('sign')
+        try {
+            let decodeData = await ctx.nodersa.rsaDecrypt(sign)
+            decodeData = JSON.parse(decodeData)
+            if (decodeData.name !== 'bag') {
+                ctx.response.status = 403
+                ctx.body = { code: 9999, data: '', message: 'sign签名信息无效' }
+            } else {
+                await next()
+            }
+        } catch (e) {
+            ctx.response.status = 403
+            ctx.body = { code: 9999, data: '', message: '系统异常' }
+        }
         // const result = filter.findIndex(item => ctx.request.url.indexOf(item) > -1) !== -1
         // if (result) {
         //     await next()
