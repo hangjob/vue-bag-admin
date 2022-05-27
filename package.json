@@ -40,6 +40,7 @@
         "file-saver": "^2.0.5",
         "fuse.js": "^6.5.3",
         "jquery": "^3.6.0",
+        "jsencrypt": "^3.2.1",
         "lodash": "^4.17.21",
         "material-icons": "^1.10.8",
         "md-editor-v3": "^2.0.0",

@@ -18,7 +18,6 @@ class RedisService extends Service {
         const { redis } = this.app
         const dbRedis = await redis.clients.get(dbConfig[db]).get(key)
         return JSON.parse(dbRedis)
-
     }
 }
 

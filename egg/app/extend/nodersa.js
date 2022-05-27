@@ -15,13 +15,13 @@ function rsaEncrypt(data) {
 }
 
 // 使用私钥解密
-function rasDecrypt(data) {
+function rsaDecrypt(data) {
     const priKey = new nodeRSA(privateKey, 'pkcs8-private')
     return priKey.decrypt(Buffer.from(data, 'base64'), 'utf8')
 }
 
 const sign = rsaEncrypt(txt)
-const _src = rasDecrypt(sign)
+const _src = rsaDecrypt(sign)
 
 console.log('加密：', sign)
 console.log('解密：', _src)
@@ -53,7 +53,7 @@ console.log('公钥验证：' + verifyRSA(sign, signature))
 
 module.exports = {
     rsaEncrypt,
-    rasDecrypt,
+    rsaDecrypt,
     signRSA,
     verifyRSA
 }

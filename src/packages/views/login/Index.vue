@@ -62,7 +62,7 @@ interface FormState {
     rememberPas: string | boolean
 }
 
-import { Encrypt, Decrypt } from '@/packages/utils/crypto'
+import { aseEncrypt, aseDecrypt } from '@/packages/utils/crypto'
 
 export default defineComponent({
     name: 'login',
@@ -89,7 +89,7 @@ export default defineComponent({
 
         const encryptData = locaStore.get('encryptData')
         if (encryptData) {
-            let { username, password, rememberPas } = JSON.parse(Decrypt(encryptData))
+            let { username, password, rememberPas } = JSON.parse(aseDecrypt(encryptData))
             formState.username = username
             formState.password = password
             formState.rememberPas = rememberPas
@@ -104,7 +104,7 @@ export default defineComponent({
                 .then(() => {
                     apiLogin(formState).then(() => {
                         if (formState.rememberPas) {
-                            locaStore.set('encryptData', Encrypt(JSON.stringify(formState)), 3600 * 24 * 7)
+                            locaStore.set('encryptData', aseEncrypt(JSON.stringify(formState)), 3600 * 24 * 7)
                         }
                         router.push('/home') // 此处通过菜单节点去读取第一个，默认是跳转home
                     })
