@@ -248,6 +248,7 @@ export default defineComponent({
                 display: -webkit-box;
                 -webkit-line-clamp: 1;
                 -webkit-box-orient: vertical;
+                text-overflow:ellipsis;
             }
 
             p {
@@ -257,6 +258,7 @@ export default defineComponent({
                 overflow: hidden;
                 margin-top: 5px;
                 line-height: 20px;
+                text-overflow:ellipsis;
             }
         }
 

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {aes_decrypt, aes_encrypt} from '@www/blog/utils/crypto'
 import {nanoid} from 'nanoid'
+import {rsaEncrypt} from "@/common/utils/crypto";
 
 // 获取文章
 const v1IndexArticle = () => {
@@ -15,22 +16,26 @@ const v1IndexArticle = () => {
 
 // 发送邮件
 const userSendEmail = (params = {}) => {
-    return axios.post('/user/sendEmail', params, {baseURL: '/api'})
+    const sign: any = rsaEncrypt(JSON.stringify({name: 'bag', nanoid: nanoid()}))
+    return axios.post('/user/sendEmail', params, {baseURL: '/api', headers: {sign}})
 }
 
 // 保存留言
 const webLeaveCreate = (params = {}) => {
-    return axios.post('/web/leave/create', params, {baseURL: '/api'})
+    const sign: any = rsaEncrypt(JSON.stringify({name: 'bag', nanoid: nanoid()}))
+    return axios.post('/web/leave/create', params, {baseURL: '/api', headers: {sign}})
 }
 
 // 获取留言
 const webLeaveAll = (params = {}) => {
-    return axios.post('/web/leave/all', params, {baseURL: '/api'})
+    const sign: any = rsaEncrypt(JSON.stringify({name: 'bag', nanoid: nanoid()}))
+    return axios.post('/web/leave/all', params, {baseURL: '/api', headers: {sign}})
 }
 
 // 获取网站配置
 const webWebsiteFind = () => {
-    return axios.post('/web/website/find', {url: 'http://192.168.1.24:8290/'}, {baseURL: '/api'})
+    const sign: any = rsaEncrypt(JSON.stringify({name: 'bag', nanoid: nanoid()}))
+    return axios.post('/web/website/find', {url: 'http://192.168.1.24:8290/'}, {baseURL: '/api', headers: {sign}})
 }
 
 export {

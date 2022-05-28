@@ -62,7 +62,7 @@ interface FormState {
     rememberPas: string | boolean
 }
 
-import { aseEncrypt, aseDecrypt } from '@/packages/utils/crypto'
+import { aseEncrypt, aseDecrypt } from '@/common/utils/crypto'
 
 export default defineComponent({
     name: 'login',

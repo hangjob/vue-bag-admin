@@ -3,7 +3,7 @@ import { getHttpNetworkConfig } from '@/common/http/index'
 import localStore from '@/common/utils/persistence'
 import { useRouter } from 'vue-router'
 import { message as messageModel } from 'ant-design-vue'
-import { rsaEncrypt } from '@/packages/utils/crypto'
+import { rsaEncrypt } from '@/common/utils/crypto'
 import { nanoid } from 'nanoid'
 // 扩展类型
 declare module 'axios' {
@@ -46,7 +46,7 @@ function requestSuccess(config: AxiosRequestConfig, { httpNetwork = {} }: { http
     } = getHttpNetworkConfig(httpNetwork)
     config.baseURL = baseURL
     config.timeout = timeout
-    const sign = rsaEncrypt(JSON.stringify({ name: 'bag', id: nanoid() }))
+    const sign = rsaEncrypt(JSON.stringify({ name: 'bag', nanoid: nanoid() }))
     config.headers = { ...headers, sign }
     config.retry = retry
     config.retryDelay = retryDelay
@@ -87,7 +87,6 @@ function responseError(err: AxiosError, {
     httpNetwork = {},
     http,
 }: { httpNetwork: any, http: any }) {
-    console.log(err.toJSON())
     const { resetPath, messageDuration } = getHttpNetworkConfig(httpNetwork)
     if (err.response) {
         const { statusText, status } = err.response
@@ -133,5 +132,4 @@ export {
     responseSuccess,
     responseError,
     requestSuccess,
-    ResponseData,
-}
+};

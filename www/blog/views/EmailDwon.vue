@@ -12,22 +12,30 @@
                 size="large"
                 style="width:200px;margin-right:10px"
             />
-            <vs-button class="wow animate__animated animate__headShake" data-wow-duration="1.0s" data-wow-delay="0.2s" style="flex-shrink: 0;" @click="handleSendEmail" color="success" type="filled" icon="forward_to_inbox">发送</vs-button>
+            <vs-button class="wow animate__animated animate__headShake" data-wow-duration="1.0s" data-wow-delay="0.2s"
+                       style="flex-shrink: 0;" @click="handleSendEmail" color="success" type="filled"
+                       icon="forward_to_inbox"
+            >发送
+            </vs-button>
         </div>
     </section>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { userSendEmail } from '@www/blog/service'
-import { ElNotification } from 'element-plus'
-import { ElMessage } from 'element-plus'
+import {defineComponent, ref} from 'vue'
+import {userSendEmail} from '@www/blog/service'
+import {ElNotification} from 'element-plus'
+import {ElMessage} from 'element-plus'
 import isEmail from '@/bag-utils/regular/isEmail'
-import { Search } from '@element-plus/icons-vue'
+import {Search} from '@element-plus/icons-vue'
+
 export default defineComponent({
     setup() {
         const email = ref('')
-
+        let isSend = true;
         const handleSendEmail = () => {
+            if (!isSend) {
+                return
+            }
             if (email.value) {
                 if (!isEmail(email.value)) {
                     return ElNotification({
@@ -36,13 +44,14 @@ export default defineComponent({
                         type: 'error',
                     })
                 }
-                userSendEmail({ userEmail: email.value }).then((res:any) => {
+                userSendEmail({userEmail: email.value}).then((res: any) => {
                     if (res.data.code === 1) {
                         ElNotification({
                             title: '邮件通知',
                             message: `发送成功，${email.value}`,
                             type: 'success',
                         })
+                        isSend = false;
                     } else {
                         ElNotification({
                             title: '邮件通知',

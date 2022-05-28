@@ -4,9 +4,9 @@ const rsa = require('./config')
 const publicKey = rsa.publicKey // 公钥
 const privateKey = rsa.privateKey // 私钥
 const txt = JSON.stringify({ name: 'bag' })
-
-console.log(publicKey)
-console.log(privateKey)
+//
+// console.log(publicKey)
+// console.log(privateKey)
 
 // 使用公钥加密
 async function rsaEncrypt(data) {
