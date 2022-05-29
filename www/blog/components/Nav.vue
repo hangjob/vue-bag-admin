@@ -23,27 +23,18 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue'
+import {defineComponent, onMounted, ref} from 'vue'
 import menuList from '@www/blog/config/menu'
-
-function heightToTop(ele: any) {
-    //ele为指定跳转到该位置的DOM节点
-    let root = document.body
-    let height = 0
-    do {
-        height += ele.offsetTop
-        ele = ele.offsetParent
-    } while (ele !== root)
-    return height
-}
+import toElementTop from "@/bag-utils/dom/toElementTop";
 
 export default defineComponent({
     setup() {
 
         const handleScrollTo = (id: string, $event: Event) => {
             if (document.getElementById(id)) {
+                const dom: any = document.getElementById(id);
                 window.scrollTo({
-                    top: heightToTop(document.getElementById(id)),
+                    top: toElementTop(dom),
                     behavior: 'smooth',
                 })
             }
@@ -68,8 +59,9 @@ export default defineComponent({
         height: @nah;
         align-items: center;
         vertical-align: top;
-        img{
-            height:30px
+
+        img {
+            height: 30px
         }
     }
 

@@ -30,16 +30,22 @@
                 <p>{{ formatTitle() }}</p>
             </div>
             <div class="item-det">
-                <a class="btn" target="_blank">点击查看</a>
+                <a class="btn" target="_blank" @click="handleVisible">点击查看</a>
             </div>
         </div>
     </div>
+    <el-dialog v-model="visible" :title="itemData.title" width="80%">
+        <div style="width:100%;height:600px" v-loading="loading">
+            <iframe ref="iframe" :src="iframeSrc" width="100%" height="100%" style="border:none"
+            ></iframe>
+        </div>
+    </el-dialog>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import {defineComponent, ref, onMounted, nextTick} from 'vue'
 import dayjs from 'dayjs'
 // @ts-ignore
-import { solar2lunar } from 'solarlunar'
+import {solar2lunar} from 'solarlunar'
 
 export default defineComponent({
     props: {
@@ -57,6 +63,10 @@ export default defineComponent({
         const year = dayjs(dateTime).format('YYYY')
         const month = dayjs(dateTime).format('MM')
         const day = dayjs(dateTime).format('DD')
+        const visible = ref(false)
+        const iframeSrc = ref('');
+        const iframe = ref(null);
+        const loading = ref(false)
         const {
             yearCn,
             gzYear,
@@ -75,9 +85,27 @@ export default defineComponent({
         const formatTitle = () => {
             return `作者：${props.itemData.member.username} ,标题：${props.itemData.title} ,关键词：${props.itemData.keywords.join(',')} ,发布时间：${gzYear}[${animal}] ${gzMonth}月 ${gzDay}日 ${ncWeek}`
         }
+
+        const handleVisible = () => {
+            iframeSrc.value = `https://www.vipbic.com/thread.html?id=${props.itemData.id}&roll=1`
+            visible.value = true;
+            nextTick(() => {
+                loading.value = true;
+                // @ts-ignore
+                iframe.value.onload = function () {
+                    loading.value = false
+                }
+            })
+        }
+
         return {
             formatTime,
             formatTitle,
+            visible,
+            iframeSrc,
+            iframe,
+            loading,
+            handleVisible
         }
     },
 })
@@ -201,11 +229,12 @@ export default defineComponent({
             flex-direction: row;
             padding: 5px 15px 0 15px;
 
-            &:last-of-type{
-                .d{
+            &:last-of-type {
+                .d {
                     background-color: #8bc34a;
                 }
             }
+
             > div {
                 display: flex;
                 align-items: center;
@@ -248,7 +277,7 @@ export default defineComponent({
                 display: -webkit-box;
                 -webkit-line-clamp: 1;
                 -webkit-box-orient: vertical;
-                text-overflow:ellipsis;
+                text-overflow: ellipsis;
             }
 
             p {
@@ -258,7 +287,7 @@ export default defineComponent({
                 overflow: hidden;
                 margin-top: 5px;
                 line-height: 20px;
-                text-overflow:ellipsis;
+                text-overflow: ellipsis;
             }
         }
 

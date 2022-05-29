@@ -13,5 +13,6 @@ import setupPrimevue from '@www/blog/plugin/primevue'
 import Vuesax from 'vuesax3'
 import 'vuesax3/dist/vuesax.css'
 import animated from "animate.css";
+import {setupGlobDirectives} from "@/common/extend/directive";
 // @ts-ignore
-createApp(App).use(Vuesax).use(animated).use(setupPrimevue).use(ElementPlus).mount('#app')
+createApp(App).use(setupGlobDirectives).use(Vuesax).use(animated).use(setupPrimevue).use(ElementPlus).mount('#app')
