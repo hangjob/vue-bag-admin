@@ -13,7 +13,6 @@ const setPinia = (to: RouteLocationNormalized, from: RouteLocationNormalized, ne
                 app.appConfig = res
                 userUserinfo().then((res) => {
                     user.userinfo = res
-                }).catch(() => {
                 })
             }).finally(() => {
                 next()

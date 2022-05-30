@@ -34,12 +34,6 @@
             </div>
         </div>
     </div>
-    <el-dialog v-model="visible" :title="itemData.title" width="80%">
-        <div style="width:100%;height:600px" v-loading="loading">
-            <iframe ref="iframe" :src="iframeSrc" width="100%" height="100%" style="border:none"
-            ></iframe>
-        </div>
-    </el-dialog>
 </template>
 <script lang="ts">
 import {defineComponent, ref, onMounted, nextTick} from 'vue'
@@ -87,15 +81,7 @@ export default defineComponent({
         }
 
         const handleVisible = () => {
-            iframeSrc.value = `https://www.vipbic.com/thread.html?id=${props.itemData.id}&roll=1`
-            visible.value = true;
-            nextTick(() => {
-                loading.value = true;
-                // @ts-ignore
-                iframe.value.onload = function () {
-                    loading.value = false
-                }
-            })
+            window.open(`https://www.vipbic.com/thread.html?id=${props.itemData.id}&roll=1`, '_blank')
         }
 
         return {
