@@ -282,6 +282,10 @@ const articles = ref([
                             display: flex;
                             align-items: center;
                             margin-left: 12px;
+                            i{
+                                font-size: 16px;
+                                margin:0 3px;
+                            }
                         }
                     }
                 }
