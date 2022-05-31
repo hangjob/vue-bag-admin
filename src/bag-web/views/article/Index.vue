@@ -8,11 +8,12 @@
         <div class="container" v-if="detailData">
             <el-row :gutter="20">
                 <el-col :xs="24" :sm="24" :md="24" :lg="16" :xl="16">
+                    <Banner :detail-data="detailData"/>
                     <div class="article-body">
                         <div class="breadcrumb">
                             <ol>
                                 <li>首页</li>
-                                <li>{{detailData.channel.name}}</li>
+                                <li>{{ detailData.channel.name }}</li>
                                 <li>互联网</li>
                             </ol>
                         </div>
@@ -62,27 +63,31 @@
 <script lang="ts" setup>
 import {ref} from 'vue'
 import {useRoute} from 'vue-router'
-
 import Wangeditor from './Wangeditor.vue'
 import Author from './Author.vue'
 import Qrcode from './Qrcode.vue'
 import HotTags from './HotTags.vue'
 import Praise from './Praise.vue'
 import Sweet from './Sweet.vue'
+import Banner from './banner/Index.vue'
 
 import {webArticleFind} from '@/bag-web/service/app'
-import { ElLoading } from 'element-plus'
+import {ElLoading} from 'element-plus'
+
 const route = useRoute()
 const detailData = ref(null)
 const loading = ref(true)
 webArticleFind({id: route.params.id}).then((res: any) => {
+    res.title_style = res.title_style ? JSON.parse(res.title_style) : {}
+    res.images = res.images ? res.images.split(',') : [];
+    console.log(res.images)
     detailData.value = res
-}).finally(()=>{
+}).finally(() => {
     loading.value = false;
 })
 
 const readingTime = (str: string) => {
-    let len:any = str.length / 500;
+    let len: any = str.length / 500;
     return parseFloat(len).toFixed(1)
 }
 
@@ -92,6 +97,7 @@ const readingTime = (str: string) => {
     margin-top: 30px;
     margin-bottom: 30px;
     min-height: 400px;
+
     &-body {
         position: relative;
         background-color: var(--bag-color-white);

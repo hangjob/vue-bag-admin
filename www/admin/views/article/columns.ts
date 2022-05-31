@@ -1,5 +1,13 @@
 export default [
     {
+        title: 'ID',
+        dataIndex: 'id',
+        key: 'id',
+        ellipsis: true,
+        align: 'center',
+        width: 80
+    },
+    {
         title: '标题',
         dataIndex: 'title',
         key: 'title',

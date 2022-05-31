@@ -89,6 +89,7 @@ module.exports = app => {
                 let str = this.getDataValue('title_style')
                 try {
                     str = str ? JSON.parse(str.replace(/'/g, '"')) : {};
+                    str = JSON.stringify(str)
                 } catch (err) {
                     console.log(err)
                 }
