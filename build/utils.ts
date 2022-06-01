@@ -4,7 +4,7 @@ const setUtilsBuild = function () {
         emptyOutDir: true,
         sourcemap: true,
         lib: {
-            entry: path.resolve(process.cwd(), 'src/bag-utils/index.ts'), //web工具化
+            entry: path.resolve(process.cwd(), 'src/bag-utils/index.ts'),
             name: 'BagUtils', // 构建依赖包的时候， 对外暴露的名称
             fileName: (format: string) => `utils.${format}.js`,
         },

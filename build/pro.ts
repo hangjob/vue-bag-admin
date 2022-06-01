@@ -15,7 +15,6 @@ const setProBuild = function() {
             //     manualChunks: {
             //         "vxe-table": ["vxe-table"],
             //         "echarts": ["echarts"],
-            //         "xe-utils": ["xe-utils"],
             //         "lodash": ['lodash'],
             //         "ant-design-vue": ['ant-design-vue'],
             //         "@antv/g2plot": ['@antv/g2plot'],
