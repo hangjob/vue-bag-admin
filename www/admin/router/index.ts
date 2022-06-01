@@ -38,6 +38,16 @@ const paths = addUniqueId([
                 filePath: '/admin/views/article/Index.vue',
             },
             {
+                name: 'Bnaner管理',
+                path: '/banner',
+                icon: '',
+                shows: 1,
+                tabHidden: false,
+                tabFix: false,
+                keepAlive: true,
+                filePath: '/admin/views/banner/Index.vue',
+            },
+            {
                 name: '关键词管理',
                 path: '/antistop',
                 icon: '',
