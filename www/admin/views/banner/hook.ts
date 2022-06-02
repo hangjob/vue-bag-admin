@@ -9,7 +9,7 @@ export default function () {
     const baseResources = reactive({
         keywords: [],
         updateImage: (data: any) => {
-            formState.img = data
+            formState.image = data
         },
     })
 

@@ -129,6 +129,11 @@
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
+                    <a-form-item label="评论数量" name="comments">
+                        <a-input-number style="width: 100%" v-model:value="formState.comments" placeholder="输入点踩次数" />
+                    </a-form-item>
+                </a-col>
+                <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="是否游客访问" name="is_guest">
                         <a-switch v-model:checked="formState.is_guest" />
                     </a-form-item>

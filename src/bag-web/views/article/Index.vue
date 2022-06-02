@@ -8,14 +8,28 @@
         <div class="container" v-if="detailData">
             <el-row :gutter="20">
                 <el-col :xs="24" :sm="24" :md="24" :lg="16" :xl="16">
-                    <Banner :detail-data="detailData"/>
+                    <Banner :detail-data="detailData" />
                     <div class="article-body">
                         <div class="breadcrumb">
                             <ol>
-                                <li>首页</li>
+                                <li>
+                                    <router-link to="/home">首页</router-link>
+                                </li>
                                 <li>{{ detailData.channel.name }}</li>
                                 <li>互联网</li>
                             </ol>
+                            <div class="widget hot" v-if="detailData.flag === '热门'">
+                                <i class="bag-icon-huo"></i>
+                            </div>
+                            <div class="widget recom"  v-if="detailData.flag === '推荐'">
+                                <i class="bag-icon-tuijianfuwu"></i>
+                            </div>
+                            <div class="widget stick"  v-if="detailData.flag === '置顶'">
+                                <i class="bag-icon-zhiding3"></i>
+                            </div>
+                            <div class="widget new"  v-if="detailData.flag === '最新'">
+                                <i class="bag-icon-zuixin"></i>
+                            </div>
                         </div>
                         <div class="content">
                             <div class="metas">
@@ -23,46 +37,46 @@
                             </div>
                             <div class="metas-action">
                                 <div>
-                                    <it-icon color="#65b1ff" style="font-size:20px" name="remove_red_eye"/>
+                                    <it-icon color="#65b1ff" style="font-size:20px" name="remove_red_eye" />
                                     <span>{{ detailData.views }} 阅读</span>
                                 </div>
                                 <div>
-                                    <it-icon color="#65b1ff" style="font-size:18px" name="design_services" outlined/>
+                                    <it-icon color="#65b1ff" style="font-size:18px" name="design_services" outlined />
                                     <span>暂无 评论</span>
                                 </div>
                                 <div>
-                                    <it-icon color="#65b1ff" style="font-size:18px" name="local_florist" outlined/>
-                                    <span>{{ detailData.like.length }} 点赞</span>
+                                    <it-icon color="#65b1ff" style="font-size:18px" name="local_florist" outlined />
+                                    <span>{{ detailData.like.length + detailData.likes }} 点赞</span>
                                 </div>
                                 <div>
-                                    <it-icon color="#65b1ff" style="font-size:18px" name="schedule" outlined/>
+                                    <it-icon color="#65b1ff" style="font-size:18px" name="schedule" outlined />
                                     <span>{{ readingTime(detailData.content) }}分钟 阅读时长</span>
                                 </div>
                                 <div>
-                                    <it-icon color="#65b1ff" style="font-size:18px" name="date_range" outlined/>
+                                    <it-icon color="#65b1ff" style="font-size:18px" name="date_range" outlined />
                                     <span>{{ detailData.updateTime }}</span>
                                 </div>
                             </div>
                             <div class="text">
-                                <Wangeditor :detailData="detailData"/>
-                                <Sweet :detailData="detailData"/>
+                                <Wangeditor :detailData="detailData" />
+                                <Sweet :detailData="detailData" />
                             </div>
                         </div>
                     </div>
-                    <Praise :detail-data="detailData"/>
+                    <Praise :detail-data="detailData" />
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="24" :lg="8" :xl="8">
-                    <Author :detail-data="detailData"/>
-                    <Qrcode :detail-data="detailData"/>
-                    <HotTags :detail-data="detailData"/>
+                    <Author :detail-data="detailData" />
+                    <Qrcode :detail-data="detailData" />
+                    <HotTags :detail-data="detailData" />
                 </el-col>
             </el-row>
         </div>
     </div>
 </template>
 <script lang="ts" setup>
-import {ref} from 'vue'
-import {useRoute} from 'vue-router'
+import { ref } from 'vue'
+import { useRoute } from 'vue-router'
 import Wangeditor from './Wangeditor.vue'
 import Author from './Author.vue'
 import Qrcode from './Qrcode.vue'
@@ -71,23 +85,23 @@ import Praise from './Praise.vue'
 import Sweet from './Sweet.vue'
 import Banner from './banner/Index.vue'
 
-import {webArticleFind} from '@/bag-web/service/app'
-import {ElLoading} from 'element-plus'
+import { webArticleFind } from '@/bag-web/service/app'
+import { ElLoading } from 'element-plus'
 
 const route = useRoute()
 const detailData = ref(null)
 const loading = ref(true)
-webArticleFind({id: route.params.id}).then((res: any) => {
+webArticleFind({ id: route.params.id }).then((res: any) => {
     res.title_style = res.title_style ? JSON.parse(res.title_style) : {}
-    res.images = res.images ? res.images.split(',') : [];
+    res.images = res.images ? res.images.split(',') : []
     console.log(res.images)
     detailData.value = res
 }).finally(() => {
-    loading.value = false;
+    loading.value = false
 })
 
 const readingTime = (str: string) => {
-    let len: any = str.length / 500;
+    let len: any = str.length / 500
     return parseFloat(len).toFixed(1)
 }
 
@@ -110,9 +124,19 @@ const readingTime = (str: string) => {
             margin-bottom: 0;
             padding: var(--bag-padding-base);
             border-bottom: 1px solid #f5f5f5;
+            position: relative;
 
             li {
                 display: inline-block;
+
+                a {
+                    color: #333333;
+
+                    &:hover {
+                        text-decoration: underline;
+                        color: #0b7ad1;
+                    }
+                }
 
                 &::after {
                     content: "/\00a0";
@@ -126,38 +150,79 @@ const readingTime = (str: string) => {
                     }
                 }
             }
-        }
 
-        .content {
-            padding: var(--bag-padding-base);
+            .widget {
+                position: absolute;
+                border-left: 40px solid transparent;
+                content: "";
+                height: 0;
+                right: 0;
+                top: 0;
+                width: 0;
+                z-index: 10;
 
-            .metas {
-
-                h1 {
-                    line-height: 1.45;
-                    margin-bottom: 10px;
-                    font-size: 24px;
-                    font-weight: bold;
-                    color: var(--bag-text-color-primary);
+                i {
+                    font-size: 17px;
+                    height: 30px;
+                    left: -26px;
+                    line-height: 30px;
+                    text-align: center;
+                    top: -42px;
+                    position: absolute;
+                    width: 30px;
+                    z-index: 9999;
+                    color: #fff;
                 }
 
-                &-action {
+                &.hot {
+                    border-top: 40px solid #ff5722;
+                }
+
+                &.recom {
+                    border-top: 40px solid #52c41a;
+                }
+
+                &.stick {
+                    border-top: 40px solid #ffe000;
+                }
+
+                &.new {
+                    border-top: 40px solid #1890ff;
+                }
+            }
+        }
+    }
+
+    .content {
+        padding: var(--bag-padding-base);
+
+        .metas {
+
+            h1 {
+                line-height: 1.45;
+                margin-bottom: 10px;
+                font-size: 24px;
+                font-weight: bold;
+                color: var(--bag-text-color-primary);
+            }
+
+            &-action {
+                display: flex;
+                align-items: center;
+
+                div {
                     display: flex;
                     align-items: center;
+                    margin-right: 30px;
 
-                    div {
-                        display: flex;
-                        align-items: center;
-                        margin-right: 30px;
-
-                        span {
-                            color: #b5b5b5;
-                            margin-left: 5px;
-                        }
+                    span {
+                        color: #b5b5b5;
+                        margin-left: 5px;
                     }
                 }
             }
         }
     }
 }
+
 </style>

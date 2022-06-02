@@ -26,6 +26,7 @@ export default function() {
         order: 0,
         images: '',
         images_type: '',
+        comments: 10,
     })
 
     const { configApp } = <any>inject('$configAppOptions')
@@ -71,7 +72,7 @@ export default function() {
                         message.error(`文件小于${2}MB`)
                     } else {
                         apiUploadImage(file).then((data: any) => {
-                            const { baseURL } = configApp?.httpNetwork;
+                            const { baseURL } = configApp?.httpNetwork
                             rev(baseURL + data)
                         }).catch((err: any) => {
                             rej(err)

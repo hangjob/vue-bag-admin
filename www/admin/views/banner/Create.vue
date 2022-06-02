@@ -22,17 +22,21 @@
                                    :placeholder="item.formData.placeholder"
                         ></component>
                         <template v-if="item.formData.element === 'bag-upload-image'">
-                            <a-input v-model:value="formState[item.formData.name]" :placeholder="item.formData.placeholder" />
-                            <bag-upload-image @update:image="baseResources.updateImage" :image="formState[item.formData.name]" />
+                            <a-input v-model:value="formState[item.formData.name]"
+                                     :placeholder="item.formData.placeholder"
+                            />
+                            <bag-upload-image @update:image="baseResources.updateImage"
+                                              :image="formState[item.formData.name]"
+                            />
                         </template>
                         <template v-if="item.formData.element === 'a-select'">
                             <a-select
                                 v-model:value="formState[item.formData.name]"
-                                mode="tags"
+                                :mode="item.formData.props.mode"
                                 style="width: 100%"
-                                :placeholder="item.formData.placeholder"
+                                :placeholder="item.formData.props.placeholder"
                                 option-label-prop="label"
-                                :options="item.formData.options"
+                                :options="item.formData.props.options"
                             >
                                 <template #option="{ value: val, label, icon }">
                                     <span role="img" :aria-label="val">{{ icon }}</span>

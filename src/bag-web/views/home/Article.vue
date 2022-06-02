@@ -4,36 +4,41 @@
             <el-row>
                 <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                     <article class="article">
-                        <template v-for="(item,idx) in articles" :key="item">
+                        <template v-for="(item,idx) in articleAll" :key="idx">
                             <div class="article-item mod1" v-if="idx !== 3">
                                 <div class="article-item-body">
                                     <div class="article-item-body-left">
-                                        <router-link to="/article/1"><img :src="item.img" alt=""></router-link>
+                                        <router-link :to="`/article/${item.id}`"><img
+                                            :src="getImageFullPath(item.image)" alt=""
+                                        >
+                                        </router-link>
                                     </div>
                                     <div class="article-item-body-right">
                                         <h3>{{ item.title }}</h3>
-                                        <div class="intro">{{ item.text }}</div>
+                                        <div class="intro">{{ item.describe }}</div>
                                         <div class="action">
                                             <div class="action-tag hidden-xs-only">
-                                                <it-tag :class="todo.class" v-for="todo in item.tag" :type="todo.type"
+                                                <it-tag :class="colorType[tidx].class"
+                                                        v-for="(todo,tidx) in item.keywords"
+                                                        :type="colorType[tidx].type"
                                                         filled
                                                         style="margin-right: 5px"
-                                                >{{ todo.name }}
+                                                >{{ todo }}
                                                 </it-tag>
                                             </div>
-                                            <div class="action-time"><span>{{ item.time }}</span></div>
+                                            <div class="action-time"><span>{{ item.createTime }}</span></div>
                                             <div class="action-user">
                                                 <div class="praise hidden-xs-only hidden-sm-and-down">
                                                     <it-icon color="#546173" name="sentiment_satisfied" outlined />
-                                                    {{ item.praise }} <span class="hidden-lg-only">点赞</span>
+                                                    {{ item.likes }} <span class="hidden-lg-only">点赞</span>
                                                 </div>
                                                 <div class="comment hidden-xs-only">
                                                     <it-icon color="#546173" name="draw" outlined />
-                                                    {{ item.comment }} <span class="hidden-lg-only">评论</span>
+                                                    {{ item.comments }} <span class="hidden-lg-only">评论</span>
                                                 </div>
                                                 <div class="preview hidden-xs-only">
                                                     <it-icon color="#546173" name="cruelty_free" outlined />
-                                                    {{ item.preview }} <span class="hidden-lg-only">浏览</span>
+                                                    {{ item.views }} <span class="hidden-lg-only">浏览</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -47,35 +52,38 @@
                                     </div>
                                     <div class="article-item-body-center">
                                         <div class="imgs">
-                                            <a><img :src="item.img" alt=""></a>
-                                            <a><img :src="item.img" alt=""></a>
-                                            <a><img :src="item.img" alt=""></a>
-                                            <a><img :src="item.img" alt=""></a>
+                                            <template v-if="item.images">
+                                                <a v-for="todo in item.images.split(',')"><img
+                                                    :src="getImageFullPath(todo)" alt=""
+                                                ></a>
+                                            </template>
                                         </div>
                                     </div>
                                     <div class="article-item-body-right">
                                         <div class="intro">{{ item.text }}</div>
                                         <div class="action">
                                             <div class="action-tag hidden-xs-only">
-                                                <it-tag :class="todo.class" v-for="todo in item.tag" :type="todo.type"
+                                                <it-tag :class="colorType[tidx].class"
+                                                        v-for="(todo,tidx) in item.keywords"
+                                                        :type="colorType[tidx].type"
                                                         filled
                                                         style="margin-right: 5px"
-                                                >{{ todo.name }}
+                                                >{{ todo }}
                                                 </it-tag>
                                             </div>
-                                            <div class="action-time"><span>{{ item.time }}</span></div>
+                                            <div class="action-time"><span>{{ item.createTime }}</span></div>
                                             <div class="action-user">
                                                 <div class="praise hidden-xs-only hidden-sm-and-down">
                                                     <it-icon color="#546173" name="sentiment_satisfied" outlined />
-                                                    {{ item.praise }} <span class="hidden-lg-only">点赞</span>
+                                                    {{ item.likes }} <span class="hidden-lg-only">点赞</span>
                                                 </div>
                                                 <div class="comment hidden-xs-only">
                                                     <it-icon color="#546173" name="draw" outlined />
-                                                    {{ item.comment }} <span class="hidden-lg-only">评论</span>
+                                                    {{ item.comments }} <span class="hidden-lg-only">评论</span>
                                                 </div>
                                                 <div class="preview hidden-xs-only">
                                                     <it-icon color="#546173" name="cruelty_free" outlined />
-                                                    {{ item.preview }} <span class="hidden-lg-only">浏览</span>
+                                                    {{ item.views }} <span class="hidden-lg-only">浏览</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -90,12 +98,19 @@
     </bag-card>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { defineProps, inject, ref } from 'vue'
 import banner1 from '@/bag-web/assets/image/banner-1.jpg'
 import banner2 from '@/bag-web/assets/image/banner-2.jpg'
 import banner3 from '@/bag-web/assets/image/banner-3.jpg'
 import banner4 from '@/bag-web/assets/image/banner-4.jpg'
 
+const { getImageFullPath } = inject<any>('bagGlobal')
+const props = defineProps({
+    articleAll: [Array],
+})
+const colorType = [{ type: 'primary' }, { type: 'success', class: 'hidden-sm-and-down' }, {
+    type: 'warning', class: 'hidden-sm-and-down',
+}]
 const articles = ref([
     {
         img: banner1,
@@ -216,12 +231,14 @@ const articles = ref([
                 font-size: var(--bag-font-size-large);
                 color: var(--bag-text-color-black);
                 margin-bottom: 10px;
+
                 &:hover {
                     text-decoration: underline;
                     cursor: pointer;
                     color: var(--bag-text-hover-color-primary);
                 }
             }
+
             a {
                 display: block;
                 width: 100%;
@@ -243,6 +260,7 @@ const articles = ref([
                     transition: all 0.3s;
                 }
             }
+
             &-left {
                 width: 180px;
                 flex-shrink: 0;
@@ -282,9 +300,10 @@ const articles = ref([
                             display: flex;
                             align-items: center;
                             margin-left: 12px;
-                            i{
+
+                            i {
                                 font-size: 16px;
-                                margin:0 3px;
+                                margin: 0 3px;
                             }
                         }
                     }
@@ -295,10 +314,11 @@ const articles = ref([
 
     .mod1 {
         .article-item-body {
-            &-left{
+            &-left {
                 height: 120px;
             }
-            &-right{
+
+            &-right {
                 .action {
                     position: absolute;
                     bottom: 0;
@@ -314,15 +334,18 @@ const articles = ref([
 
             &-center {
                 margin-bottom: 10px;
+
                 .imgs {
                     display: flex;
                     justify-content: space-between;
-                    >a{
+
+                    > a {
                         width: 24%;
                     }
                 }
             }
-            &-right{
+
+            &-right {
                 .action {
                     margin-top: 10px;
                 }

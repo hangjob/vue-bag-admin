@@ -28,11 +28,11 @@
                         <template v-if="item.formData.element === 'a-select'">
                             <a-select
                                 v-model:value="formState[item.formData.name]"
-                                mode="tags"
+                                :mode="item.formData.props.mode"
                                 style="width: 100%"
-                                placeholder="选择关键词"
+                                :placeholder="item.formData.props.placeholder"
                                 option-label-prop="label"
-                                :options="baseResources.keywords"
+                                :options="item.formData.props.options"
                             >
                                 <template #option="{ value: val, label, icon }">
                                     <span role="img" :aria-label="val">{{ icon }}</span>

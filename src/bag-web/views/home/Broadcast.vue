@@ -8,7 +8,7 @@
         </el-col>
         <el-col :xs="24" :sm="24" :md="24" :lg="8" :xl="8">
             <div class="banner-ib">
-                <i class="icon-qushi"></i>
+                <i class="bag-icon-qushi"></i>
                 <h3>
                     <CountTo :startVal="0" :endVal="processing.all" :duration="3000"></CountTo>
                 </h3>
@@ -16,7 +16,7 @@
                 <p>互联网职员，找导航，就上全栈导航</p>
                 <div class="banner-more">
                     <span>查看所有</span>
-                    <i class="icon--_jiantou"></i>
+                    <i class="bag-icon--_jiantou"></i>
                 </div>
             </div>
         </el-col>
@@ -37,7 +37,7 @@
                             <p class="new-work">上一周新增</p>
                         </div>
                         <div class="arrows">
-                            <i class="icon--_jiantou"></i>
+                            <i class="bag-icon--_jiantou"></i>
                         </div>
                     </div>
                     <div class="number-slogan">小步快跑，每日更新！</div>
@@ -55,7 +55,7 @@
                             <p class="new-work">注册用户</p>
                         </div>
                         <div class="arrows">
-                            <i class="icon--_jiantou"></i>
+                            <i class="bag-icon--_jiantou"></i>
                         </div>
                     </div>
                     <div class="number-slogan">有小可爱加入我们</div>
@@ -65,12 +65,12 @@
     </el-row>
 </template>
 <script lang="ts">
-import {defineComponent, reactive} from 'vue'
-import {CountTo} from 'vue3-count-to';
+import { defineComponent, reactive } from 'vue'
+import { CountTo } from 'vue3-count-to'
 
 export default defineComponent({
     components: {
-        CountTo
+        CountTo,
     },
     setup() {
         const processing = reactive({
@@ -78,12 +78,12 @@ export default defineComponent({
             lastMonth: 30056,
             userAll: 30056,
             userLastMonth: 30056,
-            lastWeek: 30056
+            lastWeek: 30056,
         })
         return {
-            processing
+            processing,
         }
-    }
+    },
 })
 </script>
 <style lang="less" scoped>
@@ -95,6 +95,7 @@ export default defineComponent({
     border-radius: var(--bag-border-radius-base);
     padding-top: 30px;
     margin-top: var(--bag-margin-base);
+
     h3 {
         font-size: 38px;
         line-height: 40px;
@@ -120,6 +121,7 @@ export default defineComponent({
 .banner-ib {
     position: relative;
     margin-top: var(--bag-margin-base);
+
     &::before {
         content: '';
         position: absolute;
@@ -235,6 +237,7 @@ export default defineComponent({
     width: 100%;
     height: calc(100% - 20px);
     margin-top: var(--bag-margin-base);
+
     .update-number {
         background: linear-gradient(135deg,
         rgba(71, 114, 217, 0.92),

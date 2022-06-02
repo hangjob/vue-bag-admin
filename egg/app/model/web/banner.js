@@ -1,20 +1,28 @@
 const dayjs = require('dayjs')
 module.exports = app => {
     const { STRING, INTEGER, BOOLEAN, DATE, TEXT } = app.Sequelize
-    const Banner =  app.model.define('Banner', {
+    return app.model.define('Banner', {
         id: {
             type: INTEGER,
             autoIncrement: true,
             primaryKey: true,
         },
-        img: {
-            type: INTEGER,
+        name: {
+            type: STRING,
+            comment: '图片名称',
+        },
+        image: {
+            type: STRING,
             comment: '图片地址',
         },
-        shows:{
+        shows: {
             type: BOOLEAN,
             defaultValue: true,
             comment: '是否显示',
+        },
+        describe: {
+            type: TEXT,
+            comment: '图片描述',
         },
         type: {
             type: INTEGER,
@@ -43,5 +51,4 @@ module.exports = app => {
         updatedAt: 'updateTime',
         tableName: 'yxs_web_banner', // 定义实际表名 文章表
     })
-    return Banner;
 }

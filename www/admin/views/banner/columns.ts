@@ -1,23 +1,49 @@
 export default [
     {
-        title: 'banner图',
-        dataIndex: 'img',
-        key: 'img',
+        title: '图片名称',
+        dataIndex: 'name',
+        key: 'name',
         ellipsis: true,
         align: 'center',
-        slots: {customRender: 'img'},
         formData: {
-            name: 'img',
+            name: 'name',
+            label: '图片名称',
+            element: 'a-input',
+            placeholder: '输入图片名称',
+        },
+    },
+    {
+        title: '图片描述',
+        dataIndex: 'describe',
+        key: 'describe',
+        ellipsis: true,
+        align: 'center',
+        formData: {
+            name: 'describe',
+            label: '图片描述',
+            element: 'a-textarea',
+            placeholder: '输入图片描述',
+        },
+    },
+    {
+        title: 'banner图',
+        dataIndex: 'image',
+        key: 'image',
+        ellipsis: true,
+        align: 'center',
+        slots: { customRender: 'image' },
+        formData: {
+            name: 'image',
             label: 'banner图',
             element: 'bag-upload-image',
             placeholder: '上传banner图片',
             maxlength: 300,
             rules: [
                 {
-                    required: true, message: '图片为必填项', trigger: 'blur'
-                }
-            ]
-        }
+                    required: true, message: '图片为必填项', trigger: 'blur',
+                },
+            ],
+        },
     },
     {
         title: '是否显示',
@@ -36,8 +62,8 @@ export default [
             placeholder: '是否显示',
             checkedText: '是',
             uncheckedText: '否',
-            defaultValue:true
-        }
+            defaultValue: true,
+        },
     },
     {
         title: '类型',
@@ -47,11 +73,14 @@ export default [
         ellipsis: true,
         formData: {
             name: 'type',
-            label: '关键词',
+            label: '类型',
             element: 'a-select',
-            placeholder: '输入关键词',
-            options:[],
-            defaultValue: Array()
+            props: {
+                mode: null,
+                options: [{ label: '类型1', value: 1 }, { label: '类型2', value: 2 }],
+                placeholder: '选择类型',
+            },
+            defaultValue: '',
         },
     },
     {
@@ -67,6 +96,6 @@ export default [
         key: 'action',
         align: 'center',
         width: 200,
-        slots: {customRender: 'action'},
+        slots: { customRender: 'action' },
     },
 ]

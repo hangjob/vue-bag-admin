@@ -20,6 +20,7 @@ function handlePermission(el: Element, binding: DirectiveBinding) {
         }
 
         if (!hasPermission) {
+
             if (isButton(el)) {
                 el.classList.add('ant-btn-dashed')
                 el.setAttribute('disabled', 'disabled')

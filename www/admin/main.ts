@@ -13,6 +13,12 @@ const $options: $optionsType = {
     comps: {
         ThemeBar: shallowRef(ThemeBar),
     },
+    config: {
+        webSite: {
+            title: '品茗信息',
+            subhead: '品茗',
+        },
+    },
 }
 // setupSocket(app, { connection: 'ws://127.0.0.1:8001' })
 app.use(install, $options).mount('#app')

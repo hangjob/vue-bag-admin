@@ -40,7 +40,14 @@ const httpNetwork = {
     resetPath: '/login',
 }
 
+// 网站配置
+const webSite = {
+    title: 'vue-bag-admin',
+    subhead: 'admin',
+}
+
 export {
     themeConfig,
     httpNetwork,
+    webSite
 }

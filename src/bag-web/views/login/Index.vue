@@ -71,9 +71,9 @@
             <div class="sign-social">
                 <div class="social-title">社交帐号登录</div>
                 <div class="social-group">
-                    <div><span>QQ</span><i class="icon-qq" style="color: #60c84d"></i></div>
-                    <div><span>微信</span><i class="icon-weixin" style="color: #50c8fd"></i></div>
-                    <div><span>微博</span><i class="icon-weibo" style="color: #fb6622"></i></div>
+                    <div><span>QQ</span><i class="bag-icon-qq" style="color: #60c84d"></i></div>
+                    <div><span>微信</span><i class="bag-icon-weixin" style="color: #50c8fd"></i></div>
+                    <div><span>微博</span><i class="bag-icon-weibo" style="color: #fb6622"></i></div>
                 </div>
             </div>
         </div>

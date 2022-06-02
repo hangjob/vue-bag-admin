@@ -16,14 +16,14 @@ import {defineComponent} from 'vue'
 export default defineComponent({
     setup() {
         const items = [
-            {value: '每日推荐', icon: 'icon-rili1', color: '#666', url: '/daily'},
-            {value: '效率工具', icon: 'icon-caozuojiemiantubiao---_gongju', color: '#f9be00', url: '/category/1'},
-            {value: '公众号', icon: 'icon-weixin', color: '#67c23a', url: '', isClick: true},
-            {value: '精选文章', icon: 'icon-wenzhangguanli', color: '#cddc39', url: '/article'},
-            {value: 'Top热榜', icon: 'icon-redu', color: '#f56c6c', url: '/hot'},
-            {value: 'Web前端', icon: 'icon-kaifaguanli', color: '#6869dc', url: '/category/8'},
-            {value: 'UI设计', icon: 'icon-shejishi2', color: '#e91e63', url: '/category/4'},
-            {value: '给我留言', icon: 'icon-xinjian', color: '#f8ce58', url: '/intera'}, // 弹个窗 然后 发送邮件， 填写用户邮箱，我回复
+            {value: '每日推荐', icon: 'bag-icon-rili1', color: '#666', url: '/daily'},
+            {value: '效率工具', icon: 'bag-icon-caozuojiemiantubiao---_gongju', color: '#f9be00', url: '/category/1'},
+            {value: '公众号', icon: 'bag-icon-weixin', color: '#67c23a', url: '', isClick: true},
+            {value: '精选文章', icon: 'bag-icon-wenzhangguanli', color: '#cddc39', url: '/article'},
+            {value: 'Top热榜', icon: 'bag-icon-redu', color: '#f56c6c', url: '/hot'},
+            {value: 'Web前端', icon: 'bag-icon-kaifaguanli', color: '#6869dc', url: '/category/8'},
+            {value: 'UI设计', icon: 'bag-icon-shejishi2', color: '#e91e63', url: '/category/4'},
+            {value: '给我留言', icon: 'bag-icon-xinjian', color: '#f8ce58', url: '/intera'}, // 弹个窗 然后 发送邮件， 填写用户邮箱，我回复
         ]
         return {
             items

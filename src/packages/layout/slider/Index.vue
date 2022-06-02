@@ -16,16 +16,16 @@
                     {{ logoTitle }}
                 </div>
                 <div class="scroll">
-                    <MenuSlider/>
+                    <MenuSlider />
                 </div>
             </div>
         </div>
     </a-drawer>
 </template>
 <script lang="ts">
-import {computed, defineComponent} from 'vue'
+import { computed, defineComponent, inject } from 'vue'
 import MenuSlider from './MenuSlider'
-import {useStore} from 'vuex'
+import { useStore } from 'vuex'
 
 
 export default defineComponent({
@@ -48,7 +48,8 @@ export default defineComponent({
             return menuMinWidth
         })
 
-        const logoTitle = computed(() => width.value === 80 ? 'admin' : 'vue-bag-admin')
+        const { configApp } = <any>inject('$configAppOptions')
+        const logoTitle = computed(() => width.value === 80 ? configApp.webSite.subhead : configApp.webSite.title)
 
         const close = () => {
             store.commit('app/updateFloatingVisible', !store.getters['app/getFloatingVisible'])
