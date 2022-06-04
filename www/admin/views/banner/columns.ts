@@ -46,6 +46,19 @@ export default [
         },
     },
     {
+        title: '链接地址',
+        dataIndex: 'url',
+        key: 'url',
+        ellipsis: true,
+        align: 'center',
+        formData: {
+            name: 'url',
+            label: '链接地址',
+            element: 'a-input',
+            placeholder: '输入链接地址',
+        },
+    },
+    {
         title: '是否显示',
         dataIndex: 'shows',
         key: 'shows',

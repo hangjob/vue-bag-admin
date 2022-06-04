@@ -20,8 +20,15 @@
                                    :placeholder="item.formData.placeholder"
                         ></component>
                         <template v-if="item.formData.element === 'bag-upload-image'">
-                            <a-input v-model:value="formState[item.formData.name]" :placeholder="item.formData.placeholder" />
-                            <bag-upload-image @update:image="baseResources[item.formData.props.onUpdateName]" :image="formState[item.formData.name]" />
+                            <a-input v-model:value="formState[item.formData.name]"
+                                     :placeholder="item.formData.placeholder"
+                            />
+                            <bag-upload-image @update:image="baseResources[item.formData.props.onUpdateName]"
+                                              :image="formState[item.formData.name]"
+                                              :fixedBox="item.formData.props.fixedBox"
+                                              :autoCropWidth="item.formData.props.autoCropWidth"
+                                              :autoCropHeight="item.formData.props.autoCropHeight"
+                            ></bag-upload-image>
                         </template>
                         <template v-if="item.formData.element === 'a-select'">
                             <a-select
@@ -45,18 +52,12 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import {defineComponent} from 'vue'
 import hook from './hook'
 
 export default defineComponent({
-    props: {
-        id: {
-            required: true,
-            type: [Number, String],
-        },
-    },
     setup() {
-        const { formState, formItem, rules, baseResources, formRef } = hook()
+        const {formState, formItem, rules, baseResources, formRef} = hook()
         return {
             formState,
             rules,

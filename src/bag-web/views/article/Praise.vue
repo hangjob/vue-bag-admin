@@ -1,5 +1,5 @@
 <template>
-    <div class="praises" v-if="detailData.like">
+    <div class="praises" v-if="detailData.like && detailData.like.length">
         <div class="praises-head">{{detailData.like.length}}点赞</div>
         <div class="praises-users">
             <a href="" v-for="(item,idx) in detailData.like" :key="idx">

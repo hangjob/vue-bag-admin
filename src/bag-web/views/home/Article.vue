@@ -5,16 +5,17 @@
                 <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                     <article class="article">
                         <template v-for="(item,idx) in articleAll" :key="idx">
-                            <div class="article-item mod1" v-if="idx !== 3">
+                            <div class="article-item mod1" v-if="!item.images">
                                 <div class="article-item-body">
                                     <div class="article-item-body-left">
-                                        <router-link :to="`/article/${item.id}`"><img
-                                            :src="getImageFullPath(item.image)" alt=""
-                                        >
+                                        <router-link :to="`/article/${item.id}`">
+                                            <img @click="navigate" :src="getImageFullPath(item.image)" alt="">
                                         </router-link>
                                     </div>
                                     <div class="article-item-body-right">
-                                        <h3>{{ item.title }}</h3>
+                                        <router-link :to="`/article/${item.id}`" custom v-slot="{ navigate }">
+                                            <h3 @click="navigate" role="link">{{ item.title }}</h3>
+                                        </router-link>
                                         <div class="intro">{{ item.describe }}</div>
                                         <div class="action">
                                             <div class="action-tag hidden-xs-only">
@@ -26,18 +27,18 @@
                                                 >{{ todo }}
                                                 </it-tag>
                                             </div>
-                                            <div class="action-time"><span>{{ item.createTime }}</span></div>
+                                            <div class="action-time"><span>{{ getDate(item.createTime).date }}-{{ getDate(item.createTime).week }}</span></div>
                                             <div class="action-user">
                                                 <div class="praise hidden-xs-only hidden-sm-and-down">
-                                                    <it-icon color="#546173" name="sentiment_satisfied" outlined />
+                                                    <i style="color:#3333" class="bag-icon-dianzan5"></i>
                                                     {{ item.likes }} <span class="hidden-lg-only">点赞</span>
                                                 </div>
                                                 <div class="comment hidden-xs-only">
-                                                    <it-icon color="#546173" name="draw" outlined />
+                                                    <i style="color:#3333" class="bag-icon-sheji_huatu"></i>
                                                     {{ item.comments }} <span class="hidden-lg-only">评论</span>
                                                 </div>
                                                 <div class="preview hidden-xs-only">
-                                                    <it-icon color="#546173" name="cruelty_free" outlined />
+                                                    <i style="color:#3333" class="bag-icon-qiepian"></i>
                                                     {{ item.views }} <span class="hidden-lg-only">浏览</span>
                                                 </div>
                                             </div>
@@ -47,8 +48,10 @@
                             </div>
                             <div class="article-item mod2" v-else>
                                 <div class="article-item-body">
-                                    <div class="article-item-body-left">
-                                        <h3>{{ item.title }}</h3>
+                                    <div class="article-item-body-left" style="width:100%">
+                                        <router-link :to="`/article/${item.id}`" custom v-slot="{ navigate }">
+                                            <h3 @click="navigate" role="link">{{ item.title }}</h3>
+                                        </router-link>
                                     </div>
                                     <div class="article-item-body-center">
                                         <div class="imgs">
@@ -60,7 +63,7 @@
                                         </div>
                                     </div>
                                     <div class="article-item-body-right">
-                                        <div class="intro">{{ item.text }}</div>
+                                        <div class="intro">{{ item.describe }}</div>
                                         <div class="action">
                                             <div class="action-tag hidden-xs-only">
                                                 <it-tag :class="colorType[tidx].class"
@@ -71,18 +74,18 @@
                                                 >{{ todo }}
                                                 </it-tag>
                                             </div>
-                                            <div class="action-time"><span>{{ item.createTime }}</span></div>
+                                            <div class="action-time"><span>{{ getDate(item.createTime).date }}-{{ getDate(item.createTime).week }}</span></div>
                                             <div class="action-user">
                                                 <div class="praise hidden-xs-only hidden-sm-and-down">
-                                                    <it-icon color="#546173" name="sentiment_satisfied" outlined />
+                                                    <i style="color:#3333" class="bag-icon-dianzan5"></i>
                                                     {{ item.likes }} <span class="hidden-lg-only">点赞</span>
                                                 </div>
                                                 <div class="comment hidden-xs-only">
-                                                    <it-icon color="#546173" name="draw" outlined />
+                                                    <i style="color:#3333" class="bag-icon-sheji_huatu"></i>
                                                     {{ item.comments }} <span class="hidden-lg-only">评论</span>
                                                 </div>
                                                 <div class="preview hidden-xs-only">
-                                                    <it-icon color="#546173" name="cruelty_free" outlined />
+                                                    <i style="color:#3333" class="bag-icon-qiepian"></i>
                                                     {{ item.views }} <span class="hidden-lg-only">浏览</span>
                                                 </div>
                                             </div>
@@ -98,115 +101,23 @@
     </bag-card>
 </template>
 <script lang="ts" setup>
-import { defineProps, inject, ref } from 'vue'
-import banner1 from '@/bag-web/assets/image/banner-1.jpg'
-import banner2 from '@/bag-web/assets/image/banner-2.jpg'
-import banner3 from '@/bag-web/assets/image/banner-3.jpg'
-import banner4 from '@/bag-web/assets/image/banner-4.jpg'
+import {defineProps, inject, reactive, ref} from 'vue'
+import * as dayjs from 'dayjs'
 
-const { getImageFullPath } = inject<any>('bagGlobal')
+const {getImageFullPath} = inject<any>('bagGlobal')
 const props = defineProps({
     articleAll: [Array],
 })
-const colorType = [{ type: 'primary' }, { type: 'success', class: 'hidden-sm-and-down' }, {
+const colorType = [{type: 'success'}, {type: 'primary', class: 'hidden-sm-and-down'}, {
     type: 'warning', class: 'hidden-sm-and-down',
 }]
-const articles = ref([
-    {
-        img: banner1,
-        title: '小可爱，你有男朋友了嘛',
-        text: '陌生人，你好呀，承蒙遇见，三生有幸，永远年轻，永远热泪盈眶，永远豪情满怀，永远坦坦荡荡，欢迎你的逗留，非常荣幸能在你的回忆里留下我的脚印，匆匆忙忙的人生，也许过客一场,今天的阳光很温顺，也许是我很久没出去走走了吧，看着阳外的天气，我靠在沙发睡着了.',
-        preview: 6732,
-        comment: 344,
-        praise: 688,
-        time: '2022年02月13日',
-        tag: [{ name: '你好呀', type: 'primary' }, {
-            name: '承蒙遇见',
-            type: 'success',
-            class: 'hidden-sm-and-down',
-        }, { name: '永远年轻', type: 'warning', class: 'hidden-sm-and-down' }],
-    },
-    {
-        img: banner2,
-        title: '小生想找个女朋友',
-        text: '陌生人，你好呀，承蒙遇见，三生有幸，永远年轻，永远热泪盈眶，永远豪情满怀，永远坦坦荡荡，欢迎你的逗留，非常荣幸能在你的回忆里留下我的脚印，匆匆忙忙的人生，也许过客一场,今天的阳光很温顺，也许是我很久没出去走走了吧，看着阳外的天气，我靠在沙发睡着了.',
-        preview: 1732,
-        comment: 344,
-        praise: 388,
-        time: '2022年02月13日',
-        tag: [{ name: '你好呀', type: 'primary' }, { name: '永远年轻', type: 'warning', class: 'hidden-sm-and-down' }],
-    },
-    {
-        img: banner3,
-        title: '记录我平时阳光生活',
-        text: '陌生人，你好呀，承蒙遇见，三生有幸，永远年轻，永远热泪盈眶，永远豪情满怀，永远坦坦荡荡，欢迎你的逗留，非常荣幸能在你的回忆里留下我的脚印，匆匆忙忙的人生，也许过客一场',
-        preview: 345,
-        comment: 678,
-        praise: 6288,
-        time: '2022年02月13日',
-        tag: [{ name: '承蒙遇见', type: 'success' }, { name: '永远年轻', type: 'warning', class: 'hidden-sm-and-down' }],
-    },
-    {
-        img: banner4,
-        title: '记录我平时阳光生活',
-        text: '陌生人，你好呀，承蒙遇见，三生有幸，永远年轻，永远热泪盈眶，永远豪情满怀，永远坦坦荡荡，欢迎你的逗留，非常荣幸能在你的回忆里留下我的脚印，匆匆忙忙的人生，也许过客一场',
-        preview: 345,
-        comment: 678,
-        praise: 6288,
-        time: '2022年02月13日',
-        tag: [{ name: '承蒙遇见', type: 'success' }],
-    },
-    {
-        img: banner1,
-        title: '记录我平时阳光生活',
-        text: '陌生人，你好呀，承蒙遇见，三生有幸，永远年轻，永远热泪盈眶，永远豪情满怀，永远坦坦荡荡，欢迎你的逗留，非常荣幸能在你的回忆里留下我的脚印，匆匆忙忙的人生，也许过客一场',
-        preview: 345,
-        comment: 678,
-        praise: 6288,
-        time: '2022年02月13日',
-        tag: [{ name: '承蒙遇见', type: 'success' }],
-    },
-    {
-        img: banner2,
-        title: '记录我平时阳光生活',
-        text: '陌生人，你好呀，承蒙遇见，三生有幸，永远年轻，永远热泪盈眶，永远豪情满怀，永远坦坦荡荡，欢迎你的逗留，非常荣幸能在你的回忆里留下我的脚印，匆匆忙忙的人生，也许过客一场',
-        preview: 345,
-        comment: 678,
-        praise: 6288,
-        time: '2022年02月13日',
-        tag: [{ name: '承蒙遇见', type: 'success' }],
-    },
-    {
-        img: banner3,
-        title: '记录我平时阳光生活',
-        text: '陌生人，你好呀，承蒙遇见，三生有幸，永远年轻，永远热泪盈眶，永远豪情满怀，永远坦坦荡荡，欢迎你的逗留，非常荣幸能在你的回忆里留下我的脚印，匆匆忙忙的人生，也许过客一场',
-        preview: 345,
-        comment: 678,
-        praise: 6288,
-        time: '2022年02月13日',
-        tag: [{ name: '承蒙遇见', type: 'success' }],
-    },
-    {
-        img: banner4,
-        title: '记录我平时阳光生活',
-        text: '陌生人，你好呀，承蒙遇见，三生有幸，永远年轻，永远热泪盈眶，永远豪情满怀，永远坦坦荡荡，欢迎你的逗留，非常荣幸能在你的回忆里留下我的脚印，匆匆忙忙的人生，也许过客一场',
-        preview: 345,
-        comment: 678,
-        praise: 6288,
-        time: '2022年02月13日',
-        tag: [{ name: '承蒙遇见', type: 'success' }],
-    },
-    {
-        img: banner4,
-        title: '记录我平时阳光生活',
-        text: '陌生人，你好呀，承蒙遇见，三生有幸，永远年轻，永远热泪盈眶，永远豪情满怀，永远坦坦荡荡，欢迎你的逗留，非常荣幸能在你的回忆里留下我的脚印，匆匆忙忙的人生，也许过客一场',
-        preview: 345,
-        comment: 678,
-        praise: 6288,
-        time: '2022年02月13日',
-        tag: [{ name: '承蒙遇见', type: 'success' }],
-    },
-])
+
+const getDate = (time)=>{
+    return {
+        date:dayjs(time).format('MM月DD日'),
+        week: '星期' + '日一二三四五六'.charAt(parseInt(dayjs(time).format('d'))),
+    };
+}
 </script>
 <style lang="less" scoped>
 .article {
@@ -338,7 +249,7 @@ const articles = ref([
                 .imgs {
                     display: flex;
                     justify-content: space-between;
-
+                    height: 125px;
                     > a {
                         width: 24%;
                     }

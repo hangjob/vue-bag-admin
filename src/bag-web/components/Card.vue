@@ -38,7 +38,7 @@ export default defineComponent({
 </script>
 <style lang="less" scoped>
 .card {
-    border-radius: 2px;
+    border-radius: 3px;
     background-clip: padding-box;
     background-color: #fff;
     margin-top: var(--bag-margin-base);

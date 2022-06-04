@@ -3,8 +3,8 @@
         <bag-card title="加入我们">
             <template v-slot:body>
                 <p class="join-slogan">
-                    {{ appConfig.slogan }}
-                    <span>{{appConfig.name}}</span>
+                    {{ webSettings.slogan }}
+                    <span>{{webSettings.name}}</span>
                 </p>
                 <div class="join-action">
                     <router-link to="">订阅公众号</router-link>
@@ -21,9 +21,9 @@ import appStore from '@/bag-web/store/app'
 export default defineComponent({
     setup() {
         const store = appStore()
-        const { appConfig } = store
+        const { webSettings } = store
         return {
-            appConfig,
+            webSettings,
         }
     },
 })

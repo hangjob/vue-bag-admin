@@ -11,9 +11,6 @@ export default function () {
         updateLogo: (data: any) => {
             formState.logo = data
         },
-        updateLoginbg: (data: any) => {
-            formState.loginbg = data
-        },
     })
 
     return {

@@ -1,4 +1,4 @@
-import type { App } from 'vue'
+import type {App} from 'vue'
 import mitt from 'mitt'
 import Equal from 'equal-vue'
 import ElementPlus from 'element-plus'
@@ -7,15 +7,16 @@ import 'equal-vue/dist/style.css'
 import 'element-plus/theme-chalk/display.css'
 import 'bootstrap/dist/css/bootstrap-grid.min.css'
 import 'element-plus/dist/index.css'
-import 'material-icons/iconfont/material-icons.css'
 import '@/bag-web/style/index.less'
-import { readonly } from 'vue'
-import { setupGlobComponents } from '@/bag-web/components'
-import { setupStore } from '@/bag-web/store'
-import { setupRouter } from '@/bag-web/router'
-import { httpNetwork } from '@/packages/config'
+import {readonly} from 'vue'
+import {setupGlobComponents} from '@/bag-web/components'
+import {setupStore} from '@/bag-web/store'
+import {setupRouter} from '@/bag-web/router'
+import {httpNetwork} from '@/packages/config'
 import {setupGlobDirectives} from "@/common/extend/directive";
 import setupGlobal from "@/common/global";
+import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+import {post, get} from '@/bag-web/http/request'
 
 interface $optionsType {
     router?: {
@@ -32,8 +33,13 @@ const install = (app: App, options?: $optionsType) => {
             routes: options?.router?.routes || [],
         },
         configApp: {
-            httpNetwork: { ...httpNetwork, ...options?.config?.httpNetwork },
+            httpNetwork: {...httpNetwork, ...options?.config?.httpNetwork},
         },
+    }
+
+
+    for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+        app.component(key, component)
     }
     app.config.globalProperties = _options
     app.provide('$configAppOptions', readonly(_options))
@@ -50,4 +56,6 @@ const install = (app: App, options?: $optionsType) => {
 export default install
 export {
     $optionsType,
+    post,
+    get
 }

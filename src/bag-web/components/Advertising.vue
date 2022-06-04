@@ -1,17 +1,27 @@
 <template>
-    <div class="advertising" :style="{height}">
+    <div class="advertising" v-if="images" :style="{height}">
         <div class="advertising-body">
-            <a href="">
-                <img :src="images" alt="">
-            </a>
+            <template v-if="Array.isArray(images)">
+                <a :href="item.url" v-for="(item,idx) in images" :key="idx">
+                    <img :src="getImageFullPath(item.image)" alt="">
+                </a>
+            </template>
+            <template v-else>
+                <a :href="images.url">
+                    <img :src="getImageFullPath(images.image)" alt="">
+                </a>
+            </template>
         </div>
     </div>
 </template>
 <script lang="ts" setup>
+import {inject} from "vue";
+
 const props = defineProps({
     height: String,
-    images: [String, Array],
+    images: [String, Array, Object],
 })
+const {getImageFullPath} = inject<any>('bagGlobal')
 </script>
 <style lang="less" scoped>
 .advertising {

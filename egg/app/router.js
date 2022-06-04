@@ -19,4 +19,5 @@ module.exports = app => {
     require('./router/web/leave')(app);
     require('./router/web/like')(app);
     require('./router/web/banner')(app);
+    require('./router/web/links')(app);
 };

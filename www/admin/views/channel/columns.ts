@@ -18,6 +18,13 @@ const columns = [
         ellipsis: true,
     },
     {
+        title: '链接地址',
+        dataIndex: 'url',
+        key: 'url',
+        align: 'center',
+        ellipsis: true,
+    },
+    {
         title: '父级ID',
         dataIndex: 'pid',
         key: 'pid',

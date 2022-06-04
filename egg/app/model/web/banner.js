@@ -15,6 +15,10 @@ module.exports = app => {
             type: STRING,
             comment: '图片地址',
         },
+        url: {
+            type: STRING,
+            comment: '链接地址',
+        },
         shows: {
             type: BOOLEAN,
             defaultValue: true,

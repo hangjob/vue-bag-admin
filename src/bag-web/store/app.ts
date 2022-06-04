@@ -1,4 +1,4 @@
-import { defineStore } from 'pinia'
+import {defineStore} from 'pinia'
 
 const appStore = defineStore({
     id: 'app',
@@ -7,7 +7,7 @@ const appStore = defineStore({
             // 网络配置
             httpNetwork: {},
             // 网站配置
-            appConfig: {
+            webSettings: {
                 logo: '',
                 slogan: '',
             },
@@ -19,8 +19,8 @@ const appStore = defineStore({
             this.httpNetwork = data
         },
         // 更新网站配置
-        updateAppConfig(data: any) {
-            this.appConfig = data
+        updateAppWebSettings(data: any) {
+            this.webSettings = data
         },
     },
 })

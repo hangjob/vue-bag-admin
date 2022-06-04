@@ -22,23 +22,42 @@
                 </el-row>
             </template>
         </bag-card>
-        <Article :articleAll="articleAll" />
+        <Article :articleAll="articleAll"/>
+        <div class="next">
+            <button class="next-page" v-if="page.isEnd" @click="handlePage">
+                <i class="bag-icon--_jiantou"></i>
+            </button>
+            <button v-else>
+                嘿，已经没有最新数据了...
+            </button>
+        </div>
     </div>
 </template>
 <script lang="ts" setup>
-import { defineProps, inject, ref } from 'vue'
-
+import {defineProps, inject, ref, defineEmits, reactive} from 'vue'
 import Article from './Article.vue'
-import { webBannerAll } from '@/bag-web/service/app'
 
 const props = defineProps({
     articleAll: [Array],
+    banners: [Array]
 })
-const banners = ref([])
-webBannerAll().then((res: any) => {
-    banners.value = res
+
+const emit = defineEmits({
+    'refrashData': null
 })
-const { getImageFullPath } = inject<any>('bagGlobal')
+const {getImageFullPath} = inject<any>('bagGlobal')
+const page = reactive({
+    pageSize: 15,
+    currentPage: 1,
+    isEnd: true,
+    callback: (res: any) => {
+        page.isEnd = res.length == page.pageSize;
+    }
+})
+const handlePage = () => {
+    page.currentPage += 1;
+    emit('refrashData', page)
+}
 </script>
 <style lang="less" scoped>
 .section {
@@ -108,6 +127,50 @@ const { getImageFullPath } = inject<any>('bagGlobal')
                 padding-top: 15px;
                 padding-bottom: 18px;
                 color: var(--bag-text-color-brown);
+            }
+        }
+    }
+
+    .next {
+        text-align: center;
+        margin: 20px 0;
+
+        button {
+            background: #ffffff;
+            min-width: 120px;
+            height: 46px;
+            padding: 0 20px;
+            outline: none;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+            transition: all .3s;
+            color: #828a92;
+
+            i {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                transition: all .3s;
+                color: #ffe900;
+                font-size: 30px;
+            }
+
+            &.next-page {
+                &:hover {
+                    background-color: #ffe900;
+
+                    i {
+                        color: #ffffff;
+                        transform: translate(50%, -50%);
+                    }
+                }
             }
         }
     }

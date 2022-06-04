@@ -3,7 +3,10 @@
         <div class="container">
             <el-row>
                 <el-col :xs="24" :sm="1" :md="2" :lg="2" :xl="2">
-                    <router-link to="/home"  class="nav-logo"><img @error="errorChange" ref="logoDom" :src="baseURL+appConfig.logo" :alt="appConfig.name">
+                    <router-link to="/home" class="nav-logo">
+                        <img @error="errorChange" ref="logoDom" :src="getImageFullPath(webSettings.logo)"
+                             :alt="webSettings.name"
+                        >
                     </router-link>
                 </el-col>
                 <el-col :xs="24" :sm="20" :md="18" :lg="14" :xl="14">
@@ -11,15 +14,15 @@
                         <ul>
                             <li v-for="item in menuList" :key="item.id">
                                 <div>
-                                    <router-link to="">{{ item.name }}
-                                        <it-icon v-if="item.children && item.children.length" name="arrow_drop_down"
-                                                 outlined
-                                        />
+                                    <router-link :to="item.url">{{ item.name }}
+                                        <el-icon v-if="item.children && item.children.length">
+                                            <CaretBottom/>
+                                        </el-icon>
                                     </router-link>
                                 </div>
                                 <ul class="dropdown-menu" v-if="item.children && item.children.length">
                                     <li v-for="todo in item.children">
-                                        <router-link to="">{{ todo.name }}</router-link>
+                                        <router-link :to="todo.url">{{ todo.name }}</router-link>
                                     </li>
                                 </ul>
                             </li>
@@ -39,7 +42,9 @@
                                 <li>
                                     <div>
                                         <a href="">{{ userinfo.username ? userinfo.username : '个人中心' }}
-                                            <it-icon name="arrow_drop_down" outlined/>
+                                            <el-icon>
+                                                <CaretBottom/>
+                                            </el-icon>
                                         </a>
                                     </div>
                                     <ul class="dropdown-menu">
@@ -73,8 +78,10 @@ import userStore from "@/bag-web/store/user";
 import {useRouter} from "vue-router";
 
 const {configApp} = <any>inject('$configAppOptions')
-const {baseURL, resetPath} = configApp?.httpNetwork
-const {appConfig} = appStore()
+
+const {getImageFullPath} = inject<any>('bagGlobal')
+const {resetPath} = configApp?.httpNetwork
+const {webSettings} = appStore()
 const store = userStore()
 const userinfo = store.userinfo;
 const inputValue = ref()

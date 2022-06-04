@@ -1,5 +1,5 @@
 <template>
-    <div class="login">
+    <div class="login" :style="{backgroundImage: `url(${getImageFullPath(webSettings.loginbg)})`}">
         <div class="sign-content">
             <div class="tab">
                 <ul>
@@ -80,10 +80,12 @@
     </div>
 </template>
 <script lang="ts">
-import {defineComponent, reactive} from 'vue'
+import {defineComponent, inject, reactive} from 'vue'
 import {memberCreate, userLogin} from '@/bag-web/service/app'
 import {useRouter} from "vue-router";
-import { ElNotification } from 'element-plus'
+import {ElNotification} from 'element-plus'
+import appStore from "@/bag-web/store/app";
+
 export default defineComponent({
     setup() {
         const router = useRouter()
@@ -121,7 +123,7 @@ export default defineComponent({
                     userLogin({username: form.username, password: form.password}).then(() => {
                         ElNotification({
                             title,
-                            duration:1000,
+                            duration: 1000,
                             type: 'success',
                             message: `${form.username} 账户登录成功`,
                         })
@@ -139,8 +141,12 @@ export default defineComponent({
                 }
             },
         })
+        const {getImageFullPath} = inject<any>('bagGlobal')
+        const {webSettings} = appStore()
         return {
             form,
+            webSettings,
+            getImageFullPath
         }
     },
 })
@@ -152,7 +158,6 @@ export default defineComponent({
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url("/src/bag-web/assets/image/bg.png");
     background-repeat: no-repeat;
     background-size: cover;
 

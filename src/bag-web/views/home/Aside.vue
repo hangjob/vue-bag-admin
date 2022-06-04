@@ -11,7 +11,7 @@
                 </ul>
             </template>
         </bag-card>
-        <bag-advertising height="150px" :images="banner1" />
+        <bag-advertising height="150px" :images="banners[0]"></bag-advertising>
         <bag-card class="hot" title="推荐资讯">
             <template v-slot:body>
                 <ul class="list">
@@ -22,7 +22,7 @@
                 </ul>
             </template>
         </bag-card>
-        <bag-advertising height="300px" :images="banner2" />
+        <bag-advertising height="300px" :images="banners[1]"></bag-advertising>
         <bag-card class="hot" title="推荐资讯">
             <template v-slot:body>
                 <ul class="list">
@@ -36,10 +36,12 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue'
-import banner1 from '@/bag-web/assets/image/banner-1.jpg'
-import banner2 from '@/bag-web/assets/image/banner-2.jpg'
+import {defineProps, inject, ref} from 'vue'
 import Join from './Join.vue'
+const props = defineProps({
+    articleAll: [Array],
+    banners: [Array]
+})
 const items = ref([{}, {}, {}, {}, {}, {}, {}, {}, {}, {}])
 </script>
 <style lang="less" scoped>

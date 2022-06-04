@@ -48,6 +48,16 @@ const paths = addUniqueId([
                 filePath: '/admin/views/banner/Index.vue',
             },
             {
+                name: '友情链接',
+                path: '/links',
+                icon: '',
+                shows: 1,
+                tabHidden: false,
+                tabFix: false,
+                keepAlive: true,
+                filePath: '/admin/views/links/Index.vue',
+            },
+            {
                 name: '关键词管理',
                 path: '/antistop',
                 icon: '',

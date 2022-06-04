@@ -2,8 +2,8 @@
     <div class="qrcode">
         <img src="https://www.vipbic.com/public/www/pc/img/7.cc9a928e.png" alt="">
         <div class="qrcode-des">
-            <h3>{{appConfig.name}}</h3>
-            <p>{{appConfig.slogan}}</p>
+            <h3>{{webSettings.name}}</h3>
+            <p>{{webSettings.slogan}}</p>
         </div>
     </div>
 </template>
@@ -14,9 +14,9 @@ import appStore from '@/bag-web/store/app'
 export default defineComponent({
     setup() {
         const store = appStore()
-        const { appConfig } = store
+        const { webSettings } = store
         return {
-            appConfig,
+            webSettings,
         }
     },
 })

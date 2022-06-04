@@ -1,4 +1,4 @@
-import { post } from '@/bag-web/http/request'
+import {post} from '@/bag-web/http/request'
 
 
 // 获取菜单
@@ -8,12 +8,12 @@ const webChannelAll = (params?: object) => {
 
 // 添加用户
 const memberCreate = (params?: object) => {
-    return post('/member/create', params, { notifyError: true })
+    return post('/member/create', params, {notifyError: true})
 }
 
 // 登录
 const userLogin = (params?: object) => {
-    return post('/user/login', params, { notifyError: true })
+    return post('/user/login', params, {notifyError: true})
 }
 
 // 获取用户信息
@@ -28,7 +28,7 @@ const userLogout = (params?: object) => {
 
 // 获取网站配置
 const webWebsiteFind = () => {
-    return post('/web/website/find', { url: 'http://192.168.1.24:8290/' })
+    return post('/web/website/find', {url: 'http://192.168.1.24:8290/'})
 }
 
 // 文章详情
@@ -38,7 +38,7 @@ const webArticleFind = (params?: object) => {
 
 // 点赞
 const webLikeCreate = (params?: object) => {
-    return post('/web/like/create', params, { notifyError: true })
+    return post('/web/like/create', params, {notifyError: true})
 }
 
 // 获取关键词
@@ -57,6 +57,11 @@ const webArticleAll = () => {
     return post('/web/article/all')
 }
 
+// 获取文章-分页
+const webArticlePage = (params?: object) => {
+    return post('/web/article/page', params)
+}
+
 export {
     webChannelAll,
     memberCreate,
@@ -69,4 +74,5 @@ export {
     webAntistopAll,
     webBannerAll,
     webArticleAll,
+    webArticlePage
 }

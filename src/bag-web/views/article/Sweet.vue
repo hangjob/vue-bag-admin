@@ -1,12 +1,12 @@
 <template>
     <div class="sweet">
         <it-button-group v-if="detailData.isLike">
-            <it-button type="primary" color="#65b1ff" icon="rocket_launch">你已点赞</it-button>
-            <it-button type="primary" icon="paid" outlined>打赏</it-button>
+            <it-button type="primary" color="#65b1ff">你已点赞</it-button>
+            <it-button type="primary"  outlined>打赏</it-button>
         </it-button-group>
         <it-button-group v-else>
-            <it-button type="success" color="#65b1ff" v-debounce="{ func: handleLike}" icon="rocket_launch">点赞</it-button>
-            <it-button type="success" icon="paid" outlined>打赏</it-button>
+            <it-button type="success" color="#65b1ff" v-debounce="{ func: handleLike}">点赞</it-button>
+            <it-button type="success"  outlined>打赏</it-button>
         </it-button-group>
     </div>
 </template>

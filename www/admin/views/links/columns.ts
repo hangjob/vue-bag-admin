@@ -36,27 +36,14 @@ export default [
         },
     },
     {
-        title: '二维码地址',
-        dataIndex: 'qrcode',
-        key: 'qrcode',
-        align: 'center',
-        ellipsis: true,
-        formData: {
-            name: 'qrcode',
-            label: '二维码地址',
-            element: 'a-input',
-            placeholder: '二维码地址',
-        },
-    },
-    {
         title: '网站描述',
-        dataIndex: 'slogan',
-        key: 'slogan',
+        dataIndex: 'describe',
+        key: 'describe',
         ellipsis: true,
         align: 'center',
         width: 100,
         formData: {
-            name: 'slogan',
+            name: 'describe',
             label: '描述',
             element: 'a-textarea',
             placeholder: '输入描述',
@@ -67,35 +54,6 @@ export default [
                 }
             ]
         }
-    },
-    {
-        title: '关键词',
-        dataIndex: 'keywords',
-        key: 'keywords',
-        align: 'center',
-        ellipsis: true,
-        formData: {
-            name: 'keywords',
-            label: '关键词',
-            element: 'a-select',
-            placeholder: '输入关键词',
-            defaultValue: Array()
-        },
-    },
-    {
-        title: '备案号',
-        dataIndex: 'record',
-        key: 'record',
-        align: 'center',
-        ellipsis: true,
-        visible: false,
-        formData: {
-            name: 'record',
-            label: '备案号',
-            element: 'a-textarea',
-            placeholder: '输入备案号',
-            maxlength: 300,
-        },
     },
     {
         title: '网站logo',
@@ -109,34 +67,15 @@ export default [
             element: 'bag-upload-image',
             placeholder: '上传图片',
             maxlength: 300,
-            props:{
-                onUpdateName:'updateLogo'
+            props: {
+                onUpdateName: 'updateLogo',
+                fixedBox: false,
+                autoCropWidth: 100,
+                autoCropHeight: 100
             },
             rules: [
                 {
                     required: true, message: '图片为必填项', trigger: 'blur'
-                }
-            ]
-        }
-    },
-    {
-        title: '登录页面背景图',
-        dataIndex: 'loginbg',
-        key: 'loginbg',
-        ellipsis: true,
-        align: 'center',
-        formData: {
-            name: 'loginbg',
-            label: '登录页面背景图',
-            element: 'bag-upload-image',
-            placeholder: '登录页面背景图',
-            maxlength: 300,
-            props:{
-                onUpdateName:'updateLoginbg'
-            },
-            rules: [
-                {
-                    required: true, message: '登录页面背景图', trigger: 'blur'
                 }
             ]
         }

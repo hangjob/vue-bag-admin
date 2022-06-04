@@ -8,7 +8,7 @@
         <div class="container" v-if="detailData">
             <el-row :gutter="20">
                 <el-col :xs="24" :sm="24" :md="24" :lg="16" :xl="16">
-                    <Banner :detail-data="detailData" />
+                    <Banner :detail-data="detailData"/>
                     <div class="article-body">
                         <div class="breadcrumb">
                             <ol>
@@ -21,13 +21,13 @@
                             <div class="widget hot" v-if="detailData.flag === '热门'">
                                 <i class="bag-icon-huo"></i>
                             </div>
-                            <div class="widget recom"  v-if="detailData.flag === '推荐'">
+                            <div class="widget recom" v-if="detailData.flag === '推荐'">
                                 <i class="bag-icon-tuijianfuwu"></i>
                             </div>
-                            <div class="widget stick"  v-if="detailData.flag === '置顶'">
+                            <div class="widget stick" v-if="detailData.flag === '置顶'">
                                 <i class="bag-icon-zhiding3"></i>
                             </div>
-                            <div class="widget new"  v-if="detailData.flag === '最新'">
+                            <div class="widget new" v-if="detailData.flag === '最新'">
                                 <i class="bag-icon-zuixin"></i>
                             </div>
                         </div>
@@ -37,46 +37,46 @@
                             </div>
                             <div class="metas-action">
                                 <div>
-                                    <it-icon color="#65b1ff" style="font-size:20px" name="remove_red_eye" />
+                                    <i style="color:#65b1ff;;font-size:14px" class="bag-icon-qiepian"></i>
                                     <span>{{ detailData.views }} 阅读</span>
                                 </div>
                                 <div>
-                                    <it-icon color="#65b1ff" style="font-size:18px" name="design_services" outlined />
+                                    <i style="color:#65b1ff" class="bag-icon-sheji_huatu"></i>
                                     <span>暂无 评论</span>
                                 </div>
                                 <div>
-                                    <it-icon color="#65b1ff" style="font-size:18px" name="local_florist" outlined />
+                                    <i style="color:#65b1ff;font-size:16px" class="bag-icon-redu"></i>
                                     <span>{{ detailData.like.length + detailData.likes }} 点赞</span>
                                 </div>
                                 <div>
-                                    <it-icon color="#65b1ff" style="font-size:18px" name="schedule" outlined />
+                                    <i style="color:#65b1ff;font-size:20px" class="bag-icon-shijian2"></i>
                                     <span>{{ readingTime(detailData.content) }}分钟 阅读时长</span>
                                 </div>
                                 <div>
-                                    <it-icon color="#65b1ff" style="font-size:18px" name="date_range" outlined />
+                                    <i style="color:#65b1ff;font-size:20px" class="bag-icon-rili1"></i>
                                     <span>{{ detailData.updateTime }}</span>
                                 </div>
                             </div>
                             <div class="text">
-                                <Wangeditor :detailData="detailData" />
-                                <Sweet :detailData="detailData" />
+                                <Wangeditor :detailData="detailData"/>
+                                <Sweet :detailData="detailData"/>
                             </div>
                         </div>
                     </div>
-                    <Praise :detail-data="detailData" />
+                    <Praise :detail-data="detailData"/>
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="24" :lg="8" :xl="8">
-                    <Author :detail-data="detailData" />
-                    <Qrcode :detail-data="detailData" />
-                    <HotTags :detail-data="detailData" />
+                    <Author :detail-data="detailData"/>
+                    <Qrcode :detail-data="detailData"/>
+                    <HotTags :detail-data="detailData"/>
                 </el-col>
             </el-row>
         </div>
     </div>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { useRoute } from 'vue-router'
+import {ref} from 'vue'
+import {useRoute} from 'vue-router'
 import Wangeditor from './Wangeditor.vue'
 import Author from './Author.vue'
 import Qrcode from './Qrcode.vue'
@@ -85,13 +85,13 @@ import Praise from './Praise.vue'
 import Sweet from './Sweet.vue'
 import Banner from './banner/Index.vue'
 
-import { webArticleFind } from '@/bag-web/service/app'
-import { ElLoading } from 'element-plus'
+import {webArticleFind} from '@/bag-web/service/app'
+import {ElLoading} from 'element-plus'
 
 const route = useRoute()
 const detailData = ref(null)
 const loading = ref(true)
-webArticleFind({ id: route.params.id }).then((res: any) => {
+webArticleFind({id: route.params.id}).then((res: any) => {
     res.title_style = res.title_style ? JSON.parse(res.title_style) : {}
     res.images = res.images ? res.images.split(',') : []
     console.log(res.images)

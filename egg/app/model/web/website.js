@@ -19,6 +19,10 @@ module.exports = app => {
             type: STRING,
             comment: '缩略图',
         },
+        loginbg: {
+            type: STRING,
+            comment: '登录页面背景图',
+        },
         slogan: {
             type: STRING,
             comment: '网站描述',

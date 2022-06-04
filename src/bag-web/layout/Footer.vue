@@ -6,7 +6,7 @@
                     <div>欢迎你</div>
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="18" :lg="21" :xl="22">
-                    <p>{{appConfig.record}}</p>
+                    <p>{{webSettings.record}}</p>
                     <ul class="list-unsettled">
                         <li><a href="">关于我们</a></li>
                         <li><a href="">用户协议</a></li>
@@ -23,9 +23,9 @@ import appStore from "@/bag-web/store/app";
 export default defineComponent({
     setup(){
         const store = appStore()
-        const { appConfig } = store
+        const { webSettings } = store
         return {
-            appConfig
+            webSettings
         }
     }
 })
