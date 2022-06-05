@@ -17,7 +17,7 @@ module.exports = app => {
         },
         type: {
             type: INTEGER,
-            comment: '类型',
+            comment: '类型', // 1 是文章表article.js 、2 下载表 download.js
         },
         order: {
             type: INTEGER,

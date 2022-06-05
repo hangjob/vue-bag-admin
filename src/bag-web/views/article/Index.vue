@@ -33,7 +33,7 @@
                         </div>
                         <div class="content">
                             <div class="metas">
-                                <h1 :style="{...detailData.title_style}">品茗信息科技有限公司-羊先生</h1>
+                                <h1 :style="{...detailData.title_style}">{{detailData.title}}</h1>
                             </div>
                             <div class="metas-action">
                                 <div>

@@ -166,7 +166,7 @@ const handleLogout = () => {
                         color: var(--bag-text-color-primary);
                         background-color: var(--bag-color-white);
                         border-radius: 3px;
-                        box-shadow: 0 20px 30px rgb(83 88 93 / 5%), 0 0 30px rgb(83 88 93 / 10%);
+                        box-shadow: 0 3px 3px rgb(255, 255, 255, 0.9), 0 0 3px rgb(255, 255, 255, 0.9);
                         background-clip: padding-box;
 
                         li {

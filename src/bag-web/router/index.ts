@@ -27,6 +27,10 @@ const routes = [
                 path: '/article/:id', name: 'article', meta: {title: '详情'},
                 component: () => import('@/bag-web/views/article/Index.vue'),
             },
+            {
+                path: '/download', name: 'article', meta: {title: '下载中心'},
+                component: () => import('@/bag-web/views/download/Index.vue'),
+            },
         ],
     },
     {

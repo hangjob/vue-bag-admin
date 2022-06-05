@@ -31,7 +31,7 @@ export default [
         key: 'image',
         ellipsis: true,
         align: 'center',
-        slots: { customRender: 'image' },
+        slots: {customRender: 'image'},
         formData: {
             name: 'image',
             label: 'banner图',
@@ -90,10 +90,10 @@ export default [
             element: 'a-select',
             props: {
                 mode: null,
-                options: [{ label: '类型1', value: 1 }, { label: '类型2', value: 2 }],
+                options: [{label: '类型1', value: 1}, {label: '类型2', value: 2}],
                 placeholder: '选择类型',
             },
-            defaultValue: '',
+            defaultValue: 1,
         },
     },
     {
@@ -109,6 +109,6 @@ export default [
         key: 'action',
         align: 'center',
         width: 200,
-        slots: { customRender: 'action' },
+        slots: {customRender: 'action'},
     },
 ]
