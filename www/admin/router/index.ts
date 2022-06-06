@@ -67,6 +67,16 @@ const paths = addUniqueId([
                 keepAlive: true,
                 filePath: '/admin/views/antistop/Index.vue',
             },
+            {
+                name: '下载管理',
+                path: '/download',
+                icon: '',
+                shows: 1,
+                tabHidden: false,
+                tabFix: false,
+                keepAlive: true,
+                filePath: '/admin/views/download/Index.vue',
+            },
         ],
     },
     {
