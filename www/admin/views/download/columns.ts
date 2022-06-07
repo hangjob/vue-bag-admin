@@ -5,7 +5,7 @@ export default [
         key: 'id',
         ellipsis: true,
         align: 'center',
-        width: 80
+        width: 80,
     },
     {
         title: '标题',
@@ -39,6 +39,8 @@ export default [
                 mode: null,
                 options: [],
                 placeholder: '选择类型',
+                optsKey: 'user',
+                optNmae: 'username',
             },
             defaultValue: '',
         },
@@ -57,6 +59,8 @@ export default [
                 mode: null,
                 options: [],
                 placeholder: '栏目id',
+                optsKey: 'channel',
+                optNmae: 'name',
             },
             defaultValue: '',
         },
@@ -67,7 +71,7 @@ export default [
         key: 'image',
         ellipsis: true,
         align: 'center',
-        slots: {customRender: 'image'},
+        slots: { customRender: 'image' },
         formData: {
             name: 'image',
             label: '图片',
@@ -75,9 +79,9 @@ export default [
             placeholder: '上传图片',
             maxlength: 300,
             props: {
-                onUpdateName: 'updateLogo'
-            }
-        }
+                onUpdateName: 'updateImage',
+            },
+        },
     },
     {
         title: '描述',
@@ -85,7 +89,7 @@ export default [
         key: 'describe',
         ellipsis: true,
         align: 'center',
-        slots: {customRender: 'describe'},
+        slots: { customRender: 'describe' },
         formData: {
             name: 'describe',
             label: '描述',
@@ -94,10 +98,48 @@ export default [
             maxlength: 300,
             rules: [
                 {
-                    required: true, message: '输入描述为必填项', trigger: 'blur'
-                }
-            ]
-        }
+                    required: true, message: '输入描述为必填项', trigger: 'blur',
+                },
+            ],
+        },
+    },
+    {
+        title: '内容',
+        dataIndex: 'content',
+        key: 'content',
+        ellipsis: true,
+        align: 'left',
+        visible:false,
+        formData: {
+            name: 'content',
+            label: '内容',
+            element: 'md-editor',
+            placeholder: '输入内容',
+            xs: 24,
+            sm: 24,
+            md: 24,
+            lg: 24,
+            xl: 24,
+            labelCol: { span: 3, offset: 0 },
+            wrapperCol: { span: 19, offset: 0 },
+        },
+    },
+    {
+        title: '选择时间',
+        dataIndex: 'createTime',
+        key: 'createTime',
+        ellipsis: true,
+        align: 'center',
+        width: 100,
+        formData: {
+            name: 'createTime',
+            label: '浏览次数',
+            element: 'a-date-picker',
+            props: {
+                valueFormat: 'YYYY-MM-DD HH:mm:ss',
+                placeholder: '选择时间',
+            },
+        },
     },
     {
         title: '浏览次数',
@@ -128,6 +170,34 @@ export default [
         },
     },
     {
+        title: '点踩次数',
+        dataIndex: 'dislikes',
+        key: 'dislikes',
+        ellipsis: true,
+        align: 'center',
+        width: 100,
+        formData: {
+            name: 'dislikes',
+            label: '点踩次数',
+            element: 'a-input',
+            placeholder: '输入点踩次数',
+        },
+    },
+    {
+        title: '评论数量',
+        dataIndex: 'comments',
+        key: 'comments',
+        ellipsis: true,
+        align: 'center',
+        width: 100,
+        formData: {
+            name: 'comments',
+            label: '评论数量',
+            element: 'a-input',
+            placeholder: '输入评论数量',
+        },
+    },
+    {
         title: '游客访问',
         dataIndex: 'is_guest',
         key: 'is_guest',
@@ -136,6 +206,15 @@ export default [
         width: 100,
         customRender: (item: any) => {
             return item.text ? '是' : '否'
+        },
+        formData: {
+            name: 'is_guest',
+            label: '是否显示',
+            element: 'a-switch',
+            placeholder: '是否显示',
+            checkedText: '是',
+            uncheckedText: '否',
+            defaultValue: true,
         },
     },
     {
@@ -173,6 +252,8 @@ export default [
                 mode: null,
                 options: [],
                 placeholder: '选择热度',
+                optsKey: 'channel',
+                optNmae: 'name',
             },
             defaultValue: '',
         },
@@ -190,6 +271,6 @@ export default [
         key: 'action',
         align: 'center',
         width: 200,
-        slots: {customRender: 'action'},
+        slots: { customRender: 'action' },
     },
 ]

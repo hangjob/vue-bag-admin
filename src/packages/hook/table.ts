@@ -3,6 +3,7 @@ import { ref, reactive } from 'vue'
 import { post } from '@/packages/http/request'
 import { toRaw } from 'vue'
 import { message } from 'ant-design-vue'
+import isFunction from '@/bag-utils/regular/isFunction'
 
 export default function() {
     const tableCurd = reactive({
@@ -14,11 +15,18 @@ export default function() {
             visible: false,
             formState: '',
             api: '',
+            _formState: <any>'',
             refForm: <any>'',
+            beforeSubmit: <any>'',
             submit() {
                 tableCurd.create.api = tableCurd.create.api ? tableCurd.create.api : tableCurd.apiPrefix + '/create'
+                tableCurd.create._formState = toRaw(tableCurd.create.refForm.formState)
+                if (isFunction(tableCurd.create.beforeSubmit)) {
+                    // 在触发之前 传递beforeSubmit函数 加工数据 此处可以进一步加工
+                    tableCurd.create._formState = tableCurd.create.beforeSubmit(tableCurd.create._formState)
+                }
                 tableCurd.create.refForm.formRef.validate().then(() => {
-                    post(tableCurd.create.api, toRaw(tableCurd.create.refForm.formState), { notifyError: true }).then(() => {
+                    post(tableCurd.create.api, tableCurd.create._formState, { notifyError: true }).then(() => {
                         tableCurd.create.visible = false
                         tableCurd.all.handle()
                     })

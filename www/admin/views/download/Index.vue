@@ -67,6 +67,7 @@ export default defineComponent({
         tableCurd.create.refForm = formCreate;
         tableCurd.edit.refForm = formEdit;
         tableCurd.all.handle();
+
         return {
             tableCurd,
             formCreate,

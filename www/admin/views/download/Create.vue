@@ -5,7 +5,8 @@
                 <a-col v-for="item in formItem" :key="item.name" :xs="item.xs" :sm="item.sm" :md="item.md" :lg="item.lg"
                        :xl="item.xl"
                 >
-                    <a-form-item :label="item.formData.label" :name="item.formData.name">
+                    <a-form-item :label="item.formData.label" :name="item.formData.name"
+                                 :labelCol="item.formData.labelCol" :wrapperCol="item.formData.wrapperCol">
                         <component v-if="item.formData.element === 'a-input'" :is="item.formData.element"
                                    v-model:value="formState[item.formData.name]"
                                    :placeholder="item.formData.placeholder"
@@ -19,6 +20,22 @@
                                    v-model:value="formState[item.formData.name]"
                                    :placeholder="item.formData.placeholder"
                         ></component>
+                        <component v-if="item.formData.element === 'a-date-picker'"
+                                   :is="item.formData.element"
+                                   v-model:value="formState[item.formData.name]"
+                                   :placeholder="item.formData.props.placeholder"
+                                   style="width: 100%"
+                                   type="date"
+                                   :valueFormat="item.formData.props.valueFormat"
+                        ></component>
+                        <template v-if="item.formData.element === 'md-editor'">
+                            <md-editor
+                                previewTheme="mk-cute"
+                                codeTheme="paraiso"
+                                @onUploadImg="onUploadImg"
+                                v-model="formState[item.formData.name]"
+                            />
+                        </template>
                         <template v-if="item.formData.element === 'bag-upload-image'">
                             <a-input v-model:value="formState[item.formData.name]"
                                      :placeholder="item.formData.placeholder"
@@ -33,15 +50,16 @@
                                 :mode="item.formData.props.mode"
                                 style="width: 100%"
                                 :placeholder="item.formData.props.placeholder"
-                                option-label-prop="label"
-                                :options="item.formData.props.options"
                             >
-                                <template #option="{ value: val, label, icon }">
-                                    <span role="img" :aria-label="val">{{ icon }}</span>
-                                    &nbsp;&nbsp;{{ val }}
-                                </template>
+                                <a-select-option value="">请选择</a-select-option>
+                                <a-select-option v-for="opt in baseResources.opts[item.formData.props.optsKey]" :key="opt.id"
+                                                 :value="opt.id"
+                                >
+                                    {{ opt[item.formData.props.optNmae] }}
+                                </a-select-option>
                             </a-select>
                         </template>
+
                     </a-form-item>
                 </a-col>
             </a-row>
@@ -54,13 +72,14 @@ import hook from './hook'
 
 export default defineComponent({
     setup() {
-        const { formState, formItem, rules, baseResources, formRef } = hook()
+        const { formState, formItem, rules, baseResources, formRef,onUploadImg } = hook()
         return {
             formState,
             rules,
             baseResources,
             formRef,
             formItem,
+            onUploadImg
         }
     },
 })

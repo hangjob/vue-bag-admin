@@ -152,12 +152,8 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-import MdEditor from 'md-editor-v3'
-import 'md-editor-v3/lib/style.css'
 import hook from '@www/admin/views/article/hook'
-
 export default defineComponent({
-    components: { MdEditor },
     props: {
         id: {
             required: true,
