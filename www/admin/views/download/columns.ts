@@ -46,6 +46,21 @@ export default [
         },
     },
     {
+        title: '标题样式',
+        dataIndex: 'title_style',
+        key: 'title_style',
+        ellipsis: true,
+        align: 'center',
+        visible: false,
+        formData: {
+            name: 'title_style',
+            label: '标题样式',
+            element: 'a-textarea',
+            placeholder: '输入标题样式',
+            maxlength:300,
+        },
+    },
+    {
         title: '栏目id',
         dataIndex: 'channel_id',
         key: 'channel_id',
@@ -125,6 +140,25 @@ export default [
         },
     },
     {
+        title: '下载地址',
+        dataIndex: 'download_site',
+        key: 'download_site',
+        ellipsis: true,
+        align: 'center',
+        width: 100,
+        visible: false,
+        formData: {
+            name: 'download_site',
+            label: '下载地址',
+            element: 'bag-download-site',
+            xs: 24,
+            sm: 24,
+            md: 24,
+            lg: 24,
+            xl: 24,
+        },
+    },
+    {
         title: '选择时间',
         dataIndex: 'createTime',
         key: 'createTime',
@@ -133,11 +167,13 @@ export default [
         width: 100,
         formData: {
             name: 'createTime',
-            label: '浏览次数',
+            label: '选择时间',
             element: 'a-date-picker',
             props: {
                 valueFormat: 'YYYY-MM-DD HH:mm:ss',
                 placeholder: '选择时间',
+                showTime:true,
+                type:'date'
             },
         },
     },

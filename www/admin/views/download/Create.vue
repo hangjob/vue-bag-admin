@@ -25,7 +25,8 @@
                                    v-model:value="formState[item.formData.name]"
                                    :placeholder="item.formData.props.placeholder"
                                    style="width: 100%"
-                                   type="date"
+                                   :type="item.formData.props.type"
+                                   :show-time="item.formData.props.showTime"
                                    :valueFormat="item.formData.props.valueFormat"
                         ></component>
                         <template v-if="item.formData.element === 'md-editor'">
@@ -59,7 +60,9 @@
                                 </a-select-option>
                             </a-select>
                         </template>
-
+                        <template v-if="item.formData.element === 'bag-download-site'">
+                            
+                        </template>
                     </a-form-item>
                 </a-col>
             </a-row>
@@ -69,8 +72,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import hook from './hook'
-
+import BagDownloadSite from './components/BagDownloadSite.vue'
 export default defineComponent({
+    components:{
+        BagDownloadSite
+    },
     setup() {
         const { formState, formItem, rules, baseResources, formRef,onUploadImg } = hook()
         return {
