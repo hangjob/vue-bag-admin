@@ -61,7 +61,7 @@
                             </a-select>
                         </template>
                         <template v-if="item.formData.element === 'bag-download-site'">
-                            
+                            <BagDownloadSite :formItem="item"/>
                         </template>
                     </a-form-item>
                 </a-col>

@@ -156,6 +156,8 @@ export default [
             md: 24,
             lg: 24,
             xl: 24,
+            labelCol: { span: 3, offset: 0 },
+            wrapperCol: { span: 19, offset: 0 },
         },
     },
     {
