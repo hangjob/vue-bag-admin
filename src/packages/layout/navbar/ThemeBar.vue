@@ -66,6 +66,7 @@ import { useStore } from 'vuex'
 import locaStore from '@/common/utils/persistence'
 import { useRouter } from 'vue-router'
 import { useFullscreen } from '@vueuse/core'
+import { resetStore } from '@/packages/store'
 
 export default defineComponent({
     components: {
@@ -122,7 +123,9 @@ export default defineComponent({
         const handleQuit = () => {
             apiLogout().then(() => {
                 locaStore.clearAll()
-                router.push('/login')
+                router.push('/login').then(()=>{
+                    window.location.reload()
+                })
             })
         }
 

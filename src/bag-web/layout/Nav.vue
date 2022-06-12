@@ -75,7 +75,7 @@ import {toTree} from '@/packages/utils/utils'
 import appStore from '@/bag-web/store/app'
 import logo from '@/common/assets/image/logo3.png'
 import userStore from "@/bag-web/store/user";
-import {useRouter} from "vue-router";
+import { useRoute, useRouter } from 'vue-router'
 
 const {configApp} = <any>inject('$configAppOptions')
 
@@ -94,6 +94,8 @@ const errorChange = () => {
     logoDom.value.src = logo
 }
 const router = useRouter()
+const route = useRoute();
+console.log(route.path)
 const handleLogout = () => {
     userLogout().then(() => {
         router.push(resetPath).then(() => {
@@ -166,9 +168,8 @@ const handleLogout = () => {
                         color: var(--bag-text-color-primary);
                         background-color: var(--bag-color-white);
                         border-radius: 3px;
-                        box-shadow: 0 3px 3px rgb(255, 255, 255, 0.9), 0 0 3px rgb(255, 255, 255, 0.9);
+                        box-shadow: 0 2px 2px rgb(255, 255, 255, 0.9), 0 0 2px rgb(255, 255, 255, 0.9);
                         background-clip: padding-box;
-
                         li {
                             display: block;
 

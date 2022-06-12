@@ -7,7 +7,6 @@ import ThemeBar from '@www/admin/components/ThemeBar.vue'
 import setupGlobComponents from '@www/admin/plugin/md-editor-v3'
 
 const file: Record<string, Component> = import.meta.globEager('/www/admin/views/**/*.vue')
-const app = createApp(App)
 
 const $options: $optionsType = {
     router: { file, paths, defaults: false },
@@ -22,4 +21,4 @@ const $options: $optionsType = {
     },
 }
 // setupSocket(app, { connection: 'ws://127.0.0.1:8001' })
-app.use(install, $options).use(setupGlobComponents).mount('#app')
+createApp(App).use(install, $options).use(setupGlobComponents).mount('#app')

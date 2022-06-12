@@ -23,6 +23,7 @@ const setPinia = (to: RouteLocationNormalized, from: RouteLocationNormalized, ne
     } catch (err) {
         next()
     }
+    next()
 }
 
 

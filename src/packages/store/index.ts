@@ -3,13 +3,17 @@ import { createStore } from 'vuex'
 import user from './user'
 import app from './app'
 import { setStore } from '@/packages/store/store'
+import { cloneDeep } from 'lodash'
 
-
-const store: any = createStore({
+const options = {
     modules: {
         user,
         app,
     },
+}
+
+const store: any = createStore({
+    ...cloneDeep(options),
 })
 
 /**
@@ -28,8 +32,14 @@ const setupStore = (app: App) => {
     app.use(store)
 }
 
+const resetStore = () => {
+    store.replaceState(createStore(options).state)
+}
+
 export {
     setupStore,
+    resetStore,
 }
+
 
 export default store

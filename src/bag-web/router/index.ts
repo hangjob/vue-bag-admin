@@ -28,7 +28,7 @@ const routes = [
                 component: () => import('@/bag-web/views/article/Index.vue'),
             },
             {
-                path: '/download', name: 'article', meta: {title: '下载中心'},
+                path: '/download', name: 'download', meta: {title: '下载中心'},
                 component: () => import('@/bag-web/views/download/Index.vue'),
             },
         ],

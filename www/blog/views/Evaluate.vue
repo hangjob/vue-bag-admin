@@ -28,7 +28,6 @@
 <script lang="ts" setup>
 import {webLeaveAll} from "@www/blog/service";
 import {ref} from "vue";
-import dayjs from "dayjs";
 const items = ref()
 webLeaveAll().then((res: any) => {
     items.value = res.data.data

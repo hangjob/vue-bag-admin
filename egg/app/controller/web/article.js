@@ -112,11 +112,11 @@ class WebArticleController extends baseController {
         const {ks, currentPage = 1, pageSize = 10} = ctx.request.body
         const where = {}
         if (ks) {
-            where.name = {[Op.like]: `%${ks}%`} // 模糊查詢 https://www.sequelize.com.cn/core-concepts/model-querying-basics
+            where.name = {[Op.like]: `%${ks}%`}
         }
         const result = await ctx.model.Web.Article.findAll({
             where: {...where},
-            limit: parseInt(pageSize),
+            limit: pageSize,
             offset: (currentPage - 1) * pageSize,
         })
         this.result({data: result})

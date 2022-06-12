@@ -15,7 +15,7 @@ const setAppRouterStore = (app: App) => {
         store.commit('app/updateMenuList', defaultMenu)
         store.commit('app/updateProjectMenu', defaultPrjMenu)
     }
-    store.commit('app/updateAppRouter', {defaults, file, paths, router})
+    store.commit('app/updateAppRouter', {defaults, file, paths, router}) // 把配置信息也在store放置一份
 }
 
 /**

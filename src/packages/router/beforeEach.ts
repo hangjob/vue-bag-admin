@@ -30,7 +30,7 @@ function findComponent(filePath: string, file?: Array<any>) {
  * @param paths
  */
 function pathsFileRouterStore(paths: Array<any>) {
-    const loopFile = function(paths: Array<any>) {
+    const loopFileAddRouter = function(paths: Array<any>) {
         for (let i = 0; i < paths.length; i++) {
             if (paths[i].iframePath) {
                 let component = findComponent('/iframe', store.state.app.appRouter.file) // iframe
@@ -45,11 +45,11 @@ function pathsFileRouterStore(paths: Array<any>) {
             }
             store.commit('app/addMenuList', paths[i])
             if (paths[i].children) {
-                loopFile(paths[i].children)
+                loopFileAddRouter(paths[i].children)
             }
         }
     }
-    loopFile(paths)
+    loopFileAddRouter(paths)
     router.addRoute({
         path: '/:catchAll(.*)*', // 不识别的path自动匹配404 这个一定要放在最后面加
         redirect: '/404',

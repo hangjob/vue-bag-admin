@@ -102,11 +102,11 @@ const rules = reactive<FormRules>({
         {type: 'email', message: '请输入正确的电邮地址', trigger: ['blur', 'change'],}
     ],
     url: [
-        {required: true, message: '填写地址', trigger: 'blur'},
+        {required: true, message: '填写网址地址', trigger: 'blur'},
         {type: 'url', message: '请输入正确的网址地址', trigger: ['blur', 'change'],}
     ],
     logo: [
-        {required: true, message: '填写地址', trigger: 'blur'},
+        {required: true, message: '填写图片地址', trigger: 'blur'},
         {type: 'url', message: '请输入正确的logo图片地址', trigger: ['blur', 'change'],}
     ]
 })
