@@ -1,10 +1,37 @@
-import { addUniqueId } from '@/packages/utils/lodash'
+import {addUniqueId} from '@/packages/utils/lodash'
 // 看我写的文档字段介绍
+
+const defaulSystemMenu = {
+    name: '系统管理',
+    router: '',
+    icon: 'SettingOutlined',
+    shows: 1,
+    children: [
+        {
+            name: '部门组织',
+            path: '/sys/branch',
+            icon: '',
+            shows: 1,
+            tabHidden: false,
+            tabFix: false,
+            keepAlive: true,
+        },
+        {
+            name: '角色管理',
+            path: '/sys/role',
+            icon: '',
+            shows: 1,
+            tabHidden: false,
+            tabFix: false,
+            keepAlive: true,
+        },
+    ],
+}
 
 /**
  * 默认菜单
  */
-const arr = [
+const arr: Array<any> = [
     {
         name: '首页',
         path: '/home',
@@ -15,50 +42,7 @@ const arr = [
         tabFix: true,
         keepAlive: false,
     },
-    {
-        name: '系统管理',
-        router: '',
-        icon: 'SettingOutlined',
-        shows: 1,
-        children: [
-            {
-                name: '用户管理',
-                path: '/sys/member',
-                icon: '',
-                shows: 1,
-                tabHidden: false,
-                tabFix: false,
-                keepAlive: true,
-            },
-            {
-                name: '部门组织',
-                path: '/sys/branch',
-                icon: '',
-                shows: 1,
-                tabHidden: false,
-                tabFix: false,
-                keepAlive: true,
-            },
-            {
-                name: '角色管理',
-                path: '/sys/role',
-                icon: '',
-                shows: 1,
-                tabHidden: false,
-                tabFix: false,
-                keepAlive: true,
-            },
-            {
-                name: '菜单列表',
-                path: '/sys/menu',
-                icon: '',
-                shows: 1,
-                tabHidden: false,
-                tabFix: false,
-                keepAlive: true,
-            },
-        ],
-    },
+    {...defaulSystemMenu},
     {
         name: '组件库',
         router: '',
@@ -298,6 +282,14 @@ const arr = [
         keepAlive: false,
     },
 ]
+arr[1].children.push({
+    name: '用户管理', path: '/sys/member', icon: '', shows: 1,
+    tabHidden: false, tabFix: false, keepAlive: true,
+})
+arr[1].children.push({
+    name: '菜单列表', path: '/sys/menu', icon: '', shows: 1,
+    tabHidden: false, tabFix: false, keepAlive: true,
+})
 const defaultMenu = addUniqueId(arr, '_local') // 增加个标识符
 
 /**
@@ -327,4 +319,5 @@ defaultPrjMenu = addUniqueId(defaultPrjMenu, '_local')
 export {
     defaultMenu,
     defaultPrjMenu,
+    defaulSystemMenu
 }
