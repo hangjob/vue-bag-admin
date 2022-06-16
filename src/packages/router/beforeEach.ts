@@ -1,9 +1,9 @@
-import { Component } from 'vue'
+import {Component} from 'vue'
 import store from '@/packages/store'
-import { apiAppRouter } from '@/packages/service/app'
+import {apiAppRouter} from '@/packages/service/app'
 import router from '@/packages/router'
 import defaultRouter from '@/packages/config/defaultRouter'
-import { apiUserUserinfo } from '@/packages/service/user'
+import {apiUserUserinfo} from '@/packages/service/user'
 
 let namespace = 'admin'
 
@@ -17,7 +17,7 @@ interface FileType {
 const localFile: Record<string, FileType> = import.meta.globEager('/src/packages/views/**/*.vue') // 框架 所有页面
 function findComponent(filePath: string) {
     if (filePath) {
-        const file: Array<any> = store.state.app.appRouter.file
+        const {file} = store.state.app.appRouter;
         const merges = Object.assign(localFile, file)
         const item = Object.keys(merges).find(item => item.indexOf(filePath) > -1)
         return item ? merges[item].default : false
@@ -32,18 +32,18 @@ function findComponent(filePath: string) {
  * @param paths
  */
 function pathsFileRouterStore(paths: Array<any>) {
-    const loopFileAddRouter = function(paths: Array<any>) {
+    const loopFileAddRouter = function (paths: Array<any>) {
         for (let i = 0; i < paths.length; i++) {
             const item = paths[i]
             if (item.iframePath) {
                 let component = findComponent('/iframe') // iframe
                 if (component) {
-                    router.addRoute(namespace, { path: '/iframe' + item.path, component })
+                    router.addRoute(namespace, {path: '/iframe' + item.path, component})
                 }
             } else {
                 let component = findComponent(item.filePath)
                 if (component) {
-                    router.addRoute(namespace, { path: item.path, component })
+                    router.addRoute(namespace, {path: item.path, component})
                 }
             }
             store.commit('app/addMenuList', item)
@@ -61,26 +61,27 @@ function pathsFileRouterStore(paths: Array<any>) {
 }
 
 const setAsyncRouterComponents = async () => {
-    const paths: Array<any> = []
     const userinfo = store.getters['user/userinfo']
-    console.log(userinfo)
-    if (store.state.app.appRouter.defaults) {
+    const {defaulSystemMenu, defaults, paths} = store.state.app.appRouter;
+    const menuPaths: Array<any> = []
+    if (defaults) {
         defaultRouter.forEach((item) => {
             router.addRoute(namespace, item)
         })
         try {
             const data: any = await apiAppRouter()
-            paths.push(...data)
+            menuPaths.push(...data)
         } catch (err) {
             console.log(err)
         }
     }
-    pathsFileRouterStore(paths.concat(store.state.app.appRouter.paths))
+    console.log(menuPaths.concat(defaulSystemMenu, paths))
+    pathsFileRouterStore(menuPaths.concat(defaulSystemMenu, paths))
 }
 
 
 const hasUserinfo = (to: any, from: any, next: any) => {
-    const { resetPath, whiteList } = store.state.app.httpNetwork
+    const {resetPath, whiteList} = store.state.app.httpNetwork
     const userinfo = store.getters['user/userinfo']
     if (Object.keys(userinfo).length) {
         next()
@@ -91,7 +92,7 @@ const hasUserinfo = (to: any, from: any, next: any) => {
             apiUserUserinfo().then(async (res: any) => {
                 store.commit('user/updateUserinfo', res)
                 await setAsyncRouterComponents()
-                next({ ...to, replace: true })
+                next({...to, replace: true})
             }).catch(() => {
                 next(resetPath)
             })

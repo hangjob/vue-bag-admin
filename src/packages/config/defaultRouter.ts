@@ -8,16 +8,8 @@ export default [
         component: () => import('@/packages/views/sys/menu/Index.vue'),
     },
     {
-        path: '/sys/branch', name: 'sys-branch', meta: { title: '部门组织' },
-        component: () => import('@/packages/views/sys/branch/Index.vue'),
-    },
-    {
         path: '/sys/member', name: 'sys-member', meta: { title: '用户管理' },
         component: () => import('@/packages/views/sys/member/Index.vue'),
-    },
-    {
-        path: '/sys/role', name: 'sys-role', meta: { title: '角色管理' },
-        component: () => import('@/packages/views/sys/role/Index.vue'),
     },
     {
         path: '/module/markdown', name: 'module-markdown', meta: { title: 'markdown编辑器' },

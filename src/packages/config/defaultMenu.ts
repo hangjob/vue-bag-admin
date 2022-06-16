@@ -6,26 +6,32 @@ const defaulSystemMenu = {
     router: '',
     icon: 'SettingOutlined',
     shows: 1,
-    children: [
-        {
-            name: '部门组织',
-            path: '/sys/branch',
-            icon: '',
-            shows: 1,
-            tabHidden: false,
-            tabFix: false,
-            keepAlive: true,
-        },
-        {
-            name: '角色管理',
-            path: '/sys/role',
-            icon: '',
-            shows: 1,
-            tabHidden: false,
-            tabFix: false,
-            keepAlive: true,
-        },
-    ],
+    id: '_local11',
+    children: addUniqueId(
+        [
+            {
+                name: '部门组织',
+                path: '/sys/branch',
+                icon: '',
+                shows: 1,
+                tabHidden: false,
+                tabFix: false,
+                keepAlive: true,
+                filePath: '/views/sys/branch/Index.vue'
+            },
+            {
+                name: '角色管理',
+                path: '/sys/role',
+                icon: '',
+                shows: 1,
+                tabHidden: false,
+                tabFix: false,
+                keepAlive: true,
+                filePath: '/views/sys/role/Index.vue'
+            },
+        ],
+        '_local'
+    )
 }
 
 /**
@@ -42,7 +48,20 @@ const arr: Array<any> = [
         tabFix: true,
         keepAlive: false,
     },
-    {...defaulSystemMenu},
+    {
+        ...defaulSystemMenu,
+        children: [
+            ...defaulSystemMenu.children,
+            {
+                name: '用户管理', path: '/sys/member', icon: '', shows: 1,
+                tabHidden: false, tabFix: false, keepAlive: true,
+            },
+            {
+                name: '菜单列表', path: '/sys/menu', icon: '', shows: 1,
+                tabHidden: false, tabFix: false, keepAlive: true,
+            }
+        ]
+    },
     {
         name: '组件库',
         router: '',
@@ -282,14 +301,7 @@ const arr: Array<any> = [
         keepAlive: false,
     },
 ]
-arr[1].children.push({
-    name: '用户管理', path: '/sys/member', icon: '', shows: 1,
-    tabHidden: false, tabFix: false, keepAlive: true,
-})
-arr[1].children.push({
-    name: '菜单列表', path: '/sys/menu', icon: '', shows: 1,
-    tabHidden: false, tabFix: false, keepAlive: true,
-})
+
 const defaultMenu = addUniqueId(arr, '_local') // 增加个标识符
 
 /**
