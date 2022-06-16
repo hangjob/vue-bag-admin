@@ -16,4 +16,4 @@ function loadStyle(href: string) {
 }
 
 
-export default loadStyle;
+export default loadStyle

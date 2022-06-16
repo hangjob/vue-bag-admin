@@ -19,4 +19,4 @@ function loadCssCode(code: any) {
 }
 
 
-export default loadCssCode;
+export default loadCssCode

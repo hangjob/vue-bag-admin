@@ -5,17 +5,19 @@ import router from '@/packages/router'
 import defaultRouter from '@/packages/config/defaultRouter'
 import { apiUserUserinfo } from '@/packages/service/user'
 
+let namespace = 'admin'
+
 interface FileType {
     [key: string]: Component
 }
-
 
 /**
  * 查找本地文件,获取组件
  */
 const localFile: Record<string, FileType> = import.meta.globEager('/src/packages/views/**/*.vue') // 框架 所有页面
-function findComponent(filePath: string, file?: Array<any>) {
+function findComponent(filePath: string) {
     if (filePath) {
+        const file: Array<any> = store.state.app.appRouter.file
         const merges = Object.assign(localFile, file)
         const item = Object.keys(merges).find(item => item.indexOf(filePath) > -1)
         return item ? merges[item].default : false
@@ -32,20 +34,22 @@ function findComponent(filePath: string, file?: Array<any>) {
 function pathsFileRouterStore(paths: Array<any>) {
     const loopFileAddRouter = function(paths: Array<any>) {
         for (let i = 0; i < paths.length; i++) {
-            if (paths[i].iframePath) {
-                let component = findComponent('/iframe', store.state.app.appRouter.file) // iframe
+            const item = paths[i]
+            if (item.iframePath) {
+                let component = findComponent('/iframe') // iframe
                 if (component) {
-                    router.addRoute('admin', { path: '/iframe' + paths[i].path, component })
+                    router.addRoute(namespace, { path: '/iframe' + item.path, component })
                 }
             } else {
-                let component = findComponent(paths[i].filePath, store.state.app.appRouter.file)
+                let component = findComponent(item.filePath)
                 if (component) {
-                    router.addRoute('admin', { path: paths[i].path, component })
+                    router.addRoute(namespace, { path: item.path, component })
                 }
             }
-            store.commit('app/addMenuList', paths[i])
-            if (paths[i].children) {
-                loopFileAddRouter(paths[i].children)
+            store.commit('app/addMenuList', item)
+            if (item.children) {
+                namespace = item.namespace ? item.namespace : namespace // 控制命名空间，做嵌套路由
+                loopFileAddRouter(item.children)
             }
         }
     }
@@ -62,7 +66,7 @@ const setAsyncRouterComponents = async () => {
     console.log(userinfo)
     if (store.state.app.appRouter.defaults) {
         defaultRouter.forEach((item) => {
-            router.addRoute('admin', item)
+            router.addRoute(namespace, item)
         })
         try {
             const data: any = await apiAppRouter()

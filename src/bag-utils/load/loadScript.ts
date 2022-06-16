@@ -22,4 +22,4 @@ const loadScript = (src: string) => {
 }
 
 
-export default loadScript;
+export default loadScript
