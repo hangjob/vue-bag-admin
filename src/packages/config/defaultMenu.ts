@@ -47,6 +47,7 @@ const arr: Array<any> = [
         iframe: '',
         tabFix: true,
         keepAlive: false,
+        filePath:'/views/home/Index.vue'
     },
     {
         ...defaulSystemMenu,
@@ -55,10 +56,12 @@ const arr: Array<any> = [
             {
                 name: '用户管理', path: '/sys/member', icon: '', shows: 1,
                 tabHidden: false, tabFix: false, keepAlive: true,
+                filePath: '/views/sys/member/Index.vue'
             },
             {
                 name: '菜单列表', path: '/sys/menu', icon: '', shows: 1,
                 tabHidden: false, tabFix: false, keepAlive: true,
+                filePath: '/views/sys/menu/Index.vue'
             }
         ]
     },
@@ -76,6 +79,7 @@ const arr: Array<any> = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: false,
+                filePath: '/views/module/markdown/Index.vue'
             },
             {
                 name: '富文本编辑器',
@@ -85,6 +89,7 @@ const arr: Array<any> = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: true,
+                filePath: '/views/module/rich/Index.vue'
             },
             {
                 name: '解析Exel',
@@ -94,6 +99,7 @@ const arr: Array<any> = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: false,
+                filePath: '/views/module/exel/Index.vue'
             },
             {
                 name: '上传',
@@ -109,6 +115,7 @@ const arr: Array<any> = [
                         tabHidden: false,
                         tabFix: false,
                         keepAlive: false,
+                        filePath: '/views/module/fileUpload/FileUploadImg.vue'
                     },
                     {
                         name: '文件上传',
@@ -118,6 +125,7 @@ const arr: Array<any> = [
                         tabHidden: false,
                         tabFix: false,
                         keepAlive: false,
+                        filePath: '/views/module/fileUpload/FileUpload.vue'
                     },
                 ],
             },
@@ -129,6 +137,7 @@ const arr: Array<any> = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: false,
+                filePath: '/views/module/print/Index.vue'
             },
             {
                 name: '简洁图标',
@@ -138,6 +147,7 @@ const arr: Array<any> = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: false,
+                filePath: '/views/module/icon/iconfont/Index.vue'
             },
             {
                 name: '描述列表',
@@ -147,6 +157,7 @@ const arr: Array<any> = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: false,
+                filePath: '/views/module/descriptions/Index.vue'
             },
             {
                 name: '课程表',
@@ -156,6 +167,7 @@ const arr: Array<any> = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: true,
+                filePath: '/views/module/course/Index.vue'
             },
             {
                 name: '视频播放',
@@ -165,6 +177,7 @@ const arr: Array<any> = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: true,
+                filePath: '/views/module/media/Index.vue'
             },
             {
                 name: '内容搜索',
@@ -174,6 +187,7 @@ const arr: Array<any> = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: true,
+                filePath: '/views/module/fuse/Index.vue'
             },
             {
                 name: '导出文件',
@@ -183,6 +197,7 @@ const arr: Array<any> = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: true,
+                filePath: '/views/module/fileSaver/Index.vue'
             },
             {
                 name: '表单生成器',
@@ -213,6 +228,7 @@ const arr: Array<any> = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: false,
+                filePath:'/views/chart/g2/Index.vue'
             },
             {
                 name: 'G2plot',
@@ -223,6 +239,7 @@ const arr: Array<any> = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: false,
+                filePath: '/views/chart/g2plot/Index.vue'
             },
         ],
     },
@@ -254,6 +271,7 @@ const arr: Array<any> = [
         tabHidden: false,
         tabFix: false,
         keepAlive: false,
+        filePath: '/views/error/Index.vue'
     },
     {
         name: '打点吧',
@@ -263,6 +281,7 @@ const arr: Array<any> = [
         tabHidden: false,
         tabFix: false,
         keepAlive: false,
+        filePath: '/views/admire/Index.vue'
     },
     {
         name: '权限控制',
@@ -272,6 +291,7 @@ const arr: Array<any> = [
         tabHidden: false,
         tabFix: false,
         keepAlive: false,
+        filePath: '/views/permit/Index.vue'
     },
     {
         name: '异步组件',
@@ -281,6 +301,7 @@ const arr: Array<any> = [
         tabHidden: false,
         tabFix: false,
         keepAlive: false,
+        filePath: '/views/async/Index.vue'
     },
     {
         name: '关于',
@@ -290,6 +311,7 @@ const arr: Array<any> = [
         tabHidden: false,
         tabFix: true,
         keepAlive: false,
+        filePath: '/views/about/Index.vue'
     },
     {
         name: '错误捕获',
@@ -299,11 +321,11 @@ const arr: Array<any> = [
         tabHidden: false,
         tabFix: false,
         keepAlive: false,
+        filePath: '/views/module/debug/Index.vue'
     },
 ]
 
 const defaultMenu = addUniqueId(arr, '_local') // 增加个标识符
-
 /**
  * 默认项目菜单
  */

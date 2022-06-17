@@ -12,7 +12,6 @@ import { getAllParentArr } from '@/packages/utils/utils'
 const setAppRouterStore = (app: App) => {
     const { defaults = true, file = [], paths = [] } = app.config.globalProperties?.configAppRouter || {}
     if (defaults) {
-        store.commit('app/updateMenuList', defaultMenu)
         store.commit('app/updateProjectMenu', defaultPrjMenu)
     }
     store.commit('app/updateAppRouter', { defaults, file, paths, router, defaulSystemMenu }) // 把配置信息也在store放置一份

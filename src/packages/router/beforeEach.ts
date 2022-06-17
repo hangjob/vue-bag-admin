@@ -4,6 +4,7 @@ import {apiAppRouter} from '@/packages/service/app'
 import router from '@/packages/router'
 import defaultRouter from '@/packages/config/defaultRouter'
 import {apiUserUserinfo} from '@/packages/service/user'
+import { defaultMenu,defaulSystemMenu } from '@/packages/config/defaultMenu'
 
 let namespace = 'admin'
 
@@ -46,13 +47,15 @@ function pathsFileRouterStore(paths: Array<any>) {
                     router.addRoute(namespace, {path: item.path, component})
                 }
             }
-            store.commit('app/addMenuList', item)
+            // store.commit('app/addMenuList', item)
             if (item.children) {
                 namespace = item.namespace ? item.namespace : namespace // 控制命名空间，做嵌套路由
                 loopFileAddRouter(item.children)
             }
         }
     }
+    store.commit('app/updateMenuList',paths)
+    console.log(paths)
     loopFileAddRouter(paths)
     router.addRoute({
         path: '/:catchAll(.*)*', // 不识别的path自动匹配404 这个一定要放在最后面加
@@ -62,21 +65,24 @@ function pathsFileRouterStore(paths: Array<any>) {
 
 const setAsyncRouterComponents = async () => {
     const userinfo = store.getters['user/userinfo']
-    const {defaulSystemMenu, defaults, paths} = store.state.app.appRouter;
+    const {defaults, paths} = store.state.app.appRouter;
     const menuPaths: Array<any> = []
+    console.log(paths)
     if (defaults) {
-        defaultRouter.forEach((item) => {
-            router.addRoute(namespace, item)
-        })
+        // defaultRouter.forEach((item) => {
+        //     router.addRoute(namespace, item)
+        // })
+        menuPaths.push(...defaultMenu)
         try {
             const data: any = await apiAppRouter()
             menuPaths.push(...data)
         } catch (err) {
             console.log(err)
         }
+    }else{
+        menuPaths.push(defaulSystemMenu)
     }
-    console.log(menuPaths.concat(defaulSystemMenu, paths))
-    pathsFileRouterStore(menuPaths.concat(defaulSystemMenu, paths))
+    pathsFileRouterStore(menuPaths.concat(paths))
 }
 
 

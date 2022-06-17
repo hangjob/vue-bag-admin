@@ -92,6 +92,7 @@ const app = {
         },
         // 添加菜单
         addMenuList(state: any, item: any) {
+            console.log(state.menuList)
             if (!findUnsetDepth({ path: item.path }, state.menuList)) {
                 state.menuList.push(item)
             }
