@@ -4,7 +4,8 @@ const columns = [
         dataIndex: 'name',
         key: 'name',
         align: 'center',
-        ellipsis: true
+        ellipsis: true,
+        width: 150,
     },
     {
         title: '标识符',
@@ -12,6 +13,7 @@ const columns = [
         key: 'tag',
         ellipsis: true,
         align: 'center',
+        width: 150,
         slots: {customRender: 'tag'}
     },
     {
@@ -28,7 +30,7 @@ const columns = [
         key: 'order',
         ellipsis: true,
         align: 'center',
-        width: 80,
+        width: 120,
         slots: {customRender: 'order'}
     },
     {

@@ -2,10 +2,9 @@ import {Component} from 'vue'
 import store from '@/packages/store'
 import {apiAppRouter} from '@/packages/service/app'
 import router from '@/packages/router'
-import defaultRouter from '@/packages/config/defaultRouter'
 import {apiUserUserinfo} from '@/packages/service/user'
-import { defaultMenu,defaulSystemMenu } from '@/packages/config/defaultMenu'
-
+import {defaultMenu} from '@/packages/config/defaultMenu'
+import {toTree} from "@/packages/utils/utils";
 let namespace = 'admin'
 
 interface FileType {
@@ -36,26 +35,18 @@ function pathsFileRouterStore(paths: Array<any>) {
     const loopFileAddRouter = function (paths: Array<any>) {
         for (let i = 0; i < paths.length; i++) {
             const item = paths[i]
-            if (item.iframePath) {
-                let component = findComponent('/iframe') // iframe
-                if (component) {
-                    router.addRoute(namespace, {path: '/iframe' + item.path, component})
-                }
-            } else {
-                let component = findComponent(item.filePath)
-                if (component) {
-                    router.addRoute(namespace, {path: item.path, component})
-                }
+            let component = findComponent(item.filePath)
+            if (component) {
+                router.addRoute(namespace, {path: item.path, component})
             }
-            // store.commit('app/addMenuList', item)
             if (item.children) {
                 namespace = item.namespace ? item.namespace : namespace // 控制命名空间，做嵌套路由
                 loopFileAddRouter(item.children)
             }
         }
     }
-    store.commit('app/updateMenuList',paths)
     console.log(paths)
+    store.commit('app/updateMenuList', toTree(paths)) // 设置菜单
     loopFileAddRouter(paths)
     router.addRoute({
         path: '/:catchAll(.*)*', // 不识别的path自动匹配404 这个一定要放在最后面加
@@ -67,20 +58,11 @@ const setAsyncRouterComponents = async () => {
     const userinfo = store.getters['user/userinfo']
     const {defaults, paths} = store.state.app.appRouter;
     const menuPaths: Array<any> = []
-    console.log(paths)
-    if (defaults) {
-        // defaultRouter.forEach((item) => {
-        //     router.addRoute(namespace, item)
-        // })
-        menuPaths.push(...defaultMenu)
-        try {
-            const data: any = await apiAppRouter()
-            menuPaths.push(...data)
-        } catch (err) {
-            console.log(err)
-        }
-    }else{
-        menuPaths.push(defaulSystemMenu)
+    try {
+        const data: any = await apiAppRouter()
+        menuPaths.push(...data)
+    } catch (err) {
+        console.log(err)
     }
     pathsFileRouterStore(menuPaths.concat(paths))
 }

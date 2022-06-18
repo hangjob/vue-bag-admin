@@ -90,13 +90,6 @@ const app = {
                 state.collapsed = true
             }
         },
-        // 添加菜单
-        addMenuList(state: any, item: any) {
-            console.log(state.menuList)
-            if (!findUnsetDepth({ path: item.path }, state.menuList)) {
-                state.menuList.push(item)
-            }
-        },
         // 更新菜单
         updateMenuList(state: any, arr: Array<any>) {
             state.menuList = arr

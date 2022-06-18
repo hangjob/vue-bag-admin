@@ -1,11 +1,11 @@
 //useCounter.js
-import { ref, reactive } from 'vue'
-import { post } from '@/packages/http/request'
-import { toRaw } from 'vue'
-import { message } from 'ant-design-vue'
+import {ref, reactive} from 'vue'
+import {post} from '@/packages/http/request'
+import {toRaw} from 'vue'
+import {message} from 'ant-design-vue'
 import isFunction from '@/bag-utils/regular/isFunction'
 
-export default function() {
+export default function () {
     const tableCurd = reactive({
         tableData: [], // 表格数据
         loading: false, // loading
@@ -26,7 +26,7 @@ export default function() {
                     tableCurd.create._formState = tableCurd.create.beforeSubmit(tableCurd.create._formState)
                 }
                 tableCurd.create.refForm.formRef.validate().then(() => {
-                    post(tableCurd.create.api, tableCurd.create._formState, { notifyError: true }).then(() => {
+                    post(tableCurd.create.api, tableCurd.create._formState, {notifyError: true}).then(() => {
                         tableCurd.create.visible = false
                         tableCurd.all.handle()
                     })
@@ -41,11 +41,12 @@ export default function() {
         all: {
             ks: '',
             api: '',
+            beforeSuccess: <any>'',
             handle(callback?: Function) {
                 tableCurd.all.api = tableCurd.all.api ? tableCurd.all.api : tableCurd.apiPrefix + '/all'
-                post(tableCurd.all.api, { ks: tableCurd.all.ks }).then((res: any) => {
-                    if (callback) {
-                        callback(res)
+                post(tableCurd.all.api, {ks: tableCurd.all.ks}).then((res: any) => {
+                    if (isFunction(tableCurd.all.beforeSuccess)) {
+                        tableCurd.all.beforeSuccess(res)
                     } else {
                         tableCurd.tableData = res
                     }
@@ -65,7 +66,7 @@ export default function() {
                     post(tableCurd.edit.api, {
                         id: tableCurd.edit.id,
                         ...toRaw(tableCurd.edit.refForm.formState),
-                    }, { notify: true }).then(() => {
+                    }, {notify: true}).then(() => {
                         tableCurd.edit.visible = false
                         tableCurd.all.handle()
                     })
@@ -82,7 +83,7 @@ export default function() {
             id: '',
             submit(record: any) {
                 tableCurd.delete.api = tableCurd.delete.api ? tableCurd.delete.api : tableCurd.apiPrefix + '/delete'
-                post(tableCurd.delete.api, { id: record.id }, { notify: true }).then(() => {
+                post(tableCurd.delete.api, {id: record.id}, {notify: true}).then(() => {
                     tableCurd.all.handle()
                 })
             },
@@ -95,7 +96,7 @@ export default function() {
                 if (!ids.length) {
                     return message.warning('请至少选择一个')
                 }
-                post(tableCurd.deletes.api, { ids }, { notify: true }).then(() => {
+                post(tableCurd.deletes.api, {ids}, {notify: true}).then(() => {
                     tableCurd.all.handle()
                 })
             },
@@ -104,8 +105,8 @@ export default function() {
             api: '',
             find(record: any) {
                 tableCurd.detail.api = tableCurd.detail.api ? tableCurd.detail.api : tableCurd.apiPrefix + '/find'
-                post(tableCurd.detail.api, { id: record.id }).then((res: any) => {
-                    let { updateTime, ...profileData } = res
+                post(tableCurd.detail.api, {id: record.id}).then((res: any) => {
+                    let {updateTime, ...profileData} = res
                     Object.keys(tableCurd.edit.refForm.formState).forEach((key: string) => {
                         tableCurd.edit.refForm.formState[key] = profileData[key]
                     })

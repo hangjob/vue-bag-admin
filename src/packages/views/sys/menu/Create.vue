@@ -140,13 +140,13 @@ export default defineComponent({
         const rules = {
             name: [
                 {required: true, message: '名称为必填项', trigger: 'blur'},
-                {min: 2, max: 6, message: '长度最小2，最大6', trigger: 'blur'},
+                {min: 2, max: 20, message: '长度最小2，最大20', trigger: 'blur'},
             ],
             icon: [
                 {required: false, message: 'icon为必填项', trigger: 'blur'},
             ],
             filePath: [
-                {validator: filePathRouter, trigger: 'blur'},
+                {required: false, message: '填写组件路经', trigger: 'blur'},
             ],
             httpFilePath: [
                 {validator: validatHttpFilePath, trigger: 'blur'},

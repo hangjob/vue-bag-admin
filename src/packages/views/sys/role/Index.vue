@@ -25,6 +25,7 @@
         >
             <template #action="{ record }">
                 <a-space>
+                    <a-button size="small" @click="formAuth.showDrawer()">设置权限</a-button>
                     <a-button type="primary" size="small" @click="tableCurd.edit.change(record)">编辑</a-button>
                     <a-popconfirm
                         :title="`你确定删除 ${record.name} 嘛？`"
@@ -44,22 +45,26 @@
     <bag-modal v-model:visible="tableCurd.edit.visible" title="编辑" width="85%" @ok="tableCurd.edit.submit">
         <Edit ref="formEdit" :treeData="tableCurd.tableData" :id="tableCurd.edit.id"/>
     </bag-modal>
+    <Auth ref="formAuth"/>
 </template>
 <script lang="ts">
 import {defineComponent, ref} from 'vue';
 import Create from './Create.vue'
 import Edit from './Edit.vue'
+import Auth from './Auth.vue'
 import tableHock from '@/packages/hook/table'
 import columns from './columns'
+
 export default defineComponent({
     name: 'sys-role',
     components: {
-        Create, Edit
+        Create, Edit, Auth
     },
     setup() {
         const {tableCurd} = tableHock()
         const formCreate = ref();
         const formEdit = ref();
+        const formAuth = ref();
         tableCurd.apiPrefix = '/role'
         tableCurd.create.refForm = formCreate;
         tableCurd.edit.refForm = formEdit;
@@ -68,6 +73,7 @@ export default defineComponent({
             tableCurd,
             formCreate,
             formEdit,
+            formAuth,
             columns
         };
     },

@@ -16,7 +16,7 @@ export default defineComponent({
 
         const selectedKeys = ref<string[]>([])
         const openKeys = ref<string[]>([])
-        const menuList = computed(() => toTree(store.getters['app/menuList']))
+        const menuList = computed(() => store.getters['app/menuList'])
         // 是否可见
         const visible = ref<boolean>(true)
         const goView = (item: any) => {
@@ -60,6 +60,7 @@ export default defineComponent({
         }
     },
     render(ctx: any) {
+        console.log(ctx.menuList)
         const children = deepMenu(ctx.menuList)
         return (
             ctx.visible && (

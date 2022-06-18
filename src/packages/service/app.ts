@@ -6,7 +6,7 @@ import { post } from '@/packages/http/request'
  * @param params
  */
 const apiAppRouter = (params?: object) => {
-    return post('/app/router', params, { relink: true })
+    return post('/menu/all', params, { relink: true })
 }
 
 /**

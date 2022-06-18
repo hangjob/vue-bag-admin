@@ -1,6 +1,6 @@
 import { App } from 'vue'
 import store from '@/packages/store'
-import { defaultMenu, defaultPrjMenu, defaulSystemMenu } from '@/packages/config/defaultMenu'
+import { defaultMenu, defaultPrjMenu } from '@/packages/config/defaultMenu'
 import router from '@/packages/router/index'
 import { findChildrenDepth, findContainingObject } from '@/packages/utils/lodash'
 import { getAllParentArr } from '@/packages/utils/utils'
@@ -14,7 +14,7 @@ const setAppRouterStore = (app: App) => {
     if (defaults) {
         store.commit('app/updateProjectMenu', defaultPrjMenu)
     }
-    store.commit('app/updateAppRouter', { defaults, file, paths, router, defaulSystemMenu }) // 把配置信息也在store放置一份
+    store.commit('app/updateAppRouter', { defaults, file, paths, router }) // 把配置信息也在store放置一份
 }
 
 /**

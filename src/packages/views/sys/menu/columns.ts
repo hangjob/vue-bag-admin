@@ -5,6 +5,7 @@ const columns = [
         key: 'name',
         align: 'center',
         ellipsis: true,
+        width: 150,
     },
     {
         title: '图标',

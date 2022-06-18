@@ -73,9 +73,10 @@ export default defineComponent({
         tableCurd.apiPrefix = '/menu'
         tableCurd.create.refForm = formCreate;
         tableCurd.edit.refForm = formEdit;
-        tableCurd.all.handle((res: any) => {
+        tableCurd.all.beforeSuccess = (res:any)=>{
             tableCurd.tableData = toTree(res)
-        })
+        }
+        tableCurd.all.handle()
         return {
             tableCurd,
             formCreate,

@@ -1,14 +1,36 @@
 import {addUniqueId} from '@/packages/utils/lodash'
-// 看我写的文档字段介绍
 
-const defaulSystemMenu = {
-    name: '系统管理',
-    router: '',
-    icon: 'SettingOutlined',
-    shows: 1,
-    id: '_local11',
-    children: addUniqueId(
-        [
+/**
+ * 默认菜单
+ */
+const arr: Array<any> = [
+    {
+        name: '首页',
+        path: '/home',
+        icon: 'HomeFilled',
+        shows: 1,
+        tabHidden: false,
+        iframe: '',
+        tabFix: true,
+        keepAlive: false,
+        filePath:'/views/home/Index.vue'
+    },
+    {
+        name: '系统管理',
+        router: '',
+        icon: 'SettingOutlined',
+        shows: 1,
+        children: [
+            {
+                name: '用户管理', path: '/sys/member', icon: '', shows: 1,
+                tabHidden: false, tabFix: false, keepAlive: true,
+                filePath: '/views/sys/member/Index.vue'
+            },
+            {
+                name: '菜单列表', path: '/sys/menu', icon: '', shows: 1,
+                tabHidden: false, tabFix: false, keepAlive: true,
+                filePath: '/views/sys/menu/Index.vue'
+            },
             {
                 name: '部门组织',
                 path: '/sys/branch',
@@ -29,40 +51,6 @@ const defaulSystemMenu = {
                 keepAlive: true,
                 filePath: '/views/sys/role/Index.vue'
             },
-        ],
-        '_local'
-    )
-}
-
-/**
- * 默认菜单
- */
-const arr: Array<any> = [
-    {
-        name: '首页',
-        path: '/home',
-        icon: 'HomeFilled',
-        shows: 1,
-        tabHidden: false,
-        iframe: '',
-        tabFix: true,
-        keepAlive: false,
-        filePath:'/views/home/Index.vue'
-    },
-    {
-        ...defaulSystemMenu,
-        children: [
-            ...defaulSystemMenu.children,
-            {
-                name: '用户管理', path: '/sys/member', icon: '', shows: 1,
-                tabHidden: false, tabFix: false, keepAlive: true,
-                filePath: '/views/sys/member/Index.vue'
-            },
-            {
-                name: '菜单列表', path: '/sys/menu', icon: '', shows: 1,
-                tabHidden: false, tabFix: false, keepAlive: true,
-                filePath: '/views/sys/menu/Index.vue'
-            }
         ]
     },
     {
@@ -202,6 +190,7 @@ const arr: Array<any> = [
             {
                 name: '表单生成器',
                 path: '/iframe/form-generator',
+                filePath: '/views/module/iframe/Index.vue',
                 icon: '',
                 shows: 1,
                 iframePath: 'https://demo.gin-vue-admin.com/form-generator',
@@ -260,6 +249,7 @@ const arr: Array<any> = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: false,
+                filePath: '/views/module/iframe/Index.vue',
             },
         ],
     },
@@ -323,6 +313,26 @@ const arr: Array<any> = [
         keepAlive: false,
         filePath: '/views/module/debug/Index.vue'
     },
+    {
+        name: '403',
+        path: '/403',
+        icon: 'UserOutlined',
+        shows: 0,
+        tabHidden: false,
+        tabFix: false,
+        keepAlive: false,
+        filePath: '/views/error/403.vue'
+    },
+    {
+        name: '500',
+        path: '/500',
+        icon: 'UserOutlined',
+        shows: 0,
+        tabHidden: false,
+        tabFix: false,
+        keepAlive: false,
+        filePath: '/views/error/500.vue'
+    },
 ]
 
 const defaultMenu = addUniqueId(arr, '_local') // 增加个标识符
@@ -353,5 +363,4 @@ defaultPrjMenu = addUniqueId(defaultPrjMenu, '_local')
 export {
     defaultMenu,
     defaultPrjMenu,
-    defaulSystemMenu
 }
