@@ -29,7 +29,8 @@ export default defineComponent({
     components: {RoleMenu},
     setup() {
         const visible = ref<boolean>(false);
-        const showDrawer = () => {
+        const showDrawer = (record) => {
+            console.log(record)
             visible.value = true;
         };
         return {
