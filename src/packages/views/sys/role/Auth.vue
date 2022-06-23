@@ -9,7 +9,7 @@
         <a-tabs v-model:activeKey="activeKey">
             <a-tab-pane key="1" tab="角色菜单">
                 <div class="auth-body">
-                    <RoleMenu/>
+                    <RoleMenu ref="roleMenu"/>
                 </div>
             </a-tab-pane>
             <a-tab-pane key="2" tab="数据权限">Content of Tab Pane 2</a-tab-pane>
@@ -17,7 +17,7 @@
             <a-tab-pane key="4" tab="资源权限">Content of Tab Pane 3</a-tab-pane>
         </a-tabs>
         <div class="auth-action">
-            <a-button type="primary">提交</a-button>
+            <a-button type="primary" @click="handleSubmit">提交</a-button>
         </div>
     </a-drawer>
 </template>
@@ -27,17 +27,22 @@ import RoleMenu from './RoleMenu.vue'
 
 export default defineComponent({
     components: {RoleMenu},
-    setup() {
+    setup(props, context) {
         const visible = ref<boolean>(false);
+        const roleMenu = ref();
         const showDrawer = (record) => {
             console.log(record)
             visible.value = true;
         };
+        const handleSubmit = () => {
+            context.emit('edit', roleMenu.value.allCheckedKeys);
+        }
         return {
             visible,
             showDrawer,
             activeKey: ref('1'),
-
+            roleMenu,
+            handleSubmit
         };
     },
 });

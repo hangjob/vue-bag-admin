@@ -13,11 +13,13 @@
 <script lang="ts">
 import {computed, defineComponent, ref, watch} from 'vue'
 import {useStore} from "vuex";
+
 export default defineComponent({
-    setup(){
+    setup() {
         const expandedKeys = ref<string[]>([]);
         const selectedKeys = ref<string[]>([]);
         const checkedKeys = ref<string[]>([]);
+        const allCheckedKeys = ref<string[]>([]);
         watch(expandedKeys, () => {
             console.log('expandedKeys', expandedKeys);
         });
@@ -29,16 +31,15 @@ export default defineComponent({
         });
 
         const store = useStore()
-        const treeData = computed(()=>store.state.app.menuList);
+        const treeData = computed(() => store.state.app.menuList);
         const replaceFields = {
             children: 'children',
             title: 'name',
-            key:'id'
+            key: 'id'
         };
 
-        function onCheck(checkedKeys,info) {
-            let allCheckedKeys = checkedKeys.concat(info.halfCheckedKeys);//将父节点拼接到子节点
-            console.log(allCheckedKeys)
+        function onCheck(checkedKeys, info) {
+            allCheckedKeys.value = checkedKeys.concat(info.halfCheckedKeys);//将父节点拼接到子节点
         }
 
         return {
@@ -47,7 +48,8 @@ export default defineComponent({
             checkedKeys,
             replaceFields,
             treeData,
-            onCheck
+            onCheck,
+            allCheckedKeys
         }
     }
 })
