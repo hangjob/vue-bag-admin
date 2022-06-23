@@ -37,7 +37,8 @@ import {useStore} from "vuex";
 export default defineComponent({
     setup() {
         const visible = ref<boolean>(false);
-        const showDrawer = () => {
+        const showDrawer = (record) => {
+            console.log(record)
             visible.value = true;
         };
         const store = useStore()

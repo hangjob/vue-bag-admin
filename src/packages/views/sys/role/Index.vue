@@ -25,7 +25,7 @@
         >
             <template #action="{ record }">
                 <a-space>
-                    <a-button size="small" @click="formAuth.showDrawer()">设置权限</a-button>
+                    <a-button size="small" @click="formAuth.showDrawer(record)">设置权限</a-button>
                     <a-button type="primary" size="small" @click="tableCurd.edit.change(record)">编辑</a-button>
                     <a-popconfirm
                         :title="`你确定删除 ${record.name} 嘛？`"
