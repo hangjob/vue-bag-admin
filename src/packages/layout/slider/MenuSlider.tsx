@@ -60,7 +60,6 @@ export default defineComponent({
         }
     },
     render(ctx: any) {
-        console.log(ctx.menuList)
         const children = deepMenu(ctx.menuList)
         return (
             ctx.visible && (

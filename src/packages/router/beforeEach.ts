@@ -45,7 +45,6 @@ function pathsFileRouterStore(paths: Array<any>) {
             }
         }
     }
-    console.log(paths)
     store.commit('app/updateMenuList', toTree(paths)) // 设置菜单
     loopFileAddRouter(paths)
     router.addRoute({
@@ -64,6 +63,7 @@ const setAsyncRouterComponents = async () => {
     } catch (err) {
         console.log(err)
     }
+    console.log(paths)
     pathsFileRouterStore(menuPaths.concat(paths))
 }
 
