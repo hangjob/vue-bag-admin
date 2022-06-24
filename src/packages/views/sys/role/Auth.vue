@@ -7,9 +7,9 @@
         wrapClassName="auth"
     >
         <a-tabs v-model:activeKey="activeKey">
-            <a-tab-pane key="1" tab="角色菜单">
+            <a-tab-pane key="1" tab="菜单权限">
                 <div class="auth-body">
-                    <RoleMenu ref="roleMenu"/>
+                    <RoleMenu ref="roleMenu" />
                 </div>
             </a-tab-pane>
             <a-tab-pane key="2" tab="数据权限">Content of Tab Pane 2</a-tab-pane>
@@ -22,30 +22,29 @@
     </a-drawer>
 </template>
 <script lang="ts">
-import {computed, defineComponent, ref, watch} from 'vue';
+import { computed, defineComponent, ref, watch } from 'vue'
 import RoleMenu from './RoleMenu.vue'
 
 export default defineComponent({
-    components: {RoleMenu},
+    components: { RoleMenu },
+    props: {
+        visible: {
+            type: Boolean,
+            default: false,
+        },
+    },
     setup(props, context) {
-        const visible = ref<boolean>(false);
-        const roleMenu = ref();
-        const showDrawer = (record) => {
-            console.log(record)
-            visible.value = true;
-        };
+        const roleMenu = ref()
         const handleSubmit = () => {
-            context.emit('edit', roleMenu.value.allCheckedKeys);
+            context.emit('submit', roleMenu.value.allCheckedKeys)
         }
         return {
-            visible,
-            showDrawer,
             activeKey: ref('1'),
             roleMenu,
-            handleSubmit
-        };
+            handleSubmit,
+        }
     },
-});
+})
 </script>
 <style lang="less">
 .auth {

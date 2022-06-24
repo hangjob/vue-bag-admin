@@ -25,7 +25,7 @@
         >
             <template #action="{ record }">
                 <a-space>
-                    <a-button size="small" @click="formAuth.showDrawer(record)">设置权限</a-button>
+                    <a-button size="small" @click="handleOpenAuth(record)">设置权限</a-button>
                     <a-button type="primary" size="small" @click="tableCurd.edit.change(record)">编辑</a-button>
                     <a-popconfirm
                         :title="`你确定删除 ${record.name} 嘛？`"
@@ -40,15 +40,15 @@
         </a-table>
     </bag-form-table>
     <bag-modal v-model:visible="tableCurd.create.visible" title="新增" width="85%" @ok="tableCurd.create.submit">
-        <Create ref="formCreate" :treeData="tableCurd.tableData"/>
+        <Create ref="formCreate" :treeData="tableCurd.tableData" />
     </bag-modal>
     <bag-modal v-model:visible="tableCurd.edit.visible" title="编辑" width="85%" @ok="tableCurd.edit.submit">
-        <Edit ref="formEdit" :treeData="tableCurd.tableData" :id="tableCurd.edit.id"/>
+        <Edit ref="formEdit" :treeData="tableCurd.tableData" :id="tableCurd.edit.id" />
     </bag-modal>
-    <Auth ref="formAuth"/>
+    <Auth ref="formAuth" :visible="visible" @submit="authSubmit" />
 </template>
 <script lang="ts">
-import {defineComponent, ref} from 'vue';
+import { defineComponent, ref } from 'vue'
 import Create from './Create.vue'
 import Edit from './Edit.vue'
 import Auth from './Auth.vue'
@@ -58,26 +58,42 @@ import columns from './columns'
 export default defineComponent({
     name: 'sys-role',
     components: {
-        Create, Edit, Auth
+        Create, Edit, Auth,
     },
     setup() {
-        const {tableCurd} = tableHock()
-        const formCreate = ref();
-        const formEdit = ref();
-        const formAuth = ref();
+        const { tableCurd } = tableHock()
+        const formCreate = ref()
+        const formEdit = ref()
+        const formAuth = ref()
         tableCurd.apiPrefix = '/role'
-        tableCurd.create.refForm = formCreate;
-        tableCurd.edit.refForm = formEdit;
+        tableCurd.create.refForm = formCreate
+        tableCurd.edit.refForm = formEdit
         tableCurd.all.handle()
+
+        const visible = ref(false)
+        // 权限提交
+        const authSubmit = (menus) => {
+            tableCurd.edit.directSubmit({ data: { menus } }).then(() => {
+                visible.value = false
+            })
+        }
+        // 打开权限
+        const handleOpenAuth = (record) => {
+            tableCurd.edit.id = record.id
+            visible.value = true
+        }
         return {
             tableCurd,
             formCreate,
             formEdit,
             formAuth,
-            columns
-        };
+            columns,
+            authSubmit,
+            handleOpenAuth,
+            visible
+        }
     },
-});
+})
 </script>
 <style lang="less" scoped>
 .table-action {
