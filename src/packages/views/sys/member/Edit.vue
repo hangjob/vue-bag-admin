@@ -24,12 +24,10 @@
                     <a-form-item label="角色" name="roles">
                         <a-select
                             v-model:value="formState.roles"
-                            mode="tags"
-                            :maxTagCount="3"
                             style="width: 100%"
                             placeholder="选择用户角色"
-                            :options="rolesOptions"
                         >
+                            <a-select-option v-for="item in rolesOptions" :key="item.id" :value="item.id">{{item.tag}}</a-select-option>
                         </a-select>
                     </a-form-item>
                 </a-col>
@@ -127,16 +125,11 @@ export default defineComponent({
                 {trigger: 'blur', max: 200, message: '最大长度为200'}
             ]
         };
-        apiBranchAll().then((res: Array<any>) => {
+        apiBranchAll().then((res: any) => {
             treeData.value = toTree(res);
         })
-        apiRoleAll().then((res: Array<any>) => {
-            rolesOptions.value = res.map((item) => {
-                return {
-                    ...item,
-                    value: item.tag
-                }
-            })
+        apiRoleAll().then((res: any) => {
+            rolesOptions.value = res;
         })
 
         return {

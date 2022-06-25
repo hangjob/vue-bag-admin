@@ -15,16 +15,8 @@ const user = {
         },
     },
     mutations: {
-        updateRoles(state: any, arr: Array<any>) {
-            state.roles = arr
-        },
         updateUserinfo(state: any, data: any) {
             state.userinfo = data
-            if (isArray(data.roles)) {
-                state.roles = data.roles
-            } else {
-                state.roles = data.roles.split(',')
-            }
         },
     },
     actions: {},

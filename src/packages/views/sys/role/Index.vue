@@ -40,15 +40,15 @@
         </a-table>
     </bag-form-table>
     <bag-modal v-model:visible="tableCurd.create.visible" title="新增" width="85%" @ok="tableCurd.create.submit">
-        <Create ref="formCreate" :treeData="tableCurd.tableData" />
+        <Create ref="formCreate" :treeData="tableCurd.tableData"/>
     </bag-modal>
     <bag-modal v-model:visible="tableCurd.edit.visible" title="编辑" width="85%" @ok="tableCurd.edit.submit">
-        <Edit ref="formEdit" :treeData="tableCurd.tableData" :id="tableCurd.edit.id" />
+        <Edit ref="formEdit" :treeData="tableCurd.tableData" :id="tableCurd.edit.id"/>
     </bag-modal>
-    <Auth ref="formAuth" :visible="visible" @submit="authSubmit" />
+    <Auth ref="formAuth"  @submit="authSubmit"/>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import {defineComponent, ref} from 'vue'
 import Create from './Create.vue'
 import Edit from './Edit.vue'
 import Auth from './Auth.vue'
@@ -61,7 +61,7 @@ export default defineComponent({
         Create, Edit, Auth,
     },
     setup() {
-        const { tableCurd } = tableHock()
+        const {tableCurd} = tableHock()
         const formCreate = ref()
         const formEdit = ref()
         const formAuth = ref()
@@ -70,17 +70,16 @@ export default defineComponent({
         tableCurd.edit.refForm = formEdit
         tableCurd.all.handle()
 
-        const visible = ref(false)
         // 权限提交
         const authSubmit = (menus) => {
-            tableCurd.edit.directSubmit({ data: { menus } }).then(() => {
-                visible.value = false
+            tableCurd.edit.directSubmit({data: {menus}}).then(() => {
+                formAuth.value.handleOpen(false)
             })
         }
         // 打开权限
         const handleOpenAuth = (record) => {
             tableCurd.edit.id = record.id
-            visible.value = true
+            formAuth.value.handleOpen(true,record)
         }
         return {
             tableCurd,
@@ -90,7 +89,6 @@ export default defineComponent({
             columns,
             authSubmit,
             handleOpenAuth,
-            visible
         }
     },
 })

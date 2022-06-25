@@ -89,6 +89,10 @@ class MemberController extends baseController {
         const result = await ctx.model.Member.findOne({
             where: {id},
         })
+        const rolesDetail = await ctx.model.Role.findOne({
+            where: {id: result.roles},
+        })
+        result.setDataValue('rolesDetail', rolesDetail)
         this.result({data: result})
     }
 
@@ -112,16 +116,10 @@ class MemberController extends baseController {
 
         for (let i = 0; i < result.length; i++) {
             const item = result[i]
-            const roleResult = []
-            for (let j = 0; j < item.roles.length; j++) {
-                const obj = await ctx.model.Role.findOne({
-                    where: {tag: item.roles[j]},
-                })
-                if (obj) {
-                    roleResult.push(obj)
-                }
-            }
-            item.setDataValue('rolesDetail', roleResult)
+            const rolesDetail = await ctx.model.Role.findOne({
+                where: {id: item.roles},
+            })
+            item.setDataValue('rolesDetail', rolesDetail)
         }
         this.result({data: result})
     }

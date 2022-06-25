@@ -12,6 +12,10 @@ class UserController extends baseController {
                 attributes: {exclude: ['password']},
             })
             if (result) {
+                const rolesDetail = await ctx.model.Role.findOne({
+                    where: {id: result.roles},
+                })
+                result.setDataValue('rolesDetail', rolesDetail)
                 this.result({data: result})
             } else {
                 this.result({data: '', message: '没有找到该用户', code: 1002})

@@ -5,6 +5,7 @@ import router from '@/packages/router'
 import {apiUserUserinfo} from '@/packages/service/user'
 import {defaultMenu} from '@/packages/config/defaultMenu'
 import {toTree} from "@/packages/utils/utils";
+
 let namespace = 'admin'
 
 interface FileType {
@@ -53,13 +54,30 @@ function pathsFileRouterStore(paths: Array<any>) {
     })
 }
 
+
+const filterRouter = (routes: Array<any>) => {
+    const {rolesDetail, id} = store.getters['user/userinfo']
+    if (rolesDetail) {
+        if (id === 1) {
+            return routes
+        } else {
+            return routes.filter((item: any) => {
+                return rolesDetail.menus.map(Number).indexOf(item.id) > -1;
+            })
+        }
+    } else {
+        return []
+    }
+}
+
+
 const setAsyncRouterComponents = async () => {
-    const userinfo = store.getters['user/userinfo']
-    const {defaults, paths} = store.state.app.appRouter;
+
+    const {paths} = store.state.app.appRouter;
     const menuPaths: Array<any> = []
     try {
         const data: any = await apiAppRouter()
-        menuPaths.push(...data)
+        menuPaths.push(...filterRouter(data))
     } catch (err) {
         console.log(err)
     }

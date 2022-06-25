@@ -2,6 +2,7 @@
     <a-tree
         checkable
         :tree-data="treeData"
+        :checkStrictly="true"
         v-model:expandedKeys="expandedKeys"
         v-model:selectedKeys="selectedKeys"
         v-model:checkedKeys="checkedKeys"
@@ -16,19 +17,10 @@ import {useStore} from "vuex";
 
 export default defineComponent({
     setup() {
-        const expandedKeys = ref<string[]>([]);
-        const selectedKeys = ref<string[]>([]);
-        const checkedKeys = ref<string[]>([]);
-        const allCheckedKeys = ref<string[]>([]);
-        watch(expandedKeys, () => {
-            console.log('expandedKeys', expandedKeys);
-        });
-        watch(selectedKeys, () => {
-            console.log('selectedKeys', selectedKeys);
-        });
-        watch(checkedKeys, () => {
-            console.log('checkedKeys', checkedKeys);
-        });
+        const expandedKeys = ref<any[]>([]);
+        const selectedKeys = ref<any[]>([]);
+        const checkedKeys = ref<any[]>([]);
+        const allCheckedKeys = ref<any[]>([]);
 
         const store = useStore()
         const treeData = computed(() => store.state.app.menuList);
@@ -39,7 +31,12 @@ export default defineComponent({
         };
 
         function onCheck(checkedKeys, info) {
-            allCheckedKeys.value = checkedKeys.concat(info.halfCheckedKeys);//将父节点拼接到子节点
+            // allCheckedKeys.value = checkedKeys.concat(info.halfCheckedKeys);//将父节点拼接到子节点
+        }
+
+        // 初始化默认选中
+        const initCheck = (record) => {
+            checkedKeys.value = record.menus.map(Number)
         }
 
         return {
@@ -49,7 +46,8 @@ export default defineComponent({
             replaceFields,
             treeData,
             onCheck,
-            allCheckedKeys
+            allCheckedKeys,
+            initCheck
         }
     }
 })

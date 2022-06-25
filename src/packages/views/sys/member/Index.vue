@@ -33,10 +33,7 @@
             </template>
             <template #rolesDetail="{ record }">
                 <template v-if="record.rolesDetail">
-                    <template v-for="(item,idx) in record.rolesDetail">
-                        <a-tag color="orange" v-if="idx===0">{{ item.name }}</a-tag>
-                        <a-tag color="#87d068" v-if="idx===1" @click="rolesData.handle({record})">查看全部</a-tag>
-                    </template>
+                    <a-tag color="orange" >{{ record.rolesDetail.name }}</a-tag>
                 </template>
             </template>
             <template #action="{ record }">

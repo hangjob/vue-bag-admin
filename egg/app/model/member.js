@@ -44,16 +44,8 @@ module.exports = app => {
             },
         },
         roles: {
-            type: STRING,
+            type: INTEGER,
             comment: '用户角色',
-            get() {
-                const roles = this.getDataValue('roles')
-                return roles !== '' && roles ? roles.split(',') : []
-            },
-            set() {
-                const roles = this.getDataValue('roles')
-                return roles !== '' && roles ? roles.join(',') : ''
-            },
         },
         did: {
             type: INTEGER,

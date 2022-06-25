@@ -8,9 +8,7 @@
     >
         <a-tabs v-model:activeKey="activeKey">
             <a-tab-pane key="1" tab="菜单权限">
-                <div class="auth-body">
-                    <RoleMenu ref="roleMenu" />
-                </div>
+                <div class="auth-body"><RoleMenu ref="roleMenu"/></div>
             </a-tab-pane>
             <a-tab-pane key="2" tab="数据权限">Content of Tab Pane 2</a-tab-pane>
             <a-tab-pane key="3" tab="按钮权限">Content of Tab Pane 3</a-tab-pane>
@@ -22,26 +20,29 @@
     </a-drawer>
 </template>
 <script lang="ts">
-import { computed, defineComponent, ref, watch } from 'vue'
+import {computed, defineComponent, nextTick, ref, watch} from 'vue'
 import RoleMenu from './RoleMenu.vue'
 
 export default defineComponent({
-    components: { RoleMenu },
-    props: {
-        visible: {
-            type: Boolean,
-            default: false,
-        },
-    },
+    components: {RoleMenu},
     setup(props, context) {
         const roleMenu = ref()
         const handleSubmit = () => {
-            context.emit('submit', roleMenu.value.allCheckedKeys)
+            context.emit('submit', roleMenu.value.checkedKeys.checked)
+        }
+        const visible = ref(false);
+        const handleOpen = (show, record) => {
+            visible.value = show;
+            nextTick(()=>{
+                roleMenu.value.initCheck(record)
+            })
         }
         return {
             activeKey: ref('1'),
             roleMenu,
             handleSubmit,
+            visible,
+            handleOpen
         }
     },
 })
