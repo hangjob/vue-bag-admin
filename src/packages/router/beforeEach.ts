@@ -55,10 +55,15 @@ function pathsFileRouterStore(paths: Array<any>) {
 }
 
 
+/**
+ * 根据角色过滤路由
+ * @param routes
+ */
 const filterRouter = (routes: Array<any>) => {
-    const {rolesDetail, id} = store.getters['user/userinfo']
-    if (id === 1) {
-        return routes
+    const {rolesDetail} = store.getters['user/userinfo']
+    const isSuperadmin = store.getters['user/isSuperadmin'];
+    if (isSuperadmin) {
+        return routes // 超级管理不过滤路由
     }
     if (rolesDetail) {
         return routes.filter((item: any) => {
@@ -69,13 +74,19 @@ const filterRouter = (routes: Array<any>) => {
     }
 }
 
-
+/**
+ * 获取异步路由，动态添加
+ */
 const setAsyncRouterComponents = async () => {
     const {paths} = store.state.app.appRouter;
-    const menuPaths: Array<any> = [...paths]
+    const menuPaths: Array<any> = [];
+    const isSuperadmin = store.getters['user/isSuperadmin'];
+    if (!isSuperadmin) {
+        menuPaths.push(...paths) // 超级管理员本地添加不展示
+    }
     try {
-        const data: any = await apiAppRouter()
-        menuPaths.push(...filterRouter(data))
+        const routes: any = await apiAppRouter()
+        menuPaths.push(...filterRouter(routes))
     } catch (err) {
         console.log(err)
     }

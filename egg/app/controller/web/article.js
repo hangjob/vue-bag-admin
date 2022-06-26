@@ -101,6 +101,7 @@ class WebArticleController extends baseController {
         if (ks) {
             where.name = {[Op.like]: `%${ks}%`} // 模糊查詢 https://www.sequelize.com.cn/core-concepts/model-querying-basics
         }
+        // 角色过滤数据
         const result = await ctx.model.Web.Article.findAll({
             where: {...where},
         })
