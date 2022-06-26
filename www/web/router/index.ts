@@ -8,6 +8,10 @@ const routes = [
         component: () => import('@www/web/views/links/Index.vue'),
     },
     {
+        path: '/source', name: 'source',
+        component: () => import('@www/web/views/source/Index.vue'),
+    },
+    {
         path: '/more', name: 'more',
         component: () => import('@www/web/views/more/layout/Index.vue'),
         redirect: 'about',
