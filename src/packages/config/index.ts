@@ -25,7 +25,7 @@ const httpNetwork = {
     //消息框消失时间
     messageDuration: 2.5,
     //最长请求时间
-    requestTimeout: 6000,
+    requestTimeout: 20000,
     //操作正常code码
     successCode: [1, 1000],
     // 重连间隔时间

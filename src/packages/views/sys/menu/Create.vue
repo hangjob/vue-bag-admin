@@ -62,6 +62,11 @@
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
+                    <a-form-item label="排序" name="order">
+                        <a-input v-model:value="formState.order" placeholder="输入排序"/>
+                    </a-form-item>
+                </a-col>
+                <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="开启路由缓存" name="keepAlive">
                         <a-switch checked-children="开" un-checked-children="关" v-model:checked="formState.keepAlive"/>
                     </a-form-item>
@@ -93,26 +98,21 @@
             </a-row>
         </a-form>
     </div>
-    <a-modal v-model:visible="visibleIcon" width="85%" title="选择icon"  okText="确认" cancelText="关闭">
-        <div class="item-icons">
-            <a-row>
-                <a-col class="item" :xs="12" :sm="8" :md="4" :lg="3" :xl="2" v-for="(icon,idx) in icons">
-                    <div class="item-icon">
-                        <component :is="icon" :key="idx" @click="handleSelected(icon)"></component>
-                    </div>
-                </a-col>
-            </a-row>
-        </div>
+    <a-modal v-model:visible="visibleIcon" width="85%" title="选择icon" okText="确认" cancelText="关闭">
+        <Icons @affirm="iconAffirm"/>
     </a-modal>
 </template>
 <script lang="ts">
 import {defineComponent, onMounted, reactive, ref, toRaw, UnwrapRef} from 'vue'
-import icons from './icons'
+import Icons from './Icons.vue'
 import {validatPath, validatHttpFilePath, filePathRouter} from '@/packages/utils/validator'
 import {toTree} from '@/packages/utils/utils'
 
 
 export default defineComponent({
+    components: {
+        Icons
+    },
     props: {
         treeData: {
             type: Array,
@@ -160,7 +160,7 @@ export default defineComponent({
         }
         treeData.value = toTree(props.treeData || [])
 
-        const handleSelected = (icon: string) => {
+        const iconAffirm = (icon: string) => {
             visibleIcon.value = false
             formState.icon = icon
         }
@@ -169,29 +169,9 @@ export default defineComponent({
             rules,
             formRef,
             visibleIcon,
-            icons,
-            handleSelected,
+            iconAffirm,
             treeData,
         }
     },
 })
 </script>
-<style lang="less" scoped>
-.item-icons {
-    .item {
-        text-align: center;
-        padding: 10px 0;
-        cursor: pointer;
-        font-size: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        &-icon {
-            border: 1px solid #ddd;
-            width: 45px;
-            border-radius: 3px;
-        }
-    }
-}
-</style>

@@ -34,6 +34,7 @@ class MemberController extends baseController {
                 } else {
                     password = ctx.randomString()
                 }
+                body.roles = 15; // 默认角色
                 const result = await ctx.model.Member.create({
                     ...ctx.request.body,
                     password: ctx.setToken({password: password, username: ctx.request.body.username}),

@@ -11,7 +11,7 @@ module.exports = app => {
     require('./router/user')(app);
     require('./router/menu')(app);
     require('./router/upload')(app);
-    require('./router/socket')(app);
+    // require('./router/socket')(app); // 开启之后需要连接 有超时阻塞
     require('./router/web/article')(app);
     require('./router/web/channel')(app);
     require('./router/web/antistop')(app);

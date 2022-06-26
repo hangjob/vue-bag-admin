@@ -46,7 +46,6 @@ const router = createRouter({
 
 const addRoutes = function (app: App) {
     let {routes = []} = app.config.globalProperties?.configAppRouter // 替换路由，自定义内置路由
-    console.log(routes)
     let namespace = 'web'
     let deep = function (routes: Array<any>) {
         routes.forEach((item) => {

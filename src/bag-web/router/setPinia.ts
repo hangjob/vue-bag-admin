@@ -8,22 +8,22 @@ const setPinia = (to: RouteLocationNormalized, from: RouteLocationNormalized, ne
     const user = userStore()
     try {
         const userinfo: any = user.userinfo
-        if (!userinfo.id) {
-            webWebsiteFind().then(async (res: any) => {
-                app.webSettings = res
+        webWebsiteFind().then(async (res: any) => {
+            app.webSettings = res
+            if (!userinfo.id) {
                 userUserinfo().then((res) => {
-                    user.userinfo = res
+                    user.userinfo = res;
+                    next();
+                }).catch(() => {
+                    next();
                 })
-            }).finally(() => {
+            } else {
                 next()
-            })
-        } else {
-            next()
-        }
+            }
+        })
     } catch (err) {
         next()
     }
-    next()
 }
 
 

@@ -57,14 +57,13 @@ function pathsFileRouterStore(paths: Array<any>) {
 
 const filterRouter = (routes: Array<any>) => {
     const {rolesDetail, id} = store.getters['user/userinfo']
+    if (id === 1) {
+        return routes
+    }
     if (rolesDetail) {
-        if (id === 1) {
-            return routes
-        } else {
-            return routes.filter((item: any) => {
-                return rolesDetail.menus.map(Number).indexOf(item.id) > -1;
-            })
-        }
+        return routes.filter((item: any) => {
+            return rolesDetail.menus.map(Number).indexOf(item.id) > -1;
+        })
     } else {
         return []
     }
@@ -72,17 +71,15 @@ const filterRouter = (routes: Array<any>) => {
 
 
 const setAsyncRouterComponents = async () => {
-
     const {paths} = store.state.app.appRouter;
-    const menuPaths: Array<any> = []
+    const menuPaths: Array<any> = [...paths]
     try {
         const data: any = await apiAppRouter()
         menuPaths.push(...filterRouter(data))
     } catch (err) {
         console.log(err)
     }
-    console.log(paths)
-    pathsFileRouterStore(menuPaths.concat(paths))
+    pathsFileRouterStore(menuPaths)
 }
 
 

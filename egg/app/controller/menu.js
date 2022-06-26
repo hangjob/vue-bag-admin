@@ -76,6 +76,9 @@ class MenuController extends baseController {
         }
         const result = await ctx.model.Menu.findAll({
             where: {...where},
+            order: [
+                ['order', 'DESC']
+            ],
         })
         this.result({data: result})
     }

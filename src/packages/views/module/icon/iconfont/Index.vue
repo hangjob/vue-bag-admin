@@ -91,7 +91,7 @@ export default defineComponent({
 
 		const handleToClipboard = (str: string) => {
 			toClipboard(`<${toHump(str)}/>`).then((res: any) => {
-				let html = [];
+				let html:Array<any> = [];
 				html.push(h('i', {class: str, style: {marginRight: '10px', color: '#52c41a'}},));
 				html.push(h('span', {}, `html使用：<i class="${str}"></i>`));
 				html.push(h('p', {}, `组件使用：${res.text}`));

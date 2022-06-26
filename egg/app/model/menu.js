@@ -37,6 +37,7 @@ module.exports = app => {
         },
         order: {
             type: INTEGER,
+            defaultValue:0,
             comment: '排序',
         },
         pid: {

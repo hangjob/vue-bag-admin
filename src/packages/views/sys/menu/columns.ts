@@ -39,20 +39,20 @@ const columns = [
         ellipsis: true,
         align: 'center',
     },
-    {
-        title: 'iframe',
-        dataIndex: 'iframePath',
-        key: 'iframePath',
-        ellipsis: true,
-        align: 'center',
-    },
-    {
-        title: '外链',
-        dataIndex: 'httpViewPath',
-        key: 'httpViewPath',
-        ellipsis: true,
-        align: 'center',
-    },
+    // {
+    //     title: 'iframe',
+    //     dataIndex: 'iframePath',
+    //     key: 'iframePath',
+    //     ellipsis: true,
+    //     align: 'center',
+    // },
+    // {
+    //     title: '外链',
+    //     dataIndex: 'httpViewPath',
+    //     key: 'httpViewPath',
+    //     ellipsis: true,
+    //     align: 'center',
+    // },
     {
         title: '路由缓存',
         dataIndex: 'keepAlive',
@@ -60,6 +60,9 @@ const columns = [
         align: 'center',
         ellipsis: true,
         width: 90,
+        customRender: (item: any) => {
+            return item.text ? '是' : '否'
+        },
     },
     {
         title: '是否隐藏Tab切换',
@@ -68,6 +71,9 @@ const columns = [
         align: 'center',
         ellipsis: true,
         width: 200,
+        customRender: (item: any) => {
+            return item.text ? '是' : '否'
+        },
     },
     {
         title: '固定菜单',
@@ -76,11 +82,24 @@ const columns = [
         align: 'center',
         ellipsis: true,
         width: 90,
+        customRender: (item: any) => {
+            return item.text ? '是' : '否'
+        },
     },
     {
         title: '是否显示',
         dataIndex: 'shows',
         key: 'shows',
+        align: 'center',
+        width: 90,
+        customRender: (item: any) => {
+            return item.text ? '是' : '否'
+        },
+    },
+    {
+        title: '排序',
+        dataIndex: 'order',
+        key: 'order',
         align: 'center',
         width: 90,
     },

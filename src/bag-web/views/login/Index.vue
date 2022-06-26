@@ -81,14 +81,16 @@
 </template>
 <script lang="ts">
 import {defineComponent, inject, reactive} from 'vue'
-import {memberCreate, userLogin} from '@/bag-web/service/app'
+import {memberCreate, userLogin, userUserinfo} from '@/bag-web/service/app'
 import {useRouter} from "vue-router";
 import {ElNotification} from 'element-plus'
 import appStore from "@/bag-web/store/app";
+import userStore from "@/bag-web/store/user";
 
 export default defineComponent({
     setup() {
         const router = useRouter()
+        const user = userStore()
         const form = reactive({
             tabs: [{name: '密码登录'}, {name: '账号注册'}],
             active: '密码登录',
@@ -127,7 +129,11 @@ export default defineComponent({
                             type: 'success',
                             message: `${form.username} 账户登录成功`,
                         })
-                        router.push('/home').then()
+                        router.push('/home').then(()=>{
+                            userUserinfo().then((res) => {
+                                user.userinfo = res
+                            })
+                        })
                     }).finally(() => {
                         form.loading = false
                     })
