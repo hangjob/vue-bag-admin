@@ -102,6 +102,11 @@ class WebArticleController extends baseController {
             where.name = {[Op.like]: `%${ks}%`} // 模糊查詢 https://www.sequelize.com.cn/core-concepts/model-querying-basics
         }
         // 角色过滤数据
+        const {isSuperadmin, userinfo} = await ctx.service.user.superadmin();
+        if (!isSuperadmin) {
+            where.user_id = userinfo.id;
+        }
+        console.log('where', where)
         const result = await ctx.model.Web.Article.findAll({
             where: {...where},
         })

@@ -13,6 +13,14 @@ class UserService extends Service {
             return false;
         }
     }
+
+    async superadmin() {
+        const userinfo = await this.getUserinfo();
+        return {
+            userinfo: userinfo,
+            isSuperadmin: userinfo.id === 1
+        }
+    }
 }
 
 
