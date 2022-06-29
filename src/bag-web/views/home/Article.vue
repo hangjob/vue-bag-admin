@@ -156,7 +156,7 @@ const getDate = (time)=>{
                 height: 100%;
                 overflow: hidden;
                 border-radius: 3px;
-
+                margin: 0 10px;
                 &:hover {
                     img {
                         transform: scale(1.1);

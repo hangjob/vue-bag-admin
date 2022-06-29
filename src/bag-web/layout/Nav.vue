@@ -14,15 +14,15 @@
                         <ul>
                             <li v-for="item in menuList" :key="item.id">
                                 <div>
-                                    <router-link :to="item.url">{{ item.name }}
+                                    <a href="javascript:;" @click="handleToPath(item)">{{ item.name }}
                                         <el-icon v-if="item.children && item.children.length">
                                             <CaretBottom/>
                                         </el-icon>
-                                    </router-link>
+                                    </a>
                                 </div>
                                 <ul class="dropdown-menu" v-if="item.children && item.children.length">
                                     <li v-for="todo in item.children">
-                                        <router-link :to="todo.url">{{ todo.name }}</router-link>
+                                        <a @click="handleToPath(todo)" href="javascript:;">{{ todo.name }}</a>
                                     </li>
                                 </ul>
                             </li>
@@ -75,7 +75,8 @@ import {toTree} from '@/packages/utils/utils'
 import appStore from '@/bag-web/store/app'
 import logo from '@/common/assets/image/logo3.png'
 import userStore from "@/bag-web/store/user";
-import { useRoute, useRouter } from 'vue-router'
+import {useRoute, useRouter} from 'vue-router'
+import isHttp from "@/bag-utils/regular/isHttp";
 
 const {configApp} = <any>inject('$configAppOptions')
 
@@ -95,7 +96,6 @@ const errorChange = () => {
 }
 const router = useRouter()
 const route = useRoute();
-console.log(route.path)
 const handleLogout = () => {
     userLogout().then(() => {
         router.push(resetPath).then(() => {
@@ -103,6 +103,18 @@ const handleLogout = () => {
         })
     })
 }
+
+const handleToPath = (item: any) => {
+    const {url} = item;
+    if (isHttp(url)) {
+        window.open(url)
+    } else if (url.indexOf('.html') > -1) {
+        window.location.href = window.location.origin + url;
+    } else {
+        router.push(url)
+    }
+}
+
 </script>
 <style lang="less" scoped>
 @nah: 60px;
@@ -170,6 +182,7 @@ const handleLogout = () => {
                         border-radius: 3px;
                         box-shadow: 0 2px 2px rgb(255, 255, 255, 0.9), 0 0 2px rgb(255, 255, 255, 0.9);
                         background-clip: padding-box;
+
                         li {
                             display: block;
 

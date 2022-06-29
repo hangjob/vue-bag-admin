@@ -1,5 +1,5 @@
 * [开始](/README.md)
-* 配置
+* 后端管理
   * [主题配置](/themeConfig.md)
   * [网络配置](/httpNetwork.md)
   * [菜单配置](/menu.md)
