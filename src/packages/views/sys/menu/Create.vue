@@ -105,7 +105,7 @@
 <script lang="ts">
 import {defineComponent, onMounted, reactive, ref, toRaw, UnwrapRef} from 'vue'
 import Icons from './Icons.vue'
-import {validatPath, validatHttpFilePath, filePathRouter} from '@/packages/utils/validator'
+import {validatHttpFilePath} from '@/packages/utils/validator'
 import {toTree} from '@/packages/utils/utils'
 
 

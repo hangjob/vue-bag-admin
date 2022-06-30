@@ -94,18 +94,7 @@ module.exports = app => {
         },
         title_style: {
             type: STRING,
-            comment: 'title样式',
-            get() {
-                let str = this.getDataValue('title_style')
-                try {
-                    str = str ? JSON.parse(str.replace(/'/g, '"')) : {}
-                    str = JSON.stringify(str)
-                } catch (err) {
-                    console.log(err)
-                }
-                return str
-            },
-
+            comment: 'title样式', // 前端添加注意格式 {'font-size':'20px','color':'red'} // 用单引号起来
         },
         order: {
             type: INTEGER,

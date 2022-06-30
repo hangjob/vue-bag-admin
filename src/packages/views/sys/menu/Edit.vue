@@ -107,7 +107,7 @@ import {defineComponent, reactive, ref, toRaw, watch, onMounted} from 'vue';
 import {ValidateErrorEntity} from 'ant-design-vue/es/form/interface';
 import {apiUpdate, apiFind} from '@/packages/service/menu'
 import Icons from './Icons.vue'
-import {validatPath, validatHttpFilePath, filePathRouter} from '@/packages/utils/validator'
+import { validatHttpFilePath} from '@/packages/utils/validator'
 import {toTree} from '@/packages/utils/utils'
 import {filterData} from "@/packages/utils/lodash";
 
