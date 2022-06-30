@@ -21,4 +21,6 @@ module.exports = app => {
     require('./router/web/banner')(app);
     require('./router/web/links')(app);
     require('./router/web/download')(app);
+    require('./router/web/groupimg')(app);
+    require('./router/web/material')(app);
 };

@@ -1,14 +1,11 @@
 const columns = [
     {
-        title: '序号',
-        dataIndex: 'index',
-        key: 'index',
+        title: 'ID',
+        dataIndex: 'id',
+        key: 'id',
         align: 'center',
         ellipsis: true,
         width: 70,
-        customRender: ({ index }: { index: number }) => {
-            return index + 1
-        },
     },
     {
         title: '栏目名称',

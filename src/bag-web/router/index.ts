@@ -31,6 +31,10 @@ const routes = [
                 path: '/download', name: 'download', meta: {title: '下载中心'},
                 component: () => import('@/bag-web/views/download/Index.vue'),
             },
+            {
+                path: '/download/:id', name: 'downloadId', meta: {title: '下载中心'},
+                component: () => import('@/bag-web/views/download/Id.vue'),
+            },
         ],
     },
     {
