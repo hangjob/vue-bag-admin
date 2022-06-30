@@ -8,7 +8,7 @@
         <div class="container" v-if="detailData">
             <el-row :gutter="20">
                 <el-col :xs="24" :sm="24" :md="24" :lg="16" :xl="16">
-                    <Banner :detail-data="detailData"/>
+                    <Banner :detail-data="detailData" />
                     <div class="article-body">
                         <div class="breadcrumb">
                             <ol>
@@ -33,7 +33,7 @@
                         </div>
                         <div class="content">
                             <div class="metas">
-                                <h1 :style="{...detailData.title_style}">{{detailData.title}}</h1>
+                                <h1 :style="{...detailData.title_style}">{{ detailData.title }}</h1>
                             </div>
                             <div class="metas-action">
                                 <div>
@@ -58,25 +58,25 @@
                                 </div>
                             </div>
                             <div class="text">
-                                <Wangeditor :detailData="detailData"/>
-                                <Sweet :detailData="detailData"/>
+                                <Wangeditor :detailData="detailData" />
+                                <Sweet :detailData="detailData" />
                             </div>
                         </div>
                     </div>
-                    <Praise :detail-data="detailData"/>
+                    <Praise :detail-data="detailData" />
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="24" :lg="8" :xl="8">
-                    <Author :detail-data="detailData"/>
-                    <Qrcode :detail-data="detailData"/>
-                    <HotTags :detail-data="detailData"/>
+                    <Author :detail-data="detailData" />
+                    <Qrcode :detail-data="detailData" />
+                    <HotTags :detail-data="detailData" />
                 </el-col>
             </el-row>
         </div>
     </div>
 </template>
 <script lang="ts" setup>
-import {ref} from 'vue'
-import {useRoute} from 'vue-router'
+import { ref } from 'vue'
+import { useRoute } from 'vue-router'
 import Wangeditor from './Wangeditor.vue'
 import Author from './Author.vue'
 import Qrcode from './Qrcode.vue'
@@ -85,16 +85,15 @@ import Praise from './Praise.vue'
 import Sweet from './Sweet.vue'
 import Banner from './banner/Index.vue'
 
-import {webArticleFind} from '@/bag-web/service/app'
-import {ElLoading} from 'element-plus'
+import { webArticleFind } from '@/bag-web/service/app'
+import { ElLoading } from 'element-plus'
 
 const route = useRoute()
 const detailData = ref(null)
 const loading = ref(true)
-webArticleFind({id: route.params.id}).then((res: any) => {
-    res.title_style = res.title_style ? JSON.parse(res.title_style) : {}
+webArticleFind({ id: route.params.id }).then((res: any) => {
+    res.title_style = res.title_style ? JSON.parse(res.title_style.replace(/'/g, '"')) : {}
     res.images = res.images ? res.images.split(',') : []
-    console.log(res.images)
     detailData.value = res
 }).finally(() => {
     loading.value = false
