@@ -4,11 +4,20 @@
             <h1>优秀的你，才能遇到优秀的世界<br/>Bag开源博客门户系统</h1>
         </div>
         <div class="action">
-            <vs-button color="success" @click="handleDownload" size="large" type="filled" icon="downloading">下载程序
-            </vs-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <vs-button target :href="{url: '/admin.html'}" color="primary" size="large"
+                       type="filled" icon="text_snippet"
+            >体验管理端
+            </vs-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <vs-button target :href="{url: '/web.html'}" color="rgb(11, 189, 135)" size="large" type="filled"
+                       icon="text_snippet"
+            >体验客户端
+            </vs-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <vs-button target :href="{url: 'https://hangjob.github.io/vue-bag-admin/'}" color="danger" size="large"
                        type="filled" icon="text_snippet"
             >查看文档
+            </vs-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <vs-button color="success" @click="handleDownload" size="large" type="filled" icon="downloading">
+                下载程序
             </vs-button>
         </div>
     </section>

@@ -26,6 +26,19 @@ export default [
         },
     },
     {
+        title: '排序',
+        dataIndex: 'order',
+        key: 'order',
+        ellipsis: true,
+        align: 'center',
+        formData: {
+            name: 'order',
+            label: '排序',
+            element: 'a-input',
+            placeholder: '输入排序',
+        },
+    },
+    {
         title: '创建时间',
         dataIndex: 'createTime',
         key: 'createTime',

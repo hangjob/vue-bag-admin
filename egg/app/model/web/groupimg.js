@@ -11,6 +11,10 @@ module.exports = app => {
             type: STRING,
             comment: '分组名称',
         },
+        order: {
+            type: INTEGER,
+            comment: '排序',
+        },
         createTime: {
             type: DATE,
             comment: '创建时间',

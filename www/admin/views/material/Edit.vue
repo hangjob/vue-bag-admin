@@ -21,21 +21,23 @@
                         ></component>
                         <template v-if="item.formData.element === 'bag-upload-image'">
                             <a-input v-model:value="formState[item.formData.name]" :placeholder="item.formData.placeholder" />
-                            <bag-upload-image @update:image="baseResources[item.formData.props.onUpdateName]" :image="formState[item.formData.name]" />
+                            <bag-upload-image :autoCropHeight="item.formData.props.autoCropHeight" :isFileMore="item.formData.props.isFileMore" @update:image="baseResources[item.formData.props.onUpdateName]"
+                                              :image="formState[item.formData.name]"
+                            ></bag-upload-image>
                         </template>
                         <template v-if="item.formData.element === 'a-select'">
                             <a-select
                                 v-model:value="formState[item.formData.name]"
-                                mode="tags"
+                                :mode="item.formData.props.mode"
                                 style="width: 100%"
-                                placeholder="选择关键词"
-                                option-label-prop="label"
-                                :options="baseResources.keywords"
+                                :placeholder="item.formData.props.placeholder"
                             >
-                                <template #option="{ value: val, label, icon }">
-                                    <span role="img" :aria-label="val">{{ icon }}</span>
-                                    &nbsp;&nbsp;{{ val }}
-                                </template>
+                                <a-select-option value="">请选择</a-select-option>
+                                <a-select-option v-for="opt in baseResources.opts[item.formData.props.optsKey]" :key="opt.id"
+                                                 :value="opt.id"
+                                >
+                                    {{ opt[item.formData.props.optNmae] }}
+                                </a-select-option>
                             </a-select>
                         </template>
                     </a-form-item>
