@@ -32,23 +32,19 @@
             <bag-card title="列表">
                 <template v-slot:body>
                     <el-row :gutter="20">
-                        <el-col :xs="24" :sm="24" :md="12" :lg="8" :xl="6" v-for="(item,idx) in 10" :key="idx">
+                        <el-col :xs="24" :sm="24" :md="12" :lg="8" :xl="6" v-for="(item,idx) in page.data" :key="idx">
                             <div class="archive-main">
                                 <div class="item">
                                     <div class="item-wrap">
                                         <div class="item-cont">
                                             <div class="item-top">
-                                                <img
-                                                    src="https://image.uisdc.com/wp-content/uploads/2022/06/ysbanner-202200628-3-1.jpg"
-                                                    alt=""
-                                                >
+                                                <img :src="getImageFullPath(item.image)" alt="">
                                             </div>
                                             <div class="item-title">
-                                                <h3><a href="javascript:;">想把表单的用户体验做到极致？我总结了这5个细节！</a></h3>
+                                                <h3><a href="javascript:;">{{ item.title }}</a></h3>
                                             </div>
                                             <div class="item-desc">
-                                                <p>对于设计师来说，尤其是现在 B
-                                                    端设计如此流行的情况下，表单设计细节尤其需要各位设计师注意，本文会分享表单设计中那些你不注意的细节点，</p>
+                                                <span>{{ item.describe }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -57,13 +53,54 @@
                         </el-col>
                     </el-row>
                     <div class="pagination">
-                        <el-pagination background layout="prev, pager, next" :total="1000"/>
+                        <el-pagination
+                            v-model:currentPage="page.currentPage"
+                            :page-size="page.pageSize"
+                            :total="page.total"
+                            @current-change="page.handleCurrentChange"
+                            background layout="prev, pager, next"
+                        ></el-pagination>
                     </div>
                 </template>
             </bag-card>
         </div>
     </div>
 </template>
+<script lang="ts" setup>
+import {webDownloadPage} from '@/bag-web/service/app';
+import {useRoute, useRouter} from 'vue-router'
+import {inject, reactive, ref, watch} from "vue";
+
+const {getImageFullPath} = inject<any>('bagGlobal')
+const route = useRoute();
+const page = reactive({
+    data: [],
+    total: 0,
+    currentPage: 1,
+    pageSize: 12,
+    handleCurrentChange: (val) => {
+        page.currentPage = val;
+        getData();
+        console.log(val)
+    }
+})
+watch(route, () => {
+    getData();
+})
+const getData = () => {
+    webDownloadPage({
+        channel_id: route.params.id,
+        currentPage: page.currentPage,
+        pageSize: page.pageSize
+    }).then((res: any) => {
+        const {data, total} = res;
+        page.data = data
+        page.total = total
+    })
+}
+
+getData();
+</script>
 <style lang="less" scoped>
 .download {
     .tabs-group {
@@ -121,7 +158,7 @@
                 border-radius: 5px;
                 padding: 20px 10px;
                 transition: all .2s;
-                height: 430px;
+                height: 400px;
                 position: relative;
                 border: 1px solid #eaf0f1;
 
@@ -129,12 +166,19 @@
                     .item-top {
                         width: 100%;
                         height: 200px;
+                        overflow: hidden;
+                        border-radius: 5px;
 
                         img {
                             width: 100%;
                             height: 100%;
-                            border-radius: 5px;
                             object-fit: cover;
+                            transition: all 0.5s;
+
+                            &:hover {
+                                transform: scale(1.08);
+                                object-fit: none;
+                            }
                         }
                     }
 
@@ -152,15 +196,22 @@
 
                     .item-desc {
                         margin: 10px;
-                        p {
-                            background-color: #fafafa;
-                            border-radius: 10px;
+                        padding: 15px;
+                        height: 100px;
+                        background-color: #fafafa;
+                        border-radius: 10px;
+                        overflow: hidden;
+
+                        span {
                             color: #8a8a8a;
-                            padding: 10px;
-                            height: 100px;
-                            overflow: hidden;
                             box-sizing: border-box;
                             transition: all 0.2s;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            -webkit-line-clamp: 3;
+                            text-align: justify;
                         }
                     }
                 }

@@ -62,6 +62,15 @@ const webArticlePage = (params?: object) => {
     return post('/web/article/page', params)
 }
 
+// 获取文章-分页
+const webDownloadAll = (params?: object) => {
+    return post('/web/download/all', params)
+}
+
+const webDownloadPage = (params?: object) => {
+    return post('/web/download/page', params)
+}
+
 export {
     webChannelAll,
     memberCreate,
@@ -74,5 +83,7 @@ export {
     webAntistopAll,
     webBannerAll,
     webArticleAll,
-    webArticlePage
+    webArticlePage,
+    webDownloadAll,
+    webDownloadPage
 }

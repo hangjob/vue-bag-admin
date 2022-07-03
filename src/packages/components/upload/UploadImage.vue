@@ -234,6 +234,9 @@ export default defineComponent({
 .gallery {
     img {
         border-radius: 3px;
+        height: 120px;
+        width:100%;
+        object-fit: cover;
     }
 }
 </style>

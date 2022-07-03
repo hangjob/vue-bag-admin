@@ -5,8 +5,10 @@
                 <a-col v-for="item in formItem" :key="item.name" :xs="item.xs" :sm="item.sm" :md="item.md" :lg="item.lg"
                        :xl="item.xl"
                 >
-                    <a-form-item :label="item.formData.label" :name="item.formData.name"
-                                 :labelCol="item.formData.labelCol" :wrapperCol="item.formData.wrapperCol">
+                    <a-form-item :autoLink="item.formData.autoLink" :label="item.formData.label"
+                                 :name="item.formData.name"
+                                 :labelCol="item.formData.labelCol" :wrapperCol="item.formData.wrapperCol"
+                    >
                         <component v-if="item.formData.element === 'a-input'" :is="item.formData.element"
                                    v-model:value="formState[item.formData.name]"
                                    :placeholder="item.formData.placeholder"
@@ -41,7 +43,7 @@
                             <a-input v-model:value="formState[item.formData.name]"
                                      :placeholder="item.formData.placeholder"
                             />
-                            <bag-upload-image @update:image="baseResources[item.formData.props.onUpdateName]"
+                            <bag-upload-image :isFileMore="item.formData.props.isFileMore" @update:image="baseResources[item.formData.props.onUpdateName]"
                                               :image="formState[item.formData.name]"
                             ></bag-upload-image>
                         </template>
@@ -53,7 +55,8 @@
                                 :placeholder="item.formData.props.placeholder"
                             >
                                 <a-select-option value="">请选择</a-select-option>
-                                <a-select-option v-for="opt in baseResources.opts[item.formData.props.optsKey]" :key="opt.id"
+                                <a-select-option v-for="opt in baseResources.opts[item.formData.props.optsKey]"
+                                                 :key="opt.id"
                                                  :value="opt.id"
                                 >
                                     {{ opt[item.formData.props.optNmae] }}
@@ -61,7 +64,7 @@
                             </a-select>
                         </template>
                         <template v-if="item.formData.element === 'bag-download-site'">
-                            <BagDownloadSite :formItem="item"/>
+                            <BagDownloadSite :formState="formState" :formItem="item"/>
                         </template>
                     </a-form-item>
                 </a-col>
@@ -70,15 +73,16 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import {defineComponent} from 'vue'
 import hook from './hook'
 import BagDownloadSite from './components/BagDownloadSite.vue'
+
 export default defineComponent({
-    components:{
+    components: {
         BagDownloadSite
     },
     setup() {
-        const { formState, formItem, rules, baseResources, formRef,onUploadImg } = hook()
+        const {formState, formItem, rules, baseResources, formRef, onUploadImg} = hook()
         return {
             formState,
             rules,

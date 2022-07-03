@@ -8,19 +8,19 @@ export default [
         width: 80,
     },
     {
-        title: '标题',
+        title: '应用标题',
         dataIndex: 'title',
         key: 'title',
         ellipsis: true,
         align: 'center',
         formData: {
             name: 'title',
-            label: '网站名称',
+            label: '应用标题',
             element: 'a-input',
-            placeholder: '输入网站名称',
+            placeholder: '输入应用标题',
             rules: [
                 {
-                    required: true, message: '网站名称为必填项', trigger: 'blur',
+                    required: true, message: '应用标题为必填项', trigger: 'blur',
                 },
             ],
         },
@@ -94,6 +94,7 @@ export default [
             placeholder: '上传图片',
             maxlength: 300,
             props: {
+                isFileMore:false,
                 onUpdateName: 'updateImage',
             },
         },
@@ -130,6 +131,7 @@ export default [
             label: '内容',
             element: 'md-editor',
             placeholder: '输入内容',
+            autoLink:false,
             xs: 24,
             sm: 24,
             md: 24,
@@ -158,6 +160,27 @@ export default [
             xl: 24,
             labelCol: { span: 3, offset: 0 },
             wrapperCol: { span: 19, offset: 0 },
+        },
+    },
+    {
+        title: '热度',
+        dataIndex: 'flag',
+        key: 'flag',
+        ellipsis: true,
+        align: 'center',
+        width: 100,
+        formData: {
+            name: 'flag',
+            label: '热度',
+            element: 'a-select',
+            props: {
+                mode: null,
+                options: [],
+                placeholder: '选择热度',
+                optsKey: 'flag',
+                optNmae: 'name',
+            },
+            defaultValue: '',
         },
     },
     {
@@ -200,6 +223,7 @@ export default [
         ellipsis: true,
         align: 'center',
         width: 100,
+        visible:false,
         formData: {
             name: 'likes',
             label: '点赞次数',
@@ -214,6 +238,7 @@ export default [
         ellipsis: true,
         align: 'center',
         width: 100,
+        visible:false,
         formData: {
             name: 'dislikes',
             label: '点踩次数',
@@ -228,6 +253,7 @@ export default [
         ellipsis: true,
         align: 'center',
         width: 100,
+        visible:false,
         formData: {
             name: 'comments',
             label: '评论数量',
@@ -242,6 +268,7 @@ export default [
         ellipsis: true,
         align: 'center',
         width: 100,
+        visible:false,
         customRender: (item: any) => {
             return item.text ? '是' : '否'
         },
@@ -262,6 +289,7 @@ export default [
         ellipsis: true,
         align: 'center',
         width: 100,
+        visible:false,
         customRender: (item: any) => {
             return item.text ? '是' : '否'
         },
@@ -273,27 +301,6 @@ export default [
             checkedText: '是',
             uncheckedText: '否',
             defaultValue: true,
-        },
-    },
-    {
-        title: '热度',
-        dataIndex: 'flag',
-        key: 'flag',
-        ellipsis: true,
-        align: 'center',
-        width: 100,
-        formData: {
-            name: 'flag',
-            label: '热度',
-            element: 'a-select',
-            props: {
-                mode: null,
-                options: [],
-                placeholder: '选择热度',
-                optsKey: 'channel',
-                optNmae: 'name',
-            },
-            defaultValue: '',
         },
     },
     {

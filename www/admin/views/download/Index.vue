@@ -27,7 +27,7 @@
                 <a-space>
                     <a-button type="primary" size="small" @click="tableCurd.edit.change(record)">编辑</a-button>
                     <a-popconfirm
-                        :title="`你确定删除 ${record.name} 嘛？`"
+                        :title="`你确定删除 ${record.title} 嘛？`"
                         ok-text="确认"
                         cancel-text="关闭"
                         placement="topRight"
@@ -54,6 +54,7 @@ import columns from './columns'
 import tableHock from "@/packages/hook/table";
 
 export default defineComponent({
+    name: 'downloadIndex',
     components: {
         Create, Edit,
     },
@@ -67,12 +68,14 @@ export default defineComponent({
         tableCurd.create.refForm = formCreate;
         tableCurd.edit.refForm = formEdit;
         tableCurd.all.handle();
-
+        tableCurd.detail.afterCallback = ({res}) => {
+            formEdit.value.afterCallback({res})
+        }
         return {
             tableCurd,
             formCreate,
             formEdit,
-            columns: columns.filter((item:any) => item.visible !== false)
+            columns: columns.filter((item: any) => item.visible !== false),
         }
     },
 })

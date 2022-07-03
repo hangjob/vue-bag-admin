@@ -109,17 +109,18 @@ class WebDownloadController extends baseController {
 
     async page() {
         const {ctx} = this
-        const {ks, currentPage = 1, pageSize = 10} = ctx.request.body
+        const {currentPage = 1, pageSize = 10, ...params} = ctx.request.body
         const where = {}
-        if (ks) {
-            where.name = {[Op.like]: `%${ks}%`} // 模糊查詢 https://www.sequelize.com.cn/core-concepts/model-querying-basics
+        for (const whereKey in params) {
+            where[whereKey] = {[Op.like]: `%${params[whereKey]}%`} // 模糊查詢 https://www.sequelize.com.cn/core-concepts/model-querying-basics
         }
         const result = await ctx.model.Web.Download.findAll({
             where: {...where},
             limit: parseInt(pageSize),
             offset: (currentPage - 1) * pageSize,
         })
-        this.result({data: result})
+        const total = await ctx.model.Web.Download.count({where: where});
+        this.result({data: {data: result, total, pageSize, currentPage}})
     }
 
     /**

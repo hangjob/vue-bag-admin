@@ -1,16 +1,15 @@
-import { inject, reactive, ref } from 'vue'
+import {inject, reactive, ref} from 'vue'
 import columns from './columns'
-import { createFormItem } from '@/packages/utils/form'
-import { apiAll } from '@www/admin/service/member'
-import { apiAll as apiAllChannel } from '@www/admin/service/channel'
-import { message } from 'ant-design-vue'
-import { apiUploadImage } from '@/packages/service/upload'
+import {createFormItem} from '@/packages/utils/form'
+import {apiAll} from '@www/admin/service/member'
+import {apiAll as apiAllChannel} from '@www/admin/service/channel'
+import {message} from 'ant-design-vue'
+import {apiUploadImage} from '@/packages/service/upload'
 
-export default function() {
+export default function () {
     const formRef = ref()
-    const { rules, fields, formItem } = createFormItem(columns)
+    const {rules, fields, formItem} = createFormItem(columns)
     const formState: any = reactive(fields)
-
     const baseResources = reactive({
         keywords: [],
         updateImage: (data: any) => {
@@ -22,6 +21,8 @@ export default function() {
         opts: {
             channel: [],
             user: [],
+            flag: [{name: '置顶', id: '置顶'}, {name: '最新', id: '最新'},
+                {name: '推荐', id: '推荐'}, {name: '热门', id: '热门'}]
         },
     })
 
@@ -32,7 +33,7 @@ export default function() {
         baseResources.opts.user = res
     })
 
-    const { configApp } = <any>inject('$configAppOptions')
+    const {configApp} = <any>inject('$configAppOptions')
     const onUploadImg = async (files: any, callback: Function) => {
         const res = await Promise.all(
             Array.from(files).map((file: any) => {
@@ -42,7 +43,7 @@ export default function() {
                         message.error(`文件小于${2}MB`)
                     } else {
                         apiUploadImage(file).then((data: any) => {
-                            const { baseURL } = configApp?.httpNetwork
+                            const {baseURL} = configApp?.httpNetwork
                             rev(baseURL + data)
                         }).catch((err: any) => {
                             rej(err)

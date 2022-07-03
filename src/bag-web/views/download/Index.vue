@@ -3,14 +3,12 @@
         <div class="container">
             <el-row :gutter="20">
                 <el-col :xs="24" :sm="24" :md="24" :lg="14" :xl="14" style="margin-bottom:10px">
-                    <div class="banner">
-                        <el-carousel indicator-position="none" height="250px" :interval="5000" arrow="always">
-                            <el-carousel-item v-for="item in 4" :key="item">
+                    <div class="banner" v-if="banner.length">
+                        <el-carousel indicator-position="none" height="300px" :interval="50000" arrow="always">
+                            <el-carousel-item v-for="item in banner" :key="item">
                                 <div class="banner-item">
-                                    <img src="https://img.zcool.cn/tubelocation/483c629739770002e07e1f80ee03.jpg"
-                                         alt=""
-                                    >
-                                    <div class="intro">下载中心焦点图标题4</div>
+                                    <img :src="getImageFullPath(item.image)" alt="">
+                                    <div class="intro">{{item.name}}</div>
                                 </div>
                             </el-carousel-item>
                         </el-carousel>
@@ -19,45 +17,25 @@
                 <el-col :xs="24" :sm="24" :md="24" :lg="10" :xl="10">
                     <div class="headline">
                         <el-row :gutter="10">
-                            <el-col v-for="item in 4" :key="item" :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+                            <el-col v-for="item in banner" :key="item.id" :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
                                 <router-link to="">
-                                    <div class="embed">
-                                        <img src="https://img.zcool.cn/tubelocation/483c629739770002e07e1f80ee03.jpg"
-                                             alt=""
-                                        >
-                                    </div>
-                                    <div class="intro">下载中心焦点图标题4</div>
+                                    <div class="embed"><img :src="getImageFullPath(item.image)" alt="" > </div>
+                                    <div class="intro">{{item.name}}</div>
                                 </router-link>
                             </el-col>
                         </el-row>
                     </div>
                 </el-col>
             </el-row>
-            <bag-card title="应用软件">
+            <bag-card :title="item.title" v-for="item in datas" :key="item.id">
                 <template v-slot:body>
                     <div class="download-list">
                         <el-row :gutter="20">
-                            <el-col  v-for="item in 20" :key="item"  :xs="12" :sm="6" :md="4" :lg="3" :xl="3">
+                            <el-col v-for="todo in item.list" :key="todo.id" :xs="12" :sm="6" :md="4" :lg="3" :xl="3">
                                 <router-link to="" class="download-list-item">
-                                    <img src="/1.png" alt="">
-                                    <p class="ellipsis">iTubeDownloader 6.4.8 在线视频下载工具</p>
-                                    <em>网络工具</em>
-                                    <span>立即下载</span>
-                                </router-link>
-                            </el-col>
-                        </el-row>
-                    </div>
-                </template>
-            </bag-card>
-            <bag-card title="网络工具">
-                <template v-slot:body>
-                    <div class="download-list">
-                        <el-row :gutter="20">
-                            <el-col  v-for="item in 20" :key="item"  :xs="12" :sm="6" :md="4" :lg="3" :xl="3">
-                                <router-link to="" class="download-list-item">
-                                    <img src="/1.png" alt="">
-                                    <p class="ellipsis">iTubeDownloader 6.4.8 在线视频下载工具</p>
-                                    <em>网络工具</em>
+                                    <img :src="getImageFullPath(todo.image)" alt="">
+                                    <p class="ellipsis">{{ todo.title }}</p>
+                                    <em>{{ item.title }}</em>
                                     <span>立即下载</span>
                                 </router-link>
                             </el-col>
@@ -69,6 +47,30 @@
     </div>
 </template>
 <script lang="ts" setup>
+import {webDownloadAll, webBannerAll} from '@/bag-web/service/app';
+import {inject, ref} from "vue";
+
+const {getImageFullPath} = inject<any>('bagGlobal')
+const datas = ref<Array<any>>([]);
+webDownloadAll().then((res: any) => {
+    const arr: Array<any> = [{title: '应用软件', id: 21, list: []}, {title: '网络工具', id: 20, list: []}]
+    arr.forEach((item) => {
+        const loopItem = (item) => {
+            res.map((todo) => {
+                if (todo.channel_id === item.id) {
+                    item.list.push(todo)
+                }
+            })
+        }
+        loopItem(item)
+    })
+    datas.value = arr;
+})
+const banner = ref([])
+webBannerAll().then((res: any) => {
+    banner.value = res;
+})
+
 </script>
 <style lang="less" scoped>
 .download {
@@ -82,6 +84,7 @@
             position: relative;
 
             img {
+                width:100%;
                 height: 100%;
                 object-fit: cover;
             }
@@ -147,11 +150,13 @@
             flex-direction: column;
             position: relative;
             margin-bottom: 25px;
+
             img {
-                width: 80px;
-                height: 80px;
+                width: 100%;
+                height: 100px;
                 object-fit: cover;
                 margin-bottom: 5px;
+                border-radius: 3px;
             }
 
             p {

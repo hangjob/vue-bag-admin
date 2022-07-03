@@ -104,16 +104,6 @@ module.exports = app => {
         title_style: {
             type: STRING,
             comment: 'title样式',
-            get() {
-                let str = this.getDataValue('title_style')
-                try {
-                    str = str ? JSON.parse(str.replace(/'/g, '"')) : {}
-                    str = JSON.stringify(str)
-                } catch (err) {
-                    console.log(err)
-                }
-                return str
-            },
         },
         order: {
             type: INTEGER,

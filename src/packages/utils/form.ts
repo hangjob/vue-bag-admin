@@ -10,6 +10,7 @@ const createFormItem = (columns: Array<any>) => {
             rules[item.formData.name] = item.formData.rules;
         }
         fields[item.formData.name] = item.formData?.defaultValue || '';
+        fields['autoLink'] = 'autoLink' in item.formData ? true : item.formData.autoLink;
         return {
             ...item,
             xs: item.formData?.xs || 24,
