@@ -1,7 +1,7 @@
 <template>
     <section class="section section-container">
         <div class="section-title">
-            <h1>优秀的你，才能遇到优秀的世界<br/>Bag开源博客门户系统</h1>
+            <h1>优秀的你，才能遇到优秀的世界<br/>Bag管理系统框架</h1>
         </div>
         <div class="action">
             <vs-button target :href="{url: '/admin.html'}" color="primary" size="large"

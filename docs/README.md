@@ -1,29 +1,37 @@
-🎉vue-bag-admin使用Vue3+Vite2.6+TypeScript+ant-design-vue构建，提供基础的框架，快速搭建企业级中后台产品，响应式管理后台系统
+>Bag快速开发管理系统、门户网站、博客系统框架，提供基础的框架，快速搭建企业产品，响应式开发
 
-### 安装
+## 说明
+
+>Bag分为两个vue-bag-admin、vue-bag-web
+
+## vue-bag-admin
+
+`vue-bag-admin`后台管理系统
+
+```html
+vue-bag-admin采用Vue3、Vue-Router4、Vuex4、Ant-Design-Vue、Vite、TypeScript、Egg.js、Mysql构建
+```
+#### 安装
 
 ```bash
 npm i vue-bag-admin -save
 ```
 
-### 使用
+#### 在线演示
 
-### App.vue
+[http://localhost:3000](http://localhost:3000)
 
-```vue
-<template>
-    <router-view></router-view>
-</template>
+## vue-bag-web
+
+`vue-bag-web`门户博客前台
+```html
+vue-bag-web采用Vue3、Vue-Router4、Pinia、Element-plus、Equal-Vue、Bootstrap、Vite、TypeScript、Egg.js、Mysql构建，按需加载模块，内置丰富UI
+```
+#### 安装
+
+```bash
+npm i vue-bag-web -save
 ```
 
-### main.js
-```typescript
-import { createApp } from 'vue'
-import App from './App.vue'
-
-import install from 'vue-bag-admin'
-import 'vue-bag-admin/lib/style.css'
-import 'vue-bag-admin/mock' // 进入mock数据
-
-createApp(App).use(install).mount('#app')
-```
+#### 在线演示
+[http://localhost:3000](http://localhost:3000)

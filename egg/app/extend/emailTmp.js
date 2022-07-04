@@ -36,7 +36,7 @@ const emailTmp = ({userEmail,downloads}) => {
                                                                     尊敬的${userEmail}用户，您好！
                                                                 </p>
                                                                 <p style="font-size:14px;color:#333; line-height:24px; margin:0; margin-top: 6px;">
-                                                                    优秀的你，才能遇到优秀的世界，Bag开源博客门户系统
+                                                                    优秀的你，才能遇到优秀的世界，Bag管理系统框架
                                                                 </p>
                                                                 <p class="cTMail-content" style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;">
                                                                     <span style="color: rgb(51, 51, 51); font-size: 14px;">
