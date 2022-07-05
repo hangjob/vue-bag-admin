@@ -1,10 +1,10 @@
 * [开始](/README.md)
-* 安装
-  * [主题配置](/themeConfig.md)
-  * [网络配置](/httpNetwork.md)
-  * [菜单配置](/menu.md)
-  * [Vuex配置](/store.md)
-  * [布局配置](/layout.md)
+* 管理系统
+  * [使用](/admin/usage.md)
+  * [router](/admin/router.md)
+  * [store](/admin/store.md)
+  * [comps](/store.md)
+  * [config](/layout.md)
 * [后端服务](/egg.md)
 * [Mock数据](/mock.md)
 * [权限指令](/directives.md)
