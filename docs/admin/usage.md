@@ -17,8 +17,11 @@ import install, {$optionsType} from 'vue-bag-admin';
 const $options: $optionsType = {
     router: {},//见参数介绍
     store: {},//见参数介绍
-    comps: {},//见参数介绍
-    config: {},//见参数介绍
+    config: {
+        themeConfig:{},
+        httpNetwork:{},
+        webSite:{}
+    },//见参数介绍
 }
 createApp(App).use(install, $optionsType)
 ```
