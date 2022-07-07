@@ -12,7 +12,7 @@
                         <p>最新版本</p>
                     </div>
                     <div class="package-price">
-                        <h4>5.3M</h4>
+                        <h4>2.06M</h4>
                     </div>
                     <ul>
                         <li>时间：2022-05-20</li>

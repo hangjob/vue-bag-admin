@@ -186,6 +186,12 @@ getData();
                         margin-top: 10px;
 
                         h3 {
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            display: -webkit-box;
+                            -webkit-box-orient: vertical;
+                            -webkit-line-clamp: 1;
+                            text-align: justify;
                             a {
                                 color: #323232;
                                 font-size: 20px;
