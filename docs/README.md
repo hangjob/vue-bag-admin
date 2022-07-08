@@ -4,7 +4,8 @@
 
 > Bag管理系统采用Vue3、Vue-Router4、Vuex4、Ant-Design-Vue、Vite、TypeScript、Egg.js、Mysql构建
 >
->Bag门户博客前台采用Vue3、Vue-Router4、Pinia、Element-plus、Equal-Vue、Bootstrap、Vite、TypeScript、Egg.js、Mysql构建，按需加载模块，内置丰富UI
+>Bag门户博客前台采用Vue3、Vue-Router4、Vite 、Pinia、Element-plus、Equal-Vue、Bootstrap、Vite、TypeScript、Egg.js、Mysql构建，按需加载模块，内置丰富UI
+
 
 ### 安装
 
@@ -25,3 +26,7 @@ npm i vue-bag-admin --save
 ### 在线演示
 
 [管理系统演示](http://localhost:3000)、[门户博客前台演示](http://localhost:3000)
+
+
+### 版权信息
+`vue-bag-admin`，是开源免费的，遵循MIT开源协议，意味着您无需支付任何费用，也无需授权，即可将它应用到您的产品中。

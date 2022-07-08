@@ -1,11 +1,11 @@
 * [开始](/README.md)
-* [创建项目](/README.md)
-* 管理系统
+* [创建项目](/create.md)
+* 管理端
   * [使用](/admin/usage.md)
   * [router](/admin/router.md)
   * [store](/admin/store.md)
   * [config](/admin/config.md)
-* 前端web
+* web端
   * [使用](/web/usage.md)
   * [router](/web/router.md)
   * [config](/web/config.md)

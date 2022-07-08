@@ -1,19 +1,10 @@
 // @ts-ignore
 import Mock from 'mockjs'
 
-// 注释 interface 兼容 js
-// interface resData {
-//     readonly  code: number, // 只读 属性
-//     readonly  message: string, // 只读 属性
-//     data: any,
-//
-//     [propName: string]: any, // 可能会有的新的属性添加进来
-// }
-
 Mock.mock('/api/user/userinfo', 'post', () => {
     const data = Mock.mock({
         username: '羊先生',
-        rolesDetail:{
+        rolesDetail: {
             type: 'admin',
         },
         userhead: 'https://avatars.githubusercontent.com/u/22078920?v=4',
