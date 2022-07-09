@@ -43,7 +43,7 @@ import 'vue-bag-admin/style.min.css'
 createApp(App).use(install).mount('#app')
 ```
 
-### 启动项目
+#### 启动项目
 ```bash
 npm run dev
 ```
@@ -58,7 +58,22 @@ import 'vue-bag-admin/lib-web/style.min.css'
 createApp(App).use(install).mount('#app')
 ```
 
-### 启动项目
+#### 启动项目
 ```bash
+npm run dev
+```
+
+### 后台服务
+
+> [点击下载Eggjs程序](https://github.com/hangjob/vue-bag-admin/egg.zip)
+
+##### 安装依赖
+
+```ts
+npm install 
+```
+
+##### 启动服务
+```
 npm run dev
 ```
