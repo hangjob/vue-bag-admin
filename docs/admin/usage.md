@@ -4,7 +4,7 @@
 import {createApp} from 'vue'
 import install from 'vue-bag-admin';
 import App from './App.vue'
-import '../../mock/index' // 如果后台服务,不用此mock数据
+import 'vue-bag-admin/mock/admin' // 如果后台服务,不用此mock数据
 
 createApp(App).use(install)
 ```
@@ -23,5 +23,5 @@ const $options: $optionsType = {
         webSite:{}
     },//见参数介绍
 }
-createApp(App).use(install, $optionsType)
+createApp(App).use(install, $options)
 ```

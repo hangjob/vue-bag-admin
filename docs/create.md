@@ -3,9 +3,9 @@
 [Vite官方文档](https://vitejs.dev/)、[Vite官方中文文档](https://cn.vitejs.dev/)
 > Vite 需要 Node.js 版本 >= 12.2.0。然而，有些模板需要依赖更高的 Node 版本才能正常运行，当你的包管理器发出警告时，请注意升级你的 Node 版本。
 
-### 创建
+### 1、Vite创建项目
 
-> 安装Vue程序的模板
+> 安装Vue程序的模板，下一代前端开发与构建工具
 
 ```bash
 # npm 6.x
@@ -21,6 +21,16 @@ yarn create vite my-vue-app --template vue
 pnpm create vite my-vue-app --template vue
 ```
 
+### 2、Vue CLI创建项目
+
+> [Vue CLI官方文档](https://cli.vuejs.org/zh/)，Vue.js 开发的标准工具
+
+```bash
+npm install -g @vue/cli 
+然后就可以使用vue命名
+vue create my-vue-app
+```
+
 ### 安装依赖
 
 ```bash
@@ -28,9 +38,9 @@ cd my-vue-app
 npm install
 ```
 
-### 安装cnpm
+##### 安装cnpm
 
-> 如果安装过慢、使用cnpm安装
+?> 如果安装过慢、使用cnpm安装
 
 ```bash
 npm install -g cnpm --registry=https://registry.npm.taobao.org
@@ -71,7 +81,9 @@ module.exports = {
             '^/api': {
                 target: 'http://127.0.0.1:8001', // 请看服务配置
                 changeOrigin: true,
-                rewrite: (path: any) => path.replace(/^\/api/, '')
+                pathRewrite: {
+                    '^/api': ''
+                }
             },
         }
     }
@@ -98,7 +110,7 @@ module.exports = {
 > main.js
 
 ```js
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 import App from './App.vue'
 import install from 'vue-bag-admin'
 import 'vue-bag-admin/mock/admin'
@@ -133,7 +145,7 @@ npm run dev
 > main.js
 
 ```js
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 import App from './App.vue'
 import install from 'vue-bag-admin/lib-web/index.es.js'
 import 'vue-bag-admin/mock/index'
