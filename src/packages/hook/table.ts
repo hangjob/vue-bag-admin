@@ -6,6 +6,7 @@ import isFunction from '@/bag-utils/regular/isFunction'
 
 export default function() {
     const tableCurd = reactive({
+        columns:<Array<any>>[],
         tableData: [], // 表格数据
         loading: false, // loading
         selectedRowKeys: [], // 批量选择

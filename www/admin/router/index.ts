@@ -6,14 +6,14 @@ import {addUniqueId} from '@/packages/utils/lodash'
  */
 const paths = addUniqueId([
     {
-        name: '首页',
-        path: '/home',
+        name: '测试CURD',
+        path: '/cstest',
         icon: 'HomeOutlined',
         shows: 1,
         tabHidden: false,
         tabFix: false,
         keepAlive: true,
-        filePath: '/admin/views/home/Index.vue',
+        filePath: '/admin/views/cstest/Index.vue',
     },
 ], '_local')
 
