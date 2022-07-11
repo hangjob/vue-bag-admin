@@ -1,4 +1,4 @@
-import {defineComponent, h} from 'vue'
+import { defineComponent, h } from 'vue'
 import classes from './index.module.less'
 
 export default defineComponent({
@@ -8,10 +8,10 @@ export default defineComponent({
     },
     props: {},
     render(ctx: any) {
-        const html = [];
+        const html: Array<any> = []
         if (ctx.$slots.default) {
-            html.push(h('div', {class: classes['bag-table-content']}, ctx.$slots.default?.()));
+            html.push(h('div', { class: classes['bag-table-content'] }, ctx.$slots.default?.()))
         }
-        return h('div', {class: classes['bag-table']}, [html]);
-    }
+        return h('div', { class: classes['bag-table'] }, [html])
+    },
 })
