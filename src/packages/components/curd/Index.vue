@@ -73,7 +73,7 @@
                         <a-space>
                             <a-button type="primary" size="small" @click="tableCurd.edit.change(record)">编辑</a-button>
                             <a-popconfirm
-                                :title="`你确定删除 ${record.name} 嘛？`"
+                                :title="`你确定删除嘛？`"
                                 ok-text="确认"
                                 cancel-text="关闭"
                                 placement="topRight"
@@ -90,6 +90,9 @@
     </div>
     <bag-modal v-model:visible="tableCurd.create.visible" title="新增" width="85%" @ok="tableCurd.create.submit">
         <bag-curd-create :tableCurd="tableCurd" :form="form" ref="curdCreate"></bag-curd-create>
+    </bag-modal>
+    <bag-modal v-model:visible="tableCurd.edit.visible" title="编辑" width="85%" @ok="tableCurd.edit.submit">
+        <bag-curd-edit :tableCurd="tableCurd" :form="form" ref="formEdit"></bag-curd-edit>
     </bag-modal>
 </template>
 <script lang="ts">
@@ -114,9 +117,15 @@ export default defineComponent({
         },
     },
     setup(props) {
+        const curdCreate = ref()
+        const formEdit = ref()
         const tableCurd = reactive(props.tableCurd)
+        tableCurd.create.refForm = curdCreate // 添加组件
+        tableCurd.edit.refForm = formEdit // 编辑组件
         return {
             tableCurd,
+            curdCreate,
+            formEdit,
         }
     },
 })

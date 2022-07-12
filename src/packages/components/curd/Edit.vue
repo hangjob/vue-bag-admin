@@ -8,37 +8,38 @@
                     <a-form-item :label="item.formData.label" :name="item.formData.name">
                         <component v-if="item.formData.element === 'a-input'" :is="item.formData.element"
                                    v-model:value="formState[item.formData.name]"
-                                   :placeholder="item.formData.placeholder"
+                                   :placeholder="item.formData.props.placeholder"
                         ></component>
                         <component v-if="item.formData.element === 'a-switch'" :is="item.formData.element"
                                    v-model:checked="formState[item.formData.name]"
-                                   :placeholder="item.formData.placeholder"
+                                   :placeholder="item.formData.props.placeholder"
                         ></component>
                         <component v-if="item.formData.element === 'a-textarea'" showCount
-                                   :maxlength="item.formData.maxlength" :is="item.formData.element"
+                                   :maxlength="item.formData.props.maxlength" :is="item.formData.element"
                                    v-model:value="formState[item.formData.name]"
-                                   :placeholder="item.formData.placeholder"
+                                   :placeholder="item.formData.props.placeholder"
                         ></component>
-                        <template v-if="item.formData.element === 'bag-upload-image'">
-                            <a-input v-model:value="formState[item.formData.name]"
-                                     :placeholder="item.formData.placeholder"
-                            />
-                            <bag-upload-image @update:image="baseResources[item.formData.props.onUpdateName]" :image="formState[item.formData.name]"></bag-upload-image>
-                        </template>
                         <template v-if="item.formData.element === 'a-select'">
                             <a-select
                                 v-model:value="formState[item.formData.name]"
-                                mode="tags"
+                                :mode="item.formData.props.mode"
                                 style="width: 100%"
-                                placeholder="选择关键词"
-                                option-label-prop="label"
-                                :options="baseResources.keywords"
+                                :placeholder="item.formData.props.placeholder"
                             >
-                                <template #option="{ value: val, label, icon }">
-                                    <span role="img" :aria-label="val">{{ icon }}</span>
-                                    &nbsp;&nbsp;{{ val }}
-                                </template>
+                                <a-select-option value="">请选择</a-select-option>
+                                <a-select-option v-for="(opt,idx) in item.formData.options" :key="idx"
+                                                 :value="opt.value"
+                                >
+                                    {{ opt.name }}
+                                </a-select-option>
                             </a-select>
+                        </template>
+                        <template v-if="item.formData.element === 'bag-upload-image'">
+                            <a-input v-model:value="formState[item.formData.name]"
+                                     :placeholder="item.formData.props.placeholder"
+                            />
+                            <bag-upload-image v-model:image="formState[item.formData.name]"
+                            ></bag-upload-image>
                         </template>
                     </a-form-item>
                 </a-col>
@@ -47,15 +48,23 @@
     </div>
 </template>
 <script lang="ts">
-import {defineComponent} from 'vue'
+import {defineComponent, reactive, ref} from 'vue'
 
 export default defineComponent({
-    setup() {
-        const {formState, formItem, rules, baseResources, formRef} = hook()
+    props: {
+        form: {
+            type: Object,
+            default: () => {
+                return {rules: {}, formItem: {}, formState: []}
+            },
+        },
+    },
+    setup(props) {
+        const formRef = ref()
+        const {formState, rules, formItem} = reactive(props.form)
         return {
             formState,
             rules,
-            baseResources,
             formRef,
             formItem,
         }

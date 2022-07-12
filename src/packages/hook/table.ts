@@ -78,9 +78,9 @@ export default function() {
                     })
                 })
             },
-            change(record: any) {
-                tableCurd.edit.id = record.id
-                tableCurd.detail.find(record)
+            change(row: any) {
+                tableCurd.edit.id = row.id
+                tableCurd.detail.find(row)
                 tableCurd.edit.visible = true
             },
             // 直接提交
@@ -98,9 +98,9 @@ export default function() {
         delete: {
             api: '',
             id: '',
-            submit(record: any) {
+            submit(row: any) {
                 tableCurd.delete.api = tableCurd.delete.api ? tableCurd.delete.api : tableCurd.apiPrefix + '/delete'
-                post(tableCurd.delete.api, { id: record.id }, { notify: true }).then(() => {
+                post(tableCurd.delete.api, { id: row.id }, { notify: true }).then(() => {
                     tableCurd.all.handle()
                 })
             },
@@ -121,9 +121,9 @@ export default function() {
         detail: {
             api: '',
             afterCallback: <any>'',
-            find(record: any) {
+            find(row: any) {
                 tableCurd.detail.api = tableCurd.detail.api ? tableCurd.detail.api : tableCurd.apiPrefix + '/find'
-                post(tableCurd.detail.api, { id: record.id }).then((res: any) => {
+                post(tableCurd.detail.api, { id: row.id }).then((res: any) => {
                     let { updateTime, ...profileData } = res
                     Object.keys(tableCurd.edit.refForm.formState).forEach((key: string) => {
                         tableCurd.edit.refForm.formState[key] = profileData[key]

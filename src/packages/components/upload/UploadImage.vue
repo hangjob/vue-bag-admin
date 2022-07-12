@@ -103,6 +103,7 @@ export default defineComponent({
             default: true,
         }
     },
+    emits: ['update:image'],
     setup(props, {emit}) {
         const cropper = ref()
         const visible = ref(false);
@@ -149,7 +150,7 @@ export default defineComponent({
                     return {url: item, source: item}
                 })
             }
-        })
+        }, {deep: true,immediate:true})
 
         const emitImages = () => {
             const str = preview.list.map(function (item: any) {
@@ -235,7 +236,7 @@ export default defineComponent({
     img {
         border-radius: 3px;
         height: 120px;
-        width:100%;
+        width: 100%;
         object-fit: cover;
     }
 }

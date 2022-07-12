@@ -34,6 +34,13 @@
                                 </a-select-option>
                             </a-select>
                         </template>
+                        <template v-if="item.formData.element === 'bag-upload-image'">
+                            <a-input v-model:value="formState[item.formData.name]"
+                                     :placeholder="item.formData.props.placeholder"
+                            />
+                            <bag-upload-image v-model:image="formState[item.formData.name]"
+                            ></bag-upload-image>
+                        </template>
                     </a-form-item>
                 </a-col>
             </a-row>
@@ -41,20 +48,20 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue'
+import {defineComponent, reactive, ref} from 'vue'
 
 export default defineComponent({
     props: {
         form: {
             type: Object,
             default: () => {
-                return { rules: {}, formItem: {}, formState: [] }
+                return {rules: {}, formItem: {}, formState: []}
             },
         },
     },
     setup(props) {
         const formRef = ref()
-        const { formState, rules, formItem } = reactive(props.form)
+        const {formState, rules, formItem} = reactive(props.form)
         return {
             formState,
             rules,

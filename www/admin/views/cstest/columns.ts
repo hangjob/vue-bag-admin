@@ -129,48 +129,46 @@ export default [
             },
         },
     },
-    // {
-    //     title: '网站logo',
-    //     dataIndex: 'logo',
-    //     key: 'logo',
-    //     ellipsis: true,
-    //     align: 'center',
-    //     formData: {
-    //         name: 'logo',
-    //         label: '网站logo',
-    //         element: 'bag-upload-image',
-    //         props: {
-    //             placeholder: '上传图片',
-    //             maxlength: 300,
-    //         },
-    //         rules: [
-    //             {
-    //                 required: true, message: '图片为必填项', trigger: 'blur',
-    //             },
-    //         ],
-    //     },
-    // },
-    // {
-    //     title: '登录页面背景图',
-    //     dataIndex: 'loginbg',
-    //     key: 'loginbg',
-    //     ellipsis: true,
-    //     align: 'center',
-    //     formData: {
-    //         name: 'loginbg',
-    //         label: '登录页面背景图',
-    //         element: 'bag-upload-image',
-    //         props: {
-    //             placeholder: '登录页面背景图',
-    //             maxlength: 300,
-    //         },
-    //         rules: [
-    //             {
-    //                 required: true, message: '登录页面背景图', trigger: 'blur',
-    //             },
-    //         ],
-    //     },
-    // },
+    {
+        title: '网站logo',
+        dataIndex: 'logo',
+        key: 'logo',
+        ellipsis: true,
+        align: 'center',
+        formData: {
+            name: 'logo',
+            label: '网站logo',
+            element: 'bag-upload-image',
+            props: {
+                placeholder: '上传图片',
+            },
+            rules: [
+                {
+                    required: true, message: '图片为必填项', trigger: 'blur',
+                },
+            ],
+        },
+    },
+    {
+        title: '登录页面背景图',
+        dataIndex: 'loginbg',
+        key: 'loginbg',
+        ellipsis: true,
+        align: 'center',
+        formData: {
+            name: 'loginbg',
+            label: '登录页面背景图',
+            element: 'bag-upload-image',
+            props: {
+                placeholder: '登录页面背景图',
+            },
+            rules: [
+                {
+                    required: true, message: '登录页面背景图', trigger: 'blur',
+                },
+            ],
+        },
+    },
     {
         title: '创建时间',
         dataIndex: 'createTime',
