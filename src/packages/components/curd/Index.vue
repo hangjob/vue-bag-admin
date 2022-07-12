@@ -25,37 +25,36 @@
                     <slot name="search">
                         <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="18">
                             <div class="bag-curd-header-search">
-                                <a-form class="bag-curd-header-search-form" layout="inline" :model="formSearch">
-                                    <a-form-item label="Activity zone" name="region">
-                                        <a-select style="width:100px" v-model:value="formSearch.aaaa"
-                                                  placeholder="please select your zone"
-                                        >
-                                            <a-select-option value="shanghai">Zone one</a-select-option>
-                                            <a-select-option value="beijing">Zone two</a-select-option>
-                                        </a-select>
-                                    </a-form-item>
-                                    <a-form-item label="Activity time" name="date1">
-                                        <a-date-picker
-                                            v-model:value="formSearch.fieldA"
-                                            show-time
-                                            type="date"
-                                            placeholder="Pick a date"
-                                        />
-                                    </a-form-item>
-                                    <a-form-item label="Field A">
-                                        <a-input v-model:value="formSearch.fieldA"
-                                                 placeholder="input placeholder"
-                                        />
-                                    </a-form-item>
-                                    <a-form-item label="Field B">
-                                        <a-input v-model:value="formSearch.fieldA"
-                                                 placeholder="input placeholder"
-                                        />
+                                <a-form class="bag-curd-header-search-form" layout="inline"
+                                        :model="tableCurd.all.search.formState"
+                                >
+                                    <a-form-item v-for="item in tableCurd.all.search.formItem" :label="item.label"
+                                                 :name="item.name"
+                                    >
+                                        <component v-if="item.element === 'a-input'" :is="item.element"
+                                                   v-model:value="tableCurd.all.search.formState[item.name]"
+                                                   :placeholder="item.props.placeholder"
+                                        ></component>
+                                        <template v-if="item.element === 'a-select'">
+                                            <a-select
+                                                v-model:value="tableCurd.all.search.formState[item.name]"
+                                                :mode="item.props.mode"
+                                                style="width:120px"
+                                                :placeholder="item.props.placeholder"
+                                            >
+                                                <a-select-option value="">请选择</a-select-option>
+                                                <a-select-option v-for="(opt,idx) in item.options" :key="idx"
+                                                                 :value="opt.value"
+                                                >
+                                                    {{ opt.name }}
+                                                </a-select-option>
+                                            </a-select>
+                                        </template>
                                     </a-form-item>
                                     <a-form-item>
-                                        <a-button type="primary">
+                                        <a-button @click="tableCurd.searchTable" type="primary">
                                             <template #icon>
-                                                <SearchOutlined/>
+                                                <SearchOutlined />
                                             </template>
                                             搜索
                                         </a-button>
@@ -89,12 +88,15 @@
             <div class="bag-curd-footer"></div>
         </div>
     </div>
+    <bag-modal v-model:visible="tableCurd.create.visible" title="新增" width="85%" @ok="tableCurd.create.submit">
+        <bag-curd-create :tableCurd="tableCurd" :form="form" ref="curdCreate"></bag-curd-create>
+    </bag-modal>
 </template>
 <script lang="ts">
 /**
  * 该组件一键Curd
  */
-import {defineComponent, reactive} from 'vue'
+import { defineComponent, watch, reactive, ref, shallowReactive } from 'vue'
 
 export default defineComponent({
     name: 'bag-curd-table',
@@ -102,19 +104,19 @@ export default defineComponent({
         tableCurd: {
             type: Object,
             default: () => {
-            }
-        }
+            },
+        },
+        form: {
+            type: Object,
+            default: () => {
+                return { rules: {}, formItem: {}, formState: [] }
+            },
+        },
     },
     setup(props) {
-        const formSearch = reactive({
-            layout: '',
-            fieldA: '',
-            aaaa: ""
-        })
         const tableCurd = reactive(props.tableCurd)
         return {
             tableCurd,
-            formSearch
         }
     },
 })

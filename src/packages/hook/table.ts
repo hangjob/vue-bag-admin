@@ -3,25 +3,25 @@ import { post } from '@/packages/http/request'
 import { toRaw } from 'vue'
 import { message } from 'ant-design-vue'
 import isFunction from '@/bag-utils/regular/isFunction'
+import { createFormItem } from '@/packages/utils/form'
 
 export default function() {
     const tableCurd = reactive({
-        columns:<Array<any>>[],
+        columns: <Array<any>>[],
         tableData: [], // 表格数据
         loading: false, // loading
         selectedRowKeys: [], // 批量选择
-        apiPrefix: '',
+        apiPrefix: '', // 请求前缀，curd
         create: {
-            visible: false,
-            api: '',
-            formState: '',
+            visible: false, //  弹窗是否显示
+            api: '', // API地址
+            formState: '', // 表单数据
             _formState: <any>'',
-            refForm: <any>'',
-            beforeSubmit: <any>'',
+            refForm: <any>'', // 组件ref
+            beforeSubmit: <any>'', // 提交前置函数 ,可以在提交之前处理数据然后在传给后端
             submit() {
                 tableCurd.create.api = tableCurd.create.api ? tableCurd.create.api : tableCurd.apiPrefix + '/create'
                 tableCurd.create._formState = toRaw(tableCurd.create.refForm.formState)
-                console.log(tableCurd.create._formState)
                 if (isFunction(tableCurd.create.beforeSubmit)) {
                     // 在触发之前 传递beforeSubmit函数 加工数据 此处可以进一步加工
                     tableCurd.create._formState = tableCurd.create.beforeSubmit(tableCurd.create._formState)
@@ -43,9 +43,14 @@ export default function() {
             ks: '',
             api: '',
             beforeSuccess: <any>'',
-            handle(callback?: Function) {
+            search: {
+                formItem: <any>[],
+                formState: <any>{},
+                formRules: <any>{},
+            },
+            handle() {
                 tableCurd.all.api = tableCurd.all.api ? tableCurd.all.api : tableCurd.apiPrefix + '/all'
-                post(tableCurd.all.api, { ks: tableCurd.all.ks }).then((res: any) => {
+                post(tableCurd.all.api, { ...tableCurd.all.search.formState }).then((res: any) => {
                     if (isFunction(tableCurd.all.beforeSuccess)) {
                         tableCurd.all.beforeSuccess(res)
                     } else {
@@ -145,4 +150,17 @@ export default function() {
     return {
         tableCurd,
     }
+}
+
+/**
+ * 生成form表单数据
+ * @param columns
+ */
+const formHock = function({ columns }: { columns: Array<any> }) {
+    const { rules, fields, formItem } = createFormItem(columns)
+    return { rules, formState: fields, formItem }
+}
+
+export {
+    formHock,
 }

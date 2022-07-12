@@ -48,7 +48,6 @@
 </template>
 <script lang="ts">
 import {defineComponent} from 'vue'
-import hook from './hook'
 
 export default defineComponent({
     setup() {

@@ -9,12 +9,23 @@ export default [
             name: 'name',
             label: '网站名称',
             element: 'a-input',
-            placeholder: '输入网站名称',
+            props: {
+                placeholder: '输入网站名称',
+            },
             rules: [
                 {
                     required: true, message: '网站名称为必填项', trigger: 'blur',
                 },
             ],
+        },
+        formSearch: {
+            name: 'name',
+            label: '网站名称',
+            element: 'a-input',
+            props: {
+                placeholder: '输入网站名称搜索',
+                value: '',
+            },
         },
     },
     {
@@ -27,12 +38,24 @@ export default [
             name: 'url',
             label: '网站链接',
             element: 'a-input',
-            placeholder: '输入网站链接',
+            props: {
+                placeholder: '输入网站链接',
+            },
             rules: [
                 {
                     required: true, message: '网站链接为必填项', trigger: 'blur',
                 },
             ],
+        },
+        formSearch: {
+            name: 'url',
+            label: '网站链接',
+            element: 'a-select',
+            options: [],
+            props: {
+                placeholder: '输入网站网站链接',
+                value: '',
+            },
         },
     },
     {
@@ -45,7 +68,9 @@ export default [
             name: 'qrcode',
             label: '二维码地址',
             element: 'a-input',
-            placeholder: '二维码地址',
+            props: {
+                placeholder: '二维码地址',
+            },
         },
     },
     {
@@ -59,14 +84,16 @@ export default [
             name: 'slogan',
             label: '描述',
             element: 'a-textarea',
-            placeholder: '输入描述',
-            maxlength: 300,
+            props: {
+                placeholder: '输入描述',
+                maxlength: 300,
+            },
             rules: [
                 {
-                    required: true, message: '输入描述为必填项', trigger: 'blur'
-                }
-            ]
-        }
+                    required: true, message: '输入描述为必填项', trigger: 'blur',
+                },
+            ],
+        },
     },
     {
         title: '关键词',
@@ -78,8 +105,11 @@ export default [
             name: 'keywords',
             label: '关键词',
             element: 'a-select',
-            placeholder: '输入关键词',
-            defaultValue: Array()
+            props: {
+                placeholder: '输入关键词',
+                defaultValue: Array(),
+            },
+
         },
     },
     {
@@ -93,54 +123,54 @@ export default [
             name: 'record',
             label: '备案号',
             element: 'a-textarea',
-            placeholder: '输入备案号',
-            maxlength: 300,
+            props: {
+                placeholder: '输入备案号',
+                maxlength: 300,
+            },
         },
     },
-    {
-        title: '网站logo',
-        dataIndex: 'logo',
-        key: 'logo',
-        ellipsis: true,
-        align: 'center',
-        formData: {
-            name: 'logo',
-            label: '网站logo',
-            element: 'bag-upload-image',
-            placeholder: '上传图片',
-            maxlength: 300,
-            props:{
-                onUpdateName:'updateLogo'
-            },
-            rules: [
-                {
-                    required: true, message: '图片为必填项', trigger: 'blur'
-                }
-            ]
-        }
-    },
-    {
-        title: '登录页面背景图',
-        dataIndex: 'loginbg',
-        key: 'loginbg',
-        ellipsis: true,
-        align: 'center',
-        formData: {
-            name: 'loginbg',
-            label: '登录页面背景图',
-            element: 'bag-upload-image',
-            placeholder: '登录页面背景图',
-            maxlength: 300,
-            props:{
-                onUpdateName:'updateLoginbg'
-            },
-            rules: [
-                {
-                    required: true, message: '登录页面背景图', trigger: 'blur'
-                }
-            ]
-        }
-    },
+    // {
+    //     title: '网站logo',
+    //     dataIndex: 'logo',
+    //     key: 'logo',
+    //     ellipsis: true,
+    //     align: 'center',
+    //     formData: {
+    //         name: 'logo',
+    //         label: '网站logo',
+    //         element: 'bag-upload-image',
+    //         props: {
+    //             placeholder: '上传图片',
+    //             maxlength: 300,
+    //         },
+    //         rules: [
+    //             {
+    //                 required: true, message: '图片为必填项', trigger: 'blur',
+    //             },
+    //         ],
+    //     },
+    // },
+    // {
+    //     title: '登录页面背景图',
+    //     dataIndex: 'loginbg',
+    //     key: 'loginbg',
+    //     ellipsis: true,
+    //     align: 'center',
+    //     formData: {
+    //         name: 'loginbg',
+    //         label: '登录页面背景图',
+    //         element: 'bag-upload-image',
+    //         props: {
+    //             placeholder: '登录页面背景图',
+    //             maxlength: 300,
+    //         },
+    //         rules: [
+    //             {
+    //                 required: true, message: '登录页面背景图', trigger: 'blur',
+    //             },
+    //         ],
+    //     },
+    // },
     {
         title: '创建时间',
         dataIndex: 'createTime',
@@ -154,6 +184,6 @@ export default [
         key: 'action',
         align: 'center',
         width: 200,
-        slots: {customRender: 'action'},
+        slots: { customRender: 'action' },
     },
 ]

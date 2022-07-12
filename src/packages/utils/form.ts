@@ -4,13 +4,13 @@
  */
 const createFormItem = (columns: Array<any>) => {
     const rules = <any>{}
-    const fields = <any>{};
+    const fields = <any>{}
     const formItem = columns.filter(item => item.formData).map((item: any) => {
         if (item.formData.rules) {
-            rules[item.formData.name] = item.formData.rules;
+            rules[item.formData.name] = item.formData.rules
         }
-        fields[item.formData.name] = item.formData?.defaultValue || '';
-        fields['autoLink'] = 'autoLink' in item.formData ? true : item.formData.autoLink;
+        fields[item.formData.name] = item.formData?.defaultValue || ''
+        fields['autoLink'] = 'autoLink' in item.formData ? true : item.formData.autoLink
         return {
             ...item,
             xs: item.formData?.xs || 24,
@@ -24,10 +24,10 @@ const createFormItem = (columns: Array<any>) => {
     return {
         rules,
         fields,
-        formItem
+        formItem,
     }
 }
 
 export {
-    createFormItem
+    createFormItem,
 }
