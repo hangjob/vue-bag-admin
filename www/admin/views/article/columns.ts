@@ -34,7 +34,26 @@ export default [
         key: 'image',
         ellipsis: true,
         align: 'center',
-        slots: { customRender: 'image' },
+        slots: {customRender: 'image'},
+    },
+    {
+        title: '内容',
+        dataIndex: 'content',
+        key: 'content',
+        ellipsis: true,
+        align: 'center',
+        visible: true,
+        formData: {
+            name: 'content',
+            label: '内容',
+            element: 'md-editor',
+            props: {
+                placeholder: '输入内容',
+                previewTheme: 'mk-cute',
+                codeTheme: 'paraiso',
+                autoLink:false
+            },
+        },
     },
     {
         title: '描述',
@@ -42,7 +61,7 @@ export default [
         key: 'describe',
         ellipsis: true,
         align: 'center',
-        slots: { customRender: 'describe' },
+        slots: {customRender: 'describe'},
     },
     {
         title: '浏览次数',
@@ -103,6 +122,6 @@ export default [
         key: 'action',
         align: 'center',
         width: 200,
-        slots: { customRender: 'action' },
+        slots: {customRender: 'action'},
     },
 ]

@@ -9,7 +9,9 @@ export default [
             name: 'name',
             label: '用户昵称',
             element: 'a-input',
-            placeholder: '输入用户昵称',
+            props:{
+                placeholder: '输入用户昵称',
+            },
             rules: [
                 {
                     required: true, message: '用户昵称为必填项', trigger: 'blur',
@@ -27,7 +29,9 @@ export default [
             name: 'email',
             label: '邮箱',
             element: 'a-input',
-            placeholder: '输入邮箱',
+            props: {
+                placeholder: '输入邮箱',
+            },
             rules: [
                 {
                     required: true, message: '邮箱为必填项', trigger: 'blur',
@@ -45,7 +49,9 @@ export default [
             name: 'url',
             label: '网站链接',
             element: 'a-input',
-            placeholder: '网站链接',
+            props: {
+                placeholder: '网站链接',
+            }
         },
     },
     {
@@ -58,8 +64,10 @@ export default [
             name: 'message',
             label: '留言记录',
             element: 'a-textarea',
-            placeholder: '输入留言记录',
-            maxlength: 300,
+            props: {
+                placeholder: '输入留言记录',
+                maxlength: 300,
+            },
             rules: [
                 {
                     required: true, message: '留言记录为必填项', trigger: 'blur'
@@ -81,9 +89,11 @@ export default [
             name: 'shows',
             label: '是否显示',
             element: 'a-switch',
-            placeholder: '是否显示',
-            checkedText: '是',
-            uncheckedText: '否'
+            props: {
+                placeholder: '是否显示',
+                checkedText: '是',
+                uncheckedText: '否'
+            }
         }
     },
     {

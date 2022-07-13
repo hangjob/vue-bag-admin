@@ -13,6 +13,8 @@
                         <component v-if="item.formData.element === 'a-switch'" :is="item.formData.element"
                                    v-model:checked="formState[item.formData.name]"
                                    :placeholder="item.formData.props.placeholder"
+                                   :checked-children="item.formData.props.checkedText"
+                                   :un-checked-children="item.formData.props.unchecke"
                         ></component>
                         <component v-if="item.formData.element === 'a-textarea'" showCount
                                    :maxlength="item.formData.props.maxlength" :is="item.formData.element"
@@ -38,7 +40,11 @@
                             <a-input v-model:value="formState[item.formData.name]"
                                      :placeholder="item.formData.props.placeholder"
                             />
-                            <bag-upload-image v-model:image="formState[item.formData.name]"
+                            <bag-upload-image :fixedBox="item.formData.props.fixedBox"
+                                              :autoCropWidth="item.formData.props.autoCropWidth"
+                                              :autoCropHeight="item.formData.props.autoCropHeight"
+                                              :isFileMore="item.formData.props.isFileMore"
+                                              v-model:image="formState[item.formData.name]"
                             ></bag-upload-image>
                         </template>
                     </a-form-item>

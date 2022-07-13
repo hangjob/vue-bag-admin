@@ -20,7 +20,9 @@ export default [
             name: 'name',
             label: '图片名称',
             element: 'a-input',
-            placeholder: '输入图片名称',
+            props: {
+                placeholder: '输入图片名称',
+            }
         },
     },
     {
@@ -33,14 +35,11 @@ export default [
             name: 'groupimg_id',
             label: '选择分组',
             element: 'a-select',
+            options: [],
             props: {
                 mode: null,
-                options: [],
-                placeholder: '选择分组',
-                optsKey: 'groupimg',
-                optNmae: 'name',
+                defaultValue: '',
             },
-            defaultValue: '',
         },
     },
     {
@@ -53,10 +52,9 @@ export default [
             name: 'image',
             label: '图片地址',
             element: 'bag-upload-image',
-            placeholder: '上传图片',
-            maxlength: 300,
             props: {
-                onUpdateName: 'updateImage',
+                placeholder: '上传图片',
+                maxlength: 300,
                 isFileMore: false, // 是否多传
                 autoCropHeight: 500
             },
@@ -77,14 +75,12 @@ export default [
             name: 'keywords',
             label: '关键词',
             element: 'a-select',
+            options: [],
             props: {
                 mode: null,
-                options: [],
+                defaultValue: '',
                 placeholder: '选择关键词',
-                optsKey: 'keywords',
-                optNmae: 'name',
             },
-            defaultValue: '',
         },
     },
     {

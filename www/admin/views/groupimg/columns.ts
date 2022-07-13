@@ -17,7 +17,9 @@ export default [
             name: 'name',
             label: '分组名称',
             element: 'a-input',
-            placeholder: '输入分组名称',
+            props:{
+                placeholder: '输入分组名称'
+            },
             rules: [
                 {
                     required: true, message: '分组名称为必填项', trigger: 'blur',
@@ -35,7 +37,9 @@ export default [
             name: 'order',
             label: '排序',
             element: 'a-input',
-            placeholder: '输入排序',
+            props: {
+                placeholder: '输入排序',
+            }
         },
     },
     {

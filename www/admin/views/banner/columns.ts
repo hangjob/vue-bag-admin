@@ -9,7 +9,9 @@ export default [
             name: 'name',
             label: '图片名称',
             element: 'a-input',
-            placeholder: '输入图片名称',
+            props: {
+                placeholder: '输入图片名称',
+            }
         },
     },
     {
@@ -22,7 +24,9 @@ export default [
             name: 'describe',
             label: '图片描述',
             element: 'a-textarea',
-            placeholder: '输入图片描述',
+            props: {
+                placeholder: '输入图片描述',
+            }
         },
     },
     {
@@ -31,19 +35,22 @@ export default [
         key: 'image',
         ellipsis: true,
         align: 'center',
-        slots: {customRender: 'image'},
         formData: {
             name: 'image',
-            label: 'banner图',
+            label: '图片地址',
             element: 'bag-upload-image',
-            placeholder: '上传banner图片',
-            maxlength: 300,
+            props: {
+                placeholder: '上传图片',
+                maxlength: 300,
+                isFileMore: false, // 是否多传
+                autoCropHeight: 500
+            },
             rules: [
                 {
-                    required: true, message: '图片为必填项', trigger: 'blur',
-                },
-            ],
-        },
+                    required: true, message: 'banner图为必填项', trigger: 'blur'
+                }
+            ]
+        }
     },
     {
         title: '链接地址',
@@ -55,7 +62,9 @@ export default [
             name: 'url',
             label: '链接地址',
             element: 'a-input',
-            placeholder: '输入链接地址',
+            props: {
+                placeholder: '输入链接地址',
+            }
         },
     },
     {
@@ -72,10 +81,12 @@ export default [
             name: 'shows',
             label: '是否显示',
             element: 'a-switch',
-            placeholder: '是否显示',
-            checkedText: '是',
-            uncheckedText: '否',
-            defaultValue: true,
+            props: {
+                placeholder: '是否显示',
+                checkedText: '是',
+                uncheckedText: '否',
+                defaultValue: true,
+            }
         },
     },
     {
@@ -88,12 +99,12 @@ export default [
             name: 'type',
             label: '类型',
             element: 'a-select',
+            options: [{label: '类型1', value: 1}, {label: '类型2', value: 2}],
             props: {
                 mode: null,
-                options: [{label: '类型1', value: 1}, {label: '类型2', value: 2}],
                 placeholder: '选择类型',
+                defaultValue: 1,
             },
-            defaultValue: 1,
         },
     },
     {

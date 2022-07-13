@@ -13,12 +13,23 @@
                         <component v-if="item.formData.element === 'a-switch'" :is="item.formData.element"
                                    v-model:checked="formState[item.formData.name]"
                                    :placeholder="item.formData.props.placeholder"
+                                   :checked-children="item.formData.props.checkedText"
+                                   :un-checked-children="item.formData.props.uncheckedText"
                         ></component>
                         <component v-if="item.formData.element === 'a-textarea'" showCount
                                    :maxlength="item.formData.props.maxlength" :is="item.formData.element"
                                    v-model:value="formState[item.formData.name]"
                                    :placeholder="item.formData.props.placeholder"
                         ></component>
+                        <component v-if="item.formData.element === 'a-date-picker'" :is="item.formData.element"
+                                   v-model:value="formState[item.formData.name]"
+                                   :show-time="item.formData.props.showTime"
+                                   :valueFormat="item.formData.props.valueFormat"
+                                   :type="item.formData.props.type"
+                                   :placeholder="item.formData.props.placeholder"
+                                   style="width: 100%"
+                        >
+                        </component>
                         <template v-if="item.formData.element === 'a-select'">
                             <a-select
                                 v-model:value="formState[item.formData.name]"
@@ -38,7 +49,11 @@
                             <a-input v-model:value="formState[item.formData.name]"
                                      :placeholder="item.formData.props.placeholder"
                             />
-                            <bag-upload-image v-model:image="formState[item.formData.name]"
+                            <bag-upload-image :fixedBox="item.formData.props.fixedBox"
+                                              :autoCropWidth="item.formData.props.autoCropWidth"
+                                              :autoCropHeight="item.formData.props.autoCropHeight"
+                                              :isFileMore="item.formData.props.isFileMore"
+                                              v-model:image="formState[item.formData.name]"
                             ></bag-upload-image>
                         </template>
                     </a-form-item>

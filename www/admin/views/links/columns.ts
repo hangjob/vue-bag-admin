@@ -9,7 +9,9 @@ export default [
             name: 'name',
             label: '网站名称',
             element: 'a-input',
-            placeholder: '输入网站名称',
+            props: {
+                placeholder: '输入网站名称',
+            },
             rules: [
                 {
                     required: true, message: '网站名称为必填项', trigger: 'blur',
@@ -27,7 +29,9 @@ export default [
             name: 'url',
             label: '网站链接',
             element: 'a-input',
-            placeholder: '输入网站链接',
+            props: {
+                placeholder: '输入网站链接',
+            },
             rules: [
                 {
                     required: true, message: '网站链接为必填项', trigger: 'blur',
@@ -46,8 +50,10 @@ export default [
             name: 'describe',
             label: '描述',
             element: 'a-textarea',
-            placeholder: '输入描述',
-            maxlength: 300,
+            props: {
+                placeholder: '输入描述',
+                maxlength: 300,
+            },
             rules: [
                 {
                     required: true, message: '输入描述为必填项', trigger: 'blur'
@@ -65,13 +71,12 @@ export default [
             name: 'logo',
             label: '网站logo',
             element: 'bag-upload-image',
-            placeholder: '上传图片',
-            maxlength: 300,
             props: {
-                onUpdateName: 'updateLogo',
                 fixedBox: false,
                 autoCropWidth: 100,
-                autoCropHeight: 100
+                autoCropHeight: 100,
+                placeholder: '上传图片',
+                maxlength: 300,
             },
             rules: [
                 {

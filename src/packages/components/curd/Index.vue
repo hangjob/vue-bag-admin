@@ -156,6 +156,9 @@ export default defineComponent({
                 justify-content: end;
             }
         }
+        .ant-form-inline .ant-form-item:last-of-type{
+            margin-right: 0;
+        }
     }
 
     &-body {
