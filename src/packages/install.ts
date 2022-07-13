@@ -5,7 +5,8 @@ import * as $axios from '@/packages/http/request'
 import { handleError } from '@/packages/debug'
 import { Component, readonly } from 'vue'
 import { themeConfig, httpNetwork, webSite } from '@/packages/config'
-import setupGlobal from "@/common/global";
+import setupGlobal from '@/common/global'
+import curdTableHock, { initTableHock } from '@/packages/hook/table'
 
 /**
  * router: {paths:[菜单],file:[菜单路由文件]},defaults:true,开启默认路由
@@ -72,4 +73,6 @@ export default install
 export {
     $optionsType,
     $axios,
+    curdTableHock,
+    initTableHock,
 }

@@ -152,15 +152,45 @@ export default function() {
     }
 }
 
+
 /**
  * 生成form表单数据
  * @param columns
+ * @param tableCurd
  */
+
 const formHock = function({ columns }: { columns: Array<any> }) {
     const { rules, fields, formItem } = createFormItem(columns)
     return { rules, formState: fields, formItem }
 }
 
+
+/**1
+ * 初始化准备工作
+ * @param columns
+ * @param tableCurd
+ * @param options
+ */
+const initTableHock = function({
+    columns,
+    tableCurd,
+    options = {},
+}: { columns: Array<any>, tableCurd: any, options: any }) {
+    tableCurd.columns = columns.filter((item) => item.visible !== false) // 过滤表格不需要展示的列
+    columns.filter((item) => item.formSearch && Object.keys(item.formSearch).length).map((item: any) => {  // 设置需要表单的搜索的字段
+        tableCurd.all.search.formState[item.formSearch.name] = item.formSearch.props?.defaultValue || ''
+        tableCurd.all.search.formItem.push(item.formSearch)
+    })
+    options = Object.assign({ send: true }, options)
+    tableCurd.apiPrefix = options.apiPrefix
+    if (options.send) {
+        tableCurd.all.handle() // 执行数据请求
+    }
+    return formHock({ columns })
+}
+
+
 export {
     formHock,
+    initTableHock,
 }

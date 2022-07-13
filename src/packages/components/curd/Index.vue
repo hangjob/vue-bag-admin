@@ -89,10 +89,10 @@
         </div>
     </div>
     <bag-modal v-model:visible="tableCurd.create.visible" title="新增" width="85%" @ok="tableCurd.create.submit">
-        <bag-curd-create :tableCurd="tableCurd" :form="form" ref="curdCreate"></bag-curd-create>
+        <bag-curd-create :tableCurd="tableCurd" :form="createForm" ref="curdCreate"></bag-curd-create>
     </bag-modal>
     <bag-modal v-model:visible="tableCurd.edit.visible" title="编辑" width="85%" @ok="tableCurd.edit.submit">
-        <bag-curd-edit :tableCurd="tableCurd" :form="form" ref="formEdit"></bag-curd-edit>
+        <bag-curd-edit :tableCurd="tableCurd" :form="editForm" ref="curdEdit"></bag-curd-edit>
     </bag-modal>
 </template>
 <script lang="ts">
@@ -109,7 +109,13 @@ export default defineComponent({
             default: () => {
             },
         },
-        form: {
+        createForm: {
+            type: Object,
+            default: () => {
+                return { rules: {}, formItem: {}, formState: [] }
+            },
+        },
+        editForm: {
             type: Object,
             default: () => {
                 return { rules: {}, formItem: {}, formState: [] }
@@ -118,14 +124,14 @@ export default defineComponent({
     },
     setup(props) {
         const curdCreate = ref()
-        const formEdit = ref()
+        const curdEdit = ref()
         const tableCurd = reactive(props.tableCurd)
         tableCurd.create.refForm = curdCreate // 添加组件
-        tableCurd.edit.refForm = formEdit // 编辑组件
+        tableCurd.edit.refForm = curdEdit // 编辑组件
         return {
             tableCurd,
             curdCreate,
-            formEdit,
+            curdEdit,
         }
     },
 })
