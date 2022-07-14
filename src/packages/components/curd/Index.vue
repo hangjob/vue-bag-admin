@@ -3,7 +3,7 @@
         <div class="bag-curd-container">
             <div class="bag-curd-header">
                 <a-row type="flex">
-                    <slot name="action">
+                    <slot name="header-action">
                         <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="6">
                             <div class="bag-curd-header-action">
                                 <a-space :size="20">
@@ -22,7 +22,7 @@
                             </div>
                         </a-col>
                     </slot>
-                    <slot name="search">
+                    <slot name="header-search">
                         <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="18">
                             <div class="bag-curd-header-search">
                                 <a-form class="bag-curd-header-search-form" layout="inline"
@@ -54,7 +54,7 @@
                                     <a-form-item>
                                         <a-button @click="tableCurd.searchTable" type="primary">
                                             <template #icon>
-                                                <SearchOutlined />
+                                                <SearchOutlined/>
                                             </template>
                                             搜索
                                         </a-button>
@@ -71,7 +71,7 @@
                 >
                     <template #action="{ record }">
                         <a-space>
-                            <slot name="action"></slot>
+                            <slot name="table-action" v-bind="{record}"></slot>
                             <a-button type="primary" size="small" @click="tableCurd.edit.change(record)">编辑</a-button>
                             <a-popconfirm
                                 :title="`你确定删除嘛？`"
@@ -90,7 +90,13 @@
         </div>
     </div>
     <bag-modal v-model:visible="tableCurd.create.visible" title="新增" width="85%" @ok="tableCurd.create.submit">
-        <bag-curd-create :tableCurd="tableCurd" :form="createForm" ref="curdCreate"></bag-curd-create>
+        <bag-curd-create :tableCurd="tableCurd" :form="createForm" ref="curdCreate">
+            <template v-for="item in createForm.formItem">
+                <template v-if="item.formData.slotName">
+                    <template v-slot:[item.formData.slotName] :key="item.name"></template>
+                </template>
+            </template>
+        </bag-curd-create>
     </bag-modal>
     <bag-modal v-model:visible="tableCurd.edit.visible" title="编辑" width="85%" @ok="tableCurd.edit.submit">
         <bag-curd-create :tableCurd="tableCurd" :form="editForm" ref="curdEdit"></bag-curd-create>
@@ -100,7 +106,7 @@
 /**
  * 该组件一键Curd
  */
-import { defineComponent, watch, reactive, ref, shallowReactive } from 'vue'
+import {defineComponent, watch, reactive, ref, shallowReactive} from 'vue'
 
 export default defineComponent({
     name: 'bag-curd-table',
@@ -113,13 +119,13 @@ export default defineComponent({
         createForm: {
             type: Object,
             default: () => {
-                return { rules: {}, formItem: {}, formState: [] }
+                return {rules: {}, formItem: {}, formState: []}
             },
         },
         editForm: {
             type: Object,
             default: () => {
-                return { rules: {}, formItem: {}, formState: [] }
+                return {rules: {}, formItem: {}, formState: []}
             },
         },
     },

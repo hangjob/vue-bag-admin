@@ -17,7 +17,9 @@ export default [
             name: 'title',
             label: '应用标题',
             element: 'a-input',
-            placeholder: '输入应用标题',
+            props: {
+                placeholder: '输入应用标题',
+            },
             rules: [
                 {
                     required: true, message: '应用标题为必填项', trigger: 'blur',
@@ -35,14 +37,12 @@ export default [
             name: 'user_id',
             label: '用户ID',
             element: 'a-select',
+            options: [],
             props: {
                 mode: null,
-                options: [],
                 placeholder: '选择类型',
-                optsKey: 'user',
-                optNmae: 'username',
+                defaultValue: '',
             },
-            defaultValue: '',
         },
     },
     {
@@ -56,8 +56,10 @@ export default [
             name: 'title_style',
             label: '标题样式',
             element: 'a-textarea',
-            placeholder: '输入标题样式',
-            maxlength: 300,
+            props: {
+                placeholder: '输入标题样式',
+                maxlength: 300,
+            },
         },
     },
     {
@@ -70,14 +72,12 @@ export default [
             name: 'channel_id',
             label: '栏目id',
             element: 'a-select',
+            options: [],
             props: {
                 mode: null,
-                options: [],
                 placeholder: '栏目id',
-                optsKey: 'channel',
-                optNmae: 'name',
+                defaultValue: '',
             },
-            defaultValue: '',
         },
     },
     {
@@ -86,16 +86,15 @@ export default [
         key: 'image',
         ellipsis: true,
         align: 'center',
-        slots: { customRender: 'image' },
+        slots: {customRender: 'image'},
         formData: {
             name: 'image',
             label: '图片',
             element: 'bag-upload-image',
-            placeholder: '上传图片',
-            maxlength: 300,
             props: {
                 isFileMore: false,
-                onUpdateName: 'updateImage',
+                placeholder: '上传图片',
+                maxlength: 300,
             },
         },
     },
@@ -105,13 +104,15 @@ export default [
         key: 'describe',
         ellipsis: true,
         align: 'center',
-        slots: { customRender: 'describe' },
+        slots: {customRender: 'describe'},
         formData: {
             name: 'describe',
             label: '描述',
             element: 'a-textarea',
-            placeholder: '输入描述',
-            maxlength: 300,
+            props: {
+                placeholder: '输入描述',
+                maxlength: 300,
+            },
             rules: [
                 {
                     required: true, message: '输入描述为必填项', trigger: 'blur',
@@ -139,8 +140,14 @@ export default [
             label: '内容',
             element: 'md-editor',
             autoLink: false,
-            labelCol: { span: 3, offset: 0 },
-            wrapperCol: { span: 19, offset: 0 },
+            labelCol: {
+                span: 2,
+                offset: 0,
+            },
+            wrapperCol: {
+                span: 21,
+                offset: 0,
+            },
             props: {
                 placeholder: '输入内容',
             },
@@ -164,10 +171,16 @@ export default [
         formData: {
             name: 'download_site',
             label: '下载地址',
-            slot: '',
+            slotName: 'BagDownloadSite',
             element: 'bag-download-site',
-            labelCol: { span: 3, offset: 0 },
-            wrapperCol: { span: 19, offset: 0 },
+            labelCol: {
+                span: 2,
+                offset: 0,
+            },
+            wrapperCol: {
+                span: 21,
+                offset: 0,
+            },
         },
     },
     {
@@ -181,14 +194,14 @@ export default [
             name: 'flag',
             label: '热度',
             element: 'a-select',
+            options: [{name: '置顶', value: '置顶'}, {name: '最新', value: '最新'}, {
+                name: '推荐', value: '推荐',
+            }, {name: '热门', value: '热门'}],
             props: {
                 mode: null,
-                options: [],
                 placeholder: '选择热度',
-                optsKey: 'flag',
-                optNmae: 'name',
+                defaultValue: '推荐',
             },
-            defaultValue: '',
         },
     },
     {
@@ -221,7 +234,9 @@ export default [
             name: 'views',
             label: '浏览次数',
             element: 'a-input',
-            placeholder: '输入浏览次数',
+            props: {
+                placeholder: '输入浏览次数',
+            }
         },
     },
     {
@@ -236,7 +251,9 @@ export default [
             name: 'likes',
             label: '点赞次数',
             element: 'a-input',
-            placeholder: '输入点赞次数',
+            props: {
+                placeholder: '输入点赞次数',
+            }
         },
     },
     {
@@ -251,7 +268,9 @@ export default [
             name: 'dislikes',
             label: '点踩次数',
             element: 'a-input',
-            placeholder: '输入点踩次数',
+            props: {
+                placeholder: '输入点踩次数',
+            }
         },
     },
     {
@@ -266,7 +285,9 @@ export default [
             name: 'comments',
             label: '评论数量',
             element: 'a-input',
-            placeholder: '输入评论数量',
+            props: {
+                placeholder: '输入评论数量',
+            }
         },
     },
     {
@@ -284,10 +305,12 @@ export default [
             name: 'is_guest',
             label: '是否显示',
             element: 'a-switch',
-            placeholder: '是否显示',
-            checkedText: '是',
-            uncheckedText: '否',
-            defaultValue: true,
+            props: {
+                placeholder: '是否显示',
+                checkedText: '是',
+                uncheckedText: '否',
+                defaultValue: true,
+            }
         },
     },
     {
@@ -305,10 +328,12 @@ export default [
             name: 'is_comment',
             label: '是否显示',
             element: 'a-switch',
-            placeholder: '是否显示',
-            checkedText: '是',
-            uncheckedText: '否',
-            defaultValue: true,
+            props: {
+                placeholder: '是否显示',
+                checkedText: '是',
+                uncheckedText: '否',
+                defaultValue: true,
+            }
         },
     },
     {
@@ -324,6 +349,6 @@ export default [
         key: 'action',
         align: 'center',
         width: 200,
-        slots: { customRender: 'action' },
+        slots: {customRender: 'action'},
     },
 ]

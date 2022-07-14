@@ -6,6 +6,14 @@ const columns = [
         align: 'center',
         ellipsis: true,
         width: 150,
+        formData: {
+            name: 'name',
+            label: '角色名称',
+            element: 'a-input',
+            props: {
+                placeholder: '输入内容',
+            },
+        },
     },
     {
         title: '标识符',
@@ -14,7 +22,15 @@ const columns = [
         ellipsis: true,
         align: 'center',
         width: 150,
-        slots: {customRender: 'tag'}
+        slots: {customRender: 'tag'},
+        formData: {
+            name: 'tag',
+            label: '标识符',
+            element: 'a-input',
+            props: {
+                placeholder: '输入标识符',
+            },
+        },
     },
     {
         title: '描述',
@@ -22,7 +38,15 @@ const columns = [
         key: 'describe',
         ellipsis: true,
         align: 'center',
-        slots: {customRender: 'describe'}
+        slots: {customRender: 'describe'},
+        formData: {
+            name: 'describe',
+            label: '描述',
+            element: 'a-textarea',
+            props: {
+                placeholder: '输入描述',
+            },
+        },
     },
     {
         title: '排序',
@@ -31,7 +55,15 @@ const columns = [
         ellipsis: true,
         align: 'center',
         width: 120,
-        slots: {customRender: 'order'}
+        slots: {customRender: 'order'},
+        formData: {
+            name: 'order',
+            label: '排序',
+            element: 'a-input',
+            props: {
+                placeholder: '输入排序',
+            },
+        },
     },
     {
         title: '创建时间',
