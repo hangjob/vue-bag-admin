@@ -92,7 +92,7 @@
         <bag-curd-create :tableCurd="tableCurd" :form="createForm" ref="curdCreate"></bag-curd-create>
     </bag-modal>
     <bag-modal v-model:visible="tableCurd.edit.visible" title="编辑" width="85%" @ok="tableCurd.edit.submit">
-        <bag-curd-edit :tableCurd="tableCurd" :form="editForm" ref="curdEdit"></bag-curd-edit>
+        <bag-curd-create :tableCurd="tableCurd" :form="editForm" ref="curdEdit"></bag-curd-create>
     </bag-modal>
 </template>
 <script lang="ts">
@@ -156,7 +156,8 @@ export default defineComponent({
                 justify-content: end;
             }
         }
-        .ant-form-inline .ant-form-item:last-of-type{
+
+        .ant-form-inline .ant-form-item:last-of-type {
             margin-right: 0;
         }
     }

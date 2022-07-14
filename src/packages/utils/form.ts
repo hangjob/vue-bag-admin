@@ -10,16 +10,22 @@ const createFormItem = (columns: Array<any>) => {
             rules[item.formData.name] = item.formData.rules
         }
         fields[item.formData.name] = item.formData?.props?.defaultValue || ''
-        fields['autoLink'] = 'autoLink' in item.formData ? true : item.formData?.props?.autoLink
+        item.formData.autoLink = 'autoLink' in item.formData ? item.formData.autoLink : true
+        item.formData.labelCol = 'labelCol' in item.formData ? item.formData.labelCol : { span: 4, offset: 0 }
+        item.formData.wrapperCol = 'wrapperCol' in item.formData ? item.formData.wrapperCol : { span: 18, offset: 0 }
+        if (item.formData.props && item.formData.element === 'a-textarea') {
+            item.formData.props.rows = 'rows' in item.formData.props ? item.formData.props.rows : 4
+        }
         return {
             ...item,
-            xs: item.formData?.xs || 24,
-            sm: item.formData?.sm || 24,
-            md: item.formData?.md || 24,
-            lg: item.formData?.lg || 12,
-            xl: item.formData?.xl || 12,
+            xs: item.layout?.xs || 24,
+            sm: item.layout?.sm || 24,
+            md: item.layout?.md || 24,
+            lg: item.layout?.lg || 12,
+            xl: item.layout?.xl || 12,
         }
     })
+
 
     return {
         rules,

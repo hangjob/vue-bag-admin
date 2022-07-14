@@ -2,10 +2,16 @@
     <div>
         <a-form ref="formRef" :model="formState" :rules="rules" :label-col="{span: 6}" :wrapper-col="{span: 15}">
             <a-row>
-                <a-col v-for="item in formItem" :key="item.name" :xs="item.xs" :sm="item.sm" :md="item.md" :lg="item.lg"
+                <a-col :autoLink="item.formData.autoLink" v-for="item in formItem" :key="item.name" :xs="item.xs"
+                       :sm="item.sm"
+                       :md="item.md"
+                       :lg="item.lg"
                        :xl="item.xl"
                 >
-                    <a-form-item :label="item.formData.label" :name="item.formData.name">
+                    <a-form-item :label="item.formData.label" :name="item.formData.name"
+                                 :labelCol="item.formData.labelCol"
+                                 :wrapperCol="item.formData.wrapperCol"
+                    >
                         <component v-if="item.formData.element === 'a-input'" :is="item.formData.element"
                                    v-model:value="formState[item.formData.name]"
                                    :placeholder="item.formData.props.placeholder"
@@ -19,6 +25,7 @@
                         <component v-if="item.formData.element === 'a-textarea'" showCount
                                    :maxlength="item.formData.props.maxlength" :is="item.formData.element"
                                    v-model:value="formState[item.formData.name]"
+                                   :rows="item.formData.props.rows"
                                    :placeholder="item.formData.props.placeholder"
                         ></component>
                         <component v-if="item.formData.element === 'a-date-picker'" :is="item.formData.element"
@@ -56,6 +63,15 @@
                                               v-model:image="formState[item.formData.name]"
                             ></bag-upload-image>
                         </template>
+                        <template v-if="item.formData.element === 'md-editor'">
+                            <md-editor :previewTheme="item.formData.props.previewTheme"
+                                       :codeTheme="item.formData.props.codeTheme"
+                                       @onUploadImg="(files,callback)=>onUploadImg(files,callback,{
+                                           fileSize:item.formData.props.fileSize
+                                       })"
+                                       v-model="formState[item.formData.name]"
+                            />
+                        </template>
                     </a-form-item>
                 </a-col>
             </a-row>
@@ -63,25 +79,48 @@
     </div>
 </template>
 <script lang="ts">
-import {defineComponent, reactive, ref} from 'vue'
+import { defineComponent, inject, reactive, ref } from 'vue'
+import { message } from 'ant-design-vue'
+import { apiUploadImage } from '@/packages/service/upload'
 
 export default defineComponent({
     props: {
         form: {
             type: Object,
             default: () => {
-                return {rules: {}, formItem: {}, formState: []}
+                return { rules: {}, formItem: {}, formState: [] }
             },
         },
     },
     setup(props) {
         const formRef = ref()
-        const {formState, rules, formItem} = reactive(props.form)
+        const { formState, rules, formItem } = reactive(props.form)
+        const { getImageFullPath } = inject<any>('bagGlobal')
+
+        const onUploadImg = async (files: any, callback: Function, { fileSize }) => {
+            const res = await Promise.all(
+                Array.from(files).map((file: any) => {
+                    return new Promise((rev, rej) => {
+                        if ((file.size / 1024) < fileSize) {
+                            message.error(`图片小于${fileSize}KB`)
+                        } else {
+                            apiUploadImage(file).then((data: any) => {
+                                rev(getImageFullPath(data))
+                            }).catch((err: any) => {
+                                rej(err)
+                            })
+                        }
+                    })
+                }),
+            )
+            callback(res.map((item: any) => item))
+        }
         return {
             formState,
             rules,
             formRef,
             formItem,
+            onUploadImg,
         }
     },
 })

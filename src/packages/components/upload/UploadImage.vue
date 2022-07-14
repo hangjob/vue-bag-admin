@@ -48,14 +48,14 @@
     </div>
 </template>
 <script lang="ts">
-import {defineComponent, inject, nextTick, reactive, ref, watch} from 'vue'
+import { defineComponent, inject, nextTick, reactive, ref, watch } from 'vue'
 import 'vue-cropper/dist/index.css'
-import {VueCropper} from 'vue-cropper'
-import {apiUploadImage} from '@/packages/service/upload'
-import {message} from 'ant-design-vue'
+import { VueCropper } from 'vue-cropper'
+import { apiUploadImage } from '@/packages/service/upload'
+import { message } from 'ant-design-vue'
 import base64ToFile from '@/bag-utils/file/base64ToFile'
 import fileToBase64 from '@/bag-utils/file/fileToBase64'
-import {apiAll} from '@www/admin/service/material'
+import { apiAll } from '@www/admin/service/material'
 
 interface FileItem {
     uid: string;
@@ -84,7 +84,7 @@ export default defineComponent({
         },
         fileSize: {
             type: Number,
-            default: 1,
+            default: 512,
         },
         fixedBox: {
             type: Boolean,
@@ -101,13 +101,13 @@ export default defineComponent({
         isFileMore: {
             type: Boolean,
             default: true,
-        }
+        },
     },
     emits: ['update:image'],
-    setup(props, {emit}) {
+    setup(props, { emit }) {
         const cropper = ref()
-        const visible = ref(false);
-        const images = ref([]);
+        const visible = ref(false)
+        const images = ref([])
         const preview = reactive({
             list: <any>[],
             handleDelete: (idx: number) => {
@@ -124,36 +124,35 @@ export default defineComponent({
                 tailor.loading = true
                 cropper.value.getCropData((base64: any) => {
                     const file = base64ToFile(base64, tailor.fileName)
-                    const isLt2M = file.size / 1024 / 1024 < props.fileSize
-                    if (!isLt2M) {
-                        message.error(`文件小于${props.fileSize}MB`)
-                        return false
+                    if ((file.size / 1024) < props.fileSize) {
+                        message.error(`文件小于${props.fileSize}KB`)
+                    } else {
+                        apiUploadImage(file).then((data: any) => {
+                            tailor.visible = false
+                            tailor.loading = false
+                            if (props.isFileMore) {
+                                preview.list.push({ url: data, source: data })
+                            } else {
+                                preview.list[0] = { url: data, source: data }
+                            }
+                            message.success('上传成功')
+                            emitImages()
+                        })
                     }
-                    apiUploadImage(file).then((data: any) => {
-                        tailor.visible = false
-                        tailor.loading = false
-                        if (props.isFileMore) {
-                            preview.list.push({url: data, source: data})
-                        } else {
-                            preview.list[0] = {url: data, source: data};
-                        }
-                        message.success('上传成功')
-                        emitImages()
-                    })
                 })
             },
         })
-        const {getImageFullPath} = inject<any>('bagGlobal')
+        const { getImageFullPath } = inject<any>('bagGlobal')
         watch(() => props.image, (newVal) => {
             if (newVal) {
                 preview.list = newVal?.split(',').map((item: any) => {
-                    return {url: item, source: item}
+                    return { url: item, source: item }
                 })
             }
-        }, {deep: true,immediate:true})
+        }, { deep: true, immediate: true })
 
         const emitImages = () => {
-            const str = preview.list.map(function (item: any) {
+            const str = preview.list.map(function(item: any) {
                 return item.source
             }).join(',')
             emit('update:image', str)
@@ -166,7 +165,7 @@ export default defineComponent({
                 message.error('请上传图片为,jpeg、png')
                 return false
             }
-            fileToBase64(file, ({base64}: { base64: any }) => {
+            fileToBase64(file, ({ base64 }: { base64: any }) => {
                 tailor.base64 = base64
                 tailor.visible = true
             })
@@ -178,19 +177,19 @@ export default defineComponent({
 
         const handleSelect = (item: any) => {
             if (props.isFileMore) {
-                preview.list.push({url: item.image, source: item.image})
+                preview.list.push({ url: item.image, source: item.image })
             } else {
-                preview.list[0] = {url: item.image, source: item.image};
+                preview.list[0] = { url: item.image, source: item.image }
             }
             emitImages()
-            visible.value = false;
+            visible.value = false
         }
 
         const handleSelectImage = () => {
-            visible.value = true;
+            visible.value = true
             nextTick(() => {
                 apiAll().then((res: any) => {
-                    images.value = res;
+                    images.value = res
                 })
             })
         }
@@ -206,7 +205,7 @@ export default defineComponent({
             images,
             handleSelectImage,
             handleAffirm,
-            handleSelect
+            handleSelect,
         }
     },
 })

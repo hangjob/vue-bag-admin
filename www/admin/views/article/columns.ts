@@ -5,7 +5,7 @@ export default [
         key: 'id',
         ellipsis: true,
         align: 'center',
-        width: 80
+        width: 80,
     },
     {
         title: '标题',
@@ -13,6 +13,14 @@ export default [
         key: 'title',
         ellipsis: true,
         align: 'center',
+        formData: {
+            name: 'title',
+            label: '标题',
+            element: 'a-input',
+            props: {
+                placeholder: '输入标题',
+            },
+        },
     },
     {
         title: '用户ID',
@@ -20,21 +28,134 @@ export default [
         key: 'user_id',
         align: 'center',
         ellipsis: true,
+        formData: {
+            name: 'user_id',
+            label: '用户ID',
+            element: 'a-input',
+            props: {
+                placeholder: '用户ID',
+            },
+        },
     },
     {
-        title: '栏目id',
+        title: '标题样式',
+        dataIndex: 'title_style',
+        key: 'title_style',
+        ellipsis: true,
+        align: 'center',
+        visible: false,
+        formData: {
+            name: 'title_style',
+            label: '标题样式',
+            element: 'a-textarea',
+            props: {
+                placeholder: '输入标题样式',
+                maxlength: 300,
+            },
+        },
+    },
+    {
+        title: '栏目ID',
         dataIndex: 'channel_id',
         key: 'channel_id',
         ellipsis: true,
         align: 'center',
+        formData: {
+            name: 'channel_id',
+            label: '栏目ID',
+            element: 'a-input',
+            props: {
+                placeholder: '栏目ID',
+            },
+        },
     },
     {
-        title: '图片',
+        title: '热度',
+        dataIndex: 'flag',
+        key: 'flag',
+        ellipsis: true,
+        align: 'center',
+        width: 100,
+        visible: false,
+        formData: {
+            name: 'flag',
+            label: '热度',
+            element: 'a-select',
+            options: [{ name: '置顶', value: '置顶' }, { name: '最新', value: '最新' }, {
+                name: '推荐', value: '推荐',
+            }, { name: '热门', value: '热门' }],
+            props: {
+                placeholder: '选择热度',
+            },
+        },
+    },
+    {
+        title: '关键词',
+        dataIndex: 'keywords',
+        key: 'keywords',
+        ellipsis: true,
+        align: 'center',
+        width: 100,
+        visible: false,
+        formData: {
+            name: 'keywords',
+            label: '关键词',
+            element: 'a-select',
+            options: [],
+            props: {
+                placeholder: '选择关键词',
+            },
+        },
+    },
+    {
+        title: '封面图',
         dataIndex: 'image',
         key: 'image',
         ellipsis: true,
         align: 'center',
-        slots: {customRender: 'image'},
+        slots: { customRender: 'image' },
+        formData: {
+            name: 'image',
+            label: '封面图',
+            element: 'bag-upload-image',
+            props: {
+                placeholder: '上传封面图',
+                isFileMore: false,
+            },
+        },
+    },
+    {
+        title: '组图',
+        dataIndex: 'images',
+        key: 'images',
+        ellipsis: true,
+        align: 'center',
+        slots: { customRender: 'images' },
+        formData: {
+            name: 'images',
+            label: '组图',
+            element: 'bag-upload-image',
+            props: {
+                placeholder: '上传组图',
+            },
+        },
+    },
+    {
+        title: '内容简述',
+        dataIndex: 'describe',
+        key: 'describe',
+        ellipsis: true,
+        align: 'center',
+        visible: false,
+        formData: {
+            name: 'describe',
+            label: '内容简述',
+            element: 'a-textarea',
+            props: {
+                placeholder: '输入内容简述',
+                maxlength: 300,
+            },
+        },
     },
     {
         title: '内容',
@@ -42,26 +163,53 @@ export default [
         key: 'content',
         ellipsis: true,
         align: 'center',
-        visible: true,
+        visible: false,
+        layout: {
+            xs: 24,
+            sm: 24,
+            md: 24,
+            lg: 24,
+            xl: 24,
+        },
         formData: {
             name: 'content',
             label: '内容',
             element: 'md-editor',
+            autoLink: false,
+            labelCol: {
+                span: 2,
+                offset: 0,
+            },
+            wrapperCol: {
+                span: 21,
+                offset: 0,
+            },
             props: {
                 placeholder: '输入内容',
                 previewTheme: 'mk-cute',
                 codeTheme: 'paraiso',
-                autoLink:false
+                fileSize: 1000,
             },
         },
     },
     {
-        title: '描述',
-        dataIndex: 'describe',
-        key: 'describe',
+        title: '选择时间',
+        dataIndex: 'createTime',
+        key: 'createTime',
         ellipsis: true,
         align: 'center',
-        slots: {customRender: 'describe'},
+        width: 100,
+        formData: {
+            name: 'createTime',
+            label: '选择时间',
+            element: 'a-date-picker',
+            props: {
+                valueFormat: 'YYYY-MM-DD HH:mm:ss',
+                placeholder: '选择时间',
+                showTime: true,
+                type: 'date',
+            },
+        },
     },
     {
         title: '浏览次数',
@@ -70,6 +218,14 @@ export default [
         ellipsis: true,
         align: 'center',
         width: 100,
+        formData: {
+            name: 'views',
+            label: '浏览次数',
+            element: 'a-input',
+            props: {
+                placeholder: '输入浏览次数',
+            },
+        },
     },
     {
         title: '点赞次数',
@@ -78,6 +234,31 @@ export default [
         ellipsis: true,
         align: 'center',
         width: 100,
+        formData: {
+            name: 'likes',
+            label: '点赞次数',
+            element: 'a-input',
+            props: {
+                placeholder: '输入点赞次数',
+            },
+        },
+    },
+    {
+        title: '评论数量',
+        dataIndex: 'comments',
+        key: 'comments',
+        ellipsis: true,
+        align: 'center',
+        width: 100,
+        visible: false,
+        formData: {
+            name: 'comments',
+            label: '评论数量',
+            element: 'a-input',
+            props: {
+                placeholder: '输入评论数量',
+            },
+        },
     },
     {
         title: '游客访问',
@@ -88,6 +269,17 @@ export default [
         width: 100,
         customRender: (item: any) => {
             return item.text ? '是' : '否'
+        },
+        formData: {
+            name: 'is_guest',
+            label: '是否显示',
+            element: 'a-switch',
+            props: {
+                placeholder: '是否显示',
+                checkedText: '是',
+                uncheckedText: '否',
+                defaultValue: true,
+            },
         },
     },
     {
@@ -100,14 +292,17 @@ export default [
         customRender: (item: any) => {
             return item.text ? '是' : '否'
         },
-    },
-    {
-        title: '热度',
-        dataIndex: 'flag',
-        key: 'flag',
-        ellipsis: true,
-        align: 'center',
-        width: 100,
+        formData: {
+            name: 'is_comment',
+            label: '是否评论',
+            element: 'a-switch',
+            props: {
+                placeholder: '是否评论',
+                checkedText: '是',
+                uncheckedText: '否',
+                defaultValue: true,
+            },
+        },
     },
     {
         title: '创建时间',
@@ -122,6 +317,6 @@ export default [
         key: 'action',
         align: 'center',
         width: 200,
-        slots: {customRender: 'action'},
+        slots: { customRender: 'action' },
     },
 ]
