@@ -72,6 +72,9 @@
                                        v-model="formState[item.formData.name]"
                             />
                         </template>
+                        <template>
+                            <slot name="action"></slot>
+                        </template>
                     </a-form-item>
                 </a-col>
             </a-row>

@@ -71,6 +71,7 @@
                 >
                     <template #action="{ record }">
                         <a-space>
+                            <slot name="action"></slot>
                             <a-button type="primary" size="small" @click="tableCurd.edit.change(record)">编辑</a-button>
                             <a-popconfirm
                                 :title="`你确定删除嘛？`"

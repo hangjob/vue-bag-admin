@@ -57,7 +57,7 @@ export default [
             label: '标题样式',
             element: 'a-textarea',
             placeholder: '输入标题样式',
-            maxlength:300,
+            maxlength: 300,
         },
     },
     {
@@ -94,7 +94,7 @@ export default [
             placeholder: '上传图片',
             maxlength: 300,
             props: {
-                isFileMore:false,
+                isFileMore: false,
                 onUpdateName: 'updateImage',
             },
         },
@@ -125,20 +125,25 @@ export default [
         key: 'content',
         ellipsis: true,
         align: 'left',
-        visible:false,
-        formData: {
-            name: 'content',
-            label: '内容',
-            element: 'md-editor',
-            placeholder: '输入内容',
-            autoLink:false,
+        visible: false,
+        layout: {
             xs: 24,
             sm: 24,
             md: 24,
             lg: 24,
             xl: 24,
+
+        },
+        formData: {
+            name: 'content',
+            label: '内容',
+            element: 'md-editor',
+            autoLink: false,
             labelCol: { span: 3, offset: 0 },
             wrapperCol: { span: 19, offset: 0 },
+            props: {
+                placeholder: '输入内容',
+            },
         },
     },
     {
@@ -149,15 +154,18 @@ export default [
         align: 'center',
         width: 100,
         visible: false,
-        formData: {
-            name: 'download_site',
-            label: '下载地址',
-            element: 'bag-download-site',
+        layout: {
             xs: 24,
             sm: 24,
             md: 24,
             lg: 24,
             xl: 24,
+        },
+        formData: {
+            name: 'download_site',
+            label: '下载地址',
+            slot: '',
+            element: 'bag-download-site',
             labelCol: { span: 3, offset: 0 },
             wrapperCol: { span: 19, offset: 0 },
         },
@@ -197,8 +205,8 @@ export default [
             props: {
                 valueFormat: 'YYYY-MM-DD HH:mm:ss',
                 placeholder: '选择时间',
-                showTime:true,
-                type:'date'
+                showTime: true,
+                type: 'date',
             },
         },
     },
@@ -223,7 +231,7 @@ export default [
         ellipsis: true,
         align: 'center',
         width: 100,
-        visible:false,
+        visible: false,
         formData: {
             name: 'likes',
             label: '点赞次数',
@@ -238,7 +246,7 @@ export default [
         ellipsis: true,
         align: 'center',
         width: 100,
-        visible:false,
+        visible: false,
         formData: {
             name: 'dislikes',
             label: '点踩次数',
@@ -253,7 +261,7 @@ export default [
         ellipsis: true,
         align: 'center',
         width: 100,
-        visible:false,
+        visible: false,
         formData: {
             name: 'comments',
             label: '评论数量',
@@ -268,7 +276,7 @@ export default [
         ellipsis: true,
         align: 'center',
         width: 100,
-        visible:false,
+        visible: false,
         customRender: (item: any) => {
             return item.text ? '是' : '否'
         },
@@ -289,7 +297,7 @@ export default [
         ellipsis: true,
         align: 'center',
         width: 100,
-        visible:false,
+        visible: false,
         customRender: (item: any) => {
             return item.text ? '是' : '否'
         },
