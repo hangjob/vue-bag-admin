@@ -2,7 +2,7 @@
     <div class="bag-curd">
         <div class="bag-curd-container">
             <div class="bag-curd-header">
-                <a-row style="margin-bottom: 20px" type="flex">
+                <a-row type="flex">
                     <slot name="header-action">
                         <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
                             <div class="bag-curd-header-action">
@@ -26,7 +26,20 @@
                         <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
                             <div class="bag-curd-header-prolate">
                                 <a-row type="flex" justify="end">
-                                    <a-col :xs="12" :sm="4" :md="2" :lg="1" :xl="1">
+                                    <a-col :xs="4" :sm="3" :md="2" :lg="1" :xl="1">
+                                        <a-popover trigger="click" placement="bottomRight">
+                                            <template #content>
+                                                <a-button type="primary" @click="exportTableData({tableCurd,columns})" ghost>
+                                                    Excel导出
+                                                </a-button>
+                                            </template>
+                                            <template #title>
+                                                <span>数据导出</span>
+                                            </template>
+                                            <MehOutlined twoToneColor="#eb2f96"/>
+                                        </a-popover>
+                                    </a-col>
+                                    <a-col :xs="4" :sm="3" :md="2" :lg="1" :xl="1">
                                         <a-popover trigger="click" placement="bottomRight">
                                             <template #content>
                                                 <a-radio-group v-model:value="tableSetting.size" button-style="solid">
@@ -42,10 +55,10 @@
                                             <template #title>
                                                 <span>表格大小</span>
                                             </template>
-                                            <BarsOutlined />
+                                            <SmileOutlined twoToneColor="#eb2f96"/>
                                         </a-popover>
                                     </a-col>
-                                    <a-col :xs="12" :sm="4" :md="2" :lg="1" :xl="1">
+                                    <a-col :xs="4" :sm="3" :md="2" :lg="1" :xl="1">
                                         <a-popover trigger="click" placement="bottomRight">
                                             <template #content>
                                                 <div v-for="(item,idx) in columnsAll" :key="idx">
@@ -60,7 +73,7 @@
                                             <template #title>
                                                 <span>显示列</span>
                                             </template>
-                                            <LayoutOutlined />
+                                            <HeartTwoTone twoToneColor="#eb2f96"/>
                                         </a-popover>
                                     </a-col>
                                 </a-row>
@@ -101,7 +114,7 @@
                                     <a-form-item>
                                         <a-button @click="tableCurd.searchTable" type="primary">
                                             <template #icon>
-                                                <SearchOutlined />
+                                                <SearchOutlined/>
                                             </template>
                                             搜索
                                         </a-button>
@@ -158,9 +171,9 @@
 /**
  * 该组件一键Curd
  */
-import { defineComponent, watch, reactive, ref, shallowReactive } from 'vue'
-import { columnsCheckbox, findNearestTarget } from './utils'
-import { cloneDeep } from 'lodash'
+import {defineComponent, watch, reactive, ref, shallowReactive} from 'vue'
+import {columnsCheckbox, findNearestTarget, exportTableData} from './utils'
+import {cloneDeep} from 'lodash'
 
 export default defineComponent({
     name: 'bag-curd-table',
@@ -173,44 +186,41 @@ export default defineComponent({
         createForm: {
             type: Object,
             default: () => {
-                return { rules: {}, formItem: {}, formState: [] }
+                return {rules: {}, formItem: {}, formState: []}
             },
         },
         editForm: {
             type: Object,
             default: () => {
-                return { rules: {}, formItem: {}, formState: [] }
+                return {rules: {}, formItem: {}, formState: []}
             },
         },
     },
-    setup(props, { emit }) {
+    setup(props, {emit}) {
         const curdCreate = ref()
         const curdEdit = ref()
         const tableCurd = reactive(props.tableCurd)
         tableCurd.create.refForm = curdCreate // 添加组件
         tableCurd.edit.refForm = curdEdit // 编辑组件
         let columns = reactive(cloneDeep(tableCurd.columns))
-        const columnsAll = reactive(columnsCheckbox({ tableCurd }))
+        const columnsAll = reactive(columnsCheckbox({tableCurd}))
 
         const tableSetting = reactive({
             size: 'middle',
             sizeOptions: [
-                { name: '默认', value: 'default' },
-                { name: '中等', value: 'middle' },
-                { name: '比较小', value: 'small' },
+                {name: '默认', value: 'default'},
+                {name: '中等', value: 'middle'},
+                {name: '比较小', value: 'small'},
             ],
         })
-        const checkboxChange = ({ target, item }) => {
+        const checkboxChange = ({target, item}) => {
             if (target.checked) {
                 const sortIndex = findNearestTarget(columns.map(todo => todo.sortIndex), item.sortIndex) // 找到最近的下标
-                console.log(sortIndex)
                 let findIndex = columns.findIndex((todo) => todo.sortIndex === sortIndex)
-                console.log(findIndex)
                 if (item.sortIndex !== 0 && findIndex !== columns.length) {
                     findIndex += 1
                 }
-                console.log(item.sortIndex)
-                columns.splice(findIndex, 0, { ...item })
+                columns.splice(findIndex, 0, {...item})
             } else {
                 const findIndex = columns.findIndex((todo) => todo.key === item.key)
                 columns.splice(findIndex, 1)
@@ -224,6 +234,7 @@ export default defineComponent({
             columns,
             tableSetting,
             checkboxChange,
+            exportTableData
         }
     },
 })
@@ -243,6 +254,8 @@ export default defineComponent({
 
         &-prolate {
             text-align: right;
+            margin-top: 10px;
+            margin-bottom: 10px;
         }
 
 

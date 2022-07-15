@@ -1,6 +1,6 @@
 <template>
     <div class="right_menu-item">
-        <input class="key-input" v-model="searchKey" @keydown.enter="handleKeyBoard($event,handleEnter)"
+        <input class="key-input" placeholder="输入关键词" v-model="searchKey" @keydown.enter="handleKeyBoard($event,handleEnter)"
                :class="searchActive" type="text"
         >
         <SearchOutlined class="icon-svg icon-search" @click="handleSearch" />

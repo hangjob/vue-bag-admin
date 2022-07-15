@@ -1,8 +1,10 @@
+import XLSX from 'xlsx';
+
 /**
  * 处理
  * @param tableCurd
  */
-const columnsCheckbox = ({ tableCurd }) => {
+const columnsCheckbox = ({tableCurd}) => {
     return tableCurd.sourceData.columns.map((item) => {
         return {
             ...item,
@@ -35,7 +37,26 @@ const findNearestTarget = (arr, target) => {
     return Math.abs(target - arr[l]) <= Math.abs(target - arr[r]) ? arr[l] : arr[r]
 }
 
+
+const exportTableData = ({tableCurd, columns}: { tableCurd: any, columns: any }) => {
+    const tableHead = columns.map((item) => item.key)
+    const tableBody = tableCurd.tableData.map((item) => {
+        const data: any = [];
+        for (const itemKey in item) {
+            if (tableHead.indexOf(itemKey) > -1) {
+                data.push(item[itemKey])
+            }
+        }
+        return data;
+    })
+    const ws = XLSX.utils.aoa_to_sheet([tableHead, ...tableBody]);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    XLSX.writeFile(wb, 'table.xlsx');
+}
+
 export {
     columnsCheckbox,
     findNearestTarget,
+    exportTableData
 }
