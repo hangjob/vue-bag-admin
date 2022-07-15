@@ -5,6 +5,11 @@
 const createFormItem = (columns: Array<any>) => {
     const rules = <any>{}
     const fields = <any>{}
+
+    columns.forEach((item, index) => {
+        item.sortIndex = index
+    })
+
     const formItem = columns.filter(item => item.formData).map((item: any) => {
         if (item.formData.rules) {
             rules[item.formData.name] = item.formData.rules

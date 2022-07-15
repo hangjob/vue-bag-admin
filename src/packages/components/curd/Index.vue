@@ -2,9 +2,9 @@
     <div class="bag-curd">
         <div class="bag-curd-container">
             <div class="bag-curd-header">
-                <a-row type="flex">
+                <a-row style="margin-bottom: 20px" type="flex">
                     <slot name="header-action">
-                        <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="6">
+                        <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
                             <div class="bag-curd-header-action">
                                 <a-space :size="20">
                                     <a-button type="primary" size="middle" :loading="tableCurd.loading"
@@ -22,8 +22,55 @@
                             </div>
                         </a-col>
                     </slot>
+                    <slot name="header-prolate">
+                        <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+                            <div class="bag-curd-header-prolate">
+                                <a-row type="flex" justify="end">
+                                    <a-col :xs="12" :sm="4" :md="2" :lg="1" :xl="1">
+                                        <a-popover trigger="click" placement="bottomRight">
+                                            <template #content>
+                                                <a-radio-group v-model:value="tableSetting.size" button-style="solid">
+                                                    <a-radio-button
+                                                        :value="item.value"
+                                                        :key="item.value"
+                                                        v-for="item in tableSetting.sizeOptions"
+                                                    >
+                                                        {{ item.name }}
+                                                    </a-radio-button>
+                                                </a-radio-group>
+                                            </template>
+                                            <template #title>
+                                                <span>表格大小</span>
+                                            </template>
+                                            <BarsOutlined />
+                                        </a-popover>
+                                    </a-col>
+                                    <a-col :xs="12" :sm="4" :md="2" :lg="1" :xl="1">
+                                        <a-popover trigger="click" placement="bottomRight">
+                                            <template #content>
+                                                <div v-for="(item,idx) in columnsAll" :key="idx">
+                                                    <a-checkbox
+                                                        v-model:checked="item.visible"
+                                                        :disabled="item.disabled"
+                                                        @change="({target})=>checkboxChange({target,item})"
+                                                    >{{ item.title }}
+                                                    </a-checkbox>
+                                                </div>
+                                            </template>
+                                            <template #title>
+                                                <span>显示列</span>
+                                            </template>
+                                            <LayoutOutlined />
+                                        </a-popover>
+                                    </a-col>
+                                </a-row>
+                            </div>
+                        </a-col>
+                    </slot>
+                </a-row>
+                <a-row>
                     <slot name="header-search">
-                        <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="18">
+                        <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                             <div class="bag-curd-header-search">
                                 <a-form class="bag-curd-header-search-form" layout="inline"
                                         :model="tableCurd.all.search.formState"
@@ -66,7 +113,8 @@
                 </a-row>
             </div>
             <div class="bag-curd-body">
-                <a-table rowKey="id" :scroll="{ x: '85%' }" :columns="tableCurd.columns" size="middle" :bordered="true"
+                <a-table rowKey="id" :scroll="{ x: '85%' }" :columns="columns" :size="tableSetting.size"
+                         :bordered="true"
                          :data-source="tableCurd.tableData" :row-selection="tableCurd.selection"
                 >
                     <template #action="{ record }">
@@ -111,6 +159,8 @@
  * 该组件一键Curd
  */
 import { defineComponent, watch, reactive, ref, shallowReactive } from 'vue'
+import { columnsCheckbox, findNearestTarget } from './utils'
+import { cloneDeep } from 'lodash'
 
 export default defineComponent({
     name: 'bag-curd-table',
@@ -133,16 +183,47 @@ export default defineComponent({
             },
         },
     },
-    setup(props) {
+    setup(props, { emit }) {
         const curdCreate = ref()
         const curdEdit = ref()
         const tableCurd = reactive(props.tableCurd)
         tableCurd.create.refForm = curdCreate // 添加组件
         tableCurd.edit.refForm = curdEdit // 编辑组件
+        let columns = reactive(cloneDeep(tableCurd.columns))
+        const columnsAll = reactive(columnsCheckbox({ tableCurd }))
+
+        const tableSetting = reactive({
+            size: 'middle',
+            sizeOptions: [
+                { name: '默认', value: 'default' },
+                { name: '中等', value: 'middle' },
+                { name: '比较小', value: 'small' },
+            ],
+        })
+        const checkboxChange = ({ target, item }) => {
+            if (target.checked) {
+                const sortIndex = findNearestTarget(columns.map(todo => todo.sortIndex), item.sortIndex) // 找到最近的下标
+                console.log(sortIndex)
+                let findIndex = columns.findIndex((todo) => todo.sortIndex === sortIndex)
+                console.log(findIndex)
+                if (item.sortIndex !== 0 && findIndex !== columns.length) {
+                    findIndex += 1
+                }
+                console.log(item.sortIndex)
+                columns.splice(findIndex, 0, { ...item })
+            } else {
+                const findIndex = columns.findIndex((todo) => todo.key === item.key)
+                columns.splice(findIndex, 1)
+            }
+        }
         return {
             tableCurd,
             curdCreate,
             curdEdit,
+            columnsAll,
+            columns,
+            tableSetting,
+            checkboxChange,
         }
     },
 })
@@ -160,13 +241,10 @@ export default defineComponent({
     &-header {
         padding: 15px;
 
-        &-search {
-            &-form {
-                flex: 1;
-                display: flex;
-                justify-content: end;
-            }
+        &-prolate {
+            text-align: right;
         }
+
 
         .ant-form-inline .ant-form-item:last-of-type {
             margin-right: 0;

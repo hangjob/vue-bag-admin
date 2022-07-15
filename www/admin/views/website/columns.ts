@@ -1,5 +1,18 @@
 export default [
     {
+        title: '序号',
+        dataIndex: 'index',
+        key: 'index',
+        align: 'center',
+        ellipsis: true,
+        width: 70,
+        visible: false,
+        disabled: true,
+        customRender: ({ index }: { index: number }) => {
+            return index + 1
+        },
+    },
+    {
         title: '网站名称',
         dataIndex: 'name',
         key: 'name',
@@ -172,6 +185,7 @@ export default [
         title: '操作',
         key: 'action',
         align: 'center',
+        disabled: true,
         width: 200,
         slots: { customRender: 'action' },
     },

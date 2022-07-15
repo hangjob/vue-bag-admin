@@ -193,25 +193,6 @@ export default [
         },
     },
     {
-        title: '选择时间',
-        dataIndex: 'createTime',
-        key: 'createTime',
-        ellipsis: true,
-        align: 'center',
-        width: 100,
-        formData: {
-            name: 'createTime',
-            label: '选择时间',
-            element: 'a-date-picker',
-            props: {
-                valueFormat: 'YYYY-MM-DD HH:mm:ss',
-                placeholder: '选择时间',
-                showTime: true,
-                type: 'date',
-            },
-        },
-    },
-    {
         title: '浏览次数',
         dataIndex: 'views',
         key: 'views',
@@ -308,9 +289,20 @@ export default [
         title: '创建时间',
         dataIndex: 'createTime',
         key: 'createTime',
-        align: 'center',
         ellipsis: true,
-        width: 200,
+        align: 'center',
+        width: 100,
+        formData: {
+            name: 'createTime',
+            label: '创建时间',
+            element: 'a-date-picker',
+            props: {
+                valueFormat: 'YYYY-MM-DD HH:mm:ss',
+                placeholder: '选择时间',
+                showTime: true,
+                type: 'date',
+            },
+        },
     },
     {
         title: '操作',

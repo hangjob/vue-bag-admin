@@ -7,7 +7,7 @@ import iconfont from './iconfont/Index'
 import uploadImage from './upload/UploadImage.vue'
 import curdTable from './curd/Index.vue'
 import curdCreate from './curd/Create.vue'
-import curdEdit from './curd/Edit.vue'
+// import curdEdit from './curd/Edit.vue'
 // import MdEditor from './editor/MdEditor.vue'
 
 const setupGlobComponents = (app: App) => {
@@ -15,7 +15,6 @@ const setupGlobComponents = (app: App) => {
     app.component('bag-form-table', formTable)
     app.component('bag-curd-table', curdTable)
     app.component('bag-curd-create', curdCreate)
-    app.component('bag-curd-edit', curdEdit)
     app.component('bag-modal', modal)
     app.component('bag-view', view)
     app.component('bag-iconfont', iconfont)

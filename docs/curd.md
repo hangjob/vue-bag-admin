@@ -88,6 +88,41 @@ export default [
         },
     },
     {
+        title: '内容',
+        dataIndex: 'content',
+        key: 'content',
+        ellipsis: true,
+        align: 'center',
+        visible: false,
+        layout: {
+            xs: 24,
+            sm: 24,
+            md: 24,
+            lg: 24,
+            xl: 24,
+        },
+        formData: {
+            name: 'content',
+            label: '内容',
+            element: 'md-editor',
+            autoLink: false,
+            labelCol: {
+                span: 2,
+                offset: 0,
+            },
+            wrapperCol: {
+                span: 21,
+                offset: 0,
+            },
+            props: {
+                placeholder: '输入内容',
+                previewTheme: 'mk-cute',
+                codeTheme: 'paraiso',
+                fileSize: 1000,
+            },
+        },
+    },
+    {
         title: '关键词',
         dataIndex: 'keywords',
         key: 'keywords',
