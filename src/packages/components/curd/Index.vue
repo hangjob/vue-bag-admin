@@ -54,7 +54,7 @@
                                     <a-form-item>
                                         <a-button @click="tableCurd.searchTable" type="primary">
                                             <template #icon>
-                                                <SearchOutlined/>
+                                                <SearchOutlined />
                                             </template>
                                             搜索
                                         </a-button>
@@ -86,27 +86,31 @@
                     </template>
                 </a-table>
             </div>
-            <div class="bag-curd-footer"></div>
+            <div class="bag-curd-footer">
+            </div>
         </div>
     </div>
     <bag-modal v-model:visible="tableCurd.create.visible" title="新增" width="85%" @ok="tableCurd.create.submit">
         <bag-curd-create :tableCurd="tableCurd" :form="createForm" ref="curdCreate">
-            <template v-for="item in createForm.formItem">
-                <template v-if="item.formData.slotName">
-                    <template v-slot:[item.formData.slotName] :key="item.name"></template>
-                </template>
+            <!-- 多层级插槽传递 -->
+            <template v-for="(item) in createForm.formItem" v-slot:[item.formData.slotName]>
+                <slot :name="item.formData.slotName" v-bind="{formState:createForm.formState,item}"></slot>
             </template>
         </bag-curd-create>
     </bag-modal>
     <bag-modal v-model:visible="tableCurd.edit.visible" title="编辑" width="85%" @ok="tableCurd.edit.submit">
-        <bag-curd-create :tableCurd="tableCurd" :form="editForm" ref="curdEdit"></bag-curd-create>
+        <bag-curd-create :tableCurd="tableCurd" :form="editForm" ref="curdEdit">
+            <template v-for="(item) in createForm.formItem" v-slot:[item.formData.slotName]>
+                <slot :name="item.formData.slotName" v-bind="{formState:createForm.formState,item}"></slot>
+            </template>
+        </bag-curd-create>
     </bag-modal>
 </template>
 <script lang="ts">
 /**
  * 该组件一键Curd
  */
-import {defineComponent, watch, reactive, ref, shallowReactive} from 'vue'
+import { defineComponent, watch, reactive, ref, shallowReactive } from 'vue'
 
 export default defineComponent({
     name: 'bag-curd-table',
@@ -119,13 +123,13 @@ export default defineComponent({
         createForm: {
             type: Object,
             default: () => {
-                return {rules: {}, formItem: {}, formState: []}
+                return { rules: {}, formItem: {}, formState: [] }
             },
         },
         editForm: {
             type: Object,
             default: () => {
-                return {rules: {}, formItem: {}, formState: []}
+                return { rules: {}, formItem: {}, formState: [] }
             },
         },
     },

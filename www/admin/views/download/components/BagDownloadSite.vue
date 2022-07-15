@@ -10,11 +10,11 @@
                         <a-input v-model:value="editableData[record.key].name"
                                  @pressEnter="dataForm.saveItem(record.key)"
                         />
-                        <check-outlined class="editable-cell-icon-check" @click="dataForm.saveItem(record.key)"/>
+                        <check-outlined class="editable-cell-icon-check" @click="dataForm.saveItem(record.key)" />
                     </div>
                     <div v-else class="editable-cell-text-wrapper">
                         {{ text || ' ' }}
-                        <edit-outlined class="editable-cell-icon" @click="dataForm.editItem(record.key)"/>
+                        <edit-outlined class="editable-cell-icon" @click="dataForm.editItem(record.key)" />
                     </div>
                 </div>
             </template>
@@ -24,12 +24,12 @@
                         <a-input v-model:value="editableData[record.key].url"
                                  @pressEnter="dataForm.saveItem(record.key)"
                         />
-                        <check-outlined class="editable-cell-icon-check" @click="dataForm.saveItem(record.key)"/>
+                        <check-outlined class="editable-cell-icon-check" @click="dataForm.saveItem(record.key)" />
                         <a-button size="small" style="margin:0 10px">上传文件</a-button>
                     </div>
                     <div v-else class="editable-cell-text-wrapper">
                         {{ text || ' ' }}
-                        <edit-outlined class="editable-cell-icon" @click="dataForm.editItem(record.key)"/>
+                        <edit-outlined class="editable-cell-icon" @click="dataForm.editItem(record.key)" />
                     </div>
                 </div>
             </template>
@@ -43,8 +43,8 @@
     </a-form-item>
 </template>
 <script lang="ts">
-import {defineComponent, reactive, ref, UnwrapRef, computed, watchEffect, watch, onMounted} from 'vue';
-import {cloneDeep} from 'lodash-es';
+import { defineComponent, reactive, ref, UnwrapRef, computed, watchEffect, watch, onMounted } from 'vue'
+import { cloneDeep } from 'lodash-es'
 
 export default defineComponent({
     props: {
@@ -52,60 +52,59 @@ export default defineComponent({
             type: Object,
             require: true,
             default: () => {
-            }
+            },
         },
         formState: {
             type: Object,
             require: true,
             default: () => {
-            }
-        }
+            },
+        },
     },
-    setup(props) {
-        const dataSource: any = ref([]);
-        const editableData: any = reactive({});
-        const count = computed(() => dataSource.value.length + 1);
+    setup(props, { emit }) {
+        const dataSource: any = ref([])
+        const editableData: any = reactive({})
+        const count = computed(() => dataSource.value.length + 1)
         const dataForm = reactive({
-            items: [],
             deleteItem: (key: string) => {
-                dataSource.value = dataSource.value.filter(item => item.key !== key);
+                dataSource.value = dataSource.value.filter(item => item.key !== key)
             },
             addItem: () => {
                 const newData = {
                     key: `${count.value}`,
                     name: ``,
-                };
-                dataSource.value.push(newData);
+                }
+                dataSource.value.push(newData)
             },
             saveItem: (key: string) => {
-                Object.assign(dataSource.value.filter(item => key === item.key)[0], editableData[key]);
-                delete editableData[key];
+                Object.assign(dataSource.value.filter(item => key === item.key)[0], editableData[key])
+                delete editableData[key]
             },
             editItem: (key: string) => {
-                editableData[key] = cloneDeep(dataSource.value.filter(item => key === item.key)[0]);
-            }
+                editableData[key] = cloneDeep(dataSource.value.filter(item => key === item.key)[0])
+            },
         })
         const columns = [
             {
                 title: '来源',
                 dataIndex: 'name',
                 width: '20%',
-                slots: {customRender: 'name'},
+                slots: { customRender: 'name' },
             },
             {
                 title: '地址',
                 dataIndex: 'url',
-                slots: {customRender: 'url'},
+                slots: { customRender: 'url' },
             },
             {
                 title: '操作',
                 dataIndex: 'action',
                 width: '10%',
-                slots: {customRender: 'action'},
+                slots: { customRender: 'action' },
             },
-        ];
+        ]
         watchEffect(() => {
-            props.formState[props.formItem.formData.name] = JSON.stringify(dataSource.value);
+            props.formState[props.formItem.formData.name] = JSON.stringify(dataSource.value)
         })
         return {
             dataForm,
@@ -114,8 +113,8 @@ export default defineComponent({
             editableData,
             count,
         }
-    }
-});
+    },
+})
 </script>
 <style lang="less">
 .editable-cell {

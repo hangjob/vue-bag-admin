@@ -72,8 +72,8 @@
                                        v-model="formState[item.formData.name]"
                             />
                         </template>
-                        <template  v-if="item.formData.slotName">
-                            <template v-slot:[item.formData.slotName]></template>
+                        <template v-if="item.formData.slotName">
+                            <slot :name="item.formData.slotName" v-bind="{formState,item}"></slot>
                         </template>
                     </a-form-item>
                 </a-col>
@@ -82,25 +82,25 @@
     </div>
 </template>
 <script lang="ts">
-import {defineComponent, inject, reactive, ref} from 'vue'
-import {message} from 'ant-design-vue'
-import {apiUploadImage} from '@/packages/service/upload'
+import { defineComponent, inject, reactive, ref } from 'vue'
+import { message } from 'ant-design-vue'
+import { apiUploadImage } from '@/packages/service/upload'
 
 export default defineComponent({
     props: {
         form: {
             type: Object,
             default: () => {
-                return {rules: {}, formItem: {}, formState: []}
+                return { rules: {}, formItem: {}, formState: [] }
             },
         },
     },
     setup(props) {
         const formRef = ref()
-        const {formState, rules, formItem} = reactive(props.form)
-        const {getImageFullPath} = inject<any>('bagGlobal')
+        const { formState, rules, formItem } = reactive(props.form)
+        const { getImageFullPath } = inject<any>('bagGlobal')
 
-        const onUploadImg = async (files: any, callback: Function, {fileSize}) => {
+        const onUploadImg = async (files: any, callback: Function, { fileSize }) => {
             const res = await Promise.all(
                 Array.from(files).map((file: any) => {
                     return new Promise((rev, rej) => {
