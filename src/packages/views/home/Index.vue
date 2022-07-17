@@ -30,7 +30,9 @@
                 <div class="money">
                     <div class="money-header">
                         <span class="label">2021全国销售额</span>
-                        <span class="value">￥15920.00</span>
+                        <span class="value">
+                            ￥<CountTo :startVal="0" :endVal="125920.00" :duration="1800"></CountTo>
+                        </span>
                     </div>
                     <div class="money-content">
                         <ul>
@@ -53,7 +55,9 @@
                     </div>
                     <div class="money-footer">
                         <span class="label">月均销售额</span>
-                        <span class="value">￥1362.00</span>
+                        <span class="value">
+                            ￥<CountTo :startVal="0" :endVal="9362.00" :duration="1800"></CountTo>
+                        </span>
                     </div>
                 </div>
             </bag-card>
@@ -63,7 +67,9 @@
                 <div class="money">
                     <div class="money-header">
                         <span class="label">总销售额</span>
-                        <span class="value">￥15920</span>
+                        <span class="value">
+                            ￥<CountTo :startVal="0" :endVal="65920.00" :duration="3600"></CountTo>
+                        </span>
                     </div>
                     <div class="money-content">
                         <ul>
@@ -86,7 +92,9 @@
                     </div>
                     <div class="money-footer">
                         <span class="label">日销售额</span>
-                        <span class="value">￥1298.00</span>
+                        <span class="value">
+                            ￥<CountTo :startVal="0" :endVal="5598.00" :duration="3600"></CountTo>
+                        </span>
                     </div>
                 </div>
             </bag-card>
@@ -96,7 +104,9 @@
                 <div class="money">
                     <div class="money-header">
                         <span class="label">总销售额</span>
-                        <span class="value">￥15920</span>
+                        <span class="value">
+                            ￥<CountTo :startVal="0" :endVal="35920.00" :duration="3600"></CountTo>
+                        </span>
                     </div>
                     <div class="money-content">
                         <ul>
@@ -119,7 +129,9 @@
                     </div>
                     <div class="money-footer">
                         <span class="label">日销售额</span>
-                        <span class="value">￥1298.00</span>
+                        <span class="value">
+                            ￥<CountTo :startVal="0" :endVal="13567.00" :duration="3600"></CountTo>
+                        </span>
                     </div>
                 </div>
             </bag-card>
@@ -234,6 +246,7 @@ import ProjectInfo from './ProjectInfo.vue'
 import Ripple from './Ripple.vue'
 import Dynamic from './Dynamic.vue'
 import * as dayjs from 'dayjs'
+import {CountTo} from 'vue3-count-to'
 
 export default defineComponent({
     name: 'home',
@@ -241,7 +254,8 @@ export default defineComponent({
         Returns,
         ProjectInfo,
         Ripple,
-        Dynamic
+        Dynamic,
+        CountTo
     },
     setup() {
         const loading = ref(true)

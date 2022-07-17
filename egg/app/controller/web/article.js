@@ -96,10 +96,10 @@ class WebArticleController extends baseController {
      */
     async all() {
         const {ctx} = this
-        const {ks} = ctx.request.body
+        const param = ctx.request.body || {}
         const where = {}
-        if (ks) {
-            where.name = {[Op.like]: `%${ks}%`} // 模糊查詢 https://www.sequelize.com.cn/core-concepts/model-querying-basics
+        for (const paramKey in param) {
+            where[paramKey] = { [Op.like]: `%${param[paramKey]}%` } // 模糊查找
         }
         // 角色过滤数据
         const {isSuperadmin, userinfo} = await ctx.service.user.superadmin();

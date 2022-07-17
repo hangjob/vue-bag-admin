@@ -64,7 +64,7 @@ class WebBannerController extends baseController {
      */
     async all() {
         const { ctx } = this
-        const param = ctx.request.body || {};
+        const param = ctx.request.body || {}
         const where = {}
         for (const paramKey in param) {
             where[paramKey] = { [Op.like]: `%${param[paramKey]}%` } // 模糊查找

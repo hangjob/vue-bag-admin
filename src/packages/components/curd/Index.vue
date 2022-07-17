@@ -23,58 +23,56 @@
                         </a-col>
                     </slot>
                     <slot name="header-prolate">
-                        <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+                        <a-col class="hidden-xs" :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
                             <div class="bag-curd-header-prolate">
                                 <a-row type="flex" justify="end">
-                                    <a-col :xs="4" :sm="3" :md="2" :lg="1" :xl="1">
-                                        <a-popover trigger="click" placement="bottomRight">
-                                            <template #content>
-                                                <a-button type="primary" @click="exportTableData({tableCurd,columns})" ghost>
-                                                    Excel导出
-                                                </a-button>
-                                            </template>
-                                            <template #title>
-                                                <span>数据导出</span>
-                                            </template>
-                                            <MehOutlined twoToneColor="#eb2f96"/>
-                                        </a-popover>
-                                    </a-col>
-                                    <a-col :xs="4" :sm="3" :md="2" :lg="1" :xl="1">
-                                        <a-popover trigger="click" placement="bottomRight">
-                                            <template #content>
-                                                <a-radio-group v-model:value="tableSetting.size" button-style="solid">
-                                                    <a-radio-button
-                                                        :value="item.value"
-                                                        :key="item.value"
-                                                        v-for="item in tableSetting.sizeOptions"
-                                                    >
-                                                        {{ item.name }}
-                                                    </a-radio-button>
-                                                </a-radio-group>
-                                            </template>
-                                            <template #title>
-                                                <span>表格大小</span>
-                                            </template>
-                                            <SmileOutlined twoToneColor="#eb2f96"/>
-                                        </a-popover>
-                                    </a-col>
-                                    <a-col :xs="4" :sm="3" :md="2" :lg="1" :xl="1">
-                                        <a-popover trigger="click" placement="bottomRight">
-                                            <template #content>
-                                                <div v-for="(item,idx) in columnsAll" :key="idx">
-                                                    <a-checkbox
-                                                        v-model:checked="item.visible"
-                                                        :disabled="item.disabled"
-                                                        @change="({target})=>checkboxChange({target,item})"
-                                                    >{{ item.title }}
-                                                    </a-checkbox>
-                                                </div>
-                                            </template>
-                                            <template #title>
-                                                <span>显示列</span>
-                                            </template>
-                                            <HeartTwoTone twoToneColor="#eb2f96"/>
-                                        </a-popover>
+                                    <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
+                                        <div>
+                                            <a-popover trigger="click" placement="bottomRight">
+                                                <template #content>
+                                                    <a-button type="primary" @click="exportTableData({tableCurd,columns})" ghost>
+                                                        Excel导出
+                                                    </a-button>
+                                                </template>
+                                                <template #title>
+                                                    <span>数据导出</span>
+                                                </template>
+                                                <a-button class="bag-button-color-daybreak" size="middle">数据导出</a-button>
+                                            </a-popover>
+                                            <a-popover trigger="click" placement="bottomRight">
+                                                <template #content>
+                                                    <a-radio-group v-model:value="tableSetting.size" button-style="solid">
+                                                        <a-radio-button
+                                                            :value="item.value"
+                                                            :key="item.value"
+                                                            v-for="item in tableSetting.sizeOptions"
+                                                        >
+                                                            {{ item.name }}
+                                                        </a-radio-button>
+                                                    </a-radio-group>
+                                                </template>
+                                                <template #title>
+                                                    <span>表格大小</span>
+                                                </template>
+                                                <a-button style="margin:0 10px"  class="bag-button-color-sunset" size="middle">表格大小</a-button>
+                                            </a-popover>
+                                            <a-popover trigger="click" placement="bottomRight">
+                                                <template #content>
+                                                    <div v-for="(item,idx) in columnsAll" :key="idx">
+                                                        <a-checkbox
+                                                            v-model:checked="item.visible"
+                                                            :disabled="item.disabled"
+                                                            @change="({target})=>checkboxChange({target,item})"
+                                                        >{{ item.title }}
+                                                        </a-checkbox>
+                                                    </div>
+                                                </template>
+                                                <template #title>
+                                                    <span>显示表列</span>
+                                                </template>
+                                                <a-button class="bag-button-color-volcano" size="middle">显示表列</a-button>
+                                            </a-popover>
+                                        </div>
                                     </a-col>
                                 </a-row>
                             </div>
@@ -254,10 +252,11 @@ export default defineComponent({
 
         &-prolate {
             text-align: right;
-            margin-top: 10px;
             margin-bottom: 10px;
         }
 
+        &-search{
+        }
 
         .ant-form-inline .ant-form-item:last-of-type {
             margin-right: 0;

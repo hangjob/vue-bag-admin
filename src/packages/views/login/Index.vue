@@ -40,7 +40,7 @@
                 </a-row>
                 <img class="embe embe1" src="@/packages/assets/image/01.png" alt="">
                 <img class="embe embe2 hidden-xs" src="@/packages/assets/image/01.png" alt="">
-                <img class="logo hidden-xs hidden-sm" src="@/common/assets/image/logo3.png" alt="">
+                <img class="logo hidden-xs hidden-sm" :src="configApp.webSite.logoImage" alt="">
             </div>
         </div>
     </div>

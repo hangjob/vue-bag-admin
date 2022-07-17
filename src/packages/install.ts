@@ -1,12 +1,12 @@
-import type { App } from 'vue'
+import type {App} from 'vue'
 import setupInit from '@/packages/base'
 import mitt from 'mitt'
 import * as $axios from '@/packages/http/request'
-import { handleError } from '@/packages/debug'
-import { Component, readonly } from 'vue'
-import { themeConfig, httpNetwork, webSite } from '@/packages/config'
+import {handleError} from '@/packages/debug'
+import {Component, readonly} from 'vue'
+import {themeConfig, httpNetwork, webSite} from '@/packages/config'
 import setupGlobal from '@/common/global'
-import curdTableHock, { initTableHock } from '@/packages/hook/table'
+import curdTableHock, {initTableHock} from '@/packages/hook/table'
 
 /**
  * router: {paths:[菜单],file:[菜单路由文件]},defaults:true,开启默认路由
@@ -35,7 +35,8 @@ interface $optionsType {
         httpNetwork?: object,
         webSite?: {
             title?: string,
-            subhead?: string
+            subhead?: string,
+            logoImage?: string,
         }
     }
 }
@@ -55,9 +56,9 @@ const install = (app: App, options?: $optionsType) => {
             ThemeBar: options?.comps?.ThemeBar,
         },
         configApp: {
-            themeConfig: { ...themeConfig, ...options?.config?.themeConfig },
-            httpNetwork: { ...httpNetwork, ...options?.config?.httpNetwork },
-            webSite: { ...webSite, ...options?.config?.webSite },
+            themeConfig: {...themeConfig, ...options?.config?.themeConfig},
+            httpNetwork: {...httpNetwork, ...options?.config?.httpNetwork},
+            webSite: {...webSite, ...options?.config?.webSite},
         },
     }
     app.config.globalProperties = _options

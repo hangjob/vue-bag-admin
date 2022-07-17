@@ -21,6 +21,15 @@ export default [
                 placeholder: '输入标题',
             },
         },
+        formSearch: {
+            name: 'title',
+            label: '标题',
+            element: 'a-input',
+            props: {
+                placeholder: '输入标题搜索',
+                value: '',
+            },
+        },
     },
     {
         title: '用户ID',
@@ -34,6 +43,15 @@ export default [
             element: 'a-input',
             props: {
                 placeholder: '用户ID',
+            },
+        },
+        formSearch: {
+            name: 'user_id',
+            label: '用户ID',
+            element: 'a-input',
+            props: {
+                placeholder: '输入用户ID搜索',
+                value: '',
             },
         },
     },
@@ -86,6 +104,15 @@ export default [
             }, { name: '热门', value: '热门' }],
             props: {
                 placeholder: '选择热度',
+            },
+        },
+        formSearch: {
+            name: 'flag',
+            label: '热度',
+            element: 'a-input',
+            props: {
+                placeholder: '输入热度搜索',
+                value: '',
             },
         },
     },

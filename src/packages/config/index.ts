@@ -1,3 +1,5 @@
+import logoImage from '@/common/assets/image/logo3.png';
+
 /**
  * 主题设置
  */
@@ -44,6 +46,7 @@ const httpNetwork = {
 const webSite = {
     title: 'vue-bag-admin',
     subhead: 'admin',
+    logoImage,
 }
 
 export {
