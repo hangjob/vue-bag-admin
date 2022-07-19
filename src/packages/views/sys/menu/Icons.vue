@@ -14,20 +14,27 @@
     </div>
 </template>
 <script lang="ts">
-import {defineComponent, ref} from "vue";
-import icons from './icons';
+import { defineComponent, ref } from 'vue'
+import icons from './icons'
 
 export default defineComponent({
-    setup(props, {emit}) {
+    props: {
+        icon: {
+            type: String,
+            defalut: '',
+        },
+    },
+    setup(props, { emit }) {
         const handleSelected = (icon: string) => {
             emit('affirm', icon)
+            emit('update:icon', icon)
         }
         return {
             handleSelected,
             icons,
             activeKey: ref(1),
         }
-    }
+    },
 })
 </script>
 <style lang="less" scoped>
@@ -49,9 +56,10 @@ export default defineComponent({
             align-items: center;
             justify-content: center;
             height: 45px;
-            :deep(i){
-                font-size:16px;
-                color:#333333;
+
+            :deep(i) {
+                font-size: 16px;
+                color: #333333;
             }
         }
     }

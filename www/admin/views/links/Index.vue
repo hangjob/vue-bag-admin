@@ -8,6 +8,7 @@ import curdTableHock, { initTableHock } from '@/packages/hook/table'
 import columns from './columns'
 
 export default defineComponent({
+    name:'links',
     setup() {
         const { tableCurd } = curdTableHock()
         const form = reactive(initTableHock({

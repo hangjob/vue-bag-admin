@@ -30,18 +30,23 @@
                                         <div>
                                             <a-popover trigger="click" placement="bottomRight">
                                                 <template #content>
-                                                    <a-button type="primary" @click="exportTableData({tableCurd,columns})" ghost>
+                                                    <a-button type="primary"
+                                                              @click="exportTableData({tableCurd,columns})" ghost
+                                                    >
                                                         Excel导出
                                                     </a-button>
                                                 </template>
                                                 <template #title>
                                                     <span>数据导出</span>
                                                 </template>
-                                                <a-button class="bag-button-color-daybreak" size="middle">数据导出</a-button>
+                                                <a-button class="bag-button-color-daybreak" size="middle">数据导出
+                                                </a-button>
                                             </a-popover>
                                             <a-popover trigger="click" placement="bottomRight">
                                                 <template #content>
-                                                    <a-radio-group v-model:value="tableSetting.size" button-style="solid">
+                                                    <a-radio-group v-model:value="tableSetting.size"
+                                                                   button-style="solid"
+                                                    >
                                                         <a-radio-button
                                                             :value="item.value"
                                                             :key="item.value"
@@ -54,7 +59,10 @@
                                                 <template #title>
                                                     <span>表格大小</span>
                                                 </template>
-                                                <a-button style="margin:0 10px"  class="bag-button-color-sunset" size="middle">表格大小</a-button>
+                                                <a-button style="margin:0 10px" class="bag-button-color-sunset"
+                                                          size="middle"
+                                                >表格大小
+                                                </a-button>
                                             </a-popover>
                                             <a-popover trigger="click" placement="bottomRight">
                                                 <template #content>
@@ -112,7 +120,7 @@
                                     <a-form-item>
                                         <a-button @click="tableCurd.searchTable" type="primary">
                                             <template #icon>
-                                                <SearchOutlined/>
+                                                <SearchOutlined />
                                             </template>
                                             搜索
                                         </a-button>
@@ -128,20 +136,24 @@
                          :bordered="true"
                          :data-source="tableCurd.tableData" :row-selection="tableCurd.selection"
                 >
-                    <template #action="{ record }">
-                        <a-space>
-                            <slot name="table-action" v-bind="{record}"></slot>
-                            <a-button type="primary" size="small" @click="tableCurd.edit.change(record)">编辑</a-button>
-                            <a-popconfirm
-                                :title="`你确定删除嘛？`"
-                                ok-text="确认"
-                                cancel-text="关闭"
-                                placement="topRight"
-                                @confirm="tableCurd.delete.submit(record)"
-                            >
-                                <a-button type="primary" danger size="small">删除</a-button>
-                            </a-popconfirm>
-                        </a-space>
+                    <template v-for="item in columns" v-slot:[item?.slots?.customRender]="{record}">
+                        <template v-if="item.slots">
+                            <a-space v-if="item.slots.customRender === 'action'">
+                                <slot name="table-action" v-bind="{record}"></slot>
+                                <a-button type="primary" size="small" @click="tableCurd.edit.change(record)">编辑
+                                </a-button>
+                                <a-popconfirm
+                                    :title="`你确定删除嘛？`"
+                                    ok-text="确认"
+                                    cancel-text="关闭"
+                                    placement="topRight"
+                                    @confirm="tableCurd.delete.submit(record)"
+                                >
+                                    <a-button type="primary" danger size="small">删除</a-button>
+                                </a-popconfirm>
+                            </a-space>
+                            <slot v-else :name="item.slots.customRender" v-bind="{record}"></slot>
+                        </template>
                     </template>
                 </a-table>
             </div>
@@ -169,9 +181,9 @@
 /**
  * 该组件一键Curd
  */
-import {defineComponent, watch, reactive, ref, shallowReactive} from 'vue'
-import {columnsCheckbox, findNearestTarget, exportTableData} from './utils'
-import {cloneDeep} from 'lodash'
+import { defineComponent, watch, reactive, ref, shallowReactive } from 'vue'
+import { columnsCheckbox, findNearestTarget, exportTableData } from './utils'
+import { cloneDeep } from 'lodash'
 
 export default defineComponent({
     name: 'bag-curd-table',
@@ -184,41 +196,41 @@ export default defineComponent({
         createForm: {
             type: Object,
             default: () => {
-                return {rules: {}, formItem: {}, formState: []}
+                return { rules: {}, formItem: {}, formState: [] }
             },
         },
         editForm: {
             type: Object,
             default: () => {
-                return {rules: {}, formItem: {}, formState: []}
+                return { rules: {}, formItem: {}, formState: [] }
             },
         },
     },
-    setup(props, {emit}) {
+    setup(props, { emit }) {
         const curdCreate = ref()
         const curdEdit = ref()
         const tableCurd = reactive(props.tableCurd)
         tableCurd.create.refForm = curdCreate // 添加组件
         tableCurd.edit.refForm = curdEdit // 编辑组件
         let columns = reactive(cloneDeep(tableCurd.columns))
-        const columnsAll = reactive(columnsCheckbox({tableCurd}))
+        const columnsAll = reactive(columnsCheckbox({ tableCurd }))
 
         const tableSetting = reactive({
             size: 'middle',
             sizeOptions: [
-                {name: '默认', value: 'default'},
-                {name: '中等', value: 'middle'},
-                {name: '比较小', value: 'small'},
+                { name: '默认', value: 'default' },
+                { name: '中等', value: 'middle' },
+                { name: '比较小', value: 'small' },
             ],
         })
-        const checkboxChange = ({target, item}) => {
+        const checkboxChange = ({ target, item }) => {
             if (target.checked) {
                 const sortIndex = findNearestTarget(columns.map(todo => todo.sortIndex), item.sortIndex) // 找到最近的下标
                 let findIndex = columns.findIndex((todo) => todo.sortIndex === sortIndex)
                 if (item.sortIndex !== 0 && findIndex !== columns.length) {
                     findIndex += 1
                 }
-                columns.splice(findIndex, 0, {...item})
+                columns.splice(findIndex, 0, { ...item })
             } else {
                 const findIndex = columns.findIndex((todo) => todo.key === item.key)
                 columns.splice(findIndex, 1)
@@ -232,7 +244,7 @@ export default defineComponent({
             columns,
             tableSetting,
             checkboxChange,
-            exportTableData
+            exportTableData,
         }
     },
 })
@@ -255,7 +267,7 @@ export default defineComponent({
             margin-bottom: 10px;
         }
 
-        &-search{
+        &-search {
         }
 
         .ant-form-inline .ant-form-item:last-of-type {

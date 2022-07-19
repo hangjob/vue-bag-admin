@@ -187,7 +187,6 @@ const initTableHock = function({
         tableCurd.all.handle() //是否自动挂载执行数据请求
     }
     tableCurd.sourceData = { columns } // 源数据
-    console.log(tableCurd)
     return formHock({ columns })
 }
 

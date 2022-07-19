@@ -72,6 +72,22 @@
                                        v-model="formState[item.formData.name]"
                             />
                         </template>
+                        <template v-if="item.formData.element === 'a-tree-select'">
+                            <a-tree-select
+                                v-model:value="formState[item.formData.name]"
+                                style="width: 100%"
+                                :dropdown-style="{ maxHeight: '400px', overflow: 'auto' }"
+                                :tree-data="item.formData.treeData"
+                                :replace-fields="item.formData.replaceFields"
+                                :placeholder="item.formData.props.placeholder"
+                                allow-clear
+                                tree-default-expand-all
+                            >
+                                <template #title="{ key, value,title }">
+                                    <span>{{ title }}</span>
+                                </template>
+                            </a-tree-select>
+                        </template>
                         <template v-if="item.formData.slotName">
                             <slot :name="item.formData.slotName" v-bind="{formState,item}"></slot>
                         </template>
