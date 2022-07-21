@@ -12,15 +12,19 @@ module.exports = app => {
             type: STRING,
             comment: '菜单按钮名称',
         },
-        type:{
+        type: {
             type: INTEGER,
             comment: '菜单类型',// edit create updata delete
+        },
+        role_id: {
+            type: INTEGER,
+            comment: '角色id',
         },
         menu_id: {
             type: INTEGER,
             comment: '菜单id',
         },
-        state:{
+        state: {
             type: BOOLEAN,
             defaultValue: false,
             comment: '状态', // 控制按钮是否展示
