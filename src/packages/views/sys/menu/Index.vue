@@ -20,8 +20,8 @@
             </a-modal>
         </template>
         <template #table-action="{record}">
-            <a-button size="small" @click="handleSetBtn({record})">设置按钮
-            </a-button>
+<!--            <a-button size="small" @click="handleSetBtn({record})">设置按钮-->
+<!--            </a-button>-->
         </template>
     </bag-curd-table>
     <Btns ref="btns" @submit="authSubmit" />

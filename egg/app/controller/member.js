@@ -103,10 +103,10 @@ class MemberController extends baseController {
      */
     async all() {
         const {ctx} = this
-        const {ks} = ctx.request.body
+        const param = ctx.request.body || {}
         const where = {}
-        if (ks) {
-            where.name = {[Op.like]: `%${ks}%`} // 模糊查詢 https://www.sequelize.com.cn/core-concepts/model-querying-basics
+        for (const paramKey in param) {
+            where[paramKey] = { [Op.like]: `%${param[paramKey]}%` } // 模糊查找
         }
         // attributes : 查询字段信息，可以通过 exclude 来指定不查询的字段，或者可以直接传入数组查询数组中的字段( attributes: ['id', 'nickname'] )
         // include : 指定查询的关联，as 必须和定义关联关系的 as 相同，model 指定关联的模型

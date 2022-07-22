@@ -14,6 +14,15 @@ const columns = [
                 placeholder: '名称',
             },
         },
+        formSearch: {
+            name: 'name',
+            label: '名称',
+            element: 'a-input',
+            props: {
+                placeholder: '输入名称搜索',
+                value: '',
+            },
+        },
     },
     {
         title: '父级节点',
@@ -80,6 +89,15 @@ const columns = [
                 placeholder: '路由地址',
             },
         },
+        formSearch: {
+            name: 'path',
+            label: '路由地址',
+            element: 'a-input',
+            props: {
+                placeholder: '输入路由地址搜索',
+                value: '',
+            },
+        },
     },
     {
         title: '组件路径',
@@ -93,6 +111,15 @@ const columns = [
             element: 'a-input',
             props: {
                 placeholder: '文件路径',
+            },
+        },
+        formSearch: {
+            name: 'filePath',
+            label: '文件路径',
+            element: 'a-input',
+            props: {
+                placeholder: '输入文件路径搜索',
+                value: '',
             },
         },
     },
@@ -161,6 +188,15 @@ const columns = [
                 checkedText: '是',
                 uncheckedText: '否',
                 defaultValue: true,
+            },
+        },
+        formSearch: {
+            name: 'keepAlive',
+            label: '路由缓存',
+            element: 'a-radio-group',
+            options: [{ name: '是', value: 1 }, { name: '否', value: 0 }],
+            props: {
+                value: '',
             },
         },
     },
@@ -261,7 +297,7 @@ const columns = [
         title: '操作',
         key: 'action',
         align: 'center',
-        width: 300,
+        width: 200,
         slots: { customRender: 'action' },
     },
 ]

@@ -41,7 +41,6 @@ const findNearestTarget = (arr, target) => {
 const exportTableData = ({tableCurd, columns}: { tableCurd: any, columns: any }) => {
     const tableHead = columns.map((item) => item.title)
     const tableHeadKey = columns.map((item) => item.key)
-    console.log(tableHeadKey)
     const tableBody = tableCurd.tableData.map((item) => {
         const data: any = [];
         for (let i = 0; i < tableHeadKey.length; i++) {

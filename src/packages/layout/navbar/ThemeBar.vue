@@ -1,6 +1,7 @@
 <template>
     <div class="right_menu-item">
-        <input class="key-input" placeholder="输入关键词" v-model="searchKey" @keydown.enter="handleKeyBoard($event,handleEnter)"
+        <input class="key-input" placeholder="输入关键词" v-model="searchKey"
+               @keydown.enter="handleKeyBoard($event,handleEnter)"
                :class="searchActive" type="text"
         >
         <SearchOutlined class="icon-svg icon-search" @click="handleSearch" />
@@ -29,6 +30,12 @@
     </div>
     <div class="right_menu-item" @click="handleOpenThemeSetting">
         <ClearOutlined class="icon-svg" />
+    </div>
+    <div class="right_menu-item hidden-xs" @click="handleDocument">
+        <InstagramOutlined class="icon-svg" />
+    </div>
+    <div class="right_menu-item hidden-xs" @click="handleAntDesign">
+        <AntDesignOutlined class="icon-svg" />
     </div>
     <div class="right_menu-item hidden-xs" @click="handleGithub">
         <GithubOutlined class="icon-svg" />
@@ -123,7 +130,7 @@ export default defineComponent({
         const handleQuit = () => {
             apiLogout().then(() => {
                 locaStore.clearAll()
-                router.push('/login').then(()=>{
+                router.push('/login').then(() => {
                     window.location.reload()
                 })
             })
@@ -137,6 +144,12 @@ export default defineComponent({
             window.open('https://github.com/hangjob/vue-bag-admin')
         }
 
+        const handleAntDesign = () => {
+            window.open('https://2x.antdv.com/docs/vue/introduce-cn')
+        }
+        const handleDocument = () => {
+            window.open('/doc.html')
+        }
         return {
             userSetting,
             searchActive,
@@ -156,6 +169,8 @@ export default defineComponent({
             toggle,
             ThemeBar,
             isFullscreen,
+            handleAntDesign,
+            handleDocument,
         }
     },
 })

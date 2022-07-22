@@ -1,6 +1,6 @@
 <template>
     <div class="right_menu-item hidden-xs" @click="handleOfficial">
-        <DribbbleOutlined class="icon-svg" />
+        <ChromeOutlined class="icon-svg"/>
     </div>
 </template>
 <script>

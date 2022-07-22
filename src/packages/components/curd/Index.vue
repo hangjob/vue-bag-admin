@@ -116,6 +116,12 @@
                                                 </a-select-option>
                                             </a-select>
                                         </template>
+                                        <component v-if="item.element === 'a-radio-group'" :is="item.element"
+                                                   v-model:value="tableCurd.all.search.formState[item.name]"
+                                                   :placeholder="item.props.placeholder"
+                                        >
+                                            <a-radio :value="todo.value" :key="idx" v-for="(todo,idx) in item.options">{{todo.name}}</a-radio>
+                                        </component>
                                     </a-form-item>
                                     <a-form-item>
                                         <a-button @click="tableCurd.searchTable" type="primary">
@@ -268,6 +274,7 @@ export default defineComponent({
         }
 
         &-search {
+            margin-top: 5px;
         }
 
         .ant-form-inline .ant-form-item:last-of-type {
