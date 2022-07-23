@@ -3,7 +3,9 @@
 > 快速创建增删改查，3分钟完成增删改查表单多样化页面开发
 
 ### 配置属性
+
 新建`columns.js`文件
+
 ```
 export default [
     {
@@ -179,10 +181,13 @@ export default [
 ```
 
 #### 说明
+
 [And-Design-Vue组件官网](https://2x.antdv.com/components/overview/)
 
 #### formData
->如果columns中的每一项数据包含`formData`属性，说明是可以添加或者编辑
+
+> 如果columns中的每一项数据包含`formData`属性，说明是可以添加或者编辑
+
 ```ts
 [
     {
@@ -209,7 +214,9 @@ export default [
 ```
 
 #### formSearch
->如果columns中的每一项数据包含`formSearch`属性，说明是可以进数据筛选
+
+> 如果columns中的每一项数据包含`formSearch`属性，说明是可以进数据筛选
+
 ```ts
 [
     {
@@ -227,44 +234,108 @@ export default [
             },
         },
     },
+    {
+        title: '节点类型',
+        dataIndex: 'type',
+        key: 'type',
+        ellipsis: true,
+        align: 'center',
+        width: 80,
+        slots: {customRender: 'type'},
+        formData: {
+            name: 'type',
+            label: '节点类型',
+            element: 'a-select',
+            options: [], // 下拉选项值，{name:'',value:''}
+            props: {
+                placeholder: '选择节点类型',
+            },
+        },
+    },
 ]
 ```
+
 ### 引入组件
 
 ```html
+
 <template>
     <bag-curd-table :form="form" :tableCurd="tableCurd"></bag-curd-table>
 </template>
 <script lang="ts">
-import {defineComponent, reactive, ref} from 'vue'
-import {formHock,tableHock} from 'vue-bag-admin'
-import columns from './columns' // 请看columns.js
+    import {defineComponent, reactive} from 'vue'
+    import {cloneDeep} from 'lodash'
+    import {curdTableHock, initTableHock} from 'vue-bag-admin'
+    import columns from './columns'
 
-export default defineComponent({
-    setup() {
-        const {tableCurd} = tableHock()
-        const form = reactive(formHock({columns}))
-        tableCurd.apiPrefix = '/web/website'
-        tableCurd.all.handle() // 执行数据请求
-        tableCurd.columns = columns.filter((item) => item.visible !== false) // 过滤表格不需要展示的列
-        columns.filter(item => item.formSearch).map((item: any) => {
-            // 设置需要表单的搜索的字段
-            tableCurd.all.search.formState[item.formSearch.name] = item.formSearch.props?.defaultValue || ''
-            tableCurd.all.search.formItem.push(item.formSearch)
-        })
-        tableCurd.all.search.formItem.forEach((item) => {
-            if (item.name === 'url') {
-                setTimeout(() => {
-                    item.options = [{name: '测试', value: 1111}] // 异步修改数据也更新的
-                }, 3000)
+    export default defineComponent({
+        setup() {
+            const {tableCurd} = curdTableHock()
+            const form = reactive(initTableHock({
+                columns, tableCurd, options: {
+                    apiPrefix: '/web/leave', // 接口前缀
+                },
+            }))
+            return {
+                tableCurd,
+                editForm: {...form},
+                createForm: {...cloneDeep(form)},
             }
-        })
-        return {
-            tableCurd,
-            columns: columns.filter((item) => item.visible !== false),
-            form,
-        }
-    },
-})
+        },
+    })
+```
+
+### 高级设置
+
+```html
+
+<template>
+    <bag-curd-table :form="form" :tableCurd="tableCurd"></bag-curd-table>
+</template>
+<script lang="ts">
+    import {defineComponent, reactive, ref} from 'vue'
+    import {cloneDeep} from 'lodash'
+    import {curdTableHock, initTableHock} from 'vue-bag-admin'
+    import columns from './columns'
+
+    export default defineComponent({
+        setup() {
+            const {tableCurd} = curdTableHock()
+            const form = reactive(initTableHock({
+                columns, tableCurd, options: {
+                    apiPrefix: '/menu',
+                    send: false
+                },
+            }))
+            tableCurd.all.handle() // 手动触发请求
+            tableCurd.all.beforeSuccess = (res) => {
+                tableCurd.tableData = toTree(res); // 或者 return toTree(res) ;
+                form.formItem.forEach((item) => {
+                    if (item.formData.name === 'pid') {
+                        item.formData.treeData = toTree(res) // 设置下拉选项
+                    }
+                })
+            }
+
+            tableCurd.all.search.formItem.forEach((item) => {
+                if (item.name === 'url') {
+                    setTimeout(() => {
+                        item.options = [{name: '测试', value: 1111}] // 异步修改数据也更新的
+                    }, 3000)
+                }
+            })
+
+            tableCurd.create.beforeSubmit = (data) => {
+                const _data = {...data}
+                console.log('在提交之前，自定义form表单数据')
+                return _data;
+            }
+            return {
+                tableCurd,
+                editForm: {...form},
+                createForm: {...cloneDeep(form)},
+            }
+        },
+    })
 </script>
 ```

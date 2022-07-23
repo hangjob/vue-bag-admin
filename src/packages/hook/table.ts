@@ -52,7 +52,7 @@ export default function() {
                 tableCurd.all.api = tableCurd.all.api ? tableCurd.all.api : tableCurd.apiPrefix + '/all'
                 post(tableCurd.all.api, { ...tableCurd.all.search.formState }).then((res: any) => {
                     if (isFunction(tableCurd.all.beforeSuccess)) {
-                        tableCurd.all.beforeSuccess(res)
+                        tableCurd.tableData = tableCurd.all.beforeSuccess(res)
                     } else {
                         tableCurd.tableData = res
                     }

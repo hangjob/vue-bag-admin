@@ -14,4 +14,5 @@
   * [java](/egg/java.md)
   * [php](/egg/php.md)
   * [node](/egg/node.md)
-* [CURD](/curd.md)
+* [一键表单](/curd.md)
+* [全局组件](/components.md)

@@ -8,10 +8,6 @@ export default defineComponent({
             type: Boolean,
             default: false
         },
-        active: {
-            type: Boolean,
-            default: true
-        },
         class: {
             type: String || null,
             default: null

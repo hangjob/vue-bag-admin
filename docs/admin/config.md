@@ -45,5 +45,6 @@ const httpNetwork = {
 const webSite = {
     title: 'vue-bag-admin',
     subhead: 'admin',
+    logoImage:'本地图片或者网络图片'
 }
 ```
