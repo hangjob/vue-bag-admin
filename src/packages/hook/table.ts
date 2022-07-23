@@ -1,11 +1,11 @@
-import { reactive } from 'vue'
-import { post } from '@/packages/http/request'
-import { toRaw } from 'vue'
-import { message } from 'ant-design-vue'
+import {reactive} from 'vue'
+import {post} from '@/packages/http/request'
+import {toRaw} from 'vue'
+import {message} from 'ant-design-vue'
 import isFunction from '@/bag-utils/regular/isFunction'
-import { createFormItem } from '@/packages/utils/form'
+import {createFormItem} from '@/packages/utils/form'
 
-export default function() {
+export default function () {
     const tableCurd = reactive({
         columns: <Array<any>>[],
         tableData: [], // 表格数据
@@ -27,7 +27,7 @@ export default function() {
                     tableCurd.create._formState = tableCurd.create.beforeSubmit(tableCurd.create._formState)
                 }
                 tableCurd.create.refForm.formRef.validate().then(() => {
-                    post(tableCurd.create.api, tableCurd.create._formState, { notifyError: true }).then(() => {
+                    post(tableCurd.create.api, tableCurd.create._formState, {notifyError: true}).then(() => {
                         tableCurd.create.visible = false
                         tableCurd.all.handle()
                     })
@@ -50,9 +50,12 @@ export default function() {
             },
             handle() {
                 tableCurd.all.api = tableCurd.all.api ? tableCurd.all.api : tableCurd.apiPrefix + '/all'
-                post(tableCurd.all.api, { ...tableCurd.all.search.formState }).then((res: any) => {
+                post(tableCurd.all.api, {...tableCurd.all.search.formState}).then((res: any) => {
                     if (isFunction(tableCurd.all.beforeSuccess)) {
-                        tableCurd.tableData = tableCurd.all.beforeSuccess(res)
+                        const data = tableCurd.all.beforeSuccess(res);
+                        if (data) {
+                            tableCurd.tableData = data
+                        }
                     } else {
                         tableCurd.tableData = res
                     }
@@ -72,7 +75,7 @@ export default function() {
                     post(tableCurd.edit.api, {
                         id: tableCurd.edit.id,
                         ...toRaw(tableCurd.edit.refForm.formState),
-                    }, { notify: true }).then(() => {
+                    }, {notify: true}).then(() => {
                         tableCurd.edit.visible = false
                         tableCurd.all.handle()
                     })
@@ -84,12 +87,12 @@ export default function() {
                 tableCurd.edit.visible = true
             },
             // 直接提交
-            directSubmit({ data }: { data: any }) {
+            directSubmit({data}: { data: any }) {
                 tableCurd.edit.api = tableCurd.edit.api ? tableCurd.edit.api : tableCurd.apiPrefix + '/update'
                 return post(tableCurd.edit.api, {
                     id: tableCurd.edit.id,
                     ...toRaw(data),
-                }, { notify: true }).then(() => {
+                }, {notify: true}).then(() => {
                     tableCurd.all.handle()
                     return Promise.resolve()
                 })
@@ -100,7 +103,7 @@ export default function() {
             id: '',
             submit(row: any) {
                 tableCurd.delete.api = tableCurd.delete.api ? tableCurd.delete.api : tableCurd.apiPrefix + '/delete'
-                post(tableCurd.delete.api, { id: row.id }, { notify: true }).then(() => {
+                post(tableCurd.delete.api, {id: row.id}, {notify: true}).then(() => {
                     tableCurd.all.handle()
                 })
             },
@@ -113,7 +116,7 @@ export default function() {
                 if (!ids.length) {
                     return message.warning('请至少选择一个')
                 }
-                post(tableCurd.deletes.api, { ids }, { notify: true }).then(() => {
+                post(tableCurd.deletes.api, {ids}, {notify: true}).then(() => {
                     tableCurd.all.handle()
                 })
             },
@@ -123,13 +126,13 @@ export default function() {
             afterCallback: <any>'',
             find(row: any) {
                 tableCurd.detail.api = tableCurd.detail.api ? tableCurd.detail.api : tableCurd.apiPrefix + '/find'
-                post(tableCurd.detail.api, { id: row.id }).then((res: any) => {
-                    let { updateTime, ...profileData } = res
+                post(tableCurd.detail.api, {id: row.id}).then((res: any) => {
+                    let {updateTime, ...profileData} = res
                     Object.keys(tableCurd.edit.refForm.formState).forEach((key: string) => {
                         tableCurd.edit.refForm.formState[key] = profileData[key]
                     })
                     if (isFunction(tableCurd.detail.afterCallback)) {
-                        tableCurd.detail.afterCallback({ res })
+                        tableCurd.detail.afterCallback({res})
                     }
                 })
             },
@@ -159,9 +162,9 @@ export default function() {
  * @param tableCurd
  */
 
-const formHock = function({ columns }: { columns: Array<any> }) {
-    const { rules, fields, formItem } = createFormItem(columns)
-    return { rules, formState: fields, formItem }
+const formHock = function ({columns}: { columns: Array<any> }) {
+    const {rules, fields, formItem} = createFormItem(columns)
+    return {rules, formState: fields, formItem}
 }
 
 
@@ -171,7 +174,7 @@ const formHock = function({ columns }: { columns: Array<any> }) {
  * @param tableCurd
  * @param options
  */
-const initTableHock = function({
+const initTableHock = function ({
     columns,
     tableCurd,
     options = {},
@@ -181,13 +184,13 @@ const initTableHock = function({
         tableCurd.all.search.formState[item.formSearch.name] = item.formSearch.props?.defaultValue || ''
         tableCurd.all.search.formItem.push(item.formSearch)
     })
-    options = Object.assign({ send: true }, options)
+    options = Object.assign({send: true}, options)
     tableCurd.apiPrefix = options.apiPrefix
     if (options.send) {
         tableCurd.all.handle() //是否自动挂载执行数据请求
     }
-    tableCurd.sourceData = { columns } // 源数据
-    return formHock({ columns })
+    tableCurd.sourceData = {columns} // 源数据
+    return formHock({columns})
 }
 
 

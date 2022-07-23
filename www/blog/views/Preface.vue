@@ -34,14 +34,14 @@
                         <el-progress :width="60" type="circle" status="success" :percentage="85" />
                         <div style="margin-left: 10px">
                             <h6>灵活</h6>
-                            <p>Bag所有的可视化全可由后台进行修改，路由管理，请求管理，状态管理，主题等等...</p>
+                            <p>Bag所有的可视化全可由后台进行修改，路由管理，请求管理，状态管理，角色权限等等...</p>
                         </div>
                     </div>
                     <div class="skill-count">
                         <el-progress :width="60" color="#ff4949" type="circle" status="success" :percentage="90" />
                         <div style="margin-left: 10px">
-                            <h6>稳定</h6>
-                            <p>Bag拥有高度的稳定性，使用主流技术，不用担心技术瓶颈</p>
+                            <h6>一键表单</h6>
+                            <p>高度抽象的设计，CURD只需傻瓜式的操作配置即可，增删改查完全配置化</p>
                         </div>
                     </div>
                     <div class="skill-count">

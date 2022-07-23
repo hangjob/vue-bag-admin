@@ -46,7 +46,8 @@ export default defineComponent({
         const { tableCurd } = curdTableHock()
         const form = reactive(initTableHock({
             columns, tableCurd, options: {
-                apiPrefix: '/menu',},
+                apiPrefix: '/menu'
+            },
         }))
         tableCurd.all.beforeSuccess = (res: any) => {
             tableCurd.tableData = toTree(res)

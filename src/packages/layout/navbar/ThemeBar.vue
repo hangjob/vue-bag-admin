@@ -31,6 +31,9 @@
     <div class="right_menu-item" @click="handleOpenThemeSetting">
         <ClearOutlined class="icon-svg" />
     </div>
+    <div class="right_menu-item hidden-xs" @click="handleHome">
+        <HomeOutlined class="icon-svg"/>
+    </div>
     <div class="right_menu-item hidden-xs" @click="handleDocument">
         <InstagramOutlined class="icon-svg" />
     </div>
@@ -150,6 +153,9 @@ export default defineComponent({
         const handleDocument = () => {
             window.open('/doc.html')
         }
+        const handleHome = ()=>{
+            window.open('/index.html')
+        }
         return {
             userSetting,
             searchActive,
@@ -171,6 +177,7 @@ export default defineComponent({
             isFullscreen,
             handleAntDesign,
             handleDocument,
+            handleHome
         }
     },
 })

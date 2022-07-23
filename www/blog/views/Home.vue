@@ -12,7 +12,7 @@
                        icon="text_snippet"
             >体验客户端
             </vs-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <vs-button target :href="{url: 'https://hangjob.github.io/vue-bag-admin/'}" color="danger" size="large"
+            <vs-button target :href="{url: '/doc/index.html'}" color="danger" size="large"
                        type="filled" icon="text_snippet"
             >查看文档
             </vs-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

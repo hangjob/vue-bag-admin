@@ -15,7 +15,7 @@
                         <h4>2.06M</h4>
                     </div>
                     <ul>
-                        <li>时间：2022-05-20</li>
+                        <li>时间：2022-07-20</li>
                         <li>简介：一个新的Bag</li>
                         <li>简介：后台更新</li>
                         <li>简介：前台简介</li>
@@ -111,6 +111,14 @@
                 <ul>
                     <li>本次版本内容更新如下：</li>
                     <li>npm i vue-bag-admin 一键安装</li>
+                    <li>✅ 增加角色权限</li>
+                    <li>✅ 增加Web前端</li>
+                    <li>✅ 增加CURD表单</li>
+                    <li>✅ 增加表格数据导出</li>
+                    <li>✅ 增加表格数据动态列</li>
+                    <li>✅ 完善Vuex命名空间</li>
+                    <li>✅ 完善动态Router子路由父级节点</li>
+                    <li>✅ 修复若干Bug</li>
                 </ul>
             </div>
             <template #footer>
