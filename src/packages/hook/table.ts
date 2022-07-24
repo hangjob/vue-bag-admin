@@ -181,7 +181,7 @@ const initTableHock = function ({
 }: { columns: Array<any>, tableCurd: any, options: any }) {
     tableCurd.columns = columns.filter((item) => item.visible !== false)
     columns.filter((item) => item.formSearch && Object.keys(item.formSearch).length).map((item: any) => {  // 设置需要表单的搜索的字段
-        tableCurd.all.search.formState[item.formSearch.name] = item.formSearch.props?.defaultValue || ''
+        tableCurd.all.search.formState[item.formSearch.name] = item.formSearch?.props?.defaultValue || ''
         tableCurd.all.search.formItem.push(item.formSearch)
     })
     options = Object.assign({send: true}, options)

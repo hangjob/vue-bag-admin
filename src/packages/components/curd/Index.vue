@@ -8,7 +8,7 @@
                             <div class="bag-curd-header-action">
                                 <a-space :size="20">
                                     <a-button type="primary" size="middle" :loading="tableCurd.loading"
-                                              @click="tableCurd.refreshTable"
+                                              v-debounce="{ func: tableCurd.refreshTable}"
                                     >
                                         刷新
                                     </a-button>
@@ -16,7 +16,7 @@
                                               @click="tableCurd.create.visible = true"
                                     >新增
                                     </a-button>
-                                    <a-button type="primary" danger size="middle" @click="tableCurd.deletes.submit">删除
+                                    <a-button type="primary" danger size="middle" v-debounce="{ func: tableCurd.deletes.submit}">删除
                                     </a-button>
                                 </a-space>
                             </div>
@@ -146,7 +146,7 @@
                         <template v-if="item.slots">
                             <a-space v-if="item.slots.customRender === 'action'">
                                 <slot name="table-action" v-bind="{record}"></slot>
-                                <a-button type="primary" size="small" @click="tableCurd.edit.change(record)">编辑
+                                <a-button type="primary" size="small"  @click="tableCurd.edit.change(record)">编辑
                                 </a-button>
                                 <a-popconfirm
                                     :title="`你确定删除嘛？`"

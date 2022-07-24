@@ -22,7 +22,6 @@ const columns = [
         ellipsis: true,
         align: 'center',
         width: 150,
-        slots: {customRender: 'tag'},
         formData: {
             name: 'tag',
             label: '标识符',
@@ -38,7 +37,6 @@ const columns = [
         key: 'describe',
         ellipsis: true,
         align: 'center',
-        slots: {customRender: 'describe'},
         formData: {
             name: 'describe',
             label: '描述',
@@ -55,7 +53,6 @@ const columns = [
         ellipsis: true,
         align: 'center',
         width: 120,
-        slots: {customRender: 'order'},
         formData: {
             name: 'order',
             label: '排序',

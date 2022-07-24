@@ -20,10 +20,10 @@ const setupDebounce = (app: App) => {
                 leading = true,
                 trailing = true,
                 type = 'click',
-                params = [],
+                params = {},
             } = binding.value;
-            const proxy = function proxy(args) {
-                return func.call(this, ...params.concat(args));
+            const proxy = function proxy(args = {}) {
+                return func.call(this, {...params, ...args});
             };
             el.$type = type;
             el.$handle = debounce(proxy, wait, {leading, trailing});
