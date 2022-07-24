@@ -222,7 +222,6 @@ const handleToPath = (item: any) => {
 
             a {
                 padding-right: 0;
-                text-transform: capitalize
             }
 
             ul li ul.dropdown-menu {

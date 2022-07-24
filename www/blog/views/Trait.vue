@@ -9,7 +9,7 @@
                         <vs-icon  size="70px" color="#e96656"  icon="webhook"></vs-icon>
                     </div>
                     <h5>功能强大</h5>
-                    <p class="indent">Bag所有内容均可以在后台进行修改，整个网站360无死角，前端/后台可定制化开发，并且带有邮件发送系统，会员注册，数据备份恢复，在线升级等.</p>
+                    <p class="indent">Bag所有内容均可以在后台进行修改，前端/后台可定制化开发，覆盖面广，涉及后端、移动端、桌面端等开发，快速迭代，降低试错成本，让大家把更多时间专注在业务开发上</p>
                 </div>
             </el-col>
             <el-col class="wow animate__animated animate__bounceInLeft" data-wow-duration="1.5s" data-wow-delay="0.5" :xs="24" :sm="12" :md="8" :lg="6" :xl="6">

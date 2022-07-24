@@ -7,12 +7,12 @@
                         <template v-for="(item,idx) in articleAll" :key="idx">
                             <div class="article-item mod1" v-if="!item.images">
                                 <div class="article-item-body">
-                                    <div class="article-item-body-left">
+                                    <div class="article-item-body-left hidden-xs">
                                         <router-link :to="`/article/${item.id}`">
                                             <img @click="navigate" :src="getImageFullPath(item.image)" alt="">
                                         </router-link>
                                     </div>
-                                    <div class="article-item-body-right">
+                                    <div class="article-item-body-right" style="min-height:110px">
                                         <router-link :to="`/article/${item.id}`" custom v-slot="{ navigate }">
                                             <h3 @click="navigate" role="link">{{ item.title }}</h3>
                                         </router-link>
@@ -33,11 +33,11 @@
                                                     <i style="color:#3333" class="bag-icon-dianzan5"></i>
                                                     {{ item.likes }} <span class="hidden-lg-only">点赞</span>
                                                 </div>
-                                                <div class="comment hidden-xs-only">
+                                                <div class="comment">
                                                     <i style="color:#3333" class="bag-icon-sheji_huatu"></i>
                                                     {{ item.comments }} <span class="hidden-lg-only">评论</span>
                                                 </div>
-                                                <div class="preview hidden-xs-only">
+                                                <div class="preview">
                                                     <i style="color:#3333" class="bag-icon-qiepian"></i>
                                                     {{ item.views }} <span class="hidden-lg-only">浏览</span>
                                                 </div>
@@ -74,17 +74,17 @@
                                                 >{{ todo }}
                                                 </it-tag>
                                             </div>
-                                            <div class="action-time"><span>{{ getDate(item.createTime).date }}-{{ getDate(item.createTime).week }}</span></div>
+                                            <div class="action-time hidden-xs-only hidden-sm-and-down"><span>{{ getDate(item.createTime).date }}-{{ getDate(item.createTime).week }}</span></div>
                                             <div class="action-user">
-                                                <div class="praise hidden-xs-only hidden-sm-and-down">
+                                                <div class="praise">
                                                     <i style="color:#3333" class="bag-icon-dianzan5"></i>
                                                     {{ item.likes }} <span class="hidden-lg-only">点赞</span>
                                                 </div>
-                                                <div class="comment hidden-xs-only">
+                                                <div class="comment">
                                                     <i style="color:#3333" class="bag-icon-sheji_huatu"></i>
                                                     {{ item.comments }} <span class="hidden-lg-only">评论</span>
                                                 </div>
-                                                <div class="preview hidden-xs-only">
+                                                <div class="preview">
                                                     <i style="color:#3333" class="bag-icon-qiepian"></i>
                                                     {{ item.views }} <span class="hidden-lg-only">浏览</span>
                                                 </div>
@@ -181,7 +181,6 @@ const getDate = (time)=>{
             &-right {
                 position: relative;
                 flex: 1;
-
                 .intro {
                     height: 44px;
                     line-height: 22px;

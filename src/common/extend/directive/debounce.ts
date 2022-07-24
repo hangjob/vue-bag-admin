@@ -1,5 +1,5 @@
 import {App} from "vue";
-import {debounce,merge} from 'lodash'
+import {debounce, merge} from 'lodash'
 
 /**
  * 防抖
@@ -17,13 +17,13 @@ const setupDebounce = (app: App) => {
             let {
                 func,
                 wait = 300,
-                leading = false,
+                leading = true,
                 trailing = true,
                 type = 'click',
-                params,
+                params = [],
             } = binding.value;
-            const proxy = function proxy() {
-                return func.call(this, params);
+            const proxy = function proxy(args) {
+                return func.call(this, ...params.concat(args));
             };
             el.$type = type;
             el.$handle = debounce(proxy, wait, {leading, trailing});

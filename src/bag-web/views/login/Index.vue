@@ -17,7 +17,7 @@
                     <div class="line-show"></div>
                     <div class="phone-input">
                         <input :class="form.usernameClass" @blur="form.handleBlurUsername" v-model="form.username"
-                               type="text" placeholder="输入您的账号昵称2~20个字符"
+                               type="text" placeholder="输入您的账号昵称4~16个字符"
                         >
                     </div>
                 </div>
@@ -33,7 +33,6 @@
                     </div>
                 </div>
                 <it-button v-debounce="{ func: form.register}" :disabled="form.loading" :loading="form.loading"
-                           @click="form.register"
                            style="margin-top: 20px;padding-top: 10px;padding-bottom: 10px"
                            type="primary" block
                 >注册/登录
@@ -83,7 +82,7 @@
 import {defineComponent, inject, reactive} from 'vue'
 import {memberCreate, userLogin, userUserinfo} from '@/bag-web/service/app'
 import {useRouter} from "vue-router";
-import {ElNotification} from 'element-plus'
+import {ElNotification, ElMessage} from 'element-plus'
 import appStore from "@/bag-web/store/app";
 import userStore from "@/bag-web/store/user";
 
@@ -129,7 +128,7 @@ export default defineComponent({
                             type: 'success',
                             message: `${form.username} 账户登录成功`,
                         })
-                        router.push('/home').then(()=>{
+                        router.push('/home').then(() => {
                             userUserinfo().then((res) => {
                                 user.userinfo = res
                             })
@@ -141,6 +140,14 @@ export default defineComponent({
             },
             register: () => {
                 if (form.username && form.password) {
+                    const uPattern = /^[a-zA-Z0-9_-]{4,16}$/;
+                    if (!uPattern.test(form.username)) {
+                        ElMessage({
+                            message: '用户名由字母，数字，下划线，减号组成',
+                            type: 'warning',
+                        })
+                        return
+                    }
                     memberCreate({username: form.username, password: form.password}).then(() => {
                         form.submit({title: '注册成功'})
                     })

@@ -19,7 +19,7 @@ const props = defineProps({
 
 const {getImageFullPath} = inject<any>('bagGlobal')
 </script>
-<style lang="less">
+<style lang="less" scoped>
 .praises {
     background-color: var(--bag-color-white);
     padding: var(--bag-padding-base);
