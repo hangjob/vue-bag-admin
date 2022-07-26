@@ -40,8 +40,8 @@
                     <div class="skill-count">
                         <el-progress :width="60" color="#ff4949" type="circle" status="success" :percentage="90" />
                         <div style="margin-left: 10px">
-                            <h6>一键表单</h6>
-                            <p>高度抽象的设计，CURD只需傻瓜式的操作配置即可，增删改查完全配置化</p>
+                            <h6>表单</h6>
+                            <p>灵活抽象的设计，CURD只需傻瓜式的操作配置即可，增删改查完全配置化</p>
                         </div>
                     </div>
                     <div class="skill-count">

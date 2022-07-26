@@ -32,6 +32,10 @@ const routes = [
                 component: () => import('@/bag-web/views/download/Index.vue'),
             },
             {
+                path: '/archives', name: 'archives', meta: {title: '文章列表'},
+                component: () => import('@/bag-web/views/archives/Index.vue'),
+            },
+            {
                 path: '/download/:id', name: 'downloadId', meta: {title: '下载中心'},
                 component: () => import('@/bag-web/views/download/Id.vue'),
             },
