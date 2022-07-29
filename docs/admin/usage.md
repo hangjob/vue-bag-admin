@@ -2,7 +2,8 @@
 
 ```ts
 import {createApp} from 'vue'
-import install from 'vue-bag-admin';
+import install from 'vue-bag-admin'
+import 'vue-bag-admin/lib/style.min.css'
 import App from './App.vue'
 import 'vue-bag-admin/mock/admin' // 如果后台服务,不用此mock数据
 

@@ -114,7 +114,7 @@ import {createApp} from 'vue'
 import App from './App.vue'
 import install from 'vue-bag-admin'
 import 'vue-bag-admin/mock/admin'
-import 'vue-bag-admin/style.min.css'
+import 'vue-bag-admin/lib/style.min.css'
 
 createApp(App).use(install).mount('#app')
 ```

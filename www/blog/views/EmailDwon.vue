@@ -12,8 +12,8 @@
                 size="large"
                 style="width:200px;margin-right:10px"
             />
-            <vs-button class="wow animate__animated animate__headShake" data-wow-duration="1.0s" data-wow-delay="0.2s"
-                       style="flex-shrink: 0;" v-debounce="{ func: handleSendEmail}" color="success" type="filled"
+            <vs-button :loading="loading" class="wow animate__animated animate__headShake" data-wow-duration="1.0s" data-wow-delay="0.2s"
+                       style="flex-shrink: 0;" v-debounce="{ func: handleSendEmail,wait:1000}" color="success" type="filled"
                        icon="forward_to_inbox"
             >发送
             </vs-button>
@@ -31,7 +31,9 @@ import {Search} from '@element-plus/icons-vue'
 export default defineComponent({
     setup() {
         const email = ref('')
+        const loading = ref(false)
         let isSend = true;
+        loading.value = true;
         const handleSendEmail = () => {
             if (!isSend) {
                 return
@@ -77,7 +79,8 @@ export default defineComponent({
         return {
             email,
             handleSendEmail,
-            Search
+            Search,
+            loading
         }
     },
 })

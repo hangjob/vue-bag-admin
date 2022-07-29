@@ -2,7 +2,8 @@
 ```ts
 import {createApp} from 'vue'
 import App from './App.vue'
-import install from "@/bag-web/install";
+import install from "vue-bag-admin/lib-web"
+import 'vue-bag-admin/lib-web/style.min.css'
 import 'vue-bag-admin/mock/web'
 
 app.use(install).mount('#app')

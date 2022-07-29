@@ -1,10 +1,10 @@
 {
     "name": "vue-bag-admin",
-    "version": "2.0.0",
+    "version": "1.1.0",
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "lib": "vite build --mode lib && gulp lib",
+        "lib:admin": "vite build --mode lib && gulp lib",
         "utils": "vite build --mode utils && gulp style",
         "lib:web": "vite build --mode web && gulp web",
         "gulp:style": "gulp style",
@@ -13,11 +13,11 @@
         "serve": "vite preview",
         "lint": "eslint . --ext .ts",
         "lint:fix": "eslint . --ext .ts --fix",
-        "publish":"npm run lib && npm run lib:web && npm run utils"
+        "lib":"npm run lib:admin && npm run lib:web && npm run utils"
     },
     "private": false,
     "description": "vue-bag-admin采用Vite2.0、Vue3.2、TypeScript、JavaScript构建，适合企业中后台响应式管理系统，快速安装 npm i vue-bag-admin",
-    "main": "lib/index.es.js",
+    "main": "lib/index.es.min.js",
     "dependencies": {
         "@antv/g2": "^4.1.32",
         "@antv/g2plot": "^2.3.39",
@@ -124,7 +124,7 @@
         "vue3",
         "vite",
         "vue-admin",
-        "vue-bag-admin",
+        "vue-router",
         "typescript",
         "javascript"
     ],

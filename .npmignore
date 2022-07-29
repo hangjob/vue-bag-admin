@@ -25,4 +25,11 @@ tsconfig.json
 wx.jpg
 windi.config.ts
 public
+typings
+build
+docs
+gulpfile.js
+*.html
+vite.config.ts
+favicon.ico
 
