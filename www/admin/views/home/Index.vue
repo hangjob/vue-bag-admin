@@ -19,7 +19,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
-import * as dayjs from 'dayjs'
+import dayjs from 'dayjs';
 export default defineComponent({
     name: 'home',
     setup() {

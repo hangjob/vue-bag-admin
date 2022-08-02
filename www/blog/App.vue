@@ -1,7 +1,7 @@
 <template>
     <img class="vegas" ref="vegas1" src="@www/blog/assets/bg1.jpg" alt="">
     <div>
-        <Nav/>
+        <Nav />
         <div>
             <component :id="item.components" v-for="(item,idx) of menuList" :is="item.components" :key="idx"
             ></component>
@@ -9,9 +9,11 @@
     </div>
 </template>
 <script lang="ts">
-import {defineComponent, onMounted, ref} from 'vue'
+import { defineComponent, onMounted, ref } from 'vue'
 import Nav from '@www/blog/components/Nav.vue'
-import menuList from "@www/blog/config/menu";
+import menuList from '@www/blog/config/menu'
+import loadScript from '@/bag-utils/load/loadScript'
+
 const files: any = import.meta.globEager('./views/*.vue')
 const comps: any = []
 for (const c of Object.keys(files)) {
@@ -23,7 +25,7 @@ for (const c of Object.keys(files)) {
     }
 }
 const images = import.meta.globEager('@www/blog/assets/*.jpg')
-const imgs = [];
+const imgs = []
 for (const c of Object.keys(images)) {
     const img = images[c]?.default
     // @ts-ignore
@@ -36,7 +38,7 @@ export default defineComponent({
         ...comps,
     },
     setup() {
-        const vegas = ref();
+        const vegas = ref()
         return {
             menuList,
             vegas,

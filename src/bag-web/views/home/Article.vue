@@ -102,7 +102,7 @@
 </template>
 <script lang="ts" setup>
 import {defineProps, inject, reactive, ref} from 'vue'
-import * as dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const {getImageFullPath} = inject<any>('bagGlobal')
 const props = defineProps({

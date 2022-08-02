@@ -245,7 +245,7 @@ import Returns from './Returns.vue'
 import ProjectInfo from './ProjectInfo.vue'
 import Ripple from './Ripple.vue'
 import Dynamic from './Dynamic.vue'
-import * as dayjs from 'dayjs'
+import dayjs from 'dayjs';
 import {CountTo} from 'vue3-count-to'
 
 export default defineComponent({

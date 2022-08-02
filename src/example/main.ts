@@ -4,7 +4,6 @@ import App from './App.vue'
 import store from '@/example/store/index'
 import install, { $optionsType } from '@/packages/install'
 import paths from '@www/admin/router'
-import '../../mock/index'
 //@ts-ignore
 // import install,{$optionsType} from '../../lib/index.es.js'
 // import '../../lib/style.css'

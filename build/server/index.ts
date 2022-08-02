@@ -9,10 +9,10 @@ export function configServer() {
                 changeOrigin: true,
                 rewrite: (path: any) => path.replace(/^\/api/, '')
             },
-            '^/vip': {
-                target: 'https://www.vipbic.com/api/api',
+            '^/bic': {
+                target: 'https://www.vipbic.com/api',
                 changeOrigin: true,
-                rewrite: (path: any) => path.replace(/^\/vip/, '')
+                rewrite: (path: any) => path.replace(/^\/bic/, '')
             }
         }
     }

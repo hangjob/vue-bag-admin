@@ -28,7 +28,7 @@
 </template>
 <script lang="ts" setup>
 import {defineComponent, inject, toRefs} from 'vue'
-import * as dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 const props = defineProps({
     detailData: [Object],
