@@ -45,7 +45,7 @@ const httpNetwork = {
 // 网站配置
 const webSite = {
     title: 'vue-bag-admin',
-    subhead: 'admin',
+    subhead: 'amin',
     logoImage,
 }
 

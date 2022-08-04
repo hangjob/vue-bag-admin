@@ -13,8 +13,8 @@ const $options: $optionsType = {
     },
     config: {
         webSite: {
-            title: '品茗信息',
-            subhead: '品茗',
+            title: 'vue-bag-admin',
+            subhead: 'bag',
         },
     },
 }
