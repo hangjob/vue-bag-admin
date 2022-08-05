@@ -15,7 +15,7 @@
                         <h4>2.06M</h4>
                     </div>
                     <ul>
-                        <li>时间：2022-07-20</li>
+                        <li>时间：2022-08-06</li>
                         <li>简介：一个新的Bag</li>
                         <li>简介：后台更新</li>
                         <li>简介：前台简介</li>
@@ -24,7 +24,7 @@
                         </li>
                     </ul>
                     <div class="action">
-                        <vs-button color="#e96656" size="large" type="filled" icon="downloading">下载程序</vs-button>
+                        <vs-button color="#e96656" size="large" type="filled" icon="downloading" @click="handleDownload">下载程序</vs-button>
                     </div>
                 </div>
             </el-col>
@@ -291,6 +291,9 @@ export default defineComponent({
             { src: 'https://s1.ax1x.com/2022/05/12/O0Ww8J.png' },
             { src: 'https://s1.ax1x.com/2022/05/12/O0Wf8H.png' },
         ])
+        const handleDownload= ()=>{
+            window.location.href = 'https://www.npmjs.com/package/vue-bag-admin'
+        }
         return {
             visible,
             images,
@@ -299,6 +302,7 @@ export default defineComponent({
             activeIndex,
             displayCustom,
             responsiveOptions,
+            handleDownload
         }
     },
 })

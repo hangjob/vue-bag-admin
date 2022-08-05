@@ -9,7 +9,7 @@
                     <div class="down">
                         <p class="hidden-xs">快到碗里来</p>
                         <a-button-group>
-                            <a-button type="primary" @click="handleSkip('https://github.com/hangjob/vue-bag-admin/blob/master/docs/options.md')">使用文档</a-button>
+                            <a-button type="primary" @click="handleSkip('/doc/index.html')">使用文档</a-button>
                             <a-button type="primary" @click="handleSkip('https://github.com/hangjob/vue-bag-admin')">GitHub</a-button>
                             <a-button type="primary" @click="handleSkip('https://www.npmjs.com/package/vue-bag-admin')">点击安装</a-button>
                         </a-button-group>
