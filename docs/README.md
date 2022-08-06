@@ -19,7 +19,7 @@ npm i vue-bag-admin --save
 
 >管理员账户：用户名：admin ，密码：123456
 
->超级管理员账户：用户名：supperadmin ，密码：654321
+>超级管理员账户：用户名：superadmin ，密码：123456
 
 [管理系统演示](https://vite.itnavs.com/admin.html)、[门户博客前台演示](https://vite.itnavs.com/web.html)
 
