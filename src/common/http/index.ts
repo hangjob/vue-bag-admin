@@ -15,6 +15,7 @@ const getHttpNetworkConfig = (httpNetwork: any) => {
         filterUrlToken,
         whiteList,
         resetPath,
+        serialize
     } = httpNetwork
     return {
         baseURL,
@@ -27,6 +28,7 @@ const getHttpNetworkConfig = (httpNetwork: any) => {
         filterUrlToken,
         whiteList,
         resetPath,
+        serialize
     }
 }
 

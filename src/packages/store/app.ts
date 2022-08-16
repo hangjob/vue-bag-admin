@@ -16,6 +16,7 @@ const app = {
         themeConfig: {}, // 主题配置
         httpNetwork: {}, // 网络配置
         appRouter: {}, // 包含 paths file文件 router实列
+        configApp:{}, // 配置
     },
     // 定义getters 好处可以过滤数据
     getters: {
@@ -117,6 +118,10 @@ const app = {
         updateHttpNetwork(state: any, data: any) {
             state.httpNetwork = data
         },
+        // 更新配置
+        updateConfigApp(state: any, data: any){
+            state.configApp = data
+        }
     },
 }
 

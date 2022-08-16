@@ -9,7 +9,8 @@ import paths from '@www/admin/router'
 // import '../../lib/style.css'
 
 const app = createApp(App)
-const file: Record<string, Component> = import.meta.globEager('/src/example/views/**/*.vue')
+// @ts-ignore
+const file: Record<string, Component> = import.meta.glob('/src/example/views/**/*.vue',{ eager: true })
 const $options: $optionsType = {
     router: {
         file,

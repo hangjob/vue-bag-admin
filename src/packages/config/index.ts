@@ -40,6 +40,8 @@ const httpNetwork = {
     whiteList: ['/login', '/403', '/404', '/500', '/502', '/test'],
     // 重置路由
     resetPath: '/login',
+    // 序列化
+    serialize: false, // 是否表单序列化
 }
 
 // 网站配置

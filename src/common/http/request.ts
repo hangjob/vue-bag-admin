@@ -5,6 +5,8 @@ import {useRouter} from 'vue-router'
 import {message as messageModel} from 'ant-design-vue'
 import {rsaEncrypt} from '@/common/utils/crypto'
 import {nanoid} from 'nanoid'
+import qs from 'qs';
+
 const router = useRouter()
 // 扩展类型
 declare module 'axios' {
@@ -44,6 +46,7 @@ function requestSuccess(config: AxiosRequestConfig, {httpNetwork = {}}: { httpNe
         timeout,
         baseURL,
         headers,
+        serialize
     } = getHttpNetworkConfig(httpNetwork)
     config.baseURL = baseURL
     config.timeout = timeout
@@ -51,6 +54,9 @@ function requestSuccess(config: AxiosRequestConfig, {httpNetwork = {}}: { httpNe
     config.headers = {...headers, sign}
     config.retry = retry
     config.retryDelay = retryDelay
+    if (config.method === 'post' && serialize) {
+        config.data = qs.stringify(config.data);
+    }
     return config
 }
 

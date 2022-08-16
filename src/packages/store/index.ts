@@ -1,9 +1,9 @@
-import type { App } from 'vue'
-import { createStore } from 'vuex'
+import type {App} from 'vue'
+import {createStore} from 'vuex'
 import user from './user'
 import app from './app'
-import { setStore } from '@/packages/store/store'
-import { cloneDeep } from 'lodash'
+import {setStore} from '@/packages/store/store'
+import {cloneDeep} from 'lodash'
 
 const options = {
     modules: {
@@ -21,9 +21,10 @@ const store: any = createStore({
  * @param app
  */
 const initConfigStore = (app: App) => {
-    const { configApp } = app.config.globalProperties
-    store.commit('app/updateThemeConfig', { isReset: true, ...configApp.themeConfig })
+    const {configApp,configAppApis} = app.config.globalProperties
+    store.commit('app/updateThemeConfig', {isReset: true, ...configApp.themeConfig})
     store.commit('app/updateHttpNetwork', configApp.httpNetwork)
+    store.commit('app/updateConfigApp', app.config.globalProperties)
 }
 
 const setupStore = (app: App) => {

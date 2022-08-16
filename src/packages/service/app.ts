@@ -1,4 +1,5 @@
-import { post } from '@/packages/http/request'
+import {post} from '@/packages/http/request'
+import {getApiInstanceUrl} from "@/packages/utils/api";
 
 
 /**
@@ -6,14 +7,14 @@ import { post } from '@/packages/http/request'
  * @param params
  */
 const apiAppRouter = (params?: object) => {
-    return post('/menu/all', params, { relink: true })
+    return post(getApiInstanceUrl('/menu/all'), params, {relink: true})
 }
 
 /**
  * 获取网络http异步组件
  */
 const apiAppLibrary = () => {
-    return post('/app/library')
+    return post(getApiInstanceUrl('/app/library'))
 }
 
 
@@ -21,7 +22,7 @@ const apiAppLibrary = () => {
  * 通知
  */
 const apiAppNotice = () => {
-    return post('/app/notice')
+    return post(getApiInstanceUrl('/app/notice'))
 }
 
 export {

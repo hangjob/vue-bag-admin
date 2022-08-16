@@ -1,6 +1,6 @@
 {
     "name": "vue-bag-admin",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "scripts": {
         "dev": "vite",
         "build": "vite build",
@@ -13,7 +13,7 @@
         "serve": "vite preview",
         "lint": "eslint . --ext .ts",
         "lint:fix": "eslint . --ext .ts --fix",
-        "lib":"npm run lib:admin && npm run lib:web && npm run utils"
+        "lib": "npm run lib:admin && npm run lib:web && npm run utils"
     },
     "private": false,
     "description": "vue-bag-admin采用Vite2.0、Vue3.2、TypeScript、JavaScript构建，适合企业中后台响应式管理系统，快速安装 npm i vue-bag-admin",
@@ -57,6 +57,7 @@
         "primevue": "^3.12.6",
         "print-js": "^1.6.0",
         "qrcode": "^1.5.0",
+        "qs": "^6.11.0",
         "quill": "^1.3.7",
         "socket.io-client": "^4.4.1",
         "solarlunar": "^2.0.7",

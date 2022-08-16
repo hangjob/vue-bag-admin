@@ -1,4 +1,4 @@
-import type {App} from 'vue'
+import type {App, createApp} from 'vue'
 import setupInit from '@/packages/base'
 import mitt from 'mitt'
 import * as $axios from '@/packages/http/request'
@@ -38,7 +38,8 @@ interface $optionsType {
             subhead?: string,
             logoImage?: string,
         }
-    }
+    },
+    apis?: {}
 }
 
 const install = (app: App, options?: $optionsType) => {
@@ -60,6 +61,9 @@ const install = (app: App, options?: $optionsType) => {
             httpNetwork: {...httpNetwork, ...options?.config?.httpNetwork},
             webSite: {...webSite, ...options?.config?.webSite},
         },
+        configAppApis: {
+            ...options?.apis
+        }
     }
     app.config.globalProperties = _options
     app.provide('$configAppOptions', readonly(_options))

@@ -37,6 +37,8 @@ const httpNetwork = {
     whiteList: ['/login', '/403', '/404', '/500', '/502', '/test'],
     // 重置路由
     resetPath: '/login',
+    // 当post 时候，是否序列化，qs
+    serialize:false
 }
 ```
 
@@ -48,3 +50,12 @@ const webSite = {
     logoImage:'本地图片或者网络图片'
 }
 ```
+
+### 接口覆盖
+```ts
+const apis:{
+    '/user/userinfo':'/test/userinfo'
+}
+```
+>最终在浏览器发出的请求会是该接口`/test/userinfo`
+

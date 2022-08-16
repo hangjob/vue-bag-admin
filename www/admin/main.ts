@@ -17,6 +17,9 @@ const $options: $optionsType = {
             subhead: 'bag',
         },
     },
+    apis:{
+        '/user/userinfo':'/user/userinfo'
+    }
 }
 // setupSocket(app, { connection: 'ws://127.0.0.1:8001' })
 createApp(App).use(install, $options).use(setupGlobComponents).mount('#app')
