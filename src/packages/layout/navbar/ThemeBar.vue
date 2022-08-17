@@ -34,16 +34,20 @@
     <div class="right_menu-item hidden-xs" @click="handleHome">
         <HomeOutlined class="icon-svg"/>
     </div>
-    <div class="right_menu-item hidden-xs" @click="handleDocument">
-        <InstagramOutlined class="icon-svg" />
-    </div>
-    <div class="right_menu-item hidden-xs" @click="handleAntDesign">
-        <AntDesignOutlined class="icon-svg" />
-    </div>
-    <div class="right_menu-item hidden-xs" @click="handleGithub">
-        <GithubOutlined class="icon-svg" />
-    </div>
-    <component :is="ThemeBar" v-if="ThemeBar"></component>
+    <template  v-if="ThemeBar">
+        <component :is="ThemeBar"></component>
+    </template>
+    <template v-else>
+        <div class="right_menu-item hidden-xs" @click="handleDocument">
+            <InstagramOutlined class="icon-svg" />
+        </div>
+        <div class="right_menu-item hidden-xs" @click="handleAntDesign">
+            <AntDesignOutlined class="icon-svg" />
+        </div>
+        <div class="right_menu-item hidden-xs" @click="handleGithub">
+            <GithubOutlined class="icon-svg" />
+        </div>
+    </template>
     <div class="right_menu-item hidden-xs">
         <img class="user-head" src="@/packages/assets/image/yanghang.jpg" alt="">
         <a-dropdown>
@@ -54,7 +58,7 @@
             <template #overlay>
                 <a-menu>
                     <a-menu-item>
-                        <a href="https://github.com/hangjob/vue-bag-admin" target="_blank">查看源码</a>
+                        <a target="_blank">修改密码</a>
                     </a-menu-item>
                     <a-menu-item @click="handleQuit">
                         <LogoutOutlined />
@@ -143,16 +147,6 @@ export default defineComponent({
             router.push('/module/debug')
         }
 
-        const handleGithub = () => {
-            window.open('https://github.com/hangjob/vue-bag-admin')
-        }
-
-        const handleAntDesign = () => {
-            window.open('https://2x.antdv.com/docs/vue/introduce-cn')
-        }
-        const handleDocument = () => {
-            window.open('/doc.html')
-        }
         const handleHome = ()=>{
             window.open('/index.html')
         }
@@ -171,12 +165,9 @@ export default defineComponent({
             isPC,
             handleQuit,
             handleDebug,
-            handleGithub,
             toggle,
             ThemeBar,
             isFullscreen,
-            handleAntDesign,
-            handleDocument,
             handleHome
         }
     },
