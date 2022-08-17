@@ -5,16 +5,26 @@ import {addUniqueId} from '@/packages/utils/lodash'
  * 本地路由添加
  */
 const paths = addUniqueId([
-    // {
-    //     name: '测试CURD',
-    //     path: '/cstest',
-    //     icon: 'HomeOutlined',
-    //     shows: 1,
-    //     tabHidden: false,
-    //     tabFix: false,
-    //     keepAlive: true,
-    //     filePath: '/admin/views/cstest/Index.vue',
-    // },
+    {
+        name: '测试CURD',
+        path: '/cstest',
+        icon: 'HomeOutlined',
+        shows: 0,
+        tabHidden: false,
+        tabFix: false,
+        keepAlive: true,
+        filePath: '/admin/views/cstest/Index.vue',
+    },
+    {
+        name: '修改资料',
+        path: '/user',
+        icon: 'HomeOutlined',
+        shows: 0,
+        tabHidden: false,
+        tabFix: false,
+        keepAlive: true,
+        filePath: '/admin/views/user/Index.vue',
+    },
 ], '_local')
 
 export default paths
