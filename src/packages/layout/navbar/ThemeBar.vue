@@ -58,7 +58,7 @@
             <template #overlay>
                 <a-menu>
                     <a-menu-item>
-                        <a target="_blank">修改密码</a>
+                        <router-link to="/user">修改密码</router-link>
                     </a-menu-item>
                     <a-menu-item @click="handleQuit">
                         <LogoutOutlined />
