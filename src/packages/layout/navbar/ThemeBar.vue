@@ -80,7 +80,6 @@ import { useStore } from 'vuex'
 import locaStore from '@/common/utils/persistence'
 import { useRouter } from 'vue-router'
 import { useFullscreen } from '@vueuse/core'
-import { resetStore } from '@/packages/store'
 
 export default defineComponent({
     components: {

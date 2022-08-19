@@ -78,6 +78,26 @@ module.exports = app => {
                 len: [0, 200],
             },
         },
+        job: {
+            type: STRING,
+            comment: '职业',
+        },
+        birthday: {
+            type: STRING,
+            comment: '出生年月',
+        },
+        company: {
+            type: STRING,
+            comment: '公司名称',
+        },
+        address: {
+            type: STRING,
+            comment: '地址',
+        },
+        software: {
+            type: STRING,
+            comment: '擅长编程语言',
+        },
         createTime: {
             type: DATE,
             comment: '创建时间',
