@@ -1,7 +1,7 @@
 <template>
     <div class="user">
         <a-row :gutter="[16,16]">
-            <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="10" :xxl="6">
+            <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="10" :xxl="7">
                 <div class="user-info">
                     <img class="userhead" :src="userInfo.userhead" alt="">
                     <a-typography-title :level="4">{{ userInfo.username }}</a-typography-title>
@@ -43,15 +43,17 @@
                     </div>
                 </div>
             </a-col>
-            <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="14" :xxl="18">
+            <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="14" :xxl="17">
                 <div class="user-tabs">
                     <a-tabs v-model:activeKey="tabs.activeKey">
                         <a-tab-pane key="1" tab="基本信息">
                             <BaseInfo/>
                         </a-tab-pane>
-                        <a-tab-pane key="2" tab="账号绑定" force-render>账号绑定</a-tab-pane>
+                        <a-tab-pane key="2" tab="账号绑定" force-render>
+
+                        </a-tab-pane>
                         <a-tab-pane key="3" tab="操作日志">
-                            操作日志
+                            <Logs/>
                         </a-tab-pane>
                     </a-tabs>
                 </div>
@@ -63,9 +65,11 @@
 import { defineComponent, inject, reactive,ref } from 'vue'
 import { useStore } from 'vuex'
 import BaseInfo from './BaseInfo.vue'
+import Logs from './Logs.vue'
 export default defineComponent({
     components:{
-        BaseInfo
+        BaseInfo,
+        Logs
     },
     setup() {
         const store = useStore()

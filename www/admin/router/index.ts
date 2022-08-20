@@ -14,17 +14,7 @@ const paths = addUniqueId([
         tabFix: false,
         keepAlive: true,
         filePath: '/admin/views/cstest/Index.vue',
-    },
-    {
-        name: '修改资料',
-        path: '/user',
-        icon: 'HomeOutlined',
-        shows: 0,
-        tabHidden: false,
-        tabFix: false,
-        keepAlive: true,
-        filePath: '/admin/views/user/Index.vue',
-    },
+    }
 ], '_local')
 
 export default paths
