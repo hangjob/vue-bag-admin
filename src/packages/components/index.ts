@@ -7,8 +7,6 @@ import iconfont from './iconfont/Index'
 import uploadImage from './upload/UploadImage.vue'
 import curdTable from './curd/Index.vue'
 import curdCreate from './curd/Create.vue'
-// import curdEdit from './curd/Edit.vue'
-// import MdEditor from './editor/MdEditor.vue'
 
 const setupGlobComponents = (app: App) => {
     app.component('bag-card', card)
@@ -19,7 +17,6 @@ const setupGlobComponents = (app: App) => {
     app.component('bag-view', view)
     app.component('bag-iconfont', iconfont)
     app.component('bag-upload-image', uploadImage)
-    // app.component('MdEditor', MdEditor)
 }
 
 export {

@@ -1,10 +1,9 @@
-import {Component} from 'vue'
+import { Component } from 'vue'
 import store from '@/packages/store'
-import {apiAppRouter} from '@/packages/service/app'
+import { apiAppRouter } from '@/packages/service/app'
 import router from '@/packages/router'
-import {apiUserUserinfo} from '@/packages/service/user'
-import {defaultMenu} from '@/packages/config/defaultMenu'
-import {toTree} from "@/packages/utils/utils";
+import { apiUserUserinfo } from '@/packages/service/user'
+import { toTree } from '@/packages/utils/utils'
 
 let namespace = 'admin'
 
@@ -18,7 +17,7 @@ interface FileType {
 const localFile: Record<string, FileType> = import.meta.globEager('/src/packages/views/**/*.vue') // 框架 所有页面
 function findComponent(filePath: string) {
     if (filePath) {
-        const {file} = store.state.app.appRouter;
+        const { file } = store.state.app.appRouter
         const merges = Object.assign(localFile, file)
         const item = Object.keys(merges).find(item => item.indexOf(filePath) > -1)
         return item ? merges[item].default : false
@@ -33,12 +32,12 @@ function findComponent(filePath: string) {
  * @param paths
  */
 function pathsFileRouterStore(paths: Array<any>) {
-    const loopFileAddRouter = function (paths: Array<any>) {
+    const loopFileAddRouter = function(paths: Array<any>) {
         for (let i = 0; i < paths.length; i++) {
             const item = paths[i]
             let component = findComponent(item.filePath)
             if (component) {
-                router.addRoute(namespace, {path: item.path, component})
+                router.addRoute(namespace, { path: item.path, component })
             }
             if (item.children) {
                 namespace = item.namespace ? item.namespace : namespace // 控制命名空间，做嵌套路由
@@ -60,14 +59,14 @@ function pathsFileRouterStore(paths: Array<any>) {
  * @param routes
  */
 const filterRouter = (routes: Array<any>) => {
-    const {rolesDetail} = store.getters['user/userinfo']
-    const isSuperadmin = store.getters['user/isSuperadmin'];
+    const { rolesDetail } = store.getters['user/userinfo']
+    const isSuperadmin = store.getters['user/isSuperadmin']
     if (isSuperadmin) {
         return routes // 超级管理不过滤路由
     }
     if (rolesDetail) {
         return routes.filter((item: any) => {
-            return rolesDetail.menus.map(Number).indexOf(item.id) > -1;
+            return rolesDetail.menus.map(Number).indexOf(item.id) > -1
         })
     } else {
         return []
@@ -78,12 +77,9 @@ const filterRouter = (routes: Array<any>) => {
  * 获取异步路由，动态添加
  */
 const setAsyncRouterComponents = async () => {
-    const {paths} = store.state.app.appRouter;
-    const menuPaths: Array<any> = [];
-    const isSuperadmin = store.getters['user/isSuperadmin'];
-    if (!isSuperadmin) {
-        menuPaths.push(...paths) // 超级管理员本地添加不展示
-    }
+    const { paths } = store.state.app.appRouter // 本地路由
+    const menuPaths: Array<any> = []
+    menuPaths.push(...paths)
     try {
         const routes: any = await apiAppRouter()
         menuPaths.push(...filterRouter(routes))
@@ -95,7 +91,7 @@ const setAsyncRouterComponents = async () => {
 
 
 const hasUserinfo = (to: any, from: any, next: any) => {
-    const {resetPath, whiteList} = store.state.app.httpNetwork
+    const { resetPath, whiteList } = store.state.app.httpNetwork
     const userinfo = store.getters['user/userinfo']
     if (Object.keys(userinfo).length) {
         next()
@@ -106,7 +102,7 @@ const hasUserinfo = (to: any, from: any, next: any) => {
             apiUserUserinfo().then(async (res: any) => {
                 store.commit('user/updateUserinfo', res)
                 await setAsyncRouterComponents()
-                next({...to, replace: true})
+                next({ ...to, replace: true })
             }).catch(() => {
                 next(resetPath)
             })

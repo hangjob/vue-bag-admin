@@ -65,6 +65,31 @@
                     </a-form-item>
                 </a-col>
                 <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
+                    <a-form-item label="职业" name="job">
+                        <a-input v-model:value="formState.job" placeholder="输入职业" />
+                    </a-form-item>
+                </a-col>
+                <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
+                    <a-form-item label="出生年月" name="birthday">
+                        <a-input v-model:value="formState.birthday" placeholder="输入出生年月" />
+                    </a-form-item>
+                </a-col>
+                <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
+                    <a-form-item label="公司名称" name="company">
+                        <a-input v-model:value="formState.company" placeholder="输入公司名称" />
+                    </a-form-item>
+                </a-col>
+                <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
+                    <a-form-item label="地址" name="address">
+                        <a-input v-model:value="formState.address" placeholder="输入地址" />
+                    </a-form-item>
+                </a-col>
+                <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
+                    <a-form-item label="擅长编程语言" name="software">
+                        <a-input v-model:value="formState.software" placeholder="输入擅长编程语言" />
+                    </a-form-item>
+                </a-col>
+                <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
                     <a-form-item label="是否禁用" name="state">
                         <a-radio-group v-model:value="formState.state">
                             <a-radio :value="true">启用</a-radio>
@@ -113,6 +138,11 @@ export default defineComponent({
             did: undefined,
             state: true,
             id: '',
+            job:'',
+            birthday:'',
+            company:'',
+            address:'',
+            software:''
         });
         const rules = {
             username: [

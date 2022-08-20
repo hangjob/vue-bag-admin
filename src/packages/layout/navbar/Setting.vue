@@ -8,11 +8,6 @@
         @close="onClose"
     >
         <a-form :model="formState" labelAlign="right" :label-col="labelCol" :wrapper-col="wrapperCol">
-            <!--            <a-form-item labelAlign="left" label="主题设置">-->
-            <!--                <a-select @change="changeTheme" v-model:value="formState.theme" placeholder="请选择主题">-->
-            <!--                    <a-select-option v-for="item in themeList" :key="item.path">{{ item.name }}</a-select-option>-->
-            <!--                </a-select>-->
-            <!--            </a-form-item>-->
             <a-form-item labelAlign="left" label="是否悬浮左侧菜单">
                 <a-switch @change="(check)=>{changeStyle(check,'floatingMenu')}"
                           v-model:checked="formState.floatingMenu"

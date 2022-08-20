@@ -18,7 +18,7 @@
             <a-modal v-model:visible="visibleIcon" width="85%" title="选择icon" okText="确认" cancelText="关闭">
                 <Icons v-model:icon="editForm.formState[item.formData.name]" @affirm="visibleIcon = false" />
             </a-modal>
-        </template>
+        </template>·
         <template #table-action="{record}">
 <!--            <a-button size="small" @click="handleSetBtn({record})">设置按钮-->
 <!--            </a-button>-->
@@ -57,9 +57,7 @@ export default defineComponent({
                 }
             })
         }
-        tableCurd.create.beforeSubmit = (data)=>{
 
-        }
         const handleSetBtn = ({ record }) => {
             btns.value.handleOpen(true, record)
         }
