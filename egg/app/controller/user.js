@@ -49,7 +49,6 @@ class UserController extends baseController {
                     encrypt: true,   //是否对cookie进行加密     如果cookie加密那么获取的时候要对cookie进行解密
                 })
                 this.result({data: result})
-                this.ctx.service.user.getSiteIpInfo();
             } else {
                 this.result({data: '', message: '没有找到该用户', code: 1002})
             }
@@ -66,6 +65,15 @@ class UserController extends baseController {
 
     register() {
 
+    }
+
+    async siteIpInfo() {
+        const {data, error} = await this.ctx.service.user.ipInfo();
+        if (error) {
+            this.result({data: '', message: error, code: 1001})
+        } else {
+            this.result({data: data})
+        }
     }
 
     async sendEmail() {

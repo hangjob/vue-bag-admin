@@ -58,7 +58,7 @@
             <template #overlay>
                 <a-menu>
                     <a-menu-item>
-                        <router-link to="/user">修改密码</router-link>
+                        <router-link to="/user">修改资料</router-link>
                     </a-menu-item>
                     <a-menu-item @click="handleQuit">
                         <LogoutOutlined />

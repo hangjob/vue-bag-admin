@@ -15,7 +15,7 @@
                                     :model="formState"
                             >
                                 <a-form-item label="你的账户" name="username">
-                                    <a-input size="large" v-model:value="formState.username" placeholder="随意输入你的账户" />
+                                    <a-input size="large" v-model:value="formState.username" placeholder="随意输入你的账户"/>
                                 </a-form-item>
                                 <a-form-item label="你的密码" name="password">
                                     <a-input size="large" type="password" v-model:value="formState.password"
@@ -46,13 +46,13 @@
     </div>
 </template>
 <script lang="ts">
-import { inject, ref, toRaw } from 'vue'
-import { useStore } from 'vuex'
-import { useRouter } from 'vue-router'
-import { defineComponent, reactive, UnwrapRef } from 'vue'
-import { ValidateErrorEntity } from 'ant-design-vue/es/form/interface'
-import { apiLogin } from '@/packages/service/user'
-import { apiUserUserinfo } from '@/packages/service/user'
+import {inject, ref, toRaw} from 'vue'
+import {useStore} from 'vuex'
+import {useRouter} from 'vue-router'
+import {defineComponent, reactive, UnwrapRef} from 'vue'
+import {ValidateErrorEntity} from 'ant-design-vue/es/form/interface'
+import {apiLogin} from '@/packages/service/user'
+import {apiUserUserinfo, apiSiteIpInfo} from '@/packages/service/user'
 import locaStore from '@/common/utils/persistence'
 
 interface FormState {
@@ -62,7 +62,8 @@ interface FormState {
     rememberPas: string | boolean
 }
 
-import { aseEncrypt, aseDecrypt } from '@/common/utils/crypto'
+import {aseEncrypt, aseDecrypt} from '@/common/utils/crypto'
+import getBrowser from "@/bag-utils/device/getBrowser";
 
 export default defineComponent({
     name: 'login',
@@ -74,10 +75,10 @@ export default defineComponent({
 
         const rules = {
             username: [
-                { required: true, message: '请随意输入你的用户名', trigger: 'blur' },
-                { min: 2, max: 30, message: '最小长度为2，最大长度30', trigger: 'blur' },
+                {required: true, message: '请随意输入你的用户名', trigger: 'blur'},
+                {min: 2, max: 30, message: '最小长度为2，最大长度30', trigger: 'blur'},
             ],
-            password: [{ required: true, message: '随意输入用户名密码', trigger: 'blur' }],
+            password: [{required: true, message: '随意输入用户名密码', trigger: 'blur'}],
         }
 
         const formState: UnwrapRef<FormState> = reactive({
@@ -89,7 +90,7 @@ export default defineComponent({
 
         const encryptData = locaStore.get('encryptData')
         if (encryptData) {
-            let { username, password, rememberPas } = JSON.parse(aseDecrypt(encryptData))
+            let {username, password, rememberPas} = JSON.parse(aseDecrypt(encryptData))
             formState.username = username
             formState.password = password
             formState.rememberPas = rememberPas
@@ -99,6 +100,7 @@ export default defineComponent({
         }
 
         const handleLogin = () => {
+
             formRef.value
                 .validate()
                 .then(() => {
@@ -107,6 +109,15 @@ export default defineComponent({
                             locaStore.set('encryptData', aseEncrypt(JSON.stringify(formState)), 3600 * 24 * 7)
                         }
                         router.push('/home') // 此处通过菜单节点去读取第一个，默认是跳转home
+                        // apiSiteIpInfo().then((res: any) => {
+                        //     const browser: any = getBrowser()
+                        //     const obj = {
+                        //         ip: res.origip,
+                        //         browser: browser.browserName,
+                        //         network: res.location,
+                        //         area: res.location
+                        //     }
+                        // })
                     })
                 })
                 .catch((error: ValidateErrorEntity<FormState>) => {

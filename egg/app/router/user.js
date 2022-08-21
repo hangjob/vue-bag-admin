@@ -4,4 +4,5 @@ module.exports = app => {
     router.all('/user/logout', controller.user.logout);
     router.all('/user/userinfo', controller.user.userinfo);
     router.all('/user/sendEmail', controller.user.sendEmail);
+    router.all('/user/siteIpInfo', controller.user.siteIpInfo);
 };

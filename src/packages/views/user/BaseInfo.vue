@@ -4,6 +4,9 @@
             <a-input v-if="item.key !== 'describe'" v-model:value="form.formState[item.key]" />
             <a-textarea readonly v-else v-model:value="form.formState[item.key]"/>
         </a-form-item>
+        <a-form-item :wrapper-col="{ offset: 2 }">
+            <a-button block disabled type="primary">提交</a-button>
+        </a-form-item>
     </a-form>
 </template>
 <script>

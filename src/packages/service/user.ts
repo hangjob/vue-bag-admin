@@ -24,9 +24,18 @@ const apiUserUserinfo = () => {
     return post(getApiInstanceUrl('/user/userinfo'))
 }
 
+/**
+ * 获取网络信息
+ */
+const apiSiteIpInfo = ()=>{
+    return post(getApiInstanceUrl('/user/siteIpInfo'))
+}
+
+
 
 export {
     apiLogin,
     apiLogout,
     apiUserUserinfo,
+    apiSiteIpInfo
 }

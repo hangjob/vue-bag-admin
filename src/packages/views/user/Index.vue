@@ -6,29 +6,29 @@
                     <img class="userhead" :src="userInfo.userhead" alt="">
                     <a-typography-title :level="4">{{ userInfo.username }}</a-typography-title>
                     <a-typography-text>{{ userInfo.describe }}</a-typography-text>
-                    <a-button style="margin-top:10px" type="primary" shape="round">
-                        <SmileOutlined />
+                    <a-button @click="handleFollowMe" style="margin-top:10px" type="primary" shape="round">
+                        <SmileOutlined/>
                         Follow me
                     </a-button>
                     <ul>
                         <li>
-                            <UserOutlined />
+                            <UserOutlined/>
                             <span>{{ userInfo.job }}</span>
                         </li>
                         <li>
-                            <HeartOutlined />
+                            <HeartOutlined/>
                             <span>{{ userInfo.birthday }}</span>
                         </li>
                         <li>
-                            <BankOutlined />
+                            <BankOutlined/>
                             <span>{{ userInfo.company }}</span>
                         </li>
                         <li>
-                            <RocketOutlined />
+                            <RocketOutlined/>
                             <span>{{ userInfo.address }}</span>
                         </li>
                         <li>
-                            <ShareAltOutlined />
+                            <ShareAltOutlined/>
                             <span>{{ userInfo.software }}</span>
                         </li>
                     </ul>
@@ -50,7 +50,7 @@
                             <BaseInfo/>
                         </a-tab-pane>
                         <a-tab-pane key="2" tab="账号绑定" force-render>
-
+                            <Account/>
                         </a-tab-pane>
                         <a-tab-pane key="3" tab="操作日志">
                             <Logs/>
@@ -62,19 +62,24 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, inject, reactive,ref } from 'vue'
-import { useStore } from 'vuex'
+import {defineComponent, inject, reactive, ref, h} from 'vue'
+import {useStore} from 'vuex'
 import BaseInfo from './BaseInfo.vue'
 import Logs from './Logs.vue'
+import Account from './Account.vue'
+import {notification, Button} from 'ant-design-vue';
+import {SmileOutlined} from '@ant-design/icons-vue';
+
 export default defineComponent({
-    components:{
+    components: {
         BaseInfo,
-        Logs
+        Logs,
+        Account
     },
     setup() {
         const store = useStore()
         const userinfo = store.getters['user/userinfo']
-        const { getImageFullPath } = inject<any>('bagGlobal')
+        const {getImageFullPath} = inject<any>('bagGlobal')
         const userInfo = reactive({
             ...userinfo,
             userhead: getImageFullPath(userinfo.userhead),
@@ -82,10 +87,31 @@ export default defineComponent({
         const tabs = reactive({
             activeKey: ref('1'),
         })
-        console.log(userInfo)
+        const handleFollowMe = () => {
+            const key = `open${Date.now()}`;
+            notification['success']({
+                message: '你是要去跟我点赞嘛',
+                description: 'Are you going to like me? If so, please click and remember to like me',
+                icon: h(SmileOutlined, {style: 'color: #108ee9'}),
+                btn: h(
+                    Button,
+                    {
+                        type: 'primary',
+                        size: 'small',
+                        onClick: () => {
+                            notification.close(key);
+                            window.open('https://github.com/hangjob/vue-bag-admin')
+                        },
+                    },
+                    '点我吧',
+                ),
+                key,
+            });
+        }
         return {
             userInfo,
-            tabs
+            tabs,
+            handleFollowMe
         }
     },
 })
@@ -137,7 +163,8 @@ export default defineComponent({
             }
         }
     }
-    &-tabs{
+
+    &-tabs {
         border: 1px solid #dddddd;
         display: flex;
         flex-direction: column;

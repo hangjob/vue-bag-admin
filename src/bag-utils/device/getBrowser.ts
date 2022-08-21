@@ -35,24 +35,35 @@ const getBrowser = () => {
 
         // 浏览器内核
         let prefix: string
-
+        let browserName:string
         switch (type) {
         case 'chrome':
+            prefix = 'webkit'
+            browserName = '谷歌浏览器'
+            break
         case 'safari':
+            prefix = 'webkit'
+            browserName = '苹果浏览器'
+            break
         case 'mobile':
             prefix = 'webkit'
+            browserName = '移动端webkit'
             break
         case 'msie':
             prefix = 'ms'
+            browserName = 'Ie浏览器'
             break
         case 'firefox':
+            browserName = '火狐浏览器'
             prefix = 'Moz'
             break
         case 'opera':
             prefix = 'O'
+            browserName = 'Opera浏览器'
             break
         default:
             prefix = 'webkit'
+            browserName = 'Chrome内核浏览器'
             break
         }
 
@@ -102,9 +113,12 @@ const getBrowser = () => {
             isPC,
             isMini,
             screen,
+            browserName
         }
     } catch (err) {
+        return  {
 
+        }
     }
 }
 

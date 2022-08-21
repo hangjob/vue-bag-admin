@@ -12,7 +12,7 @@ module.exports = options => {
             } else {
                 await ctx.service.redis.set(decodeData.nanoid, decodeData.nanoid, 3)
                 const req = await ctx.request;
-                const apis = []
+                const apis = ['edit', 'update', 'delete', 'deletes','updatePas']
                 const lastUrls = req.url.split('/');
                 if (apis.indexOf(lastUrls[lastUrls.length - 1]) > -1) {
                     ctx.body = {code: 1, data: '', message: '演示数据不予许编辑删除'}

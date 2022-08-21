@@ -22,7 +22,7 @@ class UserService extends Service {
         }
     }
 
-    async getSiteIpInfo() {
+    async ipInfo() {
         const {ctx} = this;
         const ip = '117.147.17.218';
         const url = `https://sp0.baidu.com/8aQDcjqpAAV3otqbppnN2DJv/api.php?query=${ip}&co=&resource_id=6006&t=${+new Date()}&ie=utf8&oe=utf8&format=json&tn=baidu`

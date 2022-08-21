@@ -11,10 +11,6 @@ module.exports = app => {
             type: STRING,
             comment: 'ip',
         },
-        login_time: {
-            type: STRING,
-            comment: '登录时间',
-        },
         browser: {
             type: STRING,
             comment: '浏览器',
