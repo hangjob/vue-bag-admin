@@ -17,6 +17,7 @@ const setupIcons = (app: App) => {
     for (const path in modules) {
         modules[path]().then((mod) => {
             mod.default.forEach((item: string) => {
+                app.component(item, iconComponent(item))
                 app.component(toHump(item), iconComponent(item))
             })
         })

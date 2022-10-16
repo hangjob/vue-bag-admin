@@ -1,10 +1,10 @@
-import type {App} from 'vue';
-import {post} from '@/packages/http/request'
+import type { App } from 'vue'
+import { post } from '@/packages/http/request'
 
 const handleError = (app: App) => {
-    const agent = navigator.userAgent.toLowerCase();
+    const agent = navigator.userAgent.toLowerCase()
     app.config.errorHandler = (err: any, vm, info) => {
-        const {message, stack} = err;
+        const { message, stack } = err
         console.log(message)
         console.log(stack)
         console.log(vm)
@@ -13,5 +13,5 @@ const handleError = (app: App) => {
 }
 
 export {
-    handleError
+    handleError,
 }

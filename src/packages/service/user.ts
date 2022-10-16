@@ -1,19 +1,19 @@
 import {post} from '@/packages/http/request'
+import {getApiInstanceUrl} from "@/packages/utils/api";
 
-const prefix = '/user'
 
 /**
  * 登录
  */
 const apiLogin = (params?: object) => {
-    return post(`${prefix}/login`, params, {notifyError: true})
+    return post(getApiInstanceUrl('/user/login'), params, {notifyError: true, relink: true})
 }
 
 /**
  * 退出
  */
 const apiLogout = () => {
-    return post(`${prefix}/logout`)
+    return post(getApiInstanceUrl('/user/logout'))
 }
 
 
@@ -21,12 +21,21 @@ const apiLogout = () => {
  * 获取用户信息
  */
 const apiUserUserinfo = () => {
-    return post(`${prefix}/userinfo`)
+    return post(getApiInstanceUrl('/user/userinfo'))
 }
+
+/**
+ * 获取网络信息
+ */
+const apiSiteIpInfo = ()=>{
+    return post(getApiInstanceUrl('/user/siteIpInfo'))
+}
+
 
 
 export {
     apiLogin,
     apiLogout,
-    apiUserUserinfo
+    apiUserUserinfo,
+    apiSiteIpInfo
 }

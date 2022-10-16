@@ -1,12 +1,15 @@
-import type { App } from 'vue'
-import setupInit from '@/packages/base/index'
+import type {App, createApp} from 'vue'
+import setupInit from '@/packages/base'
 import mitt from 'mitt'
 import * as $axios from '@/packages/http/request'
-import { handleError } from '@/packages/debug'
-import { Component } from 'vue'
+import {handleError} from '@/packages/debug'
+import {Component, readonly} from 'vue'
+import {themeConfig, httpNetwork, webSite} from '@/packages/config'
+import setupGlobal from '@/common/global'
+import curdTableHock, {initTableHock} from '@/packages/hook/table'
 
 /**
- * router: {views:[菜单],file:[菜单路由文件]}
+ * router: {paths:[菜单],file:[菜单路由文件]},defaults:true,开启默认路由
  *
  * store:{module:{store对象},namespace:’命名空间，默认web‘}
  *
@@ -17,31 +20,55 @@ import { Component } from 'vue'
 interface $optionsType {
     router?: {
         file: Record<string, Component>, // 外接路由文件所在路径 import xxx from 'home.vue'
-        paths: Array<any> // 路由地址 列如：router.push(xxx)
+        paths?: Array<any>,
+        defaults?: Boolean,
+        replaceRouter?: Array<any> // 可以替换内部路由
     },
     store?: {
         module: object,
-        namespace?: string
     },
-    priest?: {
-        list: Array<any>
+    comps?: {
+        ThemeBar?: any // 接受一个组件
     },
-    config?: object
+    config?: {
+        themeConfig?: object,
+        httpNetwork?: object,
+        webSite?: {
+            title?: string,
+            subhead?: string,
+            logoImage?: string,
+        }
+    },
+    apis?: {}
 }
 
-class Framework {
-    static install() {
+const install = (app: App, options?: $optionsType) => {
+    const _options = {
+        configAppRouter: {
+            file: options?.router?.file || [],
+            paths: options?.router?.paths || [],
+            defaults: options?.router?.defaults,
+            replaceRouter: options?.router?.replaceRouter || [],
+        },
+        configAppStore: {
+            module: options?.store?.module || {},
+        },
+        configAppComps: {
+            ThemeBar: options?.comps?.ThemeBar,
+        },
+        configApp: {
+            themeConfig: {...themeConfig, ...options?.config?.themeConfig},
+            httpNetwork: {...httpNetwork, ...options?.config?.httpNetwork},
+            webSite: {...webSite, ...options?.config?.webSite},
+        },
+        configAppApis: {
+            ...options?.apis
+        }
     }
-
-    constructor({ options }: { options: Object }) {
-
-    }
-}
-
-const install = (app: App, $options?: any) => {
-    app.config.globalProperties.$plugin = $options
-    app.provide('AppGlobal', { version: '0.0.1' }) // 具体请看官网 [https://v3.cn.vuejs.org/api/application-api.html#provide]
+    app.config.globalProperties = _options
+    app.provide('$configAppOptions', readonly(_options))
     app.provide('$mitt', mitt())
+    app.use(setupGlobal)
     handleError(app)
     setupInit(app)
 }
@@ -51,4 +78,6 @@ export default install
 export {
     $optionsType,
     $axios,
+    curdTableHock,
+    initTableHock,
 }

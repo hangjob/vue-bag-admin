@@ -9,4 +9,9 @@ tw.md
 vc.md
 www
 www/*
+dist
 .vscode
+/设计模式
+lib-utils
+lib-web
+report.html

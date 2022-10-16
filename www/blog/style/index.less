@@ -1,0 +1,77 @@
+body {
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+.section-container {
+    padding-left: 280px;
+    padding-right: 280px;
+}
+
+/*********媒体查询******************/
+@media (max-width: 767px) {
+    .section-container {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .download-release {
+        width: 90%;
+    }
+    .nav-logo{
+        justify-content: center;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .section-container {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+
+    .download-release {
+        width: 85%;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .section-container {
+        padding-left: 80px;
+        padding-right: 80px;
+    }
+
+    .download-release {
+        width: 70%;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+    .section-container {
+        padding-left: 200px;
+        padding-right: 200px;
+    }
+
+    .download-release {
+        width: 60%;
+    }
+}
+
+@media (min-width: 1400px) {
+    .section-container {
+        padding-left: 280px;
+        padding-right: 280px;
+    }
+
+    .download-release {
+        width: 50%;
+    }
+}
+
+
+/************媒体查询结束***********************/
+
+.clearfix::after {
+    display: block;
+    clear: both;
+    content: ""
+}

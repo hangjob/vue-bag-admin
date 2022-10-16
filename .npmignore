@@ -3,10 +3,11 @@ node_modules
 dist
 dist-ssr
 egg
-mock
+bag-utils
+www
+设计模式
 *.local
 .idea
-package-lock.json
 笔记.md
 .editorconfig
 .env.*
@@ -21,5 +22,14 @@ package-lock.json
 color.ts
 jsconfig.json
 tsconfig.json
+wx.jpg
+windi.config.ts
+public
+typings
+build
+docs
+gulpfile.js
+*.html
 vite.config.ts
+favicon.ico
 

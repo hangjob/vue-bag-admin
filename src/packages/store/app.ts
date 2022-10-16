@@ -1,53 +1,55 @@
-import {defaultMenu, defaultPrjMenu} from "@/packages/config/defaultMenu";
-import {find, findUnsetDepth} from "@/packages/utils/lodash";
-import {getBrowser} from '@/packages/utils/utils'
-import {defaultTabFix} from "@/packages/router/beforeStore";
-import {themeConfig} from '@/packages/config'
+import { find, findUnsetDepth } from '@/packages/utils/lodash'
+import getBrowser from '@/bag-utils/device/getBrowser'
+import { defaultTabFix } from '@/packages/router/setStore'
+
 const app = {
     namespaced: true,
     state: {
         browser: {},
-        menuList: defaultMenu,
-        projectMenu: defaultPrjMenu, // 项目切换菜单
+        menuList: [],
+        projectMenu: [], // 项目切换菜单
         processList: [], // tab切换栏
         currentRouter: {}, // 当前路由数据
         tabViewsPath: [], // 访问路经
         collapsed: false, // 菜单是否折叠
         floatingVisible: false, // 左侧菜单隐藏
-        themeConfig: {...themeConfig} // 主题配置
+        themeConfig: {}, // 主题配置
+        httpNetwork: {}, // 网络配置
+        appRouter: {}, // 包含 paths file文件 router实列
+        configApp:{}, // 配置
     },
     // 定义getters 好处可以过滤数据
     getters: {
         menuList: (state: any) => {
-            return state.menuList;
+            return state.menuList
         },
         processList: (state: any) => {
             return state.processList
         },
         currentRouter: (state: any) => {
-            return state.currentRouter;
+            return state.currentRouter
         },
         tabViewsPath: (state: any) => {
-            return state.tabViewsPath;
+            return state.tabViewsPath
         },
         getBrowser: (state: any) => {
-            return state.browser;
+            return state.browser
         },
         getThemeConfig: (state: any) => {
-            return state.themeConfig;
+            return state.themeConfig
         },
         getFloatingVisible: (state: any) => {
-            return state.floatingVisible;
+            return state.floatingVisible
         },
         getProjectMenu: (state: any) => {
-            return state.projectMenu;
-        }
+            return state.projectMenu
+        },
     },
     mutations: {
         // 添加头部路由标签
         addProcessList(state: any, item: any) {
-            if (!find({key: 'path', value: item.path}, state.processList)) {
-                state.processList.push(item);
+            if (!find({ key: 'path', value: item.path }, state.processList)) {
+                state.processList.push(item)
             }
         },
         // 使用splice元素
@@ -56,7 +58,7 @@ const app = {
         },
         // 重置指定菜单
         setProcessList(state: any, arr: Array<any>) {
-            state.processList = arr;
+            state.processList = arr
         },
         // 重置菜单
         resetProcessList(state: any) {
@@ -67,12 +69,12 @@ const app = {
             // 激活当前的 processList 中的 active
             state.processList.map((obj: any) => {
                 if (obj.path === item.path) {
-                    obj.active = true;
-                    state.currentRouter = {...obj, ...item};
+                    obj.active = true
+                    state.currentRouter = { ...obj, ...item }
                 } else {
-                    obj.active = false;
+                    obj.active = false
                 }
-            });
+            })
         },
         // 更新tab栏路由
         updateTabViewsPath(state: any, arr: Array<any>) {
@@ -86,22 +88,20 @@ const app = {
         updateBrowser(state: any) {
             state.browser = getBrowser()
             if (state.browser.isMobile || state.browser.isMini) {
-                state.collapsed = true;
+                state.collapsed = true
             }
         },
-        // 添加菜单
-        addMenuList(state: any, item: any) {
-            if (!findUnsetDepth({path: item.path}, state.menuList)) {
-                state.menuList.push(item);
-            }
-        },
-        // 更新菜單
+        // 更新菜单
         updateMenuList(state: any, arr: Array<any>) {
-            state.menuList = arr;
+            state.menuList = arr
         },
         // 更新配置
         updateThemeConfig(state: any, item: any) {
-            state.themeConfig[item.key] = item.value
+            if (item.isReset) {
+                state.themeConfig = item
+            } else {
+                state.themeConfig[item.key] = item.value
+            }
         },
         updateFloatingVisible(state: any, bol: boolean) {
             state.floatingVisible = bol
@@ -109,9 +109,21 @@ const app = {
         // 更新项目菜单
         updateProjectMenu(state: any, arr: Array<any>) {
             state.projectMenu = arr
+        },
+        // 更新信息
+        updateAppRouter(state: any, data: any) {
+            state.appRouter = data
+        },
+        // 更新网络配置
+        updateHttpNetwork(state: any, data: any) {
+            state.httpNetwork = data
+        },
+        // 更新配置
+        updateConfigApp(state: any, data: any){
+            state.configApp = data
         }
-    }
+    },
 }
 
 
-export default app;
+export default app

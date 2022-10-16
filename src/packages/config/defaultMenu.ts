@@ -1,10 +1,9 @@
-import { addUniqueId } from '@/packages/utils/lodash'
-// 看我写的文档字段介绍
+import {addUniqueId} from '@/packages/utils/lodash'
 
 /**
  * 默认菜单
  */
-const arr = [
+const arr: Array<any> = [
     {
         name: '首页',
         path: '/home',
@@ -14,6 +13,7 @@ const arr = [
         iframe: '',
         tabFix: true,
         keepAlive: false,
+        filePath:'/views/home/Index.vue'
     },
     {
         name: '系统管理',
@@ -22,13 +22,14 @@ const arr = [
         shows: 1,
         children: [
             {
-                name: '用户管理',
-                path: '/sys/member',
-                icon: '',
-                shows: 1,
-                tabHidden: false,
-                tabFix: false,
-                keepAlive: true,
+                name: '用户管理', path: '/sys/member', icon: '', shows: 1,
+                tabHidden: false, tabFix: false, keepAlive: true,
+                filePath: '/views/sys/member/Index.vue'
+            },
+            {
+                name: '菜单列表', path: '/sys/menu', icon: '', shows: 1,
+                tabHidden: false, tabFix: false, keepAlive: true,
+                filePath: '/views/sys/menu/Index.vue'
             },
             {
                 name: '部门组织',
@@ -38,6 +39,7 @@ const arr = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: true,
+                filePath: '/views/sys/branch/Index.vue'
             },
             {
                 name: '角色管理',
@@ -47,17 +49,9 @@ const arr = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: true,
+                filePath: '/views/sys/role/Index.vue'
             },
-            {
-                name: '菜单列表',
-                path: '/sys/menu',
-                icon: '',
-                shows: 1,
-                tabHidden: false,
-                tabFix: false,
-                keepAlive: true,
-            },
-        ],
+        ]
     },
     {
         name: '组件库',
@@ -73,6 +67,7 @@ const arr = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: false,
+                filePath: '/views/module/markdown/Index.vue'
             },
             {
                 name: '富文本编辑器',
@@ -82,6 +77,7 @@ const arr = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: true,
+                filePath: '/views/module/rich/Index.vue'
             },
             {
                 name: '解析Exel',
@@ -91,6 +87,7 @@ const arr = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: false,
+                filePath: '/views/module/exel/Index.vue'
             },
             {
                 name: '上传',
@@ -106,6 +103,7 @@ const arr = [
                         tabHidden: false,
                         tabFix: false,
                         keepAlive: false,
+                        filePath: '/views/module/fileUpload/FileUploadImg.vue'
                     },
                     {
                         name: '文件上传',
@@ -115,6 +113,7 @@ const arr = [
                         tabHidden: false,
                         tabFix: false,
                         keepAlive: false,
+                        filePath: '/views/module/fileUpload/FileUpload.vue'
                     },
                 ],
             },
@@ -126,6 +125,7 @@ const arr = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: false,
+                filePath: '/views/module/print/Index.vue'
             },
             {
                 name: '简洁图标',
@@ -135,6 +135,7 @@ const arr = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: false,
+                filePath: '/views/module/icon/iconfont/Index.vue'
             },
             {
                 name: '描述列表',
@@ -144,6 +145,7 @@ const arr = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: false,
+                filePath: '/views/module/descriptions/Index.vue'
             },
             {
                 name: '课程表',
@@ -153,15 +155,7 @@ const arr = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: true,
-            },
-            {
-                name: 'WinBox弹窗',
-                path: '/module/winbox',
-                icon: '',
-                shows: 1,
-                tabHidden: false,
-                tabFix: false,
-                keepAlive: true,
+                filePath: '/views/module/course/Index.vue'
             },
             {
                 name: '视频播放',
@@ -171,6 +165,7 @@ const arr = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: true,
+                filePath: '/views/module/media/Index.vue'
             },
             {
                 name: '内容搜索',
@@ -180,6 +175,7 @@ const arr = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: true,
+                filePath: '/views/module/fuse/Index.vue'
             },
             {
                 name: '导出文件',
@@ -189,69 +185,15 @@ const arr = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: true,
+                filePath: '/views/module/fileSaver/Index.vue'
             },
             {
                 name: '表单生成器',
                 path: '/iframe/form-generator',
+                filePath: '/views/module/iframe/Index.vue',
                 icon: '',
                 shows: 1,
                 iframePath: 'https://demo.gin-vue-admin.com/form-generator',
-                tabHidden: false,
-                tabFix: false,
-                keepAlive: false,
-            },
-        ],
-    },
-    {
-        name: '数据表格',
-        path: '',
-        icon: 'BarChartOutlined',
-        shows: 1,
-        tabHidden: false,
-        tabFix: false,
-        children: [
-            {
-                name: '基础表格',
-                path: '/vxe-table/base',
-                icon: '',
-                shows: 1,
-                tabHidden: false,
-                tabFix: false,
-                keepAlive: false,
-            },
-            {
-                name: '海量数据',
-                path: '/vxe-table/great-table',
-                icon: '',
-                shows: 1,
-                tabHidden: false,
-                tabFix: false,
-                keepAlive: false,
-            },
-            {
-                name: '编辑表格',
-                path: '/vxe-table/edit-table',
-                icon: '',
-                shows: 1,
-                tabHidden: false,
-                tabFix: false,
-                keepAlive: true,
-            },
-            {
-                name: '校验表格',
-                path: '/vxe-table/verify-table',
-                icon: '',
-                shows: 1,
-                tabHidden: false,
-                tabFix: false,
-                keepAlive: false,
-            },
-            {
-                name: 'vxe-table文档',
-                path: '/iframe/xuliangzhan_admin',
-                icon: '',
-                shows: 1,
-                iframePath: 'https://xuliangzhan_admin.gitee.io/vxe-table/v4/table/tree/basic',
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: false,
@@ -267,16 +209,6 @@ const arr = [
         tabFix: false,
         children: [
             {
-                name: 'Echarts',
-                path: '/chart/echarts',
-                icon: '',
-                shows: 1,
-                iframe: '',
-                tabHidden: false,
-                tabFix: false,
-                keepAlive: false,
-            },
-            {
                 name: 'G2',
                 path: '/chart/g2',
                 icon: '',
@@ -285,6 +217,7 @@ const arr = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: false,
+                filePath:'/views/chart/g2/Index.vue'
             },
             {
                 name: 'G2plot',
@@ -295,6 +228,7 @@ const arr = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: false,
+                filePath: '/views/chart/g2plot/Index.vue'
             },
         ],
     },
@@ -315,6 +249,7 @@ const arr = [
                 tabHidden: false,
                 tabFix: false,
                 keepAlive: false,
+                filePath: '/views/module/iframe/Index.vue',
             },
         ],
     },
@@ -326,6 +261,7 @@ const arr = [
         tabHidden: false,
         tabFix: false,
         keepAlive: false,
+        filePath: '/views/error/Index.vue'
     },
     {
         name: '打点吧',
@@ -335,6 +271,7 @@ const arr = [
         tabHidden: false,
         tabFix: false,
         keepAlive: false,
+        filePath: '/views/admire/Index.vue'
     },
     {
         name: '权限控制',
@@ -344,15 +281,17 @@ const arr = [
         tabHidden: false,
         tabFix: false,
         keepAlive: false,
+        filePath: '/views/permit/Index.vue'
     },
     {
         name: '异步组件',
         path: '/async',
-        icon: 'YsIonfontHmePge',
+        icon: 'UserOutlined',
         shows: 1,
         tabHidden: false,
         tabFix: false,
         keepAlive: false,
+        filePath: '/views/async/Index.vue'
     },
     {
         name: '关于',
@@ -362,6 +301,7 @@ const arr = [
         tabHidden: false,
         tabFix: true,
         keepAlive: false,
+        filePath: '/views/about/Index.vue'
     },
     {
         name: '错误捕获',
@@ -371,10 +311,31 @@ const arr = [
         tabHidden: false,
         tabFix: false,
         keepAlive: false,
+        filePath: '/views/module/debug/Index.vue'
+    },
+    {
+        name: '403',
+        path: '/403',
+        icon: 'UserOutlined',
+        shows: 0,
+        tabHidden: false,
+        tabFix: false,
+        keepAlive: false,
+        filePath: '/views/error/403.vue'
+    },
+    {
+        name: '500',
+        path: '/500',
+        icon: 'UserOutlined',
+        shows: 0,
+        tabHidden: false,
+        tabFix: false,
+        keepAlive: false,
+        filePath: '/views/error/500.vue'
     },
 ]
-const defaultMenu = addUniqueId(arr, '_local') // 增加个标识符
 
+const defaultMenu = addUniqueId(arr, '_local') // 增加个标识符
 /**
  * 默认项目菜单
  */
@@ -393,13 +354,12 @@ let defaultPrjMenu = [
     },
     {
         name: '租户管理',
-        icon: 'YsIonfontPckUOder',
+        icon: 'UserOutlined',
         shows: 1,
         menus: defaultMenu.slice(-3),
     },
 ]
 defaultPrjMenu = addUniqueId(defaultPrjMenu, '_local')
-
 export {
     defaultMenu,
     defaultPrjMenu,

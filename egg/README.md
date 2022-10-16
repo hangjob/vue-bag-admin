@@ -11,7 +11,7 @@ $ open http://127.0.0.1:7001
 
 ### 具体文档
 
-[查看具体开发文档](https://hangjob.github.io/docs/#/vue-vite-admin-ts/)
+[查看具体开发文档](https://hangjob.github.io/docs/#/vue-bag-admin/)
 
 ### Deploy
 
@@ -22,6 +22,8 @@ $ npm stop
 
 ### 错误码
 
-#### 1001 是参数异校验错误
+#### 1001 是参数异校验错误/错误异常
 
 #### 1002 未查询到数据
+
+#### 1003 数据重复

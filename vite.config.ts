@@ -1,6 +1,8 @@
 import { defineConfig, loadEnv } from 'vite'
 import setProBuild from './build/pro'
 import setLibBuild from './build/lib'
+import setUtilsBuild from './build/utils'
+import setWebBuild from './build/web'
 import createVitePlugins from './build/plugin/index'
 import { configServer } from './build/server/index'
 import { configCss } from './build/css/index'
@@ -16,7 +18,12 @@ export default ({ mode }: { mode: any }) => {
         assetsDir: 'assets', //打包静态文件的存储地址
         chunkSizeWarningLimit: 500,
     }
-    if (mode === 'production') {
+    console.log('mode', mode)
+    if (mode === 'development') {
+        const { rollupOptions } = setProBuild()
+        build.rollupOptions = rollupOptions
+    }
+    if (mode == 'production') {
         const { rollupOptions, terserOptions } = setProBuild()
         build.rollupOptions = rollupOptions
         build.terserOptions = terserOptions
@@ -27,15 +34,27 @@ export default ({ mode }: { mode: any }) => {
         build.lib = lib
         build.rollupOptions = rollupOptions
     }
+    if (mode === 'web') {
+        const { emptyOutDir, lib, rollupOptions } = setWebBuild()
+        build.emptyOutDir = emptyOutDir
+        build.lib = lib
+        build.rollupOptions = rollupOptions
+    }
+    if (mode === 'utils') {
+        const { emptyOutDir, lib } = setUtilsBuild()
+        build.emptyOutDir = emptyOutDir
+        build.lib = lib
+    }
     return defineConfig({
-        base: './',
+        base: '/',
         plugins: createVitePlugins({ variables: process.env }),
+        publicDir: 'public',
         resolve: {
             alias: {
                 // 如果报错__dirname找不到，需要安装node,执行yarn add @types/node --save-dev
+                '@www': path.resolve(__dirname, 'www'),
                 '@': path.resolve(__dirname, 'src'),
                 '__ROOT__': path.resolve(__dirname, ''),
-                'comps': path.resolve(__dirname, 'src/components'),
             },
         },
         server: configServer(),

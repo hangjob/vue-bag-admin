@@ -1,0 +1,19 @@
+.cut-systems {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+
+    :global(.ant-menu-horizontal) {
+        border-bottom: none;
+        line-height: 48px;
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    &.cut-systems-min {
+        :global(.ant-menu-horizontal) {
+            width: 80px;
+        }
+    }
+}
+

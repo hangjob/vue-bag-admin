@@ -1,0 +1,61 @@
+### 主题配置
+
+```ts
+const themeConfig = {
+    // 是否浮动菜单
+    floatingMenu: false,
+    // 菜单宽度
+    menuMaxWidth: 250,
+    // 页签样式 1默认 2圆点 3卡片
+    tabStyle: 1,
+    // 是否折叠项目菜单
+    foldPrjMenu: false,
+}
+```
+
+### 网络配置
+
+```ts
+const httpNetwork = {
+    // 请求头
+    headers: {
+        'content-type': 'application/json;charset=UTF-8',
+    },
+    //消息框消失时间
+    messageDuration: 2.5,
+    //最长请求时间
+    requestTimeout: 20000,
+    //操作正常code码
+    successCode: [1, 1000],
+    // 重连间隔时间
+    retryDelay: 3000,
+    // 最大重试次数
+    retry: 2,
+    // 默认请求前缀url
+    baseURL: '/api',
+    // 白名单
+    whiteList: ['/login', '/403', '/404', '/500', '/502', '/test'],
+    // 重置路由
+    resetPath: '/login',
+    // 当post 时候，是否序列化，qs
+    serialize:false
+}
+```
+
+### 网站配置
+```ts
+const webSite = {
+    title: 'vue-bag-admin',
+    subhead: 'admin',
+    logoImage:'本地图片或者网络图片'
+}
+```
+
+### 接口覆盖
+```ts
+const apis:{
+    '/user/userinfo':'/test/userinfo'
+}
+```
+>最终在浏览器发出的请求会是该接口`/test/userinfo`
+

@@ -1,27 +1,30 @@
+import {isArray} from '@/packages/utils/utils'
+
 const user = {
     namespaced: true,
     state: {
         userinfo: {},
-        roles: []
+        roles: [],
+        isSuperadmin: false
     },
     getters: {
         roles: (state: any) => {
-            return state.roles.split(',');
+            return state.roles
         },
         userinfo: (state: any) => {
-            return state.userinfo;
+            return state.userinfo
         },
+        isSuperadmin: (state: any) => {
+            return state.isSuperadmin
+        }
     },
     mutations: {
-        updateRoles(state: any, arr: Array<any>) {
-            state.roles = arr;
-        },
         updateUserinfo(state: any, data: any) {
-            state.userinfo = data;
-            state.roles = data.roles;
-        }
+            state.userinfo = data
+            state.isSuperadmin = data.id === 1
+        },
     },
     actions: {},
 }
 
-export default user;
+export default user

@@ -1,13 +1,19 @@
-'use strict';
+'use strict'
 
-const Controller = require('egg').Controller;
+const Controller = require('egg').Controller
 
-class IndexController extends Controller {
+class IndexSocketController extends Controller {
+
     async ping() {
-        const {ctx, app} = this;
-        const message = ctx.args[0];
-        ctx.socket.emit('res', `Hi! I've got your message: ${message}`);
+        const { ctx, app } = this
+        ctx.socket.emit('res', `Hi! I've got your message`)
+    }
+
+    async send() {
+        const { ctx, app } = this
+        // const namespace = app.io.of('/');
+        // namespace.sockets['socketId'].emit('message', '111');
     }
 }
 
-module.exports = IndexController;
+module.exports = IndexSocketController

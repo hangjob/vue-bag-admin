@@ -1,7 +1,7 @@
 const dayjs = require("dayjs");
 module.exports = app => {
     const {STRING, INTEGER, BOOLEAN, DATE} = app.Sequelize;
-    const Branch = app.model.define('Branch', {
+    return app.model.define('Branch', {
         id: {
             type: INTEGER,
             autoIncrement: true,
@@ -37,7 +37,6 @@ module.exports = app => {
         createdAt: 'createTime', // 指定名字
         updatedAt: 'updateTime',
         tableName: 'yxs_branch' // 定义实际表名
-    });
-    return Branch
+    })
 }
 

@@ -1,0 +1,23 @@
+@import url('./iconfont.less');
+@import url('./reset.less');
+@import url('./root.css');
+@import url('../../common/style/index.less');
+@import url('../../common/style/media.less');
+html, body {
+    background: #f4f6f8;
+    font-size: var(--bag-font-size-base);
+}
+
+
+
+/*********媒体查询******************/
+@media (max-width: 767px) {
+    .nav-logo {
+        justify-content: center;
+    }
+
+    .article-body .content .metas-action div {
+        flex: 1;
+        flex-direction: column;
+    }
+}

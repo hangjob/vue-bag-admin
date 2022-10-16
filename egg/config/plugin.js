@@ -7,12 +7,18 @@ exports.sequelize = {
     package: 'egg-sequelize'
 }
 
-exports.io = {
-    enable: true,
-    package: 'egg-socket.io',
-};
+// exports.io = {
+//     enable: true,
+//     package: 'egg-socket.io',
+// };
 
 exports.validate = {
     enable: true,
     package: 'egg-validate',
 }
+
+
+exports.redis = {
+    enable: true,
+    package: 'egg-redis',
+};

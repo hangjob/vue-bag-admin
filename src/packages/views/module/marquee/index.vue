@@ -1,5 +1,5 @@
 <template>
-    <yxs-view>
+    <bag-view>
         <Vue3Marquee class="example">
             <span
                 v-for="(word, index) in helloArray"
@@ -45,7 +45,7 @@
                 width="100"
             />
         </Vue3Marquee>
-    </yxs-view>
+    </bag-view>
 </template>
 <script lang="ts">
 import {defineComponent, reactive} from 'vue'

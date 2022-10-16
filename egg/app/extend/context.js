@@ -11,30 +11,37 @@
 // };
 
 
-const crypto = require('crypto');
+const CryptoJS = require('crypto-js')
 
-const key = 'ABCDEFGHIJ654321POIUYTRE'
-const iv = 'ABCDEFGHIJ654321'
-const algorithm = 'aes192'
-const encoding = 'hex'
-
+const key = CryptoJS.enc.Utf8.parse('1234123412QWERTY')  //十六位十六进制数作为密钥
+const iv = CryptoJS.enc.Utf8.parse('QWERTY1234123412')   //十六位十六进制数作为密钥偏移量
+const email = require('./email')
+const nodersa = require('./nodersa')
 module.exports = {
-    setToken({password}) {
-        const cipher = crypto.createCipheriv(algorithm, key, iv)
-        cipher.update(password)
-        return cipher.final(encoding)
+    setToken({password, username}) {
+        let str = CryptoJS.enc.Utf8.parse(JSON.stringify({password, username}))
+        let encrypted = CryptoJS.AES.encrypt(str, key, {
+            iv: iv,
+            mode: CryptoJS.mode.CBC,
+            padding: CryptoJS.pad.Pkcs7,
+        })
+        return encrypted.ciphertext.toString().toUpperCase()
     },
     getDecodeToken(token) {
-        const decipher = crypto.createDecipheriv(algorithm, key, iv)
-        decipher.update(token, encoding)
-        return decipher.final('utf8')
+        let encryptedHexStr = CryptoJS.enc.Hex.parse(token)
+        let str = CryptoJS.enc.Base64.stringify(encryptedHexStr)
+        let decrypt = CryptoJS.AES.decrypt(str, key, {iv: iv, mode: CryptoJS.mode.CBC, padding: CryptoJS.pad.Pkcs7})
+        let decryptedStr = decrypt.toString(CryptoJS.enc.Utf8)
+        return decryptedStr.toString()
     },
     randomString() {
-        let str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        let result = 'yxs_2022_';
+        let str = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        let result = 'yxs_2022_'
         for (let i = 8; i > 0; --i) {
-            result += str[Math.floor(Math.random() * str.length)];
+            result += str[Math.floor(Math.random() * str.length)]
         }
-        return result;
-    }
-};
+        return result
+    },
+    email,
+    nodersa
+}

@@ -4,16 +4,17 @@ const setProBuild = function() {
     return {
         rollupOptions: {
             input: {
-                example: path.resolve(process.cwd(), 'index.html'), // 把页面放在外面，路径简短 防止src/packages/web/index.html ，建议vite把key(web、lib)可也阔以映射成页面路径，就避免这个问题
+                index: path.resolve(process.cwd(), 'index.html'), // 把页面放在外面，路径简短 防止src/packages/web/index.html ，建议vite把key(web、lib)可也阔以映射成页面路径，就避免这个问题
                 lib: path.resolve(process.cwd(), 'lib.html'),
-                demo: path.resolve(process.cwd(), 'demo.html'),
+                example: path.resolve(process.cwd(), 'example.html'),
+                admin: path.resolve(process.cwd(), 'admin.html'),
+                web: path.resolve(process.cwd(), 'web.html'),
             },
             // 两种方式 也可以指定包名打包
             // output: {
             //     manualChunks: {
             //         "vxe-table": ["vxe-table"],
             //         "echarts": ["echarts"],
-            //         "xe-utils": ["xe-utils"],
             //         "lodash": ['lodash'],
             //         "ant-design-vue": ['ant-design-vue'],
             //         "@antv/g2plot": ['@antv/g2plot'],
