@@ -32,4 +32,4 @@ gulpfile.js
 *.html
 vite.config.ts
 favicon.ico
-
+package-lock.json
