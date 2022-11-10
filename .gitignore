@@ -4,12 +4,10 @@ lib
 dist-ssr
 *.local
 .idea
-笔记.md
 tw.md
 vc.md
 dist
 .vscode
-/设计模式
 lib-utils
 lib-web
 report.html

@@ -1,5 +1,5 @@
-import {App} from "vue";
-import {debounce, merge} from 'lodash'
+import { App } from 'vue'
+import { debounce } from 'lodash'
 
 /**
  * 防抖
@@ -21,14 +21,13 @@ const setupDebounce = (app: App) => {
                 trailing = true,
                 type = 'click',
                 params = {},
-            } = binding.value;
+            } = binding.value
             const proxy = function proxy(args = {}) {
-                return func.call(this, {...params, ...args});
-            };
-            el.$type = type;
-            el.$handle = debounce(proxy, wait, {leading, trailing});
-            el.addEventListener(el.$type, el.$handle);
-
+                return func.call(this, { ...params, ...args })
+            }
+            el.$type = type
+            el.$handle = debounce(proxy, wait, { leading, trailing })
+            el.addEventListener(el.$type, el.$handle)
         },
         // 安装绑定元素的父组件时...「等同于inserted」
         mounted() {
@@ -44,9 +43,9 @@ const setupDebounce = (app: App) => {
         },
         // 指令与元素解除绑定且父组件已卸载时...「等同于unbind」
         unmounted(el) {
-            el.removeEventListener(el.$type, el.$handle);
-        }
-    });
+            el.removeEventListener(el.$type, el.$handle)
+        },
+    })
 }
 
 export default setupDebounce

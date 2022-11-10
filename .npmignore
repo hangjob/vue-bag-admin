@@ -5,10 +5,8 @@ dist-ssr
 egg
 bag-utils
 www
-设计模式
 *.local
 .idea
-笔记.md
 .editorconfig
 .env.*
 .eslintignore

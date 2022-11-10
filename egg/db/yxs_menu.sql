@@ -1,1 +1,0 @@
-INSERT INTO `yxs_menu` (`id`, `name`, `icon`, `shows`, `path`, `httpViewPath`, `order`, `pid`, `type`, `filePath`, `iframePath`, `keepAlive`, `tabHidden`, `tabFix`, `httpFilePath`, `createTime`, `updateTime`) VALUES (1, '123445', '1231', 1, '/login', '', NULL, 0, NULL, '', '', 0, 0, 1, '', '2022-01-16 03:26:15', '2022-01-16 03:26:15');
