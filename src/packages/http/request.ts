@@ -1,8 +1,8 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
-import store from '@/packages/store'
 import fileDownload from '@/bag-utils/file/fileDownload'
 import { rewriteUrl } from '@/common/http'
 import { responseSuccess, responseError, requestSuccess } from '@/common/http/request'
+import appPinia from '@/packages/pinia/app'
 
 const CancelToken = axios.CancelToken
 const source = CancelToken.source()
@@ -13,15 +13,18 @@ const http: AxiosInstance = axios.create({
 })
 
 http.interceptors.request.use((config: AxiosRequestConfig) => {
-    return requestSuccess(config, { httpNetwork: store.state.app.httpNetwork })
+    const appStore = appPinia()
+    return requestSuccess(config, { httpNetwork: appStore.configApp.httpNetwork })
 }, (error: any) => {
     return Promise.reject(error)
 })
 
 http.interceptors.response.use((res: AxiosResponse<any>) => {
-    return responseSuccess(res, { httpNetwork: store.state.app.httpNetwork })
+    const appStore = appPinia()
+    return responseSuccess(res, { httpNetwork: appStore.configApp.httpNetwork })
 }, async (err: AxiosError) => {
-    return responseError(err, { httpNetwork: store.state.app.httpNetwork, http })
+    const appStore = appPinia()
+    return responseError(err, { httpNetwork: appStore.configApp.httpNetwork, http })
 })
 
 

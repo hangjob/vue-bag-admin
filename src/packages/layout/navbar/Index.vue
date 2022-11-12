@@ -2,28 +2,28 @@
     <!--  菜单路径  -->
     <div class="layout-header">
         <a-layout-header class="layout-header_top">
-            <MenuFoldOutlined v-if="collapsed" @click="handleCollapsed(false)"/>
-            <MenuUnfoldOutlined @click="handleCollapsed(true)" v-else/>
-            <a-breadcrumb class="text-overflow breadcrumb" style="" v-if="!isMobile">
+            <MenuFoldOutlined v-if="collapsed" @click="handleCollapsed(false)" />
+            <MenuUnfoldOutlined @click="handleCollapsed(true)" />
+            <a-breadcrumb class="text-overflow breadcrumb" style="">
                 <a-breadcrumb-item v-for="(item,idx) in list" :key="idx">{{ item.name }}</a-breadcrumb-item>
             </a-breadcrumb>
-            <a-breadcrumb class="text-overflow breadcrumb" v-else>
+            <a-breadcrumb class="text-overflow breadcrumb">
                 <a-breadcrumb-item>{{ list[list.length - 1].name }}</a-breadcrumb-item>
             </a-breadcrumb>
         </a-layout-header>
-        <CutSystems/>
+        <CutSystems />
         <div class="layout-header_right_menu">
-            <ThemeBar/>
+            <ThemeBar />
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import {computed, defineComponent} from 'vue'
-import {useStore} from 'vuex'
+import { computed, defineComponent } from 'vue'
 import ThemeBar from '@/packages/layout/navbar/ThemeBar.vue'
 import CutSystems from '@/packages/layout/navbar/CutSystems'
-import {MenuFoldOutlined, MenuUnfoldOutlined} from '@ant-design/icons-vue'
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue'
+import appPinia from '@/packages/pinia/app'
 
 export default defineComponent({
     components: {
@@ -33,25 +33,15 @@ export default defineComponent({
         CutSystems,
     },
     setup() {
-
-        const store = useStore()
-        const list = computed(() => store.getters['app/tabViewsPath'])
-        const isMobile = computed(() => store.getters['app/getBrowser'].isMobile)
-        const collapsed = computed(() => store.state.app.collapsed)
+        const appStore = appPinia()
+        const list = computed(() => appStore.tabPaths)
 
         const handleCollapsed = (bol: boolean) => {
-            if (store.state.app.themeConfig.floatingMenu) {
-                store.commit('app/updateCollapsed', false)
-            } else {
-                store.commit('app/updateCollapsed', bol)
-            }
-            store.commit('app/updateFloatingVisible', !store.getters['app/getFloatingVisible'])
+
         }
 
         return {
             list,
-            collapsed,
-            isMobile,
             handleCollapsed,
         }
     },

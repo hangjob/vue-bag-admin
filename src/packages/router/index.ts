@@ -2,8 +2,8 @@ import { createRouter, createWebHashHistory, createWebHistory, RouterOptions } f
 import { App } from 'vue'
 import { NProgress } from '@/packages/plugin/nprogress'
 import { hasUserinfo } from '@/packages/router/beforeEach'
-import { setAppRouterStore } from '@/packages/router/setStore'
 import routes from '@/packages/router/routes'
+import asyncRoutes from '@/packages/router/asyncRoutes'
 
 const router = createRouter({
     history: import.meta.env.VITE_APP_HISTORY === 'history' ? createWebHistory() : createWebHashHistory(),
@@ -12,7 +12,7 @@ const router = createRouter({
 
 router.beforeEach((to, from,  next) => {
     NProgress.start()
-    hasUserinfo(to, from, next)
+    asyncRoutes(to, from, next)
 })
 
 router.afterEach((to, from) => {

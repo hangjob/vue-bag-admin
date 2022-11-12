@@ -14,13 +14,13 @@ import setupPinia from '@/packages/pinia'
 
 const setupInit = (app: App) => {
     // setupStore(app)
+    setupPinia(app)
     setupRouter(app)
     setupAndDesignVue(app)
     setupGlobDirectives(app)
     setupGlobComponents(app)
     setupDraggable(app)
     setupIcons(app)
-    setupPinia(app)
 }
 
 export default setupInit

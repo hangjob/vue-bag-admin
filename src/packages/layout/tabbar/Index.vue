@@ -1,11 +1,11 @@
 <template>
-    <div :class="['layout-header_scroller',tabStyleClassName]">
+    <div :class="['layout-header_scroller']">
         <div class="tab-action tab-action-left" @click="handleScrollBar(false)">
             <CaretLeftFilled class="icon-svg"/>
         </div>
         <div class="tab-container" ref="tabContainer">
             <div class="app-process_item"
-                 v-for="(item,index) in processList"
+                 v-for="(item,index) in routesTabs"
                  :key="index"
                  :class="{active:item.active}"
                  @click="handleClickCutTap(item)"
@@ -25,21 +25,21 @@
 </template>
 <script lang="ts">
 import {computed, defineComponent, ref} from 'vue'
-import {useStore} from 'vuex'
 import {useRouter} from 'vue-router'
 import {last} from '@/packages/utils/lodash'
 import {themeHook} from '@/packages/hook'
 import Contextmenu from './Contextmenu.vue'
+import appPinia from '@/packages/pinia/app'
 
 export default defineComponent({
     components: {
         Contextmenu,
     },
     setup() {
-        const store = useStore()
+        const appStore = appPinia()
         const router = useRouter()
         const contextmenu: any = ref(null)
-        const processList = computed(() => store.state.app.processList.filter((e: any) => e.tabHidden === false)) // 数据列表 // 使用computed 才触发视图更新
+        const routesTabs = computed(() => appStore.routesTabs.filter((e: any) => e.tabHidden === false)) // 数据列表 // 使用computed 才触发视图更新
         const tabContainer = ref<HTMLAreaElement | any>(null)
         const {tabStyleClassName} = themeHook()
 
@@ -52,13 +52,6 @@ export default defineComponent({
 
         // 左右滚动
         const handleScrollBar = (t: boolean) => {
-            // if (t) {
-            //     console.log(tabContainer.value.scrollWidth)
-            //     console.log(tabContainer.value.lastElementChild)
-            //     scrollBar(tabContainer.value.scrollLeft + 100)
-            // } else {
-            //     scrollBar(tabContainer.value.scrollLeft + 100)
-            // }
             scrollBar(tabContainer.value.scrollLeft + (t ? 100 : -100))
         }
 
@@ -68,23 +61,23 @@ export default defineComponent({
                 router.push(path)
                 return
             }
-            const active: any = processList.value.find((e: any) => e.active) // 查找是否含有是当前激活的菜单 否则去 跳转最后一个
+            const active: any = routesTabs.value.find((e: any) => e.active) // 查找是否含有是当前激活的菜单 否则去 跳转最后一个
             if (!active) {
-                const next = last(processList.value)
+                const next = last(routesTabs.value)
                 router.push(next ? next.path : '/')
             }
         }
 
         const handleCloseCurrent = (item: any) => {
-            const idx: number = processList.value.findIndex((e: any) => e.id == item.id)
-            store.commit('app/delProcessList', idx)
+            const idx: number = routesTabs.value.findIndex((e: any) => e.id == item.id)
+            // store.commit('app/delProcessList', idx)
             toPath()
         }
 
 
         const handleContextMenu = (e: any, item: any) => {
             e.preventDefault() // 阻止默认事件
-            if (item.tabFix || processList.value.length === 1) {
+            if (item.tabFix || routesTabs.value.length === 1) {
                 return false
             }
             //获取我们自定义的右键菜单
@@ -102,17 +95,15 @@ export default defineComponent({
                 },
                 {
                     name: '关闭其他', data: item, callback: () => {
-                        const arr = processList.value.filter((e: any) => {
+                        const arr = routesTabs.value.filter((e: any) => {
                             return (e.id == item.id || e.path == '/') || e.tabFix
                         })
-                        store.commit('app/setProcessList', arr)
                         toPath()
                     },
                 },
                 {
                     name: '关闭所有', data: item, callback: () => {
-                        store.commit('app/resetProcessList')
-                        toPath(store.getters['app/processList'][0].path)
+                        // toPath(store.getters['app/processList'][0].path)
                     },
                 },
             ]
@@ -131,7 +122,7 @@ export default defineComponent({
         }
 
         return {
-            processList,
+            routesTabs,
             handleContextMenu,
             handleClickCutTap,
             tabContainer,

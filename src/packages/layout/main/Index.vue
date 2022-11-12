@@ -14,13 +14,12 @@
 <script lang="ts">
 import {computed, defineComponent, ref, watch, inject, nextTick} from 'vue'
 import {useRoute} from 'vue-router'
-import {useStore} from "vuex";
 import {NProgress} from "@/packages/plugin/nprogress";
+import appPinia from '@/packages/pinia/app'
 
 export default defineComponent({
     setup() {
-        const store = useStore()
-
+        const appStore = appPinia()
         const transition = ['slide-left', 'slide-right']
         const transitionName = ref(transition[0])
         const hasOpenComponentsArr = ref<Array<any>>([])
@@ -52,31 +51,11 @@ export default defineComponent({
             }
         })
 
-
-        /**
-         * 缓存iframe
-         */
-        const componentsIframe = () => {
-            const menuList = store.getters['app/menuList'];
-            const iframeArr: Array<any> = []
-            const getIframes = (arr: Array<any>) => {
-                arr.some((o: any) => (o['iframe'] && o['iframe'] !== '') && (iframeArr.push(o)) || (getIframes(o['children'] || [])));
-            }
-            getIframes(menuList)
-
-            iframeArr.forEach((item) => {
-                window.__app__.component(item.path, import('@/packages/views/module/iframe/index.vue'));
-            });
-
-            hasOpenComponentsArr.value = iframeArr;
-        }
-        // componentsIframe(); 在考虑如何设计
-
         /**
          * keep-live 缓存
          */
         const caches = computed(() => {
-            return store.getters["app/processList"].filter((item: any) => {
+            return appStore.routesTabs.filter((item: any) => {
                 return item.keepAlive === true;
             }).map((item: any) => {
                 return item.path.substring(1, item.path.length).replace(/\//g, "-")

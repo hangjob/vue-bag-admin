@@ -4,7 +4,11 @@ import install from '@/packages/install'
 
 const app = createApp(App)
 app.use(install, {
-    router: {
+    router: {},
+    config: {
+        webSite: {
+            title: '品茗信息',
+        },
     },
 }).mount('#app')
 window.__app__ = app

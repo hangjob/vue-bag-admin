@@ -1,15 +1,15 @@
 import {defineComponent, ref, computed} from 'vue'
-import {useStore} from 'vuex'
 import {deepMenu} from '@/packages/layout/common'
 import classes from '@/packages/layout/style/CutSystems.module.less'
 import {useRouter} from 'vue-router'
+import appPinia from '@/packages/pinia/app'
 
 export default defineComponent({
     name: 'CutSystems',
     setup() {
-        const store = useStore()
+        const appStore = appPinia()
         const router = useRouter()
-        const prjMenu = computed(() => store.getters['app/getProjectMenu'])
+        const prjMenu = appStore.prjMenu
         const current = ref(null)
         const mode = ref('horizontal')
         /**
@@ -18,11 +18,12 @@ export default defineComponent({
          */
         const handleSelect = (res: any) => {
             let data = res.item['menu-info']
-            store.commit('app/updateMenuList', data.menus)
+            appStore.menus = data.menus
             router.push(data.menus[0].path)
         }
         const classNames = computed(() => {
-            const foldPrjMenu = store.getters['app/getThemeConfig'].foldPrjMenu
+            // @ts-ignore
+            const foldPrjMenu = appStore.configApp.themeConfig.foldPrjMenu
             if (foldPrjMenu) {
                 return classes['cut-systems'] + ' ' + classes['cut-systems-min']
             } else {

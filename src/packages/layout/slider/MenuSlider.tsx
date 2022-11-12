@@ -1,81 +1,37 @@
-import {computed, defineComponent, ref, watchEffect} from 'vue'
-import {useStore} from 'vuex'
-import {useRoute, useRouter} from 'vue-router'
-import {toTree} from '@/packages/utils/utils'
-import {deepMenu} from '@/packages/layout/common'
+import { computed, defineComponent, ref, watchEffect } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { deepMenu } from '@/packages/layout/common'
+import appPinia from '@/packages/pinia/app'
 
 export default defineComponent({
     name: 'bag-menu-slider',
     setup() {
-        const store = useStore()
-        const router = useRouter()
-        const route = useRoute()
-
-        const browser = computed(() => store.getters['app/getBrowser'])
-        const collapsed = computed(() => store.state.app.collapsed)
-
+        const appStore = appPinia()
+        const collapsed = false
         const selectedKeys = ref<string[]>([])
-        const openKeys = ref<string[]>([])
-        const menuList = computed(() => store.getters['app/menuList'])
-        // 是否可见
-        const visible = ref<boolean>(true)
-        const goView = (item: any) => {
-            if (item.httpViewPath) {
-                return window.open(item.httpViewPath)
-            }
-            if (item.path && item.path != route.path) {
-                router.push(item.path).then()
-            }
+        const menus = appStore.menus
+        const handleClick = () => {
         }
-
-        const handleClick = (res: any) => {
-            goView(res.item['menu-info'])
-        }
-
-        // 监听菜单变化 - 两种方式
-        // 一
-        // watch(() => store.getters['app/tabViewsPath'], (val, old) => {
-        //     const tabPaths = JSON.parse(JSON.stringify(val));
-        //     openKeys.value = tabPaths.map((item: any) => item.id) //
-        //     selectedKeys.value = [tabPaths.pop().id];
-        // }, {deep: false, immediate: true})
-        // 二
-        watchEffect(() => {
-            const tabPaths = JSON.parse(JSON.stringify(store.getters['app/tabViewsPath']))
-            openKeys.value = tabPaths.map((item: any) => item.id)
-            if (tabPaths.length) {
-                selectedKeys.value = [tabPaths.pop().id]
-            }
-        })
-
 
         return {
             selectedKeys,
-            menuList,
+            menus,
             handleClick,
-            openKeys,
-            visible,
             collapsed,
-            browser,
         }
     },
     render(ctx: any) {
-        const children = deepMenu(ctx.menuList)
+        const children = deepMenu(ctx.menus)
         return (
-            ctx.visible && (
-                <div class="bag-menu-slider">
-                    <a-menu
-                        v-model:selectedKeys={ctx.selectedKeys}
-                        v-model:openKeys={ctx.openKeys}
-                        inline-collapsed={ctx.collapsed}
-                        mode="inline"
-                        onClick={ctx.handleClick}
-                        theme="light"
-                    >
-                        {children}
-                    </a-menu>
-                </div>
-            )
+            <a-menu
+                v-model:selectedKeys={ctx.selectedKeys}
+                inline-collapsed={ctx.collapsed}
+                mode="inline"
+                onClick={ctx.handleClick}
+                theme="light"
+            >
+                {children}
+            </a-menu>
         )
     },
 })

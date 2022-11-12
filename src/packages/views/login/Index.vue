@@ -98,10 +98,7 @@ export default defineComponent({
                         if (formState.rememberPas) {
                             locaStore.set('encryptData', aseEncrypt(JSON.stringify(formState)), 3600 * 24 * 7)
                         }
-                        // router.push('/home') // 此处通过菜单节点去读取第一个，默认是跳转home
-                        apiSiteIpInfo().then((res: any) => {
-                            console.log(res)
-                        })
+                        router.push('/home') // 此处通过菜单节点去读取第一个，默认是跳转home
                     })
                 })
                 .catch((error: ValidateErrorEntity<FormState>) => {

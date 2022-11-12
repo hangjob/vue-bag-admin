@@ -6,11 +6,11 @@
         >
         <SearchOutlined class="icon-svg icon-search" @click="handleSearch" />
     </div>
-    <div class="right_menu-item" v-if="isPC">
+    <div class="right_menu-item">
         <CompressOutlined class="icon-svg" @click="toggle" v-if="isFullscreen" />
         <ExpandOutlined class="icon-svg" @click="toggle" v-else />
     </div>
-    <div class="right_menu-item" v-if="isPC">
+    <div class="right_menu-item">
         <a-popover v-model="visible" title="系统通知" trigger="click">
             <template #content>
                 <div class="notice-content">
@@ -76,10 +76,10 @@ import { computed, defineComponent, inject, ref } from 'vue'
 import { handleKeyBoard } from '@/packages/utils/keydown'
 import { notification } from 'ant-design-vue'
 import { apiLogout } from '@/packages/service/user'
-import { useStore } from 'vuex'
 import locaStore from '@/common/utils/persistence'
 import { useRouter } from 'vue-router'
 import { useFullscreen } from '@vueuse/core'
+import userPinia from '@/packages/pinia/user'
 
 export default defineComponent({
     components: {
@@ -95,15 +95,14 @@ export default defineComponent({
         const $mitt: any = inject('$mitt')
         const visible = ref(false)
         const noticeList: any = ref([])
-        const store = useStore()
+        const userStore = userPinia()
         const { isFullscreen, toggle } = useFullscreen()
 
-        const userinfo = store.getters['user/userinfo']
+        const userinfo = userStore.userInfo
         const handleOpenThemeSetting = () => {
             userSetting.value.showDrawer()
         }
 
-        const isPC = computed(() => store.getters['app/getBrowser'].isPC)
 
         /**
          * 搜索
@@ -128,17 +127,10 @@ export default defineComponent({
         const handleRefresh = () => {
             $mitt.emit('reload-router-view')
         }
-
-        // apiAppNotice().then((res: any) => {
-        //     noticeList.value = res;
-        // })
-
         const handleQuit = () => {
             apiLogout().then(() => {
                 locaStore.clearAll()
-                router.push('/login').then(() => {
-                    window.location.reload()
-                })
+                router.push('/login')
             })
         }
 
@@ -161,7 +153,6 @@ export default defineComponent({
             handleKeyBoard,
             handleEnter,
             handleRefresh,
-            isPC,
             handleQuit,
             handleDebug,
             toggle,
