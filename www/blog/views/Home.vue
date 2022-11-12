@@ -45,10 +45,7 @@ import toElementTop from "@/bag-utils/dom/toElementTop";
 
 const handleDownload = () => {
     const dom: any = document.getElementById('Download');
-    window.scrollTo({
-        top: toElementTop(dom),
-        behavior: 'smooth',
-    })
+    toElementTop(dom)
 }
 </script>
 <style lang="less" scoped>

@@ -33,10 +33,7 @@ export default defineComponent({
         const handleScrollTo = (id: string, $event: Event) => {
             if (document.getElementById(id)) {
                 const dom: any = document.getElementById(id);
-                window.scrollTo({
-                    top: toElementTop(dom),
-                    behavior: 'smooth',
-                })
+                toElementTop(dom)
             }
         }
 

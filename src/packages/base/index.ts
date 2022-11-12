@@ -4,21 +4,23 @@ import '@/packages/style/index'
 
 import '@/packages/common/resize'
 import {setupRouter} from '@/packages/router'
-import {setupStore} from '@/packages/store'
+// import {setupStore} from '@/packages/store'
 
 import {setupGlobDirectives} from '@/packages/extend/directive'
 import {setupGlobComponents} from '@/packages/components'
 import {setupDraggable} from '@/packages/plugin/draggable'
 import {setupIcons} from '@/packages/assets/icon/iconfont'
+import setupPinia from '@/packages/pinia'
 
 const setupInit = (app: App) => {
-    setupStore(app)
+    // setupStore(app)
     setupRouter(app)
     setupAndDesignVue(app)
     setupGlobDirectives(app)
     setupGlobComponents(app)
     setupDraggable(app)
     setupIcons(app)
+    setupPinia(app)
 }
 
 export default setupInit

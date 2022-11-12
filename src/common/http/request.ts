@@ -70,6 +70,7 @@ function responseSuccess(res: AxiosResponse<ResponseData>, {
 }: { httpNetwork: any }) {
     const {config} = res
     let {code, data, message} = res.data
+    console.log(res.data,res);
     const {successCode, messageDuration} = getHttpNetworkConfig(httpNetwork)
     if (successCode.indexOf(code) !== -1) {
         if (config.notify) {

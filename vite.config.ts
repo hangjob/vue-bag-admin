@@ -13,7 +13,7 @@ export default ({ mode }: { mode: any }) => {
 
     let build: any = {
         minify: false, // 跟踪这个警告[https://github.com/element-plus/element-plus/issues/3219#issuecomment-960374776]
-        outDir: process.env.VITE_MODE, //打包文件名称
+        outDir: process.env.VITE_DIST_NAME, //打包文件名称
         assetsDir: 'assets', //打包静态文件的存储地址
         chunkSizeWarningLimit: 500,
     }

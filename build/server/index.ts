@@ -1,7 +1,7 @@
 export function configServer() {
     return {
         host: '0.0.0.0',
-        port: 8290,
+        port: 8291,
         https: false,
         proxy: {
             '^/api': {

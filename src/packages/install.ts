@@ -1,4 +1,4 @@
-import type {App, createApp} from 'vue'
+import type {App} from 'vue'
 import setupInit from '@/packages/base'
 import mitt from 'mitt'
 import * as $axios from '@/packages/http/request'

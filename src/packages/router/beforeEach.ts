@@ -14,7 +14,7 @@ interface FileType {
 /**
  * 查找本地文件,获取组件
  */
-const localFile: Record<string, FileType> = import.meta.globEager('/src/packages/views/**/*.vue') // 框架 所有页面
+const localFile: Record<string, FileType> = import.meta.glob('/src/packages/views/**/*.vue', { eager: true }) // 框架 所有页面
 function findComponent(filePath: string) {
     if (filePath) {
         const { file } = store.state.app.appRouter
