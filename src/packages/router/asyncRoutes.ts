@@ -4,7 +4,7 @@ import userPinia from '@/packages/pinia/user'
 import { apiAppRouter } from '@/packages/service/app'
 import router from '@/packages/router/index'
 import { Component } from 'vue'
-import { toTree } from '@/packages/utils/utils'
+import { toTree, getAllParentArr } from '@/packages/utils/utils'
 
 let namespace = 'admin'
 
@@ -45,8 +45,7 @@ async function getFilterRoutes() {
     const userStore = userPinia()
     const { rolesDetail } = userStore.userInfo
     const routes: any = await apiAppRouter()
-    return routes
-    return rolesDetail ? routes.filter(item => rolesDetail.menus.map(Number).indexOf(item.id) > -1) : []
+    return rolesDetail ? routes.filter(item => rolesDetail.menus.map(Number).indexOf(item.id) > -1) : routes
 }
 
 /**
@@ -93,19 +92,30 @@ function findRoutesToComps(routes: Array<any>) {
     loopAddRouter(routes)
 }
 
-const asyncRoutes = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
-    if (hasUserInfo()) {
-        return next()
+
+/**
+ * 更新当前 tabPaths
+ */
+function updataTabPaths(to: RouteLocationNormalized) {
+    const appStore = appPinia()
+    if (appStore.menus.length) {
+        let arr = getAllParentArr(appStore.menus, to.path)
+        console.log(arr)
+        appStore.tabPaths = arr.reverse() || []
     }
-    if (hasWhiteRouter(to)) {
+}
+
+
+const asyncRoutes = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
+    updataTabPaths(to)
+    if (hasWhiteRouter(to) || hasUserInfo()) {
         return next()
     }
     getUserInfo().then(async () => {
         await getAllRoutes()
         router.addRoute({ path: '/:catchAll(.*)*', redirect: '/404' })
         next({ ...to, replace: true })
-    }).catch((e) => {
-        console.log(e)
+    }).catch(() => {
         const appStore = appPinia()
         const { resetPath } = appStore.configApp.httpNetwork
         next(resetPath)

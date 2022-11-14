@@ -2,13 +2,13 @@
     <!--  菜单路径  -->
     <div class="layout-header">
         <a-layout-header class="layout-header_top">
-            <MenuFoldOutlined v-if="collapsed" @click="handleCollapsed(false)" />
+            <MenuFoldOutlined v-if="compData.collapsed" @click="compData.handleCollapsed(false)" />
             <MenuUnfoldOutlined @click="handleCollapsed(true)" />
-            <a-breadcrumb class="text-overflow breadcrumb" style="">
-                <a-breadcrumb-item v-for="(item,idx) in list" :key="idx">{{ item.name }}</a-breadcrumb-item>
+            <a-breadcrumb class="text-overflow breadcrumb" v-if="compData.browser.isPC">
+                <a-breadcrumb-item v-for="(item,idx) in compData.list" :key="idx">{{ item.name }}</a-breadcrumb-item>
             </a-breadcrumb>
-            <a-breadcrumb class="text-overflow breadcrumb">
-                <a-breadcrumb-item>{{ list[list.length - 1].name }}</a-breadcrumb-item>
+            <a-breadcrumb class="text-overflow breadcrumb" v-else>
+                <a-breadcrumb-item>{{ compData.list[compData.list.length - 1].name }}</a-breadcrumb-item>
             </a-breadcrumb>
         </a-layout-header>
         <CutSystems />
@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, reactive, watchEffect } from 'vue'
 import ThemeBar from '@/packages/layout/navbar/ThemeBar.vue'
 import CutSystems from '@/packages/layout/navbar/CutSystems'
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue'
@@ -34,15 +34,18 @@ export default defineComponent({
     },
     setup() {
         const appStore = appPinia()
-        const list = computed(() => appStore.tabPaths)
+        const { browser } = appStore
+        const compData = reactive({
+            browser,
+            list: computed(() => appStore.tabPaths),
+            collapsed: false,
+            handleCollapsed: (bol: boolean) => {
 
-        const handleCollapsed = (bol: boolean) => {
-
-        }
+            },
+        })
 
         return {
-            list,
-            handleCollapsed,
+            compData,
         }
     },
 })

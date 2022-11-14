@@ -53,12 +53,11 @@ function pathsFileRouterStore(paths: Array<any>) {
     })
 }
 
-
 /**
  * 根据角色过滤路由
  * @param routes
  */
-const filterRouter = (routes: Array<any>) => {
+function filterRouter(routes: Array<any>) {
     const { rolesDetail } = store.getters['user/userinfo']
     const isSuperadmin = store.getters['user/isSuperadmin']
     if (isSuperadmin) {
@@ -76,7 +75,7 @@ const filterRouter = (routes: Array<any>) => {
 /**
  * 获取异步路由，动态添加
  */
-const setAsyncRouterComponents = async () => {
+async function setAsyncRouterComponents() {
     const { paths } = store.state.app.appRouter // 本地路由
     const menuPaths: Array<any> = []
     menuPaths.push(...paths)
@@ -88,6 +87,8 @@ const setAsyncRouterComponents = async () => {
     }
     pathsFileRouterStore(menuPaths)
 }
+
+
 
 
 const hasUserinfo = (to: any, from: any, next: any) => {

@@ -1,7 +1,7 @@
 <template>
     <div :class="['layout-header_scroller']">
         <div class="tab-action tab-action-left" @click="handleScrollBar(false)">
-            <CaretLeftFilled class="icon-svg"/>
+            <CaretLeftFilled class="icon-svg" />
         </div>
         <div class="tab-container" ref="tabContainer">
             <div class="app-process_item"
@@ -18,16 +18,15 @@
             </div>
         </div>
         <div class="tab-action tab-action-right" @click="handleScrollBar(true)">
-            <CaretRightFilled class="icon-svg"/>
+            <CaretRightFilled class="icon-svg" />
         </div>
     </div>
-    <Contextmenu ref="contextmenu"/>
+    <Contextmenu ref="contextmenu" />
 </template>
 <script lang="ts">
-import {computed, defineComponent, ref} from 'vue'
-import {useRouter} from 'vue-router'
-import {last} from '@/packages/utils/lodash'
-import {themeHook} from '@/packages/hook'
+import { computed, defineComponent, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { last } from '@/packages/utils/lodash'
 import Contextmenu from './Contextmenu.vue'
 import appPinia from '@/packages/pinia/app'
 
@@ -41,18 +40,12 @@ export default defineComponent({
         const contextmenu: any = ref(null)
         const routesTabs = computed(() => appStore.routesTabs.filter((e: any) => e.tabHidden === false)) // 数据列表 // 使用computed 才触发视图更新
         const tabContainer = ref<HTMLAreaElement | any>(null)
-        const {tabStyleClassName} = themeHook()
 
-        function scrollBar(left: number) {
-            tabContainer.value.scrollTo({
-                left,
-                behavior: 'smooth',
-            })
-        }
 
         // 左右滚动
         const handleScrollBar = (t: boolean) => {
-            scrollBar(tabContainer.value.scrollLeft + (t ? 100 : -100))
+            const left = tabContainer.value.scrollLeft + (t ? 100 : -100)
+            tabContainer.value.scrollTo({ left, behavior: 'smooth' })
         }
 
 
@@ -128,7 +121,6 @@ export default defineComponent({
             tabContainer,
             handleScrollBar,
             handleCloseCurrent,
-            tabStyleClassName,
             contextmenu,
         }
     },

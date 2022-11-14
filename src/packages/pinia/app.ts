@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { browser } from 'pm-utils'
 
 const app = defineStore({
     id: 'app',
@@ -10,7 +11,7 @@ const app = defineStore({
                     resetPath: '',
                 },
                 themeConfig: {},
-                webSite: {},
+                webSite: { title: '' },
             },
             configAppRouter: <any>{ paths: [], file: {} },
             configAppStore: {},
@@ -19,8 +20,10 @@ const app = defineStore({
             menus: [], // 菜单
             prjMenu: [], // 项目切换菜单
             routesTabs: [], // tab切换栏
+            tabs: [], // tab切换栏
             tabPaths: [], // 路由 路径
             currentRouter: {}, // 当前路由信息
+            browser: { ...browser.browserInfo() }, // 浏览器信息
         }
     },
 
