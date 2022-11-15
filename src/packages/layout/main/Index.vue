@@ -55,7 +55,7 @@ export default defineComponent({
          * keep-live 缓存
          */
         const caches = computed(() => {
-            return appStore.routesTabs.filter((item: any) => {
+            return appStore.tabs.filter((item: any) => {
                 return item.keepAlive === true;
             }).map((item: any) => {
                 return item.path.substring(1, item.path.length).replace(/\//g, "-")

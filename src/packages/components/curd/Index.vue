@@ -142,7 +142,7 @@
                          :bordered="true"
                          :data-source="tableCurd.tableData" :row-selection="tableCurd.selection"
                 >
-                    <template v-for="item in columns" v-slot:[item?.slots?.customRender]="{record}">
+                    <template v-for="item in columns" v-slot:[item?._slots?.customRender]="record">
                         <template v-if="item.slots">
                             <a-space v-if="item.slots.customRender === 'action'">
                                 <slot name="table-action" v-bind="{record}"></slot>

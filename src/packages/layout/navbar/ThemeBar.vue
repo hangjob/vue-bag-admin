@@ -49,7 +49,7 @@
         </div>
     </template>
     <div class="right_menu-item hidden-xs">
-        <img class="user-head" src="@/packages/assets/image/yanghang.jpg" alt="">
+<!--        <img class="user-head" src="@/packages/assets/image/yanghang.jpg" alt="">-->
         <a-dropdown>
             <a class="ant-dropdown-link" @click.prevent>
                 {{ userinfo.username }}
@@ -130,7 +130,9 @@ export default defineComponent({
         const handleQuit = () => {
             apiLogout().then(() => {
                 locaStore.clearAll()
-                router.push('/login')
+                router.push('/login').then((res)=>{
+                    userStore.$reset()
+                })
             })
         }
 

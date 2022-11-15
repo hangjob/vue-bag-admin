@@ -1,7 +1,6 @@
 import { createRouter, createWebHashHistory, createWebHistory, RouterOptions } from 'vue-router'
 import { App } from 'vue'
 import { NProgress } from '@/packages/plugin/nprogress'
-import { hasUserinfo } from '@/packages/router/beforeEach'
 import routes from '@/packages/router/routes'
 import asyncRoutes from '@/packages/router/asyncRoutes'
 

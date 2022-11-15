@@ -1,11 +1,11 @@
 <template>
-    <a-layout-sider theme="light" :width="250" v-model:collapsed="compData.collapsed" :trigger="null" collapsible>
-        <div class="logo">{{ compData.title }}</div>
+    <a-layout-sider theme="light" :width="compData.width" v-model:collapsed="compData.collapsed" collapsible>
+        <div class="logo">{{ compData.collapsed ? compData.subhead : compData.title }}</div>
         <MenuSlider />
     </a-layout-sider>
 </template>
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
+import { computed, defineComponent, nextTick, reactive } from 'vue'
 import appPinia from '@/packages/pinia/app'
 import MenuSlider from './MenuSlider'
 
@@ -16,11 +16,14 @@ export default defineComponent({
     },
     setup() {
         const appStore = appPinia()
-        const { title } = appStore.configApp.webSite
+        const { title, subhead } = appStore.configApp.webSite
         const compData = reactive({
             title,
-            collapsed: false,
+            collapsed: computed(() => appStore.bagConfig.collapsed),
+            width: 0,
+            subhead,
         })
+        compData.width = compData.collapsed ? 80 : 250
         return {
             compData,
         }

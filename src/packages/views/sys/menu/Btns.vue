@@ -4,7 +4,7 @@
         placement="right"
         v-model:visible="radio.visible"
         width="25%"
-        wrapClassName="auth"
+        class="auth"
     >
         <div class="auth-body">
             <a-select

@@ -5,6 +5,7 @@ import { apiAppRouter } from '@/packages/service/app'
 import router from '@/packages/router/index'
 import { Component } from 'vue'
 import { toTree, getAllParentArr } from '@/packages/utils/utils'
+import { findChildrenDepth, find, findContainingObject } from '@/packages/utils/lodash'
 
 let namespace = 'admin'
 
@@ -89,25 +90,48 @@ function findRoutesToComps(routes: Array<any>) {
     }
     const appStore = appPinia()
     appStore.menus = toTree(routes)
+    appStore.sourceMenus = routes
     loopAddRouter(routes)
 }
 
 
 /**
- * 更新当前 tabPaths
+ * 更新 当前 tabPaths
  */
 function updataTabPaths(to: RouteLocationNormalized) {
     const appStore = appPinia()
     if (appStore.menus.length) {
         let arr = getAllParentArr(appStore.menus, to.path)
-        console.log(arr)
-        appStore.tabPaths = arr.reverse() || []
+        appStore.tabPaths = arr && arr.reverse() || []
+    }
+}
+
+/**
+ * 更新 当前路由 信息
+ */
+function updataCurrentRouter(to: RouteLocationNormalized) {
+    const appStore = appPinia()
+    const item = find({ key: 'path', value: to.path }, appStore.sourceMenus)
+    appStore.currentRouter = { ...item, route: { path: to.path } }
+}
+
+/**
+ * 更新 tab切换栏
+ */
+function updataTabs(to: RouteLocationNormalized) {
+    const appStore = appPinia()
+    appStore.defaultTabFix()
+    const item = findChildrenDepth({ key: 'path', value: to.path, node: 'children' }, appStore.menus)
+    if (item) {
+        appStore.updataTabs(item)
     }
 }
 
 
 const asyncRoutes = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
     updataTabPaths(to)
+    updataCurrentRouter(to)
+    updataTabs(to)
     if (hasWhiteRouter(to) || hasUserInfo()) {
         return next()
     }

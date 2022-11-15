@@ -1,4 +1,4 @@
-import logoImage from '@/common/assets/image/logo3.png';
+import logoImage from '@/common/assets/image/logo3.png'
 
 /**
  * 主题设置
@@ -47,12 +47,12 @@ const httpNetwork = {
 // 网站配置
 const webSite = {
     title: 'vue-bag-admin',
-    subhead: 'amin',
+    subhead: '品茗',
     logoImage,
 }
 
 export {
     themeConfig,
     httpNetwork,
-    webSite
+    webSite,
 }

@@ -1,30 +1,30 @@
 <template>
     <div :class="['layout-header_scroller']">
-        <div class="tab-action tab-action-left" @click="handleScrollBar(false)">
+        <div class="tab-action tab-action-left" @click="compData.handleScrollBar(false)">
             <CaretLeftFilled class="icon-svg" />
         </div>
         <div class="tab-container" ref="tabContainer">
             <div class="app-process_item"
-                 v-for="(item,index) in routesTabs"
-                 :key="index"
-                 :class="{active:item.active}"
-                 @click="handleClickCutTap(item)"
+                 v-for="(item) in compData.tabs"
+                 :key="item.id"
+                 :class="{active:compData.currentRouter.route.path === item.path}"
+                 @click="compData.handleTabToPath(item)"
                  @contextmenu.stop.prevent="handleContextMenu($event, item)"
             >
                 <span class="title">{{ item.name }}</span>
-                <CloseOutlined class="icon-svg" v-if="!item.tabFix && processList.length !== 1"
-                               @click.stop="handleCloseCurrent(item)"
+                <CloseOutlined class="icon-svg" v-if="!item.tabFix && compData.tabs.length !== 1"
+                               @click.stop="compData.handleCloseCurrent(item)"
                 />
             </div>
         </div>
-        <div class="tab-action tab-action-right" @click="handleScrollBar(true)">
+        <div class="tab-action tab-action-right" @click="compData.handleScrollBar(true)">
             <CaretRightFilled class="icon-svg" />
         </div>
     </div>
     <Contextmenu ref="contextmenu" />
 </template>
 <script lang="ts">
-import { computed, defineComponent, ref } from 'vue'
+import { computed, defineComponent, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { last } from '@/packages/utils/lodash'
 import Contextmenu from './Contextmenu.vue'
@@ -38,39 +38,39 @@ export default defineComponent({
         const appStore = appPinia()
         const router = useRouter()
         const contextmenu: any = ref(null)
-        const routesTabs = computed(() => appStore.routesTabs.filter((e: any) => e.tabHidden === false)) // 数据列表 // 使用computed 才触发视图更新
         const tabContainer = ref<HTMLAreaElement | any>(null)
 
-
-        // 左右滚动
-        const handleScrollBar = (t: boolean) => {
-            const left = tabContainer.value.scrollLeft + (t ? 100 : -100)
-            tabContainer.value.scrollTo({ left, behavior: 'smooth' })
-        }
-
-
-        const toPath = (path?: string) => {
-            if (path) {
-                router.push(path)
-                return
-            }
-            const active: any = routesTabs.value.find((e: any) => e.active) // 查找是否含有是当前激活的菜单 否则去 跳转最后一个
-            if (!active) {
-                const next = last(routesTabs.value)
-                router.push(next ? next.path : '/')
-            }
-        }
-
-        const handleCloseCurrent = (item: any) => {
-            const idx: number = routesTabs.value.findIndex((e: any) => e.id == item.id)
-            // store.commit('app/delProcessList', idx)
-            toPath()
-        }
-
+        const compData = reactive({
+            currentRouter: computed(() => appStore.currentRouter),
+            tabs: computed(() => appStore.tabs.filter((e: any) => e.tabHidden === false)),
+            handleScrollBar: (t: boolean) => {
+                const left = tabContainer.value.scrollLeft + (t ? 100 : -100)
+                tabContainer.value.scrollTo({ left, behavior: 'smooth' })
+            },
+            toPath: (path?: string | undefined) => {
+                if (path) {
+                    router.push(path)
+                } else {
+                    const route = compData.tabs.find((item) => item.id === compData.currentRouter.id) // 查找是否含有是当前激活的菜单 否则去 跳转最后一个
+                    if (!route) {
+                        const next = last(compData.tabs)
+                        router.push(next ? next.path : '/')
+                    }
+                }
+            },
+            handleCloseCurrent: (item: any) => {
+                let idx = appStore.tabs.findIndex((e: any) => e.id == item.id)
+                appStore.tabs.splice(idx, 1)
+                compData.toPath()
+            },
+            handleTabToPath: (item: any) => {
+                router.push(item.path)
+            },
+        })
 
         const handleContextMenu = (e: any, item: any) => {
             e.preventDefault() // 阻止默认事件
-            if (item.tabFix || routesTabs.value.length === 1) {
+            if (item.tabFix || compData.tabs.length === 1) {
                 return false
             }
             //获取我们自定义的右键菜单
@@ -83,20 +83,22 @@ export default defineComponent({
             contextmenu.value.items = [
                 {
                     name: '关闭当前', data: item, callback: (res: any) => {
-                        handleCloseCurrent(res.data)
+                        compData.handleCloseCurrent(res.data)
                     },
                 },
                 {
                     name: '关闭其他', data: item, callback: () => {
-                        const arr = routesTabs.value.filter((e: any) => {
+                        appStore.tabs = compData.tabs.filter((e: any) => {
                             return (e.id == item.id || e.path == '/') || e.tabFix
                         })
-                        toPath()
+                        compData.toPath()
                     },
                 },
                 {
                     name: '关闭所有', data: item, callback: () => {
-                        // toPath(store.getters['app/processList'][0].path)
+                        appStore.tabs = []
+                        appStore.defaultTabFix()
+                        compData.toPath(appStore.tabs[0].path)
                     },
                 },
             ]
@@ -109,24 +111,15 @@ export default defineComponent({
                 document.removeEventListener('click', removeClickFun)
             }
         }
-
-        const handleClickCutTap = (item: any) => {
-            router.push(item.path)
-        }
-
         return {
-            routesTabs,
             handleContextMenu,
-            handleClickCutTap,
             tabContainer,
-            handleScrollBar,
-            handleCloseCurrent,
             contextmenu,
+            compData,
         }
     },
 })
 </script>
-<!--suppress LessResolvedByNameOnly -->
 <style lang="less">
 .layout-header_scroller {
     background-color: transparent;

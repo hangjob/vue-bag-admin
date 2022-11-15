@@ -4,7 +4,7 @@
         placement="right"
         v-model:visible="visible"
         width="40%"
-        wrapClassName="auth"
+        class="auth"
     >
         <a-tabs v-model:activeKey="activeKey">
             <a-tab-pane key="1" tab="菜单权限">

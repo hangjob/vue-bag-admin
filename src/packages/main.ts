@@ -8,6 +8,7 @@ app.use(install, {
     config: {
         webSite: {
             title: '品茗信息',
+            subhead:'品茗'
         },
     },
 }).mount('#app')

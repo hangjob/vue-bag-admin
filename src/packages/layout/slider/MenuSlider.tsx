@@ -9,13 +9,10 @@ export default defineComponent({
         const appStore = appPinia()
         const router = useRouter()
         const route = useRoute()
-        const tabPaths = JSON.parse(JSON.stringify(appStore.tabPaths))
-        const pop: any = tabPaths.pop()
         const compData = reactive({
             menus: appStore.menus,
-            selectedKeys: [pop.id], // 当前选中的菜单项 key 数组
-            openKeys: tabPaths.map((item: any) => item.id), // 展开的数组
-            collapsed: false,
+            selectedKeys: [], // 当前选中的菜单项 key 数组
+            openKeys: appStore.tabPaths.map((item: any) => item.id), // 展开的数组
             handleClick: (res: any) => {
                 const item = res.item['info']
                 if (item.httpViewPath) {
@@ -26,7 +23,10 @@ export default defineComponent({
                 }
             },
         })
-        console.log(tabPaths, compData)
+        watchEffect(() => {
+            // @ts-ignore
+            compData.selectedKeys = [appStore.currentRouter.id]
+        })
         return {
             compData,
         }
@@ -34,7 +34,7 @@ export default defineComponent({
     render(ctx: any) {
         const children = deepMenu(ctx.compData.menus)
         return (
-            <a-menu v-model:selectedKeys={ctx.compData.selectedKeys} inlineCollapsed={ctx.compData.collapsed}
+            <a-menu v-model:selectedKeys={ctx.compData.selectedKeys}
                     mode="inline"
                     v-model:openKeys={ctx.compData.openKeys}
                     onClick={ctx.compData.handleClick} theme="light"

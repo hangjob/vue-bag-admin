@@ -1,5 +1,5 @@
 import { App, Directive, DirectiveBinding } from 'vue'
-import store from '@/packages/store'
+import userPinia from '@/packages/pinia/user'
 
 
 const isButton = (el: Element) => {
@@ -9,8 +9,9 @@ const isButton = (el: Element) => {
 // 权限指令
 function handlePermission(el: Element, binding: DirectiveBinding) {
     const { value, arg } = binding
+    const userStore = userPinia()
     if (value && value instanceof Array) {
-        const roles = store.getters['user/roles']
+        const roles = userStore.userInfo.role
         const hasPermission = roles.some((role: any) => {
             return value.includes(role)
         })

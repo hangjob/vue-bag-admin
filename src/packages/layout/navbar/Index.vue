@@ -3,7 +3,7 @@
     <div class="layout-header">
         <a-layout-header class="layout-header_top">
             <MenuFoldOutlined v-if="compData.collapsed" @click="compData.handleCollapsed(false)" />
-            <MenuUnfoldOutlined @click="handleCollapsed(true)" />
+            <MenuUnfoldOutlined v-else @click="compData.handleCollapsed(true)" />
             <a-breadcrumb class="text-overflow breadcrumb" v-if="compData.browser.isPC">
                 <a-breadcrumb-item v-for="(item,idx) in compData.list" :key="idx">{{ item.name }}</a-breadcrumb-item>
             </a-breadcrumb>
@@ -38,9 +38,9 @@ export default defineComponent({
         const compData = reactive({
             browser,
             list: computed(() => appStore.tabPaths),
-            collapsed: false,
+            collapsed: computed(() => appStore.bagConfig.collapsed),
             handleCollapsed: (bol: boolean) => {
-
+                appStore.bagConfig.collapsed = bol
             },
         })
 
