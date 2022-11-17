@@ -34,7 +34,7 @@ const columns = [
         key: 'image',
         ellipsis: true,
         align: 'center',
-        slots: { customRender: 'image' },
+        _slots: { customRender: 'image' },
     },
     {
         title: '是否显示',
@@ -76,8 +76,9 @@ const columns = [
         title: '操作',
         key: 'action',
         align: 'center',
+        dataIndex: 'action',
         width: 200,
-        slots: { customRender: 'action' },
+        _slots: { customRender: 'action' },
     },
 ]
 

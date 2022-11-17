@@ -16,7 +16,7 @@ const initStore = (app: App) => {
         httpNetwork,
         webSite,
     }
-    appStore.configAppStore = configAppRouter
+    appStore.configAppRouter = configAppRouter
     appStore.configAppStore = configAppStore
     appStore.configAppComps = configAppComps
     appStore.configAppApis = configAppApis

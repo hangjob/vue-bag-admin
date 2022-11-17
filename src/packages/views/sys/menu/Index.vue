@@ -18,10 +18,9 @@
             <a-modal v-model:visible="visibleIcon" width="85%" title="选择icon" okText="确认" cancelText="关闭">
                 <Icons v-model:icon="editForm.formState[item.formData.name]" @affirm="visibleIcon = false" />
             </a-modal>
-        </template>·
+        </template>
         <template #table-action="{record}">
-<!--            <a-button size="small" @click="handleSetBtn({record})">设置按钮-->
-<!--            </a-button>-->
+            <a-button size="small" @click="handleSetBtn({record})">设置按钮</a-button>
         </template>
     </bag-curd-table>
     <Btns ref="btns" @submit="authSubmit" />

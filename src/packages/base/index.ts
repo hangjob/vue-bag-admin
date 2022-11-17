@@ -6,7 +6,6 @@ import {setupRouter} from '@/packages/router'
 
 import {setupGlobExtend} from '@/packages/extend'
 import {setupGlobComponents} from '@/packages/components'
-import {setupDraggable} from '@/packages/plugin/draggable'
 import {setupIcons} from '@/packages/assets/icon/iconfont'
 import setupPinia from '@/packages/pinia'
 
@@ -16,7 +15,6 @@ const setupInit = (app: App) => {
     setupAndDesignVue(app)
     setupGlobExtend(app)
     setupGlobComponents(app)
-    setupDraggable(app)
     setupIcons(app)
 }
 

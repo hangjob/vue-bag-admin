@@ -1,7 +1,7 @@
 <template>
     <section class="section section-container">
         <div class="section-title">
-            <h1>优秀的你，才能遇到优秀的世界<br/>Bag管理系统框架</h1>
+            <h1>优秀的你，才能遇到优秀的世界<br />Bag管理系统框架</h1>
         </div>
         <div class="action">
             <el-row :gutter="30">
@@ -15,7 +15,8 @@
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
                     <div class="demo">
-                        <vs-button target :href="{url: '/web.html'}" color="rgb(11, 189, 135)" size="large" type="filled"
+                        <vs-button target :href="{url: '/web.html'}" color="rgb(11, 189, 135)" size="large"
+                                   type="filled"
                                    icon="text_snippet"
                         >体验客户端
                         </vs-button>
@@ -31,7 +32,9 @@
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
                     <div class="demo">
-                        <vs-button color="success" @click="handleDownload" size="large" type="filled" icon="downloading">
+                        <vs-button color="success" @click="handleDownload" size="large" type="filled"
+                                   icon="downloading"
+                        >
                             下载程序
                         </vs-button>
                     </div>
@@ -41,11 +44,10 @@
     </section>
 </template>
 <script lang="ts" setup>
-import toElementTop from "@/bag-utils/dom/toElementTop";
+import { browser } from 'pm-utils'
 
 const handleDownload = () => {
-    const dom: any = document.getElementById('Download');
-    toElementTop(dom)
+    browser.smoothScroll('#Download')
 }
 </script>
 <style lang="less" scoped>
@@ -66,10 +68,11 @@ const handleDownload = () => {
     }
 
     .action {
-        width:60%;
-        margin:80px auto 0;
+        width: 60%;
+        margin: 80px auto 0;
     }
-    .demo{
+
+    .demo {
         margin-top: 30px;
         display: flex;
         justify-content: center;

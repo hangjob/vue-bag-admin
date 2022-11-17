@@ -12,8 +12,10 @@
 </template>
 
 <script>
+import appPinia from '@/packages/pinia/app'
+
 export default {
-    name:'iframeView',
+    name: 'iframeView',
     data() {
         return {
             loading: false,
@@ -24,16 +26,17 @@ export default {
     watch: {
         $route: {
             handler({ meta }) {
-                this.url = this.$store.getters['app/currentRouter'].iframePath;
+                const appStore = appPinia()
+                this.url = appStore.currentRouter.iframePath
                 this.loading = true
             },
             immediate: true,
         },
     },
-	created() {
+    created() {
 
-	},
-	mounted() {
+    },
+    mounted() {
         const iframe = this.$el.querySelector('iframe')
         this.loading = true
 
@@ -47,7 +50,8 @@ export default {
 .spinning {
     height: 100%;
     width: 100%;
-    :deep(.ant-spin-container){
+
+    :deep(.ant-spin-container) {
         height: 100%;
         width: 100%;
     }

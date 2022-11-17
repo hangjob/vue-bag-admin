@@ -12,7 +12,6 @@ const setLibBuild = function() {
         rollupOptions: {
             // 确保外部化处理那些你不想打包进库的依赖
             external: [
-                "@braks/revue-draggable",
                 "@element-plus/icons-vue",
                 "@kangc/v-md-editor",
                 "@mojs/core",

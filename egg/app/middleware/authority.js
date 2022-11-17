@@ -10,6 +10,8 @@ module.exports = options => {
                 ctx.response.status = 403
                 ctx.body = {code: 9999, data: '', message: 'sign签名信息无效'}
             } else {
+                // ctx.response.status = 403
+                // ctx.body = {code: 9999, data: '', message: 'sign签名信息无效'}
                 await ctx.service.redis.set(decodeData.nanoid, decodeData.nanoid, 3)
                 const req = await ctx.request;
                 const apis = ['edit', 'update', 'delete', 'deletes','updatePas']

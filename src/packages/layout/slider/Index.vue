@@ -1,11 +1,13 @@
 <template>
     <a-layout-sider theme="light" :width="compData.width" v-model:collapsed="compData.collapsed" collapsible>
         <div class="logo">{{ compData.collapsed ? compData.subhead : compData.title }}</div>
-        <MenuSlider />
+        <div class="scroll">
+            <MenuSlider />
+        </div>
     </a-layout-sider>
 </template>
 <script lang="ts">
-import { computed, defineComponent, nextTick, reactive } from 'vue'
+import { computed, defineComponent, reactive } from 'vue'
 import appPinia from '@/packages/pinia/app'
 import MenuSlider from './MenuSlider'
 
@@ -41,5 +43,10 @@ export default defineComponent({
     color: #ffffff;
     font-size: 25px;
     font-weight: bold;
+}
+
+.scroll {
+    overflow-y: scroll;
+    height: calc(100% - 80px);
 }
 </style>

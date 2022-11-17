@@ -9,7 +9,7 @@ class HomeController extends baseController {
     }
 
     async library() {
-        let result = `<div class="async">这个是测试http网络异步的组件<YsIonfontDviceMna/><YsIonfontCrtAdit/></div>`
+        let result = `<div class="async">这个是测试http网络异步的组件,${+new Date()}</div>`
         this.result({data: result})
     }
 

@@ -2,47 +2,52 @@
     <a-drawer
         title="设置权限"
         placement="right"
-        v-model:visible="visible"
+        v-model:visible="compData.visible"
         width="40%"
         class="auth"
     >
-        <a-tabs v-model:activeKey="activeKey">
+        <a-tabs v-model:activeKey="compData.activeKey">
             <a-tab-pane key="1" tab="菜单权限">
-                <div class="auth-body"><RoleMenu ref="roleMenu"/></div>
+                <div class="auth-body">
+                    <RoleMenu ref="roleMenu" />
+                </div>
             </a-tab-pane>
             <a-tab-pane key="2" tab="数据权限">Content of Tab Pane 2</a-tab-pane>
             <a-tab-pane key="3" tab="按钮权限">Content of Tab Pane 3</a-tab-pane>
             <a-tab-pane key="4" tab="资源权限">Content of Tab Pane 3</a-tab-pane>
         </a-tabs>
         <div class="auth-action">
-            <a-button type="primary" @click="handleSubmit">提交</a-button>
+            <a-button type="primary" @click="compData.handleSubmit">提交</a-button>
         </div>
     </a-drawer>
 </template>
 <script lang="ts">
-import {computed, defineComponent, nextTick, ref, watch} from 'vue'
+import { computed, defineComponent, nextTick, reactive, ref, watch } from 'vue'
 import RoleMenu from './RoleMenu.vue'
 
 export default defineComponent({
-    components: {RoleMenu},
+    components: { RoleMenu },
     setup(props, context) {
         const roleMenu = ref()
-        const handleSubmit = () => {
-            context.emit('submit', roleMenu.value.checkedKeys.checked)
-        }
-        const visible = ref(false);
-        const handleOpen = (show, record) => {
-            visible.value = show;
-            nextTick(()=>{
-                roleMenu.value.initCheck(record)
-            })
-        }
+
+        const compData = reactive({
+            visible: false,
+            activeKey: '1',
+            handleOpen: (show, record) => {
+                compData.visible = show
+                if (record) {
+                    nextTick(() => {
+                        roleMenu.value.compData.handleInitCheck(record)
+                    })
+                }
+            },
+            handleSubmit: () => {
+                context.emit('submit', roleMenu.value.compData.checkedKeys.checked)
+            },
+        })
         return {
-            activeKey: ref('1'),
+            compData,
             roleMenu,
-            handleSubmit,
-            visible,
-            handleOpen
         }
     },
 })

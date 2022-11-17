@@ -53,8 +53,7 @@ import 'vue-cropper/dist/index.css'
 import { VueCropper } from 'vue-cropper'
 import { apiUploadImage } from '@/packages/service/upload'
 import { message } from 'ant-design-vue'
-import base64ToFile from '@/bag-utils/file/base64ToFile'
-import fileToBase64 from '@/bag-utils/file/fileToBase64'
+import PmUtils from 'pm-utils'
 import { apiAll } from '@www/admin/service/material'
 
 interface FileItem {
@@ -123,7 +122,7 @@ export default defineComponent({
             handleConfirm: () => {
                 tailor.loading = true
                 cropper.value.getCropData((base64: any) => {
-                    const file = base64ToFile(base64, tailor.fileName)
+                    const file = PmUtils.file.base64ToFile(base64, tailor.fileName)
                     if ((file.size / 1024) < props.fileSize) {
                         message.error(`文件小于${props.fileSize}KB`)
                     } else {
@@ -165,7 +164,7 @@ export default defineComponent({
                 message.error('请上传图片为,jpeg、png')
                 return false
             }
-            fileToBase64(file, ({ base64 }: { base64: any }) => {
+            PmUtils.file.fileToBase64(file, ({ base64 }: { base64: any }) => {
                 tailor.base64 = base64
                 tailor.visible = true
             })

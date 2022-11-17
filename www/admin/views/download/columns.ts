@@ -86,7 +86,7 @@ export default [
         key: 'image',
         ellipsis: true,
         align: 'center',
-        slots: {customRender: 'image'},
+        _slots: {customRender: 'image'},
         formData: {
             name: 'image',
             label: '图片',
@@ -104,7 +104,7 @@ export default [
         key: 'describe',
         ellipsis: true,
         align: 'center',
-        slots: {customRender: 'describe'},
+        _slots: {customRender: 'describe'},
         formData: {
             name: 'describe',
             label: '描述',
@@ -349,6 +349,6 @@ export default [
         key: 'action',
         align: 'center',
         width: 200,
-        slots: {customRender: 'action'},
+        _slots: {customRender: 'action'},
     },
 ]

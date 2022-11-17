@@ -64,7 +64,7 @@ import { ElNotification } from 'element-plus'
 import {
     Edit,
 } from '@element-plus/icons-vue'
-import isEmail from '@/bag-utils/regular/isEmail'
+import {regular} from 'pm-utils'
 
 export default defineComponent({
     setup() {
@@ -103,13 +103,13 @@ export default defineComponent({
         }
         const inputFromData = () => {
             if (fromData.email) {
-                if (!isEmail(fromData.email)) {
+                if (!regular.checkEmail(fromData.email)) {
                     text.value = '邮箱格式不正确'
                 } else {
                     text.value = '提交留言'
                 }
             }
-            disabled.value = !(fromData.email && isEmail(fromData.email) && fromData.name && fromData.message)
+            disabled.value = !(fromData.email && regular.checkEmail(fromData.email) && fromData.name && fromData.message)
         }
         return {
             fromData,

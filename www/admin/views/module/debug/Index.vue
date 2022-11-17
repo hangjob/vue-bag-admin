@@ -19,19 +19,19 @@ const columns = [
     {
         title: '浏览器',
         dataIndex: 'browserInfo',
-        slots: {customRender: 'browserInfo'},
+        _slots: {customRender: 'browserInfo'},
         ellipsis: true,
     },
     {
         title: '地址',
         dataIndex: 'location',
-        slots: {customRender: 'location'},
+        _slots: {customRender: 'location'},
         ellipsis: true,
     },
     {
         title: '错误信息',
         dataIndex: 'message',
-        slots: {customRender: 'message'},
+        _slots: {customRender: 'message'},
         ellipsis: true,
     },
     {

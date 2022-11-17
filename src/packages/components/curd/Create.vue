@@ -53,9 +53,11 @@
                             </a-select>
                         </template>
                         <template v-if="item.formData.element === 'bag-upload-image'">
-                            <a-input v-model:value="formState[item.formData.name]"
-                                     :placeholder="item.formData.props.placeholder"
-                            />
+                            <a-form-item-rest>
+                                <a-input v-model:value="formState[item.formData.name]"
+                                         :placeholder="item.formData.props.placeholder"
+                                />
+                            </a-form-item-rest>
                             <bag-upload-image :fixedBox="item.formData.props.fixedBox"
                                               :autoCropWidth="item.formData.props.autoCropWidth"
                                               :autoCropHeight="item.formData.props.autoCropHeight"

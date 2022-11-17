@@ -7,28 +7,28 @@
                     <a-typography-title :level="4">{{ userInfo.username }}</a-typography-title>
                     <a-typography-text>{{ userInfo.describe }}</a-typography-text>
                     <a-button @click="handleFollowMe" style="margin-top:10px" type="primary" shape="round">
-                        <SmileOutlined/>
+                        <SmileOutlined />
                         Follow me
                     </a-button>
                     <ul>
                         <li>
-                            <UserOutlined/>
+                            <UserOutlined />
                             <span>{{ userInfo.job }}</span>
                         </li>
                         <li>
-                            <HeartOutlined/>
+                            <HeartOutlined />
                             <span>{{ userInfo.birthday }}</span>
                         </li>
                         <li>
-                            <BankOutlined/>
+                            <BankOutlined />
                             <span>{{ userInfo.company }}</span>
                         </li>
                         <li>
-                            <RocketOutlined/>
+                            <RocketOutlined />
                             <span>{{ userInfo.address }}</span>
                         </li>
                         <li>
-                            <ShareAltOutlined/>
+                            <ShareAltOutlined />
                             <span>{{ userInfo.software }}</span>
                         </li>
                     </ul>
@@ -47,13 +47,13 @@
                 <div class="user-tabs">
                     <a-tabs v-model:activeKey="tabs.activeKey">
                         <a-tab-pane key="1" tab="基本信息">
-                            <BaseInfo/>
+                            <BaseInfo />
                         </a-tab-pane>
                         <a-tab-pane key="2" tab="账号绑定" force-render>
-                            <Account/>
+                            <Account />
                         </a-tab-pane>
                         <a-tab-pane key="3" tab="操作日志">
-                            <Logs/>
+                            <Logs />
                         </a-tab-pane>
                     </a-tabs>
                 </div>
@@ -62,56 +62,57 @@
     </div>
 </template>
 <script lang="ts">
-import {defineComponent, inject, reactive, ref, h} from 'vue'
-import {useStore} from 'vuex'
+import { defineComponent, inject, reactive, ref, h } from 'vue'
 import BaseInfo from './BaseInfo.vue'
 import Logs from './Logs.vue'
 import Account from './Account.vue'
-import {notification, Button} from 'ant-design-vue';
-import {SmileOutlined} from '@ant-design/icons-vue';
+import { notification, Button } from 'ant-design-vue'
+import { SmileOutlined } from '@ant-design/icons-vue'
+import userPinia from '@/packages/pinia/user'
 
 export default defineComponent({
     components: {
         BaseInfo,
         Logs,
-        Account
+        Account,
     },
     setup() {
-        const store = useStore()
-        const userinfo = store.getters['user/userinfo']
-        const {getImageFullPath} = inject<any>('bagGlobal')
+        const userStore = userPinia()
+        const { userInfo: _userInfo } = userStore
+        const { getImageFullPath } = inject<any>('bagGlobal')
         const userInfo = reactive({
-            ...userinfo,
-            userhead: getImageFullPath(userinfo.userhead),
+            ..._userInfo,
+            userhead: getImageFullPath(_userInfo.userhead),
         })
+        console.log(userInfo)
         const tabs = reactive({
             activeKey: ref('1'),
         })
         const handleFollowMe = () => {
-            const key = `open${Date.now()}`;
+            const key = `open${Date.now()}`
             notification['success']({
                 message: '你是要去跟我点赞嘛',
                 description: 'Are you going to like me? If so, please click and remember to like me',
-                icon: h(SmileOutlined, {style: 'color: #108ee9'}),
+                icon: h(SmileOutlined, { style: 'color: #108ee9' }),
                 btn: h(
                     Button,
                     {
                         type: 'primary',
                         size: 'small',
                         onClick: () => {
-                            notification.close(key);
+                            notification.close(key)
                             window.open('https://github.com/hangjob/vue-bag-admin')
                         },
                     },
                     '点我吧',
                 ),
                 key,
-            });
+            })
         }
         return {
             userInfo,
             tabs,
-            handleFollowMe
+            handleFollowMe,
         }
     },
 })

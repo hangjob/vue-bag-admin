@@ -76,7 +76,7 @@ import appStore from '@/bag-web/store/app'
 import logo from '@/common/assets/image/logo3.png'
 import userStore from "@/bag-web/store/user";
 import {useRoute, useRouter} from 'vue-router'
-import isHttp from "@/bag-utils/regular/isHttp";
+import {utils} from "pm-utils";
 
 const {configApp} = <any>inject('$configAppOptions')
 
@@ -106,7 +106,7 @@ const handleLogout = () => {
 
 const handleToPath = (item: any) => {
     const {url} = item;
-    if (isHttp(url)) {
+    if (utils.checkURL(url)) {
         window.open(url)
     } else if (url.indexOf('.html') > -1) {
         window.location.href = window.location.origin + url;

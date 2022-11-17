@@ -15,7 +15,9 @@ import curdTableHock, { initTableHock } from '@/packages/hook/table'
  *
  * priest:{list:[切换项目列表]}
  *
- * config:{预留参数配置}
+ * config:{themeConfig:{主题配置},httpNetwork:{网络配置},webSite:{网站配置}}
+ *
+ * apis:{}
  */
 interface $optionsType {
     router?: {

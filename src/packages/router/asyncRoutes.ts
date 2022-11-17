@@ -43,10 +43,15 @@ async function getUserInfo() {
  * 获取异步路由，动态添加
  */
 async function getFilterRoutes() {
-    const userStore = userPinia()
-    const { rolesDetail } = userStore.userInfo
-    const routes: any = await apiAppRouter()
-    return rolesDetail ? routes.filter(item => rolesDetail.menus.map(Number).indexOf(item.id) > -1) : routes
+    try {
+        const userStore = userPinia()
+        const { rolesDetail } = userStore.userInfo
+        const routes: any = await apiAppRouter()
+        return rolesDetail ? routes.filter(item => rolesDetail.menus.map(Number).indexOf(item.id) > -1) : routes
+    } catch (e) {
+        console.warn('路由接口出现异常')
+        return []
+    }
 }
 
 /**

@@ -23,17 +23,16 @@
     </div>
 </template>
 <script lang="ts">
-import {defineComponent, onMounted, ref} from 'vue'
+import { defineComponent, onMounted, ref } from 'vue'
 import menuList from '@www/blog/config/menu'
-import toElementTop from "@/bag-utils/dom/toElementTop";
+import { browser } from 'pm-utils'
 
 export default defineComponent({
     setup() {
 
         const handleScrollTo = (id: string, $event: Event) => {
             if (document.getElementById(id)) {
-                const dom: any = document.getElementById(id);
-                toElementTop(dom)
+                browser.smoothScroll('#' + id)
             }
         }
 

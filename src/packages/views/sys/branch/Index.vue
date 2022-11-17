@@ -23,22 +23,24 @@
         <a-table rowKey="id" :scroll="{ x: 1500 }" :columns="columns" size="middle" :bordered="true"
                  :data-source="tableCurd.tableData" :row-selection="tableCurd.selection"
         >
-            <template #pname="{ record }">
-                <a-tag class="bag-button-color-green">{{ getName({record}) }}</a-tag>
-            </template>
-            <template #action="{ record }">
-                <a-space>
-                    <a-button type="primary" size="small" @click="tableCurd.edit.change(record)">编辑</a-button>
-                    <a-popconfirm
-                        :title="`你确定删除 ${record.name} 嘛？`"
-                        ok-text="确认"
-                        cancel-text="关闭"
-                        placement="topRight"
-                    >
-<!--                        @confirm="tableCurd.delete.submit(record)"-->
-                        <a-button type="primary" danger size="small">删除</a-button>
-                    </a-popconfirm>
-                </a-space>
+            <template #bodyCell="{ column, record }">
+                <template v-if="column.dataIndex === 'pname'">
+                    <a-tag class="bag-button-color-green">{{ getName({record}) }}</a-tag>
+                </template>
+                <template v-if="column.dataIndex === 'action'">
+                    <a-space>
+                        <a-button type="primary" size="small" @click="tableCurd.edit.change(record)">编辑</a-button>
+                        <a-popconfirm
+                            :title="`你确定删除 ${record.name} 嘛？`"
+                            ok-text="确认"
+                            cancel-text="关闭"
+                            placement="topRight"
+                        >
+                            <!--                        @confirm="tableCurd.delete.submit(record)"-->
+                            <a-button type="primary" danger size="small">删除</a-button>
+                        </a-popconfirm>
+                    </a-space>
+                </template>
             </template>
         </a-table>
     </bag-form-table>

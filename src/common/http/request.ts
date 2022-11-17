@@ -1,13 +1,11 @@
-import {AxiosResponse, AxiosError, AxiosRequestConfig} from 'axios'
-import {getHttpNetworkConfig} from '@/common/http/index'
-import localStore from '@/common/utils/persistence'
-import {useRouter} from 'vue-router'
-import {message as messageModel} from 'ant-design-vue'
-import {rsaEncrypt} from '@/common/utils/crypto'
-import {nanoid} from 'nanoid'
-import qs from 'qs';
+import { AxiosResponse, AxiosError, AxiosRequestConfig } from 'axios'
+import { getHttpNetworkConfig } from '@/common/http/index'
+import { message as messageModel } from 'ant-design-vue'
+import { rsaEncrypt } from '@/common/utils/crypto'
+import { nanoid } from 'nanoid'
+import qs from 'qs'
 
-const router = useRouter()
+
 // 扩展类型
 declare module 'axios' {
     export interface AxiosRequestConfig {
@@ -39,23 +37,23 @@ interface ResponseErrorData {
  * @param config
  * @param httpNetwork
  */
-function requestSuccess(config: AxiosRequestConfig, {httpNetwork = {}}: { httpNetwork: any }) {
+function requestSuccess(config: AxiosRequestConfig, { httpNetwork = {} }: { httpNetwork: any }) {
     const {
         retry,
         retryDelay,
         timeout,
         baseURL,
         headers,
-        serialize
+        serialize,
     } = getHttpNetworkConfig(httpNetwork)
     config.baseURL = baseURL
     config.timeout = timeout
-    const sign = rsaEncrypt(JSON.stringify({name: 'bag', nanoid: nanoid()}))
-    config.headers = {...headers, sign}
+    const sign = rsaEncrypt(JSON.stringify({ name: 'bag', nanoid: nanoid() }))
+    config.headers = { ...headers, sign }
     config.retry = retry
     config.retryDelay = retryDelay
     if (config.method === 'post' && serialize) {
-        config.data = qs.stringify(config.data);
+        config.data = qs.stringify(config.data)
     }
     return config
 }
@@ -68,9 +66,9 @@ function requestSuccess(config: AxiosRequestConfig, {httpNetwork = {}}: { httpNe
 function responseSuccess(res: AxiosResponse<ResponseData>, {
     httpNetwork = {},
 }: { httpNetwork: any }) {
-    const {config} = res
-    let {code, data, message} = res.data
-    const {successCode, messageDuration} = getHttpNetworkConfig(httpNetwork)
+    const { config } = res
+    let { code, data, message } = res.data
+    const { successCode, messageDuration } = getHttpNetworkConfig(httpNetwork)
     if (successCode.indexOf(code) !== -1) {
         if (config.notify) {
             messageModel.success(message, messageDuration).then()
@@ -80,7 +78,7 @@ function responseSuccess(res: AxiosResponse<ResponseData>, {
     if (config.notifyError) {
         messageModel.warning(message, messageDuration)
     }
-    const errorData: ResponseErrorData = {message, error: res}
+    const errorData: ResponseErrorData = { message, error: res }
     return Promise.reject(errorData)
 }
 
@@ -89,28 +87,25 @@ function responseSuccess(res: AxiosResponse<ResponseData>, {
  * @param err
  * @param httpNetwork
  * @param http
+ * @param error
  */
 function responseError(err: AxiosError, {
     httpNetwork = {},
     http,
-}: { httpNetwork: any, http: any }) {
-    const {resetPath, messageDuration} = getHttpNetworkConfig(httpNetwork)
+    error,
+}: { httpNetwork: any, http: any, error?: Function }) {
+    const { resetPath, messageDuration } = getHttpNetworkConfig(httpNetwork)
     if (err.response) {
-        const {statusText, status} = err.response
-        const errorData: ResponseErrorData = {message: statusText, error: err.response}
-        if (status === 403) {
-            try {
-                localStore.clearAll()
-                return router.push(resetPath).then()
-            } catch (e: any) {
-                console.log(e)
-            }
+        const { data, status }: { data: any, status: number } = err.response
+        const errorData: ResponseErrorData = { message: data.message, error: err.response }
+        if (error && error({ status, resetPath })) {
+            return Promise.reject(errorData)
         }
-        messageModel.warning(statusText, messageDuration)
+        messageModel.warning(data.message, messageDuration)
         return Promise.reject(errorData)
     } else {
-        const {config, message} = <any>err.toJSON()
-        const errorData: ResponseErrorData = {message: message, error: err.toJSON()}
+        const { config, message } = <any>err.toJSON()
+        const errorData: ResponseErrorData = { message: message, error: err.toJSON() }
 
         config.reconnectCount = config.reconnectCount || 0
         let msg = config.reconnectCount ? `is reconnection ${config.reconnectCount} times，${message}` : message
@@ -125,13 +120,13 @@ function responseError(err: AxiosError, {
         }
 
         config.reconnectCount += 1  // 增加重试次数
-        const backoff = new Promise(function (resolve: any) {  // 创建新的Promise来处理
-            setTimeout(function () {
+        const backoff = new Promise(function(resolve: any) {  // 创建新的Promise来处理
+            setTimeout(function() {
                 resolve()
             }, config.retryDelay)
         })
 
-        return backoff.then(function () {  // 返回promise，其中调用axios来重试请求
+        return backoff.then(function() {  // 返回promise，其中调用axios来重试请求
             return http(config)
         })
     }
@@ -142,4 +137,4 @@ export {
     responseSuccess,
     responseError,
     requestSuccess,
-};
+}

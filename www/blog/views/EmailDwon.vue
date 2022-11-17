@@ -25,7 +25,7 @@ import {defineComponent, ref} from 'vue'
 import {userSendEmail} from '@www/blog/service'
 import {ElNotification} from 'element-plus'
 import {ElMessage} from 'element-plus'
-import isEmail from '@/bag-utils/regular/isEmail'
+import {regular} from 'pm-utils'
 import {Search} from '@element-plus/icons-vue'
 
 export default defineComponent({
@@ -39,7 +39,7 @@ export default defineComponent({
                 return
             }
             if (email.value) {
-                if (!isEmail(email.value)) {
+                if (!regular.checkEmail(email.value)) {
                     return ElNotification({
                         title: '提示',
                         message: `请输入正确的邮箱格式`,

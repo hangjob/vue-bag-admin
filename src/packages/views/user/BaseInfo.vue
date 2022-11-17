@@ -2,7 +2,7 @@
     <a-form :model="form.formState" :label-col="form.labelCol">
         <a-form-item v-for="(item,idx) in form.lists" :key="idx" :label="item.name">
             <a-input v-if="item.key !== 'describe'" v-model:value="form.formState[item.key]" />
-            <a-textarea readonly v-else v-model:value="form.formState[item.key]"/>
+            <a-textarea readonly v-else v-model:value="form.formState[item.key]" />
         </a-form-item>
         <a-form-item :wrapper-col="{ offset: 2 }">
             <a-button block disabled type="primary">提交</a-button>
@@ -11,7 +11,7 @@
 </template>
 <script>
 import { defineComponent, reactive } from 'vue'
-import { useStore } from 'vuex'
+import userPinia from '@/packages/pinia/user'
 
 export default defineComponent({
     setup() {
@@ -50,13 +50,13 @@ export default defineComponent({
             },
         ]
         const formState = {}
-        lists.map((item)=>{
-            formState[item.key] = '';
+        lists.map((item) => {
+            formState[item.key] = ''
         })
-        const store = useStore()
-        const userinfo = store.getters['user/userinfo']
+        const userStore = userPinia()
+        const userInfo = userStore.userInfo
         const form = reactive({
-            formState:{...userinfo},
+            formState: { ...userInfo },
             lists,
             labelCol: { style: { width: '100px' } },
             wrapperCol: { span: 14 },

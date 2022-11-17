@@ -4,7 +4,8 @@ import install, { $optionsType } from '@/packages/install'
 import paths from '@www/admin/router'
 import ThemeBar from '@www/admin/components/ThemeBar.vue'
 import setupGlobComponents from '@www/admin/plugin/md-editor-v3'
-const file: Record<string, Component> = import.meta.globEager('/www/admin/views/**/*.vue')
+
+const file: Record<string, Component> = import.meta.glob('/www/admin/views/**/*.vue', { eager: true })
 const $options: $optionsType = {
     router: { file, paths, defaults: false },
     comps: {
@@ -12,12 +13,12 @@ const $options: $optionsType = {
     },
     config: {
         webSite: {
-            title: 'vue-bag-admin',
+            title: '品茗信息',
             subhead: 'bag',
         },
     },
-    apis:{
-        '/user/userinfo':'/user/userinfo'
-    }
+    apis: {
+        '/user/userinfo': '/user/userinfo',
+    },
 }
 createApp(App).use(install, $options).use(setupGlobComponents).mount('#app')

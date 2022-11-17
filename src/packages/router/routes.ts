@@ -8,7 +8,8 @@ const routes: Array<RouteRecordRaw> = [
         path: '/',
         name: 'admin',
         component: () => import('@/packages/layout/Index.vue'),
-        children: [{ path: '', redirect: 'home' }],
+        redirect: 'home',
+        children: [],
     },
     {
         path: '/login', name: 'login', meta: { title: '登录' },
@@ -19,7 +20,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/packages/views/test/Index.vue'),
     },
     {
-        path: '/404',
+        path: '/:pathMatch(.*)*',
         component: () => import('@/packages/views/error/404.vue'),
     },
 ]

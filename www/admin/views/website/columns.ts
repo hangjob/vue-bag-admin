@@ -187,6 +187,6 @@ export default [
         align: 'center',
         disabled: true,
         width: 200,
-        slots: { customRender: 'action' },
+        _slots: { customRender: 'action' },
     },
 ]

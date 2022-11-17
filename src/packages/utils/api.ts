@@ -1,7 +1,7 @@
 import appPinia from '@/packages/pinia/app'
 
 /**
- * 获取接口路经
+ * 获取接口路经-接口覆盖
  * @param key
  */
 const getApiInstanceUrl = (key: string) => {

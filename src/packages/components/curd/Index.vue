@@ -16,7 +16,9 @@
                                               @click="tableCurd.create.visible = true"
                                     >新增
                                     </a-button>
-                                    <a-button type="primary" danger size="middle" v-debounce="{ func: tableCurd.deletes.submit}">删除
+                                    <a-button type="primary" danger size="middle"
+                                              v-debounce="{ func: tableCurd.deletes.submit}"
+                                    >删除
                                     </a-button>
                                 </a-space>
                             </div>
@@ -120,7 +122,9 @@
                                                    v-model:value="tableCurd.all.search.formState[item.name]"
                                                    :placeholder="item.props.placeholder"
                                         >
-                                            <a-radio :value="todo.value" :key="idx" v-for="(todo,idx) in item.options">{{todo.name}}</a-radio>
+                                            <a-radio :value="todo.value" :key="idx" v-for="(todo,idx) in item.options">
+                                                {{ todo.name }}
+                                            </a-radio>
                                         </component>
                                     </a-form-item>
                                     <a-form-item>
@@ -142,12 +146,11 @@
                          :bordered="true"
                          :data-source="tableCurd.tableData" :row-selection="tableCurd.selection"
                 >
-                    <template v-for="item in columns" v-slot:[item?._slots?.customRender]="record">
-                        <template v-if="item.slots">
-                            <a-space v-if="item.slots.customRender === 'action'">
+                    <template #bodyCell="{ column, record }">
+                        <template v-if="column._slots">
+                            <a-space v-if="column._slots.customRender === 'action'">
                                 <slot name="table-action" v-bind="{record}"></slot>
-                                <a-button type="primary" size="small"  @click="tableCurd.edit.change(record)">编辑
-                                </a-button>
+                                <a-button type="primary" size="small" @click="tableCurd.edit.change(record)">编辑</a-button>
                                 <a-popconfirm
                                     :title="`你确定删除嘛？`"
                                     ok-text="确认"
@@ -158,7 +161,7 @@
                                     <a-button type="primary" danger size="small">删除</a-button>
                                 </a-popconfirm>
                             </a-space>
-                            <slot v-else :name="item.slots.customRender" v-bind="{record}"></slot>
+                            <slot v-else :name="column._slots.customRender" v-bind="{record}"></slot>
                         </template>
                     </template>
                 </a-table>
@@ -242,6 +245,9 @@ export default defineComponent({
                 columns.splice(findIndex, 1)
             }
         }
+        const handleDebugTest = (res) => {
+            console.log(res)
+        }
         return {
             tableCurd,
             curdCreate,
@@ -251,6 +257,7 @@ export default defineComponent({
             tableSetting,
             checkboxChange,
             exportTableData,
+            handleDebugTest,
         }
     },
 })

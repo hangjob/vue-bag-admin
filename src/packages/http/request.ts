@@ -1,8 +1,10 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
-import fileDownload from '@/bag-utils/file/fileDownload'
+import PmUtils from 'pm-utils'
 import { rewriteUrl } from '@/common/http'
 import { responseSuccess, responseError, requestSuccess } from '@/common/http/request'
 import appPinia from '@/packages/pinia/app'
+import router from '@/packages/router'
+import localStore from '@/common/utils/persistence'
 
 const CancelToken = axios.CancelToken
 const source = CancelToken.source()
@@ -24,7 +26,12 @@ http.interceptors.response.use((res: AxiosResponse<any>) => {
     return responseSuccess(res, { httpNetwork: appStore.configApp.httpNetwork })
 }, async (err: AxiosError) => {
     const appStore = appPinia()
-    return responseError(err, { httpNetwork: appStore.configApp.httpNetwork, http })
+    return responseError(err, {
+        httpNetwork: appStore.configApp.httpNetwork, http, error: ({ resetPath }) => {
+            localStore.clearAll()
+            router.push(resetPath)
+        },
+    })
 })
 
 
@@ -56,7 +63,7 @@ const download = (url: string, data?: any, config?: any) => {
         data: data,
         ...config,
     }).then((res: any) => {
-        fileDownload(res.data, data?.fileName)
+        PmUtils.file.fileDownload(res.data, data?.fileName)
     })
 }
 

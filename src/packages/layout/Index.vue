@@ -6,7 +6,7 @@
             <TabBar/>
             <AppMain/>
             <div class="layout-footer">
-                Yxs Admin ©2021
+                bag-admin ©2022
                 <a-typography-link href="//www.vipbic.com">www.vipbic.com</a-typography-link>
             </div>
         </a-layout>

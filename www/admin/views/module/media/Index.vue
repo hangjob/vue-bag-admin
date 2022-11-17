@@ -11,12 +11,12 @@
 <script lang="ts">
 import {defineComponent, ref} from 'vue'
 import $ from 'jquery';
-import loadScript from '@/bag-utils/load/loadScript'
+import {browser} from 'pm-utils'
 window.$ = $;
 export default defineComponent({
     setup() {
         const media = ref()
-        loadScript('//unpkg.byted-static.com/xgplayer/2.31.2/browser/index.js').then(() => {
+        browser.loadScript('//unpkg.byted-static.com/xgplayer/2.31.2/browser/index.js').then(() => {
             let player = new Player({
                 "id": "video",
                 "url": "//lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/byted-player-videos/1.0.0/xgplayer-demo.mp4",

@@ -3,52 +3,45 @@
         checkable
         :tree-data="treeData"
         :checkStrictly="true"
-        v-model:expandedKeys="expandedKeys"
-        v-model:selectedKeys="selectedKeys"
-        v-model:checkedKeys="checkedKeys"
-        :replace-fields="replaceFields"
-        @check="onCheck"
+        v-model:expandedKeys="compData.expandedKeys"
+        v-model:selectedKeys="compData.selectedKeys"
+        v-model:checkedKeys="compData.checkedKeys"
+        :fieldNames="compData.replaceFields"
+        @check="compData.handleOnCheck"
     >
     </a-tree>
 </template>
 <script lang="ts">
-import {computed, defineComponent, ref, watch} from 'vue'
-import {useStore} from "vuex";
+import { computed, defineComponent, reactive, ref, watch } from 'vue'
+import appPinia from '@/packages/pinia/app'
 
 export default defineComponent({
     setup() {
-        const expandedKeys = ref<any[]>([]);
-        const selectedKeys = ref<any[]>([]);
-        const checkedKeys = ref<any[]>([]);
-        const allCheckedKeys = ref<any[]>([]);
+        const appStore = appPinia()
+        const compData = reactive({
+            expandedKeys: [],
+            selectedKeys: [],
+            checkedKeys: [],
+            allCheckedKeys: [],
+            replaceFields: {
+                children: 'children',
+                title: 'name',
+                key: 'id',
+            },
+            handleInitCheck: (record) => {
+                compData.checkedKeys = record.menus.map(Number)
+            },
+            handleOnCheck: (checkedKeys, info) => {
+                // allCheckedKeys.value = checkedKeys.concat(info.halfCheckedKeys);//将父节点拼接到子节点
+            },
+        })
 
-        const store = useStore()
-        const treeData = computed(() => store.state.app.menuList);
-        const replaceFields = {
-            children: 'children',
-            title: 'name',
-            key: 'id'
-        };
-
-        function onCheck(checkedKeys, info) {
-            // allCheckedKeys.value = checkedKeys.concat(info.halfCheckedKeys);//将父节点拼接到子节点
-        }
-
-        // 初始化默认选中
-        const initCheck = (record) => {
-            checkedKeys.value = record.menus.map(Number)
-        }
+        const treeData = computed(() => appStore.menus)
 
         return {
-            expandedKeys,
-            selectedKeys,
-            checkedKeys,
-            replaceFields,
             treeData,
-            onCheck,
-            allCheckedKeys,
-            initCheck
+            compData,
         }
-    }
+    },
 })
 </script>

@@ -96,6 +96,6 @@ export default [
         key: 'action',
         align: 'center',
         width: 200,
-        slots: {customRender: 'action'},
+        _slots: {customRender: 'action'},
     },
 ]

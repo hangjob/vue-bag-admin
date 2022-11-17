@@ -140,7 +140,7 @@ export default [
         key: 'image',
         ellipsis: true,
         align: 'center',
-        slots: { customRender: 'image' },
+        _slots: { customRender: 'image' },
         formData: {
             name: 'image',
             label: '封面图',
@@ -157,7 +157,7 @@ export default [
         key: 'images',
         ellipsis: true,
         align: 'center',
-        slots: { customRender: 'images' },
+        _slots: { customRender: 'images' },
         formData: {
             name: 'images',
             label: '组图',
@@ -336,6 +336,6 @@ export default [
         key: 'action',
         align: 'center',
         width: 200,
-        slots: { customRender: 'action' },
+        _slots: { customRender: 'action' },
     },
 ]

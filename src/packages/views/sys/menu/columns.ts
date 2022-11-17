@@ -50,7 +50,7 @@ const columns = [
         width: 80,
         align: 'center',
         ellipsis: true,
-        slots: { customRender: 'icon' },
+        _slots: { customRender: 'icon' },
         formData: {
             name: 'icon',
             label: '图标',
@@ -64,7 +64,7 @@ const columns = [
         ellipsis: true,
         align: 'center',
         width: 80,
-        slots: { customRender: 'type' },
+        _slots: { customRender: 'type' },
         formData: {
             name: 'type',
             label: '节点类型',
@@ -189,16 +189,7 @@ const columns = [
                 uncheckedText: '否',
                 defaultValue: true,
             },
-        },
-        formSearch: {
-            name: 'keepAlive',
-            label: '路由缓存',
-            element: 'a-radio-group',
-            options: [{ name: '是', value: 1 }, { name: '否', value: 0 }],
-            props: {
-                value: '',
-            },
-        },
+        }
     },
     {
         title: '是否隐藏Tab切换',
@@ -296,9 +287,10 @@ const columns = [
     {
         title: '操作',
         key: 'action',
+        dataIndex: 'action',
         align: 'center',
         width: 200,
-        slots: { customRender: 'action' },
+        _slots: { customRender: 'action' },
     },
 ]
 
