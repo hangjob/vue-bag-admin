@@ -1,5 +1,6 @@
 import path from 'path'
 
+
 const setWebBuild = function() {
     return {
         emptyOutDir: true,

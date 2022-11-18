@@ -36,18 +36,18 @@
 </template>
 <script lang="ts">
 import { computed, defineComponent, ref, watchEffect, watch } from 'vue'
-import { useStore } from 'vuex'
 import { notification } from 'ant-design-vue'
 import { toClipboard } from '@soerenmartius/vue3-clipboard'
+import userPinia from '@/packages/pinia/user'
 
 export default defineComponent({
     name: 'permit',
     setup() {
-        const store = useStore()
-        const roles = computed(() => store.getters['user/roles'])
+        const userStore = userPinia()
+        const roles = computed(() => userStore.userInfo.roles)
         const pauth = ref('admin')
         const visible = ref(true)
-        const radioValue = ref(store.getters['user/userinfo'].type)
+        const radioValue = ref(userStore.userInfo.type)
         const handleUpdata = () => {
             if (pauth.value === 'client') {
                 notification['info']({

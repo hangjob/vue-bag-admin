@@ -11,7 +11,7 @@ const app = defineStore({
                     whiteList: [],
                     resetPath: '',
                 },
-                themeConfig: {},
+                themeConfig: { floatingMenu: false, tabStyle: 1 },
                 webSite: { title: '', subhead: '' },
             },
             configAppRouter: <any>{ paths: [], file: {} },

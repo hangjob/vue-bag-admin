@@ -39,19 +39,19 @@ const findNearestTarget = (arr, target) => {
 
 
 const exportTableData = ({tableCurd, columns}: { tableCurd: any, columns: any }) => {
-    const tableHead = columns.map((item) => item.title)
-    const tableHeadKey = columns.map((item) => item.key)
-    const tableBody = tableCurd.tableData.map((item) => {
-        const data: any = [];
-        for (let i = 0; i < tableHeadKey.length; i++) {
-            data.push(item[tableHeadKey[i]])
-        }
-        return data;
-    })
-    const ws = XLSX.utils.aoa_to_sheet([tableHead, ...tableBody]);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-    XLSX.writeFile(wb, 'table.xlsx');
+    // const tableHead = columns.map((item) => item.title)
+    // const tableHeadKey = columns.map((item) => item.key)
+    // const tableBody = tableCurd.tableData.map((item) => {
+    //     const data: any = [];
+    //     for (let i = 0; i < tableHeadKey.length; i++) {
+    //         data.push(item[tableHeadKey[i]])
+    //     }
+    //     return data;
+    // })
+    // const ws = XLSX.utils.aoa_to_sheet([tableHead, ...tableBody]);
+    // const wb = XLSX.utils.book_new();
+    // XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    // XLSX.writeFile(wb, 'table.xlsx');
 }
 
 export {

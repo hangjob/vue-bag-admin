@@ -1,7 +1,7 @@
 import {createApp, shallowRef} from 'vue'
 import App from './App.vue'
 // @ts-ignore
-import install, {$optionsType} from "bag-admkin/bag-web/install";
+import install, {$optionsType} from "@/bag-web/install";
 import routes from "@www/web/router";
 const app = createApp(App)
 

@@ -17,7 +17,7 @@ export default ({ mode }: { mode: any }) => {
         assetsDir: 'assets', //打包静态文件的存储地址
         chunkSizeWarningLimit: 500,
     }
-    console.log('mode', mode)
+
     if (mode === 'development') {
         const { rollupOptions } = setProBuild()
         build.rollupOptions = rollupOptions

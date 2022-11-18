@@ -1,6 +1,5 @@
 import type { App } from 'vue'
 import setupInit from '@/packages/base'
-import mitt from 'mitt'
 import * as $axios from '@/packages/http/request'
 import { handleError } from '@/packages/debug'
 import { Component, readonly } from 'vue'
@@ -69,7 +68,6 @@ const install = (app: App, options?: $optionsType) => {
     }
     app.config.globalProperties = _options
     app.provide('$configAppOptions', readonly(_options))
-    app.provide('$mitt', mitt())
     app.use(setupGlobal)
     handleError(app)
     setupInit(app)

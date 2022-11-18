@@ -58,7 +58,6 @@
 <script lang="ts">
 import { ValidateErrorEntity } from 'ant-design-vue/es/form/interface'
 import { defineComponent, reactive, ref, toRaw, UnwrapRef } from 'vue'
-import {useStore} from 'vuex'
 interface FormState {
     name: string;
     region: string | undefined;
@@ -113,9 +112,7 @@ export default defineComponent({
         const resetForm = () => {
             formRef.value.resetFields()
         }
-        const store = useStore()
         const handleStore = ()=>{
-            console.log(store)
         }
         return {
             formRef,

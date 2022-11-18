@@ -8,25 +8,23 @@
 
 
 import { ref, onMounted, watch, watchEffect, computed, toRef } from 'vue'
-import { useStore } from 'vuex'
+import appPinia from '@/packages/pinia/app'
 
 const themeHook = function() {
-    const store = useStore()
-
+    const appStore = appPinia()
     const layoutClassName = computed(() => {
         let names: Array<any> = []
-        const app = store.state.app
-        if (app.collapsed) {
+        if (appStore.bagConfig.collapsed) {
             names.push('layout-is-collapse')
         }
-        if (app.themeConfig.floatingMenu) {
+        if (appStore.configApp.themeConfig.floatingMenu) {
             names.push('layout-is-collapse-floating')
         }
         return names.join(' ')
     })
 
     const tabStyleClassName = computed(() => {
-        const themeConfig = store.state.app.themeConfig
+        const themeConfig = appStore.configApp.themeConfig
         if (themeConfig.tabStyle === 2) {
             return 'tab-style-round'
         }

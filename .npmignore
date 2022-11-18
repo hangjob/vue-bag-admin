@@ -1,6 +1,12 @@
 node_modules
 .DS_Store
+docs
 dist
+mock
+public
+src
+typings
+www
 dist-ssr
 egg
 bag-utils

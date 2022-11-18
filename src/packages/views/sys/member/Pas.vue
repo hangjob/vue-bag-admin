@@ -27,7 +27,6 @@
 <script lang="ts">
 import {defineComponent, reactive, ref, toRaw} from 'vue'
 import {apiGetPas, apiUpdatePas} from '@/packages/service/member'
-import {useStore} from 'vuex'
 
 
 export default defineComponent({

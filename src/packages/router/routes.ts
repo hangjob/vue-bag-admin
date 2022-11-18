@@ -16,10 +16,6 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/packages/views/login/Index.vue'),
     },
     {
-        path: '/test', name: 'test', meta: { title: '测试页面' },
-        component: () => import('@/packages/views/test/Index.vue'),
-    },
-    {
         path: '/:pathMatch(.*)*',
         component: () => import('@/packages/views/error/404.vue'),
     },

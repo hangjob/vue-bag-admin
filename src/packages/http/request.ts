@@ -27,9 +27,11 @@ http.interceptors.response.use((res: AxiosResponse<any>) => {
 }, async (err: AxiosError) => {
     const appStore = appPinia()
     return responseError(err, {
-        httpNetwork: appStore.configApp.httpNetwork, http, error: ({ resetPath }) => {
-            localStore.clearAll()
-            router.push(resetPath)
+        httpNetwork: appStore.configApp.httpNetwork, http, error: ({ status, resetPath }) => {
+            if (status === 403) {
+                localStore.clearAll()
+                return router.push(resetPath)
+            }
         },
     })
 })
