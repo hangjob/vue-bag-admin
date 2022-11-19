@@ -15,10 +15,9 @@ export default defineComponent({
                 apiPrefix: '/web/article',
             },
         }))
-        console.log(form)
         return {
             tableCurd,
-            editForm: { ...form },
+            editForm: form,
             createForm: { ...cloneDeep(form) },
         }
     },

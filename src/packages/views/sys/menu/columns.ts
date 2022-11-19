@@ -37,7 +37,7 @@ const columns = [
             label: '父级节点',
             element: 'a-tree-select',
             treeData: [],
-            replaceFields: { children: 'children', key: 'id', value: 'id', title: 'name' },
+            replaceFields: { children: 'children', key: 'id', value: 'id', label: 'name' },
             props: {
                 placeholder: '选择父级节点，不选择为一级菜单',
             },

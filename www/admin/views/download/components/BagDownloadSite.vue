@@ -4,40 +4,42 @@
             <a-button type="primary" @click="dataForm.addItem">添加</a-button>
         </div>
         <a-table size="small" bordered :data-source="dataSource" :columns="columns">
-            <template #name="{ text, record }">
-                <div class="editable-cell">
-                    <div v-if="editableData[record.key]" class="editable-cell-input-wrapper">
-                        <a-input v-model:value="editableData[record.key].name"
-                                 @pressEnter="dataForm.saveItem(record.key)"
-                        />
-                        <check-outlined class="editable-cell-icon-check" @click="dataForm.saveItem(record.key)" />
+            <template #bodyCell="{ column, record,text }">
+                <template v-if="column.dataIndex === 'name'">
+                    <div class="editable-cell">
+                        <div v-if="editableData[record.key]" class="editable-cell-input-wrapper">
+                            <a-input v-model:value="editableData[record.key].name"
+                                     @pressEnter="dataForm.saveItem(record.key)"
+                            />
+                            <check-outlined class="editable-cell-icon-check" @click="dataForm.saveItem(record.key)" />
+                        </div>
+                        <div v-else class="editable-cell-text-wrapper">
+                            {{ text || ' ' }}
+                            <edit-outlined class="editable-cell-icon" @click="dataForm.editItem(record.key)" />
+                        </div>
                     </div>
-                    <div v-else class="editable-cell-text-wrapper">
-                        {{ text || ' ' }}
-                        <edit-outlined class="editable-cell-icon" @click="dataForm.editItem(record.key)" />
+                </template>
+                <template v-if="column.dataIndex === 'url'">
+                    <div class="editable-cell">
+                        <div v-if="editableData[record.key]" class="editable-cell-input-wrapper">
+                            <a-input v-model:value="editableData[record.key].url"
+                                     @pressEnter="dataForm.saveItem(record.key)"
+                            />
+                            <check-outlined class="editable-cell-icon-check" @click="dataForm.saveItem(record.key)" />
+                            <a-button size="small" style="margin:0 10px">上传文件</a-button>
+                        </div>
+                        <div v-else class="editable-cell-text-wrapper">
+                            {{ text || ' ' }}
+                            <edit-outlined class="editable-cell-icon" @click="dataForm.editItem(record.key)" />
+                        </div>
                     </div>
-                </div>
-            </template>
-            <template #url="{ text, record }">
-                <div class="editable-cell">
-                    <div v-if="editableData[record.key]" class="editable-cell-input-wrapper">
-                        <a-input v-model:value="editableData[record.key].url"
-                                 @pressEnter="dataForm.saveItem(record.key)"
-                        />
-                        <check-outlined class="editable-cell-icon-check" @click="dataForm.saveItem(record.key)" />
-                        <a-button size="small" style="margin:0 10px">上传文件</a-button>
-                    </div>
-                    <div v-else class="editable-cell-text-wrapper">
-                        {{ text || ' ' }}
-                        <edit-outlined class="editable-cell-icon" @click="dataForm.editItem(record.key)" />
-                    </div>
-                </div>
-            </template>
-            <template #action="{ record }">
-                <a-space :size="10">
-                    <a-button size="small" @click="dataForm.addItem">添加</a-button>
-                    <a-button danger size="small" @click="dataForm.deleteItem(record.key)">删除</a-button>
-                </a-space>
+                </template>
+                <template v-if="column.dataIndex === 'action'">
+                    <a-space :size="10">
+                        <a-button size="small" @click="dataForm.addItem">添加</a-button>
+                        <a-button danger size="small" @click="dataForm.deleteItem(record.key)">删除</a-button>
+                    </a-space>
+                </template>
             </template>
         </a-table>
     </a-form-item>
@@ -89,18 +91,15 @@ export default defineComponent({
                 title: '来源',
                 dataIndex: 'name',
                 width: '20%',
-                slots: { customRender: 'name' },
             },
             {
                 title: '地址',
                 dataIndex: 'url',
-                slots: { customRender: 'url' },
             },
             {
                 title: '操作',
                 dataIndex: 'action',
                 width: '10%',
-                slots: { customRender: 'action' },
             },
         ]
         watchEffect(() => {

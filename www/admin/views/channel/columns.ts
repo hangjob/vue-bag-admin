@@ -5,7 +5,7 @@ const columns = [
         key: 'id',
         align: 'center',
         ellipsis: true,
-        width: 70,
+        width: 80,
     },
     {
         title: '栏目名称',
@@ -13,6 +13,14 @@ const columns = [
         key: 'name',
         align: 'center',
         ellipsis: true,
+        formData: {
+            name: 'name',
+            label: '栏目名称',
+            element: 'a-input',
+            props: {
+                placeholder: '输入栏目名称',
+            },
+        },
     },
     {
         title: '链接地址',
@@ -20,13 +28,31 @@ const columns = [
         key: 'url',
         align: 'center',
         ellipsis: true,
+        formData: {
+            name: 'url',
+            label: '链接地址',
+            element: 'a-input',
+            props: {
+                placeholder: '输入链接地址',
+            },
+        },
     },
     {
-        title: '父级ID',
+        title: '父级节点',
         dataIndex: 'pid',
         key: 'pid',
         ellipsis: true,
         align: 'center',
+        formData: {
+            name: 'pid',
+            label: '父级节点',
+            element: 'a-tree-select',
+            treeData: [],
+            replaceFields: { children: 'children', key: 'id', value: 'id', label: 'name' },
+            props: {
+                placeholder: '选择父级节点，不选择为一级菜单',
+            },
+        },
     },
     {
         title: '图片',
@@ -35,6 +61,15 @@ const columns = [
         ellipsis: true,
         align: 'center',
         _slots: { customRender: 'image' },
+        formData: {
+            name: 'image',
+            label: '图片',
+            element: 'bag-upload-image',
+            props: {
+                placeholder: '上传图片',
+                isFileMore: false,
+            },
+        },
     },
     {
         title: '是否显示',
@@ -43,7 +78,17 @@ const columns = [
         ellipsis: true,
         align: 'center',
         customRender: (item: any) => {
-            return item.text === true || item.text === 1 ? '是' : '否'
+            return item.text  ? '是' : '否'
+        },
+        formData: {
+            name: 'shows',
+            label: '是否显示',
+            element: 'a-switch',
+            props: {
+                checkedText: '是',
+                uncheckedText: '否',
+                defaultValue: true,
+            },
         },
     },
     {
@@ -53,7 +98,17 @@ const columns = [
         ellipsis: true,
         align: 'center',
         customRender: (item: any) => {
-            return item.text === true || item.text === 1 ? '是' : '否'
+            return item.text ? '是' : '否'
+        },
+        formData: {
+            name: 'is_contribute',
+            label: '允许投稿',
+            element: 'a-switch',
+            props: {
+                checkedText: '是',
+                uncheckedText: '否',
+                defaultValue: true,
+            },
         },
     },
     {
@@ -63,6 +118,14 @@ const columns = [
         ellipsis: true,
         align: 'center',
         width: 80,
+        formData: {
+            name: 'order',
+            label: '排序',
+            element: 'a-input',
+            props: {
+                placeholder: '输入排序',
+            },
+        },
     },
     {
         title: '创建时间',
@@ -82,4 +145,4 @@ const columns = [
     },
 ]
 
-export default columns;
+export default columns

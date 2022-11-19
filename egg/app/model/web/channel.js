@@ -46,19 +46,11 @@ module.exports = app => {
             type: BOOLEAN,
             defaultValue: true,
             comment: '是否允许投稿',
-            get() {
-                const is_contribute = this.getDataValue('is_contribute')
-                return is_contribute ? 1 : 0
-            },
         },
         shows: {
             type: BOOLEAN,
             defaultValue: true,
             comment: '是否显示',
-            get() {
-                const shows = this.getDataValue('shows')
-                return shows ? 1 : 0
-            },
         },
         createTime: {
             type: DATE,

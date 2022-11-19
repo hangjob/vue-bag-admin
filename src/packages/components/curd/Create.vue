@@ -80,14 +80,11 @@
                                 style="width: 100%"
                                 :dropdown-style="{ maxHeight: '400px', overflow: 'auto' }"
                                 :tree-data="item.formData.treeData"
-                                :replace-fields="item.formData.replaceFields"
+                                :field-names="item.formData.replaceFields"
                                 :placeholder="item.formData.props.placeholder"
                                 allow-clear
                                 tree-default-expand-all
                             >
-                                <template #title="{ key, value,title }">
-                                    <span>{{ title }}</span>
-                                </template>
                             </a-tree-select>
                         </template>
                         <template v-if="item.formData.slotName">

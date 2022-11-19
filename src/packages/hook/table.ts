@@ -53,9 +53,7 @@ export default function() {
                 post(tableCurd.all.api, { ...tableCurd.all.search.formState }).then((res: any) => {
                     if (utils.dataType(tableCurd.all.beforeSuccess) === 'function') {
                         const data = tableCurd.all.beforeSuccess(res)
-                        if (data) {
-                            tableCurd.tableData = data
-                        }
+                        tableCurd.tableData = data || res;
                     } else {
                         tableCurd.tableData = res
                     }

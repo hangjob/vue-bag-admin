@@ -68,6 +68,7 @@ function responseSuccess(res: AxiosResponse<ResponseData>, {
 }: { httpNetwork: any }) {
     const { config } = res
     let { code, data, message } = res.data
+    message = message ? message : '请检查网络'
     const { successCode, messageDuration } = getHttpNetworkConfig(httpNetwork)
     if (successCode.indexOf(code) !== -1) {
         if (config.notify) {
@@ -106,7 +107,6 @@ function responseError(err: AxiosError, {
     } else {
         const { config, message } = <any>err.toJSON()
         const errorData: ResponseErrorData = { message: message, error: err.toJSON() }
-
         config.reconnectCount = config.reconnectCount || 0
         let msg = config.reconnectCount ? `is reconnection ${config.reconnectCount} times，${message}` : message
         messageModel.warning(msg, messageDuration)

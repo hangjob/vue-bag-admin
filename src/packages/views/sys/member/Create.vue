@@ -9,14 +9,11 @@
                             style="width: 100%"
                             :dropdown-style="{ maxHeight: '400px', overflow: 'auto' }"
                             :tree-data="treeData"
-                            :replace-fields="{children:'children', key:'id', value: 'id', title: 'name'}"
+                            :field-names="{children:'children', key:'id', value: 'id', label: 'name'}"
                             placeholder="选择部门组织"
                             allow-clear
                             tree-default-expand-all
                         >
-                            <template #title="{ key, value,title }">
-                                <span>{{ title }}</span>
-                            </template>
                         </a-tree-select>
                     </a-form-item>
                 </a-col>

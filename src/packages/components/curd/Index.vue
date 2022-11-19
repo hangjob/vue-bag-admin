@@ -150,7 +150,8 @@
                         <template v-if="column._slots">
                             <a-space v-if="column._slots.customRender === 'action'">
                                 <slot name="table-action" v-bind="{record}"></slot>
-                                <a-button type="primary" size="small" @click="tableCurd.edit.change(record)">编辑</a-button>
+                                <a-button type="primary" size="small" @click="tableCurd.edit.change(record)">编辑
+                                </a-button>
                                 <a-popconfirm
                                     :title="`你确定删除嘛？`"
                                     ok-text="确认"
@@ -180,8 +181,8 @@
     </bag-modal>
     <bag-modal v-model:visible="tableCurd.edit.visible" title="编辑" width="85%" @ok="tableCurd.edit.submit">
         <bag-curd-create :tableCurd="tableCurd" :form="editForm" ref="curdEdit">
-            <template v-for="(item) in createForm.formItem" v-slot:[item.formData.slotName]>
-                <slot :name="item.formData.slotName" v-bind="{formState:createForm.formState,item}"></slot>
+            <template v-for="(item) in editForm.formItem" v-slot:[item.formData.slotName]>
+                <slot :name="item.formData.slotName" v-bind="{formState:editForm.formState,item}"></slot>
             </template>
         </bag-curd-create>
     </bag-modal>
@@ -245,9 +246,7 @@ export default defineComponent({
                 columns.splice(findIndex, 1)
             }
         }
-        const handleDebugTest = (res) => {
-            console.log(res)
-        }
+
         return {
             tableCurd,
             curdCreate,
@@ -257,7 +256,6 @@ export default defineComponent({
             tableSetting,
             checkboxChange,
             exportTableData,
-            handleDebugTest,
         }
     },
 })

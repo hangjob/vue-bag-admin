@@ -1,7 +1,7 @@
 export default {
-    'primary-color': '#13C2C2', // 全局主色
-    'link-color': '#4ad8da', // 链接色
-    'badge-color': '#13C2C2',
+    'primary-color': '#1890ff', // 全局主色
+    'link-color': '#1890ff', // 链接色
+    'badge-color': '#1890ff',
     'success-color': '#52c41a', // 成功色
     'warning-color': '#faad14', // 警告色
     'error-color': '#f5222d',// 错误色

@@ -15,7 +15,6 @@ export default defineComponent({
                 apiPrefix: '/web/banner',
             },
         }))
-        console.log(form)
         return {
             tableCurd,
             editForm: { ...form },

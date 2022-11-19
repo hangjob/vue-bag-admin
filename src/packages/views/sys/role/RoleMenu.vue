@@ -6,7 +6,7 @@
         v-model:expandedKeys="compData.expandedKeys"
         v-model:selectedKeys="compData.selectedKeys"
         v-model:checkedKeys="compData.checkedKeys"
-        :fieldNames="compData.replaceFields"
+        :field-names="compData.replaceFields"
         @check="compData.handleOnCheck"
     >
     </a-tree>

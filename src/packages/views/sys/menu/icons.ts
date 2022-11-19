@@ -1,17 +1,6 @@
-// var arr = []
-// document.querySelectorAll('.anticons-list')[4].childNodes.forEach(item =>{
-//     item.querySelector && arr.push(item.querySelector('.ant-badge').innerText)
-// })
-
-// 方向性
-
 import cgIcons from '@/packages/assets/icon/iconfont/cg-icons';
 import rcIcons from '@/packages/assets/icon/iconfont/rc-icons';
 import xtIcons from '@/packages/assets/icon/iconfont/xt-icons';
-import fsIcons from '@/packages/assets/icon/iconfont/fs-icons';
-import tqIcons from '@/packages/assets/icon/iconfont/tq-icons';
-import shlIcons from '@/packages/assets/icon/iconfont/shl-icons';
-
 
 export default [
     {

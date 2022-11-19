@@ -205,7 +205,7 @@ export default [
         },
     },
     {
-        title: '选择时间',
+        title: '选择发布时间',
         dataIndex: 'createTime',
         key: 'createTime',
         ellipsis: true,
@@ -213,11 +213,11 @@ export default [
         width: 100,
         formData: {
             name: 'createTime',
-            label: '选择时间',
+            label: '选择发布时间',
             element: 'a-date-picker',
             props: {
                 valueFormat: 'YYYY-MM-DD HH:mm:ss',
-                placeholder: '选择时间',
+                placeholder: '选择发布时间',
                 showTime: true,
                 type: 'date',
             },

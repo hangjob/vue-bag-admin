@@ -6,6 +6,7 @@ import { Component, readonly } from 'vue'
 import { themeConfig, httpNetwork, webSite } from '@/packages/config'
 import setupGlobal from '@/common/global'
 import curdTableHock, { initTableHock } from '@/packages/hook/table'
+import mitt from 'mitt'
 
 /**
  * router: {paths:[菜单],file:[菜单路由文件]},defaults:true,开启默认路由
@@ -44,7 +45,7 @@ interface $optionsType {
 }
 
 const install = (app: App, options?: $optionsType) => {
-    const _options = {
+    const _options: any = {
         configAppRouter: {
             file: options?.router?.file || [],
             paths: options?.router?.paths || [],
@@ -69,6 +70,7 @@ const install = (app: App, options?: $optionsType) => {
     app.config.globalProperties = _options
     app.provide('$configAppOptions', readonly(_options))
     app.use(setupGlobal)
+    app.provide('$mitt', mitt())
     handleError(app)
     setupInit(app)
 }
