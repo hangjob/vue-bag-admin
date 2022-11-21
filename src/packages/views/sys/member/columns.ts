@@ -11,12 +11,37 @@ const columns = [
         },
     },
     {
+        title: '角色',
+        dataIndex: 'roles',
+        key: 'roles',
+        ellipsis: true,
+        align: 'center',
+        width: 80,
+        visible: false,
+        formData: {
+            name: 'roles',
+            label: '角色',
+            element: 'a-select',
+            options: [],
+            props: {
+                placeholder: '选择角色',
+            },
+        },
+    },
+    {
         title: '姓名',
         dataIndex: 'username',
         key: 'username',
         ellipsis: true,
         align: 'center',
-        _slots: { customRender: 'username' },
+        formData: {
+            name: 'username',
+            label: '姓名',
+            element: 'a-input',
+            props: {
+                placeholder: '输入姓名',
+            },
+        },
     },
     {
         title: '性别',
@@ -25,7 +50,15 @@ const columns = [
         ellipsis: true,
         align: 'center',
         width: 80,
-        _slots: { customRender: 'sex' },
+        formData: {
+            name: 'sex',
+            label: '性别',
+            element: 'a-select',
+            options: [{ value: 1, name: '女' }, { value: 2, name: '男' }, { value: 0, name: '保密' }],
+            props: {
+                placeholder: '选择性别',
+            },
+        },
     },
     {
         title: '年龄',
@@ -34,7 +67,14 @@ const columns = [
         ellipsis: true,
         align: 'center',
         width: 80,
-        _slots: { customRender: 'age' },
+        formData: {
+            name: 'age',
+            label: '姓名',
+            element: 'a-input',
+            props: {
+                placeholder: '输入年龄',
+            },
+        },
     },
     {
         title: '邮箱',
@@ -42,7 +82,14 @@ const columns = [
         key: 'email',
         ellipsis: true,
         align: 'center',
-        _slots: { customRender: 'email' },
+        formData: {
+            name: 'email',
+            label: '姓名',
+            element: 'a-input',
+            props: {
+                placeholder: '输入邮箱',
+            },
+        },
     },
     {
         title: '手机号',
@@ -52,6 +99,14 @@ const columns = [
         align: 'center',
         width: 120,
         _slots: { customRender: 'phone' },
+        formData: {
+            name: 'phone',
+            label: '姓名',
+            element: 'a-input',
+            props: {
+                placeholder: '输入手机号',
+            },
+        },
     },
     {
         title: '角色',
@@ -59,7 +114,111 @@ const columns = [
         key: 'rolesDetail',
         ellipsis: true,
         align: 'center',
-        _slots: { customRender: 'rolesDetail' },
+    },
+    {
+        title: '职业',
+        dataIndex: 'job',
+        key: 'job',
+        ellipsis: true,
+        align: 'center',
+        visible: false,
+        formData: {
+            name: 'job',
+            label: '职业',
+            element: 'a-input',
+            props: {
+                placeholder: '输入职业',
+            },
+        },
+    },
+    {
+        title: '公司名称',
+        dataIndex: 'company',
+        key: 'company',
+        ellipsis: true,
+        align: 'center',
+        visible: false,
+        formData: {
+            name: 'company',
+            label: '公司名称',
+            element: 'a-input',
+            props: {
+                placeholder: '输入公司名称',
+            },
+        },
+    },
+    {
+        title: '地址',
+        dataIndex: 'address',
+        key: 'address',
+        ellipsis: true,
+        align: 'center',
+        visible: false,
+        formData: {
+            name: 'address',
+            label: '地址',
+            element: 'a-input',
+            props: {
+                placeholder: '输入地址',
+            },
+        },
+    },
+    {
+        title: '编程语言',
+        dataIndex: 'software',
+        key: 'software',
+        ellipsis: true,
+        align: 'center',
+        visible: false,
+        formData: {
+            name: 'software',
+            label: '编程语言',
+            element: 'a-input',
+            props: {
+                placeholder: '输入擅长编程语言',
+            },
+        },
+    },
+    {
+        title: '生日',
+        dataIndex: 'birthday',
+        key: 'birthday',
+        ellipsis: true,
+        align: 'center',
+        visible: false,
+        formData: {
+            name: 'birthday',
+            label: '生日',
+            element: 'a-date-picker',
+            props: {
+                valueFormat: 'YYYY-MM-DD HH:mm:ss',
+                placeholder: '选择时间',
+                showTime: true,
+                type: 'date',
+            },
+        },
+    },
+    {
+        title: '是否禁用',
+        dataIndex: 'state',
+        key: 'state',
+        ellipsis: true,
+        align: 'center',
+        width: 100,
+        customRender: (item: any) => {
+            return item.text ? '是' : '否'
+        },
+        formData: {
+            name: 'state',
+            label: '是否禁用',
+            element: 'a-switch',
+            props: {
+                placeholder: '是否禁用',
+                checkedText: '是',
+                uncheckedText: '否',
+                defaultValue: true,
+            },
+        },
     },
     {
         title: '部门组织',
@@ -67,8 +226,7 @@ const columns = [
         key: 'branch',
         ellipsis: true,
         align: 'center',
-        width: 180,
-        _slots: { customRender: 'branch' },
+        visible: false,
     },
     {
         title: '创建时间',
@@ -76,57 +234,13 @@ const columns = [
         key: 'createTime',
         align: 'center',
         ellipsis: true,
-        width: 180,
     },
     {
         title: '操作',
         key: 'action',
         align: 'center',
         dataIndex: 'action',
-        width: 180,
         _slots: { customRender: 'action' },
     },
 ]
-
-const rolesColumns = [
-    {
-        title: '序号',
-        dataIndex: 'index',
-        key: 'index',
-        align: 'center',
-        ellipsis: true,
-        width: 70,
-        customRender: ({ index }: { index: number }) => {
-            return index + 1
-        },
-    },
-    {
-        title: '角色',
-        dataIndex: 'name',
-        key: 'name',
-        ellipsis: true,
-        align: 'center',
-        _slots: { customRender: 'name' },
-    },
-    {
-        title: '标识',
-        dataIndex: 'tag',
-        key: 'tag',
-        ellipsis: true,
-        align: 'center',
-        _slots: { customRender: 'tag' },
-    },
-    {
-        title: '创建时间',
-        dataIndex: 'createTime',
-        key: 'createTime',
-        ellipsis: true,
-        align: 'center',
-        _slots: { customRender: 'createTime' },
-    },
-]
-
 export default columns
-export {
-    rolesColumns,
-}

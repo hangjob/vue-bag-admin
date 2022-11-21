@@ -7,7 +7,7 @@
     <Auth ref="auth" @submit="compData.handleAuthSubmit" />
 </template>
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue'
+import { computed, defineComponent, reactive, ref } from 'vue'
 import { cloneDeep } from 'lodash'
 import curdTableHock, { initTableHock } from '@/packages/hook/table'
 import columns from './columns'
@@ -38,10 +38,12 @@ export default defineComponent({
             },
         }))
 
+        const editForm = computed(() => cloneDeep(form))
+        const createForm = computed(() => cloneDeep(form))
         return {
             tableCurd,
-            editForm: { ...form },
-            createForm: { ...cloneDeep(form) },
+            editForm,
+            createForm,
             auth,
             compData,
         }

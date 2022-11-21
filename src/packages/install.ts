@@ -24,7 +24,7 @@ interface $optionsType {
         file: Record<string, Component>, // 外接路由文件所在路径 import xxx from 'home.vue'
         paths?: Array<any>, // 本地路由
         replaceRouter?: Array<any> // 可以替换内部路由
-        defaults?: Boolean,
+        supFilter?: Array<any>
     },
     store?: {
         module: object,
@@ -49,8 +49,8 @@ const install = (app: App, options?: $optionsType) => {
         configAppRouter: {
             file: options?.router?.file || [],
             paths: options?.router?.paths || [],
-            defaults: options?.router?.defaults,
             replaceRouter: options?.router?.replaceRouter || [],
+            supFilter: options?.router?.supFilter || ['98BA9API9VEE9LHXBQ4HUD'],
         },
         configAppStore: {
             module: options?.store?.module || {},

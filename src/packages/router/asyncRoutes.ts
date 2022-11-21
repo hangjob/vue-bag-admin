@@ -5,7 +5,8 @@ import { apiAppRouter } from '@/packages/service/app'
 import router from '@/packages/router/index'
 import { Component } from 'vue'
 import { toTree, getAllParentArr } from '@/packages/utils/utils'
-import { findChildrenDepth, find, findContainingObject } from '@/packages/utils/lodash'
+import { findChildrenDepth, find } from '@/packages/utils/lodash'
+import defMenu from './defMenu'
 
 let namespace = 'admin'
 
