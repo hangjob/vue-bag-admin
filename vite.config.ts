@@ -16,6 +16,7 @@ export default ({ mode }: { mode: any }) => {
         outDir: process.env.VITE_DIST_NAME, //打包文件名称
         assetsDir: 'assets', //打包静态文件的存储地址
         chunkSizeWarningLimit: 500,
+
     }
 
     if (mode === 'development') {

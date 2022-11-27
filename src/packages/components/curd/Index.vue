@@ -142,7 +142,8 @@
                 </a-row>
             </div>
             <div class="bag-curd-body">
-                <a-table rowKey="id" :scroll="{ x: '85%' }" :columns="columns" :size="tableSetting.size"
+                <a-table :loading="tableCurd.loading" @change="tableCurd.tableChange" :pagination="tableCurd.pagination"
+                         rowKey="id" :scroll="{ x: '85%' }" :columns="columns" :size="tableSetting.size"
                          :bordered="true"
                          :data-source="tableCurd.tableData" :row-selection="tableCurd.selection"
                 >

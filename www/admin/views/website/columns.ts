@@ -129,6 +129,11 @@ export default [
                 placeholder: '输入备案号',
                 maxlength: 300,
             },
+            rules: [
+                {
+                    required: true, message: '输入描述为必填项', trigger: 'blur',
+                },
+            ],
         },
     },
     {

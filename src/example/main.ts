@@ -27,7 +27,6 @@ const $options: $optionsType = {
                 filePath: '/example/views/home/Index.vue',
             },
         ],
-        defaults:false
         // replaceRouter: [{ name: 'login', path: '/login', component: () => import('@/example/views/login/Index.vue') }],
     },
     store: {

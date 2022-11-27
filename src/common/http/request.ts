@@ -49,7 +49,7 @@ function requestSuccess(config: AxiosRequestConfig, { httpNetwork = {} }: { http
     config.baseURL = baseURL
     config.timeout = timeout
     const sign = rsaEncrypt(JSON.stringify({ name: 'bag', nanoid: nanoid() }))
-    config.headers = { ...headers, sign }
+    config.headers = { ...headers, ...config.headers, sign }
     config.retry = retry
     config.retryDelay = retryDelay
     if (config.method === 'post' && serialize) {

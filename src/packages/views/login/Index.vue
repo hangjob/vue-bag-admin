@@ -119,7 +119,7 @@ export default defineComponent({
 .login {
     width: 100%;
     height: 100%;
-    //background: url("/src/packages/assets/image/02.jpg") no-repeat center center;
+    background: url("/src/packages/assets/image/02.jpg") no-repeat center center;
 
     &-container {
         width: 75%;

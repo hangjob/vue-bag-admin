@@ -6,7 +6,6 @@ import router from '@/packages/router/index'
 import { Component } from 'vue'
 import { toTree, getAllParentArr } from '@/packages/utils/utils'
 import { findChildrenDepth, find } from '@/packages/utils/lodash'
-import defMenu from './defMenu'
 
 let namespace = 'admin'
 
@@ -46,8 +45,10 @@ async function getUserInfo() {
 async function getFilterRoutes() {
     try {
         const userStore = userPinia()
+        const appStore = appPinia()
         const { rolesDetail } = userStore.userInfo
         const routes: any = await apiAppRouter()
+        appStore.httpSourceMenus = routes
         return rolesDetail ? routes.filter(item => rolesDetail.menus.map(Number).indexOf(item.id) > -1) : routes
     } catch (e) {
         console.warn('路由接口出现异常')

@@ -3,10 +3,11 @@
         <a-row :gutter="[16,16]">
             <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="10" :xxl="7">
                 <div class="user-info">
-                    <img class="userhead" :src="userInfo.userhead" alt="">
+                    <img v-if="userInfo.userhead" class="userhead" :src="getImageFullPath(userInfo.userhead)" alt="">
+                    <img v-else class="userhead" src="@/packages/assets/image/yanghang.jpg" alt="">
                     <a-typography-title :level="4">{{ userInfo.username }}</a-typography-title>
                     <a-typography-text>{{ userInfo.describe }}</a-typography-text>
-                    <a-button @click="handleFollowMe" style="margin-top:10px" type="primary" shape="round">
+                    <a-button @click="compData.handleFollowMe" style="margin-top:10px" type="primary" shape="round">
                         <SmileOutlined />
                         Follow me
                     </a-button>
@@ -45,7 +46,7 @@
             </a-col>
             <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="14" :xxl="17">
                 <div class="user-tabs">
-                    <a-tabs v-model:activeKey="tabs.activeKey">
+                    <a-tabs v-model:activeKey="compData.tabActive">
                         <a-tab-pane key="1" tab="基本信息">
                             <BaseInfo />
                         </a-tab-pane>
@@ -78,41 +79,36 @@ export default defineComponent({
     },
     setup() {
         const userStore = userPinia()
-        const { userInfo: _userInfo } = userStore
+        const userInfo = userStore.userInfo
         const { getImageFullPath } = inject<any>('bagGlobal')
-        const userInfo = reactive({
-            ..._userInfo,
-            userhead: getImageFullPath(_userInfo.userhead),
-        })
-        console.log(userInfo)
-        const tabs = reactive({
-            activeKey: ref('1'),
-        })
-        const handleFollowMe = () => {
-            const key = `open${Date.now()}`
-            notification['success']({
-                message: '你是要去跟我点赞嘛',
-                description: 'Are you going to like me? If so, please click and remember to like me',
-                icon: h(SmileOutlined, { style: 'color: #108ee9' }),
-                btn: h(
-                    Button,
-                    {
-                        type: 'primary',
-                        size: 'small',
-                        onClick: () => {
-                            notification.close(key)
-                            window.open('https://github.com/hangjob/vue-bag-admin')
+        const compData = reactive({
+            tabActive: 1,
+            handleFollowMe() {
+                const key = `open${Date.now()}`
+                notification['success']({
+                    message: '你是要去跟我点赞嘛',
+                    description: 'Are you going to like me? If so, please click and remember to like me',
+                    icon: h(SmileOutlined, { style: 'color: #108ee9' }),
+                    btn: h(
+                        Button,
+                        {
+                            type: 'primary',
+                            size: 'small',
+                            onClick: () => {
+                                notification.close(key)
+                                window.open('https://github.com/hangjob/vue-bag-admin')
+                            },
                         },
-                    },
-                    '点我吧',
-                ),
-                key,
-            })
-        }
+                        '点我吧',
+                    ),
+                    key,
+                })
+            },
+        })
         return {
             userInfo,
-            tabs,
-            handleFollowMe,
+            compData,
+            getImageFullPath,
         }
     },
 })

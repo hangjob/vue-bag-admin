@@ -21,9 +21,6 @@
                 <Icons v-model:icon="formState[item.formData.name]" @affirm="compData.visibleIcon = false" />
             </a-modal>
         </template>
-        <template #table-action="{record}">
-            <a-button size="small" @click="compData.handleSetBtn({record})">设置按钮</a-button>
-        </template>
     </bag-curd-table>
     <Btns ref="btns" />
 </template>

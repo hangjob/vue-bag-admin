@@ -6,15 +6,12 @@
         width="40%"
         class="auth"
     >
-        <a-tabs v-model:activeKey="compData.activeKey">
+        <a-tabs class="auth-tabs" v-model:activeKey="compData.activeKey">
             <a-tab-pane key="1" tab="菜单权限">
                 <div class="auth-body">
                     <RoleMenu ref="roleMenu" />
                 </div>
             </a-tab-pane>
-            <a-tab-pane key="2" tab="数据权限">Content of Tab Pane 2</a-tab-pane>
-            <a-tab-pane key="3" tab="按钮权限">Content of Tab Pane 3</a-tab-pane>
-            <a-tab-pane key="4" tab="资源权限">Content of Tab Pane 3</a-tab-pane>
         </a-tabs>
         <div class="auth-action">
             <a-button type="primary" @click="compData.handleSubmit">提交</a-button>
@@ -58,8 +55,10 @@ export default defineComponent({
         padding: 0 0 20px 0;
     }
 
-    &-body {
-        padding: 0 10px;
+    &-tabs{
+        .ant-tabs-nav{
+            padding: 0 10px;
+        }
     }
 
     &-action {

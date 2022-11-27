@@ -14,6 +14,7 @@
 <script lang="ts">
 import { computed, defineComponent, reactive, ref, watch } from 'vue'
 import appPinia from '@/packages/pinia/app'
+import { toTree } from '@/packages/utils/utils'
 
 export default defineComponent({
     setup() {
@@ -36,7 +37,7 @@ export default defineComponent({
             },
         })
 
-        const treeData = computed(() => appStore.menus)
+        const treeData = computed(() => toTree(appStore.httpSourceMenus))
 
         return {
             treeData,

@@ -106,7 +106,6 @@ class WebArticleController extends baseController {
         if (!isSuperadmin) {
             where.user_id = userinfo.id;
         }
-        console.log('where', where)
         const result = await ctx.model.Web.Article.findAll({
             where: {...where},
         })
@@ -120,7 +119,7 @@ class WebArticleController extends baseController {
         if (ks) {
             where.name = {[Op.like]: `%${ks}%`}
         }
-        const result = await ctx.model.Web.Article.findAll({
+        const result = await ctx.model.Web.Article.findAndCountAll({
             where: {...where},
             limit: pageSize,
             offset: (currentPage - 1) * pageSize,

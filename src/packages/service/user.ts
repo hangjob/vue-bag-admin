@@ -1,12 +1,16 @@
-import {post} from '@/packages/http/request'
-import {getApiInstanceUrl} from "@/packages/utils/api";
+import { post } from '@/packages/http/request'
+import { getApiInstanceUrl } from '@/packages/utils/api'
 
 
 /**
  * 登录
  */
 const apiLogin = (params?: object) => {
-    return post(getApiInstanceUrl('/user/login'), params, {notifyError: true, relink: true})
+    return post(getApiInstanceUrl('/user/login'), params,
+        {
+            notifyError: true, relink: true,
+        },
+    )
 }
 
 /**
@@ -27,15 +31,14 @@ const apiUserUserinfo = () => {
 /**
  * 获取网络信息
  */
-const apiSiteIpInfo = ()=>{
+const apiSiteIpInfo = () => {
     return post(getApiInstanceUrl('/user/siteIpInfo'))
 }
-
 
 
 export {
     apiLogin,
     apiLogout,
     apiUserUserinfo,
-    apiSiteIpInfo
+    apiSiteIpInfo,
 }

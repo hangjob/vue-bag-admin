@@ -7,7 +7,9 @@ import setupGlobComponents from '@www/admin/plugin/md-editor-v3'
 
 const file: Record<string, Component> = import.meta.glob('/www/admin/views/**/*.vue', { eager: true })
 const $options: $optionsType = {
-    router: { file, paths, defaults: false },
+    router: {
+        file, paths,
+    },
     comps: {
         ThemeBar: shallowRef(ThemeBar),
     },
@@ -16,9 +18,12 @@ const $options: $optionsType = {
             title: '品茗信息',
             subhead: 'bag',
         },
-    },
-    apis: {
-        '/user/userinfo': '/user/userinfo',
+        httpNetwork: {
+            whiteList: [],
+            headers: {
+                'Authorization': 'Bearer',
+            },
+        },
     },
 }
 createApp(App).use(install, $options).use(setupGlobComponents).mount('#app')

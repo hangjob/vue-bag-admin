@@ -18,7 +18,8 @@ const app = defineStore({
             configAppStore: {},
             configAppComps: {},
             configAppApis: {},
-            sourceMenus: <Array<any>>[], // 菜单源数据
+            httpSourceMenus: <Array<any>>[], // http 菜单源数据
+            sourceMenus: <Array<any>>[], // http + 本地 菜单源数据
             menus: <Array<any>>[], // 菜单
             prjMenu: [], // 项目切换菜单
             tabs: <Array<any>>[], // tab切换栏
@@ -42,10 +43,7 @@ const app = defineStore({
             ars.forEach((item) => {
                 this.updataTabs(item)
             })
-        },
-        updataBagConfig(item) {
-            this.bagConfig[item.key] = this.bagConfig[item.value]
-        },
+        }
     },
 })
 

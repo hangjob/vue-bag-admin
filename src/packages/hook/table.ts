@@ -5,8 +5,25 @@ import { message } from 'ant-design-vue'
 import { utils } from 'pm-utils'
 import { createFormItem } from '@/packages/utils/form'
 
-export default function() {
+export default function(options = {}) {
+    const pagination: any = 'pagination' in options ? options.pagination : {}
+    const tableChange: any = 'tableChange' in options ? options.tableChange : () => {
+    }
     const tableCurd = reactive({
+        pagination: {
+            current: 1,
+            total: 0,
+            pageSize: 10,
+            size: 'big',
+            showQuickJumper: true,
+            ...pagination,
+        },
+        // 表格事件
+        tableChange: (pagination, filters, sorter, { currentDataSource }) => {
+            tableCurd.pagination.current = pagination.current
+            tableCurd.loading = true
+            tableCurd.all.handle()
+        },
         columns: <Array<any>>[],
         tableData: [], // 表格数据
         loading: false, // loading
@@ -47,13 +64,18 @@ export default function() {
                 formItem: <any>[],
                 formState: <any>{},
                 formRules: <any>{},
+                beforeEach: <any>'',
             },
             handle() {
                 tableCurd.all.api = tableCurd.all.api ? tableCurd.all.api : tableCurd.apiPrefix + '/all'
-                post(tableCurd.all.api, { ...tableCurd.all.search.formState }).then((res: any) => {
+                let pageData = {}
+                if (utils.dataType(tableCurd.all.search.beforeEach) === 'function') {
+                    pageData = tableCurd.all.search.beforeEach(tableCurd.all.search.formState, tableCurd.pagination)
+                }
+                post(tableCurd.all.api, { ...tableCurd.all.search.formState, ...pageData }).then((res: any) => {
                     if (utils.dataType(tableCurd.all.beforeSuccess) === 'function') {
                         const data = tableCurd.all.beforeSuccess(res)
-                        tableCurd.tableData = data || res;
+                        tableCurd.tableData = data || res
                     } else {
                         tableCurd.tableData = res
                     }

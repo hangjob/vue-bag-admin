@@ -31,8 +31,8 @@ function replaceRoutes(app: App) {
 
 
 const setupRouter = (app: App) => {
-    app.use(router)
     replaceRoutes(app)
+    app.use(router)
 }
 
 export default router

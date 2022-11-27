@@ -1,4 +1,4 @@
-import {createApp, shallowRef} from 'vue'
+import {createApp} from 'vue'
 import App from './App.vue'
 // @ts-ignore
 import install, {$optionsType} from "@/bag-web/install";

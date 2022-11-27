@@ -7,6 +7,7 @@ import { themeConfig, httpNetwork, webSite } from '@/packages/config'
 import setupGlobal from '@/common/global'
 import curdTableHock, { initTableHock } from '@/packages/hook/table'
 import mitt from 'mitt'
+import { merge } from 'lodash'
 
 /**
  * router: {paths:[菜单],file:[菜单路由文件]},defaults:true,开启默认路由
@@ -59,9 +60,9 @@ const install = (app: App, options?: $optionsType) => {
             ThemeBar: options?.comps?.ThemeBar,
         },
         configApp: {
-            themeConfig: { ...themeConfig, ...options?.config?.themeConfig },
-            httpNetwork: { ...httpNetwork, ...options?.config?.httpNetwork },
-            webSite: { ...webSite, ...options?.config?.webSite },
+            themeConfig: merge(themeConfig, options?.config?.themeConfig),
+            httpNetwork: merge(httpNetwork, options?.config?.httpNetwork),
+            webSite: merge(webSite, options?.config?.webSite),
         },
         configAppApis: {
             ...options?.apis,
