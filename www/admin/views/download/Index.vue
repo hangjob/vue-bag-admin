@@ -24,7 +24,7 @@ export default defineComponent({
                 apiPrefix: '/web/download',
             },
         }))
-        tableCurd.detail.afterCallback = ({ res }) => {
+        tableCurd.detail.afterEach = ({ res }) => {
             bagDownloadSite.value.dataSource = JSON.parse(res.download_site)
         }
         return {

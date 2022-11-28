@@ -12,8 +12,8 @@ export default defineComponent({
         const { tableCurd } = curdTableHock()
         tableCurd.all.api = '/web/article/page'
 
-        tableCurd.all.search.beforeEach = (formState, pagination) => {
-            return { currentPage: pagination.current, pageSize: pagination.pageSize }
+        tableCurd.all.beforeEach = (formState, pagination) => {
+            return { ...formState, currentPage: pagination.current, pageSize: pagination.pageSize }
         }
 
         tableCurd.all.beforeSuccess = (res) => {

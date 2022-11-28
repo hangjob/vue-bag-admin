@@ -7,8 +7,6 @@ import { createFormItem } from '@/packages/utils/form'
 
 export default function(options = {}) {
     const pagination: any = 'pagination' in options ? options.pagination : {}
-    const tableChange: any = 'tableChange' in options ? options.tableChange : () => {
-    }
     const tableCurd = reactive({
         pagination: {
             current: 1,
@@ -60,19 +58,20 @@ export default function(options = {}) {
             ks: '',
             api: '',
             beforeSuccess: <any>'',
+            beforeEach: <any>'',
+            _formState: <any>{},
             search: {
                 formItem: <any>[],
                 formState: <any>{},
                 formRules: <any>{},
-                beforeEach: <any>'',
             },
             handle() {
                 tableCurd.all.api = tableCurd.all.api ? tableCurd.all.api : tableCurd.apiPrefix + '/all'
-                let pageData = {}
-                if (utils.dataType(tableCurd.all.search.beforeEach) === 'function') {
-                    pageData = tableCurd.all.search.beforeEach(tableCurd.all.search.formState, tableCurd.pagination)
+                tableCurd.all._formState = tableCurd.all.search.formState
+                if (utils.dataType(tableCurd.all.beforeEach) === 'function') {
+                    tableCurd.all._formState = tableCurd.all.beforeEach(tableCurd.all.search.formState, tableCurd.pagination)
                 }
-                post(tableCurd.all.api, { ...tableCurd.all.search.formState, ...pageData }).then((res: any) => {
+                post(tableCurd.all.api, { ...tableCurd.all._formState }).then((res: any) => {
                     if (utils.dataType(tableCurd.all.beforeSuccess) === 'function') {
                         const data = tableCurd.all.beforeSuccess(res)
                         tableCurd.tableData = data || res
@@ -89,12 +88,19 @@ export default function(options = {}) {
             id: '',
             api: '',
             refForm: <any>'',
+            _formState: <any>{},
+            beforeSubmit: <any>'',
             submit() {
                 tableCurd.edit.api = tableCurd.edit.api ? tableCurd.edit.api : tableCurd.apiPrefix + '/update'
+                tableCurd.edit._formState = toRaw(tableCurd.edit.refForm.formState)
+                if (utils.dataType(tableCurd.edit.beforeSubmit) === 'function') {
+                    // 在触发之前 传递beforeSubmit函数 加工数据 此处可以进一步加工
+                    tableCurd.edit._formState = tableCurd.edit.beforeSubmit(tableCurd.edit._formState)
+                }
                 tableCurd.edit.refForm.formRef.validate().then(() => {
                     post(tableCurd.edit.api, {
                         id: tableCurd.edit.id,
-                        ...toRaw(tableCurd.edit.refForm.formState),
+                        ...tableCurd.edit._formState,
                     }, { notify: true }).then(() => {
                         tableCurd.edit.visible = false
                         tableCurd.all.handle()
@@ -121,38 +127,57 @@ export default function(options = {}) {
         delete: {
             api: '',
             id: '',
+            _formState: <any>{},
+            beforeSubmit: <any>'',
             submit(row: any) {
                 tableCurd.delete.api = tableCurd.delete.api ? tableCurd.delete.api : tableCurd.apiPrefix + '/delete'
-                post(tableCurd.delete.api, { id: row.id }, { notify: true }).then(() => {
+                if (utils.dataType(tableCurd.delete.beforeSubmit) === 'function') {
+                    // 在触发之前 传递beforeSubmit函数 加工数据 此处可以进一步加工
+                    tableCurd.delete._formState = tableCurd.delete.beforeSubmit(row)
+                }
+                post(tableCurd.delete.api, { id: row.id, ...tableCurd.delete._formState }, { notify: true }).then(() => {
                     tableCurd.all.handle()
                 })
             },
         },
         deletes: {
             api: '',
+            _formState: <any>{},
+            beforeSubmit: <any>'',
             submit() {
                 tableCurd.deletes.api = tableCurd.deletes.api ? tableCurd.deletes.api : tableCurd.apiPrefix + '/deletes'
                 const ids = tableCurd.selectedRowKeys.map((item: any) => item.id)
                 if (!ids.length) {
                     return message.warning('请至少选择一个')
                 }
-                post(tableCurd.deletes.api, { ids }, { notify: true }).then(() => {
+                if (utils.dataType(tableCurd.deletes.beforeSubmit) === 'function') {
+                    // 在触发之前 传递beforeSubmit函数 加工数据 此处可以进一步加工
+                    tableCurd.deletes._formState = tableCurd.deletes.beforeSubmit(ids)
+                } else {
+                    tableCurd.deletes._formState = ids
+                }
+                post(tableCurd.deletes.api, { ...tableCurd.deletes._formState }, { notify: true }).then(() => {
                     tableCurd.all.handle()
                 })
             },
         },
         detail: {
             api: '',
-            afterCallback: <any>'',
+            afterEach: <any>'',
+            beforeEach: <any>'',
+            _formState: <any>{},
             find(row: any) {
                 tableCurd.detail.api = tableCurd.detail.api ? tableCurd.detail.api : tableCurd.apiPrefix + '/find'
-                post(tableCurd.detail.api, { id: row.id }).then((res: any) => {
+                if (utils.dataType(tableCurd.detail.beforeEach) === 'function') {
+                    tableCurd.detail._formState = tableCurd.detail.beforeEach(row)
+                }
+                post(tableCurd.detail.api, { id: row.id, ...tableCurd.detail._formState }).then((res: any) => {
                     let { updateTime, ...profileData } = res
                     Object.keys(tableCurd.edit.refForm.formState).forEach((key: string) => {
                         tableCurd.edit.refForm.formState[key] = profileData[key]
                     })
-                    if (utils.dataType(tableCurd.detail.afterCallback) === 'function') {
-                        tableCurd.detail.afterCallback({ res })
+                    if (utils.dataType(tableCurd.detail.afterEach) === 'function') {
+                        tableCurd.detail.afterEach({ res })
                     }
                 })
             },
