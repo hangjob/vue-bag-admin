@@ -5,8 +5,6 @@
 ## 技术选型
 
 > Bag管理系统采用Vue3、Vue-Router4、Vuex4、Ant-Design-Vue、Vite、TypeScript、Egg.js、Mysql构建
->
->Bag门户博客前台采用Vue3、Vue-Router4、Vite 、Pinia、Element-plus、Equal-Vue、Bootstrap、Vite、TypeScript、Egg.js、Mysql构建，按需加载模块，内置丰富UI
 
 ### 安装
 
@@ -16,9 +14,9 @@ npm i vue-bag-admin --save
 
 ### 在线演示
 
-> 管理员账户：用户名：admin ，密码：123456
+> 管理员账户：用户名：superadmin ，密码：123456
 
-[管理系统演示](https://vite.itnavs.com/admin.html)、[门户博客前台演示](https://vite.itnavs.com/web.html)
+[在线管理系统演示](https://vite.itnavs.com/admin.html)
 
 ### 主要功能
 

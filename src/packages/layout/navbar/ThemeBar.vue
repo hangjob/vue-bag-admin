@@ -87,7 +87,6 @@ export default defineComponent({
                     classItemName: 'right_menu-item hidden-xs',
                     classItemIcon: 'icon-svg refresh',
                     handle: () => {
-                        console.log(1)
                         $mitt.emit('reload-router-view')
                     },
                 },

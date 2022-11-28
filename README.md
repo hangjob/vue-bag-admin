@@ -5,9 +5,6 @@
 ## 技术选型
 
 > Bag管理系统采用Vue3、Vue-Router4、Vuex4、Ant-Design-Vue、Vite、TypeScript、Egg.js、Mysql构建
->
->Bag门户博客前台采用Vue3、Vue-Router4、Vite 、Pinia、Element-plus、Equal-Vue、Bootstrap、Vite、TypeScript、Egg.js、Mysql构建，按需加载模块，内置丰富UI
-
 
 ### 安装
 
@@ -17,14 +14,12 @@ npm i vue-bag-admin --save
 
 ### 在线演示
 
->管理员账户：用户名：admin ，密码：123456
+> 管理员账户：用户名：superadmin ，密码：123456
 
->超级管理员账户：用户名：superadmin ，密码：123456
-
-[文档地址](https://vite.itnavs.com)、[管理系统演示](https://vite.itnavs.com/admin.html)、[门户博客前台演示](https://vite.itnavs.com/web.html)
-
+[文档地址](https://vite.itnavs.com/doc/)、[管理系统演示](https://vite.itnavs.com/admin.html)
 
 ### 主要功能
+
 - 用户管理：系统管理员分配用户角色和角色权限
 - 角色管理：创建权限控制的主要对象，可以给角色分配不同api权限和菜单权限
 - 菜单管理：实现用户动态菜单配置，实现不同角色不同菜单
@@ -40,17 +35,19 @@ npm i vue-bag-admin --save
 - ......
 
 ### 快速开发
->管理系统、门户博客前台代码都是同一安装包、使用同一个服务
 
+> 管理系统、门户博客前台代码都是同一安装包、使用同一个服务
 
 ### 适用人群
->正在以及想使用框架快速开发网站系统，有过前端开发经验 1 年+
+
+> 正在以及想使用框架快速开发网站系统，有过前端开发经验 1 年+
 >
 >熟悉 Vue.js 技术栈，使用它开发过几个实际项目，热爱技术，爱学习，想进阶和提升的同学
 
-###  二维码
+### 二维码
 
 ![](./wx.jpg)
 
 ### 版权信息
+
 `vue-bag-admin`，是开源免费的，遵循MIT开源协议，意味着您无需支付任何费用，也无需授权，即可将它应用到您的产品中。
