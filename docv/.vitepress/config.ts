@@ -1,6 +1,6 @@
 export default {
     base: '/doc',
-    outDir: './',
+    outDir: '../doc',
     title: 'Bag-admin',
     description: '快速开发管理系统，提供基础的框架',
     lastUpdated: '最近更新时间',

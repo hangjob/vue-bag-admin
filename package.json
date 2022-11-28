@@ -13,9 +13,9 @@
         "lint": "eslint . --ext .ts",
         "lint:fix": "eslint . --ext .ts --fix",
         "lib": "npm run lib:admin && npm run lib:web",
-        "docs:dev": "vitepress dev doc",
-        "docs:build": "vitepress build doc",
-        "docs:serve": "vitepress serve doc"
+        "docs:dev": "vitepress dev docv",
+        "docs:build": "vitepress build docv",
+        "docs:serve": "vitepress serve docv"
     },
     "private": false,
     "description": "vue-bag-admin采用Vite2.0、Vue3.2、TypeScript、JavaScript构建，适合企业中后台响应式管理系统，快速安装 npm i vue-bag-admin",
