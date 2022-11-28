@@ -8,21 +8,18 @@ import setupGlobComponents from '@www/admin/plugin/md-editor-v3'
 const file: Record<string, Component> = import.meta.glob('/www/admin/views/**/*.vue', { eager: true })
 const $options: $optionsType = {
     router: {
-        file, paths,
+        file,
     },
     comps: {
         ThemeBar: shallowRef(ThemeBar),
     },
     config: {
         webSite: {
-            title: '品茗信息',
+            title: 'bag-admin',
             subhead: 'bag',
         },
         httpNetwork: {
             whiteList: [],
-            headers: {
-                'Authorization': 'Bearer',
-            },
         },
     },
 }
