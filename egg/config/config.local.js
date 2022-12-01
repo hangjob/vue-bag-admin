@@ -2,7 +2,7 @@ module.exports = appInfo => {
     const config = {};
     config.sequelize = {
         dialect: 'mysql',
-        host: '1.15.7.39',
+        host: '127.0.0.1',
         port: 3306,
         username: 'vite_itnavs_com', // 数据库用户名
         password: 'MRwiczzP3aGS66rA', // 数据库密码
@@ -18,7 +18,7 @@ module.exports = appInfo => {
         clients: {
             bag: {                 // instanceName. See below
                 port: 6379,          // Redis port
-                host: '1.15.7.39',   // Redis host
+                host: '127.0.0.1',   // Redis host
                 password: 'oqpm38mfny8',
                 db: 0,
             },
