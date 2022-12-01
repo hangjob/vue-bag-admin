@@ -7,18 +7,8 @@
                         <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
                             <div class="bag-curd-header-action">
                                 <a-space :size="20">
-                                    <a-button type="primary" size="middle" :loading="tableCurd.loading"
-                                              v-debounce="{ func: tableCurd.refreshTable}"
-                                    >
-                                        刷新
-                                    </a-button>
-                                    <a-button class="bag-button-color-green" size="middle"
-                                              @click="tableCurd.create.visible = true"
-                                    >新增
-                                    </a-button>
-                                    <a-button type="primary" danger size="middle"
-                                              v-debounce="{ func: tableCurd.deletes.submit}"
-                                    >删除
+                                    <a-button v-debounce="{ func: item.func}" :class="item.class" :type="item.type" v-for="(item,idx) in tableCurd.btns" :key="idx">
+                                        {{item.name}}
                                     </a-button>
                                 </a-space>
                             </div>

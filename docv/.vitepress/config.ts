@@ -23,19 +23,26 @@ export default {
         sidebar: {
             '/bag/': [
                 {
-                    text: '指南',
+                    text: '开发指南',
                     items: [
-                        { text: '介绍', link: '/bag/introduce' },
-                        { text: '开始', link: '/bag/start' },
+                        { text: '框架介绍', link: '/bag/introduce' },
+                        { text: '快速上手', link: '/bag/start' },
                     ],
                 },
                 {
-                    text: '使用',
+                    text: '基础设置',
                     items: [
-                        { text: '配置', link: '/bag/deploy' },
-                        { text: 'CURD', link: '/bag/curd' },
+                        { text: '默认配置', link: '/bag/set' },
+                        { text: '内置组件', link: '/bag/comps' },
                     ],
                 },
+                {
+                    text: '表单组件',
+                    items: [
+                        { text: 'CURD', link: '/bag/curd' },
+                        { text: '属性说明', link: '/bag/attribute' },
+                    ],
+                }
             ],
         },
     },

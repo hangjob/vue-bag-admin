@@ -1,4 +1,4 @@
-# 开始
+# 快速上手
 
 ## 环境
 
@@ -29,7 +29,7 @@ npm config set registry https://registry.npmmirror.com
 
 ## Vite创建项目
 
-> 安装Vue程序的模板，下一代前端开发与构建工具
+安装Vue程序的模板，下一代前端开发与构建工具
 
 ```bash
 # npm 6.x

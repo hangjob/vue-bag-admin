@@ -1,36 +1,17 @@
-# 配置
+# 默认配置
 
-```javascript
-import { Component, createApp, shallowRef } from 'vue'
-import App from './App.vue'
-import install, { $optionsType } from '@/packages/install'
-import paths from '@www/admin/router'
-import ThemeBar from '@www/admin/components/ThemeBar.vue'
-import setupGlobComponents from '@www/admin/plugin/md-editor-v3'
+```typescript
+import install, { $optionsType } from 'vue-bag-admin'
 
-const file: Record<string, Component> = import.meta.glob('/www/admin/views/**/*.vue', { eager: true })
 const $options: $optionsType = {
-    router: {
-        file,
-        paths,
-        replaceRouter: []
-    },
+    router: {},
     config: {
-        webSite: {
-            title: '品茗信息',
-            subhead: '品茗',
-        },
-        httpNetwork: {
-            whiteList: [],
-            headers: { 'content-type': 'application/x-www-form-urlencoded' },
-            serialize: true,
-            successCode: [1, 'SUCCESS']
-        },
+        webSite: {},
+        httpNetwork: {},
     },
     apis: {}
 }
-createApp(App).use(install, $options).use(setupGlobComponents).mount('#app')
-
+createApp(App).use(install, $options).mount('#app')
 ```
 
 ## router配置
@@ -64,23 +45,7 @@ const paths = [
         iframePath: null, // 是否通过内嵌iframe打开
         order: 0, // 排序
         pid: null, // 上级，添写的如有，会自动形成树状结构
-    },
-    {
-        name: '测试页2',
-        path: '/test2',
-        icon: 'HomeOutlined',
-        shows: 1,
-        tabHidden: false,
-        tabFix: false,
-        keepAlive: true,
-        filePath: '/views/test2/index.vue',
-        id: 2,
-        httpFilePath: null,
-        httpViewPath: null,
-        iframePath: null,
-        order: 0,
-        pid: null,
-    },
+    }
 ]
 ```
 
@@ -123,7 +88,18 @@ const httpNetwork = {
     retry: 2, // 最大重试次数
     baseURL: '/api',  // 默认请求前缀url
     whiteList: ['/login', '/403', '/404', '/500', '/502', '/test'], // 白名单
-    resetPath: '/login', // 发生错误跳转的路由
+    resetPath: '/login', // 默认重置的路由
     serialize: false, // 在post模式请求，是否表单序列化
 }
 ```
+
+## apis
+
+接口覆盖，可以覆盖框架的任意接口
+
+```javascript
+const apis = {
+    '/app/library': '/xxx/library'
+}
+```
+

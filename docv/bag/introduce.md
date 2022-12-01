@@ -1,10 +1,13 @@
-![/image/1.jpg](https://vite.itnavs.com/doc/image/1.jpg)
+# 开发指南
 
-> Bag快速开发管理系统、门户网站、博客系统框架，提供基础的框架，快速搭建企业产品，响应式开发，你可以将它应用在任何需要服务端管理的应用。如：开发管理系统的 API 接口、门户网站博客、企业内部的业务管理、ERP、CMS、APP 的后台等
+::: info ⭐⭐⭐⭐⭐
 
-## 技术选型
+Bag-admin快速开发管理系统，提供基础的框架，快速搭建企业产品，响应式开发，你可以将它应用在任何需要服务端管理的应用。如：开发管理系统的 API 接口、门户网站博客、企业内部的业务管理、ERP、CMS、APP 的后台等
+:::
 
-> Bag管理系统采用Vue3、Vue-Router4、Vuex4、Ant-Design-Vue、Vite、TypeScript、Egg.js、Mysql构建
+### 技术选型
+
+采用Vite、Vue3、Vue-Router4、Pinia、Ant-Design-Vue、TypeScript、Egg.js、Mysql构建，推荐开发者使用lib包开发，这样能获得框架提供的更多功能与合理的设计
 
 ### 安装
 
@@ -14,9 +17,7 @@ npm i vue-bag-admin --save
 
 ### 在线演示
 
-> 管理员账户：用户名：superadmin ，密码：123456
-
-[在线管理系统演示](https://vite.itnavs.com/admin.html)
+管理员账户：用户名：superadmin ，密码：123456，[在线管理系统演示](https://vite.itnavs.com/admin.html)
 
 ### 主要功能
 
@@ -34,17 +35,14 @@ npm i vue-bag-admin --save
 - 全局配置：站点基本配置背景图片、Login、Slogan等等
 - ......
 
-### 社交媒体
+### 技术支持
 
-> Email： 470193837@qq.com
+Email： 470193837@qq.com
 
-[【更多信息】](https://www.vipbic.com/about.html)
+::: tip 适用人群
 
-### 适用人群
-
-> 正在以及想使用框架快速开发网站系统，有过前端开发经验 1 年+
->
->熟悉 Vue.js 技术栈，使用它开发过几个实际项目，热爱技术，爱学习，想进阶和提升的同学
+正在以及想使用框架快速开发网站系统，有过前端开发经验 1 年+ 熟悉 Vue.js 技术栈，使用它开发过几个实际项目，热爱技术，爱学习，想进阶和提升的同学
+:::
 
 ### 版权信息
 

@@ -15,8 +15,8 @@ const $options: $optionsType = {
     },
     config: {
         webSite: {
-            title: 'bag-admin',
-            subhead: 'bag',
+            title: '品茗信息',
+            subhead: '品茗',
         },
         httpNetwork: {
             whiteList: [],

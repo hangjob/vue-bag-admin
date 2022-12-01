@@ -16,6 +16,26 @@ export default function(options = {}) {
             showQuickJumper: true,
             ...pagination,
         },
+        btns: [
+            {
+                name: '刷新',
+                func: () => tableCurd.refreshTable(),
+                loading: () => tableCurd.loading,
+                type: 'primary',
+            },
+            {
+                name: '新增',
+                func: () => tableCurd.create.visible = true,
+                loading: () => tableCurd.loading,
+                class: 'bag-button-color-green',
+            },
+            {
+                name: '删除',
+                func: () => tableCurd.deletes.submit(),
+                loading: () => tableCurd.loading,
+                type: 'danger',
+            },
+        ],
         // 表格事件
         tableChange: (pagination, filters, sorter, { currentDataSource }) => {
             tableCurd.pagination.current = pagination.current

@@ -15,12 +15,20 @@ import { findChildrenDepth } from '@/packages/utils/lodash'
 export default defineComponent({
     setup() {
         const { tableCurd } = curdTableHock()
+        // 删除 第 0个 数组
+        // tableCurd.btns.splice(0,1)
+
+        // 添加
+        tableCurd.btns.push({
+            name: '测试', // 名称
+            func: () => alert('测试'), // 事件
+            type: 'primary', // 按钮type 跟ant-design-vue button组件保持一致
+        })
         const form = reactive(initTableHock({
             columns, tableCurd, options: {
                 apiPrefix: '/branch',
             },
         }))
-
         tableCurd.all.beforeSuccess = (res: any) => {
             form.formItem.forEach((item) => {
                 if (item.formData.name === 'pid') {
