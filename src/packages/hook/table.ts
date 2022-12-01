@@ -253,7 +253,10 @@ const initTableHock = function({
     options = Object.assign({ send: true }, options)
     tableCurd.apiPrefix = options.apiPrefix
     if (options.send) {
-        tableCurd.all.handle() //是否自动挂载执行数据请求
+        //是否自动挂载执行数据请求
+        setTimeout(() => {
+            tableCurd.all.handle()
+        }, 20)
     }
     tableCurd.sourceData = { columns } // 源数据
     return formHock({ columns })
