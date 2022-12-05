@@ -7,8 +7,10 @@
                         <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
                             <div class="bag-curd-header-action">
                                 <a-space :size="20">
-                                    <a-button v-debounce="{ func: item.func}" :class="item.class" :type="item.type" v-for="(item,idx) in tableCurd.btns" :key="idx">
-                                        {{item.name}}
+                                    <a-button v-debounce="{ func: item.func}" :class="item.class" :type="item.type"
+                                              v-for="(item,idx) in tableCurd.btns" :key="idx"
+                                    >
+                                        {{ item.name }}
                                     </a-button>
                                 </a-space>
                             </div>
@@ -20,58 +22,75 @@
                                 <a-row type="flex" justify="end">
                                     <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                                         <div>
-                                            <a-popover trigger="click" placement="bottomRight">
-                                                <template #content>
-                                                    <a-button type="primary"
-                                                              @click="exportTableData({tableCurd,columns})" ghost
+                                            <template key="idx" v-for="(item,idx) in tableCurd.extBtns">
+                                                <template v-if="item.ui === 'm'">
+                                                    <a-popover v-if="item.name === 'Excel导出'" trigger="click"
+                                                               placement="bottomRight"
                                                     >
-                                                        Excel导出
-                                                    </a-button>
-                                                </template>
-                                                <template #title>
-                                                    <span>数据导出</span>
-                                                </template>
-                                                <a-button class="bag-button-color-daybreak" size="middle">数据导出
-                                                </a-button>
-                                            </a-popover>
-                                            <a-popover trigger="click" placement="bottomRight">
-                                                <template #content>
-                                                    <a-radio-group v-model:value="tableSetting.size"
-                                                                   button-style="solid"
+                                                        <template #content>
+                                                            <a-button type="primary"
+                                                                      @click="exportTableData({tableCurd,columns})"
+                                                                      ghost
+                                                            >
+                                                                Excel导出
+                                                            </a-button>
+                                                        </template>
+                                                        <template #title>
+                                                            <span>数据导出</span>
+                                                        </template>
+                                                        <a-button class="bag-button-color-daybreak" size="middle">数据导出
+                                                        </a-button>
+                                                    </a-popover>
+                                                    <a-popover v-if="item.name === '表格大小'" trigger="click"
+                                                               placement="bottomRight"
                                                     >
-                                                        <a-radio-button
-                                                            :value="item.value"
-                                                            :key="item.value"
-                                                            v-for="item in tableSetting.sizeOptions"
-                                                        >
-                                                            {{ item.name }}
-                                                        </a-radio-button>
-                                                    </a-radio-group>
+                                                        <template #content>
+                                                            <a-radio-group v-model:value="tableSetting.size"
+                                                                           button-style="solid"
+                                                            >
+                                                                <a-radio-button
+                                                                    :value="item.value"
+                                                                    :key="item.value"
+                                                                    v-for="item in tableSetting.sizeOptions"
+                                                                >
+                                                                    {{ item.name }}
+                                                                </a-radio-button>
+                                                            </a-radio-group>
+                                                        </template>
+                                                        <template #title>
+                                                            <span>表格大小</span>
+                                                        </template>
+                                                        <a-button style="margin:0 10px" class="bag-button-color-sunset"
+                                                                  size="middle"
+                                                        >表格大小
+                                                        </a-button>
+                                                    </a-popover>
+                                                    <a-popover v-if="item.name === '显示表列'" trigger="click"
+                                                               placement="bottomRight"
+                                                    >
+                                                        <template #content>
+                                                            <div v-for="(item,idx) in columnsAll" :key="idx">
+                                                                <a-checkbox
+                                                                    v-model:checked="item.visible"
+                                                                    :disabled="item.disabled"
+                                                                    @change="({target})=>checkboxChange({target,item})"
+                                                                >{{ item.title }}
+                                                                </a-checkbox>
+                                                            </div>
+                                                        </template>
+                                                        <template #title>
+                                                            <span>显示表列</span>
+                                                        </template>
+                                                        <a-button class="bag-button-color-volcano" size="middle">显示表列
+                                                        </a-button>
+                                                    </a-popover>
                                                 </template>
-                                                <template #title>
-                                                    <span>表格大小</span>
-                                                </template>
-                                                <a-button style="margin:0 10px" class="bag-button-color-sunset"
-                                                          size="middle"
-                                                >表格大小
+                                                <a-button v-else v-debounce="{ func: item.func}" :class="item.class"
+                                                          :type="item.type"
+                                                >
+                                                    {{ item.name }}
                                                 </a-button>
-                                            </a-popover>
-                                            <a-popover trigger="click" placement="bottomRight">
-                                                <template #content>
-                                                    <div v-for="(item,idx) in columnsAll" :key="idx">
-                                                        <a-checkbox
-                                                            v-model:checked="item.visible"
-                                                            :disabled="item.disabled"
-                                                            @change="({target})=>checkboxChange({target,item})"
-                                                        >{{ item.title }}
-                                                        </a-checkbox>
-                                                    </div>
-                                                </template>
-                                                <template #title>
-                                                    <span>显示表列</span>
-                                                </template>
-                                                <a-button class="bag-button-color-volcano" size="middle">显示表列</a-button>
-                                            </a-popover>
+                                            </template>
                                         </div>
                                     </a-col>
                                 </a-row>
@@ -215,7 +234,7 @@ export default defineComponent({
         tableCurd.edit.refForm = curdEdit // 编辑组件
         let columns = reactive(cloneDeep(tableCurd.columns))
         const columnsAll = reactive(columnsCheckbox({ tableCurd }))
-
+        
         const tableSetting = reactive({
             size: 'middle',
             sizeOptions: [
@@ -237,7 +256,7 @@ export default defineComponent({
                 columns.splice(findIndex, 1)
             }
         }
-
+        
         return {
             tableCurd,
             curdCreate,
@@ -256,30 +275,30 @@ export default defineComponent({
     background-color: #ffffff;
     min-height: 100%;
     border-radius: 3px;
-
+    
     &-container {
-
+    
     }
-
+    
     &-header {
         padding: 15px;
-
+        
         &-prolate {
             text-align: right;
             margin-bottom: 10px;
         }
-
+        
         &-search {
             margin-top: 5px;
         }
-
+        
         .ant-form-inline .ant-form-item:last-of-type {
             margin-right: 0;
         }
     }
-
+    
     &-body {
-
+    
     }
 }
 </style>

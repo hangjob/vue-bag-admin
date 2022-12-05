@@ -36,6 +36,22 @@ export default function(options = {}) {
                 type: 'danger',
             },
         ],
+        // 右边的按钮 --属性继承exbtn
+        extBtns: [
+            {
+                name: 'Excel导出',
+                ui: 'm',
+            },
+            {
+                name: '表格大小',
+                ui: 'm',
+            },
+            {
+                name: '显示表列',
+                ui: 'm',
+            },
+        ],
+        search: <Array<any>>[],
         // 表格事件
         tableChange: (pagination, filters, sorter, { currentDataSource }) => {
             tableCurd.pagination.current = pagination.current
@@ -246,7 +262,8 @@ const initTableHock = function({
     options = {},
 }: { columns: Array<any>, tableCurd: any, options: any }) {
     tableCurd.columns = columns.filter((item) => item.visible !== false)
-    columns.filter((item) => item.formSearch && Object.keys(item.formSearch).length).map((item: any) => {  // 设置需要表单的搜索的字段
+    const _columns = columns.concat(tableCurd.search)
+    _columns.filter((item) => item.formSearch && Object.keys(item.formSearch).length).map((item: any) => {  // 设置需要表单的搜索的字段
         tableCurd.all.search.formState[item.formSearch.name] = item.formSearch?.props?.defaultValue || ''
         tableCurd.all.search.formItem.push(item.formSearch)
     })
