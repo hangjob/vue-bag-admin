@@ -135,6 +135,11 @@
                                                 {{ todo.name }}
                                             </a-radio>
                                         </component>
+                                        <template v-if="item._slots">
+                                            <slot :name="item._slots.customRender"
+                                                  v-bind="{formState:tableCurd.all.search.formState,item}"
+                                            ></slot>
+                                        </template>
                                     </a-form-item>
                                     <a-form-item>
                                         <a-button @click="tableCurd.searchTable" type="primary">
@@ -181,7 +186,9 @@
             </div>
         </div>
     </div>
-    <bag-modal v-model:visible="tableCurd.create.visible" title="新增" width="85%" @ok="tableCurd.create.submit">
+    <bag-modal v-model:visible="tableCurd.create.visible" title="新增" width="85%" @cancel="tableCurd.create.cancel"
+               @ok="tableCurd.create.submit"
+    >
         <bag-curd-create :tableCurd="tableCurd" :form="createForm" ref="curdCreate">
             <!-- 多层级插槽传递 -->
             <template v-for="(item) in createForm.formItem" v-slot:[item.formData.slotName]>
@@ -189,7 +196,9 @@
             </template>
         </bag-curd-create>
     </bag-modal>
-    <bag-modal v-model:visible="tableCurd.edit.visible" title="编辑" width="85%" @ok="tableCurd.edit.submit">
+    <bag-modal v-model:visible="tableCurd.edit.visible" title="编辑" width="85%" @cancel="tableCurd.edit.cancel"
+               @ok="tableCurd.edit.submit"
+    >
         <bag-curd-create :tableCurd="tableCurd" :form="editForm" ref="curdEdit">
             <template v-for="(item) in editForm.formItem" v-slot:[item.formData.slotName]>
                 <slot :name="item.formData.slotName" v-bind="{formState:editForm.formState,item}"></slot>
@@ -282,6 +291,10 @@ export default defineComponent({
     
     &-header {
         padding: 15px;
+        
+        &-action {
+            margin-bottom: 10px;
+        }
         
         &-prolate {
             text-align: right;

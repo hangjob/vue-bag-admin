@@ -1,4 +1,4 @@
-import { reactive } from 'vue'
+import { reactive, nextTick } from 'vue'
 import { post } from '@/packages/http/request'
 import { toRaw } from 'vue'
 import { message } from 'ant-design-vue'
@@ -25,7 +25,7 @@ export default function(options = {}) {
             },
             {
                 name: '新增',
-                func: () => tableCurd.create.visible = true,
+                func: () => tableCurd.create.change(),
                 loading: () => tableCurd.loading,
                 class: 'bag-button-color-green',
             },
@@ -77,7 +77,7 @@ export default function(options = {}) {
                     // 在触发之前 传递beforeSubmit函数 加工数据 此处可以进一步加工
                     tableCurd.create._formState = tableCurd.create.beforeSubmit(tableCurd.create._formState)
                 }
-                tableCurd.create.refForm.formRef.validate().then(() => {
+                tableCurd.create.refForm.aFormRefApi.validate().then(() => {
                     post(tableCurd.create.api, tableCurd.create._formState, { notifyError: true }).then(() => {
                         tableCurd.create.visible = false
                         tableCurd.all.handle()
@@ -88,6 +88,12 @@ export default function(options = {}) {
             },
             change() {
                 tableCurd.create.visible = true
+            },
+            cancel() {
+                tableCurd.create.resetFields()
+            },
+            resetFields() {
+                tableCurd.create.refForm.aFormRefApi.resetFields()
             },
         },
         all: {
@@ -134,7 +140,7 @@ export default function(options = {}) {
                     // 在触发之前 传递beforeSubmit函数 加工数据 此处可以进一步加工
                     tableCurd.edit._formState = tableCurd.edit.beforeSubmit(tableCurd.edit._formState)
                 }
-                tableCurd.edit.refForm.formRef.validate().then(() => {
+                tableCurd.edit.refForm.aFormRefApi.validate().then(() => {
                     post(tableCurd.edit.api, {
                         id: tableCurd.edit.id,
                         ...tableCurd.edit._formState,
@@ -148,6 +154,12 @@ export default function(options = {}) {
                 tableCurd.edit.id = row.id
                 tableCurd.detail.find(row)
                 tableCurd.edit.visible = true
+            },
+            cancel() {
+                tableCurd.edit.resetFields()
+            },
+            resetFields() {
+                tableCurd.edit.refForm.aFormRefApi.resetFields()
             },
             // 直接提交
             directSubmit({ data }: { data: any }) {
@@ -262,8 +274,8 @@ const initTableHock = function({
     options = {},
 }: { columns: Array<any>, tableCurd: any, options: any }) {
     tableCurd.columns = columns.filter((item) => item.visible !== false)
-    const _columns = columns.concat(tableCurd.search)
-    _columns.filter((item) => item.formSearch && Object.keys(item.formSearch).length).map((item: any) => {  // 设置需要表单的搜索的字段
+    const columnsMerge = columns.concat(tableCurd.search)
+    columnsMerge.filter((item) => item.formSearch && Object.keys(item.formSearch).length).map((item: any) => {  // 设置需要表单的搜索的字段
         tableCurd.all.search.formState[item.formSearch.name] = item.formSearch?.props?.defaultValue || ''
         tableCurd.all.search.formItem.push(item.formSearch)
     })

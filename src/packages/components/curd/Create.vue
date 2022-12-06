@@ -1,6 +1,6 @@
 <template>
     <div>
-        <a-form ref="formRef" :model="formState" :rules="rules" :label-col="{span: 6}" :wrapper-col="{span: 15}">
+        <a-form ref="aFormRefApi" :model="formState" :rules="rules" :label-col="{span: 6}" :wrapper-col="{span: 15}">
             <a-row>
                 <a-col :autoLink="item.formData.autoLink" v-for="item in formItem" :key="item.name" :xs="item.xs"
                        :sm="item.sm"
@@ -43,6 +43,7 @@
                                 :mode="item.formData.props.mode"
                                 style="width: 100%"
                                 :placeholder="item.formData.props.placeholder"
+                                @change="item.formData.change"
                             >
                                 <a-select-option value="">请选择</a-select-option>
                                 <a-select-option v-for="(opt,idx) in item.formData.options" :key="idx"
@@ -111,10 +112,10 @@ export default defineComponent({
         },
     },
     setup(props) {
-        const formRef = ref()
+        const aFormRefApi = ref()
         const { formState, rules, formItem } = reactive(props.form)
         const { getImageFullPath } = inject<any>('bagGlobal')
-
+        
         const onUploadImg = async (files: any, callback: Function, { fileSize }) => {
             const res = await Promise.all(
                 Array.from(files).map((file: any) => {
@@ -133,12 +134,16 @@ export default defineComponent({
             )
             callback(res.map((item: any) => item))
         }
+        const resetFields = () => {
+            aFormRefApi.value.resetFields()
+        }
         return {
             formState,
             rules,
-            formRef,
+            aFormRefApi,
             formItem,
             onUploadImg,
+            resetFields,
         }
     },
 })

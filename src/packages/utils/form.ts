@@ -14,12 +14,15 @@ const createFormItem = (columns: Array<any>) => {
         if (item.formData.rules) {
             rules[item.formData.name] = item.formData.rules
         }
-        fields[item.formData.name] = item.formData?.props?.defaultValue || ''
+        fields[item.formData.name] = item.formData?.props?.defaultValue || '' // v-model值
         item.formData.autoLink = 'autoLink' in item.formData ? item.formData.autoLink : true
         item.formData.labelCol = 'labelCol' in item.formData ? item.formData.labelCol : { span: 4, offset: 0 }
         item.formData.wrapperCol = 'wrapperCol' in item.formData ? item.formData.wrapperCol : { span: 18, offset: 0 }
         if (item.formData.props && item.formData.element === 'a-textarea') {
             item.formData.props.rows = 'rows' in item.formData.props ? item.formData.props.rows : 4
+        }
+        item.formData.change = 'change' in item.formData ? item.formData.change : () => {
+            console.log('触发了change事件')
         }
         return {
             ...item,
