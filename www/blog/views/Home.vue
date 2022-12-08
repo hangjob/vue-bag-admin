@@ -7,36 +7,32 @@
             <el-row :gutter="30">
                 <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
                     <div class="demo">
-                        <vs-button target :href="{url: '/admin.html'}" color="primary" size="large"
-                                   type="filled" icon="text_snippet"
-                        >体验管理端
-                        </vs-button>
+                        <el-button target :href="{url: '/admin.html'}" size="large" type="primary" icon="Pear">体验管理端
+                        </el-button>
                     </div>
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
                     <div class="demo">
-                        <vs-button target :href="{url: '/web.html'}" color="rgb(11, 189, 135)" size="large"
-                                   type="filled"
-                                   icon="text_snippet"
+                        <el-button target :href="{url: '/web.html'}" size="large"
+                                   type="success"
+                                   icon="Mug"
                         >体验客户端
-                        </vs-button>
+                        </el-button>
                     </div>
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
                     <div class="demo">
-                        <vs-button target :href="{url: '/doc/index.html'}" color="danger" size="large"
-                                   type="filled" icon="text_snippet"
+                        <el-button target :href="{url: '/doc/index.html'}" size="large" type="warning"
+                                   icon="IceTea"
                         >查看文档
-                        </vs-button>
+                        </el-button>
                     </div>
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
                     <div class="demo">
-                        <vs-button color="success" @click="handleDownload" size="large" type="filled"
-                                   icon="downloading"
-                        >
+                        <el-button @click="handleDownload" size="large" type="danger" icon="Apple">
                             下载程序
-                        </vs-button>
+                        </el-button>
                     </div>
                 </el-col>
             </el-row>
@@ -59,19 +55,19 @@ const handleDownload = () => {
     overflow: hidden;
     color: #FFFFFF;
     text-align: center;
-
+    
     &-title {
         h1 {
             font-size: 50px;
             font-weight: bold;
         }
     }
-
+    
     .action {
         width: 60%;
         margin: 80px auto 0;
     }
-
+    
     .demo {
         margin-top: 30px;
         display: flex;

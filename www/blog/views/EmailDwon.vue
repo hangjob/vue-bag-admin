@@ -12,11 +12,10 @@
                 size="large"
                 style="width:200px;margin-right:10px"
             />
-            <vs-button :loading="loading" class="wow animate__animated animate__headShake" data-wow-duration="1.0s" data-wow-delay="0.2s"
-                       style="flex-shrink: 0;" v-debounce="{ func: handleSendEmail,wait:1000}" color="success" type="filled"
-                       icon="forward_to_inbox"
+            <el-button :loading="loading" class="wow animate__animated animate__headShake" data-wow-duration="1.0s" data-wow-delay="0.2s"
+                       style="flex-shrink: 0;" v-debounce="{ func: handleSendEmail,wait:1000}" type="success" size="large"
             >发送
-            </vs-button>
+            </el-button>
         </div>
     </section>
 </template>
@@ -33,7 +32,6 @@ export default defineComponent({
         const email = ref('')
         const loading = ref(false)
         let isSend = true;
-        loading.value = true;
         const handleSendEmail = () => {
             if (!isSend) {
                 return

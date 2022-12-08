@@ -49,7 +49,8 @@ export default defineComponent({
     background-color: #FFFFFF;
     position: relative;
     z-index: 1000;
-
+    padding: 0 30px;
+    text-align: center;
     &-logo {
         display: flex;
         height: @nah;

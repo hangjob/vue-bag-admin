@@ -20,11 +20,11 @@
                         <li>简介：后台更新</li>
                         <li>简介：前台简介</li>
                         <li style="display: flex;justify-content: center">
-                            <vs-button color="#337ab7" type="filled" icon="wind_power" @click="visible[0] = true">查看介绍</vs-button>
+                            <el-button type="danger" @click="visible[0] = true">查看介绍</el-button>
                         </li>
                     </ul>
                     <div class="action">
-                        <vs-button color="#e96656" size="large" type="filled" icon="downloading" @click="handleDownload">下载程序</vs-button>
+                        <el-button size="large" type="success" @click="handleDownload">下载程序</el-button>
                     </div>
                 </div>
             </el-col>
@@ -43,11 +43,11 @@
                         <li>简介：后台更新</li>
                         <li>简介：前台简介</li>
                         <li style="display: flex;justify-content: center">
-                            <vs-button color="#337ab7" type="filled" icon="wind_power" @click="visible[1] = true">查看介绍</vs-button>
+                            <el-button type="primary" @click="visible[1] = true">查看介绍</el-button>
                         </li>
                     </ul>
                     <div class="action">
-                        <vs-button color="#e96656" target :href="{url: 'https://github.com/hangjob/vue-bag-admin/archive/refs/tags/v3.0.0.zip'}" size="large" type="filled" icon="downloading">下载程序</vs-button>
+                        <el-button size="large" type="danger">下载程序</el-button>
                     </div>
                 </div>
             </el-col>
@@ -66,13 +66,13 @@
                         <li>简介：后台更新</li>
                         <li>简介：前台更新</li>
                         <li style="display: flex;justify-content: center">
-                            <vs-button color="#337ab7" type="filled" icon="wind_power" @click="visible[2] = true">查看介绍
-                            </vs-button>
+                            <el-button  type="primary"  @click="visible[2] = true">查看介绍
+                            </el-button>
                         </li>
                     </ul>
                     <div class="action">
-                        <vs-button color="#e96656" target
-                                   :href="{url: 'https://github.com/hangjob/vue-bag-admin/archive/refs/tags/v2.0.0.zip'}" size="large" type="filled" icon="downloading">下载程序</vs-button>
+                        <el-button  target
+                                   :href="{url: 'https://github.com/hangjob/vue-bag-admin/archive/refs/tags/v2.0.0.zip'}" size="large" type="danger">下载程序</el-button>
                     </div>
                 </div>
             </el-col>
@@ -91,22 +91,22 @@
                         <li>简介：后台管理系统</li>
                         <li>简介：前台简介(无)</li>
                         <li style="display: flex;justify-content: center">
-                            <vs-button color="#337ab7" type="filled" @click="visible[3] = true" icon="wind_power">
+                            <el-button type="primary" @click="visible[3] = true">
                                 查看介绍
-                            </vs-button>
+                            </el-button>
                         </li>
                     </ul>
                     <div class="action">
-                        <vs-button target
+                        <el-button target
                                    :href="{url: 'https://github.com/hangjob/vue-bag-admin/archive/refs/heads/v1.zip'}"
-                                   color="#e96656" size="large" type="filled" icon="downloading"
+                                   size="large" type="danger"
                         >下载程序
-                        </vs-button>
+                        </el-button>
                     </div>
                 </div>
             </el-col>
         </el-row>
-        <Dialog class="download-release" header="版本简介" v-model:visible="visible[0]">
+        <el-dialog class="download-release" header="版本简介" v-model="visible[0]">
             <div class="release-four">
                 <ul>
                     <li>本次版本内容更新如下：</li>
@@ -126,13 +126,13 @@
             </div>
             <template #footer>
                 <div class="clearfix">
-                    <vs-button style="float: right" @click="handleClose(0)" color="danger" type="border" icon="highlight_off">
+                    <el-button style="float: right" @click="handleClose(0)" color="danger" type="border">
                         关闭
-                    </vs-button>
+                    </el-button>
                 </div>
             </template>
-        </Dialog>
-        <Dialog class="download-release" header="版本简介" v-model:visible="visible[1]">
+        </el-dialog>
+        <el-dialog class="download-release" header="版本简介" v-model="visible[1]">
             <div class="release-four">
                 <ul>
                     <li>本次版本内容更新如下：</li>
@@ -149,15 +149,15 @@
             </div>
             <template #footer>
                 <div class="clearfix">
-                    <vs-button style="float: right" @click="handleClose(1)" color="danger" type="border"
+                    <el-button style="float: right" @click="handleClose(1)" color="danger" type="border"
                                icon="highlight_off"
                     >
                         关闭
-                    </vs-button>
+                    </el-button>
                 </div>
             </template>
-        </Dialog>
-        <Dialog class="download-release" header="版本简介" v-model:visible="visible[2]">
+        </el-dialog>
+        <el-dialog class="download-release" header="版本简介" v-model="visible[2]">
             <div class="release-four">
                 <ul>
                     <li>本次版本内容更新如下：</li>
@@ -187,27 +187,27 @@
             </div>
             <template #footer>
                 <div class="clearfix">
-                    <vs-button style="float: right" @click="handleClose(2)" color="danger" type="border"
+                    <el-button style="float: right" @click="handleClose(2)" color="danger" type="border"
                                icon="highlight_off"
                     >
                         关闭
-                    </vs-button>
+                    </el-button>
                 </div>
             </template>
-        </Dialog>
-        <Galleria :value="images" v-model:activeIndex="activeIndex" :responsiveOptions="responsiveOptions"
-                  :numVisible="7" containerStyle="max-width: 850px"
-                  :circular="true" :fullScreen="true" :showItemNavigators="true" :showThumbnails="false"
-                  v-model:visible="displayCustom"
-        >
-            <template #item="slotProps">
-                <img :src="slotProps.item.src" :alt="slotProps.item.alt" style="width: 100%; display: block;" />
-            </template>
-            <template #thumbnail="slotProps">
-                <img :src="slotProps.item.src" :alt="slotProps.item.alt" style="display: block;" />
-            </template>
-        </Galleria>
-        <Dialog class="download-release" header="版本简介" v-model:visible="visible[3]">
+        </el-dialog>
+<!--        <Galleria :value="images" v-model:activeIndex="activeIndex" :responsiveOptions="responsiveOptions"-->
+<!--                  :numVisible="7" containerStyle="max-width: 850px"-->
+<!--                  :circular="true" :fullScreen="true" :showItemNavigators="true" :showThumbnails="false"-->
+<!--                  v-model:visible="displayCustom"-->
+<!--        >-->
+<!--            <template #item="slotProps">-->
+<!--                <img :src="slotProps.item.src" :alt="slotProps.item.alt" style="width: 100%; display: block;" />-->
+<!--            </template>-->
+<!--            <template #thumbnail="slotProps">-->
+<!--                <img :src="slotProps.item.src" :alt="slotProps.item.alt" style="display: block;" />-->
+<!--            </template>-->
+<!--        </Galleria>-->
+        <el-dialog class="download-release" header="版本简介" v-model="visible[3]">
             <div class="release-four">
                 <ul>
                     <li>本次版本内容更新如下：</li>
@@ -237,13 +237,11 @@
             </div>
             <template #footer>
                 <div class="clearfix">
-                    <vs-button style="float: right" @click="handleClose(3)" color="danger" type="border"
-                               icon="highlight_off"
-                    >关闭
-                    </vs-button>
+                    <el-button style="float: right" @click="handleClose(3)">关闭
+                    </el-button>
                 </div>
             </template>
-        </Dialog>
+        </el-dialog>
     </section>
 </template>
 <script lang="ts">

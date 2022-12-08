@@ -11,7 +11,9 @@
                        {{item.message}}
                     </div>
                     <div class="client">
-                        <vs-icon color="#e96656" size="50px" icon="alternate_email"></vs-icon>
+                        <el-icon color="#e96656" size="30">
+                            <MagicStick />
+                        </el-icon>
                         <div class="client-info">
                             <h6>{{item.name}}</h6>
                             <p>{{item.url ? item.url : item.createTime}}</p>

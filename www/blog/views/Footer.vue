@@ -10,19 +10,16 @@
             </el-col>
             <el-col :xs="24" :sm="24" :md="6" :lg="6" :xl="6">
                 <div class="item" @click="copyfun">
-                    <vs-icon size="34px" color="#46c93a" icon="qr_code"></vs-icon>
                     <p>微信号：<span>itnavs</span></p>
                 </div>
             </el-col>
             <el-col :xs="24" :sm="24" :md="6" :lg="6" :xl="6">
                 <div class="item">
-                    <vs-icon size="34px" color="#34d293" icon="mark_email_unread"></vs-icon>
                     <p><a href="mailto:470193837@qq.com?subject=邮件的默认标题">470193837@qq.com</a></p>
                 </div>
             </el-col>
             <el-col :xs="24" :sm="24" :md="6" :lg="6" :xl="6">
                 <div class="item">
-                    <vs-icon color="#e96656" size="34px" icon="location_on"></vs-icon>
                     <p><span>鄂ICP备17016349号-3</span></p>
                 </div>
             </el-col>

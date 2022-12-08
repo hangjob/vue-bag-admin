@@ -8,7 +8,12 @@ import setupGlobal from '@/common/global'
 import curdTableHock, { initTableHock } from '@/packages/hook/table'
 import mitt from 'mitt'
 import { merge } from 'lodash'
-
+import app from '@/packages/pinia/app'
+import user from '@/packages/pinia/user'
+const $pinia = {
+    app,
+    user
+}
 /**
  * router: {paths:[菜单],file:[菜单路由文件]},defaults:true,开启默认路由
  *
@@ -83,4 +88,5 @@ export {
     $axios,
     curdTableHock,
     initTableHock,
+    $pinia
 }

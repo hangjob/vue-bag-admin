@@ -6,7 +6,9 @@
             <el-col  class="wow animate__animated animate__bounceInLeft" data-wow-duration="1.0s" data-wow-delay="0.5" :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
                 <div class="service-icon service-icon1">
                     <div class="circle">
-                        <vs-icon  size="70px" color="#e96656"  icon="webhook"></vs-icon>
+                        <el-icon size="60" color="#e96656">
+                            <Cpu />
+                        </el-icon>
                     </div>
                     <h5>功能强大</h5>
                     <p class="indent">Bag所有内容均可以在后台进行修改，前端/后台可定制化开发，覆盖面广，涉及后端、移动端、桌面端等开发，快速迭代，降低试错成本，让大家把更多时间专注在业务开发上</p>
@@ -15,7 +17,9 @@
             <el-col class="wow animate__animated animate__bounceInLeft" data-wow-duration="1.5s" data-wow-delay="0.5" :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
                 <div class="service-icon service-icon2">
                     <div class="circle">
-                        <vs-icon  size="70px" color="#34d293"  icon="catching_pokemon"></vs-icon>
+                        <el-icon size="60" color="#34d293">
+                            <Cherry />
+                        </el-icon>
                     </div>
                     <h5>简单易用</h5>
                     <p class="indent">Bag通过简单npm命令安装，前端/后台CURD完全傻瓜式操作，所有功能，即看即会，无需任何功底，无需掌握任何技术，谁都可以是个人站长.</p>
@@ -24,7 +28,9 @@
             <el-col class="wow animate__animated animate__bounceInRight" data-wow-duration="1.5s" data-wow-delay="0.5" :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
                 <div class="service-icon service-icon3">
                     <div class="circle">
-                        <vs-icon size="70px" color="#3ab0e2" icon="broken_image"></vs-icon>
+                        <el-icon size="60" color="#3ab0e2">
+                            <Promotion />
+                        </el-icon>
                     </div>
                     <h5>社区强大</h5>
                     <p class="indent">采用市面主流技术Vue3、Vite、TypeScript、Gulp、Node.js 、Egg.js 、MySQL以及周边的优秀的插件搭建，不用担心自己业务所受框架有限的瓶颈</p>
@@ -33,7 +39,9 @@
             <el-col class="wow animate__animated animate__bounceInRight" data-wow-duration="1.0s" data-wow-delay="0.5" :xs="24" :sm="12" :md="8" :lg="6" :xl="6">
                 <div class="service-icon service-icon4">
                     <div class="circle">
-                        <vs-icon size="70px" color="#f7d861" icon="design_services"></vs-icon>
+                        <el-icon size="60" color="#f7d861">
+                            <Basketball />
+                        </el-icon>
                     </div>
                     <h5>适合人群</h5>
                     <p class="indent">1.正在以及想使用框架快速开发网站系统，有过前端开发经验 1 年+,2.熟悉 Vue.js 技术栈，使用它开发过几个实际项目，3.热爱技术，爱学习，想进阶和提升的同学</p>
