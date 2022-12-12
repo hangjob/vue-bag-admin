@@ -26,7 +26,7 @@ export default defineComponent({
         })
         const form = reactive(initTableHock({
             columns, tableCurd, options: {
-                apiPrefix: '/branch',
+                apiPrefix: '/web/branch',
             },
         }))
         tableCurd.all.beforeSuccess = (res: any) => {
