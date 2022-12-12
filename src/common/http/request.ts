@@ -102,15 +102,18 @@ function responseError(err: AxiosError, {
         if (error && error({ status, resetPath })) {
             return Promise.reject(errorData)
         }
-        messageModel.warning(data.message, messageDuration)
+        if (err.config.notifyError) {
+            messageModel.warning(data.message, messageDuration)
+        }
         return Promise.reject(errorData)
     } else {
         const { config, message } = <any>err.toJSON()
         const errorData: ResponseErrorData = { message: message, error: err.toJSON() }
         config.reconnectCount = config.reconnectCount || 0
         let msg = config.reconnectCount ? `is reconnection ${config.reconnectCount} times，${message}` : message
-        messageModel.warning(msg, messageDuration)
-
+        if (config.notifyError) {
+            messageModel.warning(msg, messageDuration)
+        }
         if (!config.relink) { // 是否开启重连
             return Promise.reject(errorData)
         }
