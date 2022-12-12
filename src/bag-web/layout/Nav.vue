@@ -4,8 +4,8 @@
             <el-row>
                 <el-col :xs="24" :sm="1" :md="2" :lg="2" :xl="2">
                     <router-link to="/home" class="nav-logo">
-                        <img @error="errorChange" ref="logoDom" :src="getImageFullPath(webSettings.logo)"
-                             :alt="webSettings.name"
+                        <img @error="errorChange" ref="logoDom" :src="getImageFullPath(siteInfo.logo)"
+                             :alt="siteInfo.name"
                         >
                     </router-link>
                 </el-col>
@@ -41,14 +41,14 @@
                             <ul>
                                 <li>
                                     <div>
-                                        <a href="">{{ userinfo.username ? userinfo.username : '个人中心' }}
+                                        <a href="">{{ userInfo.username ? userInfo.username : '个人中心' }}
                                             <el-icon>
                                                 <CaretBottom/>
                                             </el-icon>
                                         </a>
                                     </div>
                                     <ul class="dropdown-menu">
-                                        <template v-if="userinfo.username">
+                                        <template v-if="userInfo.username">
                                             <li><a @click="handleLogout" href="javascript:;">退出</a></li>
                                         </template>
                                         <template v-else>
@@ -72,9 +72,9 @@
 import {inject, ref} from 'vue'
 import {webChannelAll, userLogout} from '@/bag-web/service/app'
 import {toTree} from '@/packages/utils/utils'
-import appStore from '@/bag-web/store/app'
+import appStore from '@/bag-web/pinia/app'
 import logo from '@/common/assets/image/logo3.png'
-import userStore from "@/bag-web/store/user";
+import userStore from "@/bag-web/pinia/user";
 import {useRoute, useRouter} from 'vue-router'
 import {utils} from "pm-utils";
 
@@ -82,9 +82,9 @@ const {configApp} = <any>inject('$configAppOptions')
 
 const {getImageFullPath} = inject<any>('bagGlobal')
 const {resetPath} = configApp?.httpNetwork
-const {webSettings} = appStore()
+const {siteInfo} = appStore()
 const store = userStore()
-const userinfo = store.userinfo;
+const userInfo = store.userInfo;
 const inputValue = ref()
 const logoDom = ref();
 const menuList = ref([])
@@ -99,7 +99,7 @@ const route = useRoute();
 const handleLogout = () => {
     userLogout().then(() => {
         router.push(resetPath).then(() => {
-            store.userinfo = {}
+            store.userInfo = {}
         })
     })
 }

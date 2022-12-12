@@ -2,7 +2,7 @@ import { Component, createApp, shallowRef } from 'vue'
 import App from './App.vue'
 import install, { $optionsType } from '@/packages/install'
 import paths from '@www/admin/router'
-import ThemeBar from '@www/admin/components/ThemeBar.vue'
+import bagHeaderItem from '@www/admin/components/ThemeBar.vue'
 import setupGlobComponents from '@www/admin/plugin/md-editor-v3'
 
 const file: Record<string, Component> = import.meta.glob('/www/admin/views/**/*.vue', { eager: true })
@@ -11,7 +11,7 @@ const $options: $optionsType = {
         file,
     },
     comps: {
-        ThemeBar: shallowRef(ThemeBar),
+        bagHeaderItem: shallowRef(bagHeaderItem), // 头部icon组件覆盖
     },
     config: {
         webSite: {

@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { rewriteUrl } from '@/common/http'
-import appStore from '@/bag-web/store/app'
+import appStore from '@/bag-web/pinia/app'
 import { responseSuccess, responseError, requestSuccess } from '@/common/http/request'
 import localStore from '@/common/utils/persistence'
 import router from '@/packages/router'

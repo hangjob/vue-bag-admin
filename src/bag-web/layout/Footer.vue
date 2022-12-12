@@ -6,7 +6,7 @@
                     <div>欢迎你</div>
                 </el-col>
                 <el-col :xs="24" :sm="24" :md="18" :lg="21" :xl="22">
-                    <p>{{webSettings.record}}</p>
+                    <p>{{siteInfo.record}}</p>
                     <ul class="list-unsettled">
                         <li><a href="">关于我们</a></li>
                         <li><a href="">用户协议</a></li>
@@ -19,13 +19,13 @@
 </template>
 <script lang="ts">
 import {defineComponent} from 'vue'
-import appStore from "@/bag-web/store/app";
+import appStore from "@/bag-web/pinia/app";
 export default defineComponent({
     setup(){
         const store = appStore()
-        const { webSettings } = store
+        const { siteInfo } = store
         return {
-            webSettings
+            siteInfo
         }
     }
 })

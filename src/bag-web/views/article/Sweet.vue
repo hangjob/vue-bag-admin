@@ -13,7 +13,7 @@
 <script lang="ts">
 import {defineComponent} from 'vue'
 import {webLikeCreate} from "@/bag-web/service/app";
-import user from '@/bag-web/store/user'
+import user from '@/bag-web/pinia/user'
 import {ElNotification} from 'element-plus'
 
 export default defineComponent({
@@ -25,8 +25,8 @@ export default defineComponent({
         }
     },
     setup({detailData}) {
-        const {userinfo}: { userinfo: any } = user()
-        const user_id = userinfo.id;
+        const {userInfo}: { userInfo: any } = user()
+        const user_id = userInfo.id;
         const handleLike = () => {
             if (!user_id) {
                 ElNotification({

@@ -46,7 +46,6 @@
 </template>
 <script lang="ts">
 import { inject, ref, toRaw } from 'vue'
-// import app from '@/packages/pinia/app'
 import { useRouter } from 'vue-router'
 import { defineComponent, reactive, UnwrapRef } from 'vue'
 import { ValidateErrorEntity } from 'ant-design-vue/es/form/interface'

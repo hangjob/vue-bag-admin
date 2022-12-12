@@ -2,21 +2,21 @@
     <div class="qrcode">
         <img src="https://www.vipbic.com/public/www/pc/img/7.cc9a928e.png" alt="">
         <div class="qrcode-des">
-            <h3>{{webSettings.name}}</h3>
-            <p>{{webSettings.slogan}}</p>
+            <h3>{{siteInfo.name}}</h3>
+            <p>{{siteInfo.slogan}}</p>
         </div>
     </div>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-import appStore from '@/bag-web/store/app'
+import appStore from '@/bag-web/pinia/app'
 
 export default defineComponent({
     setup() {
         const store = appStore()
-        const { webSettings } = store
+        const { siteInfo } = store
         return {
-            webSettings,
+            siteInfo,
         }
     },
 })

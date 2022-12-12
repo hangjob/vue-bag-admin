@@ -9,21 +9,28 @@
         <GithubOutlined class="icon-svg" />
     </div>
     <div class="right_menu-item hidden-xs" @click="handleOfficial">
-        <ChromeOutlined class="icon-svg"/>
+        <ChromeOutlined class="icon-svg" />
     </div>
 </template>
 <script>
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-    setup() {
+    props: {
+        compData: {
+            type: Object,
+            default: () => { },
+        },
+    },
+    setup(props) {
+        console.log(props.compData)
         const handleOfficial = () => {
             window.open('/web.html')
         }
         const handleGithub = () => {
             window.open('https://github.com/hangjob/vue-bag-admin')
         }
-
+        
         const handleAntDesign = () => {
             window.open('https://2x.antdv.com/docs/vue/introduce-cn')
         }
@@ -34,7 +41,7 @@ export default defineComponent({
             handleOfficial,
             handleGithub,
             handleAntDesign,
-            handleDocument
+            handleDocument,
         }
     },
 })

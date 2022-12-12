@@ -41,8 +41,75 @@
         </div>
     </div>
 </template>
-<script>
+<script lang="ts">
+import { inject, ref, toRaw } from 'vue'
+import { useRouter } from 'vue-router'
+import { defineComponent, reactive, UnwrapRef } from 'vue'
+import { ValidateErrorEntity } from 'ant-design-vue/es/form/interface'
+import { apiLogin } from '@/packages/service/user'
+import { apiUserUserinfo, apiSiteIpInfo } from '@/packages/service/user'
+import locaStore from '@/common/utils/persistence'
 
+interface FormState {
+    username: string;
+    password: string;
+    rememberPas: string | boolean
+}
+
+import { aseEncrypt, aseDecrypt } from '@/common/utils/crypto'
+
+export default defineComponent({
+    name: 'login',
+    setup() {
+        const router = useRouter()
+        const formRef = ref()
+        // const appStore = app();
+        const rules = {
+            username: [
+                { required: true, message: '请随意输入你的用户名', trigger: 'blur' },
+                { min: 2, max: 30, message: '最小长度为2，最大长度30', trigger: 'blur' },
+            ],
+            password: [{ required: true, message: '随意输入用户名密码', trigger: 'blur' }],
+        }
+        
+        const formState: UnwrapRef<FormState> = reactive({
+            username: 'superadmin',
+            password: '123456',
+            rememberPas: false,
+        })
+        
+        const encryptData = locaStore.get('encryptData')
+        if (encryptData) {
+            let { username, password, rememberPas } = JSON.parse(aseDecrypt(encryptData))
+            formState.username = username
+            formState.password = password
+            formState.rememberPas = rememberPas
+        }
+        
+        const handleLogin = () => {
+            formRef.value
+                .validate()
+                .then(() => {
+                    apiLogin(formState).then(() => {
+                        if (formState.rememberPas) {
+                            locaStore.set('encryptData', aseEncrypt(JSON.stringify(formState)), 3600 * 24 * 7)
+                        }
+                        router.push('/home') // 此处通过菜单节点去读取第一个，默认是跳转home
+                    })
+                })
+                .catch((error: ValidateErrorEntity<FormState>) => {
+                    console.log('error', error)
+                })
+        }
+        
+        return {
+            handleLogin,
+            formState,
+            rules,
+            formRef,
+        }
+    },
+})
 </script>
 <style lang="less">
 .login {

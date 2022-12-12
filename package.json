@@ -1,6 +1,6 @@
 {
     "name": "vue-bag-admin",
-    "version": "1.1.13",
+    "version": "1.1.18",
     "scripts": {
         "dev": "vite",
         "build": "vite build",
@@ -69,10 +69,7 @@
         "vue-cropper": "^1.0.2",
         "vue-router": "^4.1.6",
         "vue3-count-to": "^1.1.2",
-        "vue3-marquee": "^1.0.0",
-        "vuesax3": "^4.0.20",
         "vxe-table": "^4.1.0",
-        "wangeditor": "^4.7.11",
         "xe-utils": "^3.4.0",
         "xlsx": "^0.17.3"
     },

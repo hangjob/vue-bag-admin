@@ -48,7 +48,7 @@ const setLibBuild = function() {
                 "vue-router",
                 "vue-cropper",
                 "vue3-marquee",
-                "vuex",
+                "vitepress",
                 "wangeditor",
                 "xlsx",
                 '@antv',

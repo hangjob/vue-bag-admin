@@ -22,7 +22,7 @@
                 </el-row>
             </template>
         </bag-card>
-        <Article :articleAll="articleAll"/>
+        <Article :articleAll="articleAll" />
         <div class="next">
             <button class="next-page" v-if="page.isEnd" @click="handlePage">
                 <i class="bag-icon--_jiantou"></i>
@@ -34,28 +34,28 @@
     </div>
 </template>
 <script lang="ts" setup>
-import {defineProps, inject, ref, defineEmits, reactive} from 'vue'
+import { defineProps, inject, ref, defineEmits, reactive } from 'vue'
 import Article from './Article.vue'
 
 const props = defineProps({
-    articleAll: [Array],
-    banners: [Array]
+    articleAll: { type: [Array], default: () => [] },
+    banners: { type: [Array], default: () => [] },
 })
 
 const emit = defineEmits({
-    'refrashData': null
+    'refrashData': null,
 })
-const {getImageFullPath} = inject<any>('bagGlobal')
+const { getImageFullPath } = inject<any>('bagGlobal')
 const page = reactive({
     pageSize: 15,
     currentPage: 1,
     isEnd: true,
     callback: (res: any) => {
-        page.isEnd = res.length == page.pageSize;
-    }
+        page.isEnd = res.length == page.pageSize
+    },
 })
 const handlePage = () => {
-    page.currentPage += 1;
+    page.currentPage += 1
     emit('refrashData', page)
 }
 </script>
@@ -63,24 +63,25 @@ const handlePage = () => {
 .section {
     .banner {
         margin-top: var(--bag-margin-base);
-
+        
         &-item {
             position: relative;
             height: 340px;
             border-radius: 3px;
             width: 100%;
             overflow: hidden;
-
+            
             &-img {
                 object-fit: cover;
                 width: 100%;
                 transition: all 0.3s;
                 height: 100%;
+                
                 &:hover {
                     transform: scale(1.05);
                 }
             }
-
+            
             &-des {
                 position: absolute;
                 left: 0;
@@ -92,21 +93,21 @@ const handlePage = () => {
             }
         }
     }
-
+    
     .hot {
         &-item {
             width: 100%;
             display: block;
             text-decoration: none;
-
+            
             &-inbox {
                 height: 120px;
                 overflow: hidden;
-
+                
                 &:hover img {
                     transform: scale(1.1);
                 }
-
+                
                 img {
                     width: 100%;
                     height: 100%;
@@ -115,7 +116,7 @@ const handlePage = () => {
                     transition: all 0.3s;
                 }
             }
-
+            
             h5 {
                 font-size: 14px;
                 overflow: hidden;
@@ -130,11 +131,11 @@ const handlePage = () => {
             }
         }
     }
-
+    
     .next {
         text-align: center;
         margin: 20px 0;
-
+        
         button {
             background: #ffffff;
             min-width: 120px;
@@ -151,7 +152,7 @@ const handlePage = () => {
             position: relative;
             transition: all .3s;
             color: #828a92;
-
+            
             i {
                 position: absolute;
                 top: 50%;
@@ -161,11 +162,11 @@ const handlePage = () => {
                 color: #ffe900;
                 font-size: 30px;
             }
-
+            
             &.next-page {
                 &:hover {
                     background-color: #ffe900;
-
+                    
                     i {
                         color: #ffffff;
                         transform: translate(50%, -50%);

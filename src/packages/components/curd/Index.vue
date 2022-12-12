@@ -186,7 +186,7 @@
             </div>
         </div>
     </div>
-    <bag-modal v-model:visible="tableCurd.create.visible" title="新增" width="85%" @cancel="tableCurd.create.cancel"
+    <bag-modal v-model:visible="tableCurd.create.visible" title="新增" :width="tableCurd.create.width" @cancel="tableCurd.create.cancel"
                @ok="tableCurd.create.submit"
     >
         <bag-curd-create :tableCurd="tableCurd" :form="createForm" ref="curdCreate">
@@ -196,7 +196,7 @@
             </template>
         </bag-curd-create>
     </bag-modal>
-    <bag-modal v-model:visible="tableCurd.edit.visible" title="编辑" width="85%" @cancel="tableCurd.edit.cancel"
+    <bag-modal v-model:visible="tableCurd.edit.visible" title="编辑" :width="tableCurd.edit.width" @cancel="tableCurd.edit.cancel"
                @ok="tableCurd.edit.submit"
     >
         <bag-curd-create :tableCurd="tableCurd" :form="editForm" ref="curdEdit">

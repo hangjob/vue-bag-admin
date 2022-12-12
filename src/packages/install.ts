@@ -10,10 +10,12 @@ import mitt from 'mitt'
 import { merge } from 'lodash'
 import app from '@/packages/pinia/app'
 import user from '@/packages/pinia/user'
+
 const $pinia = {
     app,
-    user
+    user,
 }
+
 /**
  * router: {paths:[菜单],file:[菜单路由文件]},defaults:true,开启默认路由
  *
@@ -36,7 +38,9 @@ interface $optionsType {
         module: object,
     },
     comps?: {
-        ThemeBar?: any // 接受一个组件
+        bagHeaderItem?: any // 接受一个组件
+        bagFooter?: any
+        bagHeaderUser?:any
     },
     config?: {
         themeConfig?: object,
@@ -62,7 +66,9 @@ const install = (app: App, options?: $optionsType) => {
             module: options?.store?.module || {},
         },
         configAppComps: {
-            ThemeBar: options?.comps?.ThemeBar,
+            bagHeaderItem: options?.comps?.bagHeaderItem,
+            bagFooter: options?.comps?.bagFooter,
+            bagHeaderUser:options?.comps?.bagHeaderUser,
         },
         configApp: {
             themeConfig: merge(themeConfig, options?.config?.themeConfig),
@@ -88,5 +94,5 @@ export {
     $axios,
     curdTableHock,
     initTableHock,
-    $pinia
+    $pinia,
 }

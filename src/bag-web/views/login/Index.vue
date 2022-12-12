@@ -1,5 +1,5 @@
 <template>
-    <div class="login" :style="{backgroundImage: `url(${getImageFullPath(webSettings.loginbg)})`}">
+    <div class="login" :style="{backgroundImage: `url(${getImageFullPath(siteInfo.loginbg)})`}">
         <div class="sign-content">
             <div class="tab">
                 <ul>
@@ -83,8 +83,8 @@ import {defineComponent, inject, reactive} from 'vue'
 import {memberCreate, userLogin, userUserinfo} from '@/bag-web/service/app'
 import {useRouter} from "vue-router";
 import {ElNotification, ElMessage} from 'element-plus'
-import appStore from "@/bag-web/store/app";
-import userStore from "@/bag-web/store/user";
+import appStore from "@/bag-web/pinia/app";
+import userStore from "@/bag-web/pinia/user";
 
 export default defineComponent({
     setup() {
@@ -130,7 +130,7 @@ export default defineComponent({
                         })
                         router.push('/home').then(() => {
                             userUserinfo().then((res) => {
-                                user.userinfo = res
+                                user.userInfo = res
                             })
                         })
                     }).finally(() => {
@@ -155,10 +155,10 @@ export default defineComponent({
             },
         })
         const {getImageFullPath} = inject<any>('bagGlobal')
-        const {webSettings} = appStore()
+        const {siteInfo} = appStore()
         return {
             form,
-            webSettings,
+            siteInfo,
             getImageFullPath
         }
     },

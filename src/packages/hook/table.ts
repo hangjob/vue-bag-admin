@@ -64,6 +64,7 @@ export default function(options = {}) {
         selectedRowKeys: [], // 批量选择
         apiPrefix: '', // 请求前缀，curd
         create: {
+            width:'85%',
             visible: false, //  弹窗是否显示
             api: '', // API地址
             formState: '', // 表单数据
@@ -128,6 +129,7 @@ export default function(options = {}) {
         },
         edit: {
             visible: false,
+            width:'85%',
             id: '',
             api: '',
             refForm: <any>'',

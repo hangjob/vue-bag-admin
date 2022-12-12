@@ -21,7 +21,8 @@ export default defineComponent({
                 apiPrefix: '/web/banner',
             },
         }))
-        
+        tableCurd.create.width = '600px'
+        tableCurd.edit.width = '65%'
         form.formItem.forEach((item) => {
             if (item.key === 'type') {
                 setTimeout(() => {

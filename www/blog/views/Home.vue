@@ -5,22 +5,22 @@
         </div>
         <div class="action">
             <el-row :gutter="30">
-                <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
+                <el-col :xs="24" :sm="24" :md="12" :lg="8" :xl="8">
                     <div class="demo">
                         <el-button target :href="{url: '/admin.html'}" size="large" type="primary" icon="Pear">体验管理端
                         </el-button>
                     </div>
                 </el-col>
-                <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
-                    <div class="demo">
-                        <el-button target :href="{url: '/web.html'}" size="large"
-                                   type="success"
-                                   icon="Mug"
-                        >体验客户端
-                        </el-button>
-                    </div>
-                </el-col>
-                <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
+<!--                <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6">-->
+<!--                    <div class="demo">-->
+<!--                        <el-button target :href="{url: '/web.html'}" size="large"-->
+<!--                                   type="success"-->
+<!--                                   icon="Mug"-->
+<!--                        >体验客户端-->
+<!--                        </el-button>-->
+<!--                    </div>-->
+<!--                </el-col>-->
+                <el-col :xs="24" :sm="24" :md="12" :lg="8" :xl="8">
                     <div class="demo">
                         <el-button target :href="{url: '/doc/index.html'}" size="large" type="warning"
                                    icon="IceTea"
@@ -28,7 +28,7 @@
                         </el-button>
                     </div>
                 </el-col>
-                <el-col :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
+                <el-col :xs="24" :sm="24" :md="12" :lg="8" :xl="8">
                     <div class="demo">
                         <el-button @click="handleDownload" size="large" type="danger" icon="Apple">
                             下载程序

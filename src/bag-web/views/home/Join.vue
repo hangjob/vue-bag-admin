@@ -3,8 +3,8 @@
         <bag-card title="加入我们">
             <template v-slot:body>
                 <p class="join-slogan">
-                    {{ webSettings.slogan }}
-                    <span>{{webSettings.name}}</span>
+                    {{ siteInfo.slogan }}
+                    <span>{{siteInfo.name}}</span>
                 </p>
                 <div class="join-action">
                     <router-link to="">订阅公众号</router-link>
@@ -16,14 +16,14 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue'
-import appStore from '@/bag-web/store/app'
+import appStore from '@/bag-web/pinia/app'
 
 export default defineComponent({
     setup() {
         const store = appStore()
-        const { webSettings } = store
+        const { siteInfo } = store
         return {
-            webSettings,
+            siteInfo,
         }
     },
 })

@@ -1,37 +1,39 @@
 <template>
-    <div class="right_menu-item">
-        <input class="key-input" placeholder="输入关键词" v-model="compData.search.str"
-               @keydown.enter="handleKeyBoard($event,compData.search.handleEnter)"
-               :class="compData.search.active" type="text"
-        >
-        <SearchOutlined class="icon-svg icon-search" @click="compData.search.handleSearch" />
-    </div>
-    <div class="right_menu-item">
-        <CompressOutlined class="icon-svg" @click="toggle" v-if="isFullscreen" />
-        <ExpandOutlined class="icon-svg" @click="toggle" v-else />
-    </div>
-    <div class="right_menu-item">
-        <a-popover v-model="compData.visible" title="系统通知" trigger="click">
-            <template #content>
-                <div class="notice-content">
-                    <p v-for="item in compData.noticeList" :key="item.id">{{ item.text }} {{ item.createTime }}</p>
-                </div>
-            </template>
-            <a-badge :count="compData.noticeList.length">
-                <BellOutlined class="icon-svg" />
-            </a-badge>
-        </a-popover>
-    </div>
-    <template :key="idx" v-for="(item,idx) in compData.icons">
-        <div :class="item.classItemName" @click="item.handle">
-            <component :class="item.classItemName" :is="item.iconName"></component>
-        </div>
+    <template v-if="bagHeaderItem">
+        <component :is="bagHeaderItem" v-bind="{compData}"></component>
     </template>
-    <template v-if="ThemeBar">
-        <component :is="ThemeBar"></component>
+    <template v-else>
+        <div class="right_menu-item">
+            <input class="key-input" placeholder="输入关键词" v-model="compData.search.str"
+                   @keydown.enter="handleKeyBoard($event,compData.search.handleEnter)"
+                   :class="compData.search.active" type="text"
+            >
+            <SearchOutlined class="icon-svg icon-search" @click="compData.search.handleSearch" />
+        </div>
+        <div class="right_menu-item">
+            <CompressOutlined class="icon-svg" @click="toggle" v-if="isFullscreen" />
+            <ExpandOutlined class="icon-svg" @click="toggle" v-else />
+        </div>
+        <div class="right_menu-item">
+            <a-popover v-model="compData.visible" title="系统通知" trigger="click">
+                <template #content>
+                    <div class="notice-content">
+                        <p v-for="item in compData.noticeList" :key="item.id">{{ item.text }} {{ item.createTime }}</p>
+                    </div>
+                </template>
+                <a-badge :count="compData.noticeList.length">
+                    <BellOutlined class="icon-svg" />
+                </a-badge>
+            </a-popover>
+        </div>
+        <template :key="idx" v-for="(item,idx) in compData.icons">
+            <div :class="item.classItemName" @click="item.handle">
+                <component :class="item.classItemName" :is="item.iconName"></component>
+            </div>
+        </template>
     </template>
     <div class="right_menu-item hidden-xs">
-        <img v-if="userinfo.userhead" class="user-head" :src="getImageFullPath(userinfo.userhead)" alt="">
+        <img v-if="userinfo.userhead" class="user-head" :src="userinfo.userhead" alt="">
         <img v-else class="user-head" src="@/packages/assets/image/yanghang.jpg" alt="">
         <a-dropdown>
             <a class="ant-dropdown-link" @click.prevent>
@@ -39,15 +41,20 @@
                 <DownOutlined />
             </a>
             <template #overlay>
-                <a-menu>
-                    <a-menu-item>
-                        <router-link to="/user">修改资料</router-link>
-                    </a-menu-item>
-                    <a-menu-item @click="compData.handleQuit">
-                        <LogoutOutlined />
-                        退出
-                    </a-menu-item>
-                </a-menu>
+                <template v-if="bagHeaderUser">
+                    <component :is="bagHeaderUser" v-bind="{compData}"></component>
+                </template>
+                <template v-else>
+                    <a-menu>
+                        <a-menu-item>
+                            <router-link to="/user">修改资料</router-link>
+                        </a-menu-item>
+                        <a-menu-item @click="compData.handleQuit">
+                            <LogoutOutlined />
+                            退出
+                        </a-menu-item>
+                    </a-menu>
+                </template>
             </template>
         </a-dropdown>
     </div>
@@ -70,7 +77,7 @@ export default defineComponent({
     },
     setup() {
         const { configAppComps } = <any>inject('$configAppOptions')
-        const { ThemeBar } = configAppComps
+        const { bagHeaderItem, bagHeaderUser } = configAppComps
         const router = useRouter()
         const userSetting = ref()
         const $mitt: any = inject('$mitt')
@@ -130,13 +137,15 @@ export default defineComponent({
                     })
                 })
             },
+            toggle
         })
         return {
             userSetting,
             userinfo,
             handleKeyBoard,
             toggle,
-            ThemeBar,
+            bagHeaderItem,
+            bagHeaderUser,
             isFullscreen,
             compData,
             getImageFullPath,
@@ -155,16 +164,16 @@ export default defineComponent({
     text-align: center;
     justify-content: center;
     transition: background-color 0.3s;
-
+    
     &:hover {
         background-color: rgba(0, 0, 0, .025);
     }
-
+    
     &:last-of-type {
         margin-right: 0;
     }
-
-
+    
+    
     .key-input {
         background: none;
         outline: none;
@@ -175,27 +184,27 @@ export default defineComponent({
         opacity: 0;
         width: 0;
     }
-
+    
     .search-active {
         width: 200px;
         opacity: 1;
     }
-
+    
     .icon-svg {
         font-size: 15px;
         transition: all .3s;
-
+        
         &.refresh:active {
             transform: rotate(360deg);
         }
     }
-
+    
     .icon-search {
         position: absolute;
         right: 10px;
         top: inherit;
     }
-
+    
     .user-head {
         width: 36px;
         height: 36px;
@@ -208,7 +217,7 @@ export default defineComponent({
     p {
         padding: 5px 0;
         display: block;
-
+        
         &:last-child, &:first-child {
             padding: 0;
         }

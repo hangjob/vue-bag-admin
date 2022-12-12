@@ -39,8 +39,8 @@
 import {defineProps, inject, ref} from 'vue'
 import Join from './Join.vue'
 const props = defineProps({
-    articleAll: [Array],
-    banners: [Array]
+    articleAll: { type: [Array], default: () => [] },
+    banners:  { type: [Array], default: () => [] },
 })
 const items = ref([{}, {}, {}, {}, {}, {}, {}, {}, {}, {}])
 </script>
