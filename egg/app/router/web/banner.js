@@ -6,4 +6,5 @@ module.exports = app => {
     router.all('/web/banner/deletes', controller.web.banner.deletes)
     router.all('/web/banner/update', controller.web.banner.update)
     router.all('/web/banner/find', controller.web.banner.find)
+    router.all('/web/banner/page', controller.web.banner.page)
 }

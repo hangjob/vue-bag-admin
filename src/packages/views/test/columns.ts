@@ -12,23 +12,31 @@ const columns = [
     },
     {
         title: '测试1',
-        dataIndex: 'roles1',
+        dataIndex: 'name',
         ellipsis: true,
         align: 'center',
         width: 80,
-        visible: false,
-        curd: {
-            name: 'roles',
-            label: '角色',
-            element: 'a-select',
-            props: {
-                placeholder: '选择角色',
-                options: [],
-            },
+        slot: {
+            name: 'pname',
         },
-        curdEdit: {},
+        curd: {
+            el: 'a-input',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '角色',
+                name: 'pname',
+                rules: [{ required: true, message: 'Please input name' }],
+            },
+            $colAttrs: { flex: 1 },
+            $elAttrs: { placeholder: '输入用户名', value: '444' },
+        },
         curdCreate: {},
-        curdSearch: {},
+        curdEdit: {},
+        curdSearch: {
+            el: 'a-input',
+            $formItemAttrs: { label: '用户名', name: 'name' },
+            $elAttrs: { placeholder: '输入用户名', value: '' },
+        },
     },
     {
         title: '测试2',
@@ -38,17 +46,23 @@ const columns = [
         width: 80,
         visible: true,
         curd: {
-            name: 'roles',
-            label: '角色',
-            element: 'a-select',
-            props: {
-                placeholder: '选择角色',
-                options: [],
+            el: 'a-select',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '角色',
+                name: 'image',
+                rules: [{ required: true, message: 'Please input name' }],
             },
+            $colAttrs: {},
+            $elAttrs: { placeholder: '输入用户名', value: '22', options: [{ value: 1, label: '11' }] },
         },
         curdEdit: {},
         curdCreate: {},
-        curdSearch: {},
+        curdSearch: {
+            el: 'a-input',
+            $formItemAttrs: { label: '用户名2', name: 'image' },
+            $elAttrs: { placeholder: '输入用户名2', value: '' },
+        },
     },
 ]
 export default columns
