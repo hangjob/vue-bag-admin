@@ -23,7 +23,6 @@ export default defineComponent({
         },
     },
     setup(props) {
-        console.log(props.compData)
         const handleOfficial = () => {
             window.open('/web.html')
         }

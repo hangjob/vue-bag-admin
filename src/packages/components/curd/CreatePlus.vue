@@ -30,6 +30,7 @@
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
 import { useSlots, useAttrs } from 'vue'
+
 export default defineComponent({
     props: {
         curdTable: {
@@ -40,7 +41,6 @@ export default defineComponent({
     },
     setup() {
         const formRef = ref(null)
-        console.log(useSlots())
         return {
             formRef,
         }

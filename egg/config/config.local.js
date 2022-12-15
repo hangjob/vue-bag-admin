@@ -2,11 +2,11 @@ module.exports = appInfo => {
     const config = {};
     config.sequelize = {
         dialect: 'mysql',
-        host: '127.0.0.1',
+        host: '1.15.7.39',
         port: 3306,
-        username: 'root2', // 数据库用户名
-        password: '123456', // 数据库密码
-        database: 'itnavas',
+        username: 'vite_itnavs_com', // 数据库用户名
+        password: 'MRwiczzP3aGS66rA', // 数据库密码
+        database: 'vite_itnavs_com',
         define: { // model的全局配置
             timestamps: true, // 添加create,update,delete时间戳
             paranoid: false, // 添加软删除
@@ -18,8 +18,8 @@ module.exports = appInfo => {
         clients: {
             bag: {                 // instanceName. See below
                 port: 6379,          // Redis port
-                host: '127.0.0.1',   // Redis host
-                password: '123456',
+                host: '1.15.7.39',   // Redis host
+                password: 'oqpm38mfny8',
                 db: 0,
             },
         },

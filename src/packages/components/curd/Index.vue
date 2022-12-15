@@ -7,11 +7,13 @@
                         <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
                             <div class="bag-curd-header-action">
                                 <a-space :size="20">
-                                    <a-button v-debounce="{ func: item.func}" :class="item.class" :type="item.type"
-                                              v-for="(item,idx) in tableCurd.btns" :key="idx"
-                                    >
-                                        {{ item.name }}
-                                    </a-button>
+                                    <template v-for="(item,idx) in tableCurd.btns">
+                                        <a-button v-if="buttonPermissions(item.tag)" v-debounce="{ func: item.func}"
+                                                  :class="item.class" :type="item.type"
+                                        >
+                                            {{ buttonPermissions(item.tag).name }}
+                                        </a-button>
+                                    </template>
                                 </a-space>
                             </div>
                         </a-col>
@@ -98,7 +100,7 @@
                         </a-col>
                     </slot>
                 </a-row>
-                <a-row>
+                <a-row v-if="tableCurd.all.search.formItem.length">
                     <slot name="header-search">
                         <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                             <div class="bag-curd-header-search">
@@ -165,16 +167,20 @@
                         <template v-if="column._slots">
                             <a-space v-if="column._slots.customRender === 'action'">
                                 <slot name="table-action" v-bind="{record}"></slot>
-                                <a-button type="primary" size="small" @click="tableCurd.edit.change(record)">编辑
+                                <a-button v-if="buttonPermissions('edit')" type="primary" size="small"
+                                          @click="tableCurd.edit.change(record)"
+                                >{{ buttonPermissions('edit').name }}
                                 </a-button>
                                 <a-popconfirm
+                                    v-if="buttonPermissions('del')"
                                     :title="`你确定删除嘛？`"
                                     ok-text="确认"
                                     cancel-text="关闭"
                                     placement="topRight"
                                     @confirm="tableCurd.delete.submit(record)"
                                 >
-                                    <a-button type="primary" danger size="small">删除</a-button>
+                                    <a-button type="primary" danger size="small">{{ buttonPermissions('del').name }}
+                                    </a-button>
                                 </a-popconfirm>
                             </a-space>
                             <slot v-else :name="column._slots.customRender" v-bind="{record}"></slot>
@@ -186,7 +192,8 @@
             </div>
         </div>
     </div>
-    <bag-modal v-model:visible="tableCurd.create.visible" title="新增" :width="tableCurd.create.width" @cancel="tableCurd.create.cancel"
+    <bag-modal v-model:visible="tableCurd.create.visible" title="新增" :width="tableCurd.create.width"
+               @cancel="tableCurd.create.cancel"
                @ok="tableCurd.create.submit"
     >
         <bag-curd-create :tableCurd="tableCurd" :form="createForm" ref="curdCreate">
@@ -196,7 +203,8 @@
             </template>
         </bag-curd-create>
     </bag-modal>
-    <bag-modal v-model:visible="tableCurd.edit.visible" title="编辑" :width="tableCurd.edit.width" @cancel="tableCurd.edit.cancel"
+    <bag-modal v-model:visible="tableCurd.edit.visible" title="编辑" :width="tableCurd.edit.width"
+               @cancel="tableCurd.edit.cancel"
                @ok="tableCurd.edit.submit"
     >
         <bag-curd-create :tableCurd="tableCurd" :form="editForm" ref="curdEdit">
@@ -213,7 +221,11 @@
 import { defineComponent, watch, reactive, ref, shallowReactive } from 'vue'
 import { columnsCheckbox, findNearestTarget, exportTableData } from './utils'
 import { cloneDeep } from 'lodash'
+import appPinia from '@/packages/pinia/app'
+import userPinia from '@/packages/pinia/user'
 
+const btnsReal = [{ tag: 'refresh', name: '刷新' }, { tag: 'create', name: '新增' },
+    { tag: 'del', name: '删除' }, { tag: 'edit', name: '编辑' }]
 export default defineComponent({
     name: 'bag-curd-table',
     props: {
@@ -236,6 +248,8 @@ export default defineComponent({
         },
     },
     setup(props, { emit }) {
+        const userStore = userPinia()
+        const appStore = appPinia()
         const curdCreate = ref()
         const curdEdit = ref()
         const tableCurd = reactive(props.tableCurd)
@@ -243,7 +257,21 @@ export default defineComponent({
         tableCurd.edit.refForm = curdEdit // 编辑组件
         let columns = reactive(cloneDeep(tableCurd.columns))
         const columnsAll = reactive(columnsCheckbox({ tableCurd }))
-        
+        const buttonPermissions = (tag) => {
+            let btnInfo: any = false
+            const btns = userStore.userInfo.rolesDetail.btns
+            if (btns) {
+                const currentId = appStore.currentRouter.id
+                const currentBtn = btns.find((item) => item.mid == currentId)
+                if (currentBtn) {
+                    btnInfo = currentBtn.btn.find((item) => item.tag === tag)
+                }
+                return btnInfo
+            } else {
+                btnInfo = btnsReal.find((item) => item.tag === tag)
+            }
+            return btnInfo
+        }
         const tableSetting = reactive({
             size: 'middle',
             sizeOptions: [
@@ -275,6 +303,7 @@ export default defineComponent({
             tableSetting,
             checkboxChange,
             exportTableData,
+            buttonPermissions,
         }
     },
 })

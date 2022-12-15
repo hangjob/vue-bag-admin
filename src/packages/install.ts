@@ -6,6 +6,7 @@ import { Component, readonly } from 'vue'
 import { themeConfig, httpNetwork, webSite } from '@/packages/config'
 import setupGlobal from '@/common/global'
 import curdTableHock, { initTableHock } from '@/packages/hook/table'
+import initCurd, { createTableHock } from '@/packages/hook/tablePlus'
 import mitt from 'mitt'
 import { merge } from 'lodash'
 import app from '@/packages/pinia/app'
@@ -40,7 +41,7 @@ interface $optionsType {
     comps?: {
         bagHeaderItem?: any // 接受一个组件
         bagFooter?: any
-        bagHeaderUser?:any
+        bagHeaderUser?: any
     },
     config?: {
         themeConfig?: object,
@@ -68,7 +69,7 @@ const install = (app: App, options?: $optionsType) => {
         configAppComps: {
             bagHeaderItem: options?.comps?.bagHeaderItem,
             bagFooter: options?.comps?.bagFooter,
-            bagHeaderUser:options?.comps?.bagHeaderUser,
+            bagHeaderUser: options?.comps?.bagHeaderUser,
         },
         configApp: {
             themeConfig: merge(themeConfig, options?.config?.themeConfig),
@@ -94,5 +95,7 @@ export {
     $axios,
     curdTableHock,
     initTableHock,
+    createTableHock,
+    initCurd,
     $pinia,
 }

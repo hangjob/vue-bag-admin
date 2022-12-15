@@ -28,8 +28,8 @@ function filter$elAttrs($elAttrs) {
 const initCurd = () => {
     const curdTable = reactive({
         apiPrefix: '', // 请求前缀，curd
-        // a-table 组件的 $attrs ，继承所有属性和事件
         selectedRowKeys: <any>[], // 批量选择
+        // a-table 组件的 $attrs ，继承所有属性和事件
         $tableAttrs: <any>{
             bordered: true,
             pagination: false,
@@ -42,6 +42,10 @@ const initCurd = () => {
                 },
             },
         },
+        // 头部按钮
+        headerBtns: <any>[],
+        // 扩展头部按钮
+        headerExtBtns: <any>[],
         // a-modal 继承所有属性和事件 新增
         $cModalAttrs: <any>{
             title: '新增',
@@ -216,8 +220,8 @@ const initCurd = () => {
                 el.resetFields()
             },
             submit() {
-                this.api = this.api ? this.api : curdTable.apiPrefix + '/create'
-                let formState = cloneDeep(this.formState)
+                this.api = this.api ? this.api : curdTable.apiPrefix + '/update'
+                let formState = cloneDeep({ ...this.formState, id: curdTable.edit.row.record.id })
                 if (utils.dataType(this.beforeRequest) === 'function') {
                     formState = this.beforeRequest(formState)
                 }
@@ -302,6 +306,39 @@ const initCurd = () => {
             filter$elAttrs,
         },
     })
+    // 头部按钮
+    curdTable.headerBtns = [
+        {
+            text: '刷新',
+            type: 'primary',
+            loading: curdTable.$tableAttrs.loading,
+            click: curdTable.refreshTable,
+        },
+        {
+            text: '新增',
+            type: 'primary',
+            class: 'bag-button-color-green',
+            loading: curdTable.$tableAttrs.loading,
+            click: () => curdTable.$cModalAttrs.visible = true,
+        },
+        {
+            text: '刷新',
+            type: 'primary',
+            danger: true,
+            click: curdTable.deletes.submit,
+        },
+    ]
+    curdTable.headerExtBtns = [
+        {
+            text: '数据导出',
+            type: 'primary',
+        },
+        {
+            text: '表格大小',
+            type: 'primary',
+            class: 'bag-button-color-green',
+        },
+    ]
     return curdTable
 }
 
@@ -392,7 +429,6 @@ const generateFormItem = ({ columns, type }: { columns: Array<any>, type: string
 export default initCurd
 export {
     createTableHock,
-    generateFormItem,
 }
 
 

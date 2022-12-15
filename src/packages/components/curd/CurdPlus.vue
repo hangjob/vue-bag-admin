@@ -7,22 +7,17 @@
                         <a-row :wrap="true">
                             <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
                                 <div class="bag-curd-header-action">
-                                    <a-button type="primary" :loading="curdTable.$tableAttrs.loading"
-                                              @click="curdTable.refreshTable"
-                                    >刷新
+                                    <a-button v-for="item in curdTable.headerBtns" v-on="item" v-bind="item">
+                                        {{ item.text }}
                                     </a-button>
-                                    <a-button type="primary" @click="curdTable.$cModalAttrs.visible = true"
-                                              class="bag-button-color-green"
-                                    >新增
-                                    </a-button>
-                                    <a-button type="primary" @click="curdTable.deletes.submit" danger>删除</a-button>
                                 </div>
                             </a-col>
                             <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
                                 <div class="bag-curd-header-action">
                                     <a-row :wrap="true" type="flex" justify="end">
-                                        <a-button type="primary">数据导出</a-button>
-                                        <a-button type="primary" class="bag-button-color-green">表格大小</a-button>
+                                        <a-button v-for="item in curdTable.headerExtBtns" v-on="item" v-bind="item">
+                                            {{ item.text }}
+                                        </a-button>
                                     </a-row>
                                 </div>
                             </a-col>
@@ -87,7 +82,9 @@
         </template>
     </bag-curd-create-plus>
     <bag-curd-edit-plus :curdTable="curdTable">
-    
+        <template v-for="(item) in curdTable.edit.formItem" v-slot:[item.slot.name]>
+            <slot :name="item.slot.name" v-bind="{formState:curdTable.edit.formState,item}"></slot>
+        </template>
     </bag-curd-edit-plus>
 </template>
 <script lang="ts">
@@ -105,7 +102,6 @@ export default defineComponent({
     },
     setup(props, { emit }) {
         const curdTable = props.curdTable
-        console.log(useSlots())
         const searchFormRef = ref<FormInstance>()
         return {
             curdTable,

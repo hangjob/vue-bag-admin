@@ -112,7 +112,7 @@ const columns = [
         title: '测试2',
         dataIndex: 'roles5',
         ellipsis: true,
-        align: 'right',
+        align: 'center',
         width: 150,
         visible: true,
         slot: {
