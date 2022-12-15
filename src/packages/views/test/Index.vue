@@ -4,6 +4,9 @@
         <template #pname="{record}">
             <span>{{ compData.formatCell({ record }) }}</span>
         </template>
+        <template #curdPname="{formState,item}">
+            <a-input v-model:value="formState.image4" placeholder="Basic usage" />
+        </template>
     </bag-curd-plus>
 </template>
 <script lang="ts">
@@ -15,11 +18,15 @@ export default defineComponent({
     components: {},
     setup() {
         const defaultCurdTable = initCurd()
+        defaultCurdTable.apiPrefix = '/web/banner'
         defaultCurdTable.all.api = '/web/banner/page'
         const curd = createTableHock({ columns, curdTable: defaultCurdTable })
         const compData = reactive({
             formatCell({ record }) {
                 return record.name
+            },
+            getSoltData(data) {
+                console.log(data)
             },
         })
         console.log(curd)

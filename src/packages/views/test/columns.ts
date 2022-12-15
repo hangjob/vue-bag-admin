@@ -15,7 +15,6 @@ const columns = [
         dataIndex: 'name',
         ellipsis: true,
         align: 'center',
-        width: 80,
         slot: {
             name: 'pname',
         },
@@ -28,10 +27,8 @@ const columns = [
                 rules: [{ required: true, message: 'Please input name' }],
             },
             $colAttrs: { flex: 1 },
-            $elAttrs: { placeholder: '输入用户名', value: '444' },
+            $elAttrs: { placeholder: '输入用户名', value: '' },
         },
-        curdCreate: {},
-        curdEdit: {},
         curdSearch: {
             el: 'a-input',
             $formItemAttrs: { label: '用户名', name: 'name' },
@@ -43,7 +40,6 @@ const columns = [
         dataIndex: 'roles2',
         ellipsis: true,
         align: 'center',
-        width: 80,
         visible: true,
         curd: {
             el: 'a-select',
@@ -54,7 +50,11 @@ const columns = [
                 rules: [{ required: true, message: 'Please input name' }],
             },
             $colAttrs: {},
-            $elAttrs: { placeholder: '输入用户名', value: '22', options: [{ value: 1, label: '11' }] },
+            $elAttrs: {
+                placeholder: '请选择',
+                value: '',
+                options: [{ value: '', label: '请选择' }, { value: '1', label: '苹果' }, { value: '2', label: '桔子' }],
+            },
         },
         curdEdit: {},
         curdCreate: {},
@@ -62,6 +62,61 @@ const columns = [
             el: 'a-input',
             $formItemAttrs: { label: '用户名2', name: 'image' },
             $elAttrs: { placeholder: '输入用户名2', value: '' },
+        },
+    },
+    {
+        title: '测试2',
+        dataIndex: 'roles3',
+        ellipsis: true,
+        align: 'center',
+        visible: true,
+        curd: {
+            el: 'a-switch',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '角色',
+                name: 'image2',
+            },
+            $colAttrs: {},
+            $elAttrs: {
+                placeholder: '请选择',
+                checked: true,
+                options: [{ value: 1, label: '苹果' }, { value: 2, label: '桔子' }],
+            },
+        },
+        curdEdit: {},
+        curdCreate: {},
+    },
+    {
+        title: '测试2',
+        dataIndex: 'roles4',
+        ellipsis: true,
+        align: 'center',
+        visible: true,
+        curd: {
+            $formItemAttrs: {
+                autoLink: false,
+                label: '角色',
+                name: 'image4',
+                rules: [{ required: true, message: 'Please input name' }],
+            },
+            slot: {
+                name: 'curdPname',
+            },
+            $colAttrs: {},
+        },
+        curdEdit: {},
+        curdCreate: {},
+    },
+    {
+        title: '测试2',
+        dataIndex: 'roles5',
+        ellipsis: true,
+        align: 'right',
+        width: 150,
+        visible: true,
+        slot: {
+            name: 'action',
         },
     },
 ]
