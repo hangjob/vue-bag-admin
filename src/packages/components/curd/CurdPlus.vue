@@ -1,23 +1,27 @@
 <template>
     <div class="bag-curd">
         <div class="bag-curd-container">
-            <div class="bag-curd-header">
+            <div v-if="compData.getEffectBtn(1) || compData.getEffectBtn(2)" class="bag-curd-header">
                 <div class="bag-curd-action">
                     <slot name="header-action">
                         <a-row :wrap="true">
                             <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
                                 <div class="bag-curd-header-action">
-                                    <a-button v-for="item in curdTable.headerBtns" v-on="item" v-bind="item">
-                                        {{ item.text }}
-                                    </a-button>
+                                    <template :key="idx" v-for="(item,idx)  in curdTable.btns">
+                                        <a-button v-if="item.effect === 1" v-on="item" v-bind="item">
+                                            {{ item.name }}
+                                        </a-button>
+                                    </template>
                                 </div>
                             </a-col>
                             <a-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
                                 <div class="bag-curd-header-action">
                                     <a-row :wrap="true" type="flex" justify="end">
-                                        <a-button v-for="item in curdTable.headerExtBtns" v-on="item" v-bind="item">
-                                            {{ item.text }}
-                                        </a-button>
+                                        <template :key="idx" v-for="(item,idx)  in curdTable.btns">
+                                            <a-button v-if="item.effect === 2" v-on="item" v-bind="item">
+                                                {{ item.name }}
+                                            </a-button>
+                                        </template>
                                     </a-row>
                                 </div>
                             </a-col>
@@ -32,10 +36,28 @@
                                :key="idx"
                         >
                             <a-form-item v-bind="item.$formItemAttrs">
-                                <component v-model:value="curdTable.search.formState[item.$formItemAttrs.name]"
+                                <!--                                <component v-model:value="curdTable.search.formState[item.$formItemAttrs.name]"-->
+                                <!--                                           :is="item.el" v-bind="curdTable.utils.filter$elAttrs(item.$elAttrs).$attrs"-->
+                                <!--                                >-->
+                                <!--                                </component>-->
+                                <component v-if="curdTable.utils.compatibleCompValue(item.el) === '1'"
+                                           v-model:value="curdTable.search.formState[item.$formItemAttrs.name]"
                                            :is="item.el" v-bind="curdTable.utils.filter$elAttrs(item.$elAttrs).$attrs"
                                 >
                                 </component>
+                                <component v-if="curdTable.utils.compatibleCompValue(item.el) === '2'"
+                                           v-model:checked="curdTable.search.formState[item.$formItemAttrs.name]"
+                                           :is="item.el" v-bind="curdTable.utils.filter$elAttrs(item.$elAttrs).$attrs"
+                                >
+                                </component>
+                                <component v-if="curdTable.utils.compatibleCompValue(item.el) === '3'"
+                                           v-model:file-list="curdTable.search.formState[item.$formItemAttrs.name]"
+                                           :is="item.el" v-bind="curdTable.utils.filter$elAttrs(item.$elAttrs).$attrs"
+                                >
+                                </component>
+                                <template v-if="item.slot.name">
+                                    <slot :name="item.slot.name" v-bind="{formState:curdTable.search.formState,item}"></slot>
+                                </template>
                             </a-form-item>
                         </a-col>
                         <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
@@ -53,23 +75,19 @@
                     <template #bodyCell="{ column, record }">
                         <template v-if="column.slot">
                             <a-space v-if="column.slot.name === 'action'">
-                                <a-button type="primary" size="small" @click="curdTable.edit.change({record})">编辑
-                                </a-button>
-                                <a-popconfirm
-                                    :title="`你确定删除嘛？`"
-                                    ok-text="确认"
-                                    cancel-text="关闭"
-                                    placement="topRight"
-                                    @confirm="curdTable.delete.submit({record})"
-                                >
-                                    <a-button type="primary" danger size="small">删除</a-button>
-                                </a-popconfirm>
+                                <template :key="idx" v-for="(item,idx)  in curdTable.btns">
+                                    <a-button type="primary" v-if="item.effect === 3" size="small" v-bind="item"
+                                              @click="item.click({record})"
+                                    >
+                                        {{ item.name }}
+                                    </a-button>
+                                </template>
                             </a-space>
-                            <slot v-else :name="column.slot.name" v-bind="{record,column}"></slot>
+                            <slot v-else :name="column.slot.name" v-bind="{record,column,curdTable}"></slot>
                         </template>
                     </template>
                 </a-table>
-                <a-pagination style="text-align: right;margin-top:20px"
+                <a-pagination v-if="curdTable.all.isPage" style="text-align: right;margin-top:20px"
                               v-bind="curdTable.$pageAttrs"
                               v-on="curdTable.$pageAttrs"
                 />
@@ -90,7 +108,7 @@
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'
 import type { FormInstance } from 'ant-design-vue'
-import { useSlots, useAttrs } from 'vue'
+import { columnsCheckbox, findNearestTarget, exportTableData } from './utils'
 
 export default defineComponent({
     props: {
@@ -103,14 +121,35 @@ export default defineComponent({
     setup(props, { emit }) {
         const curdTable = props.curdTable
         const searchFormRef = ref<FormInstance>()
+        const compData = reactive({
+            getEffectBtn(effect) {
+                return curdTable.btns.find((item) => item.effect === effect)
+            },
+        })
         return {
             curdTable,
             searchFormRef,
+            exportTableData,
+            compData,
         }
     },
 })
 </script>
 <style lang="less" scoped>
+.bag-curd {
+    background-color: #ffffff;
+    min-height: 100%;
+    border-radius: 3px;
+    
+    &-container {
+        padding: 15px;
+    }
+    
+    &-header {
+    
+    }
+}
+
 .bag-curd-header-action .ant-btn {
     margin: 4px 6px;
 }

@@ -12,7 +12,6 @@ export default defineComponent({
         const defaultCurdTable = initCurd()
         defaultCurdTable.apiPrefix = '/web/banner'
         const curd = createTableHock({ columns, curdTable: defaultCurdTable })
-        console.log(curd)
         return {
             curd,
         }

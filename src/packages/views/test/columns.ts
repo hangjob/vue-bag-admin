@@ -26,7 +26,6 @@ const columns = [
                 name: 'pname',
                 rules: [{ required: true, message: 'Please input name' }],
             },
-            $colAttrs: { flex: 1 },
             $elAttrs: { placeholder: '输入用户名', value: '' },
         },
         curdSearch: {

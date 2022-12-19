@@ -1,4 +1,4 @@
-import { reactive, nextTick } from 'vue'
+import { reactive } from 'vue'
 import { post } from '@/packages/http/request'
 import { toRaw } from 'vue'
 import { message } from 'ant-design-vue'
@@ -117,7 +117,6 @@ export default function(options = {}) {
                 if (utils.dataType(tableCurd.all.beforeEach) === 'function') {
                     tableCurd.all._formState = tableCurd.all.beforeEach(tableCurd.all.search.formState, tableCurd.pagination)
                 }
-
                 post(tableCurd.all.api, { ...tableCurd.all._formState }).then((res: any) => {
                     if (utils.dataType(tableCurd.all.beforeSuccess) === 'function') {
                         const data = tableCurd.all.beforeSuccess(res)

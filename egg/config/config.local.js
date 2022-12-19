@@ -1,5 +1,5 @@
 module.exports = appInfo => {
-    const config = {};
+    const config = {}
     config.sequelize = {
         dialect: 'mysql',
         host: '1.15.7.39',
@@ -11,8 +11,8 @@ module.exports = appInfo => {
             timestamps: true, // 添加create,update,delete时间戳
             paranoid: false, // 添加软删除
             freezeTableName: true, // 防止修改表名为复数
-            underscored: false // 防止驼峰式字段被默认转为下划线
-        }
+            underscored: false, // 防止驼峰式字段被默认转为下划线
+        },
     }
     config.redis = {
         clients: {
@@ -24,5 +24,5 @@ module.exports = appInfo => {
             },
         },
     }
-    return config;
+    return config
 }

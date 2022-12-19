@@ -6,4 +6,5 @@ module.exports = app => {
     router.all('/menu/deletes', controller.menu.deletes);
     router.all('/menu/update', controller.menu.update)
     router.all('/menu/find', controller.menu.find);
+    router.all('/menu/page', controller.menu.page);
 };

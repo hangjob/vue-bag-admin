@@ -1,8 +1,6 @@
 <template>
-    <bag-modal v-model:visible="compData.visible" title="更改密码" width="85%" @ok="compData.handleSubmit">
-        <a-form ref="formRef" :model="compData.formState" :rules="compData.rules" :label-col="{span:6}"
-                :wrapper-col="{wrapperCol:15}"
-        >
+    <a-modal v-model:visible="compData.visible" title="更改密码" width="85%" @ok="compData.handleSubmit">
+        <a-form ref="formRef" :model="compData.formState" :rules="compData.rules">
             <a-row>
                 <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                     <a-form-item label="原密码" name="rawpassword">
@@ -23,7 +21,7 @@
                 </a-col>
             </a-row>
         </a-form>
-    </bag-modal>
+    </a-modal>
 </template>
 <script lang="ts">
 import { defineComponent, reactive, ref, toRaw } from 'vue'
@@ -47,11 +45,11 @@ export default defineComponent({
                     { required: true, message: '请输入3~20位新密码', trigger: 'blur' },
                 ],
             },
-            handleOpen(row) {
+            handleOpen({ record }) {
                 this.visible = true
-                this.formState.rawpassword = row.password
-                this.formState.id = row.id
-                compData.row = row
+                this.formState.rawpassword = record.password
+                this.formState.id = record.id
+                compData.row = record
             },
             handleSubmit() {
                 return formRef.value.validate()
@@ -71,7 +69,7 @@ export default defineComponent({
                 })
             },
         })
-
+        
         return {
             formRef,
             compData,

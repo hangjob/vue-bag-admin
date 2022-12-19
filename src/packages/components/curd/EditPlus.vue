@@ -18,6 +18,21 @@
                                    v-model:file-list="curdTable.edit.formState[item.$formItemAttrs.name]"
                                    v-bind="curdTable.utils.filter$elAttrs(item.$elAttrs).$attrs"
                         ></component>
+                        <template v-if="item.el === 'bag-upload-image'">
+                            <a-form-item-rest>
+                                <a-input v-model:value="curdTable.edit.formState[item.$formItemAttrs.name]"
+                                         v-bind="curdTable.utils.filter$elAttrs(item.$elAttrs).$attrs"
+                                />
+                            </a-form-item-rest>
+                            <bag-upload-image v-bind="item.$slotAttrs"
+                                              v-model:image="curdTable.edit.formState[item.$formItemAttrs.name]"
+                            ></bag-upload-image>
+                        </template>
+                        <template v-if="item.el === 'md-editor'">
+                            <md-editor v-model="curdTable.edit.formState[item.$formItemAttrs.name]"
+                                       v-bind="curdTable.utils.filter$elAttrs(item.$elAttrs).$attrs"
+                            />
+                        </template>
                         <template v-if="item.slot.name">
                             <slot :name="item.slot.name" v-bind="{formState:curdTable.edit.formState,item}"></slot>
                         </template>

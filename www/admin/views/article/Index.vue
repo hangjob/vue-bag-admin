@@ -1,37 +1,22 @@
 <template>
-    <bag-curd-table :createForm="createForm" :editForm="editForm" :tableCurd="tableCurd"></bag-curd-table>
+    <bag-curd-plus :curdTable="curd.curdTable"></bag-curd-plus>
 </template>
 <script lang="ts">
 import { defineComponent, reactive } from 'vue'
-import { cloneDeep } from 'lodash'
-import curdTableHock, { initTableHock } from '@/packages/hook/table'
 import columns from './columns'
+import initCurd, { createTableHock } from '@/packages/hook/tablePlus'
 
 export default defineComponent({
     setup() {
-        const { tableCurd } = curdTableHock()
-        tableCurd.all.api = '/web/article/page'
-
-        tableCurd.all.beforeEach = (formState, pagination) => {
-            return { ...formState, currentPage: pagination.current, pageSize: pagination.pageSize }
-        }
-
-        tableCurd.all.beforeSuccess = (res) => {
-            tableCurd.pagination.total = res.count
-            return res.rows
-        }
-
-        const form = reactive(initTableHock({
-            columns, tableCurd, options: {
-                apiPrefix: '/web/article',
-                send: true,
-            },
-        }))
-
+        
+        const defaultCurdTable = initCurd()
+        defaultCurdTable.all.isPage = true
+        defaultCurdTable.all.api = '/web/article/page'
+        defaultCurdTable.apiPrefix = '/web/article'
+        const curd = createTableHock({ columns, curdTable: defaultCurdTable })
+        
         return {
-            tableCurd,
-            editForm: form,
-            createForm: { ...cloneDeep(form) },
+            curd,
         }
     },
 })

@@ -31,10 +31,10 @@ export default defineComponent({
         }
         
         const handleAntDesign = () => {
-            window.open('https://2x.antdv.com/docs/vue/introduce-cn')
+            window.open('https://antdv.com/docs/vue/introduce-cn')
         }
         const handleDocument = () => {
-            window.open('/doc.html')
+            window.open('/index.html')
         }
         return {
             handleOfficial,

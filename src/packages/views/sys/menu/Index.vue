@@ -1,5 +1,5 @@
 <template>
-    <bag-curd-table :createForm="createForm" :editForm="editForm" :tableCurd="tableCurd">
+    <bag-curd-plus :curdTable="curd.curdTable">
         <template #icon="{ record }">
             <template v-if="record.icon">
                 <component :is="record.icon"></component>
@@ -11,27 +11,26 @@
         </template>
         <template #form-icon="{item,formState}">
             <a-input-search
-                v-model:value="formState[item.formData.name]"
+                v-model:value="formState[item.$formItemAttrs.name]"
                 placeholder="选择icon图标"
                 enter-button
                 :readonly="true"
                 @search="compData.visibleIcon = true"
             />
             <a-modal v-model:visible="compData.visibleIcon" width="85%" title="选择icon" okText="确认" cancelText="关闭">
-                <Icons v-model:icon="formState[item.formData.name]" @affirm="compData.visibleIcon = false" />
+                <Icons v-model:icon="formState[item.$formItemAttrs.name]" @affirm="compData.visibleIcon = false" />
             </a-modal>
         </template>
-    </bag-curd-table>
+    </bag-curd-plus>
     <Btns ref="btns" />
 </template>
 <script lang="ts">
 import { computed, defineComponent, reactive, ref } from 'vue'
-import curdTableHock, { initTableHock } from '@/packages/hook/table'
 import columns from './columns'
 import { toTree } from '@/packages/utils/utils'
 import Icons from '@/packages/views/sys/menu/Icons.vue'
 import Btns from './Btns.vue'
-import { cloneDeep } from 'lodash'
+import initCurd, { createTableHock } from '@/packages/hook/tablePlus'
 
 export default defineComponent({
     components: {
@@ -39,35 +38,41 @@ export default defineComponent({
         Btns,
     },
     setup() {
+        const defaultCurdTable = initCurd()
+        defaultCurdTable.$pageAttrs.defaultPageSize = 50;
+        defaultCurdTable.all.isPage = true
+        defaultCurdTable.all.api = '/menu/page'
+        defaultCurdTable.apiPrefix = '/menu'
+        const curd = createTableHock({ columns, curdTable: defaultCurdTable })
+        
         const btns: any = ref(false)
-        const { tableCurd } = curdTableHock()
-        const form = reactive(initTableHock({
-            columns, tableCurd, options: {
-                apiPrefix: '/menu',
-            },
-        }))
-        tableCurd.all.beforeSuccess = (res: any) => {
-            form.formItem.forEach((item) => {
-                if (item.formData.name === 'pid') {
-                    item.formData.treeData = toTree(res)
+        
+        defaultCurdTable.all.afterRequest = function(res) {
+            columns.forEach((item: any) => {
+                if (item.dataIndex === 'pid') {
+                    const treeData = toTree(res.rows)
+                    treeData.unshift({ name: '请选择', id: 0 })
+                    item.curd.$elAttrs.treeData = treeData
                 }
             })
-            return toTree(res)
+            const dataSource = toTree(res.rows)
+            return {
+                dataSource,
+                total: dataSource.length,
+            }
         }
+        
         const compData = reactive({
             visibleIcon: false,
             handleSetBtn: ({ record }) => {
                 btns.value.handleOpen(true, record)
             },
         })
-        const editForm = computed(() => cloneDeep(form))
-        const createForm = computed(() => cloneDeep(form))
+        
         return {
-            tableCurd,
-            editForm,
-            createForm,
             compData,
             btns,
+            curd,
         }
     },
 })

@@ -40,7 +40,7 @@ const emailTmp = ({userEmail,downloads}) => {
                                                                 </p>
                                                                 <p class="cTMail-content" style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;">
                                                                     <span style="color: rgb(51, 51, 51); font-size: 14px;">
-                                                                        欢迎下载Bag，下载次数 <strong>${downloads}</strong>
+                                                                        欢迎下载Bag，下载次数超过 <strong>${downloads}</strong>
                                                                     </span>
                         </p>
 

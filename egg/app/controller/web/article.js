@@ -113,18 +113,21 @@ class WebArticleController extends baseController {
     }
 
     async page() {
-        const {ctx} = this
-        const {ks, currentPage = 1, pageSize = 10} = ctx.request.body
+        const { ctx } = this
+        const { currentPage = 1, pageSize = 10, ...params } = ctx.request.body
         const where = {}
-        if (ks) {
-            where.name = {[Op.like]: `%${ks}%`}
+        for (const whereKey in params) {
+            if (params[whereKey]) {
+                where[whereKey] = { [Op.like]: `%${params[whereKey]}%` } // 模糊查詢 https://www.sequelize.com.cn/core-concepts/model-querying-basics
+            }
         }
-        const result = await ctx.model.Web.Article.findAndCountAll({
-            where: {...where},
-            limit: pageSize,
+        const result = await ctx.model.Web.Article.findAll({
+            where: { ...where },
+            limit: parseInt(pageSize),
             offset: (currentPage - 1) * pageSize,
         })
-        this.result({data: result})
+        const total = await ctx.model.Web.Article.count({ where: where })
+        this.result({ data: { rows: result, total, pageSize, currentPage } })
     }
 
     /**

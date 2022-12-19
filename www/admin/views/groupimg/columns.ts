@@ -10,21 +10,17 @@ export default [
     {
         title: '分组名称',
         dataIndex: 'name',
-        key: 'name',
         ellipsis: true,
         align: 'center',
-        formData: {
-            name: 'name',
-            label: '分组名称',
-            element: 'a-input',
-            props:{
-                placeholder: '输入分组名称'
+        curd: {
+            el: 'a-input',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '分组名称',
+                name: 'name',
+                rules: [{ required: true, message: '输入分组名称', trigger: 'blur' }],
             },
-            rules: [
-                {
-                    required: true, message: '分组名称为必填项', trigger: 'blur',
-                },
-            ],
+            $elAttrs: { placeholder: '输入分组名称', value: '' },
         },
     },
     {
@@ -33,13 +29,14 @@ export default [
         key: 'order',
         ellipsis: true,
         align: 'center',
-        formData: {
-            name: 'order',
-            label: '排序',
-            element: 'a-input',
-            props: {
-                placeholder: '输入排序',
-            }
+        curd: {
+            el: 'a-input',
+            $formItemAttrs: {
+                label: '排序',
+                name: 'order',
+                rules: [{ required: true, message: '输入排序', trigger: 'blur' }],
+            },
+            $elAttrs: { placeholder: '输入排序', value: '' },
         },
     },
     {
@@ -55,6 +52,6 @@ export default [
         key: 'action',
         align: 'center',
         width: 200,
-        _slots: {customRender: 'action'},
+        slot: { name: 'action' },
     },
 ]

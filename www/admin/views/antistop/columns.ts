@@ -6,45 +6,42 @@ const columns = [
         align: 'center',
         ellipsis: true,
         width: 70,
-        customRender: ({index}: { index: number }) => {
+        customRender: ({ index }: { index: number }) => {
             return index + 1
         },
     },
     {
         title: '关键词',
         dataIndex: 'name',
-        key: 'name',
         ellipsis: true,
         align: 'center',
         width: 200,
-        formData: {
-            name: 'name',
-            label: '关键词',
-            element: 'a-input',
-            props: {
-                placeholder: '输入关键词',
+        curd: {
+            el: 'a-input',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '关键词',
+                name: 'name',
+                rules: [{ required: true, message: '输入关键词' }],
             },
-            rules: [
-                {
-                    required: true, message: '关键词为必填项', trigger: 'blur',
-                }
-            ]
-        }
+            $elAttrs: { placeholder: '输入关键词', value: '' },
+        },
     },
     {
         title: '描述',
         dataIndex: 'describe',
-        key: 'describe',
         ellipsis: true,
         align: 'center',
-        formData: {
-            name: 'describe',
-            label: '描述',
-            element: 'a-textarea',
-            props: {
-                placeholder: '输入描述',
-            }
-        }
+        curd: {
+            el: 'a-textarea',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '描述',
+                name: 'describe',
+                rules: [{ required: true, message: '输入描述' }],
+            },
+            $elAttrs: { placeholder: '输入描述', value: '' },
+        },
     },
     {
         title: '排序',
@@ -53,33 +50,35 @@ const columns = [
         ellipsis: true,
         align: 'center',
         width: 80,
-        formData: {
-            name: 'order',
-            label: '排序',
-            element: 'a-input',
-            props: {
-                placeholder: '输入排序号',
-            }
-        }
+        curd: {
+            el: 'a-input',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '排序',
+                name: 'order',
+            },
+            $elAttrs: { placeholder: '输入排序', value: '' },
+        },
     },
     {
         title: '是否显示',
         dataIndex: 'shows',
-        key: 'shows',
         ellipsis: true,
         align: 'center',
         width: 80,
-        customRender: (item: any) => {
-            return item.text ? '是' : '否'
+        curd: {
+            el: 'a-switch',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '是否显示',
+                name: 'shows',
+            },
+            $elAttrs: {
+                checkedText: '是',
+                uncheckedText: '否',
+                checked: true,
+            },
         },
-        formData: {
-            name: 'shows',
-            label: '是否显示',
-            element: 'a-switch',
-            props: {
-                defaultValue: true
-            }
-        }
     },
     {
         title: '创建时间',
@@ -94,8 +93,10 @@ const columns = [
         key: 'action',
         align: 'center',
         width: 200,
-        _slots: {customRender: 'action'},
+        slot: {
+            name: 'action',
+        },
     },
 ]
 
-export default columns;
+export default columns

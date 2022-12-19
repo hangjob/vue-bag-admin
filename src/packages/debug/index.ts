@@ -1,5 +1,4 @@
 import type { App } from 'vue'
-import { post } from '@/packages/http/request'
 
 const handleError = (app: App) => {
     const agent = navigator.userAgent.toLowerCase()

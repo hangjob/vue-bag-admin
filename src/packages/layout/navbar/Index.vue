@@ -2,7 +2,7 @@
     <!--  菜单路径  -->
     <div class="layout-header">
         <a-layout-header class="layout-header_top">
-            <MenuFoldOutlined v-if="compData.collapsed" @click="compData.handleCollapsed(false)" />
+            <MenuFoldOutlined v-if="appStore.bagConfig.collapsed" @click="compData.handleCollapsed(false)" />
             <MenuUnfoldOutlined v-else @click="compData.handleCollapsed(true)" />
             <a-breadcrumb class="text-overflow breadcrumb" v-if="compData.browser.isPC">
                 <a-breadcrumb-item v-for="(item,idx) in compData.list" :key="idx">{{ item.name }}</a-breadcrumb-item>
@@ -38,14 +38,14 @@ export default defineComponent({
         const compData = reactive({
             browser,
             list: computed(() => appStore.tabPaths),
-            collapsed: computed(() => appStore.bagConfig.collapsed),
             handleCollapsed: (bol: boolean) => {
                 appStore.bagConfig.collapsed = bol
             },
         })
-
+        
         return {
             compData,
+            appStore
         }
     },
 })
@@ -57,13 +57,13 @@ export default defineComponent({
     align-items: center;
     padding-right: 10px;
     border-bottom: 1px solid #f0f0f0;
-
+    
     .breadcrumb {
         display: flex;
         align-items: center;
         margin-left: 10px
     }
-
+    
     &_top {
         display: flex;
         align-items: center;
@@ -74,7 +74,7 @@ export default defineComponent({
         line-height: 50px;
         height: 50px;
     }
-
+    
     &_right_menu {
         height: 100%;
         display: flex;

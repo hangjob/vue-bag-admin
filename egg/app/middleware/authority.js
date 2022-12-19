@@ -17,6 +17,7 @@ module.exports = options => {
                 await next()
             }
         } catch (e) {
+            console.log(e)
             ctx.response.status = 403
             ctx.body = { code: 9999, data: '', message: '系统异常' }
         }

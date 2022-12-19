@@ -8,10 +8,10 @@
                             <div class="bag-curd-header-action">
                                 <a-space :size="20">
                                     <template v-for="(item,idx) in tableCurd.btns">
-                                        <a-button v-if="buttonPermissions(item.tag)" v-debounce="{ func: item.func}"
+                                        <a-button v-if="buttonPermissions(item)" v-debounce="{ func: item.func}"
                                                   :class="item.class" :type="item.type"
                                         >
-                                            {{ buttonPermissions(item.tag).name }}
+                                            {{ buttonPermissions(item).name }}
                                         </a-button>
                                     </template>
                                 </a-space>
@@ -167,19 +167,20 @@
                         <template v-if="column._slots">
                             <a-space v-if="column._slots.customRender === 'action'">
                                 <slot name="table-action" v-bind="{record}"></slot>
-                                <a-button v-if="buttonPermissions('edit')" type="primary" size="small"
+                                <a-button v-if="buttonPermissions({name:'编辑',tag:'edit'})" type="primary" size="small"
                                           @click="tableCurd.edit.change(record)"
-                                >{{ buttonPermissions('edit').name }}
+                                >{{ buttonPermissions({ name: '编辑', tag: 'edit' }).name }}
                                 </a-button>
                                 <a-popconfirm
-                                    v-if="buttonPermissions('del')"
+                                    v-if="buttonPermissions({name:'删除',tag:'del'})"
                                     :title="`你确定删除嘛？`"
                                     ok-text="确认"
                                     cancel-text="关闭"
                                     placement="topRight"
                                     @confirm="tableCurd.delete.submit(record)"
                                 >
-                                    <a-button type="primary" danger size="small">{{ buttonPermissions('del').name }}
+                                    <a-button type="primary" danger size="small">
+                                        {{ buttonPermissions({ name: '删除', tag: 'del' }).name }}
                                     </a-button>
                                 </a-popconfirm>
                             </a-space>
@@ -257,20 +258,24 @@ export default defineComponent({
         tableCurd.edit.refForm = curdEdit // 编辑组件
         let columns = reactive(cloneDeep(tableCurd.columns))
         const columnsAll = reactive(columnsCheckbox({ tableCurd }))
-        const buttonPermissions = (tag) => {
-            let btnInfo: any = false
+        const buttonPermissions = (btnItem) => {
+            let btnInfo = <any>{}
             const btns = userStore.userInfo.rolesDetail.btns
             if (btns) {
-                const currentId = appStore.currentRouter.id
-                const currentBtn = btns.find((item) => item.mid == currentId)
+                const currentBtn = userStore.userInfo.rolesDetail.btns.find((item) => item.mid == appStore.currentRouter.id)
                 if (currentBtn) {
-                    btnInfo = currentBtn.btn.find((item) => item.tag === tag)
+                    const find = currentBtn.btn.find((item) => item.tag === btnItem.tag)
+                    if (find) {
+                        btnInfo.name = find.name
+                    }
                 }
-                return btnInfo
+                if (btnItem.builtIn) {
+                    btnInfo.name = btnItem.name
+                }
             } else {
-                btnInfo = btnsReal.find((item) => item.tag === tag)
+                btnInfo = btnItem
             }
-            return btnInfo
+            return btnInfo && Object.keys(btnInfo).length ? btnInfo : false
         }
         const tableSetting = reactive({
             size: 'middle',
