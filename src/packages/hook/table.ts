@@ -1,4 +1,4 @@
-import { reactive, nextTick } from 'vue'
+import { reactive } from 'vue'
 import { post } from '@/packages/http/request'
 import { toRaw } from 'vue'
 import { message } from 'ant-design-vue'
@@ -22,18 +22,21 @@ export default function(options = {}) {
                 func: () => tableCurd.refreshTable(),
                 loading: () => tableCurd.loading,
                 type: 'primary',
+                tag: 'refresh',
             },
             {
                 name: '新增',
                 func: () => tableCurd.create.change(),
                 loading: () => tableCurd.loading,
                 class: 'bag-button-color-green',
+                tag: 'create',
             },
             {
                 name: '删除',
                 func: () => tableCurd.deletes.submit(),
                 loading: () => tableCurd.loading,
                 type: 'danger',
+                tag: 'del',
             },
         ],
         // 右边的按钮 --属性继承exbtn
@@ -64,7 +67,7 @@ export default function(options = {}) {
         selectedRowKeys: [], // 批量选择
         apiPrefix: '', // 请求前缀，curd
         create: {
-            width:'85%',
+            width: '85%',
             visible: false, //  弹窗是否显示
             api: '', // API地址
             formState: '', // 表单数据
@@ -114,7 +117,6 @@ export default function(options = {}) {
                 if (utils.dataType(tableCurd.all.beforeEach) === 'function') {
                     tableCurd.all._formState = tableCurd.all.beforeEach(tableCurd.all.search.formState, tableCurd.pagination)
                 }
-
                 post(tableCurd.all.api, { ...tableCurd.all._formState }).then((res: any) => {
                     if (utils.dataType(tableCurd.all.beforeSuccess) === 'function') {
                         const data = tableCurd.all.beforeSuccess(res)
@@ -129,7 +131,7 @@ export default function(options = {}) {
         },
         edit: {
             visible: false,
-            width:'85%',
+            width: '85%',
             id: '',
             api: '',
             refForm: <any>'',

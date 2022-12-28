@@ -5,7 +5,9 @@
             <p>以下是Bag近期版本的下载.</p>
         </div>
         <el-row :gutter="30">
-            <el-col  class="wow animate__animated animate__slideInRight" data-wow-duration="2.0s" data-wow-delay="0.5s" :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
+            <el-col class="wow animate__animated animate__slideInRight" data-wow-duration="2.0s" data-wow-delay="0.5s"
+                    :xs="24" :sm="24" :md="12" :lg="6" :xl="6"
+            >
                 <div class="package" style="margin-top: 25px">
                     <div class="package-header">
                         <h4>V3.1</h4>
@@ -28,7 +30,9 @@
                     </div>
                 </div>
             </el-col>
-            <el-col  class="wow animate__animated animate__slideInRight" data-wow-duration="1.8s" data-wow-delay="0.5" :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
+            <el-col class="wow animate__animated animate__slideInRight" data-wow-duration="1.8s" data-wow-delay="0.5"
+                    :xs="24" :sm="24" :md="12" :lg="6" :xl="6"
+            >
                 <div class="package">
                     <div class="package-header" style="background-color: #E7AC44">
                         <h4>v3.0</h4>
@@ -47,11 +51,13 @@
                         </li>
                     </ul>
                     <div class="action">
-                        <el-button size="large" type="danger">下载程序</el-button>
+                        <el-button size="large" @click="handleDownload" type="danger">下载程序</el-button>
                     </div>
                 </div>
             </el-col>
-            <el-col  class="wow animate__animated animate__slideInRight" data-wow-duration="1.4s" data-wow-delay="0.5" :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
+            <el-col class="wow animate__animated animate__slideInRight" data-wow-duration="1.4s" data-wow-delay="0.5"
+                    :xs="24" :sm="24" :md="12" :lg="6" :xl="6"
+            >
                 <div class="package">
                     <div class="package-header" style="background-color: #3ab0e2">
                         <h4>V2.0</h4>
@@ -66,17 +72,23 @@
                         <li>简介：后台更新</li>
                         <li>简介：前台更新</li>
                         <li style="display: flex;justify-content: center">
-                            <el-button  type="primary"  @click="visible[2] = true">查看介绍
+                            <el-button type="primary" @click="visible[2] = true">查看介绍
                             </el-button>
                         </li>
                     </ul>
                     <div class="action">
-                        <el-button  target
-                                   :href="{url: 'https://github.com/hangjob/vue-bag-admin/archive/refs/tags/v2.0.0.zip'}" size="large" type="danger">下载程序</el-button>
+                        <el-button
+                            @click="handleDownload('https://github.com/hangjob/vue-bag-admin/archive/refs/tags/v2.0.0.zip')"
+                            target
+                            size="large" type="danger"
+                        >下载程序
+                        </el-button>
                     </div>
                 </div>
             </el-col>
-            <el-col class="wow animate__animated animate__slideInRight" data-wow-duration="1.0s" data-wow-delay="0.5" :xs="24" :sm="24" :md="12" :lg="6" :xl="6">
+            <el-col class="wow animate__animated animate__slideInRight" data-wow-duration="1.0s" data-wow-delay="0.5"
+                    :xs="24" :sm="24" :md="12" :lg="6" :xl="6"
+            >
                 <div class="package">
                     <div class="package-header" style="background-color: #34d293">
                         <h4>v1.0</h4>
@@ -98,8 +110,8 @@
                     </ul>
                     <div class="action">
                         <el-button target
-                                   :href="{url: 'https://github.com/hangjob/vue-bag-admin/archive/refs/heads/v1.zip'}"
                                    size="large" type="danger"
+                                   @click="handleDownload('https://github.com/hangjob/vue-bag-admin/archive/refs/heads/v1.zip')"
                         >下载程序
                         </el-button>
                     </div>
@@ -116,10 +128,10 @@
                     <li>✅ 增加CURD表单</li>
                     <li>✅ 增加表格数据导出</li>
                     <li>✅ 增加表格数据动态列</li>
-                    <li>✅ 完善Vuex命名空间</li>
+                    <li>✅ 使用pinia状态管理</li>
                     <li>✅ 完善动态Router子路由父级节点</li>
                     <li>✅ 增加站点配置功能</li>
-                    <li>✅ 增加web更多使用案列</li>
+                    <li>✅ 增加更多使用案列</li>
                     <li>✅ 增加素材图库选择功能</li>
                     <li>✅ 修复若干Bug</li>
                 </ul>
@@ -195,18 +207,18 @@
                 </div>
             </template>
         </el-dialog>
-<!--        <Galleria :value="images" v-model:activeIndex="activeIndex" :responsiveOptions="responsiveOptions"-->
-<!--                  :numVisible="7" containerStyle="max-width: 850px"-->
-<!--                  :circular="true" :fullScreen="true" :showItemNavigators="true" :showThumbnails="false"-->
-<!--                  v-model:visible="displayCustom"-->
-<!--        >-->
-<!--            <template #item="slotProps">-->
-<!--                <img :src="slotProps.item.src" :alt="slotProps.item.alt" style="width: 100%; display: block;" />-->
-<!--            </template>-->
-<!--            <template #thumbnail="slotProps">-->
-<!--                <img :src="slotProps.item.src" :alt="slotProps.item.alt" style="display: block;" />-->
-<!--            </template>-->
-<!--        </Galleria>-->
+        <!--        <Galleria :value="images" v-model:activeIndex="activeIndex" :responsiveOptions="responsiveOptions"-->
+        <!--                  :numVisible="7" containerStyle="max-width: 850px"-->
+        <!--                  :circular="true" :fullScreen="true" :showItemNavigators="true" :showThumbnails="false"-->
+        <!--                  v-model:visible="displayCustom"-->
+        <!--        >-->
+        <!--            <template #item="slotProps">-->
+        <!--                <img :src="slotProps.item.src" :alt="slotProps.item.alt" style="width: 100%; display: block;" />-->
+        <!--            </template>-->
+        <!--            <template #thumbnail="slotProps">-->
+        <!--                <img :src="slotProps.item.src" :alt="slotProps.item.alt" style="display: block;" />-->
+        <!--            </template>-->
+        <!--        </Galleria>-->
         <el-dialog class="download-release" header="版本简介" v-model="visible[3]">
             <div class="release-four">
                 <ul>
@@ -289,8 +301,8 @@ export default defineComponent({
             { src: 'https://s1.ax1x.com/2022/05/12/O0Ww8J.png' },
             { src: 'https://s1.ax1x.com/2022/05/12/O0Wf8H.png' },
         ])
-        const handleDownload= ()=>{
-            window.location.href = 'https://www.npmjs.com/package/vue-bag-admin'
+        const handleDownload = (url) => {
+            window.location.href = !url ? 'https://www.npmjs.com/package/vue-bag-admin' : url
         }
         return {
             visible,
@@ -300,7 +312,7 @@ export default defineComponent({
             activeIndex,
             displayCustom,
             responsiveOptions,
-            handleDownload
+            handleDownload,
         }
     },
 })
@@ -313,23 +325,23 @@ export default defineComponent({
     position: relative;
     overflow: hidden;
     color: #FFFFFF;
-
+    
     &-title {
         text-align: center;
         margin-bottom: 30px;
     }
-
+    
     h1 {
         font-size: 50px;
         font-weight: bold;
     }
-
+    
     .package {
         border-radius: 4px;
         overflow: hidden;
         background-color: #FFFFFF;
         margin-top: 60px;
-
+        
         &-header {
             height: 82px;
             background-color: #e96656;
@@ -338,19 +350,19 @@ export default defineComponent({
             flex-direction: column;
             align-items: center;
             justify-content: center;
-
+            
             h4 {
                 font-weight: bold;
                 line-height: 29px;
                 text-transform: uppercase;
             }
-
+            
             .meta-text {
                 font-size: 13px;
                 line-height: normal;
             }
         }
-
+        
         &-price {
             height: 100px;
             color: #FFF;
@@ -360,7 +372,7 @@ export default defineComponent({
             display: flex;
             align-items: center;
             justify-content: center;
-
+            
             h4 {
                 display: inline;
                 font-size: 40px;
@@ -368,7 +380,7 @@ export default defineComponent({
                 margin-bottom: 0;
             }
         }
-
+        
         ul {
             li {
                 padding-top: 10px;
@@ -379,13 +391,13 @@ export default defineComponent({
                 color: #333333;
                 text-align: center;
                 overflow: hidden;
-
+                
                 &:last-child {
                     border-bottom: none;
                 }
             }
         }
-
+        
         .action {
             overflow: hidden;
             display: flex;
@@ -404,15 +416,18 @@ export default defineComponent({
         }
     }
 }
-.release-images{
+
+.release-images {
     margin-top: 20px;
-    .iamge{
+    
+    .iamge {
         background-color: #ececec;
         border-radius: 3px;
         text-align: center;
         margin: 10px 0;
     }
-    img{
+    
+    img {
         border-radius: 3px;
     }
 }

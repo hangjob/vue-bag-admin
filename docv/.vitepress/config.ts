@@ -45,6 +45,7 @@ export default {
                     items: [
                         { text: 'CURD', link: '/admin/form/curd' },
                         { text: '属性说明', link: '/admin/form/attribute' },
+                        { text: '按钮权限', link: '/admin/form/role' },
                     ],
                 }
             ]

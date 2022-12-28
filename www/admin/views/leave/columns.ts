@@ -2,78 +2,64 @@ export default [
     {
         title: '用户昵称',
         dataIndex: 'name',
-        key: 'name',
         ellipsis: true,
         align: 'center',
-        formData: {
-            name: 'name',
-            label: '用户昵称',
-            element: 'a-input',
-            props:{
-                placeholder: '输入用户昵称',
+        curd: {
+            el: 'a-input',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '用户昵称',
+                name: 'name',
+                rules: [{ required: true, message: '输入用户昵称' }],
             },
-            rules: [
-                {
-                    required: true, message: '用户昵称为必填项', trigger: 'blur',
-                },
-            ],
+            $elAttrs: { placeholder: '输入用户昵称', value: '' },
         },
     },
     {
         title: '邮箱',
         dataIndex: 'email',
-        key: 'email',
         align: 'center',
         ellipsis: true,
-        formData: {
-            name: 'email',
-            label: '邮箱',
-            element: 'a-input',
-            props: {
-                placeholder: '输入邮箱',
+        curd: {
+            el: 'a-input',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '用户邮箱',
+                name: 'email',
+                rules: [{ required: true, message: '输入用户邮箱' }],
             },
-            rules: [
-                {
-                    required: true, message: '邮箱为必填项', trigger: 'blur',
-                },
-            ],
+            $elAttrs: { placeholder: '输入用户邮箱', value: '' },
         },
     },
     {
         title: '网站链接',
         dataIndex: 'url',
-        key: 'url',
         align: 'center',
         ellipsis: true,
-        formData: {
-            name: 'url',
-            label: '网站链接',
-            element: 'a-input',
-            props: {
-                placeholder: '网站链接',
-            }
+        curd: {
+            el: 'a-input',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '网站链接',
+                name: 'url',
+            },
+            $elAttrs: { placeholder: '输入网站链接', value: '' },
         },
     },
     {
         title: '留言记录',
         dataIndex: 'message',
-        key: 'message',
         ellipsis: true,
         align: 'center',
-        formData: {
-            name: 'message',
-            label: '留言记录',
-            element: 'a-textarea',
-            props: {
-                placeholder: '输入留言记录',
-                maxlength: 300,
+        curd: {
+            el: 'a-textarea',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '留言记录',
+                name: 'message',
             },
-            rules: [
-                {
-                    required: true, message: '留言记录为必填项', trigger: 'blur'
-                }
-            ]
-        }
+            $elAttrs: { placeholder: '输入留言记录', value: '', maxlength: 300 },
+        },
     },
     {
         title: '是否显示',
@@ -85,16 +71,19 @@ export default [
         customRender: (item: any) => {
             return item.text ? '是' : '否'
         },
-        formData: {
-            name: 'shows',
-            label: '是否显示',
-            element: 'a-switch',
-            props: {
-                placeholder: '是否显示',
+        curd: {
+            el: 'a-switch',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '是否显示',
+                name: 'shows',
+            },
+            $elAttrs: {
                 checkedText: '是',
-                uncheckedText: '否'
-            }
-        }
+                uncheckedText: '否',
+                checked: true,
+            },
+        },
     },
     {
         title: '创建时间',
@@ -109,6 +98,6 @@ export default [
         key: 'action',
         align: 'center',
         width: 200,
-        _slots: {customRender: 'action'},
+        slot: { name: 'action' },
     },
 ]

@@ -8,9 +8,9 @@
     <div class="right_menu-item hidden-xs" @click="handleGithub">
         <GithubOutlined class="icon-svg" />
     </div>
-    <div class="right_menu-item hidden-xs" @click="handleOfficial">
-        <ChromeOutlined class="icon-svg" />
-    </div>
+<!--    <div class="right_menu-item hidden-xs" @click="handleOfficial">-->
+<!--        <ChromeOutlined class="icon-svg" />-->
+<!--    </div>-->
 </template>
 <script>
 import { defineComponent } from 'vue'
@@ -23,7 +23,6 @@ export default defineComponent({
         },
     },
     setup(props) {
-        console.log(props.compData)
         const handleOfficial = () => {
             window.open('/web.html')
         }
@@ -32,10 +31,10 @@ export default defineComponent({
         }
         
         const handleAntDesign = () => {
-            window.open('https://2x.antdv.com/docs/vue/introduce-cn')
+            window.open('https://antdv.com/docs/vue/introduce-cn')
         }
         const handleDocument = () => {
-            window.open('/doc.html')
+            window.open('/index.html')
         }
         return {
             handleOfficial,

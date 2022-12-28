@@ -40,7 +40,7 @@ const emailTmp = ({userEmail,downloads}) => {
                                                                 </p>
                                                                 <p class="cTMail-content" style="line-height: 24px; margin: 6px 0px 0px; overflow-wrap: break-word; word-break: break-all;">
                                                                     <span style="color: rgb(51, 51, 51); font-size: 14px;">
-                                                                        欢迎下载Bag，下载次数 <strong>${downloads}</strong>
+                                                                        欢迎下载Bag，下载次数超过 <strong>${downloads}</strong>
                                                                     </span>
                         </p>
 
@@ -101,7 +101,7 @@ const emailTmp = ({userEmail,downloads}) => {
                                             <img border="0" src="https://s1.ax1x.com/2022/05/16/Oh3AVU.png" style="width:100px; height:100px; margin:0 auto;">
                                             <br> 关注服务号，全栈导航
                                             <br>
-                                            <p style="line-height: 16px;margin: 0;margin-top: 5px;">Copyrights © 2019-2021</p>
+                                            <p style="line-height: 16px;margin: 0;margin-top: 5px;">Copyrights © 2019-2025</p>
                                             <p style="line-height: 16px;margin: 0;">All rights reserved 鄂ICP备17016349号-3</p>
                                         </p>
                                     </td>

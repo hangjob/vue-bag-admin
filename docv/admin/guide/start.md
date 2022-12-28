@@ -104,3 +104,11 @@ module.exports = {
     }
 }
 ```
+
+## 后台服务
+如没有后台，程序提供后台服务【[Egg.js](https://github.com/hangjob/vue-bag-admin/tree/master/egg)】，程序会自动完成
+```bash
+npm i
+npm run dev
+```
+

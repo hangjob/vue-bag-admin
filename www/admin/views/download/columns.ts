@@ -10,290 +10,277 @@ export default [
     {
         title: '应用标题',
         dataIndex: 'title',
-        key: 'title',
         ellipsis: true,
         align: 'center',
-        formData: {
-            name: 'title',
-            label: '应用标题',
-            element: 'a-input',
-            props: {
-                placeholder: '输入应用标题',
+        curd: {
+            el: 'a-input',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '应用标题',
+                name: 'title',
+                rules: [{ required: true, message: '应用标题为必填项', trigger: 'blur' }],
             },
-            rules: [
-                {
-                    required: true, message: '应用标题为必填项', trigger: 'blur',
-                },
-            ],
+            $elAttrs: { placeholder: '输入应用标题', value: '' },
         },
     },
     {
         title: '用户ID',
         dataIndex: 'user_id',
-        key: 'user_id',
         align: 'center',
         ellipsis: true,
-        formData: {
-            name: 'user_id',
-            label: '用户ID',
-            element: 'a-select',
-            options: [],
-            props: {
-                mode: null,
-                placeholder: '选择类型',
-                defaultValue: '',
+        curd: {
+            el: 'a-select',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '节点类型',
+                name: 'user_id',
+            },
+            $elAttrs: {
+                placeholder: '选择用户',
+                value: '',
+                options: [],
             },
         },
     },
     {
         title: '标题样式',
         dataIndex: 'title_style',
-        key: 'title_style',
         ellipsis: true,
         align: 'center',
         visible: false,
-        formData: {
-            name: 'title_style',
-            label: '标题样式',
-            element: 'a-textarea',
-            props: {
-                placeholder: '输入标题样式',
-                maxlength: 300,
+        curd: {
+            el: 'a-textarea',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '标题样式',
+                name: 'title_style',
             },
+            $elAttrs: { placeholder: '输入标题样式', value: '', maxlength: 300 },
         },
     },
     {
-        title: '栏目id',
+        title: '栏目类型',
         dataIndex: 'channel_id',
-        key: 'channel_id',
         ellipsis: true,
         align: 'center',
-        formData: {
-            name: 'channel_id',
-            label: '栏目id',
-            element: 'a-select',
-            options: [],
-            props: {
-                mode: null,
-                placeholder: '栏目id',
-                defaultValue: '',
+        curd: {
+            el: 'a-select',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '栏目类型',
+                name: 'channel_id',
+            },
+            $elAttrs: {
+                placeholder: '栏目类型',
+                value: '',
+                options: [],
             },
         },
     },
     {
         title: '图片',
         dataIndex: 'image',
-        key: 'image',
         ellipsis: true,
         align: 'center',
-        _slots: {customRender: 'image'},
-        formData: {
-            name: 'image',
-            label: '图片',
-            element: 'bag-upload-image',
-            props: {
-                isFileMore: false,
-                placeholder: '上传图片',
-                maxlength: 300,
+        curd: {
+            el: 'bag-upload-image',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '图片地址',
+                name: 'image',
+                rules: [{ required: true, message: '图片地址必填项', trigger: 'blur' }],
+            },
+            $elAttrs: {
+                placeholder: '输入图片地址',
+                value: '',
             },
         },
     },
     {
         title: '描述',
         dataIndex: 'describe',
-        key: 'describe',
         ellipsis: true,
         align: 'center',
-        _slots: {customRender: 'describe'},
-        formData: {
-            name: 'describe',
-            label: '描述',
-            element: 'a-textarea',
-            props: {
-                placeholder: '输入描述',
-                maxlength: 300,
+        curd: {
+            el: 'a-textarea',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '描述',
+                name: 'describe',
             },
-            rules: [
-                {
-                    required: true, message: '输入描述为必填项', trigger: 'blur',
-                },
-            ],
+            $elAttrs: { placeholder: '描述', value: '', maxlength: 300 },
         },
     },
     {
         title: '内容',
         dataIndex: 'content',
-        key: 'content',
         ellipsis: true,
         align: 'left',
         visible: false,
-        layout: {
-            xs: 24,
-            sm: 24,
-            md: 24,
-            lg: 24,
-            xl: 24,
-
-        },
-        formData: {
-            name: 'content',
-            label: '内容',
-            element: 'md-editor',
-            autoLink: false,
-            labelCol: {
-                span: 2,
-                offset: 0,
+        curd: {
+            el: 'md-editor',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '内容',
+                name: 'content',
+                labelCol: { span: 1, offset: 0 },
+                wrapperCol: { span: 22, offset: 0 },
             },
-            wrapperCol: {
-                span: 21,
-                offset: 0,
+            slot: {
+                name: 'curdPname',
             },
-            props: {
-                placeholder: '输入内容',
+            $elAttrs: { placeholder: '输入内容', value: '' },
+            $colAttrs: {
+                xs: 24,
+                sm: 24,
+                md: 24,
+                lg: 24,
+                xl: 24,
             },
         },
     },
     {
         title: '下载地址',
         dataIndex: 'download_site',
-        key: 'download_site',
         ellipsis: true,
         align: 'center',
         width: 100,
         visible: false,
-        layout: {
-            xs: 24,
-            sm: 24,
-            md: 24,
-            lg: 24,
-            xl: 24,
-        },
-        formData: {
-            name: 'download_site',
-            label: '下载地址',
-            slotName: 'BagDownloadSite',
-            element: 'bag-download-site',
-            labelCol: {
-                span: 2,
-                offset: 0,
+        curd: {
+            el: '',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '下载地址',
+                name: 'download_site',
+                labelCol: { span: 1, offset: 0 },
+                wrapperCol: { span: 22, offset: 0 },
             },
-            wrapperCol: {
-                span: 21,
-                offset: 0,
+            slot: {
+                name: 'BagDownloadSite',
+            },
+            $elAttrs: { placeholder: '输入下载地址', value: '' },
+            $colAttrs: {
+                xs: 24,
+                sm: 24,
+                md: 24,
+                lg: 24,
+                xl: 24,
             },
         },
     },
     {
         title: '热度',
         dataIndex: 'flag',
-        key: 'flag',
         ellipsis: true,
         align: 'center',
         width: 100,
-        formData: {
-            name: 'flag',
-            label: '热度',
-            element: 'a-select',
-            options: [{name: '置顶', value: '置顶'}, {name: '最新', value: '最新'}, {
-                name: '推荐', value: '推荐',
-            }, {name: '热门', value: '热门'}],
-            props: {
-                mode: null,
+        curd: {
+            el: 'a-select',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '热度',
+                name: 'flag',
+            },
+            $elAttrs: {
                 placeholder: '选择热度',
-                defaultValue: '推荐',
+                value: '推荐',
+                options: [
+                    { label: '置顶', value: '置顶' }, { label: '最新', value: '最新' },
+                    { label: '推荐', value: '推荐' }, { label: '热门', value: '热门' },
+                ],
             },
         },
     },
     {
         title: '选择发布时间',
         dataIndex: 'createTime',
-        key: 'createTime',
         ellipsis: true,
         align: 'center',
         width: 100,
-        formData: {
-            name: 'createTime',
-            label: '选择发布时间',
-            element: 'a-date-picker',
-            props: {
+        curd: {
+            el: 'a-date-picker',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '发布时间',
+                name: 'createTime',
+            },
+            $elAttrs: {
                 valueFormat: 'YYYY-MM-DD HH:mm:ss',
                 placeholder: '选择发布时间',
                 showTime: true,
                 type: 'date',
+                value: '',
             },
         },
     },
     {
         title: '浏览次数',
         dataIndex: 'views',
-        key: 'views',
         ellipsis: true,
         align: 'center',
         width: 100,
-        formData: {
-            name: 'views',
-            label: '浏览次数',
-            element: 'a-input',
-            props: {
-                placeholder: '输入浏览次数',
-            }
+        curd: {
+            el: 'a-input',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '浏览次数',
+                name: 'views',
+            },
+            $elAttrs: { placeholder: '输入浏览次数', value: '' },
         },
     },
     {
         title: '点赞次数',
         dataIndex: 'likes',
-        key: 'likes',
         ellipsis: true,
         align: 'center',
         width: 100,
         visible: false,
-        formData: {
-            name: 'likes',
-            label: '点赞次数',
-            element: 'a-input',
-            props: {
-                placeholder: '输入点赞次数',
-            }
+        curd: {
+            el: 'a-input',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '点赞次数',
+                name: 'likes',
+            },
+            $elAttrs: { placeholder: '输入点赞次数', value: '' },
         },
     },
     {
         title: '点踩次数',
         dataIndex: 'dislikes',
-        key: 'dislikes',
         ellipsis: true,
         align: 'center',
         width: 100,
         visible: false,
-        formData: {
-            name: 'dislikes',
-            label: '点踩次数',
-            element: 'a-input',
-            props: {
-                placeholder: '输入点踩次数',
-            }
+        curd: {
+            el: 'a-input',
+            $formItemAttrs: {
+                label: '点踩次数',
+                name: 'dislikes',
+            },
+            $elAttrs: { placeholder: '输入点踩次数', value: '' },
         },
     },
     {
         title: '评论数量',
         dataIndex: 'comments',
-        key: 'comments',
         ellipsis: true,
         align: 'center',
         width: 100,
         visible: false,
-        formData: {
-            name: 'comments',
-            label: '评论数量',
-            element: 'a-input',
-            props: {
-                placeholder: '输入评论数量',
-            }
+        curd: {
+            el: 'a-input',
+            $formItemAttrs: {
+                label: '评论数量',
+                name: 'comments',
+            },
+            $elAttrs: { placeholder: '输入评论数量', value: '' },
         },
     },
     {
         title: '游客访问',
         dataIndex: 'is_guest',
-        key: 'is_guest',
         ellipsis: true,
         align: 'center',
         width: 100,
@@ -301,39 +288,39 @@ export default [
         customRender: (item: any) => {
             return item.text ? '是' : '否'
         },
-        formData: {
-            name: 'is_guest',
-            label: '是否显示',
-            element: 'a-switch',
-            props: {
-                placeholder: '是否显示',
+        curd: {
+            el: 'a-switch',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '游客访问',
+                name: 'is_guest',
+            },
+            $elAttrs: {
                 checkedText: '是',
                 uncheckedText: '否',
-                defaultValue: true,
-            }
+                checked: true,
+            },
         },
     },
     {
         title: '是否评论',
         dataIndex: 'is_comment',
-        key: 'is_comment',
         ellipsis: true,
         align: 'center',
         width: 100,
         visible: false,
-        customRender: (item: any) => {
-            return item.text ? '是' : '否'
-        },
-        formData: {
-            name: 'is_comment',
-            label: '是否显示',
-            element: 'a-switch',
-            props: {
-                placeholder: '是否显示',
+        curd: {
+            el: 'a-switch',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '是否评论',
+                name: 'is_comment',
+            },
+            $elAttrs: {
                 checkedText: '是',
                 uncheckedText: '否',
-                defaultValue: true,
-            }
+                checked: true,
+            },
         },
     },
     {
@@ -349,6 +336,6 @@ export default [
         key: 'action',
         align: 'center',
         width: 200,
-        _slots: {customRender: 'action'},
+        slot: { name: 'action' },
     },
 ]

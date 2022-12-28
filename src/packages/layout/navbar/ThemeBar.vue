@@ -1,36 +1,42 @@
 <template>
+    <div class="right_menu-item">
+        <input class="key-input" placeholder="输入关键词" v-model="compData.search.str"
+               @keydown.enter="handleKeyBoard($event,compData.search.handleEnter)"
+               :class="compData.search.active" type="text"
+        >
+        <SearchOutlined class="icon-svg icon-search" @click="compData.search.handleSearch" />
+    </div>
+    <div class="right_menu-item">
+        <CompressOutlined class="icon-svg" @click="toggle" v-if="isFullscreen" />
+        <ExpandOutlined class="icon-svg" @click="toggle" v-else />
+    </div>
+    <div class="right_menu-item">
+        <a-popover v-model="compData.visible" title="" trigger="click">
+            <template #content>
+                <a-tabs :tabBarStyle="{minWidth:'200px'}" v-model:activeKey="compData.activeKey">
+                    <a-tab-pane key="1" tab="已读">
+                        <p style="line-height:30px" v-for="(item,idx) in compData.noticeList" :key="idx">{{ item.text }}</p>
+                    </a-tab-pane>
+                    <a-tab-pane key="2" tab="未读" force-render>
+                        <p style="line-height:30px" v-for="(item,idx) in compData.noticeList" :key="idx">{{ item.text }}</p>
+                    </a-tab-pane>
+                    <a-tab-pane key="3" tab="邮件">
+                        <p style="line-height:30px" v-for="(item,idx) in compData.noticeList" :key="idx">{{ item.text }}</p>
+                    </a-tab-pane>
+                </a-tabs>
+            </template>
+            <a-badge :count="compData.noticeList.length">
+                <BellOutlined class="icon-svg" />
+            </a-badge>
+        </a-popover>
+    </div>
+    <template :key="idx" v-for="(item,idx) in compData.icons">
+        <div :class="item.classItemName" @click="item.handle">
+            <component :class="item.classItemName" :is="item.iconName"></component>
+        </div>
+    </template>
     <template v-if="bagHeaderItem">
         <component :is="bagHeaderItem" v-bind="{compData}"></component>
-    </template>
-    <template v-else>
-        <div class="right_menu-item">
-            <input class="key-input" placeholder="输入关键词" v-model="compData.search.str"
-                   @keydown.enter="handleKeyBoard($event,compData.search.handleEnter)"
-                   :class="compData.search.active" type="text"
-            >
-            <SearchOutlined class="icon-svg icon-search" @click="compData.search.handleSearch" />
-        </div>
-        <div class="right_menu-item">
-            <CompressOutlined class="icon-svg" @click="toggle" v-if="isFullscreen" />
-            <ExpandOutlined class="icon-svg" @click="toggle" v-else />
-        </div>
-        <div class="right_menu-item">
-            <a-popover v-model="compData.visible" title="系统通知" trigger="click">
-                <template #content>
-                    <div class="notice-content">
-                        <p v-for="item in compData.noticeList" :key="item.id">{{ item.text }} {{ item.createTime }}</p>
-                    </div>
-                </template>
-                <a-badge :count="compData.noticeList.length">
-                    <BellOutlined class="icon-svg" />
-                </a-badge>
-            </a-popover>
-        </div>
-        <template :key="idx" v-for="(item,idx) in compData.icons">
-            <div :class="item.classItemName" @click="item.handle">
-                <component :class="item.classItemName" :is="item.iconName"></component>
-            </div>
-        </template>
     </template>
     <div class="right_menu-item hidden-xs">
         <img v-if="userinfo.userhead" class="user-head" :src="userinfo.userhead" alt="">
@@ -87,7 +93,12 @@ export default defineComponent({
         const { getImageFullPath } = inject<any>('bagGlobal')
         const compData = reactive({
             visible: false,
-            noticeList: [],
+            noticeList: [
+                { text: '😀 只要有梦想！你永远都是年轻！' },
+                { text: '🥰 喜欢就要争取，不行就要努力' },
+                { text: '😛 没有伞的孩子，必须努力奔跑！' },
+            ],
+            activeKey: '1',
             icons: [
                 {
                     iconName: 'SyncOutlined',
@@ -97,14 +108,14 @@ export default defineComponent({
                         $mitt.emit('reload-router-view')
                     },
                 },
-                {
-                    iconName: 'ClearOutlined',
-                    classItemName: 'right_menu-item hidden-xs',
-                    classItemIcon: 'icon-svg',
-                    handle() {
-                        userSetting.value.showDrawer()
-                    },
-                },
+                // {
+                //     iconName: 'ClearOutlined',
+                //     classItemName: 'right_menu-item hidden-xs',
+                //     classItemIcon: 'icon-svg',
+                //     handle() {
+                //         userSetting.value.showDrawer()
+                //     },
+                // },
                 {
                     iconName: 'HomeOutlined',
                     classItemName: 'right_menu-item hidden-xs',
@@ -137,7 +148,7 @@ export default defineComponent({
                     })
                 })
             },
-            toggle
+            toggle,
         })
         return {
             userSetting,

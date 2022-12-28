@@ -7,11 +7,11 @@ import columns from './columns'
 import initCurd, { createTableHock } from '@/packages/hook/tablePlus'
 
 export default defineComponent({
+    components: {},
     setup() {
         const defaultCurdTable = initCurd()
-        defaultCurdTable.apiPrefix = '/web/website'
+        defaultCurdTable.apiPrefix = '/web/banner'
         const curd = createTableHock({ columns, curdTable: defaultCurdTable })
-        
         return {
             curd,
         }

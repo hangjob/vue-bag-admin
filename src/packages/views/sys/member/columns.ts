@@ -2,7 +2,6 @@ const columns = [
     {
         title: '序号',
         dataIndex: 'index',
-        key: 'index',
         align: 'center',
         ellipsis: true,
         width: 70,
@@ -13,99 +12,100 @@ const columns = [
     {
         title: '角色',
         dataIndex: 'roles',
-        key: 'roles',
         ellipsis: true,
         align: 'center',
         width: 80,
         visible: false,
-        formData: {
-            name: 'roles',
-            label: '角色',
-            element: 'a-select',
-            options: [],
-            props: {
-                placeholder: '选择角色',
+        curd: {
+            el: 'a-select',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '选择角色',
+                name: 'roles',
             },
+            $elAttrs: { placeholder: '选择角色', value: '', options: [] },
         },
     },
     {
         title: '姓名',
         dataIndex: 'username',
-        key: 'username',
         ellipsis: true,
         align: 'center',
-        formData: {
-            name: 'username',
-            label: '姓名',
-            element: 'a-input',
-            props: {
-                placeholder: '输入姓名',
+        curd: {
+            el: 'a-input',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '姓名',
+                name: 'username',
             },
+            $elAttrs: { placeholder: '输入姓名', value: '' },
         },
     },
     {
         title: '性别',
         dataIndex: 'sex',
-        key: 'sex',
         ellipsis: true,
         align: 'center',
         width: 80,
-        formData: {
-            name: 'sex',
-            label: '性别',
-            element: 'a-select',
-            options: [{ value: 1, name: '女' }, { value: 2, name: '男' }, { value: 0, name: '保密' }],
-            props: {
+        curd: {
+            el: 'a-select',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '性别',
+                name: 'sex',
+            },
+            $elAttrs: {
                 placeholder: '选择性别',
+                value: '',
+                options: [{ value: 1, name: '女' }, { value: 2, name: '男' }, { value: 0, name: '保密' }],
             },
         },
     },
     {
         title: '年龄',
         dataIndex: 'age',
-        key: 'age',
         ellipsis: true,
         align: 'center',
         width: 80,
-        formData: {
-            name: 'age',
-            label: '姓名',
-            element: 'a-input',
-            props: {
-                placeholder: '输入年龄',
+        curd: {
+            el: 'a-input',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '年龄',
+                name: 'age',
             },
+            $elAttrs: { placeholder: '输入年龄', value: '' },
         },
     },
     {
         title: '邮箱',
         dataIndex: 'email',
-        key: 'email',
         ellipsis: true,
         align: 'center',
-        formData: {
-            name: 'email',
-            label: '姓名',
-            element: 'a-input',
-            props: {
-                placeholder: '输入邮箱',
+        curd: {
+            el: 'a-input',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '邮箱',
+                name: 'email',
             },
+            $elAttrs: { placeholder: '输入邮箱', value: '' },
         },
     },
     {
         title: '手机号',
         dataIndex: 'phone',
-        key: 'phone',
         ellipsis: true,
         align: 'center',
         width: 120,
-        _slots: { customRender: 'phone' },
-        formData: {
-            name: 'phone',
-            label: '姓名',
-            element: 'a-input',
-            props: {
-                placeholder: '输入手机号',
+        curd: {
+            el: 'a-input',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '手机号',
+                name: 'phone',
             },
+            $elAttrs: { placeholder: '输入手机号', value: '' },
         },
     },
     {
@@ -118,105 +118,109 @@ const columns = [
     {
         title: '职业',
         dataIndex: 'job',
-        key: 'job',
         ellipsis: true,
         align: 'center',
         visible: false,
-        formData: {
-            name: 'job',
-            label: '职业',
-            element: 'a-input',
-            props: {
-                placeholder: '输入职业',
+        curd: {
+            el: 'a-input',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '职业',
+                name: 'job',
             },
+            $elAttrs: { placeholder: '输入职业', value: '' },
         },
     },
     {
         title: '公司名称',
         dataIndex: 'company',
-        key: 'company',
         ellipsis: true,
         align: 'center',
         visible: false,
-        formData: {
-            name: 'company',
-            label: '公司名称',
-            element: 'a-input',
-            props: {
-                placeholder: '输入公司名称',
+        curd: {
+            el: 'a-input',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '公司名称',
+                name: 'company',
             },
+            $elAttrs: { placeholder: '输入公司名称', value: '' },
         },
     },
     {
         title: '地址',
         dataIndex: 'address',
-        key: 'address',
         ellipsis: true,
         align: 'center',
         visible: false,
-        formData: {
-            name: 'address',
-            label: '地址',
-            element: 'a-input',
-            props: {
-                placeholder: '输入地址',
+        curd: {
+            el: 'a-input',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '地址',
+                name: 'address',
             },
+            $elAttrs: { placeholder: '输入地址', value: '' },
         },
     },
     {
         title: '编程语言',
         dataIndex: 'software',
-        key: 'software',
         ellipsis: true,
         align: 'center',
         visible: false,
-        formData: {
-            name: 'software',
-            label: '编程语言',
-            element: 'a-input',
-            props: {
-                placeholder: '输入擅长编程语言',
+        curd: {
+            el: 'a-input',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '编程语言',
+                name: 'software',
             },
+            $elAttrs: { placeholder: '输入擅长编程语言', value: '' },
         },
     },
     {
         title: '生日',
         dataIndex: 'birthday',
-        key: 'birthday',
         ellipsis: true,
         align: 'center',
         visible: false,
-        formData: {
-            name: 'birthday',
-            label: '生日',
-            element: 'a-date-picker',
-            props: {
-                valueFormat: 'YYYY-MM-DD HH:mm:ss',
+        curd: {
+            el: 'a-date-picker',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '生日',
+                name: 'birthday',
+            },
+            $elAttrs: {
+                valueFormat: 'YYYY-MM-DD',
                 placeholder: '选择时间',
-                showTime: true,
                 type: 'date',
+                value: '',
             },
         },
     },
     {
         title: '是否禁用',
         dataIndex: 'state',
-        key: 'state',
         ellipsis: true,
         align: 'center',
         width: 100,
         customRender: (item: any) => {
             return item.text ? '是' : '否'
         },
-        formData: {
-            name: 'state',
-            label: '是否禁用',
-            element: 'a-switch',
-            props: {
+        curd: {
+            el: 'a-switch',
+            $formItemAttrs: {
+                autoLink: false,
+                label: '是否禁用',
+                name: 'state',
+            },
+            $elAttrs: {
                 placeholder: '是否禁用',
                 checkedText: '是',
                 uncheckedText: '否',
-                defaultValue: true,
+                checked: false,
             },
         },
     },
@@ -237,10 +241,12 @@ const columns = [
     },
     {
         title: '操作',
-        key: 'action',
         align: 'center',
         dataIndex: 'action',
-        _slots: { customRender: 'action' },
+        width: 220,
+        slot: {
+            name: 'custorm_action',
+        },
     },
 ]
 export default columns

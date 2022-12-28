@@ -12,17 +12,18 @@ module.exports = app => {
             type: STRING,
             comment: '菜单按钮名称',
         },
-        type: {
-            type: INTEGER,
-            comment: '菜单类型',// edit create updata delete
-        },
-        role_id: {
-            type: INTEGER,
-            comment: '角色id',
+        tag: {
+            type: STRING,
+            comment: '菜单标识符',// edit create updata delete
         },
         menu_id: {
             type: INTEGER,
             comment: '菜单id',
+        },
+        role: {
+            type: BOOLEAN,
+            defaultValue: true,
+            comment: '是否权限',
         },
         state: {
             type: BOOLEAN,

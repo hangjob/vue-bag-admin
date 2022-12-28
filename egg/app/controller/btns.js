@@ -69,7 +69,9 @@ class WebBtnsController extends baseController {
         for (const paramKey in param) {
             where[paramKey] = { [Op.like]: `%${param[paramKey]}%` } // 模糊查找
         }
-        const result = await ctx.model.Btns.findAll()
+        const result = await ctx.model.Btns.findAll({
+            where: {...where},
+        })
         this.result({ data: result })
     }
 

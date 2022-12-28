@@ -83,6 +83,24 @@ class MenuController extends baseController {
         this.result({data: result})
     }
 
+    async page() {
+        const { ctx } = this
+        const { currentPage = 1, pageSize = 10, ...params } = ctx.request.body
+        const where = {}
+        for (const whereKey in params) {
+            if (params[whereKey]) {
+                where[whereKey] = { [Op.like]: `%${params[whereKey]}%` } // 模糊查詢 https://www.sequelize.com.cn/core-concepts/model-querying-basics
+            }
+        }
+        const result = await ctx.model.Menu.findAll({
+            where: { ...where },
+            limit: parseInt(pageSize),
+            offset: (currentPage - 1) * pageSize,
+        })
+        const total = await ctx.model.Menu.count({ where: where })
+        this.result({ data: { rows: result, total, pageSize, currentPage } })
+    }
+
     /**
      * 编辑数据
      * @returns {Promise<void>}
