@@ -38,13 +38,13 @@ const columns = [
 ];
 const data = [
     {
-        key: '1', name: 'Vue', versions: '^3.2.16', name2: 'Vite', versions2: '^2.6.0'
+        key: '1', name: 'Vue', versions: '^3.2.16', name2: 'Vite', versions2: '^3.1.0'
     },
     {
-        key: '2', name: 'Vuex', versions: '^4.0.2', name2: 'Vue-router', versions2: '^4.0.12'
+        key: '2', name: 'Pinia', versions: '^2.0.11', name2: 'Vue-router', versions2: '^4.1.6'
     },
     {
-        key: '3', name: 'Ant-design-vue', versions: '^2.2.8', name2: 'Axios', versions2: '^0.23.0'
+        key: '3', name: 'Ant-design-vue', versions: '^3.2.13', name2: 'Axios', versions2: '^0.23.0'
     },
 ];
 export default defineComponent({

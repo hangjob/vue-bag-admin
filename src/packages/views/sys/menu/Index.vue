@@ -9,6 +9,21 @@
             <a-tag color="#2db7f5" v-if="record.children">目录</a-tag>
             <a-tag color="#87d068" v-else>菜单</a-tag>
         </template>
+        <template #custom_action="{record}">
+            <a-space v-if="!record.children">
+                <a-button class="bag-button-color-green" size="small" @click="compData.handleSetBtn({record})">设置按钮</a-button>
+                <a-button type="primary" size="small" @click="curd.curdTable.edit.change({record})">编辑</a-button>
+                <a-popconfirm
+                    :title="`你确定删除嘛？`"
+                    ok-text="确认"
+                    cancel-text="关闭"
+                    placement="topRight"
+                    @confirm="curd.curdTable.delete.submit({record})"
+                >
+                    <a-button type="primary" danger size="small">删除</a-button>
+                </a-popconfirm>
+            </a-space>
+        </template>
         <template #form-icon="{item,formState}">
             <a-input-search
                 v-model:value="formState[item.$formItemAttrs.name]"
@@ -65,7 +80,7 @@ export default defineComponent({
         const compData = reactive({
             visibleIcon: false,
             handleSetBtn: ({ record }) => {
-                btns.value.handleOpen(true, record)
+                btns.value.compData.handleOpen({record})
             },
         })
         

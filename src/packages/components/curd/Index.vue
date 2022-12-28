@@ -260,9 +260,10 @@ export default defineComponent({
         const columnsAll = reactive(columnsCheckbox({ tableCurd }))
         const buttonPermissions = (btnItem) => {
             let btnInfo = <any>{}
-            const btns = userStore.userInfo.rolesDetail.btns
-            if (btns) {
-                const currentBtn = userStore.userInfo.rolesDetail.btns.find((item) => item.mid == appStore.currentRouter.id)
+            let rolesDetail = userStore.userInfo.rolesDetail
+            if (rolesDetail && rolesDetail.btns) {
+                const btns = userStore.userInfo.rolesDetail.btns
+                const currentBtn = btns.find((item) => item.mid == appStore.currentRouter.id)
                 if (currentBtn) {
                     const find = currentBtn.btn.find((item) => item.tag === btnItem.tag)
                     if (find) {

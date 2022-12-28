@@ -10,7 +10,7 @@
                                 tleData.time
                             }}，准备吃什么呢?</h1>
                         <p>前端工程师 |
-                            品茗股份，vue-bag-admin，采用Vite2.0、Vue3.2、TypeScript、JavaScript构建，支持多种写法和调用，完整的框架体系，适合企业中后台响应式管理系统，支持现有业务各种扩展....</p>
+                            品茗股份，vue-bag-admin，采用Vite3.1、Vue3.2、TypeScript、JavaScript构建，支持多种写法和调用，完整的框架体系，适合企业中后台响应式管理系统，支持现有业务各种扩展....</p>
                     </div>
                 </div>
             </bag-card>
@@ -229,7 +229,7 @@
                 <template v-slot:title>时间轴</template>
                 <div class="timeline">
                     <a-timeline pending="持续更新中..." :reverse="false">
-                        <a-timeline-item>创建vite2.0+vue3.0+typescript构建管理系统</a-timeline-item>
+                        <a-timeline-item>创建vite3.1+vue3.2+typescript构建管理系统</a-timeline-item>
                         <a-timeline-item>添加对各种组件编写支持</a-timeline-item>
                         <a-timeline-item>完善管理系统基础配置权限、菜单、跳转控制</a-timeline-item>
                         <a-timeline-item>持续更新中...</a-timeline-item>

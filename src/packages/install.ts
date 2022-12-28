@@ -84,7 +84,7 @@ const install = (app: App, options?: $optionsType) => {
     app.provide('$configAppOptions', readonly(_options))
     app.use(setupGlobal)
     app.provide('$mitt', mitt())
-    handleError(app)
+    // handleError(app)
     setupInit(app)
 }
 

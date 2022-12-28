@@ -82,7 +82,7 @@ export default defineComponent({
         const userInfo = userStore.userInfo
         const { getImageFullPath } = inject<any>('bagGlobal')
         const compData = reactive({
-            tabActive: 1,
+            tabActive: "1",
             handleFollowMe() {
                 const key = `open${Date.now()}`
                 notification['success']({

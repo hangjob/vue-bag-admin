@@ -280,9 +280,9 @@ const columns = [
         title: '操作',
         align: 'center',
         dataIndex: 'action',
-        width: 150,
+        width: 220,
         slot: {
-            name: 'action',
+            name: 'custom_action',
         },
     },
 ]

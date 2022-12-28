@@ -11,13 +11,11 @@ module.exports = options => {
             const apis = ['edit', 'update', 'delete', 'deletes', 'updatePas']
             const lastUrls = req.url.split('/')
             if (apis.indexOf(lastUrls[lastUrls.length - 1]) > -1) {
-                // ctx.body = { code: 1, data: '', message: '演示数据不予许编辑删除' }
-                await next()
+                ctx.body = { code: 1, data: '', message: '演示数据不予许编辑删除' }
             } else {
                 await next()
             }
         } catch (e) {
-            console.log(e)
             ctx.response.status = 403
             ctx.body = { code: 9999, data: '', message: '系统异常' }
         }

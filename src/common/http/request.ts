@@ -68,7 +68,7 @@ function responseSuccess(res: AxiosResponse<ResponseData>, {
 }: { httpNetwork: any }) {
     const { config } = res
     let { code, data, message } = res.data
-    message = message ? message : '请检查网络'
+    message = message ? message : '请检查网络配置'
     const { successCode, messageDuration } = getHttpNetworkConfig(httpNetwork)
     if (successCode.indexOf(code) !== -1) {
         if (config.notify) {
@@ -102,15 +102,14 @@ function responseError(err: AxiosError, {
         if (error && error({ status, resetPath })) {
             return Promise.reject(errorData)
         }
-        messageModel.warning(data.message, messageDuration)
+        // messageModel.warning(data.message, messageDuration)
         return Promise.reject(errorData)
     } else {
         const { config, message } = <any>err.toJSON()
         const errorData: ResponseErrorData = { message: message, error: err.toJSON() }
         config.reconnectCount = config.reconnectCount || 0
         let msg = config.reconnectCount ? `is reconnection ${config.reconnectCount} times，${message}` : message
-        messageModel.warning(msg, messageDuration)
-
+        // messageModel.warning(msg, messageDuration)
         if (!config.relink) { // 是否开启重连
             return Promise.reject(errorData)
         }

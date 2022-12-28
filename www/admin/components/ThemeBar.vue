@@ -8,9 +8,9 @@
     <div class="right_menu-item hidden-xs" @click="handleGithub">
         <GithubOutlined class="icon-svg" />
     </div>
-    <div class="right_menu-item hidden-xs" @click="handleOfficial">
-        <ChromeOutlined class="icon-svg" />
-    </div>
+<!--    <div class="right_menu-item hidden-xs" @click="handleOfficial">-->
+<!--        <ChromeOutlined class="icon-svg" />-->
+<!--    </div>-->
 </template>
 <script>
 import { defineComponent } from 'vue'
