@@ -47,12 +47,22 @@ const httpNetwork = {
 // 网站配置
 const webSite = {
     title: 'vue-bag-admin',
-    subhead: '品茗',
+    subhead: 'admin',
     logoImage,
+}
+
+
+// 函数
+const funs = {
+    beforeEach: {
+        default: null,
+        callback: null,
+    },
 }
 
 export {
     themeConfig,
     httpNetwork,
     webSite,
+    funs,
 }

@@ -3,7 +3,7 @@ import setupInit from '@/packages/base'
 import * as $axios from '@/packages/http/request'
 import { handleError } from '@/packages/debug'
 import { Component, readonly } from 'vue'
-import { themeConfig, httpNetwork, webSite } from '@/packages/config'
+import { themeConfig, httpNetwork, webSite, funs } from '@/packages/config'
 import setupGlobal from '@/common/global'
 import curdTableHock, { initTableHock } from '@/packages/hook/table'
 import initCurd, { createTableHock } from '@/packages/hook/tablePlus'
@@ -52,7 +52,8 @@ interface $optionsType {
             logoImage?: string,
         }
     },
-    apis?: {}
+    apis?: {},
+    funs?: {}
 }
 
 const install = (app: App, options?: $optionsType) => {
@@ -79,7 +80,9 @@ const install = (app: App, options?: $optionsType) => {
         configAppApis: {
             ...options?.apis,
         },
+        configAppFuns: merge(funs, options?.funs),
     }
+    console.log(options)
     app.config.globalProperties = _options
     app.provide('$configAppOptions', readonly(_options))
     app.use(setupGlobal)

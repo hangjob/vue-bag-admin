@@ -1,35 +1,35 @@
 <template>
-    <div class="right_menu-item">
-        <input class="key-input" placeholder="输入关键词" v-model="compData.search.str"
-               @keydown.enter="handleKeyBoard($event,compData.search.handleEnter)"
-               :class="compData.search.active" type="text"
-        >
-        <SearchOutlined class="icon-svg icon-search" @click="compData.search.handleSearch" />
-    </div>
-    <div class="right_menu-item">
-        <CompressOutlined class="icon-svg" @click="toggle" v-if="isFullscreen" />
-        <ExpandOutlined class="icon-svg" @click="toggle" v-else />
-    </div>
-    <div class="right_menu-item">
-        <a-popover v-model="compData.visible" title="" trigger="click">
-            <template #content>
-                <a-tabs :tabBarStyle="{minWidth:'200px'}" v-model:activeKey="compData.activeKey">
-                    <a-tab-pane key="1" tab="已读">
-                        <p style="line-height:30px" v-for="(item,idx) in compData.noticeList" :key="idx">{{ item.text }}</p>
-                    </a-tab-pane>
-                    <a-tab-pane key="2" tab="未读" force-render>
-                        <p style="line-height:30px" v-for="(item,idx) in compData.noticeList" :key="idx">{{ item.text }}</p>
-                    </a-tab-pane>
-                    <a-tab-pane key="3" tab="邮件">
-                        <p style="line-height:30px" v-for="(item,idx) in compData.noticeList" :key="idx">{{ item.text }}</p>
-                    </a-tab-pane>
-                </a-tabs>
-            </template>
-            <a-badge :count="compData.noticeList.length">
-                <BellOutlined class="icon-svg" />
-            </a-badge>
-        </a-popover>
-    </div>
+<!--    <div class="right_menu-item">-->
+<!--        <input class="key-input" placeholder="输入关键词" v-model="compData.search.str"-->
+<!--               @keydown.enter="handleKeyBoard($event,compData.search.handleEnter)"-->
+<!--               :class="compData.search.active" type="text"-->
+<!--        >-->
+<!--        <SearchOutlined class="icon-svg icon-search" @click="compData.search.handleSearch" />-->
+<!--    </div>-->
+<!--    <div class="right_menu-item">-->
+<!--        <CompressOutlined class="icon-svg" @click="toggle" v-if="isFullscreen" />-->
+<!--        <ExpandOutlined class="icon-svg" @click="toggle" v-else />-->
+<!--    </div>-->
+<!--    <div class="right_menu-item">-->
+<!--        <a-popover v-model="compData.visible" title="" trigger="click">-->
+<!--            <template #content>-->
+<!--                <a-tabs :tabBarStyle="{minWidth:'200px'}" v-model:activeKey="compData.activeKey">-->
+<!--                    <a-tab-pane key="1" tab="已读">-->
+<!--                        <p style="line-height:30px" v-for="(item,idx) in compData.noticeList" :key="idx">{{ item.text }}</p>-->
+<!--                    </a-tab-pane>-->
+<!--                    <a-tab-pane key="2" tab="未读" force-render>-->
+<!--                        <p style="line-height:30px" v-for="(item,idx) in compData.noticeList" :key="idx">{{ item.text }}</p>-->
+<!--                    </a-tab-pane>-->
+<!--                    <a-tab-pane key="3" tab="邮件">-->
+<!--                        <p style="line-height:30px" v-for="(item,idx) in compData.noticeList" :key="idx">{{ item.text }}</p>-->
+<!--                    </a-tab-pane>-->
+<!--                </a-tabs>-->
+<!--            </template>-->
+<!--            <a-badge :count="compData.noticeList.length">-->
+<!--                <BellOutlined class="icon-svg" />-->
+<!--            </a-badge>-->
+<!--        </a-popover>-->
+<!--    </div>-->
     <template :key="idx" v-for="(item,idx) in compData.icons">
         <div :class="item.classItemName" @click="item.handle">
             <component :class="item.classItemName" :is="item.iconName"></component>
@@ -39,7 +39,7 @@
         <component :is="bagHeaderItem" v-bind="{compData}"></component>
     </template>
     <div class="right_menu-item hidden-xs">
-        <img v-if="userinfo.userhead" class="user-head" :src="userinfo.userhead" alt="">
+        <img v-if="userinfo.userhead" class="user-head" :src="getImageFullPath(userinfo.userhead)" alt="">
         <img v-else class="user-head" src="@/packages/assets/image/160161.png" alt="">
         <a-dropdown>
             <a class="ant-dropdown-link" @click.prevent>
@@ -100,14 +100,14 @@ export default defineComponent({
             ],
             activeKey: '1',
             icons: [
-                {
-                    iconName: 'SyncOutlined',
-                    classItemName: 'right_menu-item hidden-xs',
-                    classItemIcon: 'icon-svg refresh',
-                    handle: () => {
-                        $mitt.emit('reload-router-view')
-                    },
-                },
+                // {
+                //     iconName: 'SyncOutlined',
+                //     classItemName: 'right_menu-item hidden-xs',
+                //     classItemIcon: 'icon-svg refresh',
+                //     handle: () => {
+                //         $mitt.emit('reload-router-view')
+                //     },
+                // },
                 // {
                 //     iconName: 'ClearOutlined',
                 //     classItemName: 'right_menu-item hidden-xs',
@@ -116,14 +116,14 @@ export default defineComponent({
                 //         userSetting.value.showDrawer()
                 //     },
                 // },
-                {
-                    iconName: 'HomeOutlined',
-                    classItemName: 'right_menu-item hidden-xs',
-                    classItemIcon: 'icon-svg',
-                    handle() {
-                        window.open('/index.html')
-                    },
-                },
+                // {
+                //     iconName: 'HomeOutlined',
+                //     classItemName: 'right_menu-item hidden-xs',
+                //     classItemIcon: 'icon-svg',
+                //     handle() {
+                //         window.open('/index.html')
+                //     },
+                // },
             ],
             search: {
                 active: <any>'',

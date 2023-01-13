@@ -18,6 +18,7 @@ const app = defineStore({
             configAppStore: {},
             configAppComps: {},
             configAppApis: {},
+            configAppFuns:<any>{},
             httpSourceMenus: <Array<any>>[], // http 菜单源数据
             sourceMenus: <Array<any>>[], // http + 本地 菜单源数据
             menus: <Array<any>>[], // 菜单

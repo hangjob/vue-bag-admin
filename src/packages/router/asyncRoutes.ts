@@ -6,6 +6,7 @@ import router from '@/packages/router/index'
 import { Component } from 'vue'
 import { toTree, getAllParentArr } from '@/packages/utils/utils'
 import { findChildrenDepth, find } from '@/packages/utils/lodash'
+import { utils } from 'pm-utils'
 
 let namespace = 'admin'
 
@@ -148,8 +149,12 @@ const asyncRoutes = (to: RouteLocationNormalized, from: RouteLocationNormalized,
         next({ ...to, replace: true })
     }).catch(() => {
         const appStore = appPinia()
-        const { resetPath } = appStore.configApp.httpNetwork
-        next(resetPath)
+        if (utils.dataType(appStore.configAppFuns.beforeEach.callback) === 'function') {
+            appStore.configAppFuns.beforeEach.callback(to, from, next)
+        } else {
+            const { resetPath } = appStore.configApp.httpNetwork
+            next(resetPath)
+        }
     })
 }
 

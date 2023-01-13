@@ -9,8 +9,11 @@ app.use(install, {
     config: {
         webSite: {
             title: '品茗信息',
-            subhead:'品茗1'
+            subhead: '品茗1',
         },
+    },
+    apis: {
+        '/user/userinfo': '/xxx/xx?type=1',
     },
 }).mount('#app')
 window.__app__ = app

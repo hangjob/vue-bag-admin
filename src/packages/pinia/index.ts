@@ -10,7 +10,7 @@ const pinia = createPinia()
 const initStore = (app: App) => {
     const appStore = appPinia()
     const { themeConfig, httpNetwork, webSite } = app.config.globalProperties.configApp
-    const { configAppRouter, configAppStore, configAppComps, configAppApis } = app.config.globalProperties
+    const { configAppRouter, configAppStore, configAppComps, configAppApis,configAppFuns } = app.config.globalProperties
     appStore.configApp = {
         themeConfig,
         httpNetwork,
@@ -20,6 +20,7 @@ const initStore = (app: App) => {
     appStore.configAppStore = configAppStore
     appStore.configAppComps = configAppComps
     appStore.configAppApis = configAppApis
+    appStore.configAppFuns = configAppFuns;
 }
 
 
