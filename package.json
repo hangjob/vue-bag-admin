@@ -1,6 +1,6 @@
 {
     "name": "vue-bag-admin",
-    "version": "1.2.6",
+    "version": "1.2.8",
     "scripts": {
         "dev": "vite",
         "build": "vite build",
@@ -54,7 +54,7 @@
         "normalize.css": "^8.0.1",
         "nprogress": "^0.2.0",
         "pinia": "^2.0.11",
-        "pm-utils": "0.0.9",
+        "pm-utils": "0.0.18",
         "primeicons": "^5.0.0",
         "primevue": "^3.12.6",
         "print-js": "^1.6.0",

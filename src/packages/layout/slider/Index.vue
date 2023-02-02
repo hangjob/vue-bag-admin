@@ -1,6 +1,16 @@
 <template>
     <a-layout-sider theme="light" :width="compData.width" v-model:collapsed="appStore.bagConfig.collapsed" collapsible>
-        <div class="logo">{{ appStore.bagConfig.collapsed ? compData.subhead : compData.title }}</div>
+        <div class="logo">
+            <template v-if="appStore.bagConfig.collapsed">
+                {{ compData.subhead }}
+            </template>
+            <template v-else-if="compData.variableTitle()">
+                <img id="bag-logo-img" :src="compData.title" alt="">
+            </template>
+            <template v-else>
+                {{ compData.title }}
+            </template>
+        </div>
         <div class="scroll">
             <MenuSlider />
         </div>
@@ -10,6 +20,7 @@
 import { computed, defineComponent, reactive } from 'vue'
 import appPinia from '@/packages/pinia/app'
 import MenuSlider from './MenuSlider'
+import { utils } from 'pm-utils'
 
 export default defineComponent({
     name: 'Slider',
@@ -23,6 +34,9 @@ export default defineComponent({
             title,
             width: 0,
             subhead,
+            variableTitle: () => {
+                return utils.checkURL(title)
+            },
         })
         compData.width = appStore.bagConfig.collapsed ? 80 : 250
         return {
@@ -43,6 +57,11 @@ export default defineComponent({
     color: #ffffff;
     font-size: 25px;
     font-weight: bold;
+    
+    img {
+        width: 100%;
+        height: 100%;
+    }
 }
 
 .scroll {
