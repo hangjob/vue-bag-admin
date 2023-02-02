@@ -1,14 +1,19 @@
 <template>
     <a-layout-sider theme="light" :width="compData.width" v-model:collapsed="appStore.bagConfig.collapsed" collapsible>
         <div class="logo">
-            <template v-if="appStore.bagConfig.collapsed">
-                {{ compData.subhead }}
-            </template>
-            <template v-else-if="compData.variableTitle()">
-                <img id="bag-logo-img" :src="compData.title" alt="">
+            <template v-if="compData.variableTitle() === 'comp'">
+                <component :is="compData.title"></component>
             </template>
             <template v-else>
-                {{ compData.title }}
+                <template v-if="appStore.bagConfig.collapsed">
+                    {{ compData.subhead }}
+                </template>
+                <template v-else-if="compData.variableTitle() === 'http'">
+                    <img id="bag-logo-img" :src="compData.title" alt="">
+                </template>
+                <template v-else>
+                    {{ compData.title }}
+                </template>
             </template>
         </div>
         <div class="scroll">
@@ -17,7 +22,7 @@
     </a-layout-sider>
 </template>
 <script lang="ts">
-import { computed, defineComponent, reactive } from 'vue'
+import { computed, defineComponent, reactive, isVNode } from 'vue'
 import appPinia from '@/packages/pinia/app'
 import MenuSlider from './MenuSlider'
 import { utils } from 'pm-utils'
@@ -35,7 +40,13 @@ export default defineComponent({
             width: 0,
             subhead,
             variableTitle: () => {
-                return utils.checkURL(title)
+                if (utils.checkURL(title)) {
+                    return 'http'
+                }
+                if (utils.dataType(title) === 'string') {
+                    return 'str'
+                }
+                return 'comp'
             },
         })
         compData.width = appStore.bagConfig.collapsed ? 80 : 250

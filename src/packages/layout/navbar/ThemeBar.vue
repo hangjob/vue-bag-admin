@@ -100,30 +100,30 @@ export default defineComponent({
             ],
             activeKey: '1',
             icons: [
-                // {
-                //     iconName: 'SyncOutlined',
-                //     classItemName: 'right_menu-item hidden-xs',
-                //     classItemIcon: 'icon-svg refresh',
-                //     handle: () => {
-                //         $mitt.emit('reload-router-view')
-                //     },
-                // },
-                // {
-                //     iconName: 'ClearOutlined',
-                //     classItemName: 'right_menu-item hidden-xs',
-                //     classItemIcon: 'icon-svg',
-                //     handle() {
-                //         userSetting.value.showDrawer()
-                //     },
-                // },
-                // {
-                //     iconName: 'HomeOutlined',
-                //     classItemName: 'right_menu-item hidden-xs',
-                //     classItemIcon: 'icon-svg',
-                //     handle() {
-                //         window.open('/index.html')
-                //     },
-                // },
+                {
+                    iconName: 'HomeOutlined',
+                    classItemName: 'right_menu-item hidden-xs',
+                    classItemIcon: 'icon-svg',
+                    handle() {
+                        window.open('/index.html')
+                    },
+                },
+                {
+                    iconName: 'SyncOutlined',
+                    classItemName: 'right_menu-item hidden-xs',
+                    classItemIcon: 'icon-svg refresh',
+                    handle: () => {
+                        $mitt.emit('reload-router-view')
+                    },
+                },
+                {
+                    iconName: 'ClearOutlined',
+                    classItemName: 'right_menu-item hidden-xs',
+                    classItemIcon: 'icon-svg',
+                    handle() {
+                        userSetting.value.showDrawer()
+                    },
+                },
             ],
             search: {
                 active: <any>'',
