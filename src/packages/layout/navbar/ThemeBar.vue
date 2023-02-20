@@ -188,7 +188,7 @@ export default defineComponent({
     .key-input {
         background: none;
         outline: none;
-        border: 1px solid @primary-color;
+        border: 1px solid var(--bag-color-primary);
         border-radius: 36px;
         padding: 3px 10px;
         transition: all 0.5s;

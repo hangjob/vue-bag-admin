@@ -1,0 +1,7 @@
+:root {
+    --bag-color-primary: #c97a1a;
+    --bag-link-color: #ebc416;
+    --bag-heading-color: #000000D8; /*标题色*/
+    --bag-text-color-secondary: rgba(0, 0, 0, 0.45); /*次文本色*/
+    --bag-disabled-color: rgba(0, 0, 0, 0.25); /*失效颜色*/
+}

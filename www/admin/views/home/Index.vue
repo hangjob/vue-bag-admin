@@ -312,11 +312,11 @@ export default defineComponent({
         h1 {
             font-size: 20px;
             font-weight: 600;
-            color: @heading-color;
+            color: var(--bag-heading-color);
         }
 
         p {
-            color: @text-color-secondary;
+            color: var(--bag-text-color-secondary);
         }
     }
 }
@@ -372,12 +372,12 @@ export default defineComponent({
 .market {
     span {
         margin-right: 20px;
-        color: @disabled-color;
+        color: var(--bag-disabled-color);
         cursor: pointer;
     }
 
     span.active {
-        color: @primary-color;
+        color: var(--bag-color-primary);
     }
 }
 
@@ -395,12 +395,12 @@ export default defineComponent({
 
             span {
                 margin-left: 20px;
-                color: @disabled-color;
+                color: var(--bag-disabled-color);
                 cursor: pointer;
             }
 
             span.active {
-                color: @primary-color;
+                color: var(--bag-color-primary);
             }
         }
     }
@@ -424,7 +424,7 @@ export default defineComponent({
                     height: 16px;
                     line-height: 16px;
                     margin-right: 10px;
-                    color: @primary-color;
+                    color: var(--bag-color-primary);
                 }
 
                 p {
@@ -434,7 +434,7 @@ export default defineComponent({
 
                 &:nth-last-child(n + 3) {
                     strong {
-                        background-color: @primary-color;
+                        background-color: var(--bag-color-primary);
                         color: #fff;
                     }
                 }

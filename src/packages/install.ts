@@ -1,7 +1,7 @@
 import type { App } from 'vue'
 import setupInit from '@/packages/base'
 import * as $axios from '@/packages/http/request'
-import { handleError } from '@/packages/debug'
+// import { handleError } from '@/packages/debug'
 import { Component, readonly } from 'vue'
 import { themeConfig, httpNetwork, webSite, funs } from '@/packages/config'
 import setupGlobal from '@/common/global'
@@ -11,6 +11,8 @@ import mitt from 'mitt'
 import { merge } from 'lodash'
 import app from '@/packages/pinia/app'
 import user from '@/packages/pinia/user'
+import { ConfigProvider } from 'ant-design-vue'
+import { utils } from 'pm-utils'
 
 const $pinia = {
     app,
@@ -53,7 +55,7 @@ interface $optionsType {
         }
     },
     apis?: {},
-    funs?: {}
+    funs?: {},
 }
 
 const install = (app: App, options?: $optionsType) => {
@@ -82,13 +84,18 @@ const install = (app: App, options?: $optionsType) => {
         },
         configAppFuns: merge(funs, options?.funs),
     }
-    console.log(options)
     app.config.globalProperties = _options
     app.provide('$configAppOptions', readonly(_options))
     app.use(setupGlobal)
     app.provide('$mitt', mitt())
     // handleError(app)
     setupInit(app)
+
+    // 切换主题
+    if (utils.dataType(_options.configAppFuns.providerCallback) === 'function') {
+        _options.configAppFuns.providerCallback(ConfigProvider)
+    }
+
 }
 
 export default install

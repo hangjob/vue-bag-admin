@@ -143,7 +143,7 @@ export default defineComponent({
             background-color: #ffffff;
 
             .icon-svg {
-                color: @primary-color;
+                color: var(--bag-color-primary);
             }
         }
 
@@ -191,7 +191,7 @@ export default defineComponent({
             }
 
             &.active {
-                color: @primary-color;
+                color: var(--bag-color-primary);
             }
 
             .icon-svg {
@@ -200,7 +200,7 @@ export default defineComponent({
             }
 
             &:hover {
-                color: @primary-color;
+                color: var(--bag-color-primary);
 
                 .icon-svg {
                     font-size: inherit;
@@ -251,7 +251,7 @@ export default defineComponent({
             }
 
             &.active:before {
-                background-color: @primary-color;
+                background-color: var(--bag-color-primary);
             }
 
             &:first-of-type {

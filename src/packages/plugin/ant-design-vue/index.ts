@@ -1,6 +1,7 @@
 import type {App} from 'vue';
 import Antd from 'ant-design-vue';
-import "ant-design-vue/dist/antd.less";
+// import "ant-design-vue/dist/antd.less";
+import 'ant-design-vue/dist/antd.variable.min.css';
 import * as antIcons from '@ant-design/icons-vue'
 
 const setupAndDesignVue = (app: App) => {

@@ -18,7 +18,7 @@ const app = defineStore({
             configAppStore: {},
             configAppComps: {},
             configAppApis: {},
-            configAppFuns:<any>{},
+            configAppFuns: <any>{},
             httpSourceMenus: <Array<any>>[], // http 菜单源数据
             sourceMenus: <Array<any>>[], // http + 本地 菜单源数据
             menus: <Array<any>>[], // 菜单
@@ -30,6 +30,7 @@ const app = defineStore({
             bagConfig: {
                 collapsed: false,
             },
+            extend: {},
         }
     },
     actions: {
@@ -44,7 +45,11 @@ const app = defineStore({
             ars.forEach((item) => {
                 this.updataTabs(item)
             })
-        }
+        },
+        // 扩展字段
+        updataExtend(item: any) {
+            this.extend[item.key] = item.value
+        },
     },
 })
 

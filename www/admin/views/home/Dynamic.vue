@@ -78,7 +78,7 @@ ul {
             margin-bottom: 0;
             font-size: 14px;
             span{
-                color: @primary-color;
+                color: var(--bag-color-primary);
             }
         }
 

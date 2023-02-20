@@ -69,7 +69,7 @@ export default defineComponent({
 
         p {
             margin-bottom: 0;
-            color: @text-color-secondary;
+            color: var(--bag-text-color-secondary);
         }
     }
 }
