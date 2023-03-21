@@ -7,18 +7,18 @@
                         <div class="slide-left"><img src="@/packages/assets/image/01.jpg" alt=""></div>
                     </a-col>
                     <a-col :xs="24" :sm="24" :md="24" :lg="12" :xl="12">
-                        <div class="slide-right">
+                        <div v-if="trigger" class="slide-right">
                             <h2>欢迎您登录</h2>
                             <p>你可以直接输入您的账号和密码登录</p>
                             <a-form autocomplete="off" :rules="rules" ref="formRef" class="login-form" layout="vertical"
                                     :model="formState"
                             >
                                 <a-form-item label="你的账户" name="username">
-                                    <a-input size="large" v-model:value="formState.username" placeholder="随意输入你的账户" />
+                                    <a-input size="large" v-model:value="formState.username" placeholder="输入你的账户"/>
                                 </a-form-item>
                                 <a-form-item label="你的密码" name="password">
                                     <a-input size="large" type="password" v-model:value="formState.password"
-                                             placeholder="随意输入你的密码"
+                                             placeholder="输入你的密码"
                                     />
                                 </a-form-item>
                                 <a-form-item>
@@ -33,8 +33,9 @@
                                     </div>
                                 </a-form-item>
                             </a-form>
-                            <p class="register">没有账号? 注册账号</p>
+                            <p class="register" @click="handleTrigger">没有账号? 注册账号</p>
                         </div>
+                        <Register @handleTrigger="handleTrigger" v-if="!trigger"/>
                     </a-col>
                 </a-row>
                 <img class="embe embe1" src="@/packages/assets/image/01.png" alt="">
@@ -45,12 +46,13 @@
     </div>
 </template>
 <script lang="ts">
-import { inject, ref, toRaw } from 'vue'
-import { useRouter } from 'vue-router'
-import { defineComponent, reactive, UnwrapRef } from 'vue'
-import { ValidateErrorEntity } from 'ant-design-vue/es/form/interface'
-import { apiLogin } from '@/packages/service/user'
+import {inject, ref, toRaw} from 'vue'
+import {useRouter} from 'vue-router'
+import {defineComponent, reactive, UnwrapRef} from 'vue'
+import {ValidateErrorEntity} from 'ant-design-vue/es/form/interface'
+import {apiLogin} from '@/packages/service/user'
 import locaStore from '@/common/utils/persistence'
+import Register from './Register.vue'
 
 interface FormState {
     username: string;
@@ -58,36 +60,38 @@ interface FormState {
     rememberPas: string | boolean
 }
 
-import { aseEncrypt, aseDecrypt } from '@/common/utils/crypto'
+import {aseEncrypt, aseDecrypt} from '@/common/utils/crypto'
 
 export default defineComponent({
+    components: {Register},
     name: 'login',
     setup() {
         const router = useRouter()
         const formRef = ref()
+        const trigger = ref(true);
         // const appStore = app();
         const rules = {
             username: [
-                { required: true, message: '请随意输入你的用户名', trigger: 'blur' },
-                { min: 2, max: 30, message: '最小长度为2，最大长度30', trigger: 'blur' },
+                {required: true, message: '请输入你的用户名', trigger: 'blur'},
+                {min: 2, max: 30, message: '最小长度为2，最大长度30', trigger: 'blur'},
             ],
-            password: [{ required: true, message: '随意输入用户名密码', trigger: 'blur' }],
+            password: [{required: true, message: '输入用户名密码', trigger: 'blur'}],
         }
-        
+
         const formState: UnwrapRef<FormState> = reactive({
-            username: 'superadmin',
-            password: '123456',
+            username: '',
+            password: '',
             rememberPas: false,
         })
-        
+
         const encryptData = locaStore.get('encryptData')
         if (encryptData) {
-            let { username, password, rememberPas } = JSON.parse(aseDecrypt(encryptData))
+            let {username, password, rememberPas} = JSON.parse(aseDecrypt(encryptData))
             formState.username = username
             formState.password = password
             formState.rememberPas = rememberPas
         }
-        
+
         const handleLogin = () => {
             formRef.value
                 .validate()
@@ -103,22 +107,28 @@ export default defineComponent({
                     console.log('error', error)
                 })
         }
-        
+
+        const handleTrigger = () => {
+            trigger.value = !trigger.value
+        }
+
         return {
             handleLogin,
             formState,
             rules,
             formRef,
+            handleTrigger,
+            trigger
         }
     },
 })
 </script>
-<style lang="less" scoped>
+<style lang="less">
 .login {
     width: 100%;
     height: 100%;
     background: url("/src/packages/assets/image/02.jpg") no-repeat center center;
-    
+
     &-container {
         width: 75%;
         height: 80%;
@@ -132,7 +142,7 @@ export default defineComponent({
         padding: 30px;
         box-sizing: border-box;
     }
-    
+
     &-content {
         box-sizing: border-box;
         height: 100%;
@@ -140,23 +150,23 @@ export default defineComponent({
         display: flex;
         justify-content: center;
         align-items: center;
-        
+
         .embe {
             position: absolute;
             width: 100px;
         }
-        
+
         .embe1 {
             bottom: 55px;
             left: -75px;
         }
-        
+
         .embe2 {
             right: -80px;
             top: 40px;
             transform: rotate(180deg);
         }
-        
+
         .logo {
             position: absolute;
             left: 50px;
@@ -164,53 +174,53 @@ export default defineComponent({
             height: 40px;
             object-fit: cover;
         }
-        
+
         .slide-left {
             flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100%;
-            
+
             img {
                 width: 75%;
                 object-fit: cover;
             }
         }
-        
+
         .slide-right {
             h2 {
                 font-size: 30px;
                 color: #333333;
             }
-            
+
             p {
                 color: #d2d0d1;
                 font-size: 14px;
             }
-            
+
             .register {
                 cursor: pointer;
                 text-align: right;
             }
         }
-        
+
         .login-form {
             margin-top: 30px;
         }
-        
+
         .login-options {
             display: flex;
             justify-content: space-between;
         }
-        
+
         .login-input {
             &:nth-of-type(1) {
                 margin-top: 80px;
             }
-            
+
             margin-bottom: 20px;
-            
+
             input {
                 background-color: #fdeeed;
                 border-radius: 10px;
@@ -221,12 +231,12 @@ export default defineComponent({
                 font-size: 16px;
             }
         }
-        
+
         .login-btn {
             width: 100%;
             position: relative;
             z-index: 100;
-            
+
             button {
                 background-image: linear-gradient(to right, #e34c44, #f59178);
                 border: none;

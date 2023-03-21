@@ -29,7 +29,7 @@ class MemberController extends baseController {
                 let password = body.password
                 if (password) {
                     this.ctx.validate({
-                        password: {type: 'string', min: 2, max: 20, require: true},
+                        password: {type: 'string', min: 6, max: 20, require: true},
                     })
                 } else {
                     password = ctx.randomString()

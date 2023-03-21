@@ -13,3 +13,4 @@ run/
 typings/
 .nyc_output/
 config.prod.js
+.github/*

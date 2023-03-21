@@ -1,5 +1,5 @@
-import { post } from '@/packages/http/request'
-import { getApiInstanceUrl } from '@/packages/utils/api'
+import {post} from '@/packages/http/request'
+import {getApiInstanceUrl} from '@/packages/utils/api'
 
 
 /**
@@ -7,6 +7,18 @@ import { getApiInstanceUrl } from '@/packages/utils/api'
  */
 const apiLogin = (params?: object) => {
     return post(getApiInstanceUrl('/user/login'), params,
+        {
+            notifyError: true, relink: true,
+        },
+    )
+}
+
+
+/**
+ * 登录
+ */
+const apiLegister = (params?: object) => {
+    return post(getApiInstanceUrl('/member/create'), params,
         {
             notifyError: true, relink: true,
         },
@@ -41,4 +53,5 @@ export {
     apiLogout,
     apiUserUserinfo,
     apiSiteIpInfo,
+    apiLegister
 }
