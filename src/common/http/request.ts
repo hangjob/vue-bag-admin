@@ -49,7 +49,7 @@ function requestSuccess(config: AxiosRequestConfig, { httpNetwork = {} }: { http
     config.baseURL = baseURL
     config.timeout = timeout
     const sign = rsaEncrypt(JSON.stringify({ name: 'bag', nanoid: nanoid() }))
-    config.headers = { ...headers, ...config.headers, sign }
+    config.headers = { sign, ...headers, ...config.headers }
     config.retry = retry
     config.retryDelay = retryDelay
     if (config.method === 'post' && serialize) {
@@ -77,7 +77,7 @@ function responseSuccess(res: AxiosResponse<ResponseData>, {
         return data
     }
     if (config.notifyError) {
-        messageModel.warning(message, messageDuration)
+        messageModel.warning(message, messageDuration).then()
     }
     const errorData: ResponseErrorData = { message, error: res }
     return Promise.reject(errorData)

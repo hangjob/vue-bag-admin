@@ -2,7 +2,7 @@
     <div class="login">
         <div class="login-container">
             <div class="login-content">
-                <a-row :gutter="[100,16]">
+                <a-row style="width:100%" :gutter="[50,16]">
                     <a-col :xs="0" :sm="0" :md="0" :lg="12" :xl="12">
                         <div class="slide-left"><img src="@/packages/assets/image/01.jpg" alt=""></div>
                     </a-col>
@@ -33,7 +33,7 @@
                                     </div>
                                 </a-form-item>
                             </a-form>
-                            <p style="text-align: center">没有账号? 注册账号</p>
+                            <p class="register">没有账号? 注册账号</p>
                         </div>
                     </a-col>
                 </a-row>
@@ -73,13 +73,13 @@ export default defineComponent({
             ],
             password: [{ required: true, message: '随意输入用户名密码', trigger: 'blur' }],
         }
-
+        
         const formState: UnwrapRef<FormState> = reactive({
             username: 'superadmin',
             password: '123456',
             rememberPas: false,
         })
-
+        
         const encryptData = locaStore.get('encryptData')
         if (encryptData) {
             let { username, password, rememberPas } = JSON.parse(aseDecrypt(encryptData))
@@ -87,7 +87,7 @@ export default defineComponent({
             formState.password = password
             formState.rememberPas = rememberPas
         }
-
+        
         const handleLogin = () => {
             formRef.value
                 .validate()
@@ -103,7 +103,7 @@ export default defineComponent({
                     console.log('error', error)
                 })
         }
-
+        
         return {
             handleLogin,
             formState,
@@ -118,7 +118,7 @@ export default defineComponent({
     width: 100%;
     height: 100%;
     background: url("/src/packages/assets/image/02.jpg") no-repeat center center;
-
+    
     &-container {
         width: 75%;
         height: 80%;
@@ -132,7 +132,7 @@ export default defineComponent({
         padding: 30px;
         box-sizing: border-box;
     }
-
+    
     &-content {
         box-sizing: border-box;
         height: 100%;
@@ -140,23 +140,23 @@ export default defineComponent({
         display: flex;
         justify-content: center;
         align-items: center;
-
+        
         .embe {
             position: absolute;
             width: 100px;
         }
-
+        
         .embe1 {
             bottom: 55px;
             left: -75px;
         }
-
+        
         .embe2 {
             right: -80px;
             top: 40px;
             transform: rotate(180deg);
         }
-
+        
         .logo {
             position: absolute;
             left: 50px;
@@ -164,47 +164,53 @@ export default defineComponent({
             height: 40px;
             object-fit: cover;
         }
-
+        
         .slide-left {
             flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100%;
-
+            
             img {
-                width: 100%;
+                width: 75%;
+                object-fit: cover;
             }
         }
-
+        
         .slide-right {
             h2 {
                 font-size: 30px;
                 color: #333333;
             }
-
+            
             p {
                 color: #d2d0d1;
                 font-size: 14px;
             }
+            
+            .register {
+                cursor: pointer;
+                text-align: right;
+            }
         }
-
+        
         .login-form {
             margin-top: 30px;
         }
-
+        
         .login-options {
             display: flex;
             justify-content: space-between;
         }
-
+        
         .login-input {
             &:nth-of-type(1) {
                 margin-top: 80px;
             }
-
+            
             margin-bottom: 20px;
-
+            
             input {
                 background-color: #fdeeed;
                 border-radius: 10px;
@@ -215,12 +221,12 @@ export default defineComponent({
                 font-size: 16px;
             }
         }
-
+        
         .login-btn {
             width: 100%;
             position: relative;
             z-index: 100;
-
+            
             button {
                 background-image: linear-gradient(to right, #e34c44, #f59178);
                 border: none;
