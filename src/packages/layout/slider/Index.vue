@@ -49,6 +49,7 @@ export default defineComponent({
                 return 'comp'
             },
         })
+        console.log(compData.variableTitle(),title)
         compData.width = appStore.bagConfig.collapsed ? 80 : 250
         return {
             compData,

@@ -14,7 +14,6 @@ const $options: $optionsType = {
     },
     config: {
         webSite: {
-            title: 'http://192.168.1.19:8291/src/packages/assets/image/yanghang.jpg',
             subhead: 'Bag',
         },
         httpNetwork: {
