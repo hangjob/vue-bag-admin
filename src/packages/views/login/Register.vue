@@ -7,7 +7,7 @@
                     :model="formState"
             >
                 <a-form-item label="你的账户" name="username">
-                    <a-input size="large" v-model:value="formState.username" placeholder="输入你的账户"/>
+                    <a-input size="large" v-model:value="formState.username" placeholder="输入你的账户" />
                 </a-form-item>
                 <a-form-item label="你的密码" name="password">
                     <a-input size="large" type="password" v-model:value="formState.password"
@@ -15,7 +15,7 @@
                     />
                 </a-form-item>
                 <a-form-item label="输入密码" name="password2">
-                    <a-input size="large" type="password" v-model:value="formState.password2"
+                    <a-input size="large" type="password" autocomplete="off" v-model:value="formState.password2"
                              placeholder="在次输入你的密码"
                     />
                 </a-form-item>
@@ -31,17 +31,17 @@
                     </div>
                 </a-form-item>
             </a-form>
-            <p @click="handleTrigger" class="register">没有账号? 注册账号</p>
+            <p @click="handleTrigger" class="register">已有账号? 前往登录</p>
         </div>
     </div>
 </template>
 <script lang="ts">
-import {defineComponent, reactive, ref, UnwrapRef} from 'vue';
-import {useRouter} from "vue-router";
-import locaStore from "@/common/utils/persistence";
-import {aseDecrypt, aseEncrypt} from "@/common/utils/crypto";
-import {apiLegister, apiLogin} from "@/packages/service/user";
-import {ValidateErrorEntity} from "ant-design-vue/es/form/interface";
+import { defineComponent, reactive, ref, UnwrapRef } from 'vue'
+import { useRouter } from 'vue-router'
+import locaStore from '@/common/utils/persistence'
+import { aseDecrypt, aseEncrypt } from '@/common/utils/crypto'
+import { apiLegister, apiLogin } from '@/packages/service/user'
+import { ValidateErrorEntity } from 'ant-design-vue/es/form/interface'
 
 interface FormState {
     username: string;
@@ -51,7 +51,7 @@ interface FormState {
 
 
 export default defineComponent({
-    setup(props, {emit}) {
+    setup(props, { emit }) {
         const router = useRouter()
         const formRef = ref()
         // const appStore = app();
@@ -60,35 +60,35 @@ export default defineComponent({
             password: '',
             rememberPas: false,
         })
-
+        
         let validatePass2 = async (_rule: any, value: any) => {
             if (value === '') {
-                return Promise.reject('输入用户名密码');
+                return Promise.reject('输入用户名密码')
             } else if (value !== formState.password) {
-                return Promise.reject("在次输入密码有误");
+                return Promise.reject('在次输入密码有误')
             } else {
-                return Promise.resolve();
+                return Promise.resolve()
             }
-        };
-
+        }
+        
         const rules = {
             username: [
-                {required: true, message: '请输入你的用户名', trigger: 'blur'},
-                {min: 2, max: 30, message: '最小长度为2，最大长度30', trigger: 'blur'},
+                { required: true, message: '请输入你的用户名', trigger: 'blur' },
+                { min: 2, max: 30, message: '最小长度为2，最大长度30', trigger: 'blur' },
             ],
-            password: [{required: true, message: '输入用户名密码', trigger: 'blur'}],
-            password2: [{required: true, validator: validatePass2, trigger: 'blur'}],
+            password: [{ required: true, message: '输入用户名密码', trigger: 'blur' }],
+            password2: [{ required: true, validator: validatePass2, trigger: 'blur' }],
         }
-
-
+        
+        
         const encryptData = locaStore.get('encryptData')
         if (encryptData) {
-            let {username, password, rememberPas} = JSON.parse(aseDecrypt(encryptData))
+            let { username, password, rememberPas } = JSON.parse(aseDecrypt(encryptData))
             formState.username = username
             formState.password = password
             formState.rememberPas = rememberPas
         }
-
+        
         const handleLogin = () => {
             formRef.value
                 .validate()
@@ -106,20 +106,20 @@ export default defineComponent({
                     console.log('error', error)
                 })
         }
-
+        
         const handleTrigger = () => {
             emit('handleTrigger', true)
         }
-
+        
         return {
             handleLogin,
             formState,
             rules,
             formRef,
-            handleTrigger
+            handleTrigger,
         }
     },
-});
+})
 </script>
 <style lang="less" scoped>
 .register {

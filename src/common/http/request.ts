@@ -68,7 +68,7 @@ function responseSuccess(res: AxiosResponse<ResponseData>, {
 }: { httpNetwork: any }) {
     const { config } = res
     let { code, data, message } = res.data
-    message = message ? message : '请检查网络配置'
+    message = message ? message : '请检查网络服务是否已正常'
     const { successCode, messageDuration } = getHttpNetworkConfig(httpNetwork)
     if (successCode.indexOf(code) !== -1) {
         if (config.notify) {
