@@ -7,10 +7,10 @@
                     :model="formState"
             >
                 <a-form-item label="你的账户" name="username">
-                    <a-input size="large" v-model:value="formState.username" placeholder="输入你的账户" />
+                    <a-input size="large" v-model:value="formState.username" autocomplete="off" placeholder="输入你的账户" />
                 </a-form-item>
                 <a-form-item label="你的密码" name="password">
-                    <a-input size="large" type="password" v-model:value="formState.password"
+                    <a-input size="large" type="password" autocomplete="off" v-model:value="formState.password"
                              placeholder="输入你的密码"
                     />
                 </a-form-item>
@@ -19,7 +19,7 @@
                              placeholder="在次输入你的密码"
                     />
                 </a-form-item>
-                <a-form-item>
+                <a-form-item class="hidden-xs hidden-sm hidden-md">
                     <div class="login-options">
                         <a-checkbox v-model:checked="formState.rememberPas">七天记住我</a-checkbox>
                         <span class="hover-text-underline">忘记密码? 找回密码</span>
@@ -31,7 +31,9 @@
                     </div>
                 </a-form-item>
             </a-form>
-            <p @click="handleTrigger" class="register">已有账号? 前往登录</p>
+            <p class="register">
+                <span @click="handleTrigger">已有账号? 前往登录</span>
+            </p>
         </div>
     </div>
 </template>
@@ -42,6 +44,8 @@ import locaStore from '@/common/utils/persistence'
 import { aseDecrypt, aseEncrypt } from '@/common/utils/crypto'
 import { apiLegister, apiLogin } from '@/packages/service/user'
 import { ValidateErrorEntity } from 'ant-design-vue/es/form/interface'
+import { ConfigProvider } from 'ant-design-vue'
+import { utils } from 'pm-utils'
 
 interface FormState {
     username: string;
@@ -54,7 +58,6 @@ export default defineComponent({
     setup(props, { emit }) {
         const router = useRouter()
         const formRef = ref()
-        // const appStore = app();
         const formState: UnwrapRef<FormState> = reactive({
             username: '',
             password: '',
@@ -97,7 +100,10 @@ export default defineComponent({
                         if (formState.rememberPas) {
                             locaStore.set('encryptData', aseEncrypt(JSON.stringify(formState)), 3600 * 24 * 7)
                         }
-                        apiLogin(formState).then(() => {
+                        apiLogin(formState).then((res: any) => {
+                            if (utils.dataType(res) === 'string') {
+                                localStorage.setItem('token', res)
+                            }
                             router.push('/home') // 此处通过菜单节点去读取第一个，默认是跳转home
                         })
                     })

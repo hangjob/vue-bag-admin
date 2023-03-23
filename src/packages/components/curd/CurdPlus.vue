@@ -32,7 +32,7 @@
             <div class="bag-curd-search" v-if="curdTable.search.formItem.length">
                 <a-form ref="searchFormRef" :model="curdTable.search.formState">
                     <a-row :gutter="10">
-                        <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4" v-for="(item,idx) in curdTable.search.formItem"
+                        <a-col :xs="24" :sm="24" :md="8" :lg="6" :xl="4" v-for="(item,idx) in curdTable.search.formItem"
                                :key="idx"
                         >
                             <a-form-item v-bind="item.$formItemAttrs">
@@ -60,7 +60,7 @@
                                 </template>
                             </a-form-item>
                         </a-col>
-                        <a-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
+                        <a-col :xs="24" :sm="24" :md="16" :lg="28" :xl="20">
                             <a-form-item>
                                 <a-button type="primary" @click="curdTable.all.getData()">搜索</a-button>
                                 <a-button style="margin: 0 8px" @click="curdTable.search.resetFields(searchFormRef)">重置

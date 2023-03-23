@@ -14,17 +14,17 @@
                                     :model="formState"
                             >
                                 <a-form-item label="你的账户" name="username">
-                                    <a-input size="large" v-model:value="formState.username" placeholder="输入你的账户"/>
+                                    <a-input size="large" autocomplete="off" v-model:value="formState.username" placeholder="输入你的账户"/>
                                 </a-form-item>
                                 <a-form-item label="你的密码" name="password">
-                                    <a-input size="large" type="password" v-model:value="formState.password"
+                                    <a-input size="large" type="password" autocomplete="off" v-model:value="formState.password"
                                              placeholder="输入你的密码"
                                     />
                                 </a-form-item>
                                 <a-form-item>
                                     <div class="login-options">
                                         <a-checkbox v-model:checked="formState.rememberPas">七天记住我</a-checkbox>
-                                        <span class="hover-text-underline">忘记密码? 找回密码</span>
+                                        <span class="hover-text-underline hidden-xs">忘记密码? 找回密码</span>
                                     </div>
                                 </a-form-item>
                                 <a-form-item>
@@ -33,7 +33,9 @@
                                     </div>
                                 </a-form-item>
                             </a-form>
-                            <p class="register" @click="handleTrigger">没有账号? 注册账号</p>
+                            <p class="register" >
+                                <span  @click="handleTrigger">没有账号? 注册账号</span>
+                            </p>
                         </div>
                         <Register @handleTrigger="handleTrigger" v-if="!trigger"/>
                     </a-col>
