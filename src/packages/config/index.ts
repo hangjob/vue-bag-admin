@@ -42,6 +42,8 @@ const httpNetwork = {
     resetPath: '/login',
     // 序列化
     serialize: false, // 是否表单序列化
+    // use函数
+    asuse: false,
 }
 
 // 网站配置

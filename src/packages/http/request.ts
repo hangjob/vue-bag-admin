@@ -45,15 +45,16 @@ const get = (url: string, params?: any, config?: AxiosRequestConfig) => {
     return http.get(rewriteUrl(url), { params: params, ...config }).catch((err: any) => Promise.reject(err))
 }
 
-const upload = (url: string, file: File) => {
-    let config = {
+const upload = (url: string, file: File, config?: AxiosRequestConfig) => {
+    let _config = {
         headers: {
             'Content-Type': 'multipart/form-data',
         },
     }
+    console.log(config)
     let param = new FormData()
     param.append('file', file, file.name)
-    return http.post(rewriteUrl(url), param, { ...config })
+    return http.post(rewriteUrl(url), param, { ..._config, ...config })
 }
 
 

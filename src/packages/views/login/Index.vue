@@ -63,6 +63,7 @@ interface FormState {
 }
 
 import {aseEncrypt, aseDecrypt} from '@/common/utils/crypto'
+import { utils } from 'pm-utils'
 
 export default defineComponent({
     components: {Register},
@@ -98,9 +99,12 @@ export default defineComponent({
             formRef.value
                 .validate()
                 .then(() => {
-                    apiLogin(formState).then(() => {
+                    apiLogin(formState).then((res:any) => {
                         if (formState.rememberPas) {
                             locaStore.set('encryptData', aseEncrypt(JSON.stringify(formState)), 3600 * 24 * 7)
+                        }
+                        if (utils.dataType(res) === 'string') {
+                            localStorage.setItem('token', res)
                         }
                         router.push('/home') // 此处通过菜单节点去读取第一个，默认是跳转home
                     })

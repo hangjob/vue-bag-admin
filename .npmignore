@@ -1,6 +1,8 @@
 node_modules
 .DS_Store
 docs
+docv
+doc
 dist
 mock
 public

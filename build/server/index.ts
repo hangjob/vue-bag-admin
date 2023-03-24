@@ -8,7 +8,12 @@ export function configServer() {
                 target: 'http://127.0.0.1:8001',
                 changeOrigin: true,
                 rewrite: (path: any) => path.replace(/^\/api/, '')
-            }
+            },
+            '^/papi': {
+                target: 'http://127.0.0.1:1099',
+                changeOrigin: true,
+                rewrite: (path: any) => path.replace(/^\/papi/, '')
+            },
         }
     }
 }

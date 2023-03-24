@@ -1,10 +1,11 @@
 <template>
     <div class="upload-image">
-        <a-modal v-model:visible="tailor.visible" width="1000px" okText="确认上传" cancelText="关闭"
+        <a-modal v-model:visible="tailor.visible" :keyboard="false" wrap-class-name="full-modal" width="100%"
+                 okText="确认上传" cancelText="关闭"
                  :cancelButtonProps="{danger: true,type: 'primary'}" title="上传图片" @ok="tailor.handleConfirm"
                  :confirm-loading="tailor.loading"
         >
-            <div style="width: 100%;height: 500px">
+            <div style="width: 100%;height: 100%">
                 <vueCropper
                     ref="cropper"
                     :img="tailor.base64"
@@ -51,9 +52,9 @@
 import { defineComponent, inject, nextTick, reactive, ref, watch } from 'vue'
 import 'vue-cropper/dist/index.css'
 import { VueCropper } from 'vue-cropper'
-import { apiUploadImage } from '@/packages/service/upload'
+import { apiUploadImage, apiOssUploadImage } from '@/packages/service/upload'
 import { message } from 'ant-design-vue'
-import PmUtils from 'pm-utils'
+import * as PmUtils from 'pm-utils'
 import { apiAll } from '@www/admin/service/material'
 
 interface FileItem {
@@ -83,7 +84,7 @@ export default defineComponent({
         },
         fileSize: {
             type: Number,
-            default: 512,
+            default: 1024,
         },
         fixedBox: {
             type: Boolean,
@@ -100,6 +101,10 @@ export default defineComponent({
         isFileMore: {
             type: Boolean,
             default: true,
+        },
+        alyOss: {
+            type: Boolean,
+            default: false,
         },
     },
     emits: ['update:image'],
@@ -120,13 +125,13 @@ export default defineComponent({
             base64: '',
             fileName: '',
             handleConfirm: () => {
-                tailor.loading = true
                 cropper.value.getCropData((base64: any) => {
                     const file = PmUtils.file.base64ToFile(base64, tailor.fileName)
-                    if ((file.size / 1024) < props.fileSize) {
-                        message.error(`文件小于${props.fileSize}KB`)
+                    if ((file.size / 1024) > props.fileSize) {
+                        message.error(`文件需小于${props.fileSize}KB`)
                     } else {
-                        apiUploadImage(file).then((data: any) => {
+                        tailor.loading = true
+                        const exhibition = (data: any) => {
                             tailor.visible = false
                             tailor.loading = false
                             if (props.isFileMore) {
@@ -136,7 +141,20 @@ export default defineComponent({
                             }
                             message.success('上传成功')
                             emitImages()
-                        })
+                        }
+                        if (props.alyOss) {
+                            apiOssUploadImage(file).then((res: any) => {
+                                exhibition(res.info.url)
+                            }).finally(() => {
+                                tailor.loading = false
+                            })
+                        } else {
+                            apiUploadImage(file).then((data: any) => {
+                                exhibition(data)
+                            }).finally(() => {
+                                tailor.loading = false
+                            })
+                        }
                     }
                 })
             },
@@ -149,14 +167,14 @@ export default defineComponent({
                 })
             }
         }, { deep: true, immediate: true })
-
+        
         const emitImages = () => {
             const str = preview.list.map(function(item: any) {
                 return item.source
             }).join(',')
             emit('update:image', str)
         }
-
+        
         const beforeUpload = (file: FileItem) => {
             tailor.fileName = file.name
             const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
@@ -164,16 +182,18 @@ export default defineComponent({
                 message.error('请上传图片为,jpeg、png')
                 return false
             }
-            PmUtils.file.fileToBase64(file, ({ base64 }: { base64: any }) => {
-                tailor.base64 = base64
+            PmUtils.file.fileToBase64(file, (res: any) => {
+                tailor.base64 = res
                 tailor.visible = true
+            }, err => {
+                message.error(err)
             })
         }
-
+        
         const handleAffirm = () => {
-
+        
         }
-
+        
         const handleSelect = (item: any) => {
             if (props.isFileMore) {
                 preview.list.push({ url: item.image, source: item.image })
@@ -183,7 +203,7 @@ export default defineComponent({
             emitImages()
             visible.value = false
         }
-
+        
         const handleSelectImage = () => {
             visible.value = true
             nextTick(() => {
@@ -192,7 +212,7 @@ export default defineComponent({
                 })
             })
         }
-
+        
         return {
             fileList: ref([]),
             beforeUpload,
@@ -217,15 +237,15 @@ export default defineComponent({
         width: 600px;
         background-color: #dddddd;
     }
-
+    
     .action-btn {
         display: flex;
         margin-top: 5px;
     }
-
+    
     .preview {
         img {
-
+        
         }
     }
 }
@@ -237,5 +257,28 @@ export default defineComponent({
         width: 100%;
         object-fit: cover;
     }
+}
+
+</style>
+<style lang="less">
+.full-modal {
+    
+    .ant-modal {
+        max-width: 100%;
+        top: 0;
+        padding-bottom: 0;
+        margin: 0;
+    }
+    
+    .ant-modal-content {
+        display: flex;
+        flex-direction: column;
+        height: calc(100vh);
+    }
+    
+    .ant-modal-body {
+        flex: 1;
+    }
+    
 }
 </style>

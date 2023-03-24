@@ -115,6 +115,12 @@ const initCurd = () => {
             afterRequest: <any>null,// 请求成功之后
             isPage: false, // 是否开启分页
             isEmpty: true, // 是否过滤我空 null  undefined 的属性
+            http: {
+                config: {
+                    notifyError: true,
+                    notify: false,
+                },
+            },
             getData() {
                 curdTable.all.api = curdTable.all.api ? curdTable.all.api : curdTable.apiPrefix + '/all'
                 const { current, defaultPageSize } = curdTable.$pageAttrs
@@ -136,7 +142,7 @@ const initCurd = () => {
                 if (curdTable.all.isEmpty) {
                     params = curdTable.utils.removeEmpty(params)
                 }
-                post(curdTable.all.api, params).then((res: any) => {
+                post(curdTable.all.api, params, curdTable.all.http.config).then((res: any) => {
                     if (utils.dataType(curdTable.all.afterRequest) === 'function') {
                         const { dataSource, total } = curdTable.all.afterRequest(res)
                         curdTable.$tableAttrs.dataSource = dataSource
@@ -167,6 +173,12 @@ const initCurd = () => {
             beforeRequest: <any>null,// 请求成功之前
             afterRequest: <any>null,// 请求成功之后
             isEmpty: false,
+            http: {
+                config: {
+                    notifyError: true,
+                    notify: false,
+                },
+            },
             createFormState() {
                 curdTable.create.formItem.forEach((item) => {
                     const t = curdTable.utils.compatibleCompValue(item.el)
@@ -197,7 +209,7 @@ const initCurd = () => {
                 if (curdTable.create.isEmpty) {
                     params = curdTable.utils.removeEmpty(params)
                 }
-                post(curdTable.create.api, params, { notifyError: true }).then(() => {
+                post(curdTable.create.api, params, curdTable.create.http.config).then(() => {
                     curdTable.$cModalAttrs.visible = false
                     curdTable.all.getData()
                 })
@@ -213,6 +225,12 @@ const initCurd = () => {
             beforeRequest: <any>null,// 请求成功之前
             afterRequest: <any>null,// 请求成功之后
             isEmpty: false,
+            http: {
+                config: {
+                    notifyError: true,
+                    notify: true,
+                },
+            },
             createFormState() {
                 curdTable.edit.formItem.forEach((item) => {
                     const t = curdTable.utils.compatibleCompValue(item.el)
@@ -245,7 +263,7 @@ const initCurd = () => {
                 if (curdTable.edit.isEmpty) {
                     params = curdTable.utils.removeEmpty(params)
                 }
-                post(curdTable.edit.api, params, { notifyError: true }).then(() => {
+                post(curdTable.edit.api, params, curdTable.edit.http.config).then(() => {
                     curdTable.$eModalAttrs.visible = false
                     curdTable.all.getData()
                 })
@@ -275,6 +293,12 @@ const initCurd = () => {
             beforeRequest: <any>null,// 请求成功之前
             afterRequest: <any>null,// 请求成功之后
             isEmpty: false,
+            http: {
+                config: {
+                    notifyError: true,
+                    notify: true,
+                },
+            },
             submit({ record }) {
                 curdTable.delete.api = curdTable.delete.api ? curdTable.delete.api : curdTable.apiPrefix + '/delete'
                 curdTable.delete.row.record = record || {}
@@ -286,7 +310,7 @@ const initCurd = () => {
                 if (curdTable.delete.isEmpty) {
                     params = curdTable.utils.removeEmpty(params)
                 }
-                return post(curdTable.delete.api, params, { notify: true }).then((res) => {
+                return post(curdTable.delete.api, params, curdTable.delete.http.config).then((res) => {
                     curdTable.all.getData()
                     return Promise.resolve(res)
                 }).catch((err) => {
@@ -300,6 +324,12 @@ const initCurd = () => {
             afterRequest: <any>null,// 请求成功之后
             isEmpty: false,
             selectedRowKeys: <any>[], // 批量选择
+            http: {
+                config: {
+                    notifyError: true,
+                    notify: true,
+                },
+            },
             submit() {
                 curdTable.deletes.api = curdTable.deletes.api ? curdTable.deletes.api : curdTable.apiPrefix + '/deletes'
                 const ids = curdTable.deletes.selectedRowKeys.map((item: any) => item.id)
@@ -313,7 +343,7 @@ const initCurd = () => {
                 if (curdTable.deletes.isEmpty) {
                     params = curdTable.utils.removeEmpty(params)
                 }
-                post(curdTable.deletes.api, params, { notify: true }).then(() => {
+                post(curdTable.deletes.api, params, curdTable.deletes.http.config).then(() => {
                     curdTable.all.getData()
                 })
             },
@@ -324,6 +354,12 @@ const initCurd = () => {
             afterRequest: <any>null,// 请求成功之后
             isRequest: true,
             isEmpty: false,
+            http: {
+                config: {
+                    notifyError: true,
+                    notify: false,
+                },
+            },
             getData() {
                 curdTable.detail.api = curdTable.detail.api ? curdTable.detail.api : curdTable.apiPrefix + '/find'
                 let params = { id: curdTable.edit.row.record.id }
@@ -333,7 +369,7 @@ const initCurd = () => {
                 if (curdTable.detail.isEmpty) {
                     params = curdTable.utils.removeEmpty(params)
                 }
-                post(curdTable.detail.api, params, { notifyError: true }).then((res) => {
+                post(curdTable.detail.api, params, curdTable.detail.http.config).then((res) => {
                     if (utils.dataType(curdTable.detail.afterRequest) === 'function') {
                         const { formState } = curdTable.detail.afterRequest(res)
                         curdTable.edit.formState = formState
@@ -430,7 +466,7 @@ const initCurd = () => {
                     cancelText: '取消',
                     onOk() {
                         curdTable.delete.submit({ record }).then((res) => {
-                            console.log(1111, res)
+
                         })
                     },
                     onCancel() {
