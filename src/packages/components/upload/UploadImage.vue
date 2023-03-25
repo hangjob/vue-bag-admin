@@ -1,6 +1,6 @@
 <template>
     <div class="upload-image">
-        <a-modal v-model:visible="tailor.visible" :keyboard="false" wrap-class-name="full-modal" width="100%"
+        <a-modal v-model:visible="tailor.visible" :keyboard="false" wrap-class-name="bag-full-modal" width="100%"
                  okText="确认上传" cancelText="关闭"
                  :cancelButtonProps="{danger: true,type: 'primary'}" title="上传图片" @ok="tailor.handleConfirm"
                  :confirm-loading="tailor.loading"
@@ -50,9 +50,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, inject, nextTick, reactive, ref, watch } from 'vue'
-import 'vue-cropper/dist/index.css'
-import { VueCropper } from 'vue-cropper'
-import { apiUploadImage, apiOssUploadImage } from '@/packages/service/upload'
+import { apiOssUploadImage, apiUploadImage } from '@/packages/service/upload'
 import { message } from 'ant-design-vue'
 import * as PmUtils from 'pm-utils'
 import { apiAll } from '@www/admin/service/material'
@@ -74,9 +72,6 @@ interface FileInfo {
 }
 
 export default defineComponent({
-    components: {
-        VueCropper,
-    },
     props: {
         image: {
             type: String,
@@ -142,6 +137,7 @@ export default defineComponent({
                             message.success('上传成功')
                             emitImages()
                         }
+                        console.log(props)
                         if (props.alyOss) {
                             apiOssUploadImage(file).then((res: any) => {
                                 exhibition(res.info.url)
@@ -175,19 +171,17 @@ export default defineComponent({
             emit('update:image', str)
         }
         
-        const beforeUpload = (file: FileItem) => {
+        const beforeUpload = (file: any) => {
             tailor.fileName = file.name
             const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
             if (!isJpgOrPng) {
                 message.error('请上传图片为,jpeg、png')
                 return false
             }
-            PmUtils.file.fileToBase64(file, (res: any) => {
-                tailor.base64 = res
-                tailor.visible = true
-            }, err => {
-                message.error(err)
-            })
+            const windowURL = window.URL || window.webkitURL;
+            // window.URL.createObjectURL 会根据传入的参数创建一个指向该参数对象的URL
+            tailor.base64 = windowURL.createObjectURL(file)
+            tailor.visible = true
         }
         
         const handleAffirm = () => {
@@ -261,7 +255,7 @@ export default defineComponent({
 
 </style>
 <style lang="less">
-.full-modal {
+.bag-full-modal {
     
     .ant-modal {
         max-width: 100%;

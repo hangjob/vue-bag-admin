@@ -30,6 +30,7 @@ const columns = [
                 placeholder: '输入封面图',
                 value: '',
                 isFileMore: false,
+                alyOss:true
             },
         },
     },

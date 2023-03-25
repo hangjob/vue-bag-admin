@@ -24,7 +24,7 @@
                                          v-bind="curdTable.utils.filter$elAttrs(item.$elAttrs).$attrs"
                                 />
                             </a-form-item-rest>
-                            <bag-upload-image v-bind="item.$slotAttrs"
+                            <bag-upload-image v-bind="curdTable.utils.filter$elAttrs(item.$elAttrs).$attrs"
                                               v-model:image="curdTable.create.formState[item.$formItemAttrs.name]"
                             ></bag-upload-image>
                         </template>
@@ -54,8 +54,11 @@ export default defineComponent({
             },
         },
     },
-    setup() {
+    setup(props) {
         const formRef = ref(null)
+        setTimeout(()=>{
+            console.log(props.curdTable.create.formItem)
+        },2000)
         return {
             formRef,
         }

@@ -8,8 +8,9 @@ import {setupGlobExtend} from '@/packages/extend'
 import {setupGlobComponents} from '@/packages/components'
 import {setupIcons} from '@/packages/assets/icon/iconfont'
 import setupPinia from '@/packages/pinia'
-
+import VueCropper  from 'vue-cropper'
 const setupInit = (app: App) => {
+    app.use(VueCropper)
     setupPinia(app)
     setupRouter(app)
     setupAndDesignVue(app)

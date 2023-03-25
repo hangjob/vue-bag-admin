@@ -51,7 +51,6 @@ const upload = (url: string, file: File, config?: AxiosRequestConfig) => {
             'Content-Type': 'multipart/form-data',
         },
     }
-    console.log(config)
     let param = new FormData()
     param.append('file', file, file.name)
     return http.post(rewriteUrl(url), param, { ..._config, ...config })
