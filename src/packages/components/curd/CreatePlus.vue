@@ -56,9 +56,6 @@ export default defineComponent({
     },
     setup(props) {
         const formRef = ref(null)
-        setTimeout(()=>{
-            console.log(props.curdTable.create.formItem)
-        },2000)
         return {
             formRef,
         }

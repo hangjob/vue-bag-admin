@@ -22,7 +22,7 @@
             <a-upload :file-list="fileList" :before-upload="beforeUpload">
                 <a-button> 上传图片</a-button>
             </a-upload>&nbsp;
-            <a-button @click="handleSelectImage" type="primary">选择图库</a-button>
+            <a-button v-if="isSelect" @click="handleSelectImage" type="primary">选择图库</a-button>
         </div>
         <div class="preview">
             <div style="margin-right: 10px;display: inline-block;margin-top: 10px;position: relative"
@@ -101,6 +101,10 @@ export default defineComponent({
             type: Boolean,
             default: false,
         },
+        isSelect: {
+            type: Boolean,
+            default: true,
+        },
     },
     emits: ['update:image'],
     setup(props, { emit }) {
@@ -137,7 +141,6 @@ export default defineComponent({
                             message.success('上传成功')
                             emitImages()
                         }
-                        console.log(props)
                         if (props.alyOss) {
                             apiOssUploadImage(file).then((res: any) => {
                                 exhibition(res.info.url)
@@ -178,7 +181,7 @@ export default defineComponent({
                 message.error('请上传图片为,jpeg、png')
                 return false
             }
-            const windowURL = window.URL || window.webkitURL;
+            const windowURL = window.URL || window.webkitURL
             // window.URL.createObjectURL 会根据传入的参数创建一个指向该参数对象的URL
             tailor.base64 = windowURL.createObjectURL(file)
             tailor.visible = true

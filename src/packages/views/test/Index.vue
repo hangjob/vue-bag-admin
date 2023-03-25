@@ -18,7 +18,6 @@ export default defineComponent({
         }))
     
         tableCurd.all.beforeSuccess = (res: any) => {
-            console.log(res)
             tableCurd.pagination.total = 100
             form.formItem.forEach((item) => {
                 if (item.formData.name === 'pid') {
@@ -34,8 +33,6 @@ export default defineComponent({
             tableCurd.all.handle()
         }
         
-        console.log(tableCurd)
-     
         const editForm = cloneDeep(form)
         const createForm = cloneDeep(form)
     
