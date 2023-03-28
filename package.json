@@ -1,6 +1,6 @@
 {
     "name": "vue-bag-admin",
-    "version": "1.2.27",
+    "version": "1.2.29",
     "scripts": {
         "dev": "vite",
         "build": "vite build",

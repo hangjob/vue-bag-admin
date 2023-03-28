@@ -15,16 +15,13 @@ const columns = [
     },
     {
         title: '封面图',
-        dataIndex: 'image',
-        ellipsis: true,
-        align: 'center',
+        dataIndex: 'banner',
         curd: {
             el: 'bag-upload-image',
             $formItemAttrs: {
                 autoLink: false,
                 label: '封面图',
-                name: 'image',
-                rules: [{ required: true, message: '封面图', trigger: 'blur' }],
+                name: 'banner',
             },
             $elAttrs: {
                 placeholder: '输入封面图',

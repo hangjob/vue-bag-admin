@@ -132,7 +132,6 @@ export default defineComponent({
                         tailor.loading = true
                         const exhibition = (data: any) => {
                             tailor.visible = false
-                            tailor.loading = false
                             if (props.isFileMore) {
                                 preview.list.push({ url: data, source: data })
                             } else {
@@ -143,6 +142,8 @@ export default defineComponent({
                         }
                         if (props.alyOss) {
                             apiOssUploadImage(file).then((res: any) => {
+                                console.log(res,1)
+                                console.log(res.info.url,2)
                                 exhibition(res.info.url)
                             }).finally(() => {
                                 tailor.loading = false

@@ -19,6 +19,10 @@ module.exports = app => {
             type: STRING,
             comment: '备注',
         },
+        image: {
+            type: STRING,
+            comment: '图片',
+        },
         order: {
             type: STRING,
             comment: '排序',

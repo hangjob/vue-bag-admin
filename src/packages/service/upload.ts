@@ -8,5 +8,5 @@ export const apiUploadImage = (params?: any) => {
 
 // oss上传
 export const apiOssUploadImage = (params?: any) => {
-    return upload(getApiInstanceUrl(`/upload/img`), params)
+    return upload(getApiInstanceUrl(`/upload/img`), params,{baseURL:'/papi'})
 }

@@ -24,7 +24,7 @@
                                          v-bind="curdTable.utils.filter$elAttrs(item.$elAttrs).$attrs"
                                 />
                             </a-form-item-rest>
-                            <bag-upload-image v-bind="item.$slotAttrs"
+                            <bag-upload-image v-bind="curdTable.utils.filter$elAttrs(item.$elAttrs).$attrs"
                                               v-model:image="curdTable.edit.formState[item.$formItemAttrs.name]"
                             ></bag-upload-image>
                         </template>
