@@ -52,10 +52,12 @@ const initCurd = () => {
             visible: false,
             width: '85%',
             maskClosable: false,
+            el: null,
             cancel() {
                 curdTable.$cModalAttrs.visible = false
             },
             ok(el) {
+                curdTable.$cModalAttrs.el = el
                 el.validate().then(() => {
                     curdTable.create.submit()
                 }).catch(err => {
@@ -173,6 +175,7 @@ const initCurd = () => {
             beforeRequest: <any>null,// 请求成功之前
             afterRequest: <any>null,// 请求成功之后
             isEmpty: false,
+            isFormEmpty: true,
             http: {
                 config: {
                     notifyError: true,
@@ -210,6 +213,9 @@ const initCurd = () => {
                     params = curdTable.utils.removeEmpty(params)
                 }
                 post(curdTable.create.api, params, curdTable.create.http.config).then(() => {
+                    if (curdTable.create.isFormEmpty && curdTable.$cModalAttrs.el) {
+                        curdTable.$cModalAttrs.el.resetFields()
+                    }
                     curdTable.$cModalAttrs.visible = false
                     curdTable.all.getData()
                 })
