@@ -10,7 +10,7 @@ import { extendBtns } from './extend'
 function compatibleCompValue(el) {
     const comps = [
         {
-            el: ['a-input', 'a-cascader', 'a-textarea', 'a-date-picker', 'a-range-picker', 'a-input-number', 'a-mentions', 'a-rate', 'a-select', 'a-slider', 'a-tree-select'],
+            el: ['a-input','a-input-search', 'a-cascader', 'a-textarea', 'a-date-picker', 'a-range-picker', 'a-input-number', 'a-mentions', 'a-rate', 'a-select', 'a-slider', 'a-tree-select'],
             type: '1',
         },
         { el: ['a-checkbox', 'a-radio', 'a-switch', 'a-time-picker'], type: '2' },
