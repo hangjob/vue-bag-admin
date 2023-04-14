@@ -10,7 +10,7 @@ import { extendBtns } from './extend'
 function compatibleCompValue(el) {
     const comps = [
         {
-            el: ['a-input','a-input-search', 'a-cascader', 'a-textarea', 'a-date-picker', 'a-range-picker', 'a-input-number', 'a-mentions', 'a-rate', 'a-select', 'a-slider', 'a-tree-select'],
+            el: ['a-input', 'a-input-search', 'a-cascader', 'a-textarea', 'a-date-picker', 'a-range-picker', 'a-input-number', 'a-mentions', 'a-rate', 'a-select', 'a-slider', 'a-tree-select'],
             type: '1',
         },
         { el: ['a-checkbox', 'a-radio', 'a-switch', 'a-time-picker'], type: '2' },
@@ -277,7 +277,9 @@ const initCurd = () => {
             change({ record }) {
                 curdTable.edit.row.record = record || {}
                 if (curdTable.detail.isRequest) {
-                    curdTable.detail.getData()
+                    curdTable.detail.getData().then(() => {
+                        curdTable.$eModalAttrs.visible = true
+                    })
                 } else {
                     if (utils.dataType(curdTable.detail.afterRequest) === 'function') {
                         const { formState } = curdTable.detail.afterRequest(record)
@@ -287,8 +289,8 @@ const initCurd = () => {
                             curdTable.edit.formState[key] = record[key]
                         })
                     }
+                    curdTable.$eModalAttrs.visible = true
                 }
-                curdTable.$eModalAttrs.visible = true
             },
         },
         delete: {
@@ -375,7 +377,7 @@ const initCurd = () => {
                 if (curdTable.detail.isEmpty) {
                     params = curdTable.utils.removeEmpty(params)
                 }
-                post(curdTable.detail.api, params, curdTable.detail.http.config).then((res) => {
+                return post(curdTable.detail.api, params, curdTable.detail.http.config).then((res) => {
                     if (utils.dataType(curdTable.detail.afterRequest) === 'function') {
                         const { formState } = curdTable.detail.afterRequest(res)
                         curdTable.edit.formState = formState
@@ -384,6 +386,7 @@ const initCurd = () => {
                             curdTable.edit.formState[key] = res[key]
                         })
                     }
+                    return Promise.resolve()
                 })
             },
         },
