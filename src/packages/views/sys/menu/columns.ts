@@ -73,19 +73,6 @@ const columns = [
         slot: {
             name: 'type',
         },
-        curd: {
-            el: 'a-select',
-            $formItemAttrs: {
-                autoLink: false,
-                label: '节点类型',
-                name: 'type',
-            },
-            $elAttrs: {
-                placeholder: '选择节点类型',
-                value: '',
-                options: [],
-            },
-        },
     },
     {
         title: '路由地址',

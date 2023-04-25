@@ -108,8 +108,9 @@ export default [
                 placeholder: '输入图片地址',
                 value: '',
                 maxlength: 300,
-                isFileMore: false, // 是否多传
+                isFileMore: true, // 是否多传
                 autoCropHeight: 500,
+                isTailor:false
             },
         },
     },

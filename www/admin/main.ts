@@ -8,6 +8,7 @@ const file: Record<string, Component> = import.meta.glob('/www/admin/views/**/*.
 const $options: $optionsType = {
     router: {
         file,
+        paths
     },
     comps: {
         bagHeaderItem: shallowRef(bagHeaderItem), // 头部icon组件覆盖

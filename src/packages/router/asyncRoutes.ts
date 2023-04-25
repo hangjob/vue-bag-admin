@@ -47,6 +47,7 @@ async function getFilterRoutes() {
     try {
         const userStore = userPinia()
         const appStore = appPinia()
+        // 如果后端没有返回 rolesDetail 则没有做菜单权限过滤 所有菜单即可显示
         const { rolesDetail } = userStore.userInfo
         const routes: any = await apiAppRouter()
         appStore.httpSourceMenus = routes

@@ -77,6 +77,10 @@ export default defineComponent({
             type: String,
             default: '',
         },
+        imageFilter:{
+            type: Array,
+            default: [],
+        },
         fileSize: {
             type: Number,
             default: 1024,
@@ -105,6 +109,10 @@ export default defineComponent({
             type: Boolean,
             default: true,
         },
+        isTailor:{
+            type: Boolean,
+            default: true,
+        }
     },
     emits: ['update:image'],
     setup(props, { emit }) {
@@ -123,6 +131,16 @@ export default defineComponent({
             loading: false,
             base64: '',
             fileName: '',
+            exhibition:(data:any)=>{
+                tailor.visible = false
+                if (props.isFileMore) {
+                    preview.list.push({ url: data, source: data })
+                } else {
+                    preview.list[0] = { url: data, source: data }
+                }
+                message.success('上传成功')
+                emitImages()
+            },
             handleConfirm: () => {
                 cropper.value.getCropData((base64: any) => {
                     const file = PmUtils.file.base64ToFile(base64, tailor.fileName)
@@ -130,27 +148,15 @@ export default defineComponent({
                         message.error(`文件需小于${props.fileSize}KB`)
                     } else {
                         tailor.loading = true
-                        const exhibition = (data: any) => {
-                            tailor.visible = false
-                            if (props.isFileMore) {
-                                preview.list.push({ url: data, source: data })
-                            } else {
-                                preview.list[0] = { url: data, source: data }
-                            }
-                            message.success('上传成功')
-                            emitImages()
-                        }
                         if (props.alyOss) {
                             apiOssUploadImage(file).then((res: any) => {
-                                console.log(res,1)
-                                console.log(res.info.url,2)
-                                exhibition(res.info.url)
+                                tailor.exhibition(res.info.url)
                             }).finally(() => {
                                 tailor.loading = false
                             })
                         } else {
                             apiUploadImage(file).then((data: any) => {
-                                exhibition(data)
+                                tailor.exhibition(data)
                             }).finally(() => {
                                 tailor.loading = false
                             })
@@ -161,11 +167,9 @@ export default defineComponent({
         })
         const { getImageFullPath } = inject<any>('bagGlobal')
         watch(() => props.image, (newVal) => {
-            if (newVal) {
-                preview.list = newVal?.split(',').map((item: any) => {
-                    return { url: item, source: item }
-                })
-            }
+            preview.list = !newVal ? [] :  newVal?.split(',').map((item: any) => {
+                return { url: item, source: item }
+            })
         }, { deep: true, immediate: true })
         
         const emitImages = () => {
@@ -177,10 +181,17 @@ export default defineComponent({
         
         const beforeUpload = (file: any) => {
             tailor.fileName = file.name
-            const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
-            if (!isJpgOrPng) {
-                message.error('请上传图片为,jpeg、png')
+            const filter = ['image/jpeg','image/png','image/webp','image/gif',...props.imageFilter]
+            if(!(filter.find((item)=>item === file.type.toLowerCase()))){
+                message.error('请上传图片为,jpeg、png、webp、gif')
                 return false
+            }
+            if(!props.isTailor){
+                apiUploadImage(file).then((data: any) => {
+                    tailor.exhibition(data)
+                }).finally(() => {
+                    tailor.loading = false
+                })
             }
             const windowURL = window.URL || window.webkitURL
             // window.URL.createObjectURL 会根据传入的参数创建一个指向该参数对象的URL
