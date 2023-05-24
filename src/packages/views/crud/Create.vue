@@ -1,7 +1,5 @@
 <template>
-    <a-modal v-bind="curdTable.$cModalAttrs" @ok="curdTable.$cModalAttrs.ok(formRef)"
-             @cancel="curdTable.$cModalAttrs.cancel"
-    >
+    <div>
         <a-form ref="formRef" :model="curdTable.create.formState" :label-col="{span: 6}" :wrapper-col="{span: 15}">
             <a-row>
                 <a-col v-for="(item,idx) in curdTable.create.formItem" :key="item._key" v-bind="item.$colAttrs">
@@ -42,8 +40,7 @@
                 </a-col>
             </a-row>
         </a-form>
-    </a-modal>
-
+    </div>
 </template>
 <script lang="ts">
 import { defineComponent, reactive, ref } from 'vue'

@@ -20,7 +20,7 @@
         </a-modal>
         <div class="action-btn">
             <a-upload :file-list="fileList" :before-upload="beforeUpload">
-                <a-button> 上传图片</a-button>
+                <a-button ref="btnPaste">上传图片</a-button>
             </a-upload>&nbsp;
             <a-button v-if="isSelect" @click="handleSelectImage" type="primary">选择图库</a-button>
         </div>
@@ -49,7 +49,7 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, inject, nextTick, reactive, ref, watch } from 'vue'
+import { defineComponent, inject, nextTick, onMounted, reactive, ref, watch } from 'vue'
 import { apiOssUploadImage, apiUploadImage } from '@/packages/service/upload'
 import { message } from 'ant-design-vue'
 import * as PmUtils from 'pm-utils'
@@ -77,7 +77,7 @@ export default defineComponent({
             type: String,
             default: '',
         },
-        imageFilter:{
+        imageFilter: {
             type: Array,
             default: [],
         },
@@ -109,16 +109,26 @@ export default defineComponent({
             type: Boolean,
             default: true,
         },
-        isTailor:{
+        isTailor: {
             type: Boolean,
             default: true,
-        }
+        },
+        className: {
+            type: String,
+            default: '',
+        },
+        isOpenPaste: {
+            type: Boolean,
+            default: true,
+        },
     },
     emits: ['update:image'],
     setup(props, { emit }) {
         const cropper = ref()
+        const btnPaste = ref()
         const visible = ref(false)
         const images = ref([])
+        let isPaste = false
         const preview = reactive({
             list: <any>[],
             handleDelete: (idx: number) => {
@@ -126,12 +136,38 @@ export default defineComponent({
                 emitImages()
             },
         })
+        if (props.isOpenPaste) {
+            onMounted(() => {
+                document.addEventListener('paste', function(event: any) {
+                    // @ts-ignore
+                    let items = (event.clipboardData || window.clipboardData).items
+                    let file = null
+                    if (items && items.length) {
+                        for (let i = 0; i < items.length; i++) {
+                            if (items[i].type.indexOf('image') !== -1) {
+                                file = items[i].getAsFile()
+                                break
+                            }
+                        }
+                    } else {
+                        return
+                    }
+                    console.log(file)
+                    if (file) {
+                        if (event.target.classList.contains(props.className)) {
+                            isPaste = true
+                            beforeUpload(file)
+                        }
+                    }
+                })
+            })
+        }
         const tailor = reactive({
             visible: false,
             loading: false,
             base64: '',
             fileName: '',
-            exhibition:(data:any)=>{
+            exhibition: (data: any) => {
                 tailor.visible = false
                 if (props.isFileMore) {
                     preview.list.push({ url: data, source: data })
@@ -167,7 +203,7 @@ export default defineComponent({
         })
         const { getImageFullPath } = inject<any>('bagGlobal')
         watch(() => props.image, (newVal) => {
-            preview.list = !newVal ? [] :  newVal?.split(',').map((item: any) => {
+            preview.list = !newVal ? [] : newVal?.split(',').map((item: any) => {
                 return { url: item, source: item }
             })
         }, { deep: true, immediate: true })
@@ -181,17 +217,25 @@ export default defineComponent({
         
         const beforeUpload = (file: any) => {
             tailor.fileName = file.name
-            const filter = ['image/jpeg','image/png','image/webp','image/gif',...props.imageFilter]
-            if(!(filter.find((item)=>item === file.type.toLowerCase()))){
+            const filter = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', ...props.imageFilter]
+            if (!(filter.find((item) => item === file.type.toLowerCase()))) {
                 message.error('请上传图片为,jpeg、png、webp、gif')
                 return false
             }
-            if(!props.isTailor){
-                apiUploadImage(file).then((data: any) => {
-                    tailor.exhibition(data)
-                }).finally(() => {
-                    tailor.loading = false
-                })
+            if (!props.isTailor && !isPaste) {
+                if (props.alyOss) {
+                    apiOssUploadImage(file).then((res: any) => {
+                        tailor.exhibition(res.info.url)
+                    }).finally(() => {
+                        tailor.loading = false
+                    })
+                } else {
+                    apiUploadImage(file).then((data: any) => {
+                        tailor.exhibition(data)
+                    }).finally(() => {
+                        tailor.loading = false
+                    })
+                }
             }
             const windowURL = window.URL || window.webkitURL
             // window.URL.createObjectURL 会根据传入的参数创建一个指向该参数对象的URL
@@ -234,6 +278,7 @@ export default defineComponent({
             handleSelectImage,
             handleAffirm,
             handleSelect,
+            btnPaste,
         }
     },
 })

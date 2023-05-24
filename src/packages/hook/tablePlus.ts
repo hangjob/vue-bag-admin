@@ -5,6 +5,8 @@ import { utils, string } from 'pm-utils'
 import { message, Modal } from 'ant-design-vue'
 import { ExclamationCircleOutlined } from '@ant-design/icons-vue'
 import { extendBtns } from './extend'
+import router from '@/packages/router'
+import appPinia from '@/packages/pinia/app'
 
 // 由于 Ant-Design-Vue 框架不支持 v-bind 绑定 v-model 属性 ，需要抽离该属性
 function compatibleCompValue(el) {
@@ -176,6 +178,7 @@ const initCurd = () => {
             afterRequest: <any>null,// 请求成功之后
             isEmpty: false,
             isFormEmpty: true,
+            route: <any>null,
             http: {
                 config: {
                     notifyError: true,
@@ -231,6 +234,7 @@ const initCurd = () => {
             beforeRequest: <any>null,// 请求成功之前
             afterRequest: <any>null,// 请求成功之后
             isEmpty: false,
+            path: '/curd/edit',
             http: {
                 config: {
                     notifyError: true,
@@ -274,11 +278,28 @@ const initCurd = () => {
                     curdTable.all.getData()
                 })
             },
-            change({ record }) {
+            change({ record, column }) {
                 curdTable.edit.row.record = record || {}
+                const { id } = curdTable.edit.row.record
+                const appStore = appPinia()
+                const path = column?.route?.path + '/' + id
+                const query = {
+                    route: JSON.stringify({
+                        ...column?.route,
+                        name: record[column?.route?.nameKey],
+                        path,
+                        pid: appStore.currentRouter.id,
+                        id: id,
+                    }),
+                }
+                debugger
                 if (curdTable.detail.isRequest) {
                     curdTable.detail.getData().then(() => {
-                        curdTable.$eModalAttrs.visible = true
+                        if (utils.dataType(column?.route) === 'object') {
+                            router.push({ path, query })
+                        } else {
+                            curdTable.$eModalAttrs.visible = true
+                        }
                     })
                 } else {
                     if (utils.dataType(curdTable.detail.afterRequest) === 'function') {
@@ -289,7 +310,11 @@ const initCurd = () => {
                             curdTable.edit.formState[key] = record[key]
                         })
                     }
-                    curdTable.$eModalAttrs.visible = true
+                    if (utils.dataType(column?.route) === 'object') {
+                        router.push({ path, query })
+                    } else {
+                        curdTable.$eModalAttrs.visible = true
+                    }
                 }
             },
         },
@@ -425,7 +450,13 @@ const initCurd = () => {
             type: 'primary',
             class: 'bag-button-color-green',
             loading: curdTable.$tableAttrs.loading,
-            click: () => curdTable.$cModalAttrs.visible = true,
+            click: () => {
+                if (utils.dataType(curdTable.create.route) === 'object') {
+                    router.push({ path: curdTable.create.route.path, query: { route: JSON.stringify({ name: '新增' }) } })
+                } else {
+                    curdTable.$cModalAttrs.visible = true
+                }
+            },
             tag: 'create',
             effect: 1,
             role: true,
@@ -457,7 +488,7 @@ const initCurd = () => {
         {
             name: '编辑',
             type: 'primary',
-            click: ({ record }) => curdTable.edit.change({ record }),
+            click: ({ record, column }) => curdTable.edit.change({ record, column }),
             tag: 'edit',
             effect: 3,
             role: true,

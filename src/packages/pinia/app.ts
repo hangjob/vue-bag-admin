@@ -14,7 +14,7 @@ const app = defineStore({
                 themeConfig: { floatingMenu: false, tabStyle: 1 },
                 webSite: { title: '', subhead: '' },
             },
-            configAppRouter: <any>{ paths: [], file: {} },
+            configAppRouter: <any>{ paths: [], file: {}, allRouter: [] },
             configAppStore: {},
             configAppComps: {},
             configAppApis: {},

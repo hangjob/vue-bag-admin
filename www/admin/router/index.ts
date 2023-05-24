@@ -12,7 +12,7 @@ const paths = [
         icon: 'HomeOutlined',
         shows: 1,
         tabHidden: false,
-        tabFix: false,
+        tabFix: true,
         keepAlive: true,
         filePath: '/admin/views/cstest/Index.vue',
         id: nanoid(),

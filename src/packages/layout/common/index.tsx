@@ -1,4 +1,4 @@
-import { h, resolveComponent } from 'vue'
+import { h, reactive, resolveComponent } from 'vue'
 
 const deepMenu = function(list: Array<any>) {
     let html: any = null

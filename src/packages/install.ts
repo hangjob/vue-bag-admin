@@ -65,6 +65,7 @@ const install = (app: App, options?: $optionsType) => {
             paths: options?.router?.paths || [],
             replaceRouter: options?.router?.replaceRouter || [],
             supFilter: options?.router?.supFilter || ['98BA9API9VEE9LHXBQ4HUD'],
+            allRouter: [],
         },
         configAppStore: {
             module: options?.store?.module || {},

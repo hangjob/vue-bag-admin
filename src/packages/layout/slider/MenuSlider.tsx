@@ -14,6 +14,7 @@ export default defineComponent({
             selectedKeys: [], // 当前选中的菜单项 key 数组
             openKeys: appStore.tabPaths.map((item: any) => item.id), // 展开的数组
             handleClick: (res: any) => {
+                console.log(res)
                 const item = res.item['info']
                 if (item.httpViewPath) {
                     return window.open(item.httpViewPath)
@@ -37,7 +38,8 @@ export default defineComponent({
             <a-menu v-model:selectedKeys={ctx.compData.selectedKeys}
                     mode="inline"
                     v-model:openKeys={ctx.compData.openKeys}
-                    onClick={ctx.compData.handleClick} theme="light"
+                    onClick={ctx.compData.handleClick}
+                    theme="light"
             >
                 {children}
             </a-menu>

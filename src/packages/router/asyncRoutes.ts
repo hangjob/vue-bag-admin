@@ -6,7 +6,8 @@ import router from '@/packages/router/index'
 import { Component } from 'vue'
 import { toTree, getAllParentArr } from '@/packages/utils/utils'
 import { findChildrenDepth, find } from '@/packages/utils/lodash'
-import { utils } from 'pm-utils'
+import { utils, object, string } from 'pm-utils'
+import { _default } from './config'
 
 let namespace = 'admin'
 
@@ -64,7 +65,8 @@ async function getFilterRoutes() {
 async function getAllRoutes() {
     const appStore = appPinia()
     const { paths } = appStore.configAppRouter // 本地路由
-    findRoutesToComps(paths.concat(await getFilterRoutes()))
+    appStore.configAppRouter.paths = paths.concat(_default, await getFilterRoutes())
+    findRoutesToComps(object.arrayRemoveRepet({ arr: appStore.configAppRouter.paths }))
 }
 
 
@@ -85,10 +87,12 @@ function findComponent(filePath: string) {
  * @param routes
  */
 function findRoutesToComps(routes: Array<any>) {
+    const appStore = appPinia()
     const loopAddRouter = function(paths: Array<any>) {
         paths.forEach((item) => {
             let component = findComponent(item.filePath)
             if (component) {
+                appStore.configAppRouter.allRouter.push(item)
                 router.addRoute(namespace, { path: item.path, component })
             }
             if (item.children) {
@@ -97,7 +101,6 @@ function findRoutesToComps(routes: Array<any>) {
             }
         })
     }
-    const appStore = appPinia()
     appStore.menus = toTree(routes)
     appStore.sourceMenus = routes
     loopAddRouter(routes)
@@ -110,7 +113,7 @@ function findRoutesToComps(routes: Array<any>) {
 function updataTabPaths(to: RouteLocationNormalized) {
     const appStore = appPinia()
     if (appStore.menus.length) {
-        let arr = getAllParentArr(appStore.menus, to.path)
+        let arr = getAllParentArr(toTree(appStore.sourceMenus, { isDynamic: true }), to.path)
         appStore.tabPaths = arr && arr.reverse() || []
     }
 }
@@ -136,12 +139,29 @@ function updataTabs(to: RouteLocationNormalized) {
     }
 }
 
+/**
+ * :id 动态路由
+ */
+const updataDynamic = (to: RouteLocationNormalized, next) => {
+    const appStore = appPinia()
+    const find = appStore.configAppRouter.paths.find((item) => item.path === to.path)
+    if (!find) {
+        if (to.query.route) {
+            const route: any = JSON.parse(<string>to.query.route)
+            appStore.configAppRouter.paths.push(route)
+            // 记录后续优化 在addRouter的时候需要考虑一个问题，是否重复添加addRouter
+            findRoutesToComps(object.arrayRemoveRepet({ arr: appStore.configAppRouter.paths }))
+            next({ ...to, replace: true })
+        }
+    }
+}
 
 const asyncRoutes = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
-    updataTabPaths(to)
-    updataCurrentRouter(to)
-    updataTabs(to)
     if (hasWhiteRouter(to) || hasUserInfo()) {
+        updataDynamic(to, next)
+        updataTabPaths(to)
+        updataCurrentRouter(to)
+        updataTabs(to)
         return next()
     }
     getUserInfo().then(async () => {

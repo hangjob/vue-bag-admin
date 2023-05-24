@@ -9,7 +9,7 @@ const router = createRouter({
     routes,
 } as RouterOptions)
 
-router.beforeEach((to, from,  next) => {
+router.beforeEach((to, from, next) => {
     NProgress.start()
     asyncRoutes(to, from, next)
 })

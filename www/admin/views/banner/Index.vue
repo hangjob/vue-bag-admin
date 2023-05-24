@@ -10,6 +10,9 @@ export default defineComponent({
     setup() {
         const defaultCurdTable = initCurd()
         defaultCurdTable.apiPrefix = '/web/banner'
+        defaultCurdTable.create.route = {
+            path: '/curd/create',
+        }
         const curd = createTableHock({ columns, curdTable: defaultCurdTable })
         return {
             curd,

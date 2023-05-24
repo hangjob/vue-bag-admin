@@ -110,7 +110,7 @@ export default [
                 maxlength: 300,
                 isFileMore: true, // 是否多传
                 autoCropHeight: 500,
-                isTailor:false
+                isTailor: false,
             },
         },
     },
@@ -128,6 +128,13 @@ export default [
         width: 250,
         slot: {
             name: 'action',
+        },
+        route: {
+            nameKey: 'name', // 读取字段的标题
+            shows: false,
+            filePath: '/packages/views/crud/Edit.vue',
+            path: '/curd/edit',
+            isDynamic: true,// 动态
         },
     },
 ]

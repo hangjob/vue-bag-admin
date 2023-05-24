@@ -49,16 +49,17 @@ const randomId = () => {
 /**
  * 生成树结构
  * @param data
- * @param idName
- * @param parentIdName
+ * @param options
  */
-const toTree = (data: any, idName?: string, parentIdName?: string) => {
+const toTree = (data: any, options?) => {
     if (!data) {
         return []
     }
+    options = options || {}
     data = cloneDeep(data) // 防止对象引用
-    const id = idName || 'id'
-    const parentId = parentIdName || 'pid'
+    const id = options.idName || 'id'
+    const parentId = options.parentIdName || 'pid'
+    const isDynamic = options.isDynamic || false // 控制左侧菜单 因为动态添加的数据 包含pid，由于该函数会形成树节点，通过此字段控制没必要的属性
     // 将数据存储为 以 id 为 KEY 的 map 索引数据列
     const map: any = {}
     data.forEach(function(item: any) {
@@ -69,9 +70,17 @@ const toTree = (data: any, idName?: string, parentIdName?: string) => {
         // 在map中找到当前项的父级菜单
         const parent = map[item[parentId]]
         if (parent) {
-            // 如果父级菜单存在，则将当前项存入父级的children
-            // 如果父级的children不存在，初始化为空数组[]后再存入
-            (parent.children || (parent.children = [])).push(item)
+            if (!isDynamic) {
+                if (!item.isDynamic || item.shows) { // 针对动态菜单的区别
+                    (parent.children || (parent.children = [])).push(item)
+                } else {
+                    menu.push(item)
+                }
+            } else {
+                // 如果父级菜单存在，则将当前项存入父级的children
+                // 如果父级的children不存在，初始化为空数组[]后再存入
+                (parent.children || (parent.children = [])).push(item)
+            }
         } else {
             // 如果父级菜单不存在，则做为顶级菜单存入
             menu.push(item)

@@ -39,10 +39,10 @@ export default defineComponent({
         const router = useRouter()
         const contextmenu: any = ref(null)
         const tabContainer = ref<HTMLAreaElement | any>(null)
-
+        
         const compData = reactive({
             currentRouter: computed(() => appStore.currentRouter),
-            tabs: computed(() => appStore.tabs.filter((e: any) => e.tabHidden === false)),
+            tabs: computed(() => appStore.tabs.filter((e: any) => !e.tabHidden)),
             handleScrollBar: (t: boolean) => {
                 const left = tabContainer.value.scrollLeft + (t ? 100 : -100)
                 tabContainer.value.scrollTo({ left, behavior: 'smooth' })
@@ -67,7 +67,7 @@ export default defineComponent({
                 router.push(item.path)
             },
         })
-
+        
         const handleContextMenu = (e: any, item: any) => {
             e.preventDefault() // 阻止默认事件
             if (item.tabFix || compData.tabs.length === 1) {
@@ -79,7 +79,7 @@ export default defineComponent({
             conDom.style.left = e.clientX + 'px'
             conDom.style.top = e.clientY + 'px'
             conDom.style.display = 'block'
-
+            
             contextmenu.value.items = [
                 {
                     name: '关闭当前', data: item, callback: (res: any) => {
@@ -102,9 +102,9 @@ export default defineComponent({
                     },
                 },
             ]
-
+            
             document.addEventListener('click', removeClickFun)
-
+            
             // 隐藏掉右键菜单
             function removeClickFun() {
                 conDom.style.display = 'none'
@@ -129,7 +129,7 @@ export default defineComponent({
     box-shadow: 0 1px 3px rgba(184, 184, 184, 0.5);
     z-index: 1;
     padding: 0 10px;
-
+    
     .tab-action {
         cursor: pointer;
         height: 20px;
@@ -138,24 +138,24 @@ export default defineComponent({
         align-items: center;
         justify-content: center;
         transition: all .3s;
-
+        
         &:hover {
             background-color: #ffffff;
-
+            
             .icon-svg {
                 color: var(--bag-color-primary);
             }
         }
-
+        
         &.tab-action-left {
             margin-right: 5px;
         }
-
+        
         &.tab-action-right {
             margin-left: 5px;
         }
     }
-
+    
     .tab-container {
         width: 100%;
         flex: 1;
@@ -166,11 +166,11 @@ export default defineComponent({
         height: 42px;
         padding: 8px 0;
         text-align: left;
-
+        
         &::-webkit-scrollbar {
             display: none;
         }
-
+        
         .app-process_item {
             display: inline-flex;
             align-items: center;
@@ -185,23 +185,23 @@ export default defineComponent({
             min-width: 60px;
             justify-content: center;
             position: relative;
-
+            
             &:last-of-type {
                 margin-right: 0;
             }
-
+            
             &.active {
                 color: var(--bag-color-primary);
             }
-
+            
             .icon-svg {
                 font-size: 0;
                 transition: all 0.3s;
             }
-
+            
             &:hover {
                 color: var(--bag-color-primary);
-
+                
                 .icon-svg {
                     font-size: inherit;
                     margin-left: 5px;
@@ -214,14 +214,14 @@ export default defineComponent({
 // 卡片样式
 .tab-style-card {
     background-color: #ffffff;
-
+    
     .tab-container {
         padding: 0;
-
+        
         .app-process_item {
             margin-right: 0;
             border-radius: 0;
-
+            
             &.active {
                 background-color: #f0f7ff;
             }
@@ -232,32 +232,32 @@ export default defineComponent({
 // 圆点样式
 .tab-style-round {
     background-color: #ffffff;
-
+    
     .tab-container {
         padding: 0;
-
+        
         .app-process_item {
             margin-right: 0;
             border-radius: 0;
             border-right: 1px solid #f0f0f0;
             padding-left: 10px;
-
+            
             .title {
                 padding-left: 5px;
             }
-
+            
             &.active {
                 background-color: #f0f7ff;
             }
-
+            
             &.active:before {
                 background-color: var(--bag-color-primary);
             }
-
+            
             &:first-of-type {
                 border-left: 1px solid #f0f0f0;
             }
-
+            
             &:before {
                 width: 8px;
                 height: 8px;

@@ -56,7 +56,8 @@
                                 >
                                 </component>
                                 <template v-if="item.slot.name">
-                                    <slot :name="item.slot.name" v-bind="{formState:curdTable.search.formState,item}"></slot>
+                                    <slot :name="item.slot.name" v-bind="{formState:curdTable.search.formState,item}"
+                                    ></slot>
                                 </template>
                             </a-form-item>
                         </a-col>
@@ -77,7 +78,7 @@
                             <a-space v-if="column.slot.name === 'action'">
                                 <template :key="idx" v-for="(item,idx)  in curdTable.btns">
                                     <a-button type="primary" v-if="item.effect === 3" size="small" v-bind="item"
-                                              @click="item.click({record})"
+                                              @click="item.click({record,column})"
                                     >
                                         {{ item.name }}
                                     </a-button>
@@ -116,6 +117,10 @@ export default defineComponent({
             type: Object,
             default: () => {
             },
+        },
+        loading: {
+            type: Boolean,
+            default: false,
         },
     },
     setup(props, { emit }) {
