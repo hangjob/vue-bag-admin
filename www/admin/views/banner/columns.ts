@@ -129,12 +129,5 @@ export default [
         slot: {
             name: 'action',
         },
-        route: {
-            nameKey: 'name', // 读取字段的标题
-            shows: false,
-            filePath: '/packages/views/crud/Edit.vue',
-            path: '/curd/edit',
-            isDynamic: true,// 动态
-        },
     },
 ]

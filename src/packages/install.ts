@@ -7,7 +7,7 @@ import { themeConfig, httpNetwork, webSite, funs } from '@/packages/config'
 import setupGlobal from '@/common/global'
 import curdTableHock, { initTableHock } from '@/packages/hook/table'
 import initCurd, { createTableHock } from '@/packages/hook/tablePlus'
-import mitt from 'mitt'
+import mitt from '@/packages/utils/emitter'
 import { merge } from 'lodash'
 import app from '@/packages/pinia/app'
 import user from '@/packages/pinia/user'
@@ -88,7 +88,7 @@ const install = (app: App, options?: $optionsType) => {
     app.config.globalProperties = _options
     app.provide('$configAppOptions', readonly(_options))
     app.use(setupGlobal)
-    app.provide('$mitt', mitt())
+    app.provide('$mitt', mitt)
     // handleError(app)
     setupInit(app)
 

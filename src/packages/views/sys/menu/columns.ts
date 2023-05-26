@@ -271,6 +271,14 @@ const columns = [
         slot: {
             name: 'custom_action',
         },
+        pathItem: {
+            nameKey: 'name', // 读取字段的标题
+            shows: false,
+            filePath: '/packages/views/crud/Edit.vue',
+            path: '/curd/edit',
+            isDynamic: true,// 动态
+            isStorage: true,
+        },
     },
 ]
 

@@ -141,33 +141,5 @@ export default defineComponent({
 })
 </script>
 <style lang="less" scoped>
-.bag-curd {
-    background-color: #ffffff;
-    min-height: 100%;
-    border-radius: 3px;
-    
-    &-container {
-        padding: 15px;
-    }
-    
-    &-header {
-    
-    }
-}
-
-.bag-curd-header-action .ant-btn {
-    margin: 4px 6px;
-}
-
-.bag-curd-header-action {
-    margin-bottom: 14px;
-}
-
-.bag-curd-search {
-    padding: 0 6px;
-}
-
-.bag-curd-table {
-    padding: 0 6px;
-}
+@import '@/packages/style/curd.less';
 </style>

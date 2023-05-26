@@ -3,9 +3,8 @@
     </bag-curd-plus>
 </template>
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
+import { defineComponent, reactive,inject } from 'vue'
 import columns from './columns'
-import { findChildrenDepth } from '@/packages/utils/lodash'
 import initCurd, { createTableHock } from '@/packages/hook/tablePlus'
 
 export default defineComponent({

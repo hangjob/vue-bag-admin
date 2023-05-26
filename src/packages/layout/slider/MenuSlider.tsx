@@ -14,7 +14,6 @@ export default defineComponent({
             selectedKeys: [], // 当前选中的菜单项 key 数组
             openKeys: appStore.tabPaths.map((item: any) => item.id), // 展开的数组
             handleClick: (res: any) => {
-                console.log(res)
                 const item = res.item['info']
                 if (item.httpViewPath) {
                     return window.open(item.httpViewPath)

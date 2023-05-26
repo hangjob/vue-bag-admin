@@ -1,6 +1,6 @@
 {
     "name": "vue-bag-admin",
-    "version": "1.2.33",
+    "version": "1.3.0",
     "scripts": {
         "dev": "vite",
         "build": "vite build",
@@ -61,6 +61,8 @@
         "qrcode": "^1.5.0",
         "qs": "^6.11.0",
         "quill": "^1.3.7",
+        "safe-json-type": "^1.3.3",
+        "serialize-javascript": "^6.0.1",
         "socket.io-client": "^4.4.1",
         "solarlunar": "^2.0.7",
         "store": "^2.0.12",

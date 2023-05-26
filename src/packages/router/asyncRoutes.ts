@@ -6,7 +6,7 @@ import router from '@/packages/router/index'
 import { Component } from 'vue'
 import { toTree, getAllParentArr } from '@/packages/utils/utils'
 import { findChildrenDepth, find } from '@/packages/utils/lodash'
-import { utils, object, string } from 'pm-utils'
+import { utils, object, string, browser } from 'pm-utils'
 import { _default } from './config'
 
 let namespace = 'admin'
@@ -140,25 +140,29 @@ function updataTabs(to: RouteLocationNormalized) {
 }
 
 /**
- * :id 动态路由
+ * 添加静态数据的 动态路由
  */
-const updataDynamic = (to: RouteLocationNormalized, next) => {
+const setStaticDynamicRoutes = (to: RouteLocationNormalized, next) => {
     const appStore = appPinia()
+
     const find = appStore.configAppRouter.paths.find((item) => item.path === to.path)
     if (!find) {
-        if (to.query.route) {
-            const route: any = JSON.parse(<string>to.query.route)
-            appStore.configAppRouter.paths.push(route)
-            // 记录后续优化 在addRouter的时候需要考虑一个问题，是否重复添加addRouter
-            findRoutesToComps(object.arrayRemoveRepet({ arr: appStore.configAppRouter.paths }))
-            next({ ...to, replace: true })
+        if (to.query.id && to.path.indexOf('curd') > -1) {
+            // @ts-ignore
+            const curdCache = appStore.curdCache[String(to.query.id)]
+            if (curdCache && curdCache.pathItem) {
+                appStore.configAppRouter.paths.push(curdCache.pathItem)
+                // 记录后续优化 在addRouter的时候需要考虑一个问题，是否重复添加addRouter
+                findRoutesToComps(object.arrayRemoveRepet({ arr: appStore.configAppRouter.paths }))
+                next({ ...to, replace: true })
+            }
         }
     }
 }
 
 const asyncRoutes = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
     if (hasWhiteRouter(to) || hasUserInfo()) {
-        updataDynamic(to, next)
+        setStaticDynamicRoutes(to, next)
         updataTabPaths(to)
         updataCurrentRouter(to)
         updataTabs(to)

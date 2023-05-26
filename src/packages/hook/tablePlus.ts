@@ -1,7 +1,7 @@
 import { cloneDeep, merge } from 'lodash'
 import { post } from '@/packages/http/request'
-import { reactive, createVNode } from 'vue'
-import { utils, string } from 'pm-utils'
+import { createVNode, reactive } from 'vue'
+import { string, utils } from 'pm-utils'
 import { message, Modal } from 'ant-design-vue'
 import { ExclamationCircleOutlined } from '@ant-design/icons-vue'
 import { extendBtns } from './extend'
@@ -84,6 +84,7 @@ const initCurd = () => {
                 })
             },
         },
+        // 搜索
         search: {
             formItem: [],
             formState: {},
@@ -113,6 +114,7 @@ const initCurd = () => {
                 curdTable.$pageAttrs.defaultPageSize = size
             },
         },
+        // 获取所有
         all: {
             api: '',
             beforeRequest: <any>null,// 请求成功之前
@@ -224,10 +226,12 @@ const initCurd = () => {
                 })
             },
         },
+        // 编辑
         edit: {
             api: '',
             row: {
                 record: <any>{},
+                column: <any>{},
             },
             formItem: <any>[],
             formState: {},
@@ -280,44 +284,51 @@ const initCurd = () => {
             },
             change({ record, column }) {
                 curdTable.edit.row.record = record || {}
+                curdTable.edit.row.column = column || {}
                 const { id } = curdTable.edit.row.record
                 const appStore = appPinia()
-                const path = column?.route?.path + '/' + id
-                const query = {
-                    route: JSON.stringify({
-                        ...column?.route,
-                        name: record[column?.route?.nameKey],
-                        path,
-                        pid: appStore.currentRouter.id,
-                        id: id,
-                    }),
+                const path = curdTable.edit.row.column?.pathItem?.path + '/' + id
+                const routerInfo: any = {
+                    path, query: { id },
                 }
-                debugger
+                // 说有开启路由模式
+                if (utils.dataType(curdTable.edit.row.column?.pathItem) === 'object') {
+                    appStore.curdCache[String(id)] = {
+                        pathItem: {
+                            ...curdTable.edit.row.column?.pathItem,
+                            name: curdTable.edit.row.record[curdTable.edit.row.column?.pathItem?.nameKey],
+                            path,
+                            pid: appStore.currentRouter.id,
+                            id,
+                        },
+                    }
+                }
                 if (curdTable.detail.isRequest) {
                     curdTable.detail.getData().then(() => {
-                        if (utils.dataType(column?.route) === 'object') {
-                            router.push({ path, query })
+                        if (utils.dataType(curdTable.edit.row.column?.pathItem) === 'object') {
+                            router.push(routerInfo)
                         } else {
                             curdTable.$eModalAttrs.visible = true
                         }
                     })
                 } else {
                     if (utils.dataType(curdTable.detail.afterRequest) === 'function') {
-                        const { formState } = curdTable.detail.afterRequest(record)
+                        const { formState } = curdTable.detail.afterRequest(curdTable.edit.row.record)
                         curdTable.edit.formState = formState
                     } else {
                         Object.keys(curdTable.edit.formState).forEach((key: string) => {
-                            curdTable.edit.formState[key] = record[key]
+                            curdTable.edit.formState[key] = curdTable.edit.row.record[key]
                         })
                     }
-                    if (utils.dataType(column?.route) === 'object') {
-                        router.push({ path, query })
+                    if (utils.dataType(curdTable.edit.row.column?.pathItem) === 'object') {
+                        router.push(routerInfo)
                     } else {
                         curdTable.$eModalAttrs.visible = true
                     }
                 }
             },
         },
+        // 删除
         delete: {
             api: '',
             row: {
@@ -351,6 +362,7 @@ const initCurd = () => {
                 })
             },
         },
+        // 多个删除
         deletes: {
             api: '',
             beforeRequest: <any>null,// 请求成功之前
@@ -381,6 +393,7 @@ const initCurd = () => {
                 })
             },
         },
+        // 详情
         detail: {
             api: '',
             beforeRequest: <any>null,// 请求成功之前
@@ -411,14 +424,20 @@ const initCurd = () => {
                             curdTable.edit.formState[key] = res[key]
                         })
                     }
+                    if (utils.dataType(curdTable.edit.row.column?.pathItem) === 'object') {
+                        const appStore = appPinia()
+                        appStore.curdCache[String(curdTable.edit.row.record.id)].curdTable = curdTable
+                    }
                     return Promise.resolve()
                 })
             },
         },
+        // 刷新
         refreshTable() {
             curdTable.$tableAttrs.loading = true
             curdTable.all.getData()
         },
+        // 工具
         utils: {
             compatibleCompValue,
             // 过滤属性
@@ -534,6 +553,7 @@ const createTableHock = ({
 }) => {
     const tableAttrs = {
         columns: columns.filter((item) => item.visible !== false),
+        originalColumns: columns, // 原始 columns
     }
 
     const search = generateSearchFormItem({ columns })

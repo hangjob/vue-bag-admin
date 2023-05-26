@@ -31,6 +31,7 @@ const app = defineStore({
                 collapsed: false,
             },
             extend: {},
+            curdCache: {},
         }
     },
     actions: {

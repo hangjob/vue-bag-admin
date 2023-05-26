@@ -11,6 +11,10 @@ const createRoutePath = (data) => {
         tabHidden: false,
         tabFix: false,
         httpFilePath: '',
+        filePath: '/packages/views/crud/Edit.vue', // 路径
+        path: '/curd/edit', // 路由
+        nameKey: 'name', // 读取字段的标题
+        isDynamic: true,// 动态
     }
     return Object.assign(obj, data)
 }
