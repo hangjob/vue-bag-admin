@@ -48,7 +48,7 @@
                 @input="inputFromData"
             />
         </div>
-        <div class="sbumit">
+        <div class="submit">
             <el-button class="wow animate__animated animate__fadeInUp" data-wow-duration="1.4s" data-wow-delay="0.2s"
                        @click="handleSave" :icon="Edit" type="success" size="large" :disabled="disabled"
             >
@@ -149,7 +149,7 @@ export default defineComponent({
         margin-bottom: 10px;
     }
 
-    .sbumit {
+    .submit {
         display: flex;
         justify-content: end;
     }

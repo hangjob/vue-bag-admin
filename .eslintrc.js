@@ -13,7 +13,7 @@ module.exports = {
     plugins: ['vue', '@typescript-eslint'],
     rules: {
         // 缩进 4 空格
-        "indent": [2, 4],
+        "indent": [4, 4],
 
         // 禁止空格和 tab 的混合缩进
         'no-mixed-spaces-and-tabs': 1,
