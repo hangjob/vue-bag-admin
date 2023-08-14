@@ -1,15 +1,11 @@
-const menus = [
-    {
-        "id": 100,
-        "title": "首页",
-        "icon": "HomeOutlined",
-        "path": "/home",
-        "pid": 0,
-        "file": "/views/home/Index.vue",
-    }
-]
+import {RouterComponent} from "@/packages/type"
+
 export default {
-    whiteList: [],
+    whiteList: ["/login"],
     resetPath: "/login",
-    menus,
+    menus:[],
+    getComponent: (filePath) => {
+        const files: Record<string, RouterComponent> = import.meta.glob("/src/packages/view/**/*.vue", {eager: true})
+        console.log(files)
+    }
 }

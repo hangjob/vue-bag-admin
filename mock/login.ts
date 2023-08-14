@@ -16,7 +16,7 @@ export default [
         }
     },
     {
-        url: "/userinfo",
+        url: "/userInfo",
         method: "post",
         response: () => {
             return {

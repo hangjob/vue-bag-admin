@@ -1,8 +1,38 @@
 import {RouteLocationNormalized, NavigationGuardNext} from "vue-router"
 import appPinia from "@/packages/pinia/app.ts"
-import {menus, userInfo} from "@/packages/api/app.ts"
+import {menus as getMenus, userInfo} from "@/packages/api/app.ts"
+import {RouterComponent} from "@/packages/type"
+import router from "@/packages/router"
 
 let hasRoles = false
+const namespace = "admin"
+//框架页面组件
+const files: Record<string, RouterComponent> = import.meta.glob("@/packages/view/**/*.vue", {eager: true})
+
+//
+function findComponent(filePath) {
+    return Object.keys(files).find((file) => file.indexOf(filePath) > -1)
+}
+
+
+function createRouterComponent(menus) {
+    const appStore = appPinia()
+    menus.forEach((menu) => {
+        const component = findComponent(menu.file)
+        if (component) {
+            router.addRoute(menu.namespace ? menu.namespace : namespace, {
+                path: menu.path,
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                route: component
+            })
+        }
+        if (menu.children) {
+            createRouterComponent(menu.children)
+        }
+    })
+    console.log(router.getRoutes())
+}
 
 /**
  * 校验路由是否在白名单中
@@ -10,7 +40,7 @@ let hasRoles = false
  */
 function hasWhiteRouter(to: RouteLocationNormalized) {
     const appStore = appPinia()
-    return appStore.config.whiteList.some((e: string) => to.path.indexOf(e) === 0)
+    return appStore.configOptions.whiteList.some((e: string) => to.path.indexOf(e) === 0)
 }
 
 /**
@@ -33,26 +63,22 @@ function getUserInfo(to: RouteLocationNormalized, from: RouteLocationNormalized,
         appStore.userInfo = res
         updateRouterAll(to, from, next)
     }).catch(() => {
-        next(appStore.config.resetPath)
+        next(appStore.configOptions.resetPath)
     })
 }
 
-function getMenus(to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) {
-    menus().then((res) => {
-
-    }).catch((err) => {
-        next()
-    })
-}
-
-
+/**
+ * 获取后端接口菜单数据
+ * @param to
+ * @param from
+ * @param next
+ */
 function updateRouterAll(to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) {
     if (hasRoles) {
         next()
     } else {
-        menus().then((res) => {
-            // 这里处理合并菜单
-            console.log(res)
+        getMenus().then((res) => {
+            createRouterComponent(res.data)
         }).finally(() => {
             hasRoles = true
             next({...to, replace: true})
@@ -60,7 +86,7 @@ function updateRouterAll(to: RouteLocationNormalized, from: RouteLocationNormali
     }
 }
 
-const afterEach = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
+const beforeEach = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
     if (hasWhiteRouter(to)) {
         return next()
     }
@@ -71,4 +97,4 @@ const afterEach = (to: RouteLocationNormalized, from: RouteLocationNormalized, n
     }
 }
 
-export default afterEach
+export default beforeEach

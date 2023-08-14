@@ -4,7 +4,7 @@ import NProgress from "nprogress"
 import "nprogress/nprogress.css"
 import afterEach from "./afterEach.ts"
 import routerMap from "@/packages/router/routerMap.ts"
-
+import beforeEach from "@/packages/router/beforeEach.ts"
 NProgress.configure({
     easing: "ease",  // 动画方式
     speed: 1000,  // 递增进度条的速度
@@ -21,7 +21,7 @@ const router = vueRouter.createRouter({
 router.beforeEach((to, from, next) => {
     console.log("%c框架层拦截", "color: green;")
     NProgress.start()
-    next()
+    beforeEach(to, from, next)
 })
 
 router.afterEach((to: RouteLocationNormalized, from: RouteLocationNormalized) => {

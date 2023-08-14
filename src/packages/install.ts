@@ -7,9 +7,21 @@ import setupGlobal from "@/packages/global"
 import setupPinia from "@/packages/pinia"
 import config from "@/packages/config"
 
-const install = (app: App, options: any) => {
-    const configOptions = merge(config, options)
-    app.config.globalProperties = configOptions
+
+const menus = [
+    {
+        "id": 100,
+        "title": "首页",
+        "icon": "HomeOutlined",
+        "path": "/home",
+        "pid": 0,
+        "file": "/view/home/Index.vue",
+    }
+]
+const install = (app: App, options?: any) => {
+    const configOptions = merge(config, {menus}, options)
+    console.log(configOptions)
+    app.config.globalProperties["configOptions"] = configOptions
     app.provide("configOptions", readonly(configOptions))
     app.provide("$mitt", mitt)
     setupPinia(app)

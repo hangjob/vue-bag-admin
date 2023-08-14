@@ -1,4 +1,5 @@
 import {defineStore} from "pinia"
+import config from "@/packages/config"
 
 const app = defineStore({
     id: "app",
@@ -10,11 +11,7 @@ const app = defineStore({
     state: () => {
         return {
             browser: {},
-            config: {
-                whiteList: [],
-                resetPath: "",
-                menus: []
-            },
+            configOptions: config,
             collapsed: false,
             mobile: false,
             userSetting: { // 主题设置
@@ -22,7 +19,8 @@ const app = defineStore({
                 themeColor: "#519a73"
             },
             userInfo: {},
-            userState: false
+            userState: false,
+            menus: []
         }
     }
 })

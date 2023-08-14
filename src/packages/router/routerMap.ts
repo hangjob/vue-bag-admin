@@ -18,10 +18,6 @@ const routerMap: Array<RouteRecordRaw> = [
         component: () => import("@/packages/view/login/index.vue"),
     },
     {
-        path: "/test", name: "test", meta: { title: "测试" },
-        component: () => import("@/packages/view/test/index.vue"),
-    },
-    {
         path: "/:pathMatch(.*)*",
         component: () => import("@/packages/view/error/404.vue"),
     },

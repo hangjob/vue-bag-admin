@@ -1,4 +1,4 @@
-import { createApp } from "vue"
+import {createApp} from "vue"
 import App from "./App.vue"
 import install from "@/packages/install.ts"
 import router from "@/app/admin/router"

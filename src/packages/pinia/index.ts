@@ -7,8 +7,8 @@ const pinia = createPinia()
 
 function initStore(app: App) {
     const appStore = appPinia()
-    const {config} = app.config.globalProperties
-    appStore.config = config
+    const {configOptions} = app.config.globalProperties
+    appStore.configOptions = configOptions
 }
 
 const setupPinia = (app: App) => {
