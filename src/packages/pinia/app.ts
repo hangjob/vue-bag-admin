@@ -10,12 +10,19 @@ const app = defineStore({
     state: () => {
         return {
             browser: {},
+            config: {
+                whiteList: [],
+                resetPath: "",
+                menus: []
+            },
             collapsed: false,
             mobile: false,
-            userSetting: {
+            userSetting: { // 主题设置
                 layoutName: "ml",
                 themeColor: "#519a73"
             },
+            userInfo: {},
+            userState: false
         }
     }
 })

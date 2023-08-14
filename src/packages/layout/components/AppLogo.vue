@@ -10,19 +10,29 @@
         </template>
     </div>
 </template>
-<script lang="ts" setup>
-import appStore from "@/packages/pinia/app.js"
-import {computed, reactive} from "vue"
+<script lang="ts">
+import {computed, reactive,defineComponent} from "vue"
 
-const {browser} = appStore()
-const collapsed = computed(() => browser.sm || browser.md)
-const compData = reactive({
-    // eslint-disable-next-line vue/return-in-computed-property
-    logoStyle: computed(() => {
-        if (collapsed.value) {
-            return {width: "64px"}
+export default defineComponent({
+    props:{
+        collapsed: {
+            type: Boolean,
+            required: false
         }
-    })
+    },
+    setup(props){
+        const compData = reactive({
+            // eslint-disable-next-line vue/return-in-computed-property
+            logoStyle: computed(() => {
+                if (props.collapsed) {
+                    return {width: "64px"}
+                }
+            })
+        })
+        return {
+            compData
+        }
+    }
 })
 </script>
 <style lang="less" scoped>

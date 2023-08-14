@@ -1,10 +1,10 @@
 <template>
     <div class="user-set">
-        <div class="set-item" @click="compData[item.name]" v-for="(item,idx) in userIcon" :key="idx">
+        <n-el  tag="div" class="set-item" @click="compData[item.name]" v-for="(item,idx) in userIcon" :key="idx">
             <n-icon :size="item.size" :color="item.color">
                 <component :is="item.name"></component>
             </n-icon>
-        </div>
+        </n-el>
         <div class="set-item">
             <n-dropdown trigger="click" :options="userOptions">
                 管理员
@@ -97,7 +97,7 @@ export default defineComponent({
 <style lang="less" scoped>
 .user-set{
     display: flex;
-    height: 100%;
+    height: 50px;
     .set-item{
         display: flex;
         align-items: center;
@@ -110,7 +110,8 @@ export default defineComponent({
             padding-right: 2px;
         }
         &:hover{
-            background-color: #f8f8f8;
+            color: var(--n-text-color);
+            background-color: var(--primary-color);
         }
     }
 }

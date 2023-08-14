@@ -54,5 +54,6 @@ module.exports = {
 		],
 		'no-unused-vars': ['warn', { 'varsIgnorePattern': '^_' }], // 如需设置关闭 off
 		'@typescript-eslint/no-unused-vars': ['warn', { 'varsIgnorePattern': '^_' }],
+        '@typescript-eslint/no-explicit-any':['off']
 	}
 }

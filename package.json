@@ -13,7 +13,11 @@
     },
     "dependencies": {
         "@vueuse/core": "^10.3.0",
+        "axios": "^1.4.0",
+        "axios-retry": "^3.6.0",
+        "lodash": "^4.17.21",
         "mitt": "^3.0.1",
+        "mockjs": "^1.1.0",
         "nprogress": "^0.2.0",
         "pinia": "^2.1.6",
         "pinia-plugin-persistedstate": "^3.2.0",
@@ -37,6 +41,7 @@
         "unplugin-vue-components": "^0.25.1",
         "vfonts": "^0.0.3",
         "vite": "^4.4.5",
+        "vite-plugin-mock": "^3.0.0",
         "vue-tsc": "^1.8.5"
     }
 }

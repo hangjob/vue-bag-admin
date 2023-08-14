@@ -1,11 +1,11 @@
 <template>
     <n-layout style="height: 100%">
         <n-layout-header class="header" :inverted="inverted" bordered>
-            <AppLogo v-if="!compData.mobile"/>
+            <AppLogo :collapsed="compData.collapsed" v-if="!compData.mobile"/>
             <div class="header-plan">
                 <template v-if="userSetting.layoutName === 'ml'">
-                    <MenuVisibleIcon v-if="compData.mobile" @click="handleMobileMask"/>
-                    <Breadcrumb/>
+                    <MenuVisibleIcon v-if="compData.mobile" @click="compMethods.handleMobileMask"/>
+                    <Breadcrumb v-show="!compData.mobile"/>
                 </template>
                 <template v-else>
                     <n-menu mode="horizontal" :inverted="inverted" :options="menuOptions"/>
@@ -24,9 +24,11 @@
                 :width="compData.siderMaxWidth"
                 :native-scrollbar="false"
                 :inverted="inverted"
-                :collapsed="collapsed"
+                :collapsed="compData.collapsed"
                 :class="[compData.mobile ? 'mobile' : null]"
                 :style="{left: compData.siderLeft}"
+                @collapse="compMethods.handleCollapse"
+                @expand="compMethods.handleExpand"
             >
                 <AppLogo v-if="compData.mobile"/>
                 <n-menu
@@ -41,7 +43,7 @@
             </n-layout>
         </n-layout>
     </n-layout>
-    <div class="mobile-mask" v-show="compData.mobile && compData.isOpen" @click="handleMobileMask"></div>
+    <div class="mobile-mask" v-show="compData.mobile && compData.isOpen" @click="compMethods.handleMobileMask"></div>
 </template>
 
 <script lang="ts">
@@ -147,31 +149,42 @@ export default defineComponent({
     setup() {
         const {browser, userSetting} = appStore()
         const app = appStore()
-        const collapsed = computed(() => browser.sm || browser.md)
         const compData = reactive({
             siderMaxWidth: 240,
             siderMinWidth: 64,
             mobile: computed(() => app.mobile),
             isOpen: false,
+            collapsed:false,
             siderLeft:computed(()=>{
-                if(app.mobile){
-                    return compData.isOpen ? 0 : "-300px"
-                }else{
-                    return 0
-                }
+                return app.mobile ? compData.isOpen ? 0 : "-250px" : 0
             })
         })
-        const handleMobileMask = () => {
-            compData.isOpen = true
+        watch(browser,(newVal)=>{
+            compData.collapsed = newVal.sm || newVal.md
+        })
+        const compMethods = {
+            handleCollapse(){
+                if(compData.mobile){
+                    compData.isOpen = false
+                }else{
+                    compData.collapsed = true
+                }
+            },
+            handleExpand(){
+                compData.collapsed = false
+            },
+            handleMobileMask(){
+                compData.isOpen = true
+            }
         }
+
         return {
-            inverted: ref(false),
+            inverted: ref(true),
             menuOptions,
             browser,
             userSetting,
-            collapsed,
-            handleMobileMask,
-            compData
+            compData,
+            compMethods
         }
     }
 })
@@ -205,10 +218,10 @@ export default defineComponent({
 .mobile {
     position: fixed;
     top: 0;
-    left: -300px;
+    left: -250px;
     bottom: 0;
     z-index: 3000;
-    transition: all 0.5s;
+    transition: left 0.3s ease-in;
 }
 </style>
 

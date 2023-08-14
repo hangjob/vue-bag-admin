@@ -1,6 +1,8 @@
 <template>
 	<n-config-provider :theme-overrides="themeOverrides" :locale="locale" :date-locale="dateLocale">
-        <router-view></router-view>
+        <n-message-provider>
+            <router-view></router-view>
+        </n-message-provider>
 	</n-config-provider>
 </template>
 <script lang="ts">
