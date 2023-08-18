@@ -1,23 +1,35 @@
 <template>
     <div class="user-set">
-        <n-el  tag="div" class="set-item" @click="compData[item.name]" v-for="(item,idx) in userIcon" :key="idx">
-            <n-icon :size="item.size" :color="item.color">
-                <component :is="item.name"></component>
-            </n-icon>
+        <template v-if="!compData.browser.sm" >
+            <n-el tag="div" class="set-item hover-color" @click="compData[item.name]" v-for="(item,idx) in userIcon" :key="idx">
+                <n-icon :size="item.size" :color="item.color">
+                    <component :is="item.name"></component>
+                </n-icon>
+            </n-el>
+        </template>
+        <n-el tag="div" class="set-item">
+            <n-switch @update:value="compData.handleDarkTheme" v-model:value="darkTheme" size="medium">
+                <template #checked-icon>
+                    <n-icon :size="14"><MoonOutline/></n-icon>
+                </template>
+                <template #unchecked-icon>
+                    <n-icon :size="14"><SunnyOutline/></n-icon>
+                </template>
+            </n-switch>
         </n-el>
         <div class="set-item">
-            <n-dropdown trigger="click" :options="userOptions">
-                管理员
-            </n-dropdown>
+            <n-dropdown trigger="click" :options="userOptions">管理员</n-dropdown>
         </div>
     </div>
     <UserSetting ref="UserSettingRef"/>
 </template>
 <script lang="ts">
 import { useMessage, NAvatar, NText } from "naive-ui"
-import { h, defineComponent, ref, Component,reactive } from "vue"
-import {SearchOutline,NotificationsOutline,LanguageOutline,ScanOutline,HappyOutline,SettingsOutline} from "@vicons/ionicons5"
+import { h, defineComponent, ref,computed, Component,reactive } from "vue"
+import {SearchOutline,NotificationsOutline,LanguageOutline,ScanOutline,HappyOutline,SettingsOutline,SunnyOutline,MoonOutline} from "@vicons/ionicons5"
 import UserSetting from "@/packages/layout/components/UserSetting.vue"
+import appStore from "@/packages/pinia/app.ts"
+import {watch} from "vue/dist/vue"
 function renderCustomHeader () {
     return h(
         "div",
@@ -47,18 +59,25 @@ function renderCustomHeader () {
 export default defineComponent({
     components:{
         SearchOutline,NotificationsOutline,
-        LanguageOutline,ScanOutline,HappyOutline,SettingsOutline,UserSetting
+        LanguageOutline,ScanOutline,HappyOutline,SettingsOutline,UserSetting,MoonOutline,SunnyOutline
     },
     setup(){
         const UserSettingRef = ref(null)
+        const app = appStore()
+        const {themeName} = app.userSetting
         const compData = reactive({
             SettingsOutline:()=>{
                 UserSettingRef.value.change()
-            }
+            },
+            handleDarkTheme(value){
+                app.userSetting.themeName = value ? "darkTheme" : null
+            },
+            browser:app.browser
         })
         return {
             compData,
             UserSettingRef,
+            darkTheme:themeName !== null,
             userOptions: [
                 {
                     key: "header",
@@ -106,12 +125,14 @@ export default defineComponent({
         padding-right: 12px;
         cursor: pointer;
         flex-shrink: 0;
-        &:last-of-type{
-            padding-right: 2px;
-        }
-        &:hover{
-            color: var(--n-text-color);
-            background-color: var(--primary-color);
+        &.hover-color{
+            &:last-of-type{
+                padding-right: 2px;
+            }
+            &:hover{
+                color: var(--n-item-text-color);
+                background-color: var(--primary-color);
+            }
         }
     }
 }

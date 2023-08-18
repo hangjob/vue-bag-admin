@@ -13,7 +13,7 @@ const throttledFn = useThrottleFn(() => {
     const xxl = breakpoints["2xl"]
     app.browser = {xs, sm, md, lg, xl, xxl}
     app.mobile = xs.value
-    console.log(app.mobile)
+    app.collapsed = sm.value || md.value
 }, 200)
 
 const setupGlobal = () => {

@@ -3,44 +3,48 @@ import appPinia from "@/packages/pinia/app.ts"
 import {menus as getMenus, userInfo} from "@/packages/api/app.ts"
 import {RouterComponent} from "@/packages/type"
 import router from "@/packages/router"
-
+import {merge, isArray, unionWith} from "lodash"
+import {renderIcon} from "@/packages/config/icon.ts"
+import {toTree} from "@/packages/utils/utils.ts"
 let hasRoles = false
-const namespace = "admin"
+const namespace = "main"
 //框架页面组件
-const files: Record<string, RouterComponent> = import.meta.glob("@/packages/view/**/*.vue", {eager: true})
+const frameView: Record<string, RouterComponent> = import.meta.glob("@/packages/view/**/*.vue", {eager: true})
 
-//
-function findComponent(filePath) {
-    return Object.keys(files).find((file) => file.indexOf(filePath) > -1)
+function findComponent(filePath: string) {
+    const appStore = appPinia()
+    const views = merge(appStore.configOptions.getViews(), frameView)
+    const key = Object.keys(views).find((path) => {
+        return path.toLowerCase().indexOf(filePath.toLowerCase()) > -1
+    })
+    return filePath && views[key] && views[key].default
 }
 
-
-function createRouterComponent(menus) {
-    const appStore = appPinia()
-    menus.forEach((menu) => {
-        const component = findComponent(menu.file)
+/**
+ * 创建路由组件
+ * @param allMenus
+ */
+function createRouterComponent(allMenus) {
+    allMenus.forEach((item) => {
+        const component = findComponent(item.file)
         if (component) {
-            router.addRoute(menu.namespace ? menu.namespace : namespace, {
-                path: menu.path,
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
-                route: component
+            router.addRoute(item.namespace ? item.namespace : namespace, {
+                path: item.path, name: item.path, component: component,meta:item
             })
         }
-        if (menu.children) {
-            createRouterComponent(menu.children)
+        if (isArray(item.children)) {
+            createRouterComponent(item.children)
         }
     })
-    console.log(router.getRoutes())
 }
 
 /**
  * 校验路由是否在白名单中
- * @param to
+ * @param path
  */
-function hasWhiteRouter(to: RouteLocationNormalized) {
+function hasWhiteRouter(path: string) {
     const appStore = appPinia()
-    return appStore.configOptions.whiteList.some((e: string) => to.path.indexOf(e) === 0)
+    return appStore.configOptions.whiteList.some((e: string) => path.indexOf(e) === 0)
 }
 
 /**
@@ -67,6 +71,8 @@ function getUserInfo(to: RouteLocationNormalized, from: RouteLocationNormalized,
     })
 }
 
+
+
 /**
  * 获取后端接口菜单数据
  * @param to
@@ -74,20 +80,33 @@ function getUserInfo(to: RouteLocationNormalized, from: RouteLocationNormalized,
  * @param next
  */
 function updateRouterAll(to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) {
+    const appStore = appPinia()
     if (hasRoles) {
         next()
     } else {
         getMenus().then((res) => {
-            createRouterComponent(res.data)
+            const {menus} = appStore.configOptions
+            const allMenus = unionWith(res.data, menus)
+            appStore.allMenus = allMenus.map((item)=>{
+                if(item.icon){
+                    item.iconName = item.icon
+                    item.icon = renderIcon(item.iconName)
+                }else {
+                    delete item.icon
+                }
+                return item
+            })
+            appStore.treeMenus = toTree({arr:appStore.allMenus})
+            createRouterComponent(allMenus)
         }).finally(() => {
             hasRoles = true
-            next({...to, replace: true})
+            next(to.fullPath)
         })
     }
 }
 
 const beforeEach = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
-    if (hasWhiteRouter(to)) {
+    if (hasWhiteRouter(to.path)) {
         return next()
     }
     if (hasUserInfo()) {

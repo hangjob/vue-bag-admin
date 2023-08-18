@@ -1,5 +1,6 @@
 <template>
     <n-space>
+        22
         <n-dropdown
             placement="bottom-start"
             trigger="click"
@@ -42,7 +43,7 @@
 <script>
 import { defineComponent } from "vue"
 import { useMessage } from "naive-ui"
-
+import {useRoute,useRouter} from "vue-router"
 const options = [
     {
         label: "杰·盖茨比",
@@ -92,10 +93,11 @@ const options = [
 
 export default defineComponent({
     setup() {
+        const router = useRouter()
         return {
             options,
             handleSelect(key) {
-
+                router.push({path:"/about"})
             }
         }
     }

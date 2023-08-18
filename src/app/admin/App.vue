@@ -1,5 +1,5 @@
 <template>
-	<n-config-provider :theme-overrides="themeOverrides" :locale="locale" :date-locale="dateLocale">
+	<n-config-provider :theme="darkTheme" :theme-overrides="themeOverrides" :locale="locale" :date-locale="dateLocale">
         <n-message-provider>
             <router-view></router-view>
         </n-message-provider>
@@ -18,10 +18,11 @@ export default defineComponent({
             common: {
                 primaryColor:computed(()=>app.userSetting.themeColor),
                 primaryColorHover:computed(()=>app.userSetting.themeColor),
+                progressRailColor:computed(()=>app.userSetting.themeColor)
             },
         })
         return {
-            darkTheme,
+            darkTheme: computed(()=>app.userSetting.themeName ? darkTheme : null),
             themeOverrides,
             zhCN,
             dateZhCN,

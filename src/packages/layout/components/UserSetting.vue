@@ -12,16 +12,15 @@
                 :model="model"
                 label-placement="left"
                 label-width="auto"
-                require-mark-placement="right-hanging"
             >
                 <n-divider dashed>
                     颜色主题
                 </n-divider>
                 <n-form-item label-align="left" label="主题" path="themeColor">
                     <n-select
-                        v-model:value="model.themeColor"
+                        v-model:value="themeColor"
                         placeholder="Select"
-                        :options="model.themeOptions"
+                        :options="themeOptions"
                         @update:value="updateThemeColor"
                     />
                 </n-form-item>
@@ -29,7 +28,7 @@
                     布局模式
                 </n-divider>
                 <div class="layout-pattern">
-                    <div class="pattern-item" @click="handlePattern(item)" v-for="item in model.layoutOptions" :key="item">
+                    <div class="pattern-item" @click="handlePattern(item)" v-for="item in layoutOptions" :key="item">
                         <span class="left"></span>
                         <span class="top"></span>
                         <n-icon v-show="item === model.layoutName" class="pattern-item-icon" size="18" color="#0e7a0d">
@@ -78,12 +77,12 @@
 </template>
 <script lang="ts">
 import {computed, defineComponent, ref,reactive} from "vue"
-import {CheckboxOutline, TrailSignOutline} from "@vicons/ionicons5"
+import {CheckboxOutline} from "@vicons/ionicons5"
 import appStore from "@/packages/pinia/app.ts"
 import {SelectOption} from "naive-ui"
+import {themeOptions} from "@/packages/config/map.ts"
 export default defineComponent({
     components:{
-        TrailSignOutline,
         CheckboxOutline
     },
     setup () {
@@ -93,21 +92,12 @@ export default defineComponent({
             active.value = state
         }
         const {themeColor,layoutName} = app.userSetting
+        const layoutOptions = ["ml","mt","tm"]
         const model = reactive({
-            themeColor,
             hideTag:false,
             persistence:false,
             gray:false,
-            layoutName,
-            layoutOptions:["ml","mt","tm"],
-            themeOptions:[
-                {label:"苍翠",value:"#519a73"},
-                {label:"杏红",value:"#ff8c31"},
-                {label:"蔚蓝",value:"#70f3ff"},
-                {label:"桃红",value:"#f47983"},
-                {label:"柳绿",value:"#afdd22"},
-                {label:"湖蓝",value:"#30dff3"}
-            ]
+            layoutName
         })
         const updateThemeColor = (value: string, option: SelectOption) => {
             app.userSetting.themeColor = value
@@ -116,13 +106,15 @@ export default defineComponent({
             model.layoutName = value
             app.userSetting.layoutName = value
         }
-        console.log(model)
         return {
             active,
             change,
             model,
             updateThemeColor,
-            handlePattern
+            handlePattern,
+            themeOptions,
+            themeColor,
+            layoutOptions
         }
     }
 })

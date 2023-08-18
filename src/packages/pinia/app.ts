@@ -16,11 +16,16 @@ const app = defineStore({
             mobile: false,
             userSetting: { // 主题设置
                 layoutName: "ml",
-                themeColor: "#519a73"
+                themeColor: "#519a73",
+                themeName:null
             },
             userInfo: {},
             userState: false,
-            menus: []
+            allMenus: [], // 所有菜单
+            treeMenus:[],
+            paths: [],// 路由路径
+            tabs: [],
+            currentRouter: {}
         }
     }
 })

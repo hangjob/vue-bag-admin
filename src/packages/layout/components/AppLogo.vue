@@ -1,36 +1,23 @@
 <template>
-    <div class="header-logo" :style="compData.logoStyle">
-        <template v-if="collapsed">
-            <!--                        <img src="@/packages/assets/logo-min.png" alt="">-->
+    <div class="header-logo" :style="{width:app.collapsed ? '64px' : null}">
+        <template v-if="app.collapsed">
+            <!-- <img src="@/packages/assets/logo-min.png" alt="">-->
             <span>品茗</span>
         </template>
         <template v-else>
-            <!--                        <img src="@/packages/assets/logo-min.png" alt="">-->
+            <!-- <img src="@/packages/assets/logo-min.png" alt="">-->
             <span>品茗科技</span>
         </template>
     </div>
 </template>
 <script lang="ts">
-import {computed, reactive,defineComponent} from "vue"
-
+import {defineComponent} from "vue"
+import appStore from "@/packages/pinia/app.ts"
 export default defineComponent({
-    props:{
-        collapsed: {
-            type: Boolean,
-            required: false
-        }
-    },
-    setup(props){
-        const compData = reactive({
-            // eslint-disable-next-line vue/return-in-computed-property
-            logoStyle: computed(() => {
-                if (props.collapsed) {
-                    return {width: "64px"}
-                }
-            })
-        })
+    setup(){
+        const app = appStore()
         return {
-            compData
+            app
         }
     }
 })

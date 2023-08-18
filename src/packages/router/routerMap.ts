@@ -1,24 +1,19 @@
-import { RouteRecordRaw } from "vue-router"
+import {RouteRecordRaw} from "vue-router"
 
 const routerMap: Array<RouteRecordRaw> = [
     {
         path: "/",
         name: "main",
         component: () => import("@/packages/layout/index.vue"),
-        redirect: {name: "home"},
-        children: [
-            {
-                path: "/home", name: "home", meta: { title: "首页" },
-                component: () => import("@/packages/view/home/index.vue"),
-            }
-        ],
+        redirect: "home",
+        children: [],
     },
     {
-        path: "/login", name: "login", meta: { title: "登录" },
+        path: "/login", name: "login", meta: {title: "登录", isAuth: false},
         component: () => import("@/packages/view/login/index.vue"),
     },
     {
-        path: "/:pathMatch(.*)*",
+        path: "/:pathMatch(.*)*", meta: {title: "出错了", isAuth: false},
         component: () => import("@/packages/view/error/404.vue"),
     },
 ]
