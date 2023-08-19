@@ -16,9 +16,10 @@
             </div>
         </n-layout-header>
         <n-layout has-sider style="height: calc(100% - 50px)">
-            <Sidebar v-model:isOpen="compData.isOpen"/>
+            <Sidebar v-model:isOpen="compData.isOpen" v-if="app.userSetting.layoutName !== 'mt'"/>
             <n-layout>
-                <router-view></router-view>
+                <Tabs/>
+                <router-view style="padding: 10px"></router-view>
             </n-layout>
         </n-layout>
     </n-layout>
@@ -33,6 +34,7 @@ import MenuVisibleIcon from "@/packages/layout/components/MenuVisibleIcon.vue"
 import AppLogo from "@/packages/layout/components/AppLogo.vue"
 import Sidebar from "@/packages/layout/sidebar/index.vue"
 import Navbar from "@/packages/layout/navbar/index.vue"
+import Tabs from "@/packages/layout/tabs/index.vue"
 import appStore from "@/packages/pinia/app.ts"
 
 export default defineComponent({
@@ -42,7 +44,8 @@ export default defineComponent({
         MenuVisibleIcon,
         AppLogo,
         Sidebar,
-        Navbar
+        Navbar,
+        Tabs
     },
     setup() {
         const app = appStore()

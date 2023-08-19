@@ -17,17 +17,18 @@ const app = defineStore({
             userSetting: { // 主题设置
                 layoutName: "ml",
                 themeColor: "#519a73",
-                themeName:null
+                themeName:null,
+                language:"zhCN"
             },
             userInfo: {},
             userState: false,
             allMenus: [], // 所有菜单
             treeMenus:[],
             paths: [],// 路由路径
-            tabs: [],
+            tabs: <any>[],// 标签
             currentRouter: {}
         }
-    }
+    },
 })
 
 export default app

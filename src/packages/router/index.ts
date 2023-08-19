@@ -27,7 +27,7 @@ router.beforeEach( (to, from, next) => {
 
 router.afterEach((to: RouteLocationNormalized, from: RouteLocationNormalized) => {
     NProgress.done()
-    afterEach(to, from)
+    afterEach(to)
 })
 
 export default router

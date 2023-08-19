@@ -1,7 +1,7 @@
 import type {App} from "vue"
 import { h} from "vue"
-import {Home,SettingsOutline} from "@vicons/ionicons5"
-import {UsergroupAddOutlined} from "@vicons/antd"
+import {CloseOutline, RefreshCircleOutline,ChevronBackOutline,ChevronForwardOutline,Home,SettingsOutline} from "@vicons/ionicons5"
+import {StepBackwardFilled, StepForwardFilled, StopOutlined,SmileOutlined,UsergroupAddOutlined} from "@vicons/antd"
 import {NIcon} from "naive-ui"
 
 const icons = {Home,SettingsOutline,UsergroupAddOutlined}

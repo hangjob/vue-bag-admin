@@ -72,7 +72,6 @@ function getUserInfo(to: RouteLocationNormalized, from: RouteLocationNormalized,
 }
 
 
-
 /**
  * 获取后端接口菜单数据
  * @param to

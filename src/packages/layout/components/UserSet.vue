@@ -1,6 +1,6 @@
 <template>
     <div class="user-set">
-        <template v-if="!compData.browser.sm" >
+        <template v-if="!app.browser.sm" >
             <n-el tag="div" class="set-item hover-color" @click="compData[item.name]" v-for="(item,idx) in userIcon" :key="idx">
                 <n-icon :size="item.size" :color="item.color">
                     <component :is="item.name"></component>
@@ -69,13 +69,16 @@ export default defineComponent({
             SettingsOutline:()=>{
                 UserSettingRef.value.change()
             },
+            LanguageOutline(){
+                app.userSetting.language = app.userSetting.language ? null : "zhCN"
+            },
             handleDarkTheme(value){
                 app.userSetting.themeName = value ? "darkTheme" : null
             },
-            browser:app.browser
         })
         return {
             compData,
+            app,
             UserSettingRef,
             darkTheme:themeName !== null,
             userOptions: [
@@ -121,8 +124,8 @@ export default defineComponent({
         display: flex;
         align-items: center;
         justify-content: center;
-        padding-left: 12px;
-        padding-right: 12px;
+        padding-left: 10px;
+        padding-right: 10px;
         cursor: pointer;
         flex-shrink: 0;
         &.hover-color{
@@ -130,8 +133,7 @@ export default defineComponent({
                 padding-right: 2px;
             }
             &:hover{
-                color: var(--n-item-text-color);
-                background-color: var(--primary-color);
+                color:  var(--primary-color);
             }
         }
     }

@@ -26,8 +26,8 @@ export default defineComponent({
             themeOverrides,
             zhCN,
             dateZhCN,
-            locale: ref<NLocale | null>(null),
-            dateLocale: ref<NDateLocale | null>(null)
+            locale: computed(()=>app.userSetting.language ? zhCN : null),
+            dateLocale: computed(()=>app.userSetting.language ? dateZhCN : null)
         }
     }
 })

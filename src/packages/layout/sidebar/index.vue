@@ -70,7 +70,7 @@ export default defineComponent({
         })
 
         watch(app.userSetting,()=>{
-            if(app.userSetting.layoutName === "mt"){
+            if(app.userSetting.layoutName === "tm"){
                 compData.allMenus = computed(()=>cloneDeep(app.paths[0].children || app.paths))
             }else{
                 compData.allMenus = computed(()=>cloneDeep(app.treeMenus))
@@ -78,7 +78,6 @@ export default defineComponent({
         },{
             immediate:true
         })
-
 
         const updateExpandedKeys = ()=>{
             const paths = getObjectPath({arr:compData.allMenus,id:app.currentRouter.meta.id})

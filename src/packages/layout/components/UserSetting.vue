@@ -28,7 +28,7 @@
                     布局模式
                 </n-divider>
                 <div class="layout-pattern">
-                    <div class="pattern-item" @click="handlePattern(item)" v-for="item in layoutOptions" :key="item">
+                    <div :class="['pattern-item',item]" @click="handlePattern(item)" v-for="item in layoutOptions" :key="item">
                         <span class="left"></span>
                         <span class="top"></span>
                         <n-icon v-show="item === model.layoutName" class="pattern-item-icon" size="18" color="#0e7a0d">
@@ -142,8 +142,14 @@ export default defineComponent({
             display: inline-block;
             vertical-align: top;
         }
+        .pattern-item-icon{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(20%,-5%);
+        }
 
-        &:nth-of-type(1){
+        &.ml{
             .left{
                 height: 100%;
                 width: 30%;
@@ -158,14 +164,8 @@ export default defineComponent({
                 background: #fff;
                 box-shadow: 0 0 1px #f6f6f6;
             }
-            .pattern-item-icon{
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(20%,-5%);
-            }
         }
-        &:nth-of-type(2){
+        &.mt{
             .left{
                 background: #333333;
                 box-shadow: 0 0 1px #f6f6f6;
@@ -180,14 +180,8 @@ export default defineComponent({
                 background: #fff;
                 box-shadow: 0 0 1px #f6f6f6;
             }
-            .pattern-item-icon{
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%,-5%);
-            }
         }
-        &:nth-of-type(3){
+        &.tm{
             .left{
                 background: #333333;
                 height: 30%;
@@ -201,12 +195,6 @@ export default defineComponent({
                 bottom: 0;
                 z-index: 999;
                 left: 0;
-            }
-            .pattern-item-icon{
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                transform: translate(20%,-5%);
             }
         }
     }
