@@ -1,12 +1,14 @@
 import type {App} from "vue"
 import {readonly} from "vue"
-import mitt from "mitt"
+import mitt, {Emitter} from "mitt"
 import {mergeWith, merge, cloneDeep, isArray} from "lodash"
 import "@/packages/style/style.less"
 import setupGlobal from "@/packages/global"
 import setupPinia from "@/packages/pinia"
 import config from "@/packages/config"
 import setupIcons from "@/packages/config/icon.ts"
+
+const emitter: Emitter<any> = mitt()
 
 function customizer(objValue, srcValue) {
     if (isArray(objValue)) {
@@ -18,7 +20,7 @@ const install = (app: App, options?: any) => {
     const configOptions = mergeWith(cloneDeep(config), cloneDeep(options), customizer) // 合并值
     app.config.globalProperties["configOptions"] = configOptions
     app.provide("configOptions", readonly(configOptions))
-    app.provide("$mitt", mitt)
+    app.provide("$mitt", emitter)
     setupPinia(app)
     setupIcons(app)
     setupGlobal()

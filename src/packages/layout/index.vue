@@ -19,7 +19,7 @@
             <Sidebar v-model:isOpen="compData.isOpen" v-if="app.userSetting.layoutName !== 'mt'"/>
             <n-layout>
                 <Tabs/>
-                <router-view style="padding: 10px"></router-view>
+                <router-view v-if="compData.isRoad" style="padding: 10px"></router-view>
             </n-layout>
         </n-layout>
     </n-layout>
@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import {h, defineComponent, ref, Component, computed, reactive,watch} from "vue"
+import {defineComponent, computed, reactive, nextTick, inject} from "vue"
 import Breadcrumb from "@/packages/layout/components/Breadcrumb.vue"
 import UserSet from "@/packages/layout/components/UserSet.vue"
 import MenuVisibleIcon from "@/packages/layout/components/MenuVisibleIcon.vue"
@@ -36,6 +36,7 @@ import Sidebar from "@/packages/layout/sidebar/index.vue"
 import Navbar from "@/packages/layout/navbar/index.vue"
 import Tabs from "@/packages/layout/tabs/index.vue"
 import appStore from "@/packages/pinia/app.ts"
+import NProgress from "nprogress"
 
 export default defineComponent({
     components: {
@@ -49,11 +50,23 @@ export default defineComponent({
     },
     setup() {
         const app = appStore()
+        const $mitt: any = inject("$mitt")
         const compData = reactive({
             mobile: computed(() => app.mobile),
             isOpen: false,
-            handleMobileMask(){
+            isRoad: true,
+            handleMobileMask() {
                 compData.isOpen = true
+            }
+        })
+        $mitt.on("onReload", () => {
+            if (!NProgress.status) {
+                NProgress.start()
+                compData.isRoad = false
+                nextTick(() => {
+                    compData.isRoad = true
+                    NProgress.done()
+                })
             }
         })
         return {

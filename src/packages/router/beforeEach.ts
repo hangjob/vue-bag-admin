@@ -6,6 +6,7 @@ import router from "@/packages/router"
 import {merge, isArray, unionWith} from "lodash"
 import {renderIcon} from "@/packages/config/icon.ts"
 import {toTree} from "@/packages/utils/utils.ts"
+
 let hasRoles = false
 const namespace = "main"
 //框架页面组件
@@ -29,7 +30,7 @@ function createRouterComponent(allMenus) {
         const component = findComponent(item.file)
         if (component) {
             router.addRoute(item.namespace ? item.namespace : namespace, {
-                path: item.path, name: item.path, component: component,meta:item
+                path: item.path, name: item.path, component: component, meta: item
             })
         }
         if (isArray(item.children)) {
@@ -56,7 +57,7 @@ function hasUserInfo() {
 }
 
 /**
- * 获取用户信息
+ * 获取并更新用户信息
  * @param to
  * @param from
  * @param next
@@ -86,16 +87,16 @@ function updateRouterAll(to: RouteLocationNormalized, from: RouteLocationNormali
         getMenus().then((res) => {
             const {menus} = appStore.configOptions
             const allMenus = unionWith(res.data, menus)
-            appStore.allMenus = allMenus.map((item)=>{
-                if(item.icon){
+            appStore.allMenus = allMenus.map((item) => {
+                if (item.icon) {
                     item.iconName = item.icon
                     item.icon = renderIcon(item.iconName)
-                }else {
+                } else {
                     delete item.icon
                 }
                 return item
             })
-            appStore.treeMenus = toTree({arr:appStore.allMenus})
+            appStore.treeMenus = toTree({arr: appStore.allMenus})
             createRouterComponent(allMenus)
         }).finally(() => {
             hasRoles = true

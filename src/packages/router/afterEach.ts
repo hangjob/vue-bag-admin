@@ -3,49 +3,62 @@ import appPinia from "@/packages/pinia/app.ts"
 import {getObjectPath} from "@/packages/utils/utils.ts"
 import {cloneDeep} from "lodash"
 
-let first = true
-function updateCurrentRouter(to){
+let firstReload = true
+
+/**
+ * 更新当前路由
+ * @param to
+ */
+function updateCurrentRouter(to) {
     const appStore = appPinia()
     appStore.currentRouter = {...to}
 }
 
-function updatePaths(to){
+/**
+ * 更新路由路径
+ * @param to
+ */
+function updatePaths(to) {
     const appStore = appPinia()
-    const paths = getObjectPath({arr:appStore.treeMenus,id:to.meta.id})
+    const paths = getObjectPath({arr: appStore.treeMenus, id: to.meta.id})
     appStore.paths = (paths && paths.reverse()) || []
 }
 
-function updateTbas(current){
+/**
+ * 更新标签
+ * @param current
+ */
+function updateTbas(current) {
     const appStore = appPinia()
-    const {href,hash,name,path,query,meta} = current
-    const tag = appStore.tabs.find((item:any)=>item.meta.id === meta.id)
-    if(!tag){
-        appStore.tabs.push(cloneDeep({href,hash,name,path,query,meta}))
+    const {href, hash, name, path, query, meta} = current
+    const tag = appStore.tabs.find((item: any) => item.meta.id === meta.id)
+    if (!tag) {
+        appStore.tabs.push(cloneDeep({href, hash, name, path, query, meta}))
     }
 }
 
 
 /**
- * 更新tab
+ * 初始化-更新标签
  */
-function updateTabFix(){
+function updateTbasFix() {
     const appStore = appPinia()
-    if(first){
-        appStore.allMenus.forEach((current:any)=>{
-            if(current.tabFix){
-                updateTbas({meta:current})
+    if (firstReload) {
+        appStore.allMenus.forEach((current: any) => {
+            if (current.tabFix) {
+                updateTbas({meta: current})
             }
         })
-        first = false
+        firstReload = false
     }
 }
 
 
-const afterEach = (to: RouteLocationNormalized)=>{
+const afterEach = (to: RouteLocationNormalized) => {
     updateCurrentRouter(to)
     updatePaths(to)
     updateTbas(to)
-    updateTabFix()
+    updateTbasFix()
 }
 
 export default afterEach
