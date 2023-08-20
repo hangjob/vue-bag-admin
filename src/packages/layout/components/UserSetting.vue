@@ -4,7 +4,6 @@
         :default-width="350"
         placement="right"
         resizable
-        :mask-closable="false"
     >
         <n-drawer-content closable title="设置">
             <n-form
@@ -28,7 +27,8 @@
                     布局模式
                 </n-divider>
                 <div class="layout-pattern">
-                    <div :class="['pattern-item',item]" @click="handlePattern(item)" v-for="item in layoutOptions" :key="item">
+                    <div :class="['pattern-item',item]" @click="handlePattern(item)" v-for="item in layoutOptions"
+                         :key="item">
                         <span class="left"></span>
                         <span class="top"></span>
                         <n-icon v-show="item === model.layoutName" class="pattern-item-icon" size="18" color="#0e7a0d">
@@ -41,25 +41,36 @@
                 </n-divider>
                 <n-form-item label-align="left" label="标签风格" path="selectValue">
                     <n-select
-                        v-model:value="model.themeValue"
+                        v-model:value="model.tabsStyle"
                         placeholder="Select"
-                        :options="model.themeOptions"
+                        :options="themeTabsStyle"
+                        @update:value="updateTabsStyle"
                     />
                 </n-form-item>
                 <n-form-item label-align="left" label="隐藏标签" path="hideTag">
-                    <n-switch v-model:value="model.hideTag" />
+                    <n-switch v-model:value="app.userSetting.hideTabs"/>
                 </n-form-item>
-                <n-form-item label-align="left" label="标签持久化" path="persistence">
-                    <n-switch v-model:value="model.persistence" />
+                <n-form-item label-align="left" label="标签持久化" path="lasting">
+                    <n-switch v-model:value="app.userSetting.lasting">
+                        <template #checked>
+                            请刷新页面生效
+                        </template>
+                        <template #unchecked>
+                            开启标签持久化
+                        </template>
+                    </n-switch>
                 </n-form-item>
                 <n-form-item label-align="left" label="灰色模式" path="gray">
-                    <n-switch v-model:value="model.gray" />
+                    <n-switch @update:value="handleUpdateGray" v-model:value="app.userSetting.gray"/>
+                </n-form-item>
+                <n-form-item label-align="left" label="色弱模式" path="weak">
+                    <n-switch @update:value="handleUpdateWeak" v-model:value="app.userSetting.weak"/>
                 </n-form-item>
                 <n-divider dashed>
                     页面动画
                 </n-divider>
                 <n-form-item label-align="left" label="禁用动画" path="hideTag">
-                    <n-switch v-model:value="model.hideTag" />
+                    <n-switch v-model:value="model.hideTag"/>
                 </n-form-item>
                 <n-form-item label-align="left" label="动画方式" path="selectValue">
                     <n-select
@@ -76,33 +87,47 @@
     </n-drawer>
 </template>
 <script lang="ts">
-import {computed, defineComponent, ref,reactive} from "vue"
+import {computed, defineComponent, ref, reactive} from "vue"
 import {CheckboxOutline} from "@vicons/ionicons5"
 import appStore from "@/packages/pinia/app.ts"
 import {SelectOption} from "naive-ui"
-import {themeOptions} from "@/packages/config/map.ts"
+import {themeOptions, themeTabsStyle} from "@/packages/config/map.ts"
+import {updateHtmlGray, updateHtmlWeak} from "@/packages/global"
+
 export default defineComponent({
-    components:{
+    components: {
         CheckboxOutline
     },
-    setup () {
+    setup() {
         const active = ref(false)
         const app = appStore()
-        const change = (state=true)=>{
+        const change = (state = true) => {
             active.value = state
         }
-        const {themeColor,layoutName} = app.userSetting
-        const layoutOptions = ["ml","mt","tm"]
+        const {themeColor, layoutName, tabsStyle, hideTabs} = app.userSetting
+        const layoutOptions = ["ml", "mt", "tm"]
         const model = reactive({
-            hideTag:false,
-            persistence:false,
-            gray:false,
+            hideTag: false,
+            persistence: false,
+            gray: false,
+            tabsStyle,
             layoutName
         })
         const updateThemeColor = (value: string, option: SelectOption) => {
             app.userSetting.themeColor = value
         }
-        const handlePattern = (value)=>{
+        const updateTabsStyle = (value: string, option: SelectOption) => {
+            app.userSetting.tabsStyle = value
+        }
+        const handleUpdateGray = (value: string) => {
+            app.userSetting.gray = value
+            updateHtmlGray()
+        }
+        const handleUpdateWeak = (value: string) => {
+            app.userSetting.weak = value
+            updateHtmlWeak()
+        }
+        const handlePattern = (value) => {
             model.layoutName = value
             app.userSetting.layoutName = value
         }
@@ -114,7 +139,12 @@ export default defineComponent({
             handlePattern,
             themeOptions,
             themeColor,
-            layoutOptions
+            layoutOptions,
+            themeTabsStyle,
+            updateTabsStyle,
+            app,
+            handleUpdateGray,
+            handleUpdateWeak
         }
     }
 })
@@ -123,9 +153,11 @@ export default defineComponent({
 ::v-deep(.n-form-item-blank) {
     justify-content: flex-end;
 }
-.layout-pattern{
+
+.layout-pattern {
     display: flex;
-    .pattern-item{
+
+    .pattern-item {
         background: #f0f2f5;
         border-radius: 4px;
         box-shadow: 0 1px 2.5px #0000002e;
@@ -135,27 +167,31 @@ export default defineComponent({
         position: relative;
         flex: 1;
         margin-right: 20px;
-        &:last-of-type{
+
+        &:last-of-type {
             margin-right: 0;
         }
-        span{
+
+        span {
             display: inline-block;
             vertical-align: top;
         }
-        .pattern-item-icon{
+
+        .pattern-item-icon {
             position: absolute;
             left: 50%;
             top: 50%;
-            transform: translate(20%,-5%);
+            transform: translate(20%, -5%);
         }
 
-        &.ml{
-            .left{
+        &.ml {
+            .left {
                 height: 100%;
                 width: 30%;
                 background-color: #333333;
             }
-            .top{
+
+            .top {
                 height: 30%;
                 position: absolute;
                 right: 0;
@@ -165,13 +201,15 @@ export default defineComponent({
                 box-shadow: 0 0 1px #f6f6f6;
             }
         }
-        &.mt{
-            .left{
+
+        &.mt {
+            .left {
                 background: #333333;
                 box-shadow: 0 0 1px #f6f6f6;
                 width: 100%;
             }
-            .top{
+
+            .top {
                 height: 30%;
                 position: absolute;
                 right: 0;
@@ -181,13 +219,15 @@ export default defineComponent({
                 box-shadow: 0 0 1px #f6f6f6;
             }
         }
-        &.tm{
-            .left{
+
+        &.tm {
+            .left {
                 background: #333333;
                 height: 30%;
                 width: 100%;
             }
-            .top{
+
+            .top {
                 position: absolute;
                 background: #ffffff;
                 width: 30%;

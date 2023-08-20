@@ -1,7 +1,11 @@
 import {breakpointsTailwind, useBreakpoints, useEventListener, useThrottleFn} from "@vueuse/core"
 import type {App} from "vue"
 import appStore from "@/packages/pinia/app.ts"
+import {htmlElementClass} from "@/packages/utils/utils.ts"
 
+/**
+ * 监听窗口
+ */
 const throttledFn = useThrottleFn(() => {
     const app = appStore()
     const breakpoints = useBreakpoints(breakpointsTailwind)
@@ -16,6 +20,25 @@ const throttledFn = useThrottleFn(() => {
     app.collapsed = sm.value || md.value
 }, 200)
 
+
+/**
+ * 更新灰色模式
+ * @constructor
+ */
+const updateHtmlGray = () => {
+    const app = appStore()
+    htmlElementClass(app.userSetting.gray, "bag-grey")
+}
+
+/**
+ * 更新色弱模式
+ * @constructor
+ */
+const updateHtmlWeak = () => {
+    const app = appStore()
+    htmlElementClass(app.userSetting.weak, "bag-weak")
+}
+
 const setupGlobal = () => {
     throttledFn().then(() => (
         useEventListener(window, "resize", throttledFn)
@@ -23,3 +46,7 @@ const setupGlobal = () => {
 }
 
 export default setupGlobal
+export {
+    updateHtmlGray,
+    updateHtmlWeak
+}

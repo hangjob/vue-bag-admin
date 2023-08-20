@@ -18,8 +18,12 @@
         <n-layout has-sider style="height: calc(100% - 50px)">
             <Sidebar v-model:isOpen="compData.isOpen" v-if="app.userSetting.layoutName !== 'mt'"/>
             <n-layout>
-                <Tabs/>
-                <router-view v-if="compData.isRoad" style="padding: 10px"></router-view>
+                <Tabs v-show="!app.userSetting.hideTabs"/>
+                <router-view v-slot="{ Component }" v-if="compData.isRoad" style="padding: 10px">
+                    <transition name="slide" mode="in-out">
+                        <component :is="Component"/>
+                    </transition>
+                </router-view>
             </n-layout>
         </n-layout>
     </n-layout>
@@ -109,6 +113,38 @@ export default defineComponent({
     bottom: 0;
     z-index: 3000;
     transition: left 0.3s ease-in;
+}
+
+.slide-left-enter-active,
+.slide-left-leave-active,
+.slide-right-enter-active,
+.slide-right-leave-active {
+    width: 100%;
+    height: 100%;
+    will-change: transform;
+    transition: all 300ms cubic-bezier(.55, 0, .1, 1);
+    position: absolute;
+    backface-visibility: hidden;
+}
+
+.slide-right-enter-active {
+    opacity: 0;
+    transform: translate3d(-100%, 0, 0);
+}
+
+.slide-right-leave-active {
+    opacity: 0;
+    transform: translate3d(3%, 0, 0);
+}
+
+.slide-left-enter-active {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0);
+}
+
+.slide-left-leave-active {
+    opacity: 0;
+    transform: translate3d(-3%, 0, 0);
 }
 </style>
 

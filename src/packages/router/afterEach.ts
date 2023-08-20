@@ -45,7 +45,7 @@ function updateTbasFix() {
     const appStore = appPinia()
     if (firstReload) {
         appStore.allMenus.forEach((current: any) => {
-            if (current.tabFix) {
+            if (current.tabFix && current.path) {
                 updateTbas({meta: current})
             }
         })

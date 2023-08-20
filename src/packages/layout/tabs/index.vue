@@ -5,19 +5,36 @@
                 <ChevronBackOutline/>
             </n-icon>
         </div>
-        <div class="tabs" ref="tabsRefs">
-            <template v-if="app.tabs.length">
-                <n-el @click="compData.handleActionRouter(item)" v-for="(item,idx) in app.tabs" :key="idx" tag="div"
-                      :class="['tabs-item',item.meta.id === app.currentRouter.meta.id ? 'active' : null]">
-                    <component class="icon" v-if="item.meta.icon" :is="item.meta.icon"></component>
-                    <span>{{ item.meta.title }}</span>
-                    <n-icon class="icon-close" @click.stop="compData.handleColseRouter(item)"
-                            v-if="compData.isClose(item)">
-                        <CloseOutline/>
-                    </n-icon>
-                </n-el>
-            </template>
-        </div>
+        <template v-if="app.userSetting.tabsStyle === 'tact'">
+            <div class="tact tabs" ref="tabsRefs">
+                <template v-if="app.tabs.length">
+                    <n-el @click="compData.handleActionRouter(item)" v-for="(item,idx) in app.tabs" :key="idx" tag="div"
+                          :class="['tabs-item',item.meta.id === app.currentRouter.meta.id ? 'active' : null]">
+                        <component class="icon" v-if="item.meta.icon" :is="item.meta.icon"></component>
+                        <span>{{ item.meta.title }}</span>
+                        <n-icon class="icon-close" @click.stop="compData.handleColseRouter(item)"
+                                v-if="compData.isClose(item)">
+                            <CloseOutline/>
+                        </n-icon>
+                    </n-el>
+                </template>
+            </div>
+        </template>
+        <template v-else>
+            <div class="sutra tabs" ref="tabsRefs">
+                <template v-if="app.tabs.length">
+                    <n-el @click="compData.handleActionRouter(item)" v-for="(item,idx) in app.tabs" :key="idx" tag="div"
+                          :class="['tabs-item',item.meta.id === app.currentRouter.meta.id ? 'active' : null]">
+                        <component class="icon" v-if="item.meta.icon" :is="item.meta.icon"></component>
+                        <span>{{ item.meta.title }}</span>
+                        <n-icon class="icon-close" @click.stop="compData.handleColseRouter(item)"
+                                v-if="compData.isClose(item)">
+                            <CloseOutline/>
+                        </n-icon>
+                    </n-el>
+                </template>
+            </div>
+        </template>
         <div @click="handleArrowScroll('next')" class="arrow arrow-next">
             <n-icon size="18" color="var(--primary-color)">
                 <ChevronForwardOutline/>
@@ -28,7 +45,6 @@
                 :options="compData.tabsMore"
                 placement="bottom-start"
                 trigger="click"
-                @select="compData.handleMoreSelect"
             >
                 <n-icon size="18">
                     <SmileOutlined/>
@@ -38,7 +54,7 @@
     </n-el>
 </template>
 <script lang="ts">
-import {defineComponent, reactive, inject, ref} from "vue"
+import {defineComponent, reactive, inject, ref, computed} from "vue"
 import {ChevronBackOutline, ChevronForwardOutline, CloseOutline} from "@vicons/ionicons5"
 import {SmileOutlined} from "@vicons/antd"
 import appStore from "@/packages/pinia/app.ts"
@@ -79,32 +95,11 @@ export default defineComponent({
                         $mitt.emit("onReload")
                     }
                 }
-            }
-            if (item.key === "2") {
+            } else {
+                item.disabled = computed(() => !(app.tabs.length > 1))
                 item.props = {
                     onClick: () => {
-                        compData.handleColseRouter(app.currentRouter)
-                    }
-                }
-            }
-            if (item.key === "3") {
-                item.props = {
-                    onClick: () => {
-                        compData.handleColseRouter(app.currentRouter, "l")
-                    }
-                }
-            }
-            if (item.key === "4") {
-                item.props = {
-                    onClick: () => {
-                        compData.handleColseRouter(app.currentRouter, "r")
-                    }
-                }
-            }
-            if (item.key === "5") {
-                item.props = {
-                    onClick: () => {
-                        compData.handleColseRouter(app.currentRouter, "c")
+                        compData.handleColseRouter(app.currentRouter, item.zt)
                     }
                 }
             }
@@ -119,7 +114,6 @@ export default defineComponent({
             },
             handleColseRouter(item, zt) {
                 const idx = app.tabs.findIndex((k) => k.meta.id === item.meta.id)
-                let current = null
                 if (zt === "l") {
                     app.tabs.splice(0, idx)
                 } else if (zt === "r") {
@@ -129,14 +123,13 @@ export default defineComponent({
                     app.tabs.splice(1, app.tabs.length)
                 } else {
                     app.tabs.splice(idx, 1)
-                    current = app.tabs[idx - 1]
-                    if (current) {
-                        router.push(current.meta.path)
+                    if (app.currentRouter.meta.id === item.meta.id) {
+                        const current = app.tabs[idx - 1 <= -1 ? 0 : idx - 1]
+                        if (current) {
+                            compData.handleActionRouter(current)
+                        }
                     }
                 }
-            },
-            handleMoreSelect() {
-
             }
         })
         return {
@@ -153,9 +146,7 @@ export default defineComponent({
     height: 40px;
     position: relative;
     white-space: nowrap;
-    border-bottom: 1px solid var(--divider-color);
     display: flex;
-    overflow: hidden;
     box-sizing: border-box;
 
     .arrow {
@@ -170,6 +161,7 @@ export default defineComponent({
         z-index: 999;
         box-sizing: border-box;
         background-color: var(--n-color);
+        border-bottom: 1px solid var(--divider-color);
 
         &.arrow-next {
             border-left: 1px solid var(--divider-color);
@@ -184,15 +176,51 @@ export default defineComponent({
         }
     }
 
+    .sutra {
+        padding: 3px;
+        border-bottom: 1px solid var(--divider-color);
+
+        .tabs-item {
+            border-radius: 3px;
+            border: 1px solid var(--border-color);
+        }
+    }
+
+    .tact {
+        padding-top: 3px;
+        background-color: var(--tab-color);
+        box-sizing: border-box;
+        border-bottom: 1px solid var(--divider-color);
+
+        .tabs-item {
+            background-color: var(--n-color);
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+
+            &.active {
+                border: none;
+                color: var(--primary-color);
+            }
+
+            &.active::before {
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 1px;
+                bottom: 0px;
+                left: 0;
+                background-color: var(--primary-color);
+            }
+        }
+    }
+
     .tabs {
-        overflow: visible;
         position: relative;
         transition: transform .5s ease-in-out;
         white-space: nowrap;
         display: flex;
         height: 40px;
         flex: 1;
-        padding: 5px;
         float: left;
         box-sizing: border-box;
         overflow-y: scroll;
@@ -209,12 +237,15 @@ export default defineComponent({
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 5px;
+            margin-right: 10px;
             padding: 0 8px;
-            border-radius: 3px;
             box-sizing: border-box;
-            border: 1px solid var(--border-color);
             transition: all .3s;
+            position: relative;
+
+            &:first-child {
+                margin-left: 10px;
+            }
 
             .icon {
                 padding-right: 3px;

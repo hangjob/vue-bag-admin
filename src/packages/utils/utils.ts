@@ -29,14 +29,16 @@ const toTree = ({arr = [], keyField = "id", children = "children", pid = "pid"})
  * @param arr
  * @param id
  */
-const getObjectPath = ({arr=<any>[],id=""})=>{
+const getObjectPath = ({arr = <any>[], id = ""}) => {
     const data = cloneDeep(arr)
     for (const i in arr) {
         // eslint-disable-next-line no-prototype-builtins
         if (data.hasOwnProperty(i)) {
-            if (arr[i].id === id) {return [data[i]]}
+            if (arr[i].id === id) {
+                return [data[i]]
+            }
             if (data[i].children) {
-                const node: any = getObjectPath({arr:data[i].children, id})
+                const node: any = getObjectPath({arr: data[i].children, id})
                 if (node !== undefined) {
                     return node.concat(data[i])
                 }
@@ -45,8 +47,18 @@ const getObjectPath = ({arr=<any>[],id=""})=>{
     }
 }
 
+function htmlElementClass(state: boolean, clsName: string, target?: HTMLElement) {
+    const targetEl = target || document.body
+    if (state) {
+        targetEl.classList.add(clsName)
+    } else {
+        targetEl.classList.remove(clsName)
+    }
+}
+
 
 export {
     toTree,
     getObjectPath,
+    htmlElementClass
 }
