@@ -13,6 +13,7 @@
     },
     "dependencies": {
         "@vueuse/core": "^10.3.0",
+        "animate.css": "^4.1.1",
         "axios": "^1.4.0",
         "axios-retry": "^3.6.0",
         "lodash": "^4.17.21",

@@ -32,7 +32,8 @@ const app = defineStore({
                 lasting: false, // 标签持久化
                 gray: false, // 灰色模式
                 weak: false, // 色弱模式
-                isFullscreen: false // 全屏模式
+                isFullscreen: false, // 全屏模式
+                animation: "slideInLeft"
             },
             userInfo: {},
             userState: false,

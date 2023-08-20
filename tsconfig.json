@@ -3,9 +3,17 @@
         "target": "ES2020",
         "useDefineForClassFields": true,
         "module": "ESNext",
-        "lib": ["ES2020", "DOM", "DOM.Iterable"],
+        "lib": [
+            "ES2020",
+            "DOM",
+            "DOM.Iterable"
+        ],
         "skipLibCheck": true,
-        "types": ["node", "stripe-v3", "vite/client"],
+        "types": [
+            "node",
+            "stripe-v3",
+            "vite/client"
+        ],
         "noImplicitAny": false,
         /* Bundler mode */
         "moduleResolution": "bundler",
@@ -21,11 +29,27 @@
         "noFallthroughCasesInSwitch": true,
         "baseUrl": "./",
         "paths": {
-            "@/*": ["src/*"],
-            "__ROOT__/*": ["*"]
+            "@/*": [
+                "src/*"
+            ],
+            "__ROOT__/*": [
+                "*"
+            ]
         }
     },
-    "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-    "references": [{ "path": "./tsconfig.node.json" }],
-    "exclude": ["node_modules", "egg/*"]
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.d.ts",
+        "src/**/*.tsx",
+        "src/**/*.vue"
+    ],
+    "references": [
+        {
+            "path": "./tsconfig.node.json"
+        }
+    ],
+    "exclude": [
+        "node_modules",
+        "egg/*"
+    ]
 }

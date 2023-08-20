@@ -21,11 +21,23 @@ const tabsMore = [
 
 const themeTabsStyle = [
     {label: "经典卡片", key: "1", value: "sutra"},
-    {label: "圆滑灵动", key: "1", value: "tact"}
+    {label: "圆滑灵动", key: "2", value: "tact"}
 ]
+
+const animations = [
+    {label: "backInDown", key: "1", value: "animate__backInDown", out: "animate__backOutDown"},
+    {label: "backInLeft", key: "2", value: "animate__backInLeft", out: "animate__backOutLeft"},
+    {label: "backInRight", key: "3", value: "animate__backInRight", out: "animate__backOutRight"},
+    {label: "backInUp", key: "4", value: "animate__backInUp", out: "animate__backOutUp"},
+    {label: "lightSpeedInRight", key: "5", value: "animate__lightSpeedInRight", out: "animate__lightSpeedOutRight"},
+    {label: "slideInLeft", key: "6", value: "animate__slideInLeft", out: "animate__slideOutLeft"},
+    {label: "fadeInLeft", key: "7", value: "animate__fadeInLeft", out: "animate__fadeOutLeft"}
+]
+
 
 export {
     themeOptions,
     tabsMore,
-    themeTabsStyle
+    themeTabsStyle,
+    animations
 }

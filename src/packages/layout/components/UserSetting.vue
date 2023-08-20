@@ -74,9 +74,9 @@
                 </n-form-item>
                 <n-form-item label-align="left" label="动画方式" path="selectValue">
                     <n-select
-                        v-model:value="model.themeValue"
+                        v-model:value="app.userSetting.animation"
                         placeholder="Select"
-                        :options="model.themeOptions"
+                        :options="animations"
                     />
                 </n-form-item>
             </n-form>
@@ -91,7 +91,7 @@ import {computed, defineComponent, ref, reactive} from "vue"
 import {CheckboxOutline} from "@vicons/ionicons5"
 import appStore from "@/packages/pinia/app.ts"
 import {SelectOption} from "naive-ui"
-import {themeOptions, themeTabsStyle} from "@/packages/config/map.ts"
+import {themeOptions, themeTabsStyle, animations} from "@/packages/config/map.ts"
 import {updateHtmlGray, updateHtmlWeak} from "@/packages/global"
 
 export default defineComponent({
@@ -144,7 +144,8 @@ export default defineComponent({
             updateTabsStyle,
             app,
             handleUpdateGray,
-            handleUpdateWeak
+            handleUpdateWeak,
+            animations
         }
     }
 })

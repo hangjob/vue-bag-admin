@@ -125,7 +125,24 @@
     </div>
     <n-drawer v-model:show="compData.searchModel" :width="502" placement="top">
         <n-drawer-content title="搜索">
-            《斯通纳》是美国作家约翰·威廉姆斯在 1965 年出版的小说。
+            <n-form
+                ref="formRef"
+                inline
+                :label-width="180"
+                :model="compData.formValue"
+                :rules="compData.rules"
+                size="medium"
+            >
+                <n-form-item label="姓名" path="user.name">
+                    <n-input v-model:value="compData.formValue.user.name" placeholder="输入姓名"/>
+                </n-form-item>
+                <n-form-item label="年龄" path="user.age">
+                    <n-input v-model:value="compData.formValue.user.age" placeholder="输入年龄"/>
+                </n-form-item>
+                <n-form-item label="电话号码" path="phone">
+                    <n-input v-model:value="compData.formValue.phone" placeholder="电话号码"/>
+                </n-form-item>
+            </n-form>
             <template #footer>
                 <n-button-group>
                     <n-button ghost>
@@ -144,7 +161,7 @@
                         </template>
                         重置
                     </n-button>
-                    <n-button ghost>
+                    <n-button @click="compData.handleValidateClick" ghost>
                         <template #icon>
                             <n-icon size="16">
                                 <SearchOutline/>
@@ -155,12 +172,11 @@
                 </n-button-group>
             </template>
         </n-drawer-content>
-
     </n-drawer>
     <UserSetting ref="UserSettingRef"/>
 </template>
 <script lang="ts">
-import {useMessage, NAvatar, NText, NumberAnimationInst} from "naive-ui"
+import {useMessage, NAvatar, NText, NumberAnimationInst, FormInst} from "naive-ui"
 import {h, defineComponent, ref, computed, Component, reactive} from "vue"
 import {
     SearchOutline,
@@ -224,8 +240,39 @@ export default defineComponent({
         const {themeName} = app.userSetting
         const {isFullscreen, toggle} = useFullscreen(document.body)
         app.userSetting.isFullscreen = isFullscreen
+        const formRef = ref<FormInst | null>(null)
+        const message = useMessage()
         const compData = reactive({
             searchModel: false,
+            formValue: {
+                user: {
+                    name: "",
+                    age: ""
+                },
+                phone: ""
+            },
+            rules: {
+                user: {
+                    name: {
+                        required: true,
+                        message: "请输入姓名",
+                        trigger: "blur"
+                    },
+                    age: {
+                        required: true,
+                        message: "请输入年龄",
+                        trigger: ["input", "blur"]
+                    }
+                },
+                phone: {
+                    required: true,
+                    message: "请输入电话号码",
+                    trigger: ["input"]
+                }
+            },
+            handleValidateClick(e: MouseEvent) {
+                e.preventDefault()
+            },
             SettingsOutline: () => {
                 UserSettingRef.value.change()
             },
@@ -245,6 +292,7 @@ export default defineComponent({
         return {
             compData,
             app,
+            formRef,
             UserSettingRef,
             darkTheme: themeName !== null,
             userOptions: [
@@ -271,9 +319,9 @@ export default defineComponent({
                 }
             ],
             userIcon: [
-                {size: 18, color: "0e7a0d", name: "HappyOutline"},
                 {size: 18, color: "0e7a0d", name: "SearchOutline"},
                 {size: 18, color: "0e7a0d", name: "NotificationsOutline"},
+                {size: 18, color: "0e7a0d", name: "HappyOutline"},
                 {size: 18, color: "0e7a0d", name: "LanguageOutline"},
                 {size: 18, color: "0e7a0d", name: "ScanOutline"},
                 {size: 18, color: "0e7a0d", name: "SettingsOutline"}
@@ -286,7 +334,6 @@ export default defineComponent({
 .user-set {
     display: flex;
     height: 50px;
-
     .set-item {
         display: flex;
         align-items: center;
@@ -295,6 +342,14 @@ export default defineComponent({
         padding-right: 12px;
         cursor: pointer;
         flex-shrink: 0;
+
+        .n-icon {
+            outline: none;
+
+            svg {
+                outline: none;
+            }
+        }
 
         &.hover-color {
             &:last-of-type {

@@ -20,7 +20,11 @@
             <n-layout>
                 <Tabs v-show="!app.userSetting.hideTabs"/>
                 <router-view v-slot="{ Component }" v-if="compData.isRoad" style="padding: 10px">
-                    <transition name="slide" mode="in-out">
+                    <transition
+                        mode="out-in"
+                        enter-active-class="animate__animated animate__fadeInLeftBig"
+                        leave-active-class="animate__animated animate__fadeOutRightBig"
+                    >
                         <component :is="Component"/>
                     </transition>
                 </router-view>
@@ -113,38 +117,6 @@ export default defineComponent({
     bottom: 0;
     z-index: 3000;
     transition: left 0.3s ease-in;
-}
-
-.slide-left-enter-active,
-.slide-left-leave-active,
-.slide-right-enter-active,
-.slide-right-leave-active {
-    width: 100%;
-    height: 100%;
-    will-change: transform;
-    transition: all 300ms cubic-bezier(.55, 0, .1, 1);
-    position: absolute;
-    backface-visibility: hidden;
-}
-
-.slide-right-enter-active {
-    opacity: 0;
-    transform: translate3d(-100%, 0, 0);
-}
-
-.slide-right-leave-active {
-    opacity: 0;
-    transform: translate3d(3%, 0, 0);
-}
-
-.slide-left-enter-active {
-    opacity: 0;
-    transform: translate3d(100%, 0, 0);
-}
-
-.slide-left-leave-active {
-    opacity: 0;
-    transform: translate3d(-3%, 0, 0);
 }
 </style>
 

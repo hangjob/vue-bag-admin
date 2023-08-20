@@ -3,6 +3,7 @@ import {readonly} from "vue"
 import mitt, {Emitter} from "mitt"
 import {mergeWith, cloneDeep, isArray} from "lodash"
 import "@/packages/style/style.less"
+
 import setupGlobal from "@/packages/global"
 import setupPinia from "@/packages/pinia"
 import config from "@/packages/config"
