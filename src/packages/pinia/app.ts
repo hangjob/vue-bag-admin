@@ -33,7 +33,9 @@ const app = defineStore({
                 gray: false, // 灰色模式
                 weak: false, // 色弱模式
                 isFullscreen: false, // 全屏模式
-                animation: "slideInLeft"
+                animation: "animate__slideInLeft", // 类型 参考animation.css
+                disableAnimation: false, // 动画
+                keepAlive: false // 是否缓存
             },
             userInfo: {},
             userState: false,

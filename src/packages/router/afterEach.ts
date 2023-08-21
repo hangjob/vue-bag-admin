@@ -1,7 +1,7 @@
 import {RouteLocationNormalized} from "vue-router"
 import appPinia from "@/packages/pinia/app.ts"
 import {getObjectPath} from "@/packages/utils/utils.ts"
-import {cloneDeep} from "lodash"
+import cloneDeep from "lodash/cloneDeep.js"
 
 let firstReload = true
 

@@ -3,7 +3,9 @@ import appPinia from "@/packages/pinia/app.ts"
 import {menus as getMenus, userInfo} from "@/packages/api/app.ts"
 import {RouterComponent} from "@/packages/type"
 import router from "@/packages/router"
-import {merge, isArray, unionWith} from "lodash"
+import merge from "lodash/merge.js"
+import isArray from "lodash/isArray.js"
+import unionWith from "lodash/unionWith.js"
 import {renderIcon} from "@/packages/config/icon.ts"
 import {toTree} from "@/packages/utils/utils.ts"
 
@@ -30,7 +32,7 @@ function createRouterComponent(allMenus) {
         const component = findComponent(item.file)
         if (component) {
             router.addRoute(item.namespace ? item.namespace : namespace, {
-                path: item.path, name: item.path, component: component, meta: item
+                path: item.path, name: item.name, component: component, meta: item
             })
         }
         if (isArray(item.children)) {
@@ -94,6 +96,7 @@ function updateRouterAll(to: RouteLocationNormalized, from: RouteLocationNormali
                 } else {
                     delete item.icon
                 }
+                item.name = item.name || item.path
                 return item
             })
             appStore.treeMenus = toTree({arr: appStore.allMenus})

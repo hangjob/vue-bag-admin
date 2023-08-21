@@ -1,4 +1,4 @@
-import {cloneDeep} from "lodash"
+import cloneDeep from "lodash/cloneDeep.js"
 
 /**
  * 生成树节点

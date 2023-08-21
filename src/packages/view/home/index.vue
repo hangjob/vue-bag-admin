@@ -40,7 +40,7 @@
     </n-space>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from "vue"
 import { useMessage } from "naive-ui"
 import {useRoute,useRouter} from "vue-router"

@@ -1,11 +1,12 @@
 {
     "name": "vue-bag-admin",
-    "private": true,
-    "version": "0.0.0",
+    "private": false,
+    "version": "0.0.1",
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "vue-tsc && vite build",
+        "build": "vite build",
+        "lib": "vite build --mode lib",
         "preview": "vite preview",
         "lint": "eslint src",
         "fix": "eslint src --fix",
@@ -37,6 +38,7 @@
         "eslint-plugin-vue": "^9.17.0",
         "less": "^4.2.0",
         "naive-ui": "^2.34.4",
+        "rollup-plugin-visualizer": "^5.9.2",
         "typescript": "^5.0.2",
         "unplugin-auto-import": "^0.16.6",
         "unplugin-vue-components": "^0.25.1",

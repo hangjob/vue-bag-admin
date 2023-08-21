@@ -32,7 +32,7 @@ import {h, defineComponent, ref, Component, computed, reactive,watch} from "vue"
 import AppLogo from "@/packages/layout/components/AppLogo.vue"
 import appStore from "@/packages/pinia/app.ts"
 import {useRouter} from "vue-router"
-import {cloneDeep} from "lodash"
+import cloneDeep from "lodash/cloneDeep.js"
 import { getObjectPath} from "@/packages/utils/utils.ts"
 export default defineComponent({
     props:{

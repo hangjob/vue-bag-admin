@@ -18,7 +18,7 @@
                 <n-form-item label-align="left" label="主题" path="themeColor">
                     <n-select
                         v-model:value="themeColor"
-                        placeholder="Select"
+                        placeholder="选择主题"
                         :options="themeOptions"
                         @update:value="updateThemeColor"
                     />
@@ -42,7 +42,7 @@
                 <n-form-item label-align="left" label="标签风格" path="selectValue">
                     <n-select
                         v-model:value="model.tabsStyle"
-                        placeholder="Select"
+                        placeholder="选择标签风格"
                         :options="themeTabsStyle"
                         @update:value="updateTabsStyle"
                     />
@@ -66,16 +66,16 @@
                 <n-form-item label-align="left" label="色弱模式" path="weak">
                     <n-switch @update:value="handleUpdateWeak" v-model:value="app.userSetting.weak"/>
                 </n-form-item>
+                <n-form-item label-align="left" label="页面缓存" path="weak">
+                    <n-switch @update:value="handleUpdateKeepAlive" v-model:value="app.userSetting.keepAlive"/>
+                </n-form-item>
                 <n-divider dashed>
                     页面动画
                 </n-divider>
-                <n-form-item label-align="left" label="禁用动画" path="hideTag">
-                    <n-switch v-model:value="model.hideTag"/>
-                </n-form-item>
                 <n-form-item label-align="left" label="动画方式" path="selectValue">
                     <n-select
                         v-model:value="app.userSetting.animation"
-                        placeholder="Select"
+                        placeholder="选择动画方式"
                         :options="animations"
                     />
                 </n-form-item>
@@ -113,10 +113,10 @@ export default defineComponent({
             tabsStyle,
             layoutName
         })
-        const updateThemeColor = (value: string, option: SelectOption) => {
+        const updateThemeColor = (value: string) => {
             app.userSetting.themeColor = value
         }
-        const updateTabsStyle = (value: string, option: SelectOption) => {
+        const updateTabsStyle = (value: string) => {
             app.userSetting.tabsStyle = value
         }
         const handleUpdateGray = (value: string) => {
@@ -130,6 +130,9 @@ export default defineComponent({
         const handlePattern = (value) => {
             model.layoutName = value
             app.userSetting.layoutName = value
+        }
+        const handleUpdateKeepAlive = (value) => {
+            app.userSetting.keepAlive = value
         }
         return {
             active,
@@ -145,7 +148,8 @@ export default defineComponent({
             app,
             handleUpdateGray,
             handleUpdateWeak,
-            animations
+            animations,
+            handleUpdateKeepAlive
         }
     }
 })

@@ -25,15 +25,51 @@ const themeTabsStyle = [
 ]
 
 const animations = [
-    {label: "backInDown", key: "1", value: "animate__backInDown", out: "animate__backOutDown"},
-    {label: "backInLeft", key: "2", value: "animate__backInLeft", out: "animate__backOutLeft"},
-    {label: "backInRight", key: "3", value: "animate__backInRight", out: "animate__backOutRight"},
-    {label: "backInUp", key: "4", value: "animate__backInUp", out: "animate__backOutUp"},
-    {label: "lightSpeedInRight", key: "5", value: "animate__lightSpeedInRight", out: "animate__lightSpeedOutRight"},
-    {label: "slideInLeft", key: "6", value: "animate__slideInLeft", out: "animate__slideOutLeft"},
-    {label: "fadeInLeft", key: "7", value: "animate__fadeInLeft", out: "animate__fadeOutLeft"}
+    {label: "禁用动画", key: "100", value: "disabled", out: "disabled", prefix: ""},
+    {
+        label: "backInDown",
+        key: "1",
+        value: "animate__backInDown",
+        out: "animate__backOutDown",
+        prefix: "animate__animated"
+    },
+    {
+        label: "backInLeft",
+        key: "2",
+        value: "animate__backInLeft",
+        out: "animate__backOutLeft",
+        prefix: "animate__animated"
+    },
+    {
+        label: "backInRight",
+        key: "3",
+        value: "animate__backInRight",
+        out: "animate__backOutRight",
+        prefix: "animate__animated"
+    },
+    {label: "backInUp", key: "4", value: "animate__backInUp", out: "animate__backOutUp", prefix: "animate__animated"},
+    {
+        label: "lightSpeedInRight",
+        key: "5",
+        value: "animate__lightSpeedInRight",
+        out: "animate__lightSpeedOutRight",
+        prefix: "animate__animated"
+    },
+    {
+        label: "slideInLeft",
+        key: "6",
+        value: "animate__slideInLeft",
+        out: "animate__slideOutLeft",
+        prefix: "animate__animated"
+    },
+    {
+        label: "fadeInLeft",
+        key: "7",
+        value: "animate__fadeInLeft",
+        out: "animate__fadeOutLeft",
+        prefix: "animate__animated"
+    }
 ]
-
 
 export {
     themeOptions,

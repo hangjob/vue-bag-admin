@@ -1,7 +1,9 @@
 import type {App} from "vue"
 import {readonly} from "vue"
 import mitt, {Emitter} from "mitt"
-import {mergeWith, cloneDeep, isArray} from "lodash"
+import mergeWith from "lodash/mergeWith.js"
+import cloneDeep from "lodash/mergeWith.js"
+import isArray from "lodash/isArray.js"
 import "@/packages/style/style.less"
 
 import setupGlobal from "@/packages/global"

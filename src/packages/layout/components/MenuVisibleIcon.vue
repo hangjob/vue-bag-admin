@@ -3,7 +3,7 @@
         <MenuUnfoldOutlined/>
     </n-icon>
 </template>
-<script>
+<script lang="ts">
 import {defineComponent} from "vue"
 import {MenuUnfoldOutlined} from "@vicons/antd"
 export default defineComponent({

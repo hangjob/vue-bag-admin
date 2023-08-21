@@ -19,15 +19,7 @@
             <Sidebar v-model:isOpen="compData.isOpen" v-if="app.userSetting.layoutName !== 'mt'"/>
             <n-layout>
                 <Tabs v-show="!app.userSetting.hideTabs"/>
-                <router-view v-slot="{ Component }" v-if="compData.isRoad" style="padding: 10px">
-                    <transition
-                        mode="out-in"
-                        enter-active-class="animate__animated animate__fadeInLeftBig"
-                        leave-active-class="animate__animated animate__fadeOutRightBig"
-                    >
-                        <component :is="Component"/>
-                    </transition>
-                </router-view>
+                <Main/>
             </n-layout>
         </n-layout>
     </n-layout>
@@ -43,8 +35,9 @@ import AppLogo from "@/packages/layout/components/AppLogo.vue"
 import Sidebar from "@/packages/layout/sidebar/index.vue"
 import Navbar from "@/packages/layout/navbar/index.vue"
 import Tabs from "@/packages/layout/tabs/index.vue"
+import Main from "@/packages/layout/main/index.vue"
 import appStore from "@/packages/pinia/app.ts"
-import NProgress from "nprogress"
+
 
 export default defineComponent({
     components: {
@@ -54,28 +47,17 @@ export default defineComponent({
         AppLogo,
         Sidebar,
         Navbar,
-        Tabs
+        Tabs,
+        Main
     },
     setup() {
         const app = appStore()
-        const $mitt: any = inject("$mitt")
         const compData = reactive({
             mobile: computed(() => app.mobile),
             isOpen: false,
-            isRoad: true,
             handleMobileMask() {
                 compData.isOpen = true
-            }
-        })
-        $mitt.on("onReload", () => {
-            if (!NProgress.status) {
-                NProgress.start()
-                compData.isRoad = false
-                nextTick(() => {
-                    compData.isRoad = true
-                    NProgress.done()
-                })
-            }
+            },
         })
         return {
             compData,
