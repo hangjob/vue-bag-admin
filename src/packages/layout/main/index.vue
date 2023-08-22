@@ -1,16 +1,18 @@
 <template>
-    <router-view v-slot="{ Component }" v-if="isRoad" style="padding: 10px">
-        <transition
-            mode="out-in"
-            :enter-active-class="enterActiveClass"
-            :leave-active-class="leaveActiveClass"
-        >
-            <keep-alive v-if="app.userSetting.keepAlive" :max="30" :include="caches">
-                <component :is="Component"/>
-            </keep-alive>
-            <component v-else :is="Component"/>
-        </transition>
-    </router-view>
+    <div class="main">
+        <router-view  v-slot="{ Component }" v-if="isRoad">
+            <transition
+                mode="out-in"
+                :enter-active-class="enterActiveClass"
+                :leave-active-class="leaveActiveClass"
+            >
+                <keep-alive v-if="app.userSetting.keepAlive" :max="30" :include="caches">
+                    <component :is="Component"/>
+                </keep-alive>
+                <component v-else :is="Component"/>
+            </transition>
+        </router-view>
+    </div>
 </template>
 <script lang="ts">
 import {computed, defineComponent, inject, nextTick, ref} from "vue"
@@ -57,3 +59,9 @@ export default defineComponent({
     }
 })
 </script>
+<style lang="less" scoped>
+.main{
+    padding: 8px;
+    box-sizing: border-box;
+}
+</style>

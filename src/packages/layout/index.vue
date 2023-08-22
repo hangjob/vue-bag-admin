@@ -16,10 +16,10 @@
             </div>
         </n-layout-header>
         <n-layout has-sider style="height: calc(100% - 50px)">
-            <Sidebar v-model:isOpen="compData.isOpen" v-if="app.userSetting.layoutName !== 'mt'"/>
+            <Sidebar v-model:isOpen="compData.isOpen"/>
             <n-layout>
                 <Tabs v-show="!app.userSetting.hideTabs"/>
-                <Main/>
+                <BagMain/>
             </n-layout>
         </n-layout>
     </n-layout>
@@ -27,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, computed, reactive, nextTick, inject} from "vue"
+import {defineComponent, computed, reactive} from "vue"
 import Breadcrumb from "@/packages/layout/components/Breadcrumb.vue"
 import UserSet from "@/packages/layout/components/UserSet.vue"
 import MenuVisibleIcon from "@/packages/layout/components/MenuVisibleIcon.vue"
@@ -35,7 +35,7 @@ import AppLogo from "@/packages/layout/components/AppLogo.vue"
 import Sidebar from "@/packages/layout/sidebar/index.vue"
 import Navbar from "@/packages/layout/navbar/index.vue"
 import Tabs from "@/packages/layout/tabs/index.vue"
-import Main from "@/packages/layout/main/index.vue"
+import BagMain from "@/packages/layout/main/index.vue"
 import appStore from "@/packages/pinia/app.ts"
 
 
@@ -48,15 +48,14 @@ export default defineComponent({
         Sidebar,
         Navbar,
         Tabs,
-        Main
+        BagMain
     },
     setup() {
         const app = appStore()
         const compData = reactive({
-            mobile: computed(() => app.mobile),
             isOpen: false,
             handleMobileMask() {
-                compData.isOpen = true
+                compData.isOpen = !compData.isOpen
             },
         })
         return {

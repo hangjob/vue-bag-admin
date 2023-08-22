@@ -1,24 +1,28 @@
 import type {App} from "vue"
 import {h} from "vue"
 import {
-    CloseOutline,
+    CloseOutline,BookOutline,
     RefreshCircleOutline,
     ChevronBackOutline,
     ChevronForwardOutline,
     Home,
-    SettingsOutline
+    SettingsOutline,SunnyOutline,FileTrayOutline,
+    HomeOutline,CubeOutline,PlanetOutline,LeafOutline
 } from "@vicons/ionicons5"
-import {StepBackwardFilled, StepForwardFilled, StopOutlined, SmileOutlined, UsergroupAddOutlined} from "@vicons/antd"
+import {StepBackwardFilled,CloudSyncOutlined, StepForwardFilled,DribbbleOutlined
+    ,TeamOutlined,UserSwitchOutlined, StopOutlined, SmileOutlined, UsergroupAddOutlined,MenuOutlined,UserOutlined,BehanceOutlined} from "@vicons/antd"
 import {NIcon} from "naive-ui"
 
 const icons = {
-    Home,
-    SettingsOutline,
-    UsergroupAddOutlined,
+    Home,UserSwitchOutlined,BookOutline,CloudSyncOutlined,DribbbleOutlined,CubeOutline,PlanetOutline,SunnyOutline,
+    SettingsOutline,LeafOutline,FileTrayOutline,
+    UsergroupAddOutlined,BehanceOutlined,
     CloseOutline,
     RefreshCircleOutline,
     ChevronBackOutline,
-    ChevronForwardOutline,
+    ChevronForwardOutline,HomeOutline,
+    MenuOutlined,TeamOutlined,
+    UserOutlined,
     StepBackwardFilled, StepForwardFilled, StopOutlined, SmileOutlined
 }
 

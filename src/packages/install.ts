@@ -10,6 +10,8 @@ import setupGlobal from "@/packages/global"
 import setupPinia from "@/packages/pinia"
 import config from "@/packages/config"
 import setupIcons from "@/packages/config/icon.ts"
+import {axios} from "@/packages/http/request.ts"
+import router from "@/packages/router"
 
 const emitter: Emitter<any> = mitt()
 
@@ -30,3 +32,7 @@ const install = (app: App, options?: any) => {
 }
 
 export default install
+export {
+    axios,
+    router
+}

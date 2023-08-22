@@ -26,7 +26,7 @@
 import {defineComponent, ref} from "vue"
 
 export default defineComponent({
-    name:"cardGeneral",
+    name: "cardGeneral",
     setup() {
         const formRef = ref<null>(null)
         return {

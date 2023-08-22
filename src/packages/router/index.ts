@@ -19,13 +19,12 @@ const router = vueRouter.createRouter({
     routes: routerMap,
 } as RouterOptions)
 
-router.beforeEach( (to, from, next) => {
-    console.log("%c框架层拦截", "color: green;")
+router.beforeEach((to, from, next) => {
     NProgress.start()
     beforeEach(to, from, next)
 })
 
-router.afterEach((to: RouteLocationNormalized, from: RouteLocationNormalized) => {
+router.afterEach((to: RouteLocationNormalized) => {
     NProgress.done()
     afterEach(to)
 })

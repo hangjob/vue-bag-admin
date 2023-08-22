@@ -38,5 +38,5 @@ const get = (url: string, params?: any, config?: AxiosRequestConfig) => {
 export {
     post,
     get,
-    http
+    http as axios,
 }

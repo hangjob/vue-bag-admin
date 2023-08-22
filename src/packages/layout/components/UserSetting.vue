@@ -1,6 +1,6 @@
 <template>
     <n-drawer
-        v-model:show="active"
+        v-model:show="showhide"
         :default-width="350"
         placement="right"
         resizable
@@ -17,10 +17,9 @@
                 </n-divider>
                 <n-form-item label-align="left" label="主题" path="themeColor">
                     <n-select
-                        v-model:value="themeColor"
+                        v-model:value="app.userSetting.themeColor"
                         placeholder="选择主题"
                         :options="themeOptions"
-                        @update:value="updateThemeColor"
                     />
                 </n-form-item>
                 <n-divider dashed>
@@ -31,7 +30,8 @@
                          :key="item">
                         <span class="left"></span>
                         <span class="top"></span>
-                        <n-icon v-show="item === model.layoutName" class="pattern-item-icon" size="18" color="#0e7a0d">
+                        <n-icon v-show="item === app.userSetting.layoutName" class="pattern-item-icon" size="18"
+                                color="#0e7a0d">
                             <CheckboxOutline/>
                         </n-icon>
                     </div>
@@ -41,10 +41,9 @@
                 </n-divider>
                 <n-form-item label-align="left" label="标签风格" path="selectValue">
                     <n-select
-                        v-model:value="model.tabsStyle"
+                        v-model:value="app.userSetting.tabsStyle"
                         placeholder="选择标签风格"
                         :options="themeTabsStyle"
-                        @update:value="updateTabsStyle"
                     />
                 </n-form-item>
                 <n-form-item label-align="left" label="隐藏标签" path="hideTag">
@@ -67,7 +66,7 @@
                     <n-switch @update:value="handleUpdateWeak" v-model:value="app.userSetting.weak"/>
                 </n-form-item>
                 <n-form-item label-align="left" label="页面缓存" path="weak">
-                    <n-switch @update:value="handleUpdateKeepAlive" v-model:value="app.userSetting.keepAlive"/>
+                    <n-switch v-model:value="app.userSetting.keepAlive"/>
                 </n-form-item>
                 <n-divider dashed>
                     页面动画
@@ -87,10 +86,9 @@
     </n-drawer>
 </template>
 <script lang="ts">
-import {computed, defineComponent, ref, reactive} from "vue"
+import {defineComponent, ref, reactive} from "vue"
 import {CheckboxOutline} from "@vicons/ionicons5"
 import appStore from "@/packages/pinia/app.ts"
-import {SelectOption} from "naive-ui"
 import {themeOptions, themeTabsStyle, animations} from "@/packages/config/map.ts"
 import {updateHtmlGray, updateHtmlWeak} from "@/packages/global"
 
@@ -99,26 +97,13 @@ export default defineComponent({
         CheckboxOutline
     },
     setup() {
-        const active = ref(false)
+        const showhide = ref(false)
         const app = appStore()
         const change = (state = true) => {
-            active.value = state
+            showhide.value = state
         }
-        const {themeColor, layoutName, tabsStyle, hideTabs} = app.userSetting
         const layoutOptions = ["ml", "mt", "tm"]
-        const model = reactive({
-            hideTag: false,
-            persistence: false,
-            gray: false,
-            tabsStyle,
-            layoutName
-        })
-        const updateThemeColor = (value: string) => {
-            app.userSetting.themeColor = value
-        }
-        const updateTabsStyle = (value: string) => {
-            app.userSetting.tabsStyle = value
-        }
+        const model = reactive({})
         const handleUpdateGray = (value: string) => {
             app.userSetting.gray = value
             updateHtmlGray()
@@ -128,28 +113,20 @@ export default defineComponent({
             updateHtmlWeak()
         }
         const handlePattern = (value) => {
-            model.layoutName = value
             app.userSetting.layoutName = value
         }
-        const handleUpdateKeepAlive = (value) => {
-            app.userSetting.keepAlive = value
-        }
         return {
-            active,
+            showhide,
             change,
             model,
-            updateThemeColor,
             handlePattern,
             themeOptions,
-            themeColor,
             layoutOptions,
             themeTabsStyle,
-            updateTabsStyle,
             app,
             handleUpdateGray,
             handleUpdateWeak,
             animations,
-            handleUpdateKeepAlive
         }
     }
 })
@@ -193,7 +170,7 @@ export default defineComponent({
             .left {
                 height: 100%;
                 width: 30%;
-                background-color: #333333;
+                background: var(--n-title-text-color);
             }
 
             .top {
@@ -209,7 +186,7 @@ export default defineComponent({
 
         &.mt {
             .left {
-                background: #333333;
+                background: var(--n-title-text-color);
                 box-shadow: 0 0 1px #f6f6f6;
                 width: 100%;
             }
@@ -220,21 +197,21 @@ export default defineComponent({
                 right: 0;
                 top: 0;
                 width: 100%;
-                background: #fff;
+                background: var(--n-color);
                 box-shadow: 0 0 1px #f6f6f6;
             }
         }
 
         &.tm {
             .left {
-                background: #333333;
+                background: var(--n-title-text-color);
                 height: 30%;
                 width: 100%;
             }
 
             .top {
                 position: absolute;
-                background: #ffffff;
+                background: var(--n-color);
                 width: 30%;
                 height: 70%;
                 bottom: 0;

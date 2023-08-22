@@ -46,7 +46,7 @@ function createRouterComponent(allMenus) {
  * @param path
  */
 function hasWhiteRouter(path: string) {
-    const appStore = appPinia()
+    const appStore= appPinia()
     return appStore.configOptions.whiteList.some((e: string) => path.indexOf(e) === 0)
 }
 

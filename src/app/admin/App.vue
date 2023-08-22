@@ -1,33 +1,32 @@
 <template>
-	<n-config-provider :theme="darkTheme" :theme-overrides="themeOverrides" :locale="locale" :date-locale="dateLocale">
+    <n-config-provider :theme="darkTheme" :theme-overrides="themeOverrides" :locale="locale"
+                       :date-locale="dateLocale">
         <n-message-provider>
             <router-view></router-view>
         </n-message-provider>
-	</n-config-provider>
+    </n-config-provider>
 </template>
 <script lang="ts">
-import {computed, defineComponent, reactive, ref} from "vue"
-import { darkTheme,NConfigProvider ,GlobalThemeOverrides} from "naive-ui"
-import { zhCN, dateZhCN } from "naive-ui"
-import type { NLocale, NDateLocale } from "naive-ui"
+import {computed, defineComponent, reactive} from "vue"
+import {darkTheme, GlobalThemeOverrides} from "naive-ui"
+import {zhCN, dateZhCN} from "naive-ui"
 import appStore from "@/packages/pinia/app.ts"
+
 export default defineComponent({
     setup() {
         const app = appStore()
         const themeOverrides: GlobalThemeOverrides = reactive({
             common: {
-                primaryColor:computed(()=>app.userSetting.themeColor),
-                primaryColorHover:computed(()=>app.userSetting.themeColor),
-                progressRailColor:computed(()=>app.userSetting.themeColor)
+                primaryColor: computed(() => app.userSetting.themeColor),
+                primaryColorHover: computed(() => app.userSetting.themeColor),
+                progressRailColor: computed(() => app.userSetting.themeColor)
             },
         })
         return {
-            darkTheme: computed(()=>app.userSetting.themeName ? darkTheme : null),
+            darkTheme: computed(() => app.userSetting.themeName ? darkTheme : null),
             themeOverrides,
-            zhCN,
-            dateZhCN,
-            locale: computed(()=>app.userSetting.language ? zhCN : null),
-            dateLocale: computed(()=>app.userSetting.language ? dateZhCN : null)
+            locale: computed(() => app.userSetting.language ? zhCN : null),
+            dateLocale: computed(() => app.userSetting.language ? dateZhCN : null),
         }
     }
 })
