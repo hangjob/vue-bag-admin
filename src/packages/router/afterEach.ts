@@ -1,6 +1,6 @@
 import {RouteLocationNormalized} from "vue-router"
 import appPinia from "@/packages/pinia/app.ts"
-import {getObjectPath} from "@/packages/utils/utils.ts"
+import {getObjectPath, toTree} from "@/packages/utils/utils.ts"
 import cloneDeep from "lodash/cloneDeep.js"
 
 let firstReload = true
@@ -20,7 +20,7 @@ function updateCurrentRouter(to) {
  */
 function updatePaths(to) {
     const appStore = appPinia()
-    const paths = getObjectPath({arr: appStore.treeMenus, id: to.meta.id})
+    const paths = getObjectPath({arr: toTree({arr:appStore.allMenus}), id: to.meta.id})
     appStore.paths = (paths && paths.reverse()) || []
 }
 

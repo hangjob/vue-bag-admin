@@ -20,7 +20,7 @@
             :icon-size="18"
             key-field="id"
             label-field="title"
-            v-model:value="app.currentRouter.meta.id"
+            v-model:value="compData.value"
             :options="compData.allMenus"
             :expanded-keys="compData.expandedKeys"
             @update:value="compData.handleSelect"
@@ -34,7 +34,7 @@ import AppLogo from "@/packages/layout/components/AppLogo.vue"
 import appStore from "@/packages/pinia/app.ts"
 import {useRouter} from "vue-router"
 import cloneDeep from "lodash/cloneDeep.js"
-import {getObjectPath} from "@/packages/utils/utils.ts"
+import {getObjectPath, toTree} from "@/packages/utils/utils.ts"
 
 export default defineComponent({
     props: {
@@ -50,6 +50,12 @@ export default defineComponent({
     setup(props, {emit}) {
         const app = appStore()
         const router = useRouter()
+        const updateExpandedKeys = () => {
+            const paths = getObjectPath({arr: toTree({arr:app.allMenus}), id: app.currentRouter.meta.id})
+            const tabPaths = paths.filter(item => item.shows)
+            compData.expandedKeys = tabPaths.map((item) => item.id)
+        }
+
         const compData = reactive({
             expandedKeys: [],
             styleLeft: computed(() => {
@@ -69,7 +75,19 @@ export default defineComponent({
                     app.collapsed = true
                 }
             },
+            value:undefined
         })
+
+        watch(() =>
+            router.currentRoute.value.path,
+        () => {
+            updateExpandedKeys()
+            if(router.currentRoute.value.meta.shows){
+                compData.value = app.currentRouter.meta.id
+            }else{
+                compData.value = compData.expandedKeys[0]
+            }
+        },{immediate: true,deep: true})
 
         watch(app.userSetting, () => {
             if (app.userSetting.layoutName === "tm") {
@@ -80,18 +98,6 @@ export default defineComponent({
         }, {
             immediate: true
         })
-
-        const updateExpandedKeys = () => {
-            const paths = getObjectPath({arr: compData.allMenus, id: app.currentRouter.meta.id})
-            const tabPaths = paths.slice(1)
-            compData.expandedKeys = tabPaths.map((item) => item.id)
-        }
-        updateExpandedKeys()
-
-        app.$subscribe((mutation, state) => {
-            updateExpandedKeys()
-        })
-
 
         return {
             compData,

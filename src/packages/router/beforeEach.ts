@@ -23,17 +23,31 @@ function findComponent(filePath: string) {
     return filePath && views[key] && views[key].default
 }
 
+
+function addRouter(item){
+    const component = findComponent(item.file)
+    if (component) {
+        router.addRoute(item.namespace ? item.namespace : namespace, {
+            path: item.path, name: item.name, component: component, meta: item
+        })
+    }
+}
+
 /**
  * 创建路由组件
  * @param allMenus
  */
 function createRouterComponent(allMenus) {
+    console.log(allMenus)
     allMenus.forEach((item) => {
-        const component = findComponent(item.file)
-        if (component) {
-            router.addRoute(item.namespace ? item.namespace : namespace, {
-                path: item.path, name: item.name, component: component, meta: item
-            })
+        if(item.file){
+            addRouter(item)
+        }
+        if(Object.keys(item.add).length !== 0){
+            addRouter(item.add)
+        }
+        if(Object.keys(item.edit).length !== 0){
+            addRouter(item.edit)
         }
         if (isArray(item.children)) {
             createRouterComponent(item.children)
@@ -89,7 +103,7 @@ function updateRouterAll(to: RouteLocationNormalized, from: RouteLocationNormali
         getMenus().then((res) => {
             const {menus} = appStore.configOptions
             const allMenus = unionWith(res.data, menus)
-            appStore.allMenus = allMenus.map((item) => {
+            appStore.allMenus  = allMenus.map((item) => {
                 if (item.icon) {
                     item.iconName = item.icon
                     item.icon = renderIcon(item.iconName)
@@ -99,7 +113,7 @@ function updateRouterAll(to: RouteLocationNormalized, from: RouteLocationNormali
                 item.name = item.name || item.path
                 return item
             })
-            appStore.treeMenus = toTree({arr: appStore.allMenus})
+            appStore.treeMenus = toTree({arr:  appStore.allMenus.filter((item:any)=>item.shows)})
             createRouterComponent(allMenus)
         }).finally(() => {
             hasRoles = true

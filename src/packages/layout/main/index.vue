@@ -1,5 +1,5 @@
 <template>
-    <div class="main">
+    <div class="main bag-scroll">
         <router-view  v-slot="{ Component }" v-if="isRoad">
             <transition
                 mode="out-in"
@@ -29,7 +29,6 @@ export default defineComponent({
             // 缓存生效需要再页面中定义组件的name
             return (app.allMenus.filter((item) => item.keepAlive)).map((item) => item.name)
         })
-        console.log(caches.value)
         $mitt.on("onReload", () => {
             if (!NProgress.status) {
                 NProgress.start()
@@ -62,6 +61,7 @@ export default defineComponent({
 <style lang="less" scoped>
 .main{
     padding: 8px;
-    box-sizing: border-box;
+    overflow-y: scroll;
+    height: calc(100% - 40px);
 }
 </style>

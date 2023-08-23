@@ -113,6 +113,9 @@ export default defineComponent({
                 router.push(item.meta.path)
             },
             handleColseRouter(item, zt) {
+                if(app.tabs.length <= 1){
+                    return false
+                }
                 const idx = app.tabs.findIndex((k) => k.meta.id === item.meta.id)
                 if (zt === "l") {
                     app.tabs.splice(0, idx)

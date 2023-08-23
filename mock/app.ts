@@ -2,10 +2,10 @@ import {MockMethod} from "vite-plugin-mock"
 
 function creataDataItem(data={}){
     const item = {"id": "","title": "首页","icon": "","shows": true,"path": "", "order": 1,
-        "pid": "","file": "","isIframe": "","url": "","keepAlive": false,"tabHidden": false,
+        "pid": "","file": "","isIframe": "","url": "","keepAlive": false,"tabHidden": false, add:{}, edit:"",
         "tabFix": false,"httpFile": ""}
     for (const itemKey in item) {
-        if(data[itemKey]){
+        if(data[itemKey] || data[itemKey] === false){
             item[itemKey] = data[itemKey]
         }
     }
@@ -21,7 +21,9 @@ export default [
                 data: [
                     creataDataItem({id:100,"title": "首页","path": "/home","file": "/view/home/index.vue","icon":"HomeOutline"}),
                     creataDataItem({id:200,"title": "系统设置","icon": "SettingsOutline"}),
-                    creataDataItem({id:201,"title": "用户管理","pid": 200,"path": "/system/member","file": "/view/system/member/index.vue","icon": "TeamOutlined"}),
+                    creataDataItem({id:201,"title": "用户管理","pid": 200,"path": "/system/member","file": "/view/system/member/index.vue","icon": "TeamOutlined",}),
+                    creataDataItem({id:1000,"title": "添加用户","pid": 201,"path": "/system/member/add","file": "/view/system/member/add.vue","icon": "","shows":false}),
+                    creataDataItem({id:1001,"title": "编辑用户","pid": 201,"path": "/system/member/edit/:id","file": "/view/system/member/edit.vue","icon": "","shows":false}),
                     creataDataItem({id:202,"title": "角色管理","pid": 200, "path": "/system/role","file": "/view/system/role/index.vue","icon": "UserSwitchOutlined"}),
                     creataDataItem({id:203,"title": "权限管理","pid": 200, "path": "/system/branch","file": "/view/system/role/index.vue","icon": "UserOutlined"}),
                     creataDataItem({id:204,"title": "菜单管理","pid": 200, "path": "/system/menu","file": "/view/system/role/index.vue","icon": "MenuOutlined"}),

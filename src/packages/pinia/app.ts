@@ -18,10 +18,10 @@ const app = defineStore({
     // 持久化存储插件其他配置
     state: () => {
         return {
-            browser: {},
-            configOptions: config,
-            collapsed: false,
-            mobile: false,
+            browser: {}, // 当前浏览器信息
+            configOptions: config, // 框架配置
+            collapsed: false, // 是否折叠
+            mobile: false, // 是否移动端
             userSetting: { // 主题设置
                 layoutName: "ml", // 主题名称
                 themeColor: "#519a73", // 主题颜色
@@ -40,10 +40,10 @@ const app = defineStore({
             userInfo: {},
             userState: false,
             allMenus: [], // 所有菜单
-            treeMenus: [],
+            treeMenus: [], // 渲染的菜单
             paths: [],// 路由路径
             tabs: <any>[],// 标签
-            currentRouter: {}
+            currentRouter: {} // 当前路由信息
         }
     },
 })

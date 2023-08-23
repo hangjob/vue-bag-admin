@@ -1,10 +1,9 @@
-import {DataTableColumns, NButton} from "naive-ui"
+import {DataTableColumns, NButton,NPopconfirm,useMessage} from "naive-ui"
 import {h} from "vue"
 
 const createColumns = ({
-    play
-}: {
-    play: (row: any) => void
+    handleEdit,
+    handleDelete
 }): DataTableColumns => {
     return [
         {
@@ -19,7 +18,6 @@ const createColumns = ({
             align:"center",
             maxWidth:120,
             ellipsis:true,
-            resizable:true
         },
         {
             title: "年龄",
@@ -67,18 +65,37 @@ const createColumns = ({
                             type:"success",
                             size: "small",
                             ghost:true,
-                            onClick: () => play(row),
+                            onClick: () => handleEdit(row),
                             style:{marginRight:"5px"}
                         },
                         { default: () => "编辑" }),
-                    h( NButton,
+
+                    h(  NPopconfirm,
                         {
-                            type:"error",
-                            ghost:true,
-                            size: "small",
-                            onClick: () => play(row)
+                            onPositiveClick: () => {
+                                handleDelete(row)
+                            },
+                            negativeText:"取消",
+                            positiveText:"确定"
                         },
-                        { default: () => "删除" })
+                        {
+                            trigger: () => {
+                                return h(
+                                    NButton,
+                                    {
+                                        type:"error",
+                                        strong: true,
+                                        size: "small",
+                                        ghost:true,
+                                    },
+                                    { default: () => "删除" }
+                                )
+                            },
+                            default: () => {
+                                return "确认删除该条数据嘛？"
+                            }
+                        }
+                    ),
                 ])
             }
         }
