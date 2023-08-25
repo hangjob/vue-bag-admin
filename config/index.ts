@@ -1,8 +1,5 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import path from "path"
 
-console.log(process.cwd())
 export default function setupConfig({mode}: { mode: any }) {
     const build: any = {
         minify: false

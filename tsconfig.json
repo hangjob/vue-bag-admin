@@ -2,6 +2,8 @@
     "compilerOptions": {
         "target": "ES2020",
         "useDefineForClassFields": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
         "module": "ESNext",
         "allowJs": true,
         "lib": [
@@ -42,7 +44,8 @@
         "src/**/*.ts",
         "src/**/*.d.ts",
         "src/**/*.tsx",
-        "src/**/*.vue"
+        "src/**/*.vue",
+        "config/index.ts"
     ],
     "references": [
         {
@@ -51,6 +54,7 @@
     ],
     "exclude": [
         "node_modules",
-        "egg/*"
+        "egg/*",
+        "./vite.config.ts"
     ]
 }

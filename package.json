@@ -17,6 +17,7 @@
         "animate.css": "^4.1.1",
         "axios": "^1.4.0",
         "axios-retry": "^3.6.0",
+        "dayjs": "^1.11.9",
         "lodash": "^4.17.21",
         "mitt": "^3.0.1",
         "mockjs": "^1.1.0",

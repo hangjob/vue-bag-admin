@@ -1,4 +1,5 @@
-import { MockMethod } from "vite-plugin-mock"
+import {MockMethod} from "vite-plugin-mock"
+import {Random} from "mockjs"
 export default [
     {
         url: "/login",
@@ -8,9 +9,10 @@ export default [
                 code: 1,
                 data: {
                     username: "admin",
-                    roles: ["admin","common"],
-                    accessToken: "ooflnBycHzbaJycsM+obDQAkkQdaJKp",
-                    expiresTime: "2023/9/30 00:00:00"
+                    roles: ["admin", "common"],
+                    id: Random.id(),
+                    accessToken:Random.id(),
+                    expiresTime: Random.now(),
                 }
             }
         }
@@ -23,9 +25,7 @@ export default [
                 code: 1,
                 data: {
                     username: "admin",
-                    roles: ["admin","common"],
-                    accessToken: "ooflnBycHzbaJycsM+obDQAkkQdaJKp",
-                    expiresTime: "2023/9/30 00:00:00"
+                    roles: ["admin", "common"],
                 }
             }
         }

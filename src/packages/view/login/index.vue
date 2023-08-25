@@ -68,8 +68,8 @@ export default defineComponent({
         const message = useMessage()
         console.log(useMessage)
         const modelRef = ref<ModelType>({
-            age: null,
-            password: null,
+            age: 1,
+            password: 1,
             reenteredPassword: null
         })
         function validatePasswordStartWith (

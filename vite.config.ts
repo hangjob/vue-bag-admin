@@ -4,9 +4,6 @@ import path from "path"
 import Components from "unplugin-vue-components/vite"
 import {NaiveUiResolver} from "unplugin-vue-components/resolvers"
 import {viteMockServe} from "vite-plugin-mock"
-import { visualizer } from "rollup-plugin-visualizer"
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import setupConfig from "./config"
 
 export default ({mode}: { mode: any }) => {
@@ -21,12 +18,6 @@ export default ({mode}: { mode: any }) => {
             }),
             viteMockServe({
                 mockPath: "./mock",
-                enable: true,
-            }),
-            visualizer({
-                open: true,  //注意这里要设置为true，否则无效
-                gzipSize: true,
-                brotliSize: true
             })
         ],
         publicDir: "public",
