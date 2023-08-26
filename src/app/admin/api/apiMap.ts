@@ -1,3 +1,5 @@
 export default {
-    member:"/member",
+    member: "/member",
+    role: "/role",
+    branch: "/branch"
 }

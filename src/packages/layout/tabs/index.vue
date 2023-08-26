@@ -110,10 +110,10 @@ export default defineComponent({
                 return app.tabs.length > 1
             },
             handleActionRouter(item) {
-                router.push(item.meta.path)
+                router.push(item.meta.tempPath || item.meta.path)
             },
             handleColseRouter(item, zt) {
-                if(app.tabs.length <= 1){
+                if (app.tabs.length <= 1) {
                     return false
                 }
                 const idx = app.tabs.findIndex((k) => k.meta.id === item.meta.id)

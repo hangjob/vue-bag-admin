@@ -32,24 +32,35 @@
                     >
                         <n-tab-pane name="查询数据">
                             <n-form style="margin-bottom: -24px" label-placement="left" label-align="right"
-                                    :show-label="true" ref="formRef" inline :label-width="60"
+                                    :show-label="true" ref="searchFormRef" inline :label-width="60"
                                     :model="compData.searchForm">
-                                <n-form-item label="用户名" path="user.name">
-                                    <n-input v-model:value="compData.searchForm.userName" placeholder="输入姓名"/>
-                                </n-form-item>
-                                <n-form-item>
-                                    <n-space>
-                                        <n-button attr-type="button">搜索</n-button>
-                                        <n-button strong secondary type="success">重置</n-button>
-                                    </n-space>
-                                </n-form-item>
+                                <n-grid cols="24" x-gap="10" item-responsive responsive="screen">
+                                    <n-grid-item span="24 m:12 l:8">
+                                        <n-form-item label="用户名" path="username">
+                                            <n-input v-model:value="compData.searchForm.username"
+                                                     placeholder="输入用户名"/>
+                                        </n-form-item>
+                                    </n-grid-item>
+                                    <n-grid-item span="24 m:12 l:8">
+                                        <n-form-item label="邮箱" path="email">
+                                            <n-input v-model:value="compData.searchForm.email" placeholder="输入邮箱"/>
+                                        </n-form-item>
+                                    </n-grid-item>
+                                    <n-grid-item span="24 m:12 l:8">
+                                        <n-form-item>
+                                            <n-space>
+                                                <n-button attr-type="button" @click="compHandle.search">搜索</n-button>
+                                            </n-space>
+                                        </n-form-item>
+                                    </n-grid-item>
+                                </n-grid>
                             </n-form>
                         </n-tab-pane>
-                        <n-tab-pane name="更多操作">
+                        <n-tab-pane name="表格操作">
                             <n-space>
                                 <n-button color="#52C41A" @click="compHandle.add()">新增数据</n-button>
-                                <n-button color="#ff4d4f">删除数据</n-button>
-                                <n-button color="#1890ff" :loading="compData.loading" @click="compHandle.refresh">
+                                <n-button color="#ff4d4f" @click="compHandle.dels()">删除数据</n-button>
+                                <n-button color="#1890ff" :loading="compData.loading" @click="compHandle.getTableData">
                                     刷新数据
                                 </n-button>
                                 <n-button strong secondary type="success">数据导出</n-button>
@@ -81,6 +92,8 @@
                         :single-line="false"
                         :loading="compData.loading"
                         :size="compData.tableSizeValue"
+                        :row-key="compData.rowKey"
+                        @update:checked-row-keys="compHandle.check"
                     />
                 </n-card>
                 <n-card :bordered="false" content-style="padding: 10px;">
@@ -110,9 +123,8 @@ import {useRouter} from "vue-router"
 export default defineComponent({
     setup() {
         const router = useRouter()
-        const formRef = ref<FormInst | null>(null)
+        const searchFormRef = ref<FormInst | null>(null)
         const message = useMessage()
-        let columns = []
         const compData = reactive({
             tableData: [],
             tablePage: 1,
@@ -122,11 +134,13 @@ export default defineComponent({
             treeData,
             defaultExpandedKeys: ["1", "2"],
             columns: [],
-            sourceColumns:[],
+            sourceColumns: [],
             columnsOptions: [],
             columnsOptionsValue: [],
             searchForm: {userName: ""},
-            pagination: false
+            pagination: false,
+            rowKey: (row: any) => row.id,
+            checkedRowKeys: []
         })
         const compHandle = reactive({
             getTableData() {
@@ -137,8 +151,15 @@ export default defineComponent({
                     compData.loading = false
                 })
             },
-            del() {
-                message.success("模拟演示，删除成功")
+            del(row) {
+                message.success(`模拟演示，删除成功，${row.id}`)
+            },
+            dels() {
+                if (compData.checkedRowKeys.length) {
+                    message.success(`模拟演示，删除成功，${compData.checkedRowKeys.join(",")}`)
+                } else {
+                    message.warning("请选择要删除的项")
+                }
             },
             edit(row: any) {
                 router.push("/system/member/edit/" + row.id)
@@ -146,21 +167,23 @@ export default defineComponent({
             add() {
                 router.push("/system/member/add")
             },
-            refresh() {
-                compData.tablePage = 1
-                this.getTabdata()
+            check(rowKeys: any) {
+                compData.checkedRowKeys = rowKeys
             },
             tableSize() {
 
             },
             handleColumnsOptions(value: (string | number)[]) {
                 compData.columns = compData.sourceColumns.filter((item) => value.indexOf(item.key) !== -1)
+            },
+            search() {
+                message.success("模拟演示搜索")
             }
         })
         compData.sourceColumns = createColumns({compHandle})
         compData.columns = compData.sourceColumns
         compData.columnsOptionsValue = compData.sourceColumns.map((item) => item.key)
-        compData.columnsOptions = compData.sourceColumns.map((item) => {
+        compData.columnsOptions = compData.sourceColumns.filter((item) => item.type !== "selection").map((item) => {
             if (item.key === "actions") {
                 item.disabled = true
             }
@@ -168,7 +191,7 @@ export default defineComponent({
         })
         compHandle.getTableData()
         return {
-            formRef,
+            searchFormRef,
             FlashOutline,
             compData,
             compHandle,

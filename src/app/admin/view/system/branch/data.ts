@@ -1,4 +1,4 @@
-import {DataTableColumns, NButton, NPopconfirm, useMessage} from "naive-ui"
+import {DataTableColumns, NButton, NPopconfirm} from "naive-ui"
 import {h} from "vue"
 
 const createColumns = ({compHandle}): DataTableColumns => {
@@ -7,51 +7,23 @@ const createColumns = ({compHandle}): DataTableColumns => {
             type: "selection",
         },
         {
-            title: "ID",
-            key: "id",
-            align: "center",
-            width: 80,
-        },
-        {
-            title: "用户名",
-            key: "username",
+            title: "组织名称",
+            key: "name",
             align: "center",
             maxWidth: 120,
             ellipsis: true,
         },
         {
-            title: "年龄",
-            key: "age",
-            align: "center",
-            ellipsis: true,
-            maxWidth: 120,
-        },
-        {
-            title: "邮箱",
-            key: "email",
-            align: "center",
-            ellipsis: true,
-            maxWidth: 120,
-        },
-        {
-            title: "描述",
-            key: "describe",
+            title: "更新时间",
+            key: "updateTime",
             align: "center",
             ellipsis: true
         },
         {
-            title: "公司",
-            key: "company",
+            title: "创建时间",
+            key: "createTime",
             align: "center",
             ellipsis: true,
-            maxWidth: 150,
-        },
-        {
-            title: "坐标",
-            key: "address",
-            align: "center",
-            ellipsis: true,
-            width: 150,
         },
         {
             title: "操作",
@@ -155,8 +127,14 @@ const jobOptions = [
     {label: "全栈开发", value: "全栈开发"},
     {label: "场景设计师", value: "场景设计师"},
     {label: "IOS开发", value: "IOS开发"},
-    {label: "Android开发", value: "Android开发"},
-    {label: "前端菜鸟-羊先生", value: "前端菜鸟-羊先生"}
+    {label: "Android开发", value: "Android开发"}
+]
+
+const tagOptions = [
+    {label: "管理员", value: "admin"},
+    {label: "测试人员", value: "test"},
+    {label: "普通用户", value: "web"},
+    {label: "vip用户", value: "vip"},
 ]
 
 export {
@@ -164,5 +142,6 @@ export {
     treeData,
     tableSize,
     emailOptions,
-    jobOptions
+    jobOptions,
+    tagOptions
 }

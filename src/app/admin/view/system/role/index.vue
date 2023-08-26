@@ -1,12 +1,153 @@
 <template>
-    <div>
-        index
-        <a target="_self"></a>
-    </div>
+    <n-grid cols="24" x-gap="10" item-responsive responsive="screen">
+        <n-grid-item span="24 m:24 l:24">
+            <n-space :wrap-item="false">
+                <n-card content-style="padding: 0;">
+                    <n-tabs
+                        type="line"
+                        size="large"
+                        :tabs-padding="10"
+                        pane-style="padding: 10px;"
+                    >
+                        <n-tab-pane name="表格操作">
+                            <n-space>
+                                <n-button color="#52C41A" @click="compHandle.add()">新增数据</n-button>
+                                <n-button color="#ff4d4f" @click="compHandle.dels()">删除数据</n-button>
+                                <n-button color="#1890ff" :loading="compData.loading" @click="compHandle.getTableData">
+                                    刷新数据
+                                </n-button>
+                                <n-button strong secondary type="success">数据导出</n-button>
+                                <n-popselect v-model:value="compData.tableSizeValue" :options="compData.tableSize"
+                                             trigger="click">
+                                    <n-button strong secondary type="warning">表格大小</n-button>
+                                </n-popselect>
+                                <n-popover trigger="click" placement="bottom">
+                                    <template #trigger>
+                                        <n-button strong secondary type="info">设置表列</n-button>
+                                    </template>
+                                    <n-checkbox-group v-model:value="compData.columnsOptionsValue"
+                                                      @update:value="compHandle.handleColumnsOptions">
+                                        <n-space vertical align="start">
+                                            <n-checkbox v-for="item in compData.columnsOptions" :value="item.key"
+                                                        :label="item.title" :disabled="item.disabled"></n-checkbox>
+                                        </n-space>
+                                    </n-checkbox-group>
+                                </n-popover>
+                            </n-space>
+                        </n-tab-pane>
+                    </n-tabs>
+                </n-card>
+                <n-card :bordered="false" content-style="padding:0">
+                    <n-data-table
+                        :columns="compData.columns"
+                        :data="compData.tableData"
+                        :pagination="compData.pagination"
+                        :single-line="false"
+                        :loading="compData.loading"
+                        :size="compData.tableSizeValue"
+                        :row-key="compData.rowKey"
+                        @update:checked-row-keys="compHandle.check"
+                    />
+                </n-card>
+                <n-card :bordered="false" content-style="padding: 10px;">
+                    <n-pagination
+                        v-model:page="compData.tablePage"
+                        :page-count="1"
+                        size="large"
+                        show-quick-jumper
+                        show-size-picker
+                        style="justify-content: flex-end;flex: 1"
+                    />
+                </n-card>
+            </n-space>
+        </n-grid-item>
+    </n-grid>
 </template>
-<script lang="ts">
-import {defineComponent} from "vue"
-export default defineComponent({
 
+<script lang="ts">
+import {defineComponent, reactive, ref} from "vue"
+import {useMessage} from "naive-ui"
+import type {FormInst} from "naive-ui"
+import {role} from "@/app/admin/api/app.ts"
+import {createColumns, treeData, tableSize} from "./data.ts"
+import {FlashOutline} from "@vicons/ionicons5"
+import {useRouter} from "vue-router"
+
+export default defineComponent({
+    setup() {
+        const router = useRouter()
+        const searchFormRef = ref<FormInst | null>(null)
+        const message = useMessage()
+        const compData = reactive({
+            tableData: [],
+            tablePage: 1,
+            tableSizeValue: "medium",
+            tableSize,
+            loading: true,
+            treeData,
+            columns: [],
+            sourceColumns: [],
+            columnsOptions: [],
+            columnsOptionsValue: [],
+            searchForm: {userName: ""},
+            pagination: false,
+            rowKey: (row: any) => row.id,
+            checkedRowKeys: []
+        })
+        const compHandle = reactive({
+            getTableData() {
+                compData.loading = true
+                role().then((res) => {
+                    compData.tableData = res.data
+                }).finally(() => {
+                    compData.loading = false
+                })
+            },
+            del(row) {
+                message.success(`模拟演示，删除成功，${row.id}`)
+            },
+            dels() {
+                if (compData.checkedRowKeys.length) {
+                    message.success(`模拟演示，删除成功，${compData.checkedRowKeys.join(",")}`)
+                } else {
+                    message.warning("请选择要删除的项")
+                }
+            },
+            edit(row: any) {
+                router.push("/system/role/edit/" + row.id)
+            },
+            add() {
+                router.push("/system/role/add")
+            },
+            check(rowKeys: any) {
+                compData.checkedRowKeys = rowKeys
+            },
+            tableSize() {
+
+            },
+            handleColumnsOptions(value: (string | number)[]) {
+                compData.columns = compData.sourceColumns.filter((item) => value.indexOf(item.key) !== -1)
+            },
+            search() {
+                message.success("模拟演示搜索")
+            }
+        })
+        compData.sourceColumns = createColumns({compHandle})
+        compData.columns = compData.sourceColumns
+        compData.columnsOptionsValue = compData.sourceColumns.map((item) => item.key)
+        compData.columnsOptions = compData.sourceColumns.filter((item) => item.type !== "selection").map((item) => {
+            if (item.key === "actions") {
+                item.disabled = true
+            }
+            return item
+        })
+        compHandle.getTableData()
+        return {
+            searchFormRef,
+            FlashOutline,
+            compData,
+            compHandle,
+        }
+    }
 })
 </script>

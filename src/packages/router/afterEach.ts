@@ -20,7 +20,7 @@ function updateCurrentRouter(to) {
  */
 function updatePaths(to) {
     const appStore = appPinia()
-    const paths = getObjectPath({arr: toTree({arr:appStore.allMenus}), id: to.meta.id})
+    const paths = getObjectPath({arr: toTree({arr: appStore.allMenus}), id: to.meta.id})
     appStore.paths = (paths && paths.reverse()) || []
 }
 
@@ -33,6 +33,7 @@ function updateTbas(current) {
     const {href, hash, name, path, query, meta} = current
     const tag = appStore.tabs.find((item: any) => item.meta.id === meta.id)
     if (!tag) {
+        meta.tempPath = path // 主要解决临时动态路由
         appStore.tabs.push(cloneDeep({href, hash, name, path, query, meta}))
     }
 }
