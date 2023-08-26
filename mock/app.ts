@@ -3,7 +3,7 @@ import {MockMethod} from "vite-plugin-mock"
 function creataDataItem(data = {}) {
     const item = {
         "id": "", "title": "首页", "icon": "", "shows": true, "path": "", "order": 1,
-        "pid": "", "file": "", "isIframe": "", "url": "", "keepAlive": false, "tabHidden": false, add: {}, edit: "",
+        "pid": "", "file": "", "isIframe": "", "url": "", "keepAlive": false, "tabHidden": false,
         "tabFix": false, "httpFile": ""
     }
     for (const itemKey in item) {
@@ -113,8 +113,26 @@ export default [
                         "title": "菜单管理",
                         "pid": 200,
                         "path": "/system/menu",
-                        "file": "/view/system/role/index.vue",
+                        "file": "/view/system/menu/index.vue",
                         "icon": "MenuOutlined"
+                    }),
+                    creataDataItem({
+                        id: 1007,
+                        "title": "添加菜单",
+                        "pid": 204,
+                        "path": "/system/menu/add",
+                        "file": "/view/system/menu/add.vue",
+                        "icon": "",
+                        "shows": false
+                    }),
+                    creataDataItem({
+                        id: 1008,
+                        "title": "编辑菜单",
+                        "pid": 204,
+                        "path": "/system/menu/edit/:id",
+                        "file": "/view/system/menu/edit.vue",
+                        "icon": "",
+                        "shows": false
                     }),
                     creataDataItem({
                         id: 205,

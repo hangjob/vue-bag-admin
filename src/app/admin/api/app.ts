@@ -11,8 +11,14 @@ const role = ()=>{
 const branch = ()=>{
     return post(apiMap.branch)
 }
+
+const menus = ()=>{
+    return post(apiMap.menus)
+}
+
 export {
     member,
     role,
-    branch
+    branch,
+    menus
 }

@@ -24,7 +24,7 @@ function findComponent(filePath: string) {
 }
 
 
-function addRouter(item){
+function addRouter(item) {
     const component = findComponent(item.file)
     if (component) {
         router.addRoute(item.namespace ? item.namespace : namespace, {
@@ -40,13 +40,13 @@ function addRouter(item){
 function createRouterComponent(allMenus) {
     console.log(allMenus)
     allMenus.forEach((item) => {
-        if(item.file){
+        if (item.file) {
             addRouter(item)
         }
-        if(Object.keys(item.add).length !== 0){
+        if (item.add && Object.keys(item.add).length !== 0) {
             addRouter(item.add)
         }
-        if(Object.keys(item.edit).length !== 0){
+        if (item.edit && Object.keys(item.edit).length !== 0) {
             addRouter(item.edit)
         }
         if (isArray(item.children)) {
@@ -60,7 +60,7 @@ function createRouterComponent(allMenus) {
  * @param path
  */
 function hasWhiteRouter(path: string) {
-    const appStore= appPinia()
+    const appStore = appPinia()
     return appStore.configOptions.whiteList.some((e: string) => path.indexOf(e) === 0)
 }
 
@@ -103,7 +103,7 @@ function updateRouterAll(to: RouteLocationNormalized, from: RouteLocationNormali
         getMenus().then((res) => {
             const {menus} = appStore.configOptions
             const allMenus = unionWith(res.data, menus)
-            appStore.allMenus  = allMenus.map((item) => {
+            appStore.allMenus = allMenus.map((item) => {
                 if (item.icon) {
                     item.iconName = item.icon
                     item.icon = renderIcon(item.iconName)
@@ -113,7 +113,7 @@ function updateRouterAll(to: RouteLocationNormalized, from: RouteLocationNormali
                 item.name = item.name || item.path
                 return item
             })
-            appStore.treeMenus = toTree({arr:  appStore.allMenus.filter((item:any)=>item.shows)})
+            appStore.treeMenus = toTree({arr: appStore.allMenus.filter((item: any) => item.shows)})
             createRouterComponent(allMenus)
         }).finally(() => {
             hasRoles = true

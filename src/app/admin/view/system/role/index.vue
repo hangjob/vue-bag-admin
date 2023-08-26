@@ -37,8 +37,10 @@
                         </n-tab-pane>
                     </n-tabs>
                 </n-card>
-                <n-card :bordered="false" content-style="padding:0">
+                <n-card :segmented="{content: true,footer:true}" footer-style="padding:10px" content-style="padding:0">
                     <n-data-table
+                        :bordered="false"
+                        :bottom-bordered="false"
                         :columns="compData.columns"
                         :data="compData.tableData"
                         :pagination="compData.pagination"
@@ -48,16 +50,16 @@
                         :row-key="compData.rowKey"
                         @update:checked-row-keys="compHandle.check"
                     />
-                </n-card>
-                <n-card :bordered="false" content-style="padding: 10px;">
-                    <n-pagination
-                        v-model:page="compData.tablePage"
-                        :page-count="1"
-                        size="large"
-                        show-quick-jumper
-                        show-size-picker
-                        style="justify-content: flex-end;flex: 1"
-                    />
+                    <template #footer>
+                        <n-pagination
+                            v-model:page="compData.tablePage"
+                            :page-count="1"
+                            size="large"
+                            show-quick-jumper
+                            show-size-picker
+                            style="justify-content: flex-end;flex: 1"
+                        />
+                    </template>
                 </n-card>
             </n-space>
         </n-grid-item>

@@ -2,7 +2,8 @@
     <n-grid cols="24" x-gap="10" item-responsive responsive="screen">
         <n-grid-item span="24 m:24 l:24">
             <n-space :wrap-item="false">
-                <n-card :segmented="{content: true,footer: 'soft'}" content-style="padding:10px;">
+                <n-card :segmented="{content: true,footer:true}" footer-style="padding:10px"
+                        content-style="padding:0px;">
                     <template #header>
                         <n-space>
                             <n-button color="#52C41A" @click="compHandle.add()">新增数据</n-button>
@@ -13,6 +14,8 @@
                         </n-space>
                     </template>
                     <n-data-table
+                        :bordered="false"
+                        :bottom-bordered="false"
                         :columns="compData.columns"
                         :data="compData.tableData"
                         :pagination="compData.pagination"
@@ -22,7 +25,7 @@
                         :row-key="compData.rowKey"
                         @update:checked-row-keys="compHandle.check"
                     />
-                    <template #action>
+                    <template #footer>
                         <n-pagination
                             v-model:page="compData.tablePage"
                             :page-count="1"
