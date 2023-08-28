@@ -16,9 +16,14 @@ const menus = ()=>{
     return post(apiMap.menus)
 }
 
+const dictionary = ()=>{
+    return post(apiMap.dictionary)
+}
+
 export {
     member,
     role,
     branch,
-    menus
+    menus,
+    dictionary
 }

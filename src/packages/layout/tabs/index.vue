@@ -55,19 +55,12 @@
 </template>
 <script lang="ts">
 import {defineComponent, reactive, inject, ref, computed} from "vue"
-import {ChevronBackOutline, ChevronForwardOutline, CloseOutline} from "@vicons/ionicons5"
-import {SmileOutlined} from "@vicons/antd"
 import appStore from "@/packages/pinia/app.ts"
 import {tabsMore} from "@/packages/config/map.ts"
 import {useRouter} from "vue-router"
 
 export default defineComponent({
-    components: {
-        ChevronBackOutline,
-        ChevronForwardOutline,
-        CloseOutline,
-        SmileOutlined
-    },
+
     setup() {
         const app = appStore()
         const tabsRefs = ref<HTMLElement | null>(null)

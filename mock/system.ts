@@ -1,4 +1,5 @@
 import {MockMethod} from "vite-plugin-mock"
+import {Random} from "mockjs"
 
 export default [
     {
@@ -174,6 +175,29 @@ export default [
                         "pid": ""
                     },
                 ]
+            }
+        }
+    },
+    {
+        url: "/dictionary",
+        method: "post",
+        response: () => {
+            const data = []
+            for (let i = 0; i < 8; i++) {
+                data.push({
+                    "createTime": Random.datetime(),
+                    "updateTime": Random.datetime(),
+                    "id": String(i + 1),
+                    "name": Random.ctitle(5),
+                    "key": Random.word(5),
+                    "pid": String(i + 1),
+                    "disabled": false,
+                    "shows": true
+                })
+            }
+            return {
+                code: 1,
+                data
             }
         }
     },

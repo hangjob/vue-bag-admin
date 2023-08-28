@@ -12,13 +12,11 @@
 </template>
 <script lang="ts">
 import {computed, defineComponent} from "vue"
-import { WalletOutline } from "@vicons/ionicons5"
 import appPinia from "@/packages/pinia/app.ts"
 export default defineComponent({
     setup () {
         const appStore = appPinia()
         return {
-            WalletOutline,
             paths:computed(()=>appStore.paths)
         }
     }

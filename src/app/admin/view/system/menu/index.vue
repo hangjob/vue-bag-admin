@@ -58,7 +58,8 @@
                                         <n-checkbox-group v-model:value="compData.columnsOptionsValue"
                                                           @update:value="compHandle.handleColumnsOptions">
                                             <n-space vertical align="start">
-                                                <n-checkbox v-for="item in compData.columnsOptions" :value="item.key"
+                                                <n-checkbox v-for="item in compData.columnsOptions" :key="item.value"
+                                                            :value="item.key"
                                                             :label="item.title" :disabled="item.disabled"></n-checkbox>
                                             </n-space>
                                         </n-checkbox-group>
@@ -78,6 +79,7 @@
                         :size="compData.tableSizeValue"
                         :row-key="compData.rowKey"
                         @update:checked-row-keys="compHandle.check"
+                        :default-expanded-row-keys="[200]"
                     />
                     <template #footer>
                         <n-pagination
@@ -101,7 +103,6 @@ import {useMessage} from "naive-ui"
 import type {FormInst} from "naive-ui"
 import {menus} from "@/app/admin/api/app.ts"
 import {createColumns, treeData, tableSize} from "./data.ts"
-import {FlashOutline} from "@vicons/ionicons5"
 import {useRouter} from "vue-router"
 import {toTree} from "@/packages/utils/utils.ts"
 
@@ -146,10 +147,10 @@ export default defineComponent({
                 }
             },
             edit(row: any) {
-                router.push("/system/branch/edit/" + row.id)
+                router.push("/system/menu/edit/" + row.id)
             },
             add() {
-                router.push("/system/branch/add")
+                router.push("/system/menu/add")
             },
             check(rowKeys: any) {
                 compData.checkedRowKeys = rowKeys

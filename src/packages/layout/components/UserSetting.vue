@@ -87,15 +87,11 @@
 </template>
 <script lang="ts">
 import {defineComponent, ref, reactive} from "vue"
-import {CheckboxOutline} from "@vicons/ionicons5"
 import appStore from "@/packages/pinia/app.ts"
 import {themeOptions, themeTabsStyle, animations} from "@/packages/config/map.ts"
 import {updateHtmlGray, updateHtmlWeak} from "@/packages/global"
 
 export default defineComponent({
-    components: {
-        CheckboxOutline
-    },
     setup() {
         const showhide = ref(false)
         const app = appStore()

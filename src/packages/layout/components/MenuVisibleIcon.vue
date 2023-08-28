@@ -5,11 +5,8 @@
 </template>
 <script lang="ts">
 import {defineComponent} from "vue"
-import {MenuUnfoldOutlined} from "@vicons/antd"
 export default defineComponent({
-    components:{
-        MenuUnfoldOutlined
-    }
+
 })
 </script>
 <style lang="less" scoped>

@@ -47,7 +47,6 @@ import {useMessage} from "naive-ui"
 import type {FormInst} from "naive-ui"
 import {branch} from "@/app/admin/api/app.ts"
 import {createColumns, treeData, tableSize} from "./data.ts"
-import {FlashOutline} from "@vicons/ionicons5"
 import {useRouter} from "vue-router"
 import {toTree} from "@/packages/utils/utils.ts"
 
@@ -122,7 +121,6 @@ export default defineComponent({
         compHandle.getTableData()
         return {
             searchFormRef,
-            FlashOutline,
             compData,
             compHandle,
         }

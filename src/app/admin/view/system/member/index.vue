@@ -9,7 +9,9 @@
                         placeholder="输入部门列表查询"
                     >
                         <template #suffix>
-                            <n-icon :component="FlashOutline"/>
+                            <n-icon>
+                                <FlashOutline/>
+                            </n-icon>
                         </template>
                     </n-input>
                 </template>
@@ -119,7 +121,6 @@ import {useMessage} from "naive-ui"
 import type {FormInst} from "naive-ui"
 import {member} from "@/app/admin/api/app.ts"
 import {createColumns, treeData, tableSize} from "@/app/admin/view/system/member/data.ts"
-import {FlashOutline} from "@vicons/ionicons5"
 import {useRouter} from "vue-router"
 
 export default defineComponent({
@@ -194,7 +195,6 @@ export default defineComponent({
         compHandle.getTableData()
         return {
             searchFormRef,
-            FlashOutline,
             compData,
             compHandle,
         }

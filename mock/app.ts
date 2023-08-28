@@ -27,7 +27,9 @@ export default [
                         "title": "首页",
                         "path": "/home",
                         "file": "/view/home/index.vue",
-                        "icon": "HomeOutline"
+                        "icon": "HomeOutline",
+                        "keepAlive": true,
+                        "tabFix": true
                     }),
                     creataDataItem({id: 200, "title": "系统设置", "icon": "SettingsOutline"}),
                     creataDataItem({
@@ -97,7 +99,8 @@ export default [
                         "path": "/system/branch/add",
                         "file": "/view/system/branch/add.vue",
                         "icon": "",
-                        "shows": false
+                        "shows": false,
+                        "keepAlive": true
                     }),
                     creataDataItem({
                         id: 1006,
@@ -106,7 +109,8 @@ export default [
                         "path": "/system/branch/edit/:id",
                         "file": "/view/system/branch/edit.vue",
                         "icon": "",
-                        "shows": false
+                        "shows": false,
+                        "keepAlive": true
                     }),
                     creataDataItem({
                         id: 204,
@@ -139,8 +143,26 @@ export default [
                         "title": "字典管理",
                         "pid": 200,
                         "path": "/system/dictionary",
-                        "file": "/view/system/role/index.vue",
+                        "file": "/view/system/dictionary/index.vue",
                         "icon": "BookOutline"
+                    }),
+                    creataDataItem({
+                        id: 1009,
+                        "title": "添加字典",
+                        "pid": 205,
+                        "path": "/system/dictionary/add",
+                        "file": "/view/system/dictionary/add.vue",
+                        "icon": "",
+                        "shows": false
+                    }),
+                    creataDataItem({
+                        id: 1010,
+                        "title": "编辑字典",
+                        "pid": 205,
+                        "path": "/system/dictionary/edit/:id",
+                        "file": "/view/system/dictionary/edit.vue",
+                        "icon": "",
+                        "shows": false
                     }),
                     creataDataItem({
                         id: 206,

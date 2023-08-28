@@ -34,6 +34,7 @@
                                 v-model:value="compData.from.describe"
                                 placeholder="请输入描述"
                                 type="textarea"
+                                maxlength="100"
                                 :autosize="{minRows: 3,maxRows: 5}"
                             />
                         </n-form-item>

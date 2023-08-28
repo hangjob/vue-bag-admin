@@ -182,18 +182,6 @@
 <script lang="ts">
 import {NAvatar, NText, FormInst} from "naive-ui"
 import {h, defineComponent, ref, computed, reactive} from "vue"
-import {
-    SearchOutline,
-    NotificationsOutline,
-    LanguageOutline,
-    ScanOutline,
-    HappyOutline,
-    SettingsOutline,
-    SunnyOutline,
-    MoonOutline,
-    CloseCircleOutline,
-    SyncCircleOutline
-} from "@vicons/ionicons5"
 import UserSetting from "@/packages/layout/components/UserSetting.vue"
 import appStore from "@/packages/pinia/app.ts"
 import {useFullscreen} from "@vueuse/core"
@@ -226,17 +214,7 @@ function renderCustomHeader() {
 
 export default defineComponent({
     components: {
-        SearchOutline,
-        NotificationsOutline,
-        SyncCircleOutline,
-        LanguageOutline,
-        ScanOutline,
-        HappyOutline,
-        SettingsOutline,
         UserSetting,
-        MoonOutline,
-        SunnyOutline,
-        CloseCircleOutline
     },
     setup() {
         const UserSettingRef = ref(null)

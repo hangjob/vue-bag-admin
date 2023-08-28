@@ -57,8 +57,53 @@ function htmlElementClass(state: boolean, clsName: string, target?: HTMLElement)
 }
 
 
+const clipboardCopy = (text: string) => {
+    if (navigator.clipboard) { // 如果浏览器兼容该 API
+        return navigator.clipboard.writeText(text).catch(function (err) {
+            throw (err !== undefined ? err : new DOMException("The request is not allowed", "NotAllowedError"))
+        })
+    }
+
+    // 或者使用 document.execCommand()
+
+    // 把需要复制的文本放入 <span>
+    const span = document.createElement("span")
+    span.textContent = text
+
+    // 保留文本样式
+    span.style.whiteSpace = "pre"
+
+    // 把 <span> 放进页面
+    document.body.appendChild(span)
+
+    // 创建选择区域
+    const selection: any = window.getSelection()
+    const range = window.document.createRange()
+    selection.removeAllRanges()
+    range.selectNode(span)
+    selection.addRange(range)
+
+    // 复制文本到剪切板
+    let success = false
+    try {
+        success = window.document.execCommand("copy")
+    } catch (err) {
+        console.log(err)
+    }
+
+    // 清除战场
+    selection.removeAllRanges()
+    window.document.body.removeChild(span)
+
+    return success
+        ? Promise.resolve()
+        : Promise.reject(new DOMException("The request is not allowed", "NotAllowedError"))
+}
+
+
 export {
     toTree,
     getObjectPath,
-    htmlElementClass
+    htmlElementClass,
+    clipboardCopy
 }

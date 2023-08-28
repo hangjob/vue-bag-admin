@@ -4,67 +4,42 @@ import {h} from "vue"
 const createColumns = ({compHandle}): DataTableColumns => {
     return [
         {
-            type: "selection",
-        },
-        {
-            title: "菜单名称",
-            key: "title",
+            title: "ID",
+            key: "id",
             align: "center",
             ellipsis: true,
         },
         {
-            title: "路由",
-            key: "path",
+            title: "字典值",
+            key: "name",
             align: "center",
             ellipsis: true,
-            width: 160
         },
         {
-            title: "路径",
-            key: "file",
+            title: "字典key",
+            key: "key",
             align: "center",
             ellipsis: true,
-            width: 160
         },
         {
-            title: "图标",
-            key: "icon",
+            title: "是否禁用",
+            key: "disabled",
             align: "center",
-            ellipsis: true
+            ellipsis: true,
+            render(row: any) {
+                return h(NSwitch, {
+                    defaultValue: row.disabled
+                })
+            }
         },
         {
             title: "是否显示",
             key: "shows",
             align: "center",
             ellipsis: true,
-            width: 100,
             render(row: any) {
                 return h(NSwitch, {
                     defaultValue: row.shows
-                })
-            }
-        },
-        {
-            title: "是否缓存",
-            key: "keepAlive",
-            align: "center",
-            ellipsis: true,
-            width: 100,
-            render(row: any) {
-                return h(NSwitch, {
-                    defaultValue: row.keepAlive
-                })
-            }
-        },
-        {
-            title: "是否固定",
-            key: "tabFix",
-            align: "center",
-            ellipsis: true,
-            width: 100,
-            render(row: any) {
-                return h(NSwitch, {
-                    defaultValue: row.tabFix
                 })
             }
         },
@@ -180,11 +155,25 @@ const tagOptions = [
     {label: "vip用户", value: "vip"},
 ]
 
+const tabsOptions = [
+    {label: "职位字典", value: "1"},
+    {label: "岗位字典", value: "2"},
+    {label: "寂寞围绕着电视", value: "3"},
+    {label: "在两点半消失", value: "4"},
+    {label: "我在写代码", value: "5"},
+    {label: "间关车之舝兮", value: "6"},
+    {label: "思娈季女逝兮", value: "7"},
+    {label: "陟彼高冈", value: "8"},
+    {label: "析其柞薪", value: "9"},
+    {label: "六辔如琴", value: "10"},
+]
+
 export {
     createColumns,
     treeData,
     tableSize,
     emailOptions,
     jobOptions,
-    tagOptions
+    tagOptions,
+    tabsOptions
 }

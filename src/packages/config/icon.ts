@@ -7,10 +7,22 @@ import {
     ChevronForwardOutline,
     Home,
     SettingsOutline,SunnyOutline,FileTrayOutline,
-    HomeOutline,CubeOutline,PlanetOutline,LeafOutline
+    HomeOutline,CubeOutline,PlanetOutline,LeafOutline,
+    FlashOutline,
+    SearchOutline,
+    NotificationsOutline,
+    LanguageOutline,
+    ScanOutline,
+    HappyOutline,
+    MoonOutline,
+    CloseCircleOutline,
+    SyncCircleOutline,
+    CheckboxOutline
 } from "@vicons/ionicons5"
 import {StepBackwardFilled,CloudSyncOutlined, StepForwardFilled,DribbbleOutlined
-    ,TeamOutlined,UserSwitchOutlined, StopOutlined, SmileOutlined, UsergroupAddOutlined,MenuOutlined,UserOutlined,BehanceOutlined} from "@vicons/antd"
+    ,TeamOutlined,UserSwitchOutlined, StopOutlined, SmileOutlined, UsergroupAddOutlined,
+    MenuOutlined,UserOutlined,BehanceOutlined,MenuUnfoldOutlined
+} from "@vicons/antd"
 import {NIcon} from "naive-ui"
 
 const icons = {
@@ -23,7 +35,16 @@ const icons = {
     ChevronForwardOutline,HomeOutline,
     MenuOutlined,TeamOutlined,
     UserOutlined,
-    StepBackwardFilled, StepForwardFilled, StopOutlined, SmileOutlined
+    StepBackwardFilled, StepForwardFilled, StopOutlined, SmileOutlined,FlashOutline,MenuUnfoldOutlined,
+    SearchOutline,
+    NotificationsOutline,
+    LanguageOutline,
+    ScanOutline,
+    HappyOutline,
+    MoonOutline,
+    CloseCircleOutline,
+    SyncCircleOutline,
+    CheckboxOutline
 }
 
 function renderIcon(iconName: string) {
@@ -31,10 +52,13 @@ function renderIcon(iconName: string) {
 }
 
 const setupIcons = (app: App) => {
-    app.component("Home", Home)
+    for (const iconsKey in icons) {
+        app.component(iconsKey, icons[iconsKey])
+    }
 }
 
 export default setupIcons
 export {
-    renderIcon
+    renderIcon,
+    icons
 }
