@@ -194,7 +194,7 @@ export default [
                         "title": "水印",
                         "pid": 300,
                         "path": "/module/watermark",
-                        "file": "/view/module/icon/index.vue",
+                        "file": "/view/module/watermark/index.vue",
                         "icon": "LeafOutline"
                     }),
                     creataDataItem({

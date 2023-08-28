@@ -2,11 +2,11 @@
     <n-card :segmented="{content: true,footer:true}" header-style="padding:10px" footer-style="padding:10px"
             content-style="">
         <template #header>
-            <n-grid y-gap="20" x-gap="0" cols="24" item-responsive responsive="screen">
-                <n-grid-item span="24 m:10 l:6">
+            <n-grid y-gap="20" x-gap="20" cols="24" item-responsive responsive="screen">
+                <n-grid-item span="24 m:12 l:6">
                     <n-input-group>
-                        <n-button type="primary">搜索</n-button>
-                        <n-input :style="{ width: '200px' }" />
+                        <n-button>搜索</n-button>
+                        <n-input  />
                         <n-button type="primary" ghost>
                             <n-icon>
                                 <SearchOutline/>
@@ -14,12 +14,21 @@
                         </n-button>
                     </n-input-group>
                 </n-grid-item>
-                <n-grid-item  span="24 m:4 l:4">
-                    <n-color-picker ghost style="width: 100px" :show-alpha="false" v-model:value="compData.color">
-                        <template #label>
-                            图标颜色
-                        </template>
-                    </n-color-picker>
+                <n-grid-item  span="24 m:12 l:6">
+                    <n-input-group>
+                        <n-input readonly :value="compData.color"/>
+                        <n-color-picker ghost style="width: 100px" :show-alpha="false" v-model:value="compData.color">
+                            <template #label>
+                                图标颜色
+                            </template>
+                        </n-color-picker>
+                    </n-input-group>
+                </n-grid-item>
+                <n-grid-item  span="24 m:12 l:6">
+                    <n-input-group>
+                        <n-button>图标大小</n-button>
+                        <n-input-number style="width: 100%"  v-model:value="compData.size"  />
+                    </n-input-group>
                 </n-grid-item>
             </n-grid>
         </template>
@@ -28,7 +37,7 @@
                 <n-grid-item  v-for="(item,idx) in icons" :key="idx" span="12 m:4 l:3 xl:2">
                     <div class="icons-item">
                         <div class="icons-item_content">
-                            <n-icon class="icon" size="24">
+                            <n-icon class="icon" :color="compData.color" :size="compData.size">
                                 <component :is="item"></component>
                             </n-icon>
                             <span @click="compData.copy(item)" class="copy">复制</span>
@@ -37,7 +46,6 @@
                 </n-grid-item>
             </n-grid>
         </div>
-        <div ref="copyContent" style="display: none"></div>
     </n-card>
 </template>
 
@@ -51,6 +59,7 @@ export default defineComponent({
         const message = useMessage()
         const compData = reactive({
             color:"#18A058",
+            size:24,
             copy(icon){
                 clipboardCopy(icon.name).then(()=>{
                     message.success(`已复制，${icon.name}`)
@@ -71,7 +80,10 @@ export default defineComponent({
     left: 0;
     right: 0;
     overflow: hidden;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }
+
 .icons{
     &-item{
         width: 100%;
