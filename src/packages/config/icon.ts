@@ -49,7 +49,9 @@ import {
     Disc,
     FastFood,
     FootballOutline,
-    FootstepsOutline
+    FootstepsOutline,
+    DesktopOutline,
+    TvOutline
 } from "@vicons/ionicons5"
 import {StepBackwardFilled,CloudSyncOutlined, StepForwardFilled,DribbbleOutlined
     ,TeamOutlined,UserSwitchOutlined, StopOutlined, SmileOutlined, UsergroupAddOutlined,
@@ -160,7 +162,9 @@ const icons = {
     Disc,
     FastFood,
     FootballOutline,
-    FootstepsOutline
+    FootstepsOutline,
+    DesktopOutline,
+    TvOutline
 }
 
 function renderIcon(iconName: string) {

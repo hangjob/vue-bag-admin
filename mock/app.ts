@@ -202,8 +202,32 @@ export default [
                         "title": "字符拼音",
                         "pid": 300,
                         "path": "/module/pinyin",
-                        "file": "/view/module/icon/index.vue",
+                        "file": "/view/module/pinyin/index.vue",
                         "icon": "BehanceOutlined"
+                    }),
+                    creataDataItem({
+                        id: 304,
+                        "title": "敏感词汇",
+                        "pid": 300,
+                        "path": "/module/mint",
+                        "file": "/view/module/mint/index.vue",
+                        "icon": "FootstepsOutline"
+                    }),
+                    creataDataItem({
+                        id: 306,
+                        "title": "渐变文字",
+                        "pid": 300,
+                        "path": "/module/gradient",
+                        "file": "/view/module/gradient/index.vue",
+                        "icon": "FootstepsOutline"
+                    }),
+                    creataDataItem({
+                        id: 307,
+                        "title": "图像裁剪",
+                        "pid": 300,
+                        "path": "/module/cropping",
+                        "file": "/view/module/cropping/index.vue",
+                        "icon": "FootstepsOutline"
                     }),
                     creataDataItem({id: 310, "title": "表格", "pid": 310, "icon": "SettingsOutline"}),
                     creataDataItem({
@@ -228,6 +252,22 @@ export default [
                         "pid": 320,
                         "path": "/module/card/general",
                         "file": "/view/module/table/ordinary/index.vue"
+                    }),
+                    creataDataItem({
+                        id: 601,
+                        "title": "网页内嵌",
+                        "pid": "",
+                        "path": "/iframe",
+                        "file": "/view/iframe/index.vue",
+                        "icon": "DesktopOutline"
+                    }),
+                    creataDataItem({
+                        id: 602,
+                        "title": "瀑布流",
+                        "pid": "",
+                        "path": "/module/waterfall",
+                        "file": "/view/module/waterfall/index.vue",
+                        "icon": "TvOutline"
                     }),
                 ]
             }

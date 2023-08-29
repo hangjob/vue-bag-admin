@@ -10,13 +10,19 @@ export default function setupConfig({mode}: { mode: any }) {
         build.outDir = path.resolve(process.cwd(), "lib")
         build.lib = {
             entry: path.resolve(process.cwd(), "src/packages/install.ts"),
-            name: "BagAdmin", // 构建依赖包的时候， 对外暴露的名称
-            fileName: (format: string) => `index.${format}.js`,
+            name: "bagAdmin", // 构建依赖包的时候， 对外暴露的名称
+            fileName: "bagAdmin",
         }
-        build.output = {
-            nlineDynamicImports: true,
-            globals: {
-                vue: "Vue"
+        build.rollupOptions = {
+            external:["vue","naive-ui","vue-router","lodash","axios","pinia","@vicons/antd","@vicons/ionicons5"],
+            output:{
+                globals: {
+                    vue: "Vue",
+                    "naive-ui":"naive",
+                    "vue-router":"vueRouter",
+                    "axios":"axios",
+                    "pinia":"pinia"
+                }
             }
         }
     }

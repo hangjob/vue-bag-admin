@@ -6,14 +6,16 @@ const routerMap: Array<RouteRecordRaw> = [
         name: "main",
         component: () => import("@/packages/layout/index.vue"),
         redirect: "home",
-        children: [],
+        children: [
+
+        ],
     },
     {
-        path: "/login", name: "login", meta: {title: "登录", isAuth: false},
+        path: "/login", name: "login", meta: {title: "登录"},
         component: () => import("@/packages/view/login/index.vue"),
     },
     {
-        path: "/:pathMatch(.*)*", meta: {title: "出错了", isAuth: false},
+        path: "/:pathMatch(.*)*", meta: {title: "出错了"},
         component: () => import("@/packages/view/error/404.vue"),
     },
 ]

@@ -179,6 +179,7 @@ export default defineComponent({
         .tabs-item {
             border-radius: 3px;
             border: 1px solid var(--border-color);
+            background-color: var(--card-color);
         }
     }
 

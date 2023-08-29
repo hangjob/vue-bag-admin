@@ -20,6 +20,9 @@ const dictionary = ()=>{
     return post(apiMap.dictionary)
 }
 
+
+
+
 export {
     member,
     role,

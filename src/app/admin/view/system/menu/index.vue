@@ -177,7 +177,6 @@ export default defineComponent({
         compHandle.getTableData()
         return {
             searchFormRef,
-            FlashOutline,
             compData,
             compHandle,
         }

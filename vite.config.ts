@@ -39,6 +39,11 @@ export default ({mode}: { mode: any }) => {
                     changeOrigin: true,
                     rewrite: (path: any) => path.replace(/^\/api/, "")
                 },
+                "^/gsc":{
+                    target: "https://v2.jinrishici.com",
+                    changeOrigin: true,
+                    rewrite: (path: any) => path.replace(/^\/gsc/, "")
+                }
             }
         }
     })
