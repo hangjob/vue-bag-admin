@@ -240,6 +240,10 @@ export default defineComponent({
             transition: all .3s;
             position: relative;
 
+            span{
+                font-size: var(--font-size);
+            }
+
             &:first-child {
                 margin-left: 10px;
             }

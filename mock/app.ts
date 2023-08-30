@@ -4,7 +4,7 @@ function creataDataItem(data = {}) {
     const item = {
         "id": "", "title": "首页", "icon": "", "shows": true, "path": "", "order": 1,
         "pid": "", "file": "", "isIframe": "", "url": "", "keepAlive": false, "tabHidden": false,
-        "tabFix": false, "httpFile": ""
+        "tabFix": false, "httpFile": "","roles":["admin","test","web","vip"]
     }
     for (const itemKey in item) {
         if (data[itemKey] || data[itemKey] === false) {
@@ -29,7 +29,8 @@ export default [
                         "file": "/view/home/index.vue",
                         "icon": "HomeOutline",
                         "keepAlive": true,
-                        "tabFix": true
+                        "tabFix": true,
+                        "order":"100"
                     }),
                     creataDataItem({id: 200, "title": "系统设置", "icon": "SettingsOutline"}),
                     creataDataItem({
@@ -191,7 +192,7 @@ export default [
                     }),
                     creataDataItem({
                         id: 302,
-                        "title": "水印",
+                        "title": "添加水印",
                         "pid": 300,
                         "path": "/module/watermark",
                         "file": "/view/module/watermark/index.vue",
@@ -211,7 +212,7 @@ export default [
                         "pid": 300,
                         "path": "/module/mint",
                         "file": "/view/module/mint/index.vue",
-                        "icon": "FootstepsOutline"
+                        "icon": "HeartDislikeCircleOutline"
                     }),
                     creataDataItem({
                         id: 306,
@@ -219,7 +220,7 @@ export default [
                         "pid": 300,
                         "path": "/module/gradient",
                         "file": "/view/module/gradient/index.vue",
-                        "icon": "FootstepsOutline"
+                        "icon": "ColorPaletteOutline"
                     }),
                     creataDataItem({
                         id: 307,
@@ -227,7 +228,23 @@ export default [
                         "pid": 300,
                         "path": "/module/cropping",
                         "file": "/view/module/cropping/index.vue",
-                        "icon": "FootstepsOutline"
+                        "icon": "ImageOutline"
+                    }),
+                    creataDataItem({
+                        id: 308,
+                        "title": "卡片描述",
+                        "pid": 300,
+                        "path": "/module/des",
+                        "file": "/view/module/des/index.vue",
+                        "icon": "WalletOutline"
+                    }),
+                    creataDataItem({
+                        id: 309,
+                        "title": "日历",
+                        "pid": 300,
+                        "path": "/module/calendar",
+                        "file": "/view/module/calendar/index.vue",
+                        "icon": "ReadOutlined"
                     }),
                     creataDataItem({id: 310, "title": "表格", "pid": 310, "icon": "SettingsOutline"}),
                     creataDataItem({
@@ -257,9 +274,11 @@ export default [
                         id: 601,
                         "title": "网页内嵌",
                         "pid": "",
-                        "path": "/iframe",
+                        "path": "/iframe/guide",
+                        "isIframe":true,
+                        "url":"https://cn.vitejs.dev/guide/",
                         "file": "/view/iframe/index.vue",
-                        "icon": "DesktopOutline"
+                        "icon": "LayersOutline"
                     }),
                     creataDataItem({
                         id: 602,
@@ -268,6 +287,112 @@ export default [
                         "path": "/module/waterfall",
                         "file": "/view/module/waterfall/index.vue",
                         "icon": "TvOutline"
+                    }),
+                    creataDataItem({
+                        id: 700,
+                        "title": "编辑器",
+                        "pid": "",
+                        "path": "",
+                        "file": "",
+                        "icon": "CreateOutline"
+                    }),
+                    creataDataItem({
+                        id: 701,
+                        "title": "Markdown",
+                        "pid": "700",
+                        "path": "/editor/md",
+                        "file": "/view/editor/md.vue",
+                        "icon": "FileTrayOutline"
+                    }),
+                    creataDataItem({
+                        id: 702,
+                        "title": "富文本",
+                        "pid": "700",
+                        "path": "/editor/rich",
+                        "file": "/view/editor/rich.vue",
+                        "icon": "LaptopOutline"
+                    }),
+                    creataDataItem({
+                        id: 800,
+                        "title": "异常页面",
+                        "pid": "",
+                        "path": "",
+                        "file": "",
+                        "icon": "AlertOutlined"
+                    }),
+                    creataDataItem({
+                        id: 801,
+                        "title": "403",
+                        "pid": "800",
+                        "path": "/error/403",
+                        "file": "/view/error/403.vue",
+                        "icon": ""
+                    }),
+                    creataDataItem({
+                        id: 802,
+                        "title": "404",
+                        "pid": "800",
+                        "path": "/error/404",
+                        "file": "/view/error/404.vue",
+                        "icon": ""
+                    }),
+                    creataDataItem({
+                        id: 804,
+                        "title": "418",
+                        "pid": "800",
+                        "path": "/error/418",
+                        "file": "/view/error/418.vue",
+                        "icon": ""
+                    }),
+                    creataDataItem({
+                        id: 803,
+                        "title": "500",
+                        "pid": "800",
+                        "path": "/error/500",
+                        "file": "/view/error/500.vue",
+                        "icon": ""
+                    }),
+                    creataDataItem({
+                        id: 900,
+                        "title": "结果页面",
+                        "pid": "",
+                        "path": "/result",
+                        "file": "/view/result/index.vue",
+                        "icon": "HappyOutline"
+                    }),
+                    creataDataItem({
+                        id: 901,
+                        "title": "模板打印",
+                        "pid": "",
+                        "path": "/iframe/hiprint",
+                        "isIframe":true,
+                        "url":"https://ccsimple.gitee.io/vue-plugin-hiprint/",
+                        "file": "/view/iframe/index.vue",
+                        "icon": "LogoIonic"
+                    }),
+                    creataDataItem({
+                        id: 3000,
+                        "title": "权限测试",
+                        "pid": "",
+                        "path": "",
+                        "file": "",
+                        "icon": "InstagramOutlined"
+                    }),
+                    creataDataItem({
+                        id: 3001,
+                        "title": "页面权限",
+                        "pid": "3000",
+                        "path": "/permission/page",
+                        "file": "/view/permission/page.vue",
+                        "icon": ""
+                    }),
+                    creataDataItem({
+                        id: 3002,
+                        "title": "按钮权限",
+                        "pid": "3000",
+                        "path": "/permission/button",
+                        "file": "/view/permission/button.vue",
+                        "icon": ""
                     }),
                 ]
             }

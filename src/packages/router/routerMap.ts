@@ -1,5 +1,6 @@
 import {RouteRecordRaw} from "vue-router"
-
+import error from "@/packages/view/error/404.vue"
+import login from "@/packages/view/login/index.vue"
 const routerMap: Array<RouteRecordRaw> = [
     {
         path: "/",
@@ -12,11 +13,11 @@ const routerMap: Array<RouteRecordRaw> = [
     },
     {
         path: "/login", name: "login", meta: {title: "登录"},
-        component: () => import("@/packages/view/login/index.vue"),
+        component: login,
     },
     {
         path: "/:pathMatch(.*)*", meta: {title: "出错了"},
-        component: () => import("@/packages/view/error/404.vue"),
+        component: error,
     },
 ]
 

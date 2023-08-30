@@ -286,7 +286,8 @@ export default defineComponent({
 .user-set {
     display: flex;
     height: 50px;
-
+    flex-shrink: 0;
+    margin-left: 50px;
     .set-item {
         display: flex;
         align-items: center;

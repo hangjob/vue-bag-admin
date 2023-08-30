@@ -51,7 +51,11 @@ import {
     FootballOutline,
     FootstepsOutline,
     DesktopOutline,
-    TvOutline
+    TvOutline,
+    ImageOutline,
+    LaptopOutline,
+    CreateOutline,
+    AlertCircleOutline
 } from "@vicons/ionicons5"
 import {StepBackwardFilled,CloudSyncOutlined, StepForwardFilled,DribbbleOutlined
     ,TeamOutlined,UserSwitchOutlined, StopOutlined, SmileOutlined, UsergroupAddOutlined,
@@ -81,7 +85,12 @@ import {StepBackwardFilled,CloudSyncOutlined, StepForwardFilled,DribbbleOutlined
     HomeTwotone,
     MehOutlined,
     PropertySafetyOutlined,
-    ProfileOutlined
+    ProfileOutlined,
+    MediumOutlined,
+    ReadOutlined,
+    FrownOutlined,
+    AlertOutlined,
+    InstagramOutlined
 } from "@vicons/antd"
 import {NIcon} from "naive-ui"
 
@@ -164,7 +173,16 @@ const icons = {
     FootballOutline,
     FootstepsOutline,
     DesktopOutline,
-    TvOutline
+    TvOutline,
+    ImageOutline,
+    MediumOutlined,
+    ReadOutlined,
+    LaptopOutline,
+    CreateOutline,
+    AlertCircleOutline,
+    FrownOutlined,
+    AlertOutlined,
+    InstagramOutlined
 }
 
 function renderIcon(iconName: string) {

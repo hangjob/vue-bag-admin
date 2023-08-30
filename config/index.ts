@@ -21,8 +21,11 @@ export default function setupConfig({mode}: { mode: any }) {
                     "naive-ui":"naive",
                     "vue-router":"vueRouter",
                     "axios":"axios",
-                    "pinia":"pinia"
-                }
+                    "pinia":"pinia",
+                    "@vicons/antd":"antd",
+                    "@vicons/ionicons5":"ionicons5"
+                },
+                exports:"named" //具体请查看文档 default named none
             }
         }
     }

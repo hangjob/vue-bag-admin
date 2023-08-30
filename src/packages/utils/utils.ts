@@ -6,7 +6,7 @@ import cloneDeep from "lodash/cloneDeep.js"
  * @param keyField
  * @param childField
  */
-const toTree = ({arr = [], keyField = "id", children = "children", pid = "pid"}) => {
+const toTree = ({arr = [], keyField = "id", children = "children", pid = "pid",callback=()=>{}}:{arr:Array<any>;keyField?:string;children?:string;pid?:string;callback?:(item) => void}) => {
     const data = cloneDeep(arr)
     const map: any = {}
     data.forEach(function (item: any) {
@@ -20,12 +20,13 @@ const toTree = ({arr = [], keyField = "id", children = "children", pid = "pid"})
         } else {
             new_data.push(item)
         }
+        callback && callback(item)
     })
     return new_data
 }
 
 /**
- * 生产链路
+ * 生成链路
  * @param arr
  * @param id
  */
@@ -47,6 +48,7 @@ const getObjectPath = ({arr = <any>[], id = ""}) => {
     }
 }
 
+
 function htmlElementClass(state: boolean, clsName: string, target?: HTMLElement) {
     const targetEl = target || document.body
     if (state) {
@@ -57,6 +59,10 @@ function htmlElementClass(state: boolean, clsName: string, target?: HTMLElement)
 }
 
 
+/**
+ * 复制
+ * @param text
+ */
 const clipboardCopy = (text: string) => {
     if (navigator.clipboard) { // 如果浏览器兼容该 API
         return navigator.clipboard.writeText(text).catch(function (err) {
@@ -101,9 +107,21 @@ const clipboardCopy = (text: string) => {
 }
 
 
+const rdmRgbColor = () =>{
+    const arr:any = []
+    for (let i = 0; i < 3; i++) {
+        arr.push(Math.floor(Math.random() * 128 + 64))
+        arr.push(Math.floor(Math.random() * 128 + 128))
+    }
+    const [r, g, b] = arr
+    return `#${r.toString().length > 1 ? r.toString() : "0" + r.toString()}${g.toString().length > 1 ? g.toString() : "0" + g.toString()}${
+        b.toString().length > 1 ? b.toString() : "0" + b.toString()}`
+}
+
 export {
     toTree,
     getObjectPath,
     htmlElementClass,
-    clipboardCopy
+    clipboardCopy,
+    rdmRgbColor
 }

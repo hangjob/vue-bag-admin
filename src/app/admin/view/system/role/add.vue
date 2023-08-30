@@ -32,6 +32,19 @@
                                 :autosize="{minRows: 3,maxRows: 5}"
                             />
                         </n-form-item>
+                        <n-form-item label="菜单">
+                            <n-tree
+                                block-line
+                                cascade
+                                key-field="id"
+                                label-field="title"
+                                checkable
+                                :data="compData.treeData"
+                                :default-expanded-keys="compData.defaultExpandedKeys"
+                                :checked-keys="compData.checkedKeys"
+                                @update:checked-keys="compHandle.updateCheckedKeys"
+                            />
+                        </n-form-item>
                     </n-form>
                     <template #action>
                         <n-space justify="end">
@@ -45,9 +58,11 @@
     </n-grid>
 </template>
 <script lang="ts">
-import {defineComponent, reactive, computed, ref} from "vue"
+import {defineComponent, reactive, ref} from "vue"
 import {tagOptions} from "./data.ts"
 import {FormInst, useMessage} from "naive-ui"
+import {menus} from "@/app/admin/api/app.ts"
+import {toTree} from "@/packages/utils/utils.ts"
 
 export default defineComponent({
     setup() {
@@ -76,7 +91,11 @@ export default defineComponent({
                     message: "请输入描述"
                 },
             },
-            tagOptions
+            tagOptions,
+            treeData:[],
+            defaultExpandedKeys:[],
+            defaultCheckedKeys:[],
+            checkedKeys:[]
         })
         const compHandle = reactive({
             validate(e: MouseEvent) {
@@ -86,8 +105,21 @@ export default defineComponent({
                         message.success("数据校验通过")
                     }
                 })
+            },
+            updateCheckedKeys( keys: Array<any>, options: Array<any>, meta: {node: any, action: "check" | "uncheck"}){
+                compData.checkedKeys = keys
             }
         })
+        menus().then((res) => {
+            const checkedKeys = []
+            compData.treeData = toTree({
+                arr: res.data, callback: (item) => {
+                    checkedKeys.push(item.id)
+                }
+            })
+            compData.checkedKeys = checkedKeys
+        })
+
         return {
             compData,
             compHandle,

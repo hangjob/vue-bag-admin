@@ -5,7 +5,7 @@
             瀑布流组件
         </template>
         <template #header-extra>
-            <n-tag type="success">vue-waterfall-plugin-next</n-tag>
+            <n-tag type="success" @click="handleClick">vue-waterfall-plugin-next</n-tag>
         </template>
         <Waterfall :row-key="options.rowKey"
                    :gutter="options.gutter"
@@ -31,6 +31,7 @@
 import {defineComponent, reactive} from "vue"
 import {Waterfall} from "vue-waterfall-plugin-next"
 import "vue-waterfall-plugin-next/dist/style.css"
+import {rdmRgbColor} from "@/packages/utils/utils.ts"
 
 export default defineComponent({
     components:{
@@ -77,16 +78,7 @@ export default defineComponent({
         const items = []
 
         const genBetweenRight = (m, n) => Math.floor(Math.random() * (n - m) + 1) + m
-        const rdmRgbColor = () =>{
-            let arr = []
-            for (let i = 0; i < 3; i++) {
-                arr.push(Math.floor(Math.random() * 128 + 64))
-                arr.push(Math.floor(Math.random() * 128 + 128))
-            }
-            let [r, g, b] = arr
-            return `#${r.toString().length > 1 ? r.toString() : "0" + r.toString()}${g.toString().length > 1 ? g.toString() : "0" + g.toString()}${
-                b.toString().length > 1 ? b.toString() : "0" + b.toString()}`
-        }
+
         for (let i = 0; i < 90; i++) {
             items.push({
                 style:{
@@ -98,9 +90,13 @@ export default defineComponent({
         const compData = reactive({
             items
         })
+        const handleClick =()=>{
+            window.open("https://vue-waterfall.netlify.app/")
+        }
         return {
             compData,
-            options
+            options,
+            handleClick
         }
     }
 })
