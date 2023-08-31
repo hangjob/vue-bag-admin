@@ -4,7 +4,7 @@ function creataDataItem(data = {}) {
     const item = {
         "id": "", "title": "首页", "icon": "", "shows": true, "path": "", "order": 1,
         "pid": "", "file": "", "isIframe": "", "url": "", "keepAlive": false, "tabHidden": false,
-        "tabFix": false, "httpFile": "","roles":["admin","test","web","vip"]
+        "tabFix": false, "httpFile": "","permission":[]
     }
     for (const itemKey in item) {
         if (data[itemKey] || data[itemKey] === false) {
@@ -246,6 +246,30 @@ export default [
                         "file": "/view/module/calendar/index.vue",
                         "icon": "ReadOutlined"
                     }),
+                    creataDataItem({
+                        id: 380,
+                        "title": "时间线",
+                        "pid": 300,
+                        "path": "/module/timeline",
+                        "file": "/view/module/timeline/index.vue",
+                        "icon": "HourglassOutline"
+                    }),
+                    creataDataItem({
+                        id: 381,
+                        "title": "通知",
+                        "pid": 300,
+                        "path": "/module/notice",
+                        "file": "/view/module/notice/index.vue",
+                        "icon": "NotificationsOutline"
+                    }),
+                    creataDataItem({
+                        id: 382,
+                        "title": "二维码",
+                        "pid": 300,
+                        "path": "/module/qrcode",
+                        "file": "/view/module/qrcode/index.vue",
+                        "icon": "QrCodeSharp"
+                    }),
                     creataDataItem({id: 310, "title": "表格", "pid": 310, "icon": "SettingsOutline"}),
                     creataDataItem({
                         id: 311,
@@ -302,7 +326,7 @@ export default [
                         "pid": "700",
                         "path": "/editor/md",
                         "file": "/view/editor/md.vue",
-                        "icon": "FileTrayOutline"
+                        "icon": "MediumOutlined"
                     }),
                     creataDataItem({
                         id: 702,
@@ -392,7 +416,16 @@ export default [
                         "pid": "3000",
                         "path": "/permission/button",
                         "file": "/view/permission/button.vue",
-                        "icon": ""
+                        "icon": "",
+                        "permission":["sys:permission:admin","sys:permission:web"]
+                    }),
+                    creataDataItem({
+                        id: 5000,
+                        "title": "动画",
+                        "pid": "",
+                        "path": "/animation",
+                        "file": "/view/animation/index.vue",
+                        "icon": "LogoPinterest",
                     }),
                 ]
             }

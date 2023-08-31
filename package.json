@@ -38,6 +38,7 @@
         "pinia": "^2.1.6",
         "pinia-plugin-persistedstate": "^3.2.0",
         "pinyin-pro": "^3.16.3",
+        "qrcode": "^1.5.3",
         "vue": "^3.3.4",
         "vue-router": "^4.2.4",
         "vue-waterfall-plugin-next": "^2.2.3"

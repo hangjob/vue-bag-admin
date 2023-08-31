@@ -1,6 +1,5 @@
 <template>
-    <n-card :segmented="{content: true,footer:true}" header-style="padding:10px" footer-style="padding:10px"
-            content-style="">
+    <n-card :segmented="{content: true,footer:true}" header-style="padding:10px" footer-style="padding:10px">
         <template #header>
             瀑布流组件
         </template>

@@ -1,9 +1,9 @@
 <template>
-    <slot v-if="showSlot" :userPermission="permission"></slot>
+    <slot v-if="showSlot" :userPermission="permissions"></slot>
 </template>
 <script lang="ts">
 import {computed, defineComponent} from "vue"
-import appStore from "@/packages/pinia/app";
+import appStore from "@/packages/pinia/app"
 
 export default defineComponent({
     props: {
@@ -11,22 +11,23 @@ export default defineComponent({
     },
     setup(props) {
         const app = appStore()
+        const permissions = app.currentRouter.meta.permission || []
         const showSlot = computed(() => {
             if (!props.permission) {
-                return true;
+                return true
             }
-            const permission = app.userInfo.permission
-            if (!permission) {
+            if (!permissions) {
                 return false
             }
             if (Array.isArray(props.permission)) {
-                return props.permission.every((item) => permission.includes(item))
+                return props.permission.every((item) => permissions.includes(item))
             } else {
-                return permission.includes(props.permission)
+                return permissions.includes(props.permission)
             }
         })
         return {
-            showSlot
+            showSlot,
+            permissions,
         }
     }
 })

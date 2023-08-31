@@ -81,7 +81,7 @@ function hasUserInfo() {
 function getUserInfo(to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) {
     const appStore = appPinia()
     userInfo().then((res) => {
-        appStore.userInfo = res
+        appStore.userInfo = res.data
         updateRouterAll(to, from, next)
     }).catch(() => {
         next(appStore.configOptions.resetPath)

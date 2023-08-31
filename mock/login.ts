@@ -8,8 +8,8 @@ export default [
             return {
                 code: 1,
                 data: {
-                    username: "admin",
-                    roles: ["admin", "common"],
+                    username: "管理员",
+                    roles: ["admin", "web"],
                     id: Random.id(),
                     accessToken:Random.id(),
                     expiresTime: Random.now(),
@@ -24,8 +24,9 @@ export default [
             return {
                 code: 1,
                 data: {
-                    username: "admin",
-                    roles: ["admin", "common"],
+                    username: "管理员",
+                    roles: ["admin", "web"],
+                    permission:["sys:permission:admin","sys:permission:web"]
                 }
             }
         }
