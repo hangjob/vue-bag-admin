@@ -2,9 +2,9 @@
     <n-card :segmented="{content: true,footer:true}" header-style="padding:10px" footer-style="padding:10px">
         <n-form inline :label-width="80" :model="compData">
             <n-grid  item-responsive responsive="screen" :x-gap="12" :y-gap="8" cols="24">
-                <n-grid-item span="24 m:6 l:4">
+                <n-grid-item span="24 m:6 l:24">
                     <n-form-item label="内容" path="text">
-                        <n-input v-model:value="compData.text" placeholder="输入内容" />
+                        <n-input type="textarea" v-model:value="compData.text" placeholder="输入内容" />
                     </n-form-item>
                 </n-grid-item>
                 <n-grid-item span="24 m:6 l:4">
@@ -37,7 +37,11 @@
         </n-form>
         <n-space>
             <n-card content-style="padding:10px">
-                <n-image :src="compData.src"></n-image>
+                <n-image-group show-toolbar-tooltip>
+                    <n-space>
+                        <n-image style="border-radius: 3px" :src="compData.src"></n-image>
+                    </n-space>
+                </n-image-group>
             </n-card>
         </n-space>
     </n-card>
@@ -48,7 +52,7 @@ import QRCode from "qrcode"
 export default defineComponent({
     setup(){
         const compData = reactive({
-            text:"https://vite.itnavs.com/",
+            text:"宣和辛丑八月十日到莱，独坐一室，平生所见，皆不在目前",
             src:"",
             optoons:{
                 errorCorrectionLevel: "H",

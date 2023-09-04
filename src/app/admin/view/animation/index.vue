@@ -60,7 +60,7 @@ export default defineComponent({
     min-height: 100px;
     background-color: var(--inverted-color);
     border-radius: 3px;
-    color:var(--text-color-1);
+    color:#fff;
     .animate__animated{
         animation-duration: 8s;
         animation-fill-mode: both;

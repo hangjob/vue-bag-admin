@@ -28,6 +28,7 @@
         "cropperjs": "^1.6.0",
         "date-fns": "^2.30.0",
         "dayjs": "^1.11.9",
+        "echarts": "^5.4.3",
         "js-calendar-converter": "^0.0.6",
         "lodash": "^4.17.21",
         "mavon-editor": "3.0.1",

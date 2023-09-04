@@ -8,15 +8,15 @@ import isArray from "lodash/isArray.js"
 import unionWith from "lodash/unionWith.js"
 import {renderIcon} from "@/packages/config/icon.ts"
 import {toTree} from "@/packages/utils/utils.ts"
-
+import globalViewIframe from "@/packages/view/iframe/index.vue"
 let hasRoles = false
 const namespace = "main"
 //框架页面组件
-const frameView: Record<string, RouterComponent> = import.meta.glob("@/packages/view/**/*.vue", {eager: true})
+const packagesViews: Record<string, RouterComponent> = import.meta.glob("@/packages/view/**/*.vue", {eager: true})
 
 function findComponent(filePath: string) {
     const appStore = appPinia()
-    const views = merge(appStore.configOptions.getViews(), frameView)
+    const views = merge(appStore.configOptions.getViews(), packagesViews)
     const key = Object.keys(views).find((path) => {
         return path.toLowerCase().indexOf(filePath.toLowerCase()) > -1
     })
@@ -25,7 +25,14 @@ function findComponent(filePath: string) {
 
 
 function addRouter(item) {
-    const component = findComponent(item.file)
+    let component = null
+    if(item.isIframe === true && item.file === ""){
+        component = globalViewIframe
+    }else{
+        if(item.file){
+            component = findComponent(item.file)
+        }
+    }
     if (component) {
         router.addRoute(item.namespace ? item.namespace : namespace, {
             path: item.path, name: item.name, component: component, meta: item
@@ -40,9 +47,7 @@ function addRouter(item) {
 function createRouterComponent(allMenus) {
     console.log(allMenus)
     allMenus.forEach((item) => {
-        if (item.file) {
-            addRouter(item)
-        }
+        addRouter(item)
         if (item.add && Object.keys(item.add).length !== 0) {
             addRouter(item.add)
         }

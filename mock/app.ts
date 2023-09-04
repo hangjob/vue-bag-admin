@@ -270,6 +270,14 @@ export default [
                         "file": "/view/module/qrcode/index.vue",
                         "icon": "QrCodeSharp"
                     }),
+                    creataDataItem({
+                        id: 383,
+                        "title": "文件上传",
+                        "pid": 300,
+                        "path": "/module/upload",
+                        "file": "/view/module/upload/index.vue",
+                        "icon": "CloudUploadOutline"
+                    }),
                     creataDataItem({id: 310, "title": "表格", "pid": 310, "icon": "SettingsOutline"}),
                     creataDataItem({
                         id: 311,
@@ -278,21 +286,6 @@ export default [
                         "path": "/module/table/general",
                         "file": "/view/module/icon/index.vue",
                         "icon": "SettingsOutline"
-                    }),
-                    creataDataItem({id: 320, "title": "卡片", "pid": 300, "icon": "FileTrayOutline"}),
-                    creataDataItem({
-                        id: 321,
-                        "title": "普通卡片",
-                        "pid": 320,
-                        "path": "/module/card/ordinary",
-                        "file": "/view/module/table/ordinary/index.vue"
-                    }),
-                    creataDataItem({
-                        id: 322,
-                        "title": "普通卡片",
-                        "pid": 320,
-                        "path": "/module/card/general",
-                        "file": "/view/module/table/ordinary/index.vue"
                     }),
                     creataDataItem({
                         id: 601,
@@ -426,6 +419,44 @@ export default [
                         "path": "/animation",
                         "file": "/view/animation/index.vue",
                         "icon": "LogoPinterest",
+                    }),
+                    creataDataItem({
+                        id: 6000,
+                        "title": "表单设计器",
+                        "pid": "",
+                        "path": "",
+                        "file": "",
+                        "icon": "PlanetOutline",
+                    }),
+                    creataDataItem({
+                        id: 6001,
+                        "title": "FormMaking",
+                        "pid": "6000",
+                        "path": "/formDesigner/making",
+                        "file": "",
+                        "icon": "",
+                        "isIframe":true,
+                        "url":"https://form.making.link/sample/#/zh-CN/",
+                    }),
+                    creataDataItem({
+                        id: 6002,
+                        "title": "FormGenerator",
+                        "pid": "6000",
+                        "path": "/formDesigner/generator",
+                        "file": "",
+                        "icon": "",
+                        "isIframe":true,
+                        "url":"https://demo.gin-vue-admin.com/form-generator/",
+                    }),
+                    creataDataItem({
+                        id: 6003,
+                        "title": "Starfish",
+                        "pid": "6000",
+                        "path": "/formDesigner/starfish",
+                        "file": "",
+                        "icon": "",
+                        "isIframe":true,
+                        "url":"https://haixin-fang.github.io/starfish-vue3-lowcode/playground/index.html",
                     }),
                 ]
             }

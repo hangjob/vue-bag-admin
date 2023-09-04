@@ -55,7 +55,9 @@ import {
     ImageOutline,
     LaptopOutline,
     CreateOutline,
-    AlertCircleOutline
+    AlertCircleOutline,
+    CloudUploadOutline,
+    ArchiveOutline
 } from "@vicons/ionicons5"
 import {StepBackwardFilled,CloudSyncOutlined, StepForwardFilled,DribbbleOutlined
     ,TeamOutlined,UserSwitchOutlined, StopOutlined, SmileOutlined, UsergroupAddOutlined,
@@ -182,7 +184,9 @@ const icons = {
     AlertCircleOutline,
     FrownOutlined,
     AlertOutlined,
-    InstagramOutlined
+    InstagramOutlined,
+    CloudUploadOutline,
+    ArchiveOutline
 }
 
 function renderIcon(iconName: string) {

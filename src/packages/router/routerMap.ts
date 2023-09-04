@@ -1,6 +1,7 @@
 import {RouteRecordRaw} from "vue-router"
 import error from "@/packages/view/error/404.vue"
 import login from "@/packages/view/login/index.vue"
+import sku from "@/app/admin/view/sku/index.vue"
 const routerMap: Array<RouteRecordRaw> = [
     {
         path: "/",
@@ -14,6 +15,10 @@ const routerMap: Array<RouteRecordRaw> = [
     {
         path: "/login", name: "login", meta: {title: "登录"},
         component: login,
+    },
+    {
+        path: "/aa", name: "login", meta: {title: "登录"},
+        component: sku,
     },
     {
         path: "/:pathMatch(.*)*", meta: {title: "出错了"},

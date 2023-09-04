@@ -199,7 +199,7 @@ function renderCustomHeader() {
                 src: "https://07akioni.oss-cn-beijing.aliyuncs.com/demo1.JPG"
             }),
             h("div", null, [
-                h("div", null, [h(NText, {depth: 2}, {default: () => "打工仔"})]),
+                h("div", null, [h(NText, {depth: 2}, {default: () => "羊先生"})]),
                 h("div", {style: "font-size: 12px;"}, [
                     h(
                         NText,
