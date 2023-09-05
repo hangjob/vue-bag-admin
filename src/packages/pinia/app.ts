@@ -46,6 +46,11 @@ const app = defineStore({
             currentRouter: {} // 当前路由信息
         }
     },
+    getters: {
+        getTabs(state) {
+            return state.tabs.sort((a, b) => (b.meta.order || 0) - (a.meta.order || 0))
+        }
+    }
 })
 
 export default app

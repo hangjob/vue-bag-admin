@@ -78,7 +78,7 @@
                 <n-space justify="space-around">
                     <n-card size="huge" :key="idx" v-for="(item,idx) in compData.menus">
                         <n-badge :value="item.number" :color="item.color">
-                            <n-space align="center" vertical>
+                            <n-space @click="compData.handleRouter(item)" align="center" vertical>
                                 <div class="icon">
                                     <n-icon :color="item.color" size="24">
                                         <component :is="item.icon"></component>
@@ -124,6 +124,7 @@ import {defineComponent, reactive, onMounted} from "vue"
 import {menus, timeline} from "@/app/admin/view/home/data.ts"
 import * as echarts from "echarts"
 import dayjs from "dayjs"
+import {useRouter} from "vue-router"
 
 function echartInit() {
     const chartDom = document.getElementById("main")
@@ -208,6 +209,7 @@ function echartInit() {
 
 export default defineComponent({
     setup() {
+        const router = useRouter()
         onMounted(() => {
             echartInit()
         })
@@ -249,6 +251,9 @@ export default defineComponent({
             timeline,
             handleSkip() {
 
+            },
+            handleRouter(item: any) {
+                router.push(item.path)
             }
         })
         return {
@@ -285,5 +290,6 @@ export default defineComponent({
     width: 80px;
     height: 60px;
     border-radius: 10px;
+    cursor: pointer;
 }
 </style>

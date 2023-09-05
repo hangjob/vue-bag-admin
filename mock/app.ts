@@ -30,7 +30,7 @@ export default [
                         "icon": "HomeOutline",
                         "keepAlive": true,
                         "tabFix": true,
-                        "order":"100"
+                        "order":100
                     }),
                     creataDataItem({id: 200, "title": "系统设置", "icon": "SettingsOutline"}),
                     creataDataItem({
@@ -170,7 +170,7 @@ export default [
                         "title": "系统日志",
                         "pid": 200,
                         "path": "/system/log",
-                        "file": "/view/system/role/index.vue",
+                        "file": "/view/system/log/index.vue",
                         "icon": "CloudSyncOutlined"
                     }),
                     creataDataItem({

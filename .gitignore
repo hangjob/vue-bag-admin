@@ -23,3 +23,4 @@ pnpm-lock.yaml
 *.sln
 *.sw?
 stats.html
+docs

@@ -45,7 +45,9 @@
         "src/**/*.d.ts",
         "src/**/*.tsx",
         "src/**/*.vue",
-        "config/index.ts"
+        "config/index.ts",
+        "docs/.vitepress/**/*.ts",
+        "docs/.vitepress/**/*.vue"
     ],
     "references": [
         {

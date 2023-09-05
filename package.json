@@ -10,7 +10,10 @@
         "preview": "vite preview",
         "lint": "eslint src",
         "fix": "eslint src --fix",
-        "preinstall": "npx only-allow pnpm"
+        "preinstall": "npx only-allow pnpm",
+        "docs:dev": "vitepress dev docs",
+        "docs:build": "vitepress build docs",
+        "docs:serve": "vitepress serve docs"
     },
     "exports": {
         ".": {
@@ -63,6 +66,7 @@
         "vfonts": "^0.0.3",
         "vite": "^4.4.5",
         "vite-plugin-mock": "^2.9.6",
+        "vitepress": "1.0.0-rc.10",
         "vue-tsc": "^1.8.5"
     },
     "author": {

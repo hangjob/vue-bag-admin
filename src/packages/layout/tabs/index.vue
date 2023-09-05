@@ -7,8 +7,8 @@
         </div>
         <template v-if="app.userSetting.tabsStyle === 'tact'">
             <div class="tact tabs" ref="tabsRefs">
-                <template v-if="app.tabs.length">
-                    <n-el @click="compData.handleActionRouter(item)" v-for="(item,idx) in app.tabs" :key="idx" tag="div"
+                <template v-if="app.getTabs.length">
+                    <n-el @click="compData.handleActionRouter(item)" v-for="(item,idx) in app.getTabs" :key="idx" tag="div"
                           :class="['tabs-item',item.meta.id === app.currentRouter.meta.id ? 'active' : null]">
                         <component class="icon" v-if="item.meta.icon" :is="item.meta.icon"></component>
                         <span>{{ item.meta.title }}</span>
@@ -22,8 +22,8 @@
         </template>
         <template v-else>
             <div class="sutra tabs" ref="tabsRefs">
-                <template v-if="app.tabs.length">
-                    <n-el @click="compData.handleActionRouter(item)" v-for="(item,idx) in app.tabs" :key="idx" tag="div"
+                <template v-if="app.getTabs.length">
+                    <n-el @click="compData.handleActionRouter(item)" v-for="(item,idx) in app.getTabs" :key="idx" tag="div"
                           :class="['tabs-item',item.meta.id === app.currentRouter.meta.id ? 'active' : null]">
                         <component class="icon" v-if="item.meta.icon" :is="item.meta.icon"></component>
                         <span>{{ item.meta.title }}</span>
@@ -89,7 +89,7 @@ export default defineComponent({
                     }
                 }
             } else {
-                item.disabled = computed(() => !(app.tabs.length > 1))
+                item.disabled = computed(() => !(app.getTabs.length > 1))
                 item.props = {
                     onClick: () => {
                         compData.handleColseRouter(app.currentRouter, item.zt)
@@ -100,27 +100,27 @@ export default defineComponent({
         const compData = reactive({
             tabsMore,
             isClose() {
-                return app.tabs.length > 1
+                return app.getTabs.length > 1
             },
             handleActionRouter(item) {
                 router.push(item.meta.tempPath || item.meta.path)
             },
             handleColseRouter(item, zt) {
-                if (app.tabs.length <= 1) {
+                if (app.getTabs.length <= 1) {
                     return false
                 }
-                const idx = app.tabs.findIndex((k) => k.meta.id === item.meta.id)
+                const idx = app.getTabs.findIndex((k) => k.meta.id === item.meta.id)
                 if (zt === "l") {
-                    app.tabs.splice(0, idx)
+                    app.getTabs.splice(0, idx)
                 } else if (zt === "r") {
-                    app.tabs.splice(idx + 1, app.tabs.length)
+                    app.getTabs.splice(idx + 1, app.getTabs.length)
                 } else if (zt === "c") {
-                    app.tabs.splice(0, idx)
-                    app.tabs.splice(1, app.tabs.length)
+                    app.getTabs.splice(0, idx)
+                    app.getTabs.splice(1, app.getTabs.length)
                 } else {
-                    app.tabs.splice(idx, 1)
+                    app.getTabs.splice(idx, 1)
                     if (app.currentRouter.meta.id === item.meta.id) {
-                        const current = app.tabs[idx - 1 <= -1 ? 0 : idx - 1]
+                        const current = app.getTabs[idx - 1 <= -1 ? 0 : idx - 1]
                         if (current) {
                             compData.handleActionRouter(current)
                         }
