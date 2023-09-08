@@ -1,7 +1,7 @@
 {
     "name": "vue-bag-admin",
     "private": false,
-    "version": "0.0.1",
+    "version": "0.0.2",
     "type": "module",
     "scripts": {
         "dev": "vite",
@@ -14,10 +14,10 @@
         "docs:dev": "vitepress dev docs",
         "docs:build": "vitepress build docs",
         "docs:serve": "vitepress serve docs",
-        "patch":"npm version patch",
-        "minor":"npm version minor",
-        "major":"npm version major",
-        "publish":"npm version patch && npm publish"
+        "patch": "npm version patch",
+        "minor": "npm version minor",
+        "major": "npm version major",
+        "publish": "npm version patch && npm publish"
     },
     "exports": {
         ".": {
