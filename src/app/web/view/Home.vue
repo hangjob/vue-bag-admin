@@ -1,0 +1,71 @@
+<template>
+    <section class="section section-container">
+        <div class="section-title">
+            <h1 style="line-height:75px">旨在让开发者能够以最小的成本完成开发<br/>降低开发量
+            </h1>
+        </div>
+        <div class="action">
+            <n-grid cols="24" x-gap="30" y-gap="30" item-responsive responsive="screen">
+                <n-grid-item span="24 m:12 l:6">
+                    <div class="demo">
+                        <n-button target @click="handleSkip('/admin.html')" size="large" type="primary" icon="Pear">
+                            体验管理端
+                        </n-button>
+                    </div>
+                </n-grid-item>
+                <n-grid-item span="24 m:12 l:6">
+                    <div class="demo">
+                        <n-button target :href="{url: '/web.html'}" size="large" type="info">体验客户端
+                        </n-button>
+                    </div>
+                </n-grid-item>
+                <n-grid-item span="24 m:12 l:6">
+                    <div class="demo">
+                        <n-button target @click="handleSkip('/doc/index.html')" size="large" type="warning">查看文档
+                        </n-button>
+                    </div>
+                </n-grid-item>
+                <n-grid-item span="24 m:12 l:6">
+                    <div class="demo">
+                        <n-button @click="handleDownload" size="large" type="error">下载程序</n-button>
+                    </div>
+                </n-grid-item>
+            </n-grid>
+        </div>
+    </section>
+</template>
+<script lang="ts" setup>
+
+const handleSkip = (url) => {
+
+}
+</script>
+<style lang="less" scoped>
+.section {
+    padding-top: 220px;
+    padding-bottom: 220px;
+    background: rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+    color: #FFFFFF;
+    text-align: center;
+
+    &-title {
+        h1 {
+            font-size: 50px;
+            font-weight: bold;
+        }
+    }
+
+    .action {
+        width: 60%;
+        margin: 80px auto 0;
+    }
+
+    .demo {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+    }
+}
+</style>

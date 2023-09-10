@@ -10,6 +10,7 @@ src
 docs
 .idea
 docdist
+public
 .editorconfig
 .eslintrc.cjs
 .npmignore

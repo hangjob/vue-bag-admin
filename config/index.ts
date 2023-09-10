@@ -9,23 +9,23 @@ export default function setupConfig({mode}: { mode: any }) {
         build.sourcemap = false
         build.outDir = path.resolve(process.cwd(), "lib")
         build.lib = {
-            entry: path.resolve(process.cwd(), "src/packages/install.ts"),
-            name: "bagAdmin", // 构建依赖包的时候， 对外暴露的名称
-            fileName: "bagAdmin",
+            entry: path.resolve(process.cwd(), "src/packages/install.vue"),
+            name: "BagAdmin", // 构建依赖包的时候， 对外暴露的名称
+            fileName: "bag-admin",
+            formats: ["es", "umd"]
         }
         build.rollupOptions = {
-            external:["vue","naive-ui","vue-router","lodash","axios","pinia","@vicons/antd","@vicons/ionicons5"],
-            output:{
+            external: ["vue", "naive-ui", "vue-router", "pinia"],
+            // external:["vue"],`
+            output: {
+                inlineDynamicImports: true,
                 globals: {
-                    vue: "Vue",
-                    "naive-ui":"naive",
-                    "vue-router":"vueRouter",
-                    "axios":"axios",
-                    "pinia":"pinia",
-                    "@vicons/antd":"antd",
-                    "@vicons/ionicons5":"ionicons5"
+                    "vue": "Vue",
+                    "naive-ui": "naive",
+                    "vue-router": "vueRouter",
+                    "pinia": "pinia",
                 },
-                exports:"named" //具体请查看文档 default named none
+                exports: "named" //具体请查看文档 default named none
             }
         }
     }

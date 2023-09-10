@@ -17,7 +17,7 @@ const routerMap: Array<RouteRecordRaw> = [
         component: login,
     },
     {
-        path: "/aa", name: "login", meta: {title: "登录"},
+        path: "/sku", name: "sku", meta: {title: "登录"},
         component: sku,
     },
     {

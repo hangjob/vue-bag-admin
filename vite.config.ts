@@ -1,10 +1,11 @@
-import {defineConfig, loadEnv} from "vite"
+import {defineConfig} from "vite"
 import vue from "@vitejs/plugin-vue"
 import path from "path"
 import Components from "unplugin-vue-components/vite"
 import {NaiveUiResolver} from "unplugin-vue-components/resolvers"
 import {viteMockServe} from "vite-plugin-mock"
 import setupConfig from "./config"
+import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js"
 
 export default ({mode}: { mode: any }) => {
     const {build} = setupConfig({mode})
@@ -18,7 +19,8 @@ export default ({mode}: { mode: any }) => {
             }),
             viteMockServe({
                 mockPath: "./mock",
-            })
+            }),
+            cssInjectedByJsPlugin()
         ],
         publicDir: "public",
         resolve: {
@@ -39,11 +41,6 @@ export default ({mode}: { mode: any }) => {
                     changeOrigin: true,
                     rewrite: (path: any) => path.replace(/^\/api/, "")
                 },
-                "^/gsc":{
-                    target: "https://v2.jinrishici.com",
-                    changeOrigin: true,
-                    rewrite: (path: any) => path.replace(/^\/gsc/, "")
-                }
             }
         }
     })
