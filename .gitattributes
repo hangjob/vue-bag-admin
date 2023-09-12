@@ -1,2 +1,2 @@
 docs/** -linguist-documentation
-utils/*.crypto filter=crypto
+crypto.ts filter=crypto
