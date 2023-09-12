@@ -7,10 +7,11 @@
         <Preface/>
         <Quantity/>
         <Download/>
+        <Develop/>
         <EmailDwon/>
         <Evaluate/>
         <Message/>
-        <Footer/>
+        <BagFooter/>
     </div>
 </template>
 
@@ -35,11 +36,12 @@ import Trait from "@/app/web/view/Trait.vue"
 import Viewing from "@/app/web/view/Viewing.vue"
 import Preface from "@/app/web/view/Preface.vue"
 import Quantity from "@/app/web/view/Quantity.vue"
+import Develop from "@/app/web/view/Develop.vue"
 import Download from "@/app/web/view/Download.vue"
 import EmailDwon from "@/app/web/view/EmailDwon.vue"
 import Evaluate from "@/app/web/view/Evaluate.vue"
 import Message from "@/app/web/view/Message.vue"
-import Footer from "@/app/web/view/Footer.vue"
+import BagFooter from "@/app/web/view/Footer.vue"
 export default defineComponent({
     components: {
         Home,
@@ -51,7 +53,8 @@ export default defineComponent({
         EmailDwon,
         Evaluate,
         Message,
-        Footer
+        BagFooter,
+        Develop
     },
     setup() {
 

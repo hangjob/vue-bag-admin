@@ -39,7 +39,6 @@ export default function setupConfig({mode}: { mode: any }) {
             input: {  // 多页面模式-注意root指定的根目录
                 main: path.resolve(process.cwd(), "src/app/index.html"),
                 admin: path.resolve(process.cwd(), "src/app/admin/index.html"),
-                web: path.resolve(process.cwd(), "src/app/web/index.html"),
             }
         }
     }

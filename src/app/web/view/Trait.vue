@@ -2,57 +2,53 @@
     <section class="section section-container">
         <h1>特点</h1>
         <p>相对于其他的系统，Bag一直保持着自己的风格.</p>
-        <n-grid cols="24" x-gap="30" y-gap="30" item-responsive responsive="screen">
+        <n-grid cols="24" x-gap="10" y-gap="30" item-responsive responsive="screen">
             <n-grid-item span="24 m:12 l:6" class="wow animate__animated animate__bounceInLeft" data-wow-duration="1.0s"
                          data-wow-delay="0.5">
                 <div class="service-icon service-icon1">
                     <div class="circle">
-                        <el-icon size="60" color="#e96656">
-                            <Cpu/>
-                        </el-icon>
+                        <n-icon size="60"  color="#e96656">
+                            <DesktopOutline/>
+                        </n-icon>
                     </div>
-                    <h5>功能强大</h5>
-                    <p class="indent">
-                        Bag所有内容均可以在后台进行修改，所有内容可定制化开发，覆盖面广，涉及后端、移动端、桌面端等开发，快速迭代，降低试错成本，让大家把更多时间专注在业务开发上</p>
+                    <h5>响应式开发</h5>
+                    <p class="indent">基于Css媒体查询进行开发,手机、平板、PC均自动适配，增强网站的响应式设计，提高网站的可用性，减少开发成本和维护工作</p>
                 </div>
             </n-grid-item>
             <n-grid-item span="24 m:12 l:6" class="wow animate__animated animate__bounceInLeft" data-wow-duration="1.5s"
                          data-wow-delay="0.5">
                 <div class="service-icon service-icon2">
                     <div class="circle">
-                        <el-icon size="60" color="#34d293">
-                            <Cherry/>
-                        </el-icon>
+                        <n-icon size="60" color="#34d293">
+                            <DiscOutline/>
+                        </n-icon>
                     </div>
-                    <h5>简单易用</h5>
-                    <p class="indent">
-                        Bag通过简单npm命令安装，表单CURD完全傻瓜式操作，分分钟一个页面，所有功能，路由权限，按钮权限，即看即会，无需任何功底，无需掌握任何技术，谁都可以是个人站长.</p>
+                    <h5>方便易用</h5>
+                    <p class="indent">Bag可通过npm命令安装主程序包，也可下载源码开发，做到框架(packages)和应用(app)分开，即可以减少项目之间的耦合，也能提升项目扩展性</p>
                 </div>
             </n-grid-item>
             <n-grid-item span="24 m:12 l:6" class="wow animate__animated animate__bounceInRight"
                          data-wow-duration="1.5s" data-wow-delay="0.5">
                 <div class="service-icon service-icon3">
                     <div class="circle">
-                        <el-icon size="60" color="#3ab0e2">
-                            <Promotion/>
-                        </el-icon>
+                        <n-icon size="60"  color="#3ab0e2">
+                            <RocketOutline/>
+                        </n-icon>
                     </div>
                     <h5>社区强大</h5>
-                    <p class="indent">采用市面主流技术Vue3、Vite、TypeScript、Gulp、Node.js 、Egg.js
-                        、MySQL以及周边的优秀的插件搭建，不用担心自己业务所受框架有限的瓶颈</p>
+                    <p class="indent">采用主流技术Vue3、Vite、TypeScript、Gulp、Pinia以及周边的优秀的插件搭建，不用担心自己业务所受框架有限的瓶颈</p>
                 </div>
             </n-grid-item>
             <n-grid-item span="24 m:12 l:6" class="wow animate__animated animate__bounceInRight"
                          data-wow-duration="1.0s" data-wow-delay="0.5">
                 <div class="service-icon service-icon4">
                     <div class="circle">
-                        <el-icon size="60" color="#f7d861">
-                            <Basketball/>
-                        </el-icon>
+                        <n-icon size="60" color="#f7d861">
+                            <BicycleOutline/>
+                        </n-icon>
                     </div>
                     <h5>适合人群</h5>
-                    <p class="indent">1.正在以及想使用框架快速开发网站系统，有过前端开发经验 1 年+,2.熟悉 Vue.js
-                        技术栈，使用它开发过几个实际项目，3.热爱技术，爱学习，想进阶和提升的同学</p>
+                    <p class="indent">正在以及想使用框架快速中后台系统，熟悉Vue使用它开发过几个实际项目，热爱技术，爱学习，想进阶和提升的同学</p>
                 </div>
             </n-grid-item>
         </n-grid>

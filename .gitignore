@@ -24,3 +24,4 @@ pnpm-lock.yaml
 *.sw?
 stats.html
 docs
+lib

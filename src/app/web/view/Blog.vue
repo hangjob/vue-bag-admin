@@ -5,7 +5,7 @@
             <p>这里是Bag的作者写的一些博文</p>
         </div>
         <div class="article">
-            <n-grid cols="24" x-gap="30" y-gap="30" item-responsive responsive="screen">
+            <n-grid cols="24" x-gap="10"  y-gap="30" item-responsive responsive="screen">
                 <el-col span="24 m:12 l:6" class="wow animate__animated animate__zoomIn" data-wow-duration="1.0s"
                         :data-wow-delay="index/8+'s'"
                         v-for="(item,index) in items" :key="index"

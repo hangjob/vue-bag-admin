@@ -1,33 +1,56 @@
 <template>
     <section class="section section-container">
         <div class="section-title">
-            <h1 style="line-height:75px">旨在让开发者能够以最小的成本完成开发<br/>降低开发量
-            </h1>
+            <h1 style="line-height:75px">旨在让开发者能够以最小的成本完成开发<br/>降低开发量</h1>
         </div>
         <div class="action">
-            <n-grid cols="24" x-gap="30" y-gap="30" item-responsive responsive="screen">
+            <n-grid cols="24" x-gap="10"  y-gap="30" item-responsive responsive="screen">
                 <n-grid-item span="24 m:12 l:6">
                     <div class="demo">
                         <n-button target @click="handleSkip('/admin.html')" size="large" type="primary" icon="Pear">
+                            <template #icon>
+                                <n-icon>
+                                    <HappyOutline/>
+                                </n-icon>
+                            </template>
                             体验管理端
                         </n-button>
                     </div>
                 </n-grid-item>
                 <n-grid-item span="24 m:12 l:6">
                     <div class="demo">
-                        <n-button target :href="{url: '/web.html'}" size="large" type="info">体验客户端
+                        <n-button target :href="{url: '/web.html'}" size="large" type="info">
+                            <template #icon>
+                                <n-icon>
+                                    <LaptopOutline/>
+                                </n-icon>
+                            </template>
+                            体验客户端
                         </n-button>
                     </div>
                 </n-grid-item>
                 <n-grid-item span="24 m:12 l:6">
                     <div class="demo">
-                        <n-button target @click="handleSkip('/doc/index.html')" size="large" type="warning">查看文档
+                        <n-button target @click="handleSkip('/doc/index.html')" size="large" type="warning">
+                            <template #icon>
+                                <n-icon>
+                                    <BookOutline/>
+                                </n-icon>
+                            </template>
+                            查看文档
                         </n-button>
                     </div>
                 </n-grid-item>
                 <n-grid-item span="24 m:12 l:6">
                     <div class="demo">
-                        <n-button @click="handleDownload" size="large" type="error">下载程序</n-button>
+                        <n-button @click="handleDownload" size="large" type="error">
+                            <template #icon>
+                                <n-icon>
+                                    <CloudDownloadOutline/>
+                                </n-icon>
+                            </template>
+                            下载程序
+                        </n-button>
                     </div>
                 </n-grid-item>
             </n-grid>
@@ -37,6 +60,9 @@
 <script lang="ts" setup>
 
 const handleSkip = (url) => {
+
+}
+const handleDownload = () => {
 
 }
 </script>
@@ -58,7 +84,6 @@ const handleSkip = (url) => {
     }
 
     .action {
-        width: 60%;
         margin: 80px auto 0;
     }
 

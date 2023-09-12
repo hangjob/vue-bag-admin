@@ -1,12 +1,12 @@
 <template>
     <section class="section section-container">
-        <n-grid  cols="24" x-gap="30" y-gap="30" item-responsive responsive="screen">
+        <n-grid  cols="24" x-gap="10"  y-gap="30" item-responsive responsive="screen">
             <n-grid-item span="24 m:12 l:6">
                 <div class="service-icon">
                     <div class="circle wow animate__animated animate__slideInLeft" data-wow-duration="1.0s" data-wow-delay="0.5">
-                        <el-icon size="40" color="#e96656">
-                            <DishDot />
-                        </el-icon>
+                        <n-icon size="60" color="#e96656">
+                            <TeamOutlined/>
+                        </n-icon>
                     </div>
                     <h5  class="wow animate__animated animate__slideInRight" data-wow-duration="1.0s" data-wow-delay="0.5">
                         <n-number-animation :from="0" :duration="1800" :to="12288" />
@@ -17,9 +17,9 @@
             <n-grid-item span="24 m:12 l:6">
                 <div class="service-icon">
                     <div class="circle wow animate__animated animate__slideInLeft" data-wow-duration="1.0s" data-wow-delay="0.5">
-                        <el-icon size="40" color="#34d293">
-                            <CoffeeCup />
-                        </el-icon>
+                        <n-icon size="60" color="#34d293">
+                            <UsergroupAddOutlined/>
+                        </n-icon>
                     </div>
                     <h5 class="wow animate__animated animate__slideInRight" data-wow-duration="1.4s" data-wow-delay="0.5">
                         <n-number-animation :from="0" :duration="1800" :to="2288" />
@@ -30,9 +30,9 @@
             <n-grid-item span="24 m:12 l:6">
                 <div class="service-icon">
                     <div class="circle wow animate__animated animate__slideInLeft" data-wow-duration="1.0s" data-wow-delay="0.5">
-                        <el-icon size="40" color="#3ab0e2">
-                            <Burger />
-                        </el-icon>
+                        <n-icon size="60" color="#3ab0e2">
+                            <MailUnread/>
+                        </n-icon>
                     </div>
                     <h5 class="wow animate__animated animate__slideInRight" data-wow-duration="1.4s" data-wow-delay="0.5">
                         <n-number-animation :from="0" :duration="1800" :to="18234" />
@@ -43,9 +43,9 @@
             <n-grid-item span="24 m:12 l:6">
                 <div class="service-icon">
                     <div class="circle wow animate__animated animate__slideInLeft" data-wow-duration="1.0s" data-wow-delay="0.5">
-                        <el-icon size="40" color="#f7d861">
-                            <Dessert />
-                        </el-icon>
+                        <n-icon size="60" color="#f7d861">
+                            <RibbonOutline/>
+                        </n-icon>
                     </div>
                     <h5 class="wow animate__animated animate__slideInRight" data-wow-duration="1.0s" data-wow-delay="0.5">
                         <n-number-animation :from="0" :to="1800" />

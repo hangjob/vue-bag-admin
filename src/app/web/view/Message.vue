@@ -4,7 +4,7 @@
             <h1>与我联系</h1>
             <p>如果您有其他的问题请在下方提交留言与我联系（博客使用类问题请加交流群或看手册文档）.</p>
         </div>
-        <n-grid cols="24" x-gap="30" y-gap="30" item-responsive responsive="screen">
+        <n-grid cols="24" x-gap="10"  y-gap="30" item-responsive responsive="screen">
             <n-grid-item class="message-input wow animate__animated animate__bounce" data-wow-duration="1.0s"
                     data-wow-delay="0.2s" span="24 m:12 l:8"
             >
@@ -52,6 +52,11 @@
             <n-button class="wow animate__animated animate__fadeInUp" data-wow-duration="1.4s" data-wow-delay="0.2s"
                        @click="handleSave" type="success" size="large" :disabled="disabled"
             >
+                <template #icon>
+                    <n-icon>
+                        <CreateOutline/>
+                    </n-icon>
+                </template>
                 {{ text }}
             </n-button>
         </div>
@@ -102,6 +107,7 @@ export default defineComponent({
         h1 {
             font-size: 50px;
             font-weight: bold;
+            margin-bottom: 10px;
         }
 
     }

@@ -19,3 +19,7 @@ tsconfig.json
 tsconfig.node.json
 vite.config.ts
 stats.html
+mock
+config
+.gitattributes
+gulpfile.js

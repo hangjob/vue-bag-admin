@@ -3,7 +3,14 @@
         <h2 class="wow animate__animated animate__fadeInLeft" data-wow-duration="1.0s" data-wow-delay="0.5">
             如果您是一个Bag的全新使用者，您可能会遇到一些问题，我们建议您阅读文档</h2>
         <div class="action wow animate__animated animate__fadeIn" data-wow-duration="1.0s" data-wow-delay="0.5">
-            <n-button @click="handleClick" type="success" icon="Document" size="large">查看文档</n-button>
+            <n-button @click="handleClick" type="success" icon="Document" size="large">
+                <template #icon>
+                    <n-icon>
+                        <ReadOutlined />
+                    </n-icon>
+                </template>
+                查看文档
+            </n-button>
         </div>
     </section>
 </template>

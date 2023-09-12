@@ -4,16 +4,16 @@
             <h1>评价</h1>
             <p>以下内容来自于Bag用户对于本博客系统的评价.</p>
         </div>
-        <n-grid cols="24" x-gap="30" y-gap="30" item-responsive responsive="screen">
+        <n-grid cols="24" x-gap="10"  y-gap="30" item-responsive responsive="screen">
             <n-grid-item span="24 m:12 l:8" v-for="(item,idx) in items" :key="idx">
                 <div class="feedback-bok">
                     <div class="describe">
                         {{ item.message }}
                     </div>
                     <div class="client">
-                        <el-icon color="#e96656" size="30">
-                            <MagicStick/>
-                        </el-icon>
+                        <n-icon color="#e96656" size="30">
+                            <FastFood/>
+                        </n-icon>
                         <div class="client-info">
                             <h6>{{ item.name }}</h6>
                             <p>{{ item.url ? item.url : item.createTime }}</p>
@@ -66,6 +66,7 @@ const items = [
     h1 {
         font-size: 50px;
         font-weight: bold;
+        margin-bottom: 10px;
     }
 
     .feedback-bok {
@@ -107,8 +108,11 @@ const items = [
                 border-radius: 50%;
                 overflow: hidden;
                 border: 3px solid #f6f6f6;
-
+                object-fit: cover;
                 img {
+                    width: 100%;
+                    height: 100%;
+                    padding: 20%;
                     vertical-align: middle;
                 }
             }

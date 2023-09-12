@@ -1,6 +1,6 @@
 <template>
     <section class="section section-container">
-        <n-grid cols="24" x-gap="30" y-gap="30" item-responsive responsive="screen">
+        <n-grid cols="24" x-gap="10"  y-gap="30" item-responsive responsive="screen">
             <n-grid-item span="24 m:12 l:6">
                 <div class="item">
                     <img style="width: 66px" :src="domImg" alt="">
@@ -27,7 +27,9 @@
     </section>
 </template>
 <script lang="ts" setup>
+import {ref} from "vue"
 
+const domImg = ref("")
 </script>
 <style lang="less" scoped>
 .section {

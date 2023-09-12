@@ -16,7 +16,13 @@
             <n-button :loading="loading" class="wow animate__animated animate__headShake" data-wow-duration="1.0s"
                       data-wow-delay="0.2s"
                       style="flex-shrink: 0;" @click="handleSendEmail" type="success" size="large"
-            >发送
+            >
+                <template #icon>
+                    <n-icon>
+                        <MailUnread/>
+                    </n-icon>
+                </template>
+                发送
             </n-button>
         </div>
     </section>
@@ -55,6 +61,7 @@ export default defineComponent({
         h1 {
             font-size: 50px;
             font-weight: bold;
+            margin-bottom: 10px;
         }
     }
 

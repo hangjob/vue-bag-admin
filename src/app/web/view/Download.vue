@@ -4,7 +4,7 @@
             <h1>下载</h1>
             <p>以下是Bag近期版本的下载.</p>
         </div>
-        <n-grid cols="24" x-gap="30" y-gap="30" item-responsive responsive="screen">
+        <n-grid cols="24" x-gap="10"  y-gap="30" item-responsive responsive="screen">
             <n-grid-item class="wow animate__animated animate__slideInRight" data-wow-duration="2.0s"
                          data-wow-delay="0.5s"
                          span="24 m:12 l:6"
@@ -329,6 +329,7 @@ export default defineComponent({
     h1 {
         font-size: 50px;
         font-weight: bold;
+        margin-bottom: 10px;
     }
 
     .package {

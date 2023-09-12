@@ -9,6 +9,10 @@ import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js"
 
 export default ({mode}: { mode: any }) => {
     const {build} = setupConfig({mode})
+    const plugins = []
+    if (mode === "lib") {
+        plugins.push(cssInjectedByJsPlugin())
+    }
     return defineConfig({
         root: path.resolve(__dirname, "src/app"), // 修改root参数为多页面的根目录
         base: "./",
@@ -20,7 +24,7 @@ export default ({mode}: { mode: any }) => {
             viteMockServe({
                 mockPath: "./mock",
             }),
-            cssInjectedByJsPlugin()
+            ...plugins
         ],
         publicDir: "public",
         resolve: {
