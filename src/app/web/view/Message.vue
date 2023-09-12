@@ -9,7 +9,7 @@
                     data-wow-delay="0.2s" span="24 m:12 l:8"
             >
                 <n-input
-                    v-model="fromData.name"
+                    v-model:value="fromData.name"
                     placeholder="你的名字"
                     size="large"
                     @input="inputFromData"
@@ -19,7 +19,7 @@
                     data-wow-delay="0.2s" span="24 m:12 l:8"
             >
                 <n-input
-                    v-model="fromData.email"
+                    v-model:value="fromData.email"
                     placeholder="你的邮箱"
                     size="large"
                     @input="inputFromData"
@@ -29,7 +29,7 @@
                     data-wow-delay="0.2s" span="24 m:12 l:8"
             >
                 <n-input
-                    v-model="fromData.url"
+                    v-model:value="fromData.url"
                     placeholder="你的站点/可为空"
                     size="large"
                     @input="inputFromData"
@@ -39,7 +39,7 @@
         <div class="action">
             <n-input
                 class="wow animate__animated animate__fadeInUp" data-wow-duration="1.0s" data-wow-delay="0.2s"
-                v-model="fromData.message"
+                v-model:value="fromData.message"
                 :rows="6"
                 type="textarea"
                 maxlength="500"
@@ -64,9 +64,16 @@
 </template>
 <script lang="ts">
 import { defineComponent, reactive, ref } from "vue"
-
+import { webLeaveCreate } from "@/app/web/service"
+import {useNotification} from "naive-ui"
+function validateEmail (email) {
+    // 邮箱验证正则
+    let reg = /^[A-Za-z0-9]+([_\.][A-Za-z0-9]+)*@([A-Za-z0-9\-]+\.)+[A-Za-z]{2,6}$/
+    return reg.test(email)
+}
 export default defineComponent({
     setup() {
+        const notification = useNotification()
         const fromData = reactive({
             email: "",
             name: "",
@@ -76,10 +83,38 @@ export default defineComponent({
         const text = ref("提交留言")
         const disabled = ref(true)
         const handleSave = function() {
-
+            webLeaveCreate(fromData).then((res: any) => {
+                if (res.data.code === 1) {
+                    notification.success({
+                        title: "留言通知",
+                        content: "留言成功，感谢你的提交，我会尽快反馈",
+                    })
+                    fromData.message = ""
+                    inputFromData()
+                } else {
+                    notification.error({
+                        title: "留言通知",
+                        content: "留言失败，请检查是否正确填写",
+                        type: "error",
+                    })
+                }
+            }).catch(() => {
+                notification.error({
+                    title: "留言通知",
+                    content: "留言失败，请检查是否正确填写",
+                    type: "error",
+                })
+            })
         }
         const inputFromData = () => {
-
+            if (fromData.email) {
+                if (!validateEmail(fromData.email)) {
+                    text.value = "邮箱格式不正确"
+                } else {
+                    text.value = "提交留言"
+                }
+            }
+            disabled.value = !(fromData.email && validateEmail(fromData.email) && fromData.name && fromData.message)
         }
         return {
             fromData,

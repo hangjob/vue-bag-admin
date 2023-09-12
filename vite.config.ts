@@ -41,9 +41,13 @@ export default ({mode}: { mode: any }) => {
             https: false,
             proxy: {
                 "^/api": {
-                    target: "http://127.0.0.1:8001",
+                    target: "https://vite.itnavs.com/",
                     changeOrigin: true,
-                    rewrite: (path: any) => path.replace(/^\/api/, "")
+                },
+                "^/bic": {
+                    target: "https://api.vipbic.com/",
+                    changeOrigin: true,
+                    rewrite: (path: any) => path.replace(/^\/bic/, "")
                 },
             }
         }

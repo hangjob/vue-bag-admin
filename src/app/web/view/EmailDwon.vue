@@ -8,7 +8,7 @@
         <div class="action">
             <n-input
                 class="wow animate__animated animate__headShake" data-wow-duration="1.0s" data-wow-delay="0.2s"
-                v-model="email"
+                v-model:value="email"
                 placeholder="输入你的邮箱"
                 size="large"
                 style="width:200px;margin-right:10px"
@@ -29,13 +29,56 @@
 </template>
 <script lang="ts">
 import {defineComponent, ref} from "vue"
-
+import {userSendEmail} from "@/app/web/service"
+import {useNotification} from "naive-ui"
+function validateEmail (email) {
+    // 邮箱验证正则
+    let reg = /^[A-Za-z0-9]+([_\.][A-Za-z0-9]+)*@([A-Za-z0-9\-]+\.)+[A-Za-z]{2,6}$/
+    return reg.test(email)
+}
 export default defineComponent({
     setup() {
         const email = ref("")
         const loading = ref(false)
+        let isSend = true
+        const notification = useNotification()
         const handleSendEmail = () => {
-
+            if (!isSend) {
+                return
+            }
+            console.log(email)
+            if (email.value) {
+                if (!validateEmail(email.value)) {
+                    return notification.error({
+                        meta: "提示",
+                        content: "请输入正确的邮箱格式",
+                    })
+                }
+                userSendEmail({userEmail: email.value}).then((res: any) => {
+                    if (res.data.code === 1) {
+                        notification.success({
+                            meta: "邮件通知",
+                            content: `发送成功，${email.value}`,
+                        })
+                        isSend = false
+                    } else {
+                        notification.error({
+                            meta: "邮件通知",
+                            content: `发送失败，请检查邮箱是否填写正确，${email.value}`,
+                        })
+                    }
+                }).catch(() => {
+                    notification.error({
+                        meta: "邮件通知",
+                        message: `发送失败，请检查邮箱是否填写正确，${email.value}`,
+                    })
+                })
+            } else {
+                return notification.error({
+                    meta: "提示",
+                    content: "你输入的到邮箱地址是空",
+                })
+            }
         }
         return {
             email,

@@ -36,7 +36,7 @@
     </div>
 </template>
 <script lang="ts">
-import {defineComponent, ref, onMounted, nextTick} from "vue"
+import {defineComponent, ref} from "vue"
 import dayjs from "dayjs"
 import {solar2lunar} from "solarlunar"
 
@@ -44,10 +44,12 @@ export default defineComponent({
     props: {
         itemData: {
             type: Object,
+            // eslint-disable-next-line vue/require-valid-default-prop
             default: {},
         },
         itemSumData: {
             type: Array,
+            // eslint-disable-next-line vue/require-valid-default-prop
             default: [],
         },
     },
@@ -66,7 +68,6 @@ export default defineComponent({
             monthCn,
             gzMonth,
             gzDay,
-            dayCn,
             cDay,
             ncWeek,
             animal,

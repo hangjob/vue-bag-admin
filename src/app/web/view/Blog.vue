@@ -6,7 +6,7 @@
         </div>
         <div class="article">
             <n-grid cols="24" x-gap="10"  y-gap="30" item-responsive responsive="screen">
-                <el-col span="24 m:12 l:6" class="wow animate__animated animate__zoomIn" data-wow-duration="1.0s"
+                <n-grid-item span="24 m:12 l:6" class="wow animate__animated animate__zoomIn" data-wow-duration="1.0s"
                         :data-wow-delay="index/8+'s'"
                         v-for="(item,index) in items" :key="index"
                 >
@@ -16,7 +16,7 @@
                     <template v-else>
                         <BagArticle :item-data="item"/>
                     </template>
-                </el-col>
+                </n-grid-item>
             </n-grid>
         </div>
     </section>
@@ -56,6 +56,7 @@ export default defineComponent({
         h1 {
             font-size: 50px;
             font-weight: bold;
+            margin-bottom: 10px;
         }
     }
 

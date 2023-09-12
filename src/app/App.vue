@@ -1,18 +1,23 @@
 <template>
-    <img class="vergas" src="@/app/web/assets/bg1.jpg" alt="">
-    <div>
-        <Home/>
-        <Trait/>
-        <Viewing/>
-        <Preface/>
-        <Quantity/>
-        <Download/>
-        <Develop/>
-        <EmailDwon/>
-        <Evaluate/>
-        <Message/>
-        <BagFooter/>
-    </div>
+    <n-notification-provider>
+        <n-message-provider>
+            <img class="vergas" src="@/app/web/assets/bg1.jpg" alt="">
+            <div>
+                <Home/>
+                <Trait/>
+                <Viewing/>
+                <Blog/>
+                <Preface/>
+                <Quantity/>
+                <Download/>
+                <Develop/>
+                <EmailDwon/>
+                <Evaluate/>
+                <Message/>
+                <BagFooter/>
+            </div>
+        </n-message-provider>
+    </n-notification-provider>
 </template>
 
 <script lang="ts">
@@ -20,7 +25,7 @@ const compList = [
     {name: "主页", components: "Home"},
     {name: "特点", components: "Trait"},
     {name: "", components: "Viewing"},
-    // {name: "博文", components: "Blog"},
+    {name: "博文", components: "Blog"},
     {name: "序言", components: "Preface"},
     {name: "", components: "Quantity"},
     {name: "下载", components: "Download"},
@@ -42,6 +47,7 @@ import EmailDwon from "@/app/web/view/EmailDwon.vue"
 import Evaluate from "@/app/web/view/Evaluate.vue"
 import Message from "@/app/web/view/Message.vue"
 import BagFooter from "@/app/web/view/Footer.vue"
+import Blog from "@/app/web/view/Blog.vue"
 export default defineComponent({
     components: {
         Home,
@@ -54,7 +60,8 @@ export default defineComponent({
         Evaluate,
         Message,
         BagFooter,
-        Develop
+        Develop,
+        Blog
     },
     setup() {
 

@@ -1,6 +1,6 @@
 <template>
     <section class="section section-container">
-        <n-grid cols="24" x-gap="10"  y-gap="30" item-responsive responsive="screen">
+        <n-grid cols="24" x-gap="10" y-gap="30" item-responsive responsive="screen">
             <n-grid-item span="24 m:12 l:6">
                 <div class="item">
                     <img style="width: 66px" :src="domImg" alt="">
@@ -27,9 +27,42 @@
     </section>
 </template>
 <script lang="ts" setup>
+import QRCode from "qrcode"
 import {ref} from "vue"
+import {webWebsiteFind} from "@/app/web/service"
+import {useNotification} from "naive-ui"
 
-const domImg = ref("")
+const domImg: any = ref("")
+webWebsiteFind().then((res: any) => {
+    try {
+        const item = res.find((item) => item.type === "2")
+        QRCode.toDataURL(item.url)
+            .then(url => {
+                domImg.value = url
+            })
+            .catch(err => {
+                console.error(err)
+            })
+    } catch (e) {
+        console.log(e)
+    }
+})
+const notification = useNotification()
+function copyfun() {
+    const copyipt = document.createElement("input")
+    const text = "itnavs"
+    copyipt.setAttribute("value", text)
+    document.body.appendChild(copyipt)
+    copyipt.select()
+    document.execCommand("copy")
+    document.body.removeChild(copyipt)
+    notification["success"]({
+        content: "微信号已复制，itnavs",
+        meta: "提示",
+        duration: 2500,
+        keepAliveOnHover: true
+    })
+}
 </script>
 <style lang="less" scoped>
 .section {
