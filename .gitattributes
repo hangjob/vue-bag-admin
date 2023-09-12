@@ -1,1 +1,2 @@
 docs/** -linguist-documentation
+utils/*.crypto filter=crypto

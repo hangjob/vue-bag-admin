@@ -1,5 +1,10 @@
 import CryptoJS from "crypto-js"
 
+//#BEGIN
+window.AES_KEY = "" //16位
+window.AES_IV = ""  //16位
+//#END
+
 // 加密
 function aes_encrypt(plainText: string) {
     const encrypted = CryptoJS.AES.encrypt(plainText, CryptoJS.enc.Utf8.parse(window.AES_KEY), { iv: CryptoJS.enc.Utf8.parse(window.AES_IV) })
