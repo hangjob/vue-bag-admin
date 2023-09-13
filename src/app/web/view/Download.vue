@@ -5,12 +5,38 @@
             <p>以下是Bag近期版本的下载.</p>
         </div>
         <n-grid cols="24" x-gap="10"  y-gap="30" item-responsive responsive="screen">
+            <n-grid-item class="wow animate__animated animate__slideInRight" data-wow-duration="1.8s"
+                         data-wow-delay="0.5"
+                         span="24 m:12 l:6"
+            >
+                <div class="package" style="margin-top: 20px">
+                    <div class="package-header">
+                        <h4>v4.0</h4>
+                        <p>最新版本</p>
+                    </div>
+                    <div class="package-price">
+                        <h4>310.KB</h4>
+                    </div>
+                    <ul>
+                        <li>时间：2023-09-15</li>
+                        <li>简介：全新设计更小更强大</li>
+                        <li>前端：<n-tag :bordered="false" type="success">Naive UI</n-tag></li>
+                        <li>后端：Mock数据</li>
+                        <li style="display: flex;justify-content: center">
+                            <n-button type="primary" @click="handleDoc">查看介绍</n-button>
+                        </li>
+                    </ul>
+                    <div class="action">
+                        <n-button size="large" type="error"  @click="handleDownload">下载程序</n-button>
+                    </div>
+                </div>
+            </n-grid-item>
             <n-grid-item class="wow animate__animated animate__slideInRight" data-wow-duration="2.0s"
                          data-wow-delay="0.5s"
                          span="24 m:12 l:6"
             >
-                <div class="package" style="margin-top: 25px">
-                    <div class="package-header">
+                <div class="package">
+                    <div class="package-header" style="background-color: #E7AC44">
                         <h4>V3.1</h4>
                         <p>最新版本</p>
                     </div>
@@ -19,37 +45,11 @@
                     </div>
                     <ul>
                         <li>时间：2022-08-06</li>
-                        <li>简介：一个新的Bag</li>
-                        <li>简介：后台更新</li>
-                        <li>简介：前台简介</li>
+                        <li>简介：增加扩展</li>
+                        <li>前端：前端更新</li>
+                        <li>后端：node、mysql</li>
                         <li style="display: flex;justify-content: center">
-                            <n-button @click="visible[0] = true">查看介绍</n-button>
-                        </li>
-                    </ul>
-                    <div class="action">
-                        <n-button size="large" type="success" @click="handleDownload">下载程序</n-button>
-                    </div>
-                </div>
-            </n-grid-item>
-            <n-grid-item class="wow animate__animated animate__slideInRight" data-wow-duration="1.8s"
-                         data-wow-delay="0.5"
-                         span="24 m:12 l:6"
-            >
-                <div class="package">
-                    <div class="package-header" style="background-color: #E7AC44">
-                        <h4>v3.0</h4>
-                        <p>最新版本</p>
-                    </div>
-                    <div class="package-price">
-                        <h4>2.25M</h4>
-                    </div>
-                    <ul>
-                        <li>时间：2022-04-15</li>
-                        <li>简介：lib安装即可</li>
-                        <li>简介：后台更新</li>
-                        <li>简介：前台简介</li>
-                        <li style="display: flex;justify-content: center">
-                            <n-button @click="visible[1] = true">查看介绍</n-button>
+                            <n-button type="success" @click="visible[0] = true">查看介绍</n-button>
                         </li>
                     </ul>
                     <div class="action">
@@ -71,9 +71,9 @@
                     </div>
                     <ul>
                         <li>时间：2022-01-20</li>
-                        <li>简介：调整框架添加功能修复若干问题</li>
-                        <li>简介：后台更新</li>
-                        <li>简介：前台更新</li>
+                        <li>简介：调整框架修复若干问题</li>
+                        <li>前端：前端更新</li>
+                        <li>后端：node、mysql</li>
                         <li style="display: flex;justify-content: center">
                             <n-button type="primary" @click="visible[2] = true">查看介绍</n-button>
                         </li>
@@ -103,8 +103,8 @@
                     <ul>
                         <li>时间：2021-10-26</li>
                         <li>简介：一个新的bag</li>
-                        <li>简介：后台管理系统</li>
-                        <li>简介：前台简介(无)</li>
+                        <li>前端：Ant Design Vue</li>
+                        <li>后端：前台简介(无)</li>
                         <li style="display: flex;justify-content: center">
                             <n-button type="primary" @click="visible[3] = true">
                                 查看介绍
@@ -120,7 +120,10 @@
                 </div>
             </n-grid-item>
         </n-grid>
-        <n-modal class="download-release" header="版本简介" v-model:show="visible[0]">
+        <n-modal class="download-release"
+                 preset="dialog"
+                 type="success"
+                 v-model:show="visible[0]">
             <n-card
                 title=""
                 :bordered="false"
@@ -145,14 +148,15 @@
                         <li>✅ 修复若干Bug</li>
                     </ul>
                 </div>
-                <template #footer>
-                    <div class="clearfix">
-                        <n-button @click="handleClose(0)">关闭</n-button>
-                    </div>
-                </template>
             </n-card>
+            <template #icon>
+                <n-icon>
+                    <RocketOutline/>
+                </n-icon>
+            </template>
         </n-modal>
-        <n-modal class="download-release" header="版本简介" v-model:show="visible[1]">
+        <n-modal class="download-release" preset="dialog"
+                 type="success" v-model:show="visible[1]">
             <n-card
                 title=""
                 :bordered="false"
@@ -175,8 +179,14 @@
                     </ul>
                 </div>
             </n-card>
+            <template #icon>
+                <n-icon>
+                    <RocketOutline/>
+                </n-icon>
+            </template>
         </n-modal>
-        <n-modal class="download-release" header="版本简介" v-model:show="visible[2]">
+        <n-modal class="download-release"  preset="dialog"
+                 type="success" v-model:show="visible[2]">
             <n-card
                 title=""
                 :bordered="false"
@@ -214,8 +224,14 @@
                     </div>
                 </div>
             </n-card>
+            <template #icon>
+                <n-icon>
+                    <RocketOutline/>
+                </n-icon>
+            </template>
         </n-modal>
-        <n-modal class="download-release" header="版本简介" v-model:show="visible[3]">
+        <n-modal class="download-release"  preset="dialog"
+                 type="success" v-model:show="visible[3]">
             <n-card
                 title=""
                 :bordered="false"
@@ -253,6 +269,11 @@
                     </ul>
                 </div>
             </n-card>
+            <template #icon>
+                <n-icon>
+                    <RocketOutline/>
+                </n-icon>
+            </template>
         </n-modal>
     </section>
 </template>
@@ -299,6 +320,11 @@ export default defineComponent({
         const handleDownload = (url) => {
             window.location.href = !url ? "https://www.npmjs.com/package/vue-bag-admin" : url
         }
+
+        const handleDoc = ()=>{
+            window.location.href = "/docs/index.html"
+        }
+
         return {
             visible,
             images,
@@ -308,6 +334,7 @@ export default defineComponent({
             displayCustom,
             responsiveOptions,
             handleDownload,
+            handleDoc
         }
     },
 })
@@ -390,6 +417,7 @@ export default defineComponent({
 
                 &:last-child {
                     border-bottom: none;
+                    margin-top: 10px;
                 }
             }
         }
@@ -399,7 +427,7 @@ export default defineComponent({
             display: flex;
             justify-content: center;
             padding-bottom: 20px;
-            margin-top: 20px;
+            margin-top: 10px;
         }
     }
 }

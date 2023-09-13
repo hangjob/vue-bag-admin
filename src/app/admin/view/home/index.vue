@@ -15,7 +15,7 @@
                                 tleData.time
                             }}，准备吃什么呢?</h1>
                         <p class="des">前端工程师 |
-                            阿里巴巴，vue-bag-admin，采用Vite4.4、Vue3.3、TypeScript、JavaScript构建，支持多种写法和调用，完整的框架体系，适合企业中后台响应式管理系统，支持现有业务各种扩展....</p>
+                            阿里巴巴，vue-bag-admin，采用Vite4.4、Vue3.3、TypeScript、JavaScript构建，支持多种写法和调用，完整的框架体系，适合响应式中后台管理系统，支持现有业务各种扩展....</p>
                     </div>
                 </div>
             </n-card>

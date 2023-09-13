@@ -32,6 +32,7 @@ export default [
                         "tabFix": true,
                         "order":100
                     }),
+                    creataDataItem({id: 300, "title": "组件", "icon": "CubeOutline"}),
                     creataDataItem({id: 200, "title": "系统设置", "icon": "SettingsOutline"}),
                     creataDataItem({
                         id: 201,
@@ -181,7 +182,7 @@ export default [
                         "file": "/view/system/user/center/index.vue",
                         "icon": "PlanetOutline"
                     }),
-                    creataDataItem({id: 300, "title": "组件", "icon": "CubeOutline"}),
+
                     creataDataItem({
                         id: 301,
                         "title": "清新图标",
@@ -426,7 +427,7 @@ export default [
                         "pid": "",
                         "path": "",
                         "file": "",
-                        "icon": "PlanetOutline",
+                        "icon": "RestaurantOutline",
                     }),
                     creataDataItem({
                         id: 6001,
@@ -457,6 +458,24 @@ export default [
                         "icon": "",
                         "isIframe":true,
                         "url":"https://haixin-fang.github.io/starfish-vue3-lowcode/playground/index.html",
+                    }),
+                    creataDataItem({
+                        id: 7001,
+                        "title": "浏览器指纹",
+                        "pid": "",
+                        "path": "/fingerprintjs",
+                        "file": "/view/fingerprintjs/index.vue",
+                        "icon": "LogoChrome",
+                        "url":"",
+                    }),
+                    creataDataItem({
+                        id: 7002,
+                        "title": "窗口通信",
+                        "pid": "",
+                        "path": "/wicket",
+                        "file": "/view/wicket/index.vue",
+                        "icon": "PlanetOutline",
+                        "url":"",
                     }),
                 ]
             }

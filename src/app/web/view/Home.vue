@@ -4,7 +4,7 @@
             <h1 style="line-height:75px">旨在让开发者能够以最小的成本完成开发<br/>降低开发量</h1>
         </div>
         <div class="action">
-            <n-grid cols="24" x-gap="10"  y-gap="30" item-responsive responsive="screen">
+            <n-grid cols="24" x-gap="10" y-gap="30" item-responsive responsive="screen">
                 <n-grid-item span="24 m:12 l:6">
                     <div class="demo">
                         <n-button target @click="handleSkip('/admin.html')" size="large" type="primary" icon="Pear">
@@ -58,12 +58,21 @@
     </section>
 </template>
 <script lang="ts" setup>
-
+import { useMessage } from "naive-ui"
 const handleSkip = (url) => {
-
+    window.location.href = url
 }
+const message = useMessage()
+const channel = new BroadcastChannel("wicket")
+channel.addEventListener("message",(event)=>{
+    message.success(event.data,{
+        duration: 0
+    })
+})
 const handleDownload = () => {
-
+    document.querySelector("#Download").scrollIntoView({
+        behavior: "smooth"
+    })
 }
 </script>
 <style lang="less" scoped>

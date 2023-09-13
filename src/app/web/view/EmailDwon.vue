@@ -22,7 +22,7 @@
                         <MailUnread/>
                     </n-icon>
                 </template>
-                发送
+                {{text}}
             </n-button>
         </div>
     </section>
@@ -39,6 +39,7 @@ function validateEmail (email) {
 export default defineComponent({
     setup() {
         const email = ref("")
+        const text = ref("发送")
         const loading = ref(false)
         let isSend = true
         const notification = useNotification()
@@ -46,7 +47,6 @@ export default defineComponent({
             if (!isSend) {
                 return
             }
-            console.log(email)
             if (email.value) {
                 if (!validateEmail(email.value)) {
                     return notification.error({
@@ -54,24 +54,16 @@ export default defineComponent({
                         content: "请输入正确的邮箱格式",
                     })
                 }
+                text.value = "发送中..."
                 userSendEmail({userEmail: email.value}).then((res: any) => {
                     if (res.data.code === 1) {
-                        notification.success({
-                            meta: "邮件通知",
-                            content: `发送成功，${email.value}`,
-                        })
+                        text.value = "发送成功"
                         isSend = false
                     } else {
-                        notification.error({
-                            meta: "邮件通知",
-                            content: `发送失败，请检查邮箱是否填写正确，${email.value}`,
-                        })
+                        text.value = "发送失败"
                     }
                 }).catch(() => {
-                    notification.error({
-                        meta: "邮件通知",
-                        message: `发送失败，请检查邮箱是否填写正确，${email.value}`,
-                    })
+                    text.value = "发送失败"
                 })
             } else {
                 return notification.error({
@@ -83,7 +75,8 @@ export default defineComponent({
         return {
             email,
             handleSendEmail,
-            loading
+            loading,
+            text
         }
     },
 })

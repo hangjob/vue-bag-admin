@@ -113,6 +113,7 @@
         }
         p{
             color: #808080;
+            line-height: 20px;
         }
         i{
             margin-right: 10px;

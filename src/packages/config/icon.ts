@@ -60,7 +60,9 @@ import {
     ArchiveOutline,
     DocumentTextOutline,
     DiscOutline,
-    RocketOutline
+    RocketOutline,
+    ReloadCircleOutline,
+    RestaurantOutline
 } from "@vicons/ionicons5"
 import {StepBackwardFilled,CloudSyncOutlined, StepForwardFilled,DribbbleOutlined
     ,TeamOutlined,UserSwitchOutlined, StopOutlined, SmileOutlined, UsergroupAddOutlined,
@@ -192,7 +194,9 @@ const icons = {
     ArchiveOutline,
     DocumentTextOutline,
     DiscOutline,
-    RocketOutline
+    RocketOutline,
+    ReloadCircleOutline,
+    RestaurantOutline
 }
 
 function renderIcon(iconName: string) {

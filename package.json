@@ -16,8 +16,7 @@
         "docs:serve": "vitepress serve docs",
         "publish:patch": "npm version patch && npm publish",
         "publish:minor": "npm version minor && npm publish",
-        "publish:major": "npm version major && npm publish",
-        "gulp": "gulp default"
+        "publish:major": "npm version major && npm publish"
     },
     "main": "./lib/bag-admin.umd.cjs",
     "exports": {
@@ -38,6 +37,7 @@
         "date-fns": "^2.30.0",
         "dayjs": "^1.11.9",
         "echarts": "^5.4.3",
+        "fingerprintjs2": "^2.1.4",
         "js-calendar-converter": "^0.0.6",
         "jsencrypt": "^3.3.2",
         "lodash": "^4.17.21",
@@ -54,7 +54,8 @@
         "solarlunar": "^2.0.7",
         "vue": "^3.3.4",
         "vue-router": "^4.2.4",
-        "vue-waterfall-plugin-next": "^2.2.3"
+        "vue-waterfall-plugin-next": "^2.2.3",
+        "wow.js": "^1.2.2"
     },
     "devDependencies": {
         "@types/node": "^20.4.9",

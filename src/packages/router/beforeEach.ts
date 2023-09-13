@@ -45,7 +45,6 @@ function addRouter(item) {
  * @param allMenus
  */
 function createRouterComponent(allMenus) {
-    console.log(allMenus)
     allMenus.forEach((item) => {
         addRouter(item)
         if (item.add && Object.keys(item.add).length !== 0) {

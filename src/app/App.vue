@@ -9,7 +9,7 @@
                 <Blog/>
                 <Preface/>
                 <Quantity/>
-                <Download/>
+                <Download id="Download"/>
                 <Develop/>
                 <EmailDwon/>
                 <Evaluate/>
@@ -21,21 +21,22 @@
 </template>
 
 <script lang="ts">
-const compList = [
-    {name: "主页", components: "Home"},
-    {name: "特点", components: "Trait"},
-    {name: "", components: "Viewing"},
-    {name: "博文", components: "Blog"},
-    {name: "序言", components: "Preface"},
-    {name: "", components: "Quantity"},
-    {name: "下载", components: "Download"},
-    {name: "开发", components: "Develop"},
-    {name: "", components: "EmailDwon"},
-    {name: "评价", components: "Evaluate"},
-    {name: "留言", components: "Message"},
-    {name: "", components: "Footer"},
-]
-import {defineComponent} from "vue"
+import Wow  from "wow.js"
+// const compList = [
+//     {name: "主页", components: "Home"},
+//     {name: "特点", components: "Trait"},
+//     {name: "", components: "Viewing"},
+//     {name: "博文", components: "Blog"},
+//     {name: "序言", components: "Preface"},
+//     {name: "", components: "Quantity"},
+//     {name: "下载", components: "Download"},
+//     {name: "开发", components: "Develop"},
+//     {name: "", components: "EmailDwon"},
+//     {name: "评价", components: "Evaluate"},
+//     {name: "留言", components: "Message"},
+//     {name: "", components: "Footer"},
+// ]
+import {defineComponent,onMounted} from "vue"
 import Home from "@/app/web/view/Home.vue"
 import Trait from "@/app/web/view/Trait.vue"
 import Viewing from "@/app/web/view/Viewing.vue"
@@ -48,6 +49,7 @@ import Evaluate from "@/app/web/view/Evaluate.vue"
 import Message from "@/app/web/view/Message.vue"
 import BagFooter from "@/app/web/view/Footer.vue"
 import Blog from "@/app/web/view/Blog.vue"
+
 export default defineComponent({
     components: {
         Home,
@@ -64,7 +66,9 @@ export default defineComponent({
         Blog
     },
     setup() {
-
+        onMounted(()=>{
+            new Wow().init()
+        })
     }
 })
 </script>

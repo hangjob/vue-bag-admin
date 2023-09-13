@@ -67,12 +67,6 @@ export default defineComponent({
     }
 })
 </script>
-<style lang="less">
-.n-config-provider {
-    height: 100%;
-    width: 100%;
-}
-</style>
 <style lang="less" scoped>
 
 .header {
