@@ -9,6 +9,7 @@ import unionWith from "lodash/unionWith.js"
 import {renderIcon} from "@/packages/config/icon.ts"
 import {toTree} from "@/packages/utils/utils.ts"
 import globalViewIframe from "@/packages/view/iframe/index.vue"
+import locaStore from "@/packages/utils/locaStore.ts"
 let hasRoles = false
 const namespace = "main"
 //框架页面组件
@@ -127,6 +128,7 @@ function updateRouterAll(to: RouteLocationNormalized, from: RouteLocationNormali
 }
 
 const beforeEach = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
+    const appStore = appPinia()
     if (hasWhiteRouter(to.path)) {
         return next()
     }

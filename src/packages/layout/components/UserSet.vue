@@ -124,7 +124,7 @@
             </n-switch>
         </n-el>
         <div class="set-item">
-            <n-dropdown trigger="click" :options="userOptions">管理员</n-dropdown>
+            <n-dropdown @select="compData.handleSelect" trigger="click" :options="userOptions">管理员</n-dropdown>
         </div>
     </div>
     <n-drawer v-model:show="compData.searchModel" :width="502" placement="top">
@@ -185,7 +185,9 @@ import {h, defineComponent, ref, computed, reactive} from "vue"
 import UserSetting from "@/packages/layout/components/UserSetting.vue"
 import appStore from "@/packages/pinia/app.ts"
 import {useFullscreen} from "@vueuse/core"
-
+import {useRouter} from "vue-router"
+import  headImg from "@/packages/assets/yanghang.jpg"
+import locaStore from "@/packages/utils/locaStore.ts"
 function renderCustomHeader() {
     return h(
         "div",
@@ -196,7 +198,7 @@ function renderCustomHeader() {
             h(NAvatar, {
                 round: true,
                 style: "margin-right: 12px;",
-                src: "https://07akioni.oss-cn-beijing.aliyuncs.com/demo1.JPG"
+                src: headImg
             }),
             h("div", null, [
                 h("div", null, [h(NText, {depth: 2}, {default: () => "羊先生"})]),
@@ -219,6 +221,7 @@ export default defineComponent({
     setup() {
         const UserSettingRef = ref(null)
         const app = appStore()
+        const router = useRouter()
         const {themeName} = app.userSetting
         const {isFullscreen, toggle} = useFullscreen(document.body)
         app.userSetting.isFullscreen = isFullscreen
@@ -264,6 +267,12 @@ export default defineComponent({
             handleDarkTheme(value) {
                 app.userSetting.themeName = value ? "darkTheme" : null
             },
+            handleSelect(key: string | number){
+                if(key === "stmt4"){
+                    locaStore.clearAll()
+                    router.push("/login")
+                }
+            }
         })
         return {
             compData,
@@ -274,8 +283,8 @@ export default defineComponent({
             userOptions: [{key: "header", type: "render", render: renderCustomHeader},
                 {key: "header-divider", type: "divider"},
                 {label: "处理群消息 342 条", key: "stmt1"},
-                {label: "被 @ 58 次", key: "stmt2"},
-                {label: "加入群 17 个", key: "stmt3"}
+                {label: "加入群 17 个", key: "stmt3"},
+                {label: "退出登录", key: "stmt4"}
             ],
             userIcon,
         }

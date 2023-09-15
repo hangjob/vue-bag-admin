@@ -120,7 +120,7 @@ const createColumns = ({compHandle}): DataTableColumns => {
 
 const treeData = [
     {
-        label: "品茗科技",
+        label: "阿里巴巴",
         key: "1",
         children: [{label: "数字政务", key: "10"}, {label: "Ai事业部", key: "11"}, {
             label: "住建事业部",

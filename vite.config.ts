@@ -6,12 +6,19 @@ import {NaiveUiResolver} from "unplugin-vue-components/resolvers"
 import {viteMockServe} from "vite-plugin-mock"
 import setupConfig from "./config"
 import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js"
+import viteCompression from "vite-plugin-compression"
 
 export default ({mode}: { mode: any }) => {
     const {build} = setupConfig({mode})
     const plugins = []
     if (mode === "lib") {
         plugins.push(cssInjectedByJsPlugin())
+    }else{
+        plugins.push(
+            viteCompression({
+                threshold: 10240
+            })
+        )
     }
     return defineConfig({
         root: path.resolve(__dirname, "src/app"), // 修改root参数为多页面的根目录

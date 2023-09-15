@@ -7,7 +7,7 @@
             <n-grid cols="24" x-gap="10" y-gap="30" item-responsive responsive="screen">
                 <n-grid-item span="24 m:12 l:6">
                     <div class="demo">
-                        <n-button target @click="handleSkip('/admin.html')" size="large" type="primary" icon="Pear">
+                        <n-button target @click="handleSkip('/admin/')" size="large" type="primary" icon="Pear">
                             <template #icon>
                                 <n-icon>
                                     <HappyOutline/>
@@ -19,7 +19,7 @@
                 </n-grid-item>
                 <n-grid-item span="24 m:12 l:6">
                     <div class="demo">
-                        <n-button target :href="{url: '/web.html'}" size="large" type="info">
+                        <n-button target  size="large" type="info">
                             <template #icon>
                                 <n-icon>
                                     <LaptopOutline/>

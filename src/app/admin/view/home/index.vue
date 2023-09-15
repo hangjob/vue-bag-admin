@@ -9,7 +9,7 @@
                 </template>
                 <div class="home-head">
                     <n-image width="80" style="border-radius: 50%"
-                             src="https://vite.itnavs.com/assets/static/yanghang-c3d6d50c.jpg"></n-image>
+                             :src="headImg"></n-image>
                     <div style="margin-left: 20px">
                         <h1 class="title">嗨，{{ tleData.pam }} 今天是{{ tleData.date }} {{ tleData.week }} {{
                                 tleData.time
@@ -125,7 +125,7 @@ import {menus, timeline} from "@/app/admin/view/home/data.ts"
 import * as echarts from "echarts"
 import dayjs from "dayjs"
 import {useRouter} from "vue-router"
-
+import  headImg from "@/packages/assets/yanghang.jpg"
 function echartInit() {
     const chartDom = document.getElementById("main")
     const myChart = echarts.init(chartDom)
@@ -142,9 +142,7 @@ function echartInit() {
             axisTick: {show: false},
             axisLabel: {
                 show: true,
-                textStyle: {
-                    color: "#a4a4a4",
-                },
+                color: "#a4a4a4",
             },
             axisLine: {
                 show: true,
@@ -160,9 +158,7 @@ function echartInit() {
             axisTick: {show: false},
             axisLabel: {
                 show: true,
-                textStyle: {
-                    color: "#a4a4a4",
-                },
+                color: "#a4a4a4",
             },
             axisLine: {
                 show: true,
@@ -192,14 +188,12 @@ function echartInit() {
                     borderRadius: [5, 5, 0, 0],
                 },
                 itemStyle: {
-                    normal: {
-                        // 这里就可以实现，配置柱状图的颜色
-                        color: function (params) {
-                            let colorList = ["#1ec4c5", "#1ec4c5", "#FCCE10", "#E87C25", "#fe5558", "#fe5558", "#fe5558"]
-                            return colorList[params.dataIndex]
-                        },
-                        borderRadius: [5, 5, 0, 0],
+                    // 这里就可以实现，配置柱状图的颜色
+                    color: function (params) {
+                        let colorList = ["#1ec4c5", "#1ec4c5", "#FCCE10", "#E87C25", "#fe5558", "#fe5558", "#fe5558"]
+                        return colorList[params.dataIndex]
                     },
+                    borderRadius: [5, 5, 0, 0],
                 },
             },
         ]
@@ -258,7 +252,8 @@ export default defineComponent({
         })
         return {
             tleData,
-            compData
+            compData,
+            headImg
         }
     }
 })

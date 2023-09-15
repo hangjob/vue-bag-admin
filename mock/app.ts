@@ -1,5 +1,5 @@
 import {MockMethod} from "vite-plugin-mock"
-
+import {Random} from "mockjs"
 function creataDataItem(data = {}) {
     const item = {
         "id": "", "title": "首页", "icon": "", "shows": true, "path": "", "order": 1,
@@ -13,8 +13,35 @@ function creataDataItem(data = {}) {
     }
     return item
 }
-
 export default [
+    {
+        url: "/login",
+        method: "post",
+        response: () => {
+            return {
+                code: 1,
+                data: {
+                    username: "管理员",
+                    id: Random.id(),
+                    accessToken:Random.id(),
+                    expiresTime: Random.now(),
+                }
+            }
+        }
+    },
+    {
+        url: "/userInfo",
+        method: "post",
+        response: () => {
+            return {
+                code: 1,
+                data: {
+                    username: "管理员",
+                    permission:["sys:permission:admin","sys:permission:web"]
+                }
+            }
+        }
+    },
     {
         url: "/menus",
         method: "post",
@@ -174,15 +201,14 @@ export default [
                         "file": "/view/system/log/index.vue",
                         "icon": "CloudSyncOutlined"
                     }),
-                    creataDataItem({
-                        id: 207,
-                        "title": "用户中心",
-                        "pid": 200,
-                        "path": "/system/user/center",
-                        "file": "/view/system/user/center/index.vue",
-                        "icon": "PlanetOutline"
-                    }),
-
+                    // creataDataItem({
+                    //     id: 207,
+                    //     "title": "用户中心",
+                    //     "pid": 200,
+                    //     "path": "/system/user/center",
+                    //     "file": "/view/system/user/center/index.vue",
+                    //     "icon": "PlanetOutline"
+                    // }),
                     creataDataItem({
                         id: 301,
                         "title": "清新图标",
@@ -223,14 +249,14 @@ export default [
                         "file": "/view/module/gradient/index.vue",
                         "icon": "ColorPaletteOutline"
                     }),
-                    creataDataItem({
-                        id: 307,
-                        "title": "图像裁剪",
-                        "pid": 300,
-                        "path": "/module/cropping",
-                        "file": "/view/module/cropping/index.vue",
-                        "icon": "ImageOutline"
-                    }),
+                    // creataDataItem({
+                    //     id: 307,
+                    //     "title": "图像裁剪",
+                    //     "pid": 300,
+                    //     "path": "/module/cropping",
+                    //     "file": "/view/module/cropping/index.vue",
+                    //     "icon": "ImageOutline"
+                    // }),
                     creataDataItem({
                         id: 308,
                         "title": "卡片描述",

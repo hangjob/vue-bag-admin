@@ -16,7 +16,7 @@ const createColumns = ({compHandle}): DataTableColumns => {
             title: "用户名",
             key: "username",
             align: "center",
-            maxWidth: 120,
+            maxWidth: 100,
             ellipsis: true,
         },
         {
@@ -24,14 +24,12 @@ const createColumns = ({compHandle}): DataTableColumns => {
             key: "age",
             align: "center",
             ellipsis: true,
-            maxWidth: 120,
         },
         {
             title: "邮箱",
             key: "email",
             align: "center",
             ellipsis: true,
-            maxWidth: 120,
         },
         {
             title: "描述",
@@ -44,14 +42,12 @@ const createColumns = ({compHandle}): DataTableColumns => {
             key: "company",
             align: "center",
             ellipsis: true,
-            maxWidth: 150,
         },
         {
             title: "坐标",
             key: "address",
             align: "center",
             ellipsis: true,
-            width: 150,
         },
         {
             title: "操作",
@@ -105,7 +101,7 @@ const createColumns = ({compHandle}): DataTableColumns => {
 
 const treeData = [
     {
-        label: "品茗科技",
+        label: "阿里巴巴",
         key: "1",
         children: [{label: "数字政务", key: "10"}, {label: "Ai事业部", key: "11"}, {
             label: "住建事业部",

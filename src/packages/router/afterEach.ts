@@ -32,7 +32,7 @@ function updateTbas(current) {
     const appStore = appPinia()
     const {href, hash, name, path, query, meta} = current
     const tag = appStore.tabs.find((item: any) => item.meta.id === meta.id)
-    if (!tag) {
+    if (!tag && meta.id) {
         meta.tempPath = path // 主要解决临时动态路由
         appStore.tabs.push(cloneDeep({href, hash, name, path, query, meta}))
     }

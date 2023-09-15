@@ -3,6 +3,11 @@ import App from "./App.vue"
 import install from "@/packages/install.ts"
 import router from "@/app/admin/router"
 
+import {setupProdMockServer} from "__ROOT__/mock/mockProdServer.ts"
+if (process.env.NODE_ENV === "production") {
+    setupProdMockServer()
+}
+
 createApp(App).use(install, {
     menus: [
         // {

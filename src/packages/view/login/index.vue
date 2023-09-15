@@ -2,7 +2,7 @@
     <n-card :bordered="false" style="height: 100%" content-style="padding:0;height:100%">
         <div class="login-set">
             <n-space>
-                <n-switch :rail-style="railStyle">
+                <n-switch @update:value="compData.handleUpdateImg" :rail-style="railStyle">
                     <template #checked-icon>
                        <n-icon>
                            <LogoIonic/>
@@ -29,7 +29,7 @@
             </n-space>
         </div>
         <div class="login">
-            <div class="login_bg" :class="[darkTheme ? 'black' : null]"></div>
+            <div class="login_bg" :style="{backgroundImage: `url(${getAssetsFile})`}" :class="[darkTheme ? 'black' : null]"></div>
             <div class="login-container">
                 <div class="embellish left">
                     <div class="embellish-up">
@@ -56,16 +56,23 @@
                             <div class="slide-right">
                                 <n-h1>欢迎您登录</n-h1>
                                 <n-text depth="3">你可以直接输入您的账号和密码登录</n-text>
-                                <n-form autocomplete="off" :rules="rules" ref="formRef" class="login-form" layout="vertical"
+                                <n-form autocomplete="off" :rules="compData.rules" ref="formRef" class="login-form" layout="vertical"
                                         :model="compData.form"
                                 >
                                     <n-form-item label="你的账户" name="username">
-                                        <n-input size="large" autocomplete="off" v-model:value="compData.form.username" placeholder="输入你的账户"/>
+                                        <n-input size="large" :maxlength="12" autocomplete="off" v-model:value="compData.form.username" placeholder="输入你的账户">
+                                            <template #suffix>
+                                                <n-icon>
+                                                    <HappyOutline/>
+                                                </n-icon>
+                                            </template>
+                                        </n-input>
                                     </n-form-item>
                                     <n-form-item label="你的密码" name="password">
-                                        <n-input size="large" type="password" autocomplete="off" v-model:value="compData.form.password"
+                                        <n-input size="large" :show-password-on="'click'"  type="password" autocomplete="off" v-model:value="compData.form.password"
                                                  placeholder="输入你的密码"
-                                        />
+                                        >
+                                        </n-input>
                                     </n-form-item>
                                 </n-form>
                                 <n-space style="margin-bottom: 10px" justify="space-between">
@@ -73,8 +80,8 @@
                                     <n-text depth="3">忘记密码? 找回密码</n-text>
                                 </n-space>
                                 <n-space justify="space-between" :size="[10,15]" vertical>
-                                    <n-button style="width: 100%" @click="handleLogin">登录</n-button>
-                                    <n-text style="text-align: right" depth="3" @click="handleTrigger">没有账号? 注册账号</n-text>
+                                    <n-button size="large" style="width: 100%" @click="handleLogin">登录</n-button>
+                                    <n-text style="text-align: right" depth="3">没有账号? 注册账号</n-text>
                                 </n-space>
                             </div>
                         </n-grid-item>
@@ -86,47 +93,53 @@
     </n-card>
 </template>
 <script lang="ts">
-import {defineComponent, ref,reactive,CSSProperties} from "vue"
+import {defineComponent, ref,reactive,CSSProperties,computed} from "vue"
 import {useRouter} from "vue-router"
 import appStore from "@/packages/pinia/app.ts"
+import locaStore from "@/packages/utils/locaStore.ts"
+const imgs = ["login_bg_1.jpg","login_bg_2.jpg","login_bg_3.jpg"]
+
 export default defineComponent({
     name: "login",
     setup() {
         const router = useRouter()
         const formRef = ref()
-        const trigger = ref(true)
         const app = appStore()
         const {themeName} = app.userSetting
         const compData = reactive({
-            form:{},
+            form:{
+                username:"admin",
+                password:"123456"
+            },
+            passView:false,
+            rules:{
+                username: [
+                    {required: true, message: "请输入你的用户名", trigger: "blur"},
+                    {message: "最小长度为2，最大长度12", trigger: "blur"},
+                ],
+                password: [{required: true, message: "输入用户名密码", trigger: "blur"}],
+            },
             handleDarkTheme(value){
                 app.userSetting.themeName = value ? "darkTheme" : null
+            },
+            imgName:imgs[0],
+            handleUpdateImg(){
+                const idx = Math.floor(Math.random()*2)
+                compData.imgName = idx === 0  ? imgs[2] : imgs[idx]
             }
         })
-        const rules = {
-            username: [
-                {required: true, message: "请输入你的用户名", trigger: "blur"},
-                {min: 2, max: 30, message: "最小长度为2，最大长度30", trigger: "blur"},
-            ],
-            password: [{required: true, message: "输入用户名密码", trigger: "blur"}],
-        }
-
+        const getAssetsFile =  computed(() => new URL(`../../assets/${compData.imgName}`, import.meta.url).href)
 
         const handleLogin = () => {
-
-        }
-
-        const handleTrigger = () => {
-            trigger.value = !trigger.value
+            locaStore.set("token","F6JRK9PPWEY6SSPFH7WKKTN39T0TBR0A",86400)
+            router.push("/home")
         }
 
         return {
+            getAssetsFile,
             handleLogin,
             compData,
-            rules,
             formRef,
-            handleTrigger,
-            trigger,
             darkTheme: themeName !== null,
             railStyle: ({focused,checked}: {
                 focused: boolean
@@ -157,14 +170,16 @@ export default defineComponent({
     overflow: hidden;
     position: relative;
     .login_bg{
-        background: url("https://w.wallhaven.cc/full/jx/wallhaven-jxyowm.png") no-repeat center center;
         background-size: cover;
-        filter: blur(5px) brightness(1);
+        background-repeat: no-repeat;
+        background-position: center center;
+        filter: blur(2px) brightness(1);
         position: absolute;
         top: -8px;
         right: -8px;
         bottom: -8px;
         left: -8px;
+        transition: all 1s;
         &.black{
             filter: blur(5px) brightness(0.75);
         }

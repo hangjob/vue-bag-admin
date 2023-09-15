@@ -2,7 +2,7 @@
     <n-card :segmented="{content: true,footer:true}" header-style="padding:10px" footer-style="padding:10px"
             content-style="">
         <template #header>
-            <n-grid y-gap="20" x-gap="20" cols="24" item-responsive responsive="screen">
+            <n-grid y-gap="20" x-gap="10" cols="24" item-responsive responsive="screen">
                 <n-grid-item span="24 m:12 l:6">
                     <n-input-group>
                         <n-button>搜索</n-button>

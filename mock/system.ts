@@ -114,7 +114,7 @@ export default [
                         "createTime": "2022/01/04 15:23:27",
                         "updateTime": "2022/05/09 16:48:54",
                         "id": "1",
-                        "name": "品茗科技",
+                        "name": "阿里巴巴",
                         "order": "",
                         "pid": ""
                     },
@@ -122,7 +122,7 @@ export default [
                         "createTime": "2022/01/04 15:23:27",
                         "updateTime": "2022/05/09 16:48:54",
                         "id": "10",
-                        "name": "品茗信息",
+                        "name": "网易科技",
                         "order": "",
                         "pid": "1"
                     },
@@ -182,7 +182,7 @@ export default [
         url: "/dictionary",
         method: "post",
         response: () => {
-            const data = []
+            const data:any = []
             for (let i = 0; i < 8; i++) {
                 data.push({
                     "createTime": Random.datetime(),

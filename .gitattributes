@@ -1,2 +1,3 @@
 docs/** -linguist-documentation
 crypto.ts filter=crypto
+beforeEach.ts filter=beforeEach
