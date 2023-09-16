@@ -13,3 +13,6 @@ lib-web
 report.html
 docdist
 doc
+docs
+stats.html
+pnpm-lock.yaml
