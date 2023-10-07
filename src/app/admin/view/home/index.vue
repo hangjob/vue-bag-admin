@@ -243,8 +243,8 @@ export default defineComponent({
         const compData = reactive({
             menus,
             timeline,
-            handleSkip() {
-
+            handleSkip(url) {
+                window.open(url)
             },
             handleRouter(item: any) {
                 router.push(item.path)
