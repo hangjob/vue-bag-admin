@@ -1,11 +1,11 @@
 <template>
     <div class="header-logo" :style="{width:app.collapsed ? '64px' : null}">
         <template v-if="app.collapsed">
-             <img src="@/packages/assets/logo-min.png" alt="">
+             <img :src="app.configOptions.website.logo" alt="">
         </template>
         <template v-else>
-             <img src="@/packages/assets/logo-min.png" alt="">
-             <span>bag-admin</span>
+             <img :src="app.configOptions.website.logo" alt="">
+             <span>{{app.configOptions.website.title}}</span>
         </template>
     </div>
 </template>

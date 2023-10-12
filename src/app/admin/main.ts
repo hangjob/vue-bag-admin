@@ -1,9 +1,11 @@
-import {createApp} from "vue"
+import {createApp, shallowRef} from "vue"
 import App from "./App.vue"
 import install from "@/packages/install.ts"
 import router from "@/app/admin/router"
+import headerUserSet from "@/app/admin/components/headerUserSet.vue"
 
 import {setupProdMockServer} from "__ROOT__/mock/mockProdServer.ts"
+
 if (process.env.NODE_ENV === "production") {
     setupProdMockServer()
 }
@@ -21,5 +23,9 @@ createApp(App).use(install, {
     ],
     getViews: () => {
         return import.meta.glob("@/app/admin/view/**/*.vue", {eager: true})
+    },
+    website: {},
+    components: {
+        headerUserSet: shallowRef(headerUserSet)
     }
 }).use(router).mount("#app")

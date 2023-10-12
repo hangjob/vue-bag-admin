@@ -18,10 +18,10 @@
         <n-layout has-sider style="height: calc(100% - 50px);">
             <Sidebar v-model:isOpen="compData.isOpen"/>
             <n-layout style="height: 100%">
-               <n-el tag="div" class="layout-main">
-                   <Tabs v-show="!app.userSetting.hideTabs"/>
-                   <BagMain/>
-               </n-el>
+                <n-el tag="div" class="layout-main">
+                    <Tabs v-show="!app.userSetting.hideTabs"/>
+                    <BagMain/>
+                </n-el>
             </n-layout>
         </n-layout>
     </n-layout>
@@ -86,7 +86,8 @@ export default defineComponent({
         padding-right: 10px;
     }
 }
-.layout-main{
+
+.layout-main {
     background-color: var(--action-color);
     height: 100%
 }

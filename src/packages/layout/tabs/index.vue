@@ -223,6 +223,7 @@ export default defineComponent({
         overflow-y: scroll;
         scrollbar-width: none;
         -ms-overflow-style: none;
+        background-color: var(--table-header-color);
 
         &::-webkit-scrollbar {
             display: none;
