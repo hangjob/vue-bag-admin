@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://vite.itnavs.com/assets/logo-min-3e85bab5.png" width="160" height="160" />
+<img src="https://vite.itnavs.com/assets/logo-min-3e85bab5.png" height="160" />
 </p>
 
 <h1 align="center">Vue-Bag-Admin</h1>
