@@ -3,8 +3,28 @@
 ## 安装
 
 ```shell
-pnpm i vue-bag-admin naive-ui pinia vue-router --save
+pnpm i vue-bag-admin pinia vue-router --save
 ```
+
+## 安装naive-ui
+```shell
+pnpm i naive-ui --save
+pnpm i unplugin-vue-components --dev
+```
+```shell
+// vite.config.js
+import Components from "unplugin-vue-components/vite"
+import {NaiveUiResolver} from "unplugin-vue-components/resolvers"
+export default defineConfig({
+    plugins: [
+        Components({
+          resolvers: [NaiveUiResolver()]
+        })
+    ]
+})
+```
+
+
 
 ## main.js
 

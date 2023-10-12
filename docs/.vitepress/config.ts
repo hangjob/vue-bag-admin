@@ -84,6 +84,10 @@ export default defineConfig({
                             link: "/guide/axios",
                         },
                         {
+                            text: "视图更改",
+                            link: "/guide/view",
+                        },
+                        {
                             text: "接口说明",
                             link: "/guide/menu",
                         },
