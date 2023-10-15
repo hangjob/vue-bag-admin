@@ -7,9 +7,9 @@ const menus = [
         "number": "新"
     },
     {
-        "title": "菜单管理",
-        "path": "/system/menu",
-        "icon": "MenuOutlined",
+        "title": "数据图表",
+        "path": "/baigdata/ppchart",
+        "icon": "FileTrayOutline",
         "color": "#8ecae6",
         "number": "新"
     },

@@ -26,6 +26,6 @@ createApp(App).use(install, {
     },
     website: {},
     components: {
-        headerUserSet: shallowRef(headerUserSet)
+        headerUserSet: null
     }
 }).use(router).mount("#app")
