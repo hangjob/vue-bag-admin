@@ -8,8 +8,8 @@ pnpm i vue-bag-admin pinia vue-router --save
 
 ## 安装naive-ui
 ```shell
-pnpm i naive-ui --save
-pnpm i unplugin-vue-components --dev
+pnpm i naive-ui --save-prod
+pnpm i unplugin-vue-components --save-dev
 ```
 ```shell
 // vite.config.js
@@ -24,8 +24,6 @@ export default defineConfig({
 })
 ```
 
-
-
 ## main.js
 
 ```javascript
@@ -34,7 +32,8 @@ import "./style.css"
 import App, {install, router} from "vue-bag-admin"
 
 createApp(App).use(install, {
-	getViews: () => import.meta.glob("@/view/**/*.vue", {eager: true})
+	// getViews: () => import.meta.glob("@/view/**/*.vue", {eager: true})
+    getViews: () => import.meta.glob("./view/**/*.vue", {eager: true})
 }).use(router).mount("#app")
 ```
 

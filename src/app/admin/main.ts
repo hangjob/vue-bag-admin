@@ -27,5 +27,5 @@ createApp(App).use(install, {
     website: {},
     components: {
         headerUserSet: null
-    }
+    },
 }).use(router).mount("#app")

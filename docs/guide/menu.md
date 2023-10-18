@@ -2,6 +2,17 @@
 
 ## 用户信息
 
+### api替换
+在实际业务中，可能的你用户信息接口不叫做userInfo
+```javascript
+createApp(App).use(install, {
+    apis:{
+        "/userInfo ":"/custom/userInfo",  // userInfo 是系统里面的  /custom/userInfo 换成你自己的
+        "/menus":"...."
+    }
+}).use(router).mount("#app")
+```
+
 基础框架实现菜单动态加载，接口是`/api/userInfo`
 
 ```javascript

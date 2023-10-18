@@ -45,8 +45,15 @@ const setupGlobal = () => {
     ))
 }
 
+const resetApiInstanceUrl = (key) => {
+    const app = appStore()
+    const url = app.configOptions.apis[key]
+    return url ? url : key
+}
+
 export default setupGlobal
 export {
     updateHtmlGray,
-    updateHtmlWeak
+    updateHtmlWeak,
+    resetApiInstanceUrl
 }
