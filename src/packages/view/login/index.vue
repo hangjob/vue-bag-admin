@@ -91,6 +91,7 @@
             </div>
         </div>
     </n-card>
+    <DigitalClock></DigitalClock>
 </template>
 <script lang="ts">
 import {defineComponent, ref,reactive,CSSProperties,computed} from "vue"
