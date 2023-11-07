@@ -1,7 +1,9 @@
 import {createApp, shallowRef} from "vue"
-import App from "./App.vue"
-import install from "@/packages/install.ts"
-import router from "@/app/admin/router"
+// @ts-ignore
+import App, { install,router } from "@/packages/install.vue"
+// import App from "./App.vue"
+// import install from "@/packages/install.ts"
+// import router from "@/app/admin/router"
 import headerUserSet from "@/app/admin/components/headerUserSet.vue"
 
 import {setupProdMockServer} from "__ROOT__/mock/mockProdServer.ts"

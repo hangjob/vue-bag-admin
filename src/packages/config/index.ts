@@ -3,6 +3,7 @@ import logo from "@/packages/assets/logo-min.png"
 export default {
     whiteList: ["/login"],
     resetPath: "/login",
+    httpCode:[1],
     menus: [],
     // 通过注入函数，让框架获取外部文件
     getViews: () => {

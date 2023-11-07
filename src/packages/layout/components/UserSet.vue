@@ -236,6 +236,8 @@ export default defineComponent({
         const formRef = ref<FormInst | null>(null)
         const userIcon = ref(
             [
+                {size: 20, color: "0e7a0d", name: "GithubOutlined", show: true},
+                {size: 18, color: "0e7a0d", name: "HomeOutline", show: true},
                 {size: 18, color: "0e7a0d", name: "SearchOutline", show: computed(() => !app.browser.xs)},
                 {size: 18, color: "0e7a0d", name: "NotificationsOutline", show: true},
                 {size: 18, color: "0e7a0d", name: "HappyOutline", show: true},
@@ -268,6 +270,12 @@ export default defineComponent({
             },
             ScanOutline() {
                 toggle()
+            },
+            GithubOutlined(){
+                window.open("https://github.com/hangjob/vue-bag-admin")
+            },
+            HomeOutline(){
+                window.location.href = "/"
             },
             SearchOutline() {
                 compData.searchModel = true

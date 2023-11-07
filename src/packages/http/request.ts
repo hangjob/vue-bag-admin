@@ -18,9 +18,20 @@ http.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 })
 
 http.interceptors.response.use((response: AxiosResponse) => {
-    const {code} = response.data
+    const {code,msg} = response.data
     if (code === 1) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        if(response.config.hint && msg){
+            window.$message.success(msg)
+        }
         return response.data
+    }
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    if(response.config.hint && msg){
+        window.$notification.warning({content: "异常提示",meta: msg,duration: 2500,keepAliveOnHover: true})
     }
     return response
 }, (error: AxiosError) => {

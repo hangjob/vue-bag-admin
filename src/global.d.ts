@@ -4,5 +4,7 @@ declare global {
         AES_IV: any;
         AES_KEY: any;
         publicKey: any;
+        $message:any;
+        $notification:any
     }
 }

@@ -2,7 +2,9 @@
     <n-config-provider :theme="darkTheme" :theme-overrides="themeOverrides" :locale="locale"
                        :date-locale="dateLocale">
         <n-notification-provider>
+            <NotificationApi/>
             <n-message-provider>
+                <MessageApi/>
                 <router-view></router-view>
             </n-message-provider>
         </n-notification-provider>
@@ -20,7 +22,6 @@ import mergeWith from "lodash/mergeWith.js"
 import cloneDeep from "lodash/mergeWith.js"
 import isArray from "lodash/isArray.js"
 import "@/packages/style/style.less"
-
 import setupGlobal from "@/packages/global"
 import setupPinia from "@/packages/pinia"
 import config from "@/packages/config"
@@ -28,7 +29,8 @@ import setupIcons from "@/packages/config/icon.ts"
 import {axios} from "@/packages/http/request.ts"
 import router from "@/packages/router"
 import setupComponents from "@/packages/components"
-
+import Message from "@/packages/layout/components/Message.vue"
+import Notification from "@/packages/layout/components/Notification.vue"
 const emitter: Emitter<any> = mitt()
 
 function customizer(objValue, srcValue) {
@@ -42,6 +44,7 @@ const install = (app: App, options?: any) => {
     app.config.globalProperties["configOptions"] = configOptions
     app.provide("configOptions", readonly(configOptions))
     app.provide("$mitt", emitter)
+    axios.configOptions = configOptions
     setupPinia(app)
     setupIcons(app)
     setupGlobal()
@@ -55,6 +58,10 @@ export {
 }
 
 export default defineComponent({
+    components:{
+        MessageApi:Message,
+        NotificationApi:Notification
+    },
     setup() {
         const app = appStore()
         const themeOverrides: GlobalThemeOverrides = reactive({

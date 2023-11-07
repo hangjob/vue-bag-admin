@@ -39,8 +39,6 @@ import Navbar from "@/packages/layout/navbar/index.vue"
 import Tabs from "@/packages/layout/tabs/index.vue"
 import BagMain from "@/packages/layout/main/index.vue"
 import appStore from "@/packages/pinia/app.ts"
-
-
 export default defineComponent({
     components: {
         Breadcrumb,

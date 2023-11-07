@@ -63,3 +63,13 @@ createApp(App).use(install, {
     getViews: () => import.meta.glob("@/view/**/*.vue", {eager: true})
 }).use(router).mount("#app")
 ```
+
+## 全局变量
+已内置，可在组件外部使用
+[官方-message](https://www.naiveui.com/zh-CN/os-theme/components/message)，
+[官方-notification](https://www.naiveui.com/zh-CN/os-theme/components/notification)
+```javascript
+window.$message['success'] ... // 信息
+window.$notification['warning'] ... // 通知
+```
+
