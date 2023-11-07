@@ -27,12 +27,6 @@ http.interceptors.response.use((response: AxiosResponse) => {
         }
         return response.data
     }
-
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    if(response.config.hint && msg){
-        window.$notification.warning({content: "异常提示",meta: msg,duration: 2500,keepAliveOnHover: true})
-    }
     return response
 }, (error: AxiosError) => {
     return Promise.reject(error)
