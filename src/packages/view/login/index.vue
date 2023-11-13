@@ -4,9 +4,9 @@
             <n-space>
                 <n-switch @update:value="compData.handleUpdateImg" :rail-style="railStyle">
                     <template #checked-icon>
-                       <n-icon>
-                           <LogoIonic/>
-                       </n-icon>
+                        <n-icon>
+                            <LogoIonic/>
+                        </n-icon>
                     </template>
                     <template #unchecked-icon>
                         <n-icon>
@@ -14,7 +14,8 @@
                         </n-icon>
                     </template>
                 </n-switch>
-                <n-switch :rail-style="railStyle" @update:value="compData.handleDarkTheme" v-model:value="darkTheme" size="medium">
+                <n-switch :rail-style="railStyle" @update:value="compData.handleDarkTheme" v-model:value="darkTheme"
+                          size="medium">
                     <template #checked-icon>
                         <n-icon :size="14">
                             <MoonOutline/>
@@ -29,7 +30,8 @@
             </n-space>
         </div>
         <div class="login">
-            <div class="login_bg" :style="{backgroundImage: `url(${getAssetsFile})`}" :class="[darkTheme ? 'black' : null]"></div>
+            <div class="login_bg" :style="{backgroundImage: `url(${getAssetsFile})`}"
+                 :class="[darkTheme ? 'black' : null]"></div>
             <div class="login-container">
                 <div class="embellish left">
                     <div class="embellish-up">
@@ -54,13 +56,15 @@
                         </n-grid-item>
                         <n-grid-item span="24 m:24 l:12">
                             <div class="slide-right">
-                                <n-h1>欢迎您登录</n-h1>
-                                <n-text depth="3">你可以直接输入您的账号和密码登录</n-text>
-                                <n-form autocomplete="off" :rules="compData.rules" ref="formRef" class="login-form" layout="vertical"
+                                <n-h1>{{compData[compData.mode].title}}</n-h1>
+                                <n-text depth="3">{{compData[compData.mode].des}}</n-text>
+                                <n-form autocomplete="off" :rules="compData.rules" ref="formRef" class="login-form"
+                                        layout="vertical"
                                         :model="compData.form"
                                 >
-                                    <n-form-item label="你的账户" name="username">
-                                        <n-input size="large" :maxlength="12" autocomplete="off" v-model:value="compData.form.username" placeholder="输入你的账户">
+                                    <n-form-item label="你的用户" path="name">
+                                        <n-input size="large" :maxlength="12" autocomplete="off"
+                                                 v-model:value="compData.form.name" placeholder="输入你的用户名">
                                             <template #suffix>
                                                 <n-icon>
                                                     <HappyOutline/>
@@ -68,8 +72,36 @@
                                             </template>
                                         </n-input>
                                     </n-form-item>
-                                    <n-form-item label="你的密码" name="password">
-                                        <n-input size="large" :show-password-on="'click'"  type="password" autocomplete="off" v-model:value="compData.form.password"
+                                    <template v-if="compData.mode !== 'login'">
+                                        <n-form-item v-if="app.mobile" label="账号" path="email">
+                                            <n-input size="large" :maxlength="30" autocomplete="off"
+                                                     v-model:value="compData.form.email" placeholder="输入账号">
+                                            </n-input>
+                                        </n-form-item>
+                                        <n-form-item v-if="app.mobile" label="验证码" path="code">
+                                            <n-input-group>
+                                                <n-input size="large" :maxlength="6" autocomplete="off"
+                                                         v-model:value="compData.form.code" placeholder="输入验证码">
+                                                </n-input>
+                                                <n-button size="large" type="primary" ghost>发送验证码</n-button>
+                                            </n-input-group>
+                                        </n-form-item>
+                                        <n-form-item v-if="!app.mobile" label="账号" path="email">
+                                            <n-input-group>
+                                                <n-input size="large" :maxlength="30" autocomplete="off"
+                                                         v-model:value="compData.form.email"
+                                                         placeholder="输入手机号或者邮箱">
+                                                </n-input>
+                                                <n-input size="large" :style="{width:'43%'}" :maxlength="6" autocomplete="off"
+                                                         v-model:value="compData.form.code" placeholder="输入验证码">
+                                                </n-input>
+                                                <n-button size="large" type="primary" ghost>发送验证码</n-button>
+                                            </n-input-group>
+                                        </n-form-item>
+                                    </template>
+                                    <n-form-item label="你的密码" path="password">
+                                        <n-input size="large" :maxlength="30" :show-password-on="'click'" type="password"
+                                                 autocomplete="off" v-model:value="compData.form.password"
                                                  placeholder="输入你的密码"
                                         >
                                         </n-input>
@@ -80,25 +112,28 @@
                                     <n-text depth="3">忘记密码? 找回密码</n-text>
                                 </n-space>
                                 <n-space justify="space-between" :size="[10,15]" vertical>
-                                    <n-button size="large" style="width: 100%" @click="handleLogin">登录</n-button>
-                                    <n-text style="text-align: right" depth="3">没有账号? 注册账号</n-text>
+                                    <n-button size="large" style="width: 100%" @click="handleLogin">{{compData[compData.mode].btn}}</n-button>
+                                    <n-text style="text-align: right;cursor: pointer" @click="compData.mode = compData.mode ==='login' ? 'register' : 'login'" depth="3">{{compData[compData.mode].hint}}</n-text>
                                 </n-space>
                             </div>
                         </n-grid-item>
                     </n-grid>
-                    <img class="logo hidden-xs hidden-sm" src="@/packages/assets/logo.png" alt="">
+                    <img class="logo hidden-xs hidden-sm" :src="app.configOptions.website.maxLogo" alt="">
                 </div>
             </div>
         </div>
     </n-card>
-<!--    <DigitalClock></DigitalClock>-->
+    <!--    <DigitalClock></DigitalClock>-->
 </template>
 <script lang="ts">
-import {defineComponent, ref,reactive,CSSProperties,computed} from "vue"
+import {defineComponent, ref, reactive, CSSProperties, computed} from "vue"
 import {useRouter} from "vue-router"
 import appStore from "@/packages/pinia/app.ts"
 import locaStore from "@/packages/utils/locaStore.ts"
-const imgs = ["login_bg_1.jpg","login_bg_2.jpg","login_bg_3.jpg"]
+import { FormItemRule,} from "naive-ui"
+import useComponent from "@/packages/view/login/useComponent.ts"
+import {login,register} from "@/packages/api/app.ts"
+const imgs = ["login_bg_1.jpg", "login_bg_2.jpg", "login_bg_3.jpg"]
 
 export default defineComponent({
     name: "login",
@@ -107,33 +142,75 @@ export default defineComponent({
         const formRef = ref()
         const app = appStore()
         const {themeName} = app.userSetting
+        const {commonData}  = useComponent()
         const compData = reactive({
-            form:{
-                username:"admin",
-                password:"123456"
+            form: {
+                name: "admin",
+                password: "123456",
+                email: "",
+                code: ""
             },
-            passView:false,
-            rules:{
-                username: [
-                    {required: true, message: "请输入你的用户名", trigger: "blur"},
-                    {message: "最小长度为2，最大长度12", trigger: "blur"},
+            passView: false,
+            rules: {
+                name: [
+                    {required: true, message: "请输入你的用户", trigger: "blur"},
+                ],
+                email: [{
+                    validator: (rule: FormItemRule, value: string)=>{
+                        if (app.mobile) {
+                            if (compData.form.email) {
+                                return true
+                            } else {
+                                return new Error("请输入你的手机号或者邮箱")
+                            }
+                        } else {
+                            if (compData.form.email && compData.form.code) {
+                                return true
+                            } else {
+                                return new Error("请输入你的手机号或者邮箱以及验证码")
+                            }
+                        }
+                    }, trigger: "blur"}
+                ],
+                code: [
+                    {required: true, message: "请输入验证码", trigger: "blur"},
                 ],
                 password: [{required: true, message: "输入用户名密码", trigger: "blur"}],
             },
-            handleDarkTheme(value){
+            handleDarkTheme(value) {
                 app.userSetting.themeName = value ? "darkTheme" : null
             },
-            imgName:imgs[0],
-            handleUpdateImg(){
-                const idx = Math.floor(Math.random()*2)
-                compData.imgName = idx === 0  ? imgs[2] : imgs[idx]
-            }
+            imgName: imgs[0],
+            handleUpdateImg() {
+                const idx = Math.floor(Math.random() * 2)
+                compData.imgName = idx === 0 ? imgs[2] : imgs[idx]
+            },
+            ...commonData
         })
-        const getAssetsFile =  computed(() => new URL(`../../assets/${compData.imgName}`, import.meta.url).href)
 
-        const handleLogin = () => {
-            locaStore.set("token","F6JRK9PPWEY6SSPFH7WKKTN39T0TBR0A",86400)
-            router.push("/home")
+        const getAssetsFile = computed(() => new URL(`../../assets/${compData.imgName}`, import.meta.url).href)
+
+        const handleLogin = (e) => {
+            e.preventDefault()
+            formRef.value?.validate((errors) => {
+                if (!errors) {
+                    if(compData.mode === "login"){
+                        login(compData.form).then((result)=>{
+                            if( app.configOptions.events.login ){
+                                app.configOptions.events.login({ result,router })
+                            }else{
+                                locaStore.set("access_token", result.data)
+                                router.push("/home")
+                            }
+                        })
+                    }
+                    if(compData.mode === "register"){
+                        register(compData.form).then((res)=>{
+                            compData.mode = "login"
+                        })
+                    }
+                }
+            })
         }
 
         return {
@@ -141,8 +218,9 @@ export default defineComponent({
             handleLogin,
             compData,
             formRef,
+            app,
             darkTheme: themeName !== null,
-            railStyle: ({focused,checked}: {
+            railStyle: ({focused, checked}: {
                 focused: boolean
                 checked: boolean
             }) => {
@@ -170,7 +248,8 @@ export default defineComponent({
     height: 100%;
     overflow: hidden;
     position: relative;
-    .login_bg{
+
+    .login_bg {
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center center;
@@ -181,7 +260,8 @@ export default defineComponent({
         bottom: -8px;
         left: -8px;
         transition: all 1s;
-        &.black{
+
+        &.black {
             filter: blur(5px) brightness(0.75);
         }
     }
@@ -193,44 +273,54 @@ export default defineComponent({
         top: 50%;
         transform: translate(-50%, -50%);
         position: relative;
-        .embellish{
+
+        .embellish {
             width: 60px;
             height: 45px;
             position: absolute;
-            &.left{
+
+            &.left {
                 bottom: 60px;
                 left: -45px;
-                .embellish-up{
-                    .up_2{
+
+                .embellish-up {
+                    .up_2 {
                         margin-right: 10px;
                     }
                 }
-                .embellish-down{
+
+                .embellish-down {
                     margin-left: 30px;
                 }
             }
-            &.right{
+
+            &.right {
                 right: -45px;
                 top: 40px;
-                .embellish-up{
-                    .up_1{
+
+                .embellish-up {
+                    .up_1 {
                         margin-right: 10px;
                     }
                 }
-                .embellish-down{
+
+                .embellish-down {
                     margin-left: -30px;
                 }
             }
-            .embellish-up{
+
+            .embellish-up {
                 display: flex;
                 align-items: center;
-                .up_1{
+
+                .up_1 {
                     width: 60px;
                     height: 12px;
                     border-radius: 20px;
                     background-color: var(--n-color);
                 }
-                .up_2{
+
+                .up_2 {
                     width: 12px;
                     height: 12px;
                     border-radius: 50%;
@@ -239,12 +329,13 @@ export default defineComponent({
                     flex-shrink: 0;
                 }
             }
-            .embellish-down{
+
+            .embellish-down {
                 margin-top: 10px;
                 width: 60px;
                 height: 12px;
                 border-radius: 20px;
-                background-color:var(--n-color);
+                background-color: var(--n-color);
             }
         }
     }
@@ -261,6 +352,7 @@ export default defineComponent({
         align-items: center;
         justify-content: center;
         background-color: var(--n-color);
+
         .logo {
             position: absolute;
             left: 25px;
@@ -269,27 +361,31 @@ export default defineComponent({
             object-fit: cover;
         }
 
-        .slide-right{
+        .slide-right {
             margin-top: 10px;
         }
+
         .slide-left {
             flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100%;
+
             img {
                 width: 80%;
                 object-fit: cover;
                 transform: rotateY(180deg);
             }
         }
+
         .login-form {
             margin-top: 30px;
         }
     }
 }
-.login-set{
+
+.login-set {
     position: fixed;
     top: 10px;
     right: 15px;

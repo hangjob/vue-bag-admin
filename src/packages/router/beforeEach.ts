@@ -120,15 +120,14 @@ function updateRouterAll(to: RouteLocationNormalized, from: RouteLocationNormali
             })
             appStore.treeMenus = toTree({arr: appStore.allMenus.filter((item: any) => item.shows)})
             createRouterComponent(allMenus)
+            next(to.fullPath)
         }).finally(() => {
             hasRoles = true
-            next(to.fullPath)
         })
     }
 }
 
 const beforeEach = (to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) => {
-    const appStore = appPinia()
     if (hasWhiteRouter(to.path)) {
         return next()
     }

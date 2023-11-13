@@ -30,6 +30,19 @@ export default [
         }
     },
     {
+        url: "/register",
+        method: "post",
+        response: () => {
+            return {
+                code: 1,
+                data: {
+                    id: Random.id(),
+                    expiresTime: Random.now(),
+                }
+            }
+        }
+    },
+    {
         url: "/userInfo",
         method: "post",
         response: () => {

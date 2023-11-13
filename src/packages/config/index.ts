@@ -1,4 +1,5 @@
 import logo from "@/packages/assets/logo-min.png"
+import maxLogo from "@/packages/assets/logo.png"
 
 export default {
     whiteList: ["/login"],
@@ -11,10 +12,12 @@ export default {
     },
     website: {
         logo,
+        maxLogo,
         title: "bag-admin"
     },
     components: {
         headerUserSet: null
     },
-    apis:{}
+    apis:{},
+    events:{}
 }

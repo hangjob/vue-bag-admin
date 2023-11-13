@@ -44,7 +44,8 @@ const install = (app: App, options?: any) => {
     app.config.globalProperties["configOptions"] = configOptions
     app.provide("configOptions", readonly(configOptions))
     app.provide("$mitt", emitter)
-    axios.configOptions = configOptions
+    axios.$configOptions = configOptions
+    axios.$router = router
     setupPinia(app)
     setupIcons(app)
     setupGlobal()

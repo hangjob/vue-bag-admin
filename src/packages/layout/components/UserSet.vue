@@ -285,6 +285,7 @@ export default defineComponent({
             },
             handleSelect(key: string | number) {
                 if (key === "stmt4") {
+                    app.$reset()
                     locaStore.clearAll()
                     router.push("/login")
                 }
