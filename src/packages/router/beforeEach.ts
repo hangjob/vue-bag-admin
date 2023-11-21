@@ -9,8 +9,6 @@ import unionWith from "lodash/unionWith.js"
 import {renderIcon} from "@/packages/config/icon.ts"
 import {toTree} from "@/packages/utils/utils.ts"
 import globalViewIframe from "@/packages/view/iframe/index.vue"
-import locaStore from "@/packages/utils/locaStore.ts"
-let hasRoles = false
 const namespace = "main"
 //框架页面组件
 const packagesViews: Record<string, RouterComponent> = import.meta.glob("@/packages/view/**/*.vue", {eager: true})
@@ -102,7 +100,7 @@ function getUserInfo(to: RouteLocationNormalized, from: RouteLocationNormalized,
  */
 function updateRouterAll(to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) {
     const appStore = appPinia()
-    if (hasRoles) {
+    if (appStore.hasRoles) {
         next()
     } else {
         getMenus().then((res) => {
@@ -122,7 +120,7 @@ function updateRouterAll(to: RouteLocationNormalized, from: RouteLocationNormali
             createRouterComponent(allMenus)
             next(to.fullPath)
         }).finally(() => {
-            hasRoles = true
+            appStore.hasRoles = true
         })
     }
 }

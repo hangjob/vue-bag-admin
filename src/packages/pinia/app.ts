@@ -43,6 +43,7 @@ const app = defineStore({
             treeMenus: [], // 渲染的菜单
             paths: [],// 路由路径
             tabs: <any>[],// 标签
+            hasRoles:false, // 是否加载菜单
             currentRouter: {} // 当前路由信息
         }
     },
