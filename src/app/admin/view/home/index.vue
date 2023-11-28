@@ -69,6 +69,108 @@
                 </n-table>
             </n-card>
         </n-grid-item>
+        <n-grid-item span="24 m:24 l:12">
+            <n-card style="height:100%" :segmented="{content: true,footer:true}"
+                    header-style="padding:10px;font-size:14px"
+                    footer-style="padding:10px" content-style="padding:10px;height:100%">
+                <template #header>
+                    欢迎您
+                </template>
+                <n-statistic label="你一共处理了" tabular-nums>
+                    <n-number-animation ref="numberAnimationInstRef" show-separator :from="0" :to="1203459" />
+                    <template #suffix>
+                        条群消息
+                    </template>
+                </n-statistic>
+                <n-space vertical>
+                    花时间、花精力、花心思，愿你每一份努力都不负所望
+                    <n-button @click="handleClick">
+                        播放
+                    </n-button>
+                </n-space>
+            </n-card>
+        </n-grid-item>
+        <n-grid-item span="24 m:24 l:12">
+            <n-card style="height:100%" :segmented="{content: true,footer:true}"
+                    header-style="padding:10px;font-size:14px"
+                    footer-style="padding:10px" content-style="padding:10px;height:100%">
+                <template #header>
+                    欢迎您
+                </template>
+                <n-carousel show-arrow autoplay>
+                    <img
+                        class="carousel-img"
+                        src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel1.jpeg"
+                    >
+                    <img
+                        class="carousel-img"
+                        src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel2.jpeg"
+                    >
+                    <img
+                        class="carousel-img"
+                        src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel3.jpeg"
+                    >
+                    <img
+                        class="carousel-img"
+                        src="https://naive-ui.oss-cn-beijing.aliyuncs.com/carousel-img/carousel4.jpeg"
+                    >
+                    <template #arrow="{ prev, next }">
+                        <div class="custom-arrow">
+                            <button type="button" class="custom-arrow--left" @click="prev">
+                                <n-icon><ArrowBack /></n-icon>
+                            </button>
+                            <button type="button" class="custom-arrow--right" @click="next">
+                                <n-icon><ArrowForward /></n-icon>
+                            </button>
+                        </div>
+                    </template>
+                    <template #dots="{ total, currentIndex, to }">
+                        <ul class="custom-dots">
+                            <li
+                                v-for="index of total"
+                                :key="index"
+                                :class="{ ['is-active']: currentIndex === index - 1 }"
+                                @click="to(index - 1)"
+                            />
+                        </ul>
+                    </template>
+                </n-carousel>
+            </n-card>
+        </n-grid-item>
+        <n-grid-item span="24 m:24 l:24">
+            <n-descriptions label-placement="top" bordered :column="6">
+                <n-descriptions-item>
+                    <template #label>
+                        早餐
+                    </template>
+                    苹果
+                </n-descriptions-item>
+                <n-descriptions-item label="早午餐">
+                    苹果
+                </n-descriptions-item>
+                <n-descriptions-item label="午餐">
+                    苹果
+                </n-descriptions-item>
+                <n-descriptions-item label="晚餐">
+                    苹果
+                </n-descriptions-item>
+                <n-descriptions-item label="正餐">
+                    苹果
+                </n-descriptions-item>
+                <n-descriptions-item label="夜宵">
+                    苹果
+                </n-descriptions-item>
+                <n-descriptions-item label="苹果">
+                    苹果
+                </n-descriptions-item>
+                <n-descriptions-item label="苹果" :span="2">
+                    苹果
+                </n-descriptions-item>
+                <n-descriptions-item label="苹果" :span="3">
+                    苹果
+                </n-descriptions-item>
+            </n-descriptions>
+        </n-grid-item>
         <n-grid-item span="24 m:24 l:24">
             <n-card :segmented="{content: true,footer:true}" header-style="padding:10px;font-size:14px"
                     footer-style="padding:10px" content-style="padding:40px; 0px">
@@ -120,12 +222,14 @@
     </n-grid>
 </template>
 <script lang="ts">
-import {defineComponent, reactive, onMounted} from "vue"
+import {defineComponent, reactive, onMounted,ref} from "vue"
 import {menus, timeline} from "@/app/admin/view/home/data.ts"
 import * as echarts from "echarts"
 import dayjs from "dayjs"
 import {useRouter} from "vue-router"
 import  headImg from "@/packages/assets/yanghang.jpg"
+import { NumberAnimationInst } from "naive-ui"
+import { ArrowBack, ArrowForward } from "@vicons/ionicons5"
 function echartInit() {
     const chartDom = document.getElementById("main")
     const myChart = echarts.init(chartDom)
@@ -202,6 +306,10 @@ function echartInit() {
 }
 
 export default defineComponent({
+    components:{
+        ArrowBack,
+        ArrowForward
+    },
     setup() {
         const router = useRouter()
         onMounted(() => {
@@ -250,10 +358,24 @@ export default defineComponent({
                 router.push(item.path)
             }
         })
+        const numberAnimationInstRef = ref<NumberAnimationInst | null>(null)
+        const renderCountdown = ({
+            hours,
+            minutes,
+            seconds
+        }) => {
+            return `烫烫烫${String(hours).padStart(2, "0")}锟斤拷${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`
+        }
         return {
             tleData,
             compData,
-            headImg
+            headImg,
+            numberAnimationInstRef,
+            handleClick () {
+                numberAnimationInstRef.value?.play()
+            },
+            renderCountdown,
+            active: ref(false)
         }
     }
 })
@@ -286,5 +408,67 @@ export default defineComponent({
     height: 60px;
     border-radius: 10px;
     cursor: pointer;
+}
+
+.carousel-img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+}
+
+.custom-arrow {
+    display: flex;
+    position: absolute;
+    bottom: 25px;
+    right: 10px;
+}
+
+.custom-arrow button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    margin-right: 12px;
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-width: 0;
+    border-radius: 8px;
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.custom-arrow button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.custom-arrow button:active {
+    transform: scale(0.95);
+    transform-origin: center;
+}
+
+.custom-dots {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+}
+
+.custom-dots li {
+    display: inline-block;
+    width: 12px;
+    height: 4px;
+    margin: 0 3px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.4);
+    transition: width 0.3s, background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.custom-dots li.is-active {
+    width: 40px;
+    background: #fff;
 }
 </style>

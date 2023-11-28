@@ -69,18 +69,21 @@ export default defineConfig({
                             text: "快速开始",
                             link: "/guide/start",
                         },
-
+                        {
+                            text: "源码开发",
+                            link: "/guide/source",
+                        },
                     ],
                 },
                 {
                     text: "说明",
                     items: [
                         {
-                            text: "配置",
+                            text: "基础配置",
                             link: "/guide/conf",
                         },
                         {
-                            text: "请求",
+                            text: "网络请求",
                             link: "/guide/axios",
                         },
                         {
@@ -94,6 +97,10 @@ export default defineConfig({
                         {
                             text: "图标使用",
                             link: "/guide/icon",
+                        },
+                        {
+                            text: "框架页面",
+                            link: "/guide/page",
                         },
                     ],
                 },

@@ -484,6 +484,15 @@ export default [
                         "permission":["sys:permission:admin","sys:permission:web"]
                     }),
                     creataDataItem({
+                        id: 8000,
+                        "title": "高亮关键词",
+                        "pid": "",
+                        "path": "/high",
+                        "file": "/view/high/index.vue",
+                        "icon": "ReadOutlined",
+                        "url":"",
+                    }),
+                    creataDataItem({
                         id: 5000,
                         "title": "动画",
                         "pid": "",
