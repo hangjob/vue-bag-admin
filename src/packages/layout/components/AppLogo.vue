@@ -37,6 +37,7 @@ export default defineComponent({
     img {
         max-width: 100%;
         height: 32px;
+        object-fit: cover;
     }
 
     span {
