@@ -2,11 +2,13 @@
     <n-config-provider :theme="darkTheme" :theme-overrides="themeOverrides" :locale="locale"
                        :date-locale="dateLocale">
         <n-notification-provider>
-            <NotificationApi/>
-            <n-message-provider>
-                <MessageApi/>
-                <router-view></router-view>
-            </n-message-provider>
+            <n-dialog-provider>
+                <NotificationApi/>
+                <n-message-provider>
+                    <MessageApi/>
+                    <router-view></router-view>
+                </n-message-provider>
+            </n-dialog-provider>
         </n-notification-provider>
     </n-config-provider>
 </template>
@@ -31,6 +33,7 @@ import router from "@/packages/router"
 import setupComponents from "@/packages/components"
 import Message from "@/packages/layout/components/Message.vue"
 import Notification from "@/packages/layout/components/Notification.vue"
+
 const emitter: Emitter<any> = mitt()
 
 function customizer(objValue, srcValue) {
@@ -59,9 +62,9 @@ export {
 }
 
 export default defineComponent({
-    components:{
-        MessageApi:Message,
-        NotificationApi:Notification
+    components: {
+        MessageApi: Message,
+        NotificationApi: Notification
     },
     setup() {
         const app = appStore()
