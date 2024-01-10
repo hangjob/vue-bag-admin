@@ -98,6 +98,9 @@ createApp(App).use(install).use(router).mount('#app')
 
 正在以及想使用框架快速中后台系统，熟悉Vue使用它开发过几个实际项目，热爱技术，爱学习，想进阶和提升的同学
 
+### 后端框架
+[egg-bag-framework](https://github.com/hangjob/egg-bag-framework)
+
 ## 学习讨论
 
 ![微信群-定期更新](./scan.jpg)

@@ -15,7 +15,7 @@
                                 tleData.time
                             }}，准备吃什么呢?</h1>
                         <p class="des">前端工程师 |
-                            阿里巴巴，vue-bag-admin，采用Vite4.4、Vue3.3、TypeScript、JavaScript构建，支持多种写法和调用，完整的框架体系，适合响应式中后台管理系统，支持现有业务各种扩展....</p>
+                            品茗科技，vue-bag-admin，🍁采用Vite4、Vue3、Pinia 、Naive UI 构建，构建企业npm依赖包中后台管理系统基础框架，做到框架(packages)和应用(app)分开，即可以减少项目之间的耦合，也能提升项目扩展性...</p>
                     </div>
                 </div>
             </n-card>

@@ -22,7 +22,6 @@ http.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 http.interceptors.response.use((response: AxiosResponse) => {
     const {code, msg} = response.data
     if (code === 1) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         if (response.config.hint && msg) {
             window.$message.success(msg)
@@ -30,7 +29,6 @@ http.interceptors.response.use((response: AxiosResponse) => {
         return response.data
     }
     if(code === 1003){
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         http.$router.push(http.$configOptions.resetPath)
     }

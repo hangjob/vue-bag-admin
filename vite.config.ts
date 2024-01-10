@@ -45,18 +45,6 @@ export default ({mode}: { mode: any }) => {
         server: {
             host: "0.0.0.0",
             port: 8280,
-            https: false,
-            proxy: {
-                "^/api": {
-                    target: "https://vite.itnavs.com/",
-                    changeOrigin: true,
-                },
-                "^/bic": {
-                    target: "https://api.vipbic.com/",
-                    changeOrigin: true,
-                    rewrite: (path: any) => path.replace(/^\/bic/, "")
-                },
-            }
         }
     })
 }
