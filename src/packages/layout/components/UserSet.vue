@@ -271,10 +271,10 @@ export default defineComponent({
             ScanOutline() {
                 toggle()
             },
-            GithubOutlined(){
+            GithubOutlined() {
                 window.open("https://github.com/hangjob/vue-bag-admin")
             },
-            HomeOutline(){
+            HomeOutline() {
                 window.location.href = "/"
             },
             SearchOutline() {
@@ -286,7 +286,8 @@ export default defineComponent({
             handleSelect(key: string | number) {
                 if (key === "stmt4") {
                     app.$reset()
-                    locaStore.clearAll()
+                    locaStore.remove("access_token")
+                    locaStore.remove("app")
                     router.push("/login")
                 }
             }

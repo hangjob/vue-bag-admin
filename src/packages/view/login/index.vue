@@ -56,8 +56,8 @@
                         </n-grid-item>
                         <n-grid-item span="24 m:24 l:12">
                             <div class="slide-right">
-                                <n-h1>{{compData[compData.mode].title}}</n-h1>
-                                <n-text depth="3">{{compData[compData.mode].des}}</n-text>
+                                <n-h1>{{ compData[compData.mode].title }}</n-h1>
+                                <n-text depth="3">{{ compData[compData.mode].des }}</n-text>
                                 <n-form autocomplete="off" :rules="compData.rules" ref="formRef" class="login-form"
                                         layout="vertical"
                                         :model="compData.form"
@@ -92,7 +92,8 @@
                                                          v-model:value="compData.form.email"
                                                          placeholder="输入手机号或者邮箱">
                                                 </n-input>
-                                                <n-input size="large" :style="{width:'43%'}" :maxlength="6" autocomplete="off"
+                                                <n-input size="large" :style="{width:'43%'}" :maxlength="6"
+                                                         autocomplete="off"
                                                          v-model:value="compData.form.code" placeholder="输入验证码">
                                                 </n-input>
                                                 <n-button size="large" type="primary" ghost>发送验证码</n-button>
@@ -100,7 +101,8 @@
                                         </n-form-item>
                                     </template>
                                     <n-form-item label="你的密码" path="password">
-                                        <n-input size="large" :maxlength="30" :show-password-on="'click'" type="password"
+                                        <n-input size="large" :maxlength="30" :show-password-on="'click'"
+                                                 type="password"
                                                  autocomplete="off" v-model:value="compData.form.password"
                                                  placeholder="输入你的密码"
                                         >
@@ -108,12 +110,17 @@
                                     </n-form-item>
                                 </n-form>
                                 <n-space style="margin-bottom: 10px" justify="space-between">
-                                    <n-checkbox v-model:checked="compData.form.rememberPas">七天记住我</n-checkbox>
+                                    <n-checkbox v-model:checked="compData.rememberPas">七天记住我</n-checkbox>
                                     <n-text depth="3">忘记密码? 找回密码</n-text>
                                 </n-space>
                                 <n-space justify="space-between" :size="[10,15]" vertical>
-                                    <n-button size="large" style="width: 100%" @click="handleLogin">{{compData[compData.mode].btn}}</n-button>
-                                    <n-text style="text-align: right;cursor: pointer" @click="compData.mode = compData.mode ==='login' ? 'register' : 'login'" depth="3">{{compData[compData.mode].hint}}</n-text>
+                                    <n-button size="large" style="width: 100%" @click="handleLogin">
+                                        {{ compData[compData.mode].btn }}
+                                    </n-button>
+                                    <n-text style="text-align: right;cursor: pointer"
+                                            @click="compData.mode = compData.mode ==='login' ? 'register' : 'login'"
+                                            depth="3">{{ compData[compData.mode].hint }}
+                                    </n-text>
                                 </n-space>
                             </div>
                         </n-grid-item>
@@ -123,16 +130,17 @@
             </div>
         </div>
     </n-card>
-    <!--    <DigitalClock></DigitalClock>-->
+    <!--        <DigitalClock></DigitalClock>-->
 </template>
 <script lang="ts">
-import {defineComponent, ref, reactive, CSSProperties, computed} from "vue"
+import {defineComponent, ref, reactive, CSSProperties, computed, onMounted} from "vue"
 import {useRouter} from "vue-router"
 import appStore from "@/packages/pinia/app.ts"
 import locaStore from "@/packages/utils/locaStore.ts"
-import { FormItemRule,} from "naive-ui"
+import {FormItemRule,} from "naive-ui"
 import useComponent from "@/packages/view/login/useComponent.ts"
-import {login,register} from "@/packages/api/app.ts"
+import {login, register} from "@/packages/api/app.ts"
+
 const imgs = ["login_bg_1.jpg", "login_bg_2.jpg", "login_bg_3.jpg"]
 
 export default defineComponent({
@@ -142,21 +150,22 @@ export default defineComponent({
         const formRef = ref()
         const app = appStore()
         const {themeName} = app.userSetting
-        const {commonData}  = useComponent()
+        const {commonData} = useComponent()
         const compData = reactive({
             form: {
                 name: "admin",
                 password: "123456",
                 email: "",
-                code: ""
+                code: "",
             },
+            rememberPas: false,
             passView: false,
             rules: {
                 name: [
                     {required: true, message: "请输入你的用户", trigger: "blur"},
                 ],
                 email: [{
-                    validator: (rule: FormItemRule, value: string)=>{
+                    validator: (rule: FormItemRule, value: string) => {
                         if (app.mobile) {
                             if (compData.form.email) {
                                 return true
@@ -170,7 +179,8 @@ export default defineComponent({
                                 return new Error("请输入你的手机号或者邮箱以及验证码")
                             }
                         }
-                    }, trigger: "blur"}
+                    }, trigger: "blur"
+                }
                 ],
                 code: [
                     {required: true, message: "请输入验证码", trigger: "blur"},
@@ -187,32 +197,38 @@ export default defineComponent({
             },
             ...commonData
         })
-
         const getAssetsFile = computed(() => new URL(`../../assets/${compData.imgName}`, import.meta.url).href)
-
+        onMounted(() => {
+            compData.form.password = locaStore.get("pass")
+            compData.rememberPas = !!compData.form.password
+        })
         const handleLogin = (e) => {
             e.preventDefault()
             formRef.value?.validate((errors) => {
                 if (!errors) {
-                    if(compData.mode === "login"){
-                        login(compData.form).then((result)=>{
-                            if( app.configOptions.events.login ){
-                                app.configOptions.events.login({ result,router })
-                            }else{
+                    if (compData.mode === "login") {
+                        login(compData.form).then((result) => {
+                            if (compData.rememberPas) {
+                                locaStore.set("pass", compData.form.password, 7 * 86400)
+                            } else {
+                                locaStore.remove("pass")
+                            }
+                            if (app.configOptions.events.login) {
+                                app.configOptions.events.login({result, router})
+                            } else {
                                 locaStore.set("access_token", result.data)
                                 router.push("/home")
                             }
                         })
                     }
-                    if(compData.mode === "register"){
-                        register(compData.form).then((res)=>{
+                    if (compData.mode === "register") {
+                        register(compData.form).then((res) => {
                             compData.mode = "login"
                         })
                     }
                 }
             })
         }
-
         return {
             getAssetsFile,
             handleLogin,

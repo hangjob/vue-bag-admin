@@ -2,7 +2,12 @@ import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, Int
 import axiosRetry from "axios-retry"
 import locaStore from "@/packages/utils/locaStore.ts"
 
-const http: AxiosInstance = axios.create({
+interface BagAxiosInstance extends AxiosInstance {
+    $configOptions?: any
+    $router?: any
+}
+
+const http: BagAxiosInstance = axios.create({
     withCredentials: true,
 })
 
@@ -13,7 +18,9 @@ axiosRetry(http, {
 })
 
 http.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-    config.headers["authorization"] =  locaStore.get("access_token")
+    if (locaStore.get("access_token")) {
+        config.headers["authorization"] = locaStore.get("access_token")
+    }
     return config
 }, (error: AxiosError) => {
     return Promise.reject(error)
@@ -21,15 +28,14 @@ http.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 
 http.interceptors.response.use((response: AxiosResponse) => {
     const {code, msg} = response.data
-    if (code === 1) {
+    if (http.$configOptions.httpCode.indexOf(code) !== -1) {
         // @ts-ignore
-        if (response.config.hint && msg) {
+        if (response.config.hint && msg && window.$message) {
             window.$message.success(msg)
         }
         return response.data
     }
-    if(code === 1003){
-        // @ts-ignore
+    if (code === 1003) {
         http.$router.push(http.$configOptions.resetPath)
     }
     return Promise.reject(response)
