@@ -4,7 +4,7 @@ import maxLogo from "@/packages/assets/logo.png"
 export default {
     whiteList: ["/login"],
     resetPath: "/login",
-    httpCode:[1],
+    httpCode: [1],
     menus: [],
     // 通过注入函数，让框架获取外部文件
     getViews: () => {
@@ -18,6 +18,11 @@ export default {
     components: {
         headerUserSet: null
     },
-    apis:{},
-    events:{}
+    apis: {
+        "/login": "/auth/local",
+        "/userInfo": "/user/userinfo",
+        "/menus": "/menus/getAll"
+    },
+    events: {},
+    apiModeStrapi: false
 }

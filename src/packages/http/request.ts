@@ -7,6 +7,8 @@ interface BagAxiosInstance extends AxiosInstance {
     $router?: any
 }
 
+axios.defaults.baseURL = "/api"
+
 const http: BagAxiosInstance = axios.create({
     withCredentials: true,
 })
@@ -28,7 +30,7 @@ http.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 
 http.interceptors.response.use((response: AxiosResponse) => {
     const {code, msg} = response.data
-    if (http.$configOptions.httpCode.indexOf(code) !== -1) {
+    if (http.$configOptions.httpCode.indexOf(code) !== -1 || http.$configOptions.apiModeStrapi) {
         // @ts-ignore
         if (response.config.hint && msg && window.$message) {
             window.$message.success(msg)
@@ -39,8 +41,14 @@ http.interceptors.response.use((response: AxiosResponse) => {
         http.$router.push(http.$configOptions.resetPath)
     }
     return Promise.reject(response)
-}, (error: AxiosError) => {
-    return Promise.reject(error)
+}, (err: AxiosError) => {
+    const {response} = err
+    if (response?.data) {
+        // @ts-ignore
+        const {error} = response?.data
+        error && window.$message.error(error?.message)
+    }
+    return Promise.reject(err)
 })
 
 const post = (url: string, params?: any, config?: AxiosRequestConfig) => {

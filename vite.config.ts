@@ -28,9 +28,9 @@ export default ({mode}: { mode: any }) => {
             Components({
                 resolvers: [NaiveUiResolver()]
             }),
-            viteMockServe({
-                mockPath: "./mock",
-            }),
+            // viteMockServe({
+            //     mockPath: "./mock",
+            // }),
             ...plugins
         ],
         publicDir: "public",
@@ -45,6 +45,12 @@ export default ({mode}: { mode: any }) => {
         server: {
             host: "0.0.0.0",
             port: 8280,
+            proxy: {
+                '/api': {
+                    target: 'http://127.0.0.1:1337',
+                    changeOrigin: true,
+                }
+            }
         }
     })
 }

@@ -29,10 +29,11 @@ import setupPinia from "@/packages/pinia"
 import config from "@/packages/config"
 import setupIcons from "@/packages/config/icon.ts"
 import {axios} from "@/packages/http/request.ts"
-import router from "@/packages/router"
+import router, {setupRouter} from "@/packages/router"
 import setupComponents from "@/packages/components"
 import Message from "@/packages/layout/components/Message.vue"
 import Notification from "@/packages/layout/components/Notification.vue"
+import locaStore from "@/packages/utils/locaStore.ts"
 
 const emitter: Emitter<any> = mitt()
 
@@ -59,6 +60,8 @@ export {
     install,
     axios,
     router,
+    setupRouter,
+    locaStore
 }
 
 export default defineComponent({

@@ -62,9 +62,10 @@
                                         layout="vertical"
                                         :model="compData.form"
                                 >
-                                    <n-form-item label="你的用户" path="name">
-                                        <n-input size="large" :maxlength="12" autocomplete="off"
-                                                 v-model:value="compData.form.name" placeholder="输入你的用户名">
+                                    <n-form-item label="用户名" path="name">
+                                        <n-input size="large" :maxlength="20" autocomplete="off"
+                                                 v-model:value="compData.form.name"
+                                                 :placeholder="compData.mode !== 'login' ? '输入您的用户名' : '输入你的手机号或邮箱'">
                                             <template #suffix>
                                                 <n-icon>
                                                     <HappyOutline/>
@@ -80,7 +81,7 @@
                                         </n-form-item>
                                         <n-form-item v-if="app.mobile" label="验证码" path="code">
                                             <n-input-group>
-                                                <n-input size="large" :maxlength="6" autocomplete="off"
+                                                <n-input size="large" :maxlength="8" autocomplete="off"
                                                          v-model:value="compData.form.code" placeholder="输入验证码">
                                                 </n-input>
                                                 <n-button size="large" type="primary" ghost>发送验证码</n-button>
@@ -92,7 +93,7 @@
                                                          v-model:value="compData.form.email"
                                                          placeholder="输入手机号或者邮箱">
                                                 </n-input>
-                                                <n-input size="large" :style="{width:'43%'}" :maxlength="6"
+                                                <n-input size="large" :style="{width:'43%'}" :maxlength="8"
                                                          autocomplete="off"
                                                          v-model:value="compData.form.code" placeholder="输入验证码">
                                                 </n-input>
@@ -130,7 +131,7 @@
             </div>
         </div>
     </n-card>
-    <!--        <DigitalClock></DigitalClock>-->
+    <!--    <DigitalClock></DigitalClock>-->
 </template>
 <script lang="ts">
 import {defineComponent, ref, reactive, CSSProperties, computed, onMounted} from "vue"
@@ -153,8 +154,8 @@ export default defineComponent({
         const {commonData} = useComponent()
         const compData = reactive({
             form: {
-                name: "admin",
-                password: "123456",
+                name: "user@strapi.io",
+                password: "strapiPassword",
                 email: "",
                 code: "",
             },
@@ -199,24 +200,31 @@ export default defineComponent({
         })
         const getAssetsFile = computed(() => new URL(`../../assets/${compData.imgName}`, import.meta.url).href)
         onMounted(() => {
-            compData.form.password = locaStore.get("pass")
-            compData.rememberPas = !!compData.form.password
+            if (locaStore.get("pass")) {
+                compData.form.password = locaStore.get("pass")
+                compData.rememberPas = !!compData.form.password
+            }
         })
         const handleLogin = (e) => {
             e.preventDefault()
             formRef.value?.validate((errors) => {
                 if (!errors) {
                     if (compData.mode === "login") {
-                        login(compData.form).then((result) => {
+                        const form = {identifier: compData.form.name}
+                        login({...compData.form, ...form}).then((result) => {
                             if (compData.rememberPas) {
-                                locaStore.set("pass", compData.form.password, 7 * 86400)
+                                locaStore.set("pass", escape(compData.form.password), 7 * 86400)
                             } else {
                                 locaStore.remove("pass")
                             }
                             if (app.configOptions.events.login) {
                                 app.configOptions.events.login({result, router})
                             } else {
-                                locaStore.set("access_token", result.data)
+                                if (app.configOptions.apiModeStrapi) {
+                                    locaStore.set("access_token", `Bearer ${result.jwt}`)
+                                } else {
+                                    locaStore.set("access_token", result.data)
+                                }
                                 router.push("/home")
                             }
                         })

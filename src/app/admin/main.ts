@@ -30,4 +30,5 @@ createApp(App).use(install, {
     components: {
         headerUserSet: null
     },
+    apiModeStrapi: true
 }).use(router).mount("#app")

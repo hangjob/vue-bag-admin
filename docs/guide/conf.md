@@ -40,8 +40,12 @@ export default router
 createApp(App).use(install, {
     whiteList: ["/login", "/test"], // 路由白名单
     resetPath: "/login", // 比如用户失效需要跳转的路由
+    httpCode:[1], // 接口返回是成功的code码
+    apiModeStrapi:false // 如果接口是strapi框架，设置为true，默认false
 }).use(router).mount("#app")
 ```
+
+>关于如何使用strapi框架，请看[https://juejin.cn/post/7337957655191535650](https://juejin.cn/post/7337957655191535650)
 
 ## 静态添加路由
 

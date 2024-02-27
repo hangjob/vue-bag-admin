@@ -24,6 +24,32 @@ export default defineConfig({
 })
 ```
 
+如果需要可以配置，也可以在使用的时候，在引入即可
+```ts
+import { useNotification } from 'naive-ui'
+```
+```ts
+import AutoImport from 'unplugin-auto-import/vite'
+export default defineConfig({
+    plugins: [
+        AutoImport({
+            imports: [
+                'vue',
+                    {
+                'naive-ui': [
+                    'useDialog',
+                    'useMessage',
+                    'useNotification',
+                    'useLoadingBar'
+                    ]
+                }
+              ]
+        })
+    ]
+})
+```
+
+
 ## main.js
 
 ```javascript

@@ -5,6 +5,7 @@ import "nprogress/nprogress.css"
 import afterEach from "./afterEach.ts"
 import routerMap from "@/packages/router/routerMap.ts"
 import beforeEach from "@/packages/router/beforeEach.ts"
+import type {App} from "vue"
 
 NProgress.configure({
     easing: "ease",  // 动画方式
@@ -29,4 +30,15 @@ router.afterEach((to: RouteLocationNormalized) => {
     afterEach(to)
 })
 
+const setupRouter = (app: App)=>{
+    let { replaceRouter } = app.config.globalProperties?.configOptions // 替换路由，自定义内置路由
+    replaceRouter.forEach((item: any) => {
+        router.addRoute(item)
+    })
+    return router;
+}
+
 export default router
+export {
+    setupRouter
+}
