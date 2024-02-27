@@ -19,9 +19,7 @@ export default {
         headerUserSet: null
     },
     apis: {
-        "/login": "/auth/local",
-        "/userInfo": "/user/userinfo",
-        "/menus": "/menus/getAll"
+
     },
     events: {},
     apiModeStrapi: false

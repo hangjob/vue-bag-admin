@@ -30,5 +30,10 @@ createApp(App).use(install, {
     components: {
         headerUserSet: null
     },
+    apis:{
+        "/login": "/auth/local",
+        "/userInfo": "/user/userinfo",
+        "/menus": "/menus/getAll"
+    },
     apiModeStrapi: true
 }).use(router).mount("#app")
