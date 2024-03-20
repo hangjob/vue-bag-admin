@@ -530,13 +530,13 @@ export default [
                     }),
                     creataDataItem({
                         id: 6003,
-                        "title": "Starfish",
+                        "title": "vue-form-design",
                         "pid": "6000",
                         "path": "/formDesigner/starfish",
                         "file": "",
                         "icon": "",
                         "isIframe":true,
-                        "url":"https://haixin-fang.github.io/starfish-vue3-lowcode/playground/index.html",
+                        "url":"https://haixin-fang.github.io/vue-form-design/playground/index.html",
                     }),
                     creataDataItem({
                         id: 7001,
