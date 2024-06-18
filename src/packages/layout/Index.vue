@@ -1,58 +1,52 @@
 <template>
-    <a-layout style="height: 100%">
-        <Slider />
-        <a-layout class="layout">
-            <NavBar />
-            <TabBar />
-            <AppMain />
-            <template v-if="bagFooter">
-                <component :is="bagFooter"></component>
-            </template>
-            <template>
-                <div class="layout-footer">
-                    bag-admin ©2022
-                    <a-typography-link href="//www.vipbic.com">www.vipbic.com</a-typography-link>
-                </div>
-            </template>
-        </a-layout>
-    </a-layout>
+    <div class="flex flex-col" style="height: 100%">
+        <Header/>
+        <n-layout fle has-sider style="flex: 1">
+            <n-layout-sider
+                bordered
+                v-model:collapsed="$globalStore.configs.menuCollapsed"
+                :show-trigger="!$globalStore.deviceInfo.isMobile"
+                collapse-mode="width"
+                :collapsed-width="64"
+                :width="$globalStore.deviceInfo.isMobile ? 0 : $globalStore.configs.layoutSiderWidth"
+            >
+                <SiderMenu/>
+            </n-layout-sider>
+            <div class="flex h-full flex-col flex-auto overflow-hidden">
+                <component is="LayoutTabBar">
+                    <TabBar v-if="$globalStore.configs.isTabar"/>
+                </component>
+                <n-layout has-sider :native-scrollbar="false">
+                    <router-view class="flex-auto"></router-view>
+                </n-layout>
+            </div>
+        </n-layout>
+        <n-drawer v-model:show="$globalStore.configs.mobileMenuVisible" :width="$globalStore.configs.layoutSiderWidth"
+                  placement="left">
+            <n-drawer-content :title="$globalStore.configs.title">
+                <SiderMenu/>
+            </n-drawer-content>
+        </n-drawer>
+        <Footer/>
+    </div>
 </template>
-<script lang="ts">
-import { defineComponent, inject } from 'vue'
-import Slider from './slider/Index.vue'
-import NavBar from './navbar/Index.vue'
-import TabBar from './tabbar/Index.vue'
-import AppMain from './main/Index.vue'
+
+<script>
+import Header from "@/packages/layout/Header.vue";
+import Footer from "@/packages/layout/Footer.vue";
+import SiderMenu from "@/packages/layout/components/SiderMenu.vue"
+import TabBar from "@/packages/layout/components/TabBar.vue"
+import {h, defineComponent, ref} from 'vue'
+import currentDevice from "current-device"
 
 export default defineComponent({
     components: {
-        Slider,
-        TabBar,
-        NavBar,
-        AppMain,
+        Header, Footer, SiderMenu, TabBar
     },
     setup() {
-        const { configAppComps } = <any>inject('$configAppOptions')
-        const { bagFooter } = configAppComps
-        return {
-            bagFooter,
-        }
-    },
+        const {appContext: {config: {globalProperties}}} = getCurrentInstance();
+        globalProperties.$globalStore.dispatchDeviceInfo()
+        currentDevice.onChangeOrientation(globalProperties.$globalStore.dispatchDeviceInfo)
+    }
 })
 </script>
-<style scoped lang="less">
-.layout {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    z-index: 1;
-    
-    &-footer {
-        padding: 8px 0;
-        text-align: center;
-        background-color: #ffffff;
-        font-size: 12px;
-    }
-}
-</style>
-
