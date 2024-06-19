@@ -9,7 +9,7 @@
                 <n-button icon-placement="right" class="cursor-pointer" v-for="item in $globalStore.tabs"
                           :type="$globalStore.currentRouter.path === item.path ? 'success' : ''" closable
                           @click="$global.router.push(item)">
-                    {{ item.title }}
+                    {{ $global?.helpers?.formatTitle($global, item) }}
                     <template #icon>
                         <n-icon @click.stop="$globalHook.useCloseTabBarJump(item)">
                             <CloseOutline/>
@@ -46,7 +46,7 @@ import {
     LeafOutline,
     CloseOutline
 } from "@vicons/ionicons5"
-import {renderIcon} from "@/packages/helpers/index.js";
+import {formatTitle, renderIcon} from "@/packages/helpers/index.js";
 
 const popselectOptions = ref([
     {

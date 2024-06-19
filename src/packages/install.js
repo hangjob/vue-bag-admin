@@ -11,11 +11,9 @@ import * as http from "@/packages/http/request.js"
 import * as radash from "radash"
 import * as hooksPlus from "vue-hooks-plus"
 import * as dayjs from "dayjs"
-import {setupI18n} from "@/packages/locales/index.js";
-
 const pina = createPinia()
 const app = createApp(App)
-app.use(setupI18n)
+
 const framework = new Framework({
     app,
     pina,

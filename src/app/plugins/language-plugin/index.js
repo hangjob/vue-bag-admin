@@ -1,20 +1,20 @@
-import setupMenuRouter from "./plug.js"
+import setupI18n from "@/app/plugins/language-plugin/plug.js";
 
 /**
- * 页面视图插件
+ * 语言插件
  */
-export class RouterPlugin {
+export class LanguagePlugin {
     constructor() {
-        this.name = 'RouterPlugin'
+        this.name = 'LanguagePlugin'
         this._enable = false
     }
 
     install({ctx}, options) {
-        ctx.loadRouter = true
         console.log(`${this.name}安装了`);
-        setupMenuRouter(ctx)
+        console.log(ctx, options)
+        this._enable = true;
+        setupI18n(ctx)
     }
-
 
     disable() {
         console.log(`${this.name}被禁用了`);
@@ -37,4 +37,4 @@ export class RouterPlugin {
 }
 
 
-export const useRouterPlugin = new RouterPlugin()
+export const useLanguagePlugin = new LanguagePlugin()

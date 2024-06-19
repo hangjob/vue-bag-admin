@@ -25,7 +25,7 @@ const useGlobalStore = defineStore('global', {
             isDataPersistence: false, // 标签是否持久化
             layoutMode: 1, // 布局方式
             isSubmenu: true, // 分类子菜单
-            language: 'zh'
+            language: navigator.language.indexOf('zh') !== -1 ? 'zh' : 'en',
         },
         deviceInfo: { // 设备类型,
             isMobile: false,

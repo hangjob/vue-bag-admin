@@ -36,6 +36,14 @@ function findParents(arr = [], key = '', node) {
     }
 }
 
+function formatTitle(ctx, item, isRender = false) {
+    const t = ctx.i18n?.global?.t;
+    if (t && item.localesKey) {
+        return isRender ? () => t(item.localesKey) : t(item.localesKey);
+    } else {
+        return item.title
+    }
+}
 
 
 export {
@@ -43,4 +51,5 @@ export {
     depthForEach,
     findParents,
     lscache,
+    formatTitle
 }

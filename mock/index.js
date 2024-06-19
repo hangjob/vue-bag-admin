@@ -10,6 +10,7 @@ const menus = [
     {
         id: 1,
         title: '用户管理',
+        localesKey: 'userManagement',
         file: '/src/app/views/user/index.vue',
         path: '/user',
         name: 'user',
@@ -18,6 +19,7 @@ const menus = [
     {
         id: 2,
         title: '项目管理',
+        localesKey: 'projectManagement',
         file: '/src/app/views/pmp/index.vue',
         path: '/pmp',
         name: 'pmp'
@@ -25,6 +27,7 @@ const menus = [
     {
         id: 3,
         title: '图标管理',
+        localesKey: 'iconManagement',
         file: '/src/app/views/icon/index.vue',
         path: '/icon',
         name: 'icon'
@@ -32,6 +35,7 @@ const menus = [
     {
         id: 4,
         title: '编辑器',
+        localesKey: 'editor',
         file: '/src/app/views/editor/index.vue',
         path: '/editor',
         name: 'editor',
@@ -40,6 +44,7 @@ const menus = [
             {
                 id: 5,
                 title: 'MD文档',
+                localesKey: 'markdown',
                 file: '/src/app/views/editor/md.vue',
                 path: '/md',
                 name: 'md',
@@ -47,6 +52,7 @@ const menus = [
             {
                 id: 6,
                 title: '富文本',
+                localesKey: 'richTextFormat',
                 file: '/src/app/views/editor/rich.vue',
                 path: '/rich',
                 name: 'rich',

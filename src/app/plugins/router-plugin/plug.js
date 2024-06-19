@@ -1,6 +1,7 @@
 import {http} from "@/packages/install.js";
 import {md5} from 'js-md5';
 
+
 const files = import.meta.glob(`@/app/views/*/*.vue`, {eager: true})
 
 /**
@@ -58,17 +59,20 @@ function mapMenusToRoutes(userMenus) {
 
 
 function commonMenuItem(ctx, data) {
+    const t = ctx.i18n?.global?.t
     if (ctx.radash.isArray(data)) {
         ctx.helpers.depthForEach(data, (item) => {
             const topIds = ctx.helpers.findParents(data, item.id) // 获取当前的菜单的父级ID
             item.md5 = item.file ? md5(item.file) : null // 对每一个数据打印标记
             item.icon = ctx.helpers.getIcons(ctx, item.icon) // 转换传递过来的icon为render函数
+            item.title = ctx.helpers?.formatTitle(ctx, item, true);
             if (ctx.radash.isArray(topIds)) {
                 const topId = topIds[topIds.length - 1]
                 item.topId = topId.id !== item.id ? topId.id : null // 给每个菜单添加一个自己的顶级应用分类的Id
             }
         })
     }
+    console.log(data)
     return data || []
 }
 
@@ -104,8 +108,7 @@ async function getAppGroups(ctx) {
     })
 }
 
-
-function useMenuToRouter(ctx) {
+const setupMenuRouter = (ctx) => {
     ctx.router.beforeEach(async (to, from, next) => {
         try {
             const {isLoadRoutes, dispatchFiles, dispatchIsRoutes} = ctx.app.config.globalProperties.$globalStore;
@@ -126,7 +129,4 @@ function useMenuToRouter(ctx) {
 }
 
 
-export {
-    useAddRouter,
-    useMenuToRouter
-}
+export default setupMenuRouter;

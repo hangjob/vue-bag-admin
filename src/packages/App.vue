@@ -5,11 +5,20 @@
                        :theme-overrides="$globalStore.theme.overrides">
         <n-global-style/>
         <router-view></router-view>
-        <n-date-picker/>
     </n-config-provider>
 </template>
 <script setup>
-import {darkTheme, NConfigProvider} from 'naive-ui'
-import locales from "@/packages/locales/index.js";
+import {darkTheme, NConfigProvider, zhCN, dateZhCN, useMessage} from 'naive-ui'
+
+const locales = ref({
+    zh: {
+        locale: zhCN,
+        dateLocale: dateZhCN
+    },
+    en: {
+        locale: ref(null),
+        dateLocale: ref(null)
+    }
+})
 // globalProperties.$globalHook.useCutColorTheme();
 </script>

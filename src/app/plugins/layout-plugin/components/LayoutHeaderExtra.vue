@@ -1,7 +1,7 @@
 <template>
     <template v-if="!$globalStore.deviceInfo.isMobile">
         <n-dropdown trigger="click" v-for="item in allOptions" :options="item.options" placement="bottom-start">
-            <n-button :bordered="false" @click="item.props.onClick($globalStore)">
+            <n-button :bordered="false" @click="item.props.onClick($global,$globalStore)">
                 <n-badge>
                     <component class="mr-2" :is="item.icon"></component>
                 </n-badge>
@@ -32,9 +32,9 @@ import {UserCircleRegular} from "@vicons/fa";
 import LayoutHeaderExtra from "./LayoutSettings.vue"
 import {renderIcon} from "@/packages/helpers/index.js";
 import {useMessage, NAvatar, NText} from 'naive-ui'
-import {useI18n} from 'vue-i18n'
 
-const {locale} = useI18n()
+const {appContext: {config: {globalProperties}}} = getCurrentInstance();
+const useI18n = globalProperties?.$global?.i18n?.useI18n()
 
 function renderCustomHeader() {
     return h(
@@ -102,23 +102,27 @@ const allOptions = [
         options: noticeOptions
     },
     {
+        label: '语言',
+        key: 'settings',
+        icon: renderIcon(Language, {size: 18}),
+        props: {
+            onClick: ($global, $globalStore) => {
+                if (useI18n) {
+                    useI18n.locale.value = useI18n.locale.value === 'zh' ? 'en' : 'zh'
+                    $globalStore.configs.language = useI18n.locale.value
+                } else {
+                    $global.naive?.message?.error(`未安装插件，language-plugin`)
+                }
+            }
+        }
+    },
+    {
         label: '设置',
         key: 'settings',
         icon: renderIcon(SettingsOutline, {size: 18}),
         props: {
             onClick: () => {
                 visible.value = true;
-            }
-        }
-    },
-    {
-        label: '语言',
-        key: 'settings',
-        icon: renderIcon(Language, {size: 18}),
-        props: {
-            onClick: ($globalStore) => {
-                locale.value = locale.value === 'zh' ? 'en' : 'zh'
-                $globalStore.configs.language = locale.value
             }
         }
     },
@@ -145,3 +149,4 @@ const allOptions = [
 
 
 </script>
+
