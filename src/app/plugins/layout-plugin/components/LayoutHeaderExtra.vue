@@ -1,16 +1,16 @@
 <template>
     <template v-if="!$globalStore.deviceInfo.isMobile">
         <n-dropdown trigger="click" v-for="item in allOptions" :options="item.options" placement="bottom-start">
-            <n-button :bordered="false" @click="item.props.onClick($global,$globalStore)">
+            <n-button :bordered="false" @click="item.props.onClick">
                 <n-badge>
                     <component class="mr-2" :is="item.icon"></component>
                 </n-badge>
-                {{ item.label }}
+                {{ $global?.helpers?.formatTitle($global, item) }}
             </n-button>
         </n-dropdown>
         <LayoutHeaderExtra v-model:show="visible"></LayoutHeaderExtra>
     </template>
-    <n-dropdown v-else trigger="hover" :options="allOptions">
+    <n-dropdown v-else trigger="hover" :render-label="renderLabel" :options="allOptions">
         <n-button :bordered="false">
             <n-badge>
                 <n-icon size="20">
@@ -30,11 +30,19 @@ import {
 } from "@vicons/ionicons5";
 import {UserCircleRegular} from "@vicons/fa";
 import LayoutHeaderExtra from "./LayoutSettings.vue"
-import {renderIcon} from "@/packages/helpers/index.js";
+import {formatTitle, renderIcon} from "@/packages/helpers/index.js";
 import {useMessage, NAvatar, NText} from 'naive-ui'
 
 const {appContext: {config: {globalProperties}}} = getCurrentInstance();
 const useI18n = globalProperties?.$global?.i18n?.useI18n()
+
+watch(
+    () => globalProperties.$globalStore?.configs?.language,
+    () => {
+        useI18n.locale.value = globalProperties.$globalStore?.configs?.language
+    }
+)
+
 
 function renderCustomHeader() {
     return h(
@@ -62,6 +70,9 @@ function renderCustomHeader() {
     )
 }
 
+const renderLabel = (item) => {
+    return globalProperties.$global?.helpers?.formatTitle(globalProperties.$global, item)
+}
 const noticeOptions = [
     {
         key: 'header',
@@ -85,40 +96,42 @@ const noticeOptions = [
         key: 'stmt3'
     }
 ]
-
 const visible = ref(false)
 const allOptions = [
     {
-        label: '首页',
+        title: '首页',
         key: 'home',
+        localesKey: 'home',
         icon: renderIcon(HomeOutline, {size: 18}),
         props: {}
     },
     {
-        label: '通知',
+        title: '通知',
         key: 'notifica',
+        localesKey: 'notification',
         icon: renderIcon(NotificationsOutline, {size: 18}),
         props: {},
         options: noticeOptions
     },
     {
-        label: '语言',
+        title: '语言',
         key: 'settings',
+        localesKey: 'language',
         icon: renderIcon(Language, {size: 18}),
         props: {
-            onClick: ($global, $globalStore) => {
+            onClick: () => {
                 if (useI18n) {
-                    useI18n.locale.value = useI18n.locale.value === 'zh' ? 'en' : 'zh'
-                    $globalStore.configs.language = useI18n.locale.value
+                    globalProperties.$globalStore.configs.language = globalProperties.$globalStore.configs.language === 'zh' ? 'en' : 'zh'
                 } else {
-                    $global.naive?.message?.error(`未安装插件，language-plugin`)
+                    globalProperties?.$global?.naive?.message?.error(`未安装插件，language-plugin`)
                 }
             }
         }
     },
     {
-        label: '设置',
+        title: '设置',
         key: 'settings',
+        localesKey: 'setting',
         icon: renderIcon(SettingsOutline, {size: 18}),
         props: {
             onClick: () => {
@@ -127,20 +140,21 @@ const allOptions = [
         }
     },
     {
-        label: '用户名',
+        title: '用户名',
         key: 'user',
+        localesKey: 'userName',
         icon: renderIcon(UserCircleRegular, {size: 18}),
         props: {
             class: 'mr-2'
         },
         options: [
             {
-                label: '修改账户',
+                title: '修改账户',
                 key: '1',
                 disabled: true
             },
             {
-                label: '退出登录',
+                title: '退出登录',
                 key: '3',
             }
         ]

@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance, onMounted, ref } from 'vue'
+import {defineComponent, getCurrentInstance, onMounted, ref} from 'vue'
 
 export default defineComponent({
     props: {

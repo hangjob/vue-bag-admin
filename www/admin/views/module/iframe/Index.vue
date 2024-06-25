@@ -25,7 +25,7 @@ export default {
 
     watch: {
         $route: {
-            handler({ meta }) {
+            handler({meta}) {
                 const appStore = appPinia()
                 this.url = appStore.currentRouter.iframePath
                 this.loading = true

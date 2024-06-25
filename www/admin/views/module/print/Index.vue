@@ -3,7 +3,8 @@
         <a-row>
             <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                 <a-space :size="8" style="margin-bottom: 10px">
-                    <a-button type="primary" @click="handleJsonPrint(Object.keys(someJSONData[0]))">JSON数据打印</a-button>
+                    <a-button type="primary" @click="handleJsonPrint(Object.keys(someJSONData[0]))">JSON数据打印
+                    </a-button>
                     <a-button type="primary" @click="handleJsonPrint(['name','email'])">JSON数据打印指定字段name，email
                     </a-button>
                 </a-space>
@@ -14,7 +15,7 @@
         </a-row>
         <a-row>
             <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-                <a-space :size="8"  style="margin-bottom: 10px">
+                <a-space :size="8" style="margin-bottom: 10px">
                     <a-button type="primary" @click="handleImgPrint">单张图片打印</a-button>
                     <a-button type="primary" @click="handleJsonPrints">多张张图片打印</a-button>
                 </a-space>
@@ -27,13 +28,14 @@
         </a-row>
         <a-row>
             <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-                <a-space :size="8"  style="margin-bottom: 10px">
+                <a-space :size="8" style="margin-bottom: 10px">
                     <a-button type="primary" @click="handleHtmlPrint">Html打印</a-button>
                 </a-space>
                 <div class="dom" id="htmlPrint">
                     <h1>打印标题</h1>
                     <h5>打印次级标题</h5>
-                    <p>正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</p>
+                    <p>
+                        正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</p>
                 </div>
             </a-col>
         </a-row>
@@ -65,7 +67,7 @@ let someJSONData = [
     }
 ]
 export default defineComponent({
-    name:'module-print',
+    name: 'module-print',
     setup() {
         const handleJsonPrint = (fields: Array<string>) => {
             printJS({printable: someJSONData, properties: fields, type: 'json'})
@@ -84,7 +86,7 @@ export default defineComponent({
             })
         }
 
-        const handleHtmlPrint =()=>{
+        const handleHtmlPrint = () => {
             printJS('htmlPrint', 'html')
         }
 

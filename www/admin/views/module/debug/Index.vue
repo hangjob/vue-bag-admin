@@ -6,8 +6,9 @@
             </template>
             <template #title>Vue3异常捕获</template>
             <template #footer>
-                官方推荐可以使用错误追踪服务 <a href="https://sentry.io/for/vue/" target="_blank">Sentry</a>和 <a target="_blank"
-                                                                                                   href="https://docs.bugsnag.com/platforms/javascript/vue/">Bugsnag </a>使用此选项提供官方集成
+                官方推荐可以使用错误追踪服务 <a href="https://sentry.io/for/vue/" target="_blank">Sentry</a>和 <a
+                target="_blank"
+                href="https://docs.bugsnag.com/platforms/javascript/vue/">Bugsnag </a>使用此选项提供官方集成
             </template>
         </a-table>
     </bag-view>

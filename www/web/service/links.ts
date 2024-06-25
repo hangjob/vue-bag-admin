@@ -5,7 +5,7 @@ const webLinksAll = () => {
 }
 
 const webLinksCreate = (params: object) => {
-    return post('/web/links/create',params)
+    return post('/web/links/create', params)
 }
 
 export {

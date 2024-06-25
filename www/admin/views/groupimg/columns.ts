@@ -18,9 +18,9 @@ export default [
                 autoLink: false,
                 label: '分组名称',
                 name: 'name',
-                rules: [{ required: true, message: '输入分组名称', trigger: 'blur' }],
+                rules: [{required: true, message: '输入分组名称', trigger: 'blur'}],
             },
-            $elAttrs: { placeholder: '输入分组名称', value: '' },
+            $elAttrs: {placeholder: '输入分组名称', value: ''},
         },
     },
     {
@@ -34,9 +34,9 @@ export default [
             $formItemAttrs: {
                 label: '排序',
                 name: 'order',
-                rules: [{ required: true, message: '输入排序', trigger: 'blur' }],
+                rules: [{required: true, message: '输入排序', trigger: 'blur'}],
             },
-            $elAttrs: { placeholder: '输入排序', value: '' },
+            $elAttrs: {placeholder: '输入排序', value: ''},
         },
     },
     {
@@ -52,6 +52,6 @@ export default [
         key: 'action',
         align: 'center',
         width: 200,
-        slot: { name: 'action' },
+        slot: {name: 'action'},
     },
 ]

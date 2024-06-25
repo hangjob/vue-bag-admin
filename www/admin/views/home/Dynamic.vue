@@ -3,7 +3,7 @@
         <template v-slot:title>
             <div class="title">
                 <span>动态</span>
-                <SyncOutlined  class="refresh"/>
+                <SyncOutlined class="refresh"/>
             </div>
         </template>
         <ul>
@@ -42,31 +42,37 @@
 
 </script>
 <style scoped lang="less">
-.title{
+.title {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    .refresh{
+
+    .refresh {
         transition: all 1s;
         cursor: pointer;
-        &:hover{
+
+        &:hover {
             transform: rotate(360deg);
         }
     }
 }
+
 ul {
     margin-bottom: 0;
     height: 210px;
     overflow-y: scroll;
+
     li {
         display: flex;
         align-items: center;
         padding: 10px 0;
-        .des{
+
+        .des {
             display: flex;
             flex-direction: column;
             flex: 1;
         }
+
         img {
             width: 30px;
             height: 30px;
@@ -77,7 +83,8 @@ ul {
         p {
             margin-bottom: 0;
             font-size: 14px;
-            span{
+
+            span {
                 color: var(--bag-color-primary);
             }
         }

@@ -8,6 +8,7 @@ const setupNaive = (ctx) => {
     const configProviderPropsRef = computed(() => ({
         theme: themeRef.value === "light" ? lightTheme : darkTheme
     }));
+    // 解决脱离setup也能用
     const {message, notification, dialog, loadingBar, modal} = createDiscreteApi(
         ["message", "dialog", "notification", "loadingBar", "modal"],
         {

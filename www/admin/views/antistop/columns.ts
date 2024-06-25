@@ -6,7 +6,7 @@ const columns = [
         align: 'center',
         ellipsis: true,
         width: 70,
-        customRender: ({ index }: { index: number }) => {
+        customRender: ({index}: { index: number }) => {
             return index + 1
         },
     },
@@ -22,9 +22,9 @@ const columns = [
                 autoLink: false,
                 label: '关键词',
                 name: 'name',
-                rules: [{ required: true, message: '输入关键词' }],
+                rules: [{required: true, message: '输入关键词'}],
             },
-            $elAttrs: { placeholder: '输入关键词', value: '' },
+            $elAttrs: {placeholder: '输入关键词', value: ''},
         },
     },
     {
@@ -38,9 +38,9 @@ const columns = [
                 autoLink: false,
                 label: '描述',
                 name: 'describe',
-                rules: [{ required: true, message: '输入描述' }],
+                rules: [{required: true, message: '输入描述'}],
             },
-            $elAttrs: { placeholder: '输入描述', value: '' },
+            $elAttrs: {placeholder: '输入描述', value: ''},
         },
     },
     {
@@ -57,7 +57,7 @@ const columns = [
                 label: '排序',
                 name: 'order',
             },
-            $elAttrs: { placeholder: '输入排序', value: '' },
+            $elAttrs: {placeholder: '输入排序', value: ''},
         },
     },
     {

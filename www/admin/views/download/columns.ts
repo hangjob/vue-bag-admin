@@ -18,9 +18,9 @@ export default [
                 autoLink: false,
                 label: '应用标题',
                 name: 'title',
-                rules: [{ required: true, message: '应用标题为必填项', trigger: 'blur' }],
+                rules: [{required: true, message: '应用标题为必填项', trigger: 'blur'}],
             },
-            $elAttrs: { placeholder: '输入应用标题', value: '' },
+            $elAttrs: {placeholder: '输入应用标题', value: ''},
         },
     },
     {
@@ -55,7 +55,7 @@ export default [
                 label: '标题样式',
                 name: 'title_style',
             },
-            $elAttrs: { placeholder: '输入标题样式', value: '', maxlength: 300 },
+            $elAttrs: {placeholder: '输入标题样式', value: '', maxlength: 300},
         },
     },
     {
@@ -88,7 +88,7 @@ export default [
                 autoLink: false,
                 label: '图片地址',
                 name: 'image',
-                rules: [{ required: true, message: '图片地址必填项', trigger: 'blur' }],
+                rules: [{required: true, message: '图片地址必填项', trigger: 'blur'}],
             },
             $elAttrs: {
                 placeholder: '输入图片地址',
@@ -108,7 +108,7 @@ export default [
                 label: '描述',
                 name: 'describe',
             },
-            $elAttrs: { placeholder: '描述', value: '', maxlength: 300 },
+            $elAttrs: {placeholder: '描述', value: '', maxlength: 300},
         },
     },
     {
@@ -123,13 +123,13 @@ export default [
                 autoLink: false,
                 label: '内容',
                 name: 'content',
-                labelCol: { span: 1, offset: 0 },
-                wrapperCol: { span: 22, offset: 0 },
+                labelCol: {span: 1, offset: 0},
+                wrapperCol: {span: 22, offset: 0},
             },
             slot: {
                 name: 'curdPname',
             },
-            $elAttrs: { placeholder: '输入内容', value: '' },
+            $elAttrs: {placeholder: '输入内容', value: ''},
             $colAttrs: {
                 xs: 24,
                 sm: 24,
@@ -152,13 +152,13 @@ export default [
                 autoLink: false,
                 label: '下载地址',
                 name: 'download_site',
-                labelCol: { span: 1, offset: 0 },
-                wrapperCol: { span: 22, offset: 0 },
+                labelCol: {span: 1, offset: 0},
+                wrapperCol: {span: 22, offset: 0},
             },
             slot: {
                 name: 'BagDownloadSite',
             },
-            $elAttrs: { placeholder: '输入下载地址', value: '' },
+            $elAttrs: {placeholder: '输入下载地址', value: ''},
             $colAttrs: {
                 xs: 24,
                 sm: 24,
@@ -185,8 +185,8 @@ export default [
                 placeholder: '选择热度',
                 value: '推荐',
                 options: [
-                    { label: '置顶', value: '置顶' }, { label: '最新', value: '最新' },
-                    { label: '推荐', value: '推荐' }, { label: '热门', value: '热门' },
+                    {label: '置顶', value: '置顶'}, {label: '最新', value: '最新'},
+                    {label: '推荐', value: '推荐'}, {label: '热门', value: '热门'},
                 ],
             },
         },
@@ -226,7 +226,7 @@ export default [
                 label: '浏览次数',
                 name: 'views',
             },
-            $elAttrs: { placeholder: '输入浏览次数', value: '' },
+            $elAttrs: {placeholder: '输入浏览次数', value: ''},
         },
     },
     {
@@ -243,7 +243,7 @@ export default [
                 label: '点赞次数',
                 name: 'likes',
             },
-            $elAttrs: { placeholder: '输入点赞次数', value: '' },
+            $elAttrs: {placeholder: '输入点赞次数', value: ''},
         },
     },
     {
@@ -259,7 +259,7 @@ export default [
                 label: '点踩次数',
                 name: 'dislikes',
             },
-            $elAttrs: { placeholder: '输入点踩次数', value: '' },
+            $elAttrs: {placeholder: '输入点踩次数', value: ''},
         },
     },
     {
@@ -275,7 +275,7 @@ export default [
                 label: '评论数量',
                 name: 'comments',
             },
-            $elAttrs: { placeholder: '输入评论数量', value: '' },
+            $elAttrs: {placeholder: '输入评论数量', value: ''},
         },
     },
     {
@@ -336,6 +336,6 @@ export default [
         key: 'action',
         align: 'center',
         width: 200,
-        slot: { name: 'action' },
+        slot: {name: 'action'},
     },
 ]

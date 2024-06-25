@@ -1,7 +1,7 @@
 import setupNaive from "@/app/plugins/naive-plugin/plug.js";
 
 /**
- * 页面视图插件
+ * naive-ui 扩展
  */
 export class NaivePlugin {
     constructor() {
@@ -11,7 +11,6 @@ export class NaivePlugin {
 
     install({ctx}, options) {
         console.log(`${this.name}安装了`);
-        console.log(ctx, options)
         this._enable = true;
         setupNaive(ctx)
     }

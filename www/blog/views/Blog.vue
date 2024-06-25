@@ -11,10 +11,10 @@
                         :xs="24" :sm="12" :md="8" :lg="6" :xl="6" v-for="(item,index) in items" :key="index"
                 >
                     <template v-if="index === 0">
-                        <Article :item-data="item" :item-sum-data="items" />
+                        <Article :item-data="item" :item-sum-data="items"/>
                     </template>
                     <template v-else>
-                        <Article :item-data="item" />
+                        <Article :item-data="item"/>
                     </template>
                 </el-col>
             </el-row>
@@ -22,9 +22,9 @@
     </section>
 </template>
 <script>
-import { defineComponent, ref } from 'vue'
+import {defineComponent, ref} from 'vue'
 import Article from '@www/blog/components/Article.vue'
-import { v1IndexArticle } from '@www/blog/service'
+import {v1IndexArticle} from '@www/blog/service'
 
 export default defineComponent({
     components: {

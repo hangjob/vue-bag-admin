@@ -10,14 +10,14 @@ export default [
                 autoLink: false,
                 label: '图片名称',
                 name: 'name',
-                rules: [{ required: true, message: '输入图片名称' }],
+                rules: [{required: true, message: '输入图片名称'}],
             },
-            $elAttrs: { placeholder: '输入图片名称', value: '' },
+            $elAttrs: {placeholder: '输入图片名称', value: ''},
         },
         curdSearch: { // 该属性代表的搜索
             el: 'a-input',
-            $formItemAttrs: { label: '用户名', name: 'name' },
-            $elAttrs: { placeholder: '输入用户名', value: '' },
+            $formItemAttrs: {label: '用户名', name: 'name'},
+            $elAttrs: {placeholder: '输入用户名', value: ''},
         },
     },
     {
@@ -31,7 +31,7 @@ export default [
                 label: '图片描述',
                 name: 'describe',
             },
-            $elAttrs: { placeholder: '输入图片描述', value: '' },
+            $elAttrs: {placeholder: '输入图片描述', value: ''},
         },
     },
 
@@ -46,7 +46,7 @@ export default [
                 label: '链接地址',
                 name: 'url',
             },
-            $elAttrs: { placeholder: '输入链接地址', value: '' },
+            $elAttrs: {placeholder: '输入链接地址', value: ''},
         },
     },
     {
@@ -87,7 +87,7 @@ export default [
             $elAttrs: {
                 placeholder: '选择类型',
                 value: '',
-                options: [{ label: '请选择', value: '' }],
+                options: [{label: '请选择', value: ''}],
             },
         },
     },
@@ -102,7 +102,7 @@ export default [
                 autoLink: false,
                 label: '图片地址',
                 name: 'image',
-                rules: [{ required: true, message: '图片地址必填项', trigger: 'blur' }],
+                rules: [{required: true, message: '图片地址必填项', trigger: 'blur'}],
             },
             $elAttrs: {
                 placeholder: '输入图片地址',
@@ -110,7 +110,7 @@ export default [
                 maxlength: 300,
                 isFileMore: true, // 是否多传
                 autoCropHeight: 500,
-                isTailor:false
+                isTailor: false
             },
         },
     },

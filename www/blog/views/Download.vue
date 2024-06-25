@@ -232,7 +232,8 @@
                     <li>✅ 网络错误重连</li>
                     <li>✅ 组件权限指令封装</li>
                     <li>✅ http网络组件(vue3新特性)</li>
-                    <li>✅ 菜单管理，包含增、删、改、查，菜单是缓存、是否固定、是否隐藏(但展示)、是否隐藏等待 具体功能,查看文档</li>
+                    <li>✅ 菜单管理，包含增、删、改、查，菜单是缓存、是否固定、是否隐藏(但展示)、是否隐藏等待 具体功能,查看文档
+                    </li>
                     <li>✅ 包含富文本编辑器，文件打印，图表预览，动画组件，状态详情组件等等</li>
                     <li>✅ 支持多页面应用</li>
                     <li>✅ 支持iframe内嵌</li>
@@ -257,7 +258,7 @@
     </section>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue'
+import {defineComponent, reactive, ref} from 'vue'
 import Dialog from 'primevue/dialog'
 import Galleria from 'primevue/galleria'
 
@@ -294,12 +295,12 @@ export default defineComponent({
             displayCustom.value = true
         }
         const images = ref([
-            { src: 'https://s1.ax1x.com/2022/05/12/O0R3TO.png' },
-            { src: 'https://s1.ax1x.com/2022/05/12/O0RB0f.png' },
-            { src: 'https://s1.ax1x.com/2022/05/12/O0R21s.png' },
-            { src: 'https://s1.ax1x.com/2022/05/12/O0WpND.png' },
-            { src: 'https://s1.ax1x.com/2022/05/12/O0Ww8J.png' },
-            { src: 'https://s1.ax1x.com/2022/05/12/O0Wf8H.png' },
+            {src: 'https://s1.ax1x.com/2022/05/12/O0R3TO.png'},
+            {src: 'https://s1.ax1x.com/2022/05/12/O0RB0f.png'},
+            {src: 'https://s1.ax1x.com/2022/05/12/O0R21s.png'},
+            {src: 'https://s1.ax1x.com/2022/05/12/O0WpND.png'},
+            {src: 'https://s1.ax1x.com/2022/05/12/O0Ww8J.png'},
+            {src: 'https://s1.ax1x.com/2022/05/12/O0Wf8H.png'},
         ])
         const handleDownload = (url) => {
             window.location.href = !url ? 'https://www.npmjs.com/package/vue-bag-admin' : url
@@ -325,23 +326,23 @@ export default defineComponent({
     position: relative;
     overflow: hidden;
     color: #FFFFFF;
-    
+
     &-title {
         text-align: center;
         margin-bottom: 30px;
     }
-    
+
     h1 {
         font-size: 50px;
         font-weight: bold;
     }
-    
+
     .package {
         border-radius: 4px;
         overflow: hidden;
         background-color: #FFFFFF;
         margin-top: 60px;
-        
+
         &-header {
             height: 82px;
             background-color: #e96656;
@@ -350,19 +351,19 @@ export default defineComponent({
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            
+
             h4 {
                 font-weight: bold;
                 line-height: 29px;
                 text-transform: uppercase;
             }
-            
+
             .meta-text {
                 font-size: 13px;
                 line-height: normal;
             }
         }
-        
+
         &-price {
             height: 100px;
             color: #FFF;
@@ -372,7 +373,7 @@ export default defineComponent({
             display: flex;
             align-items: center;
             justify-content: center;
-            
+
             h4 {
                 display: inline;
                 font-size: 40px;
@@ -380,7 +381,7 @@ export default defineComponent({
                 margin-bottom: 0;
             }
         }
-        
+
         ul {
             li {
                 padding-top: 10px;
@@ -391,13 +392,13 @@ export default defineComponent({
                 color: #333333;
                 text-align: center;
                 overflow: hidden;
-                
+
                 &:last-child {
                     border-bottom: none;
                 }
             }
         }
-        
+
         .action {
             overflow: hidden;
             display: flex;
@@ -419,14 +420,14 @@ export default defineComponent({
 
 .release-images {
     margin-top: 20px;
-    
+
     .iamge {
         background-color: #ececec;
         border-radius: 3px;
         text-align: center;
         margin: 10px 0;
     }
-    
+
     img {
         border-radius: 3px;
     }

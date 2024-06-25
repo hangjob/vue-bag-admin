@@ -9,7 +9,6 @@ export class ViewPlugin {
 
     install(ctx, options) {
         console.log(`${this.name}安装了`);
-        console.log(ctx,options)
         this._enable = true;
     }
 

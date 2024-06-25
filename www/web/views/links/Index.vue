@@ -71,6 +71,7 @@ import {inject, reactive, ref} from "vue";
 import {webLinksAll, webLinksCreate} from '@www/web/service/links'
 import type {FormInstance, FormRules} from 'element-plus'
 import {ElNotification} from "element-plus";
+
 const {getImageFullPath} = inject<any>('bagGlobal')
 const fromData = reactive({
     email: '',
@@ -148,6 +149,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
             align-items: center;
             border-radius: 3px;
             margin-bottom: 20px;
+
             .logo {
                 height: 60px;
                 width: 80px;
@@ -158,12 +160,14 @@ const submitForm = async (formEl: FormInstance | undefined) => {
                 display: flex;
                 align-items: center;
                 justify-content: center;
+
                 img {
                     width: 85%;
                     height: 85%;
                     transition: all .3s;
                     object-fit: cover;
-                    &:hover{
+
+                    &:hover {
                         transform: scale(1.1);
                     }
                 }

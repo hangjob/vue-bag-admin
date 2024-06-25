@@ -28,9 +28,9 @@
 </template>
 <script lang="ts" setup>
 import QRCode from 'qrcode'
-import { ref } from 'vue'
-import { webWebsiteFind } from '@www/blog/service'
-import { ElNotification } from 'element-plus'
+import {ref} from 'vue'
+import {webWebsiteFind} from '@www/blog/service'
+import {ElNotification} from 'element-plus'
 
 const domImg: any = ref('')
 webWebsiteFind().then((res: any) => {

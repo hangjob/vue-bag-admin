@@ -7,13 +7,14 @@
 
 </script>
 <style lang="less" scoped>
-.join{
+.join {
     width: 100%;
-    padding:50px 20px;
+    padding: 50px 20px;
     background: url(https://www.itnavs.com/_nuxt/img/joinbg.8da772c.jpg) repeat;
     margin-bottom: -30px;
     text-align: center;
-    .weixn{
+
+    .weixn {
         width: 750px;
         padding: 30px;
     }

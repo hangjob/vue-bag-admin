@@ -72,11 +72,24 @@
                     <n-form-item label-placement="left" label="分类子菜单" path="user.phone">
                         <n-switch v-model:value="$globalStore.configs.isSubmenu"/>
                     </n-form-item>
+                    <n-form-item label-placement="left" label="模块坞" path="user.phone">
+                        <n-switch v-model:value="$globalStore.configs.isDocking"/>
+                    </n-form-item>
+                    <n-form-item label-placement="left" label="底部显示" path="user.phone">
+                        <n-switch v-model:value="$globalStore.configs.isFooter"/>
+                    </n-form-item>
+                    <n-form-item v-if="$globalStore.configs.isWatermark" label="水印文案" path="user.name">
+                        <n-input v-model:value="$globalStore.configs.watermark" placeholder="输入水印文案" />
+                    </n-form-item>
+                    <n-form-item label-placement="left" label="水印显示" path="user.phone">
+                        <n-switch v-model:value="$globalStore.configs.isWatermark"/>
+                    </n-form-item>
                     <n-form-item label-placement="left" label="标签风格" path="user.phone">
                         <n-select v-model:value="form.value" :options="options" placeholder="选择标签风格"/>
                     </n-form-item>
                     <n-form-item label-placement="left" label="语言切换" path="user.phone">
-                        <n-select v-model:value="$globalStore.configs.language" :options="languageOptions" placeholder="选择语言"/>
+                        <n-select v-model:value="$globalStore.configs.language" :options="languageOptions"
+                                  placeholder="选择语言"/>
                     </n-form-item>
                 </n-space>
             </n-form>

@@ -1,4 +1,4 @@
-const setupWow = ()=>{
+const setupWow = () => {
 
 }
 

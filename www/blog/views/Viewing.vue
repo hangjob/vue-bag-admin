@@ -21,12 +21,12 @@ const handleClick = () => {
     overflow: hidden;
     color: #FFFFFF;
     text-align: center;
-    
+
     h2 {
         font-size: 24px;
         font-weight: bold;
     }
-    
+
     .action {
         display: flex;
         justify-content: center;

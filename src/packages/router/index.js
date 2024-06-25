@@ -20,8 +20,10 @@ function updataBreadcrumbMenus(app, to) {
         const breadcrumbRoutes = findParents(router.getRoutes(), to.meta.id, (item) => item.meta.id)
         if (breadcrumbRoutes) {
             breadcrumbRoutes.forEach((item) => {
-                item.title = item?.meta?.title
-                item.id = item?.meta?.id
+                const meta = item?.meta || {};
+                for (const itemKey in meta) {
+                    item[itemKey] = meta[itemKey]
+                }
             })
             app.breadcrumb = breadcrumbRoutes.reverse();
         }

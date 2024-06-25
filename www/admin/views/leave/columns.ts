@@ -10,9 +10,9 @@ export default [
                 autoLink: false,
                 label: '用户昵称',
                 name: 'name',
-                rules: [{ required: true, message: '输入用户昵称' }],
+                rules: [{required: true, message: '输入用户昵称'}],
             },
-            $elAttrs: { placeholder: '输入用户昵称', value: '' },
+            $elAttrs: {placeholder: '输入用户昵称', value: ''},
         },
     },
     {
@@ -26,9 +26,9 @@ export default [
                 autoLink: false,
                 label: '用户邮箱',
                 name: 'email',
-                rules: [{ required: true, message: '输入用户邮箱' }],
+                rules: [{required: true, message: '输入用户邮箱'}],
             },
-            $elAttrs: { placeholder: '输入用户邮箱', value: '' },
+            $elAttrs: {placeholder: '输入用户邮箱', value: ''},
         },
     },
     {
@@ -43,7 +43,7 @@ export default [
                 label: '网站链接',
                 name: 'url',
             },
-            $elAttrs: { placeholder: '输入网站链接', value: '' },
+            $elAttrs: {placeholder: '输入网站链接', value: ''},
         },
     },
     {
@@ -58,7 +58,7 @@ export default [
                 label: '留言记录',
                 name: 'message',
             },
-            $elAttrs: { placeholder: '输入留言记录', value: '', maxlength: 300 },
+            $elAttrs: {placeholder: '输入留言记录', value: '', maxlength: 300},
         },
     },
     {
@@ -98,6 +98,6 @@ export default [
         key: 'action',
         align: 'center',
         width: 200,
-        slot: { name: 'action' },
+        slot: {name: 'action'},
     },
 ]

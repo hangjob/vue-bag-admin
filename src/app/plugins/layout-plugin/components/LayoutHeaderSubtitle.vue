@@ -1,32 +1,21 @@
 <template>
-    <n-menu
-        v-if="!$globalStore.deviceInfo.isMobile"
-        v-model:value="$globalStore.currentRouter.meta.topId"
-        mode="horizontal"
-        key-field="id"
-        :children-field="$globalStore.configs.isSubmenu ? 'children' : '__children__'"
-        :options="$globalStore.appGroups"
-        responsive
-        :on-update:value="(value,item)=>handleUpdateValue(value,item,$globalStore,$global)"
-    />
+    <n-popover trigger="click" v-if="$globalStore.configs.isDocking">
+        <template #trigger>
+            <n-icon size="18">
+                <GridOutline/>
+            </n-icon>
+        </template>
+        <Menu mode="vertical"/>
+    </n-popover>
+    <Menu v-else-if="!$globalStore.deviceInfo.isMobile"/>
     <h3 v-else>{{ $globalStore.webSite.title }}</h3>
 </template>
 
 <script setup>
+import {GridOutline} from '@vicons/ionicons5'
+import Menu from "../common/Menu.vue"
 
 const {appContext: {config: {globalProperties}}} = getCurrentInstance();
-
-const handleUpdateValue = (key, item, $globalStore, $global) => {
-    if ($globalStore.configs.isSubmenu) {
-        $global.router.push(item.path)
-    } else {
-        if ($global.radash.isArray(item.children)) {
-            $globalStore.currentRouter.meta.topId = key
-            $globalStore.dispatchMenus(item.children)
-        }
-    }
-}
-
 /**
  * 深度观察 当前路由的变化
  * 高亮分类

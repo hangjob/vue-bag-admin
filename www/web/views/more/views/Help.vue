@@ -92,8 +92,9 @@ const route = useRoute();
                 color: #525252;
             }
         }
-        &:last-of-type{
-            li:last-of-type{
+
+        &:last-of-type {
+            li:last-of-type {
                 margin-bottom: 20px;
             }
         }

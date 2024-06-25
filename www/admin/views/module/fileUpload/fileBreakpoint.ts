@@ -87,7 +87,9 @@ class FileBreakpoint {
     calUploadProcess() {
         let uploadedCount = 0;
         _.each(this.allChunksUploadStatus, (item: any) => {
-            if (item) {uploadedCount++;}
+            if (item) {
+                uploadedCount++;
+            }
         });
         return Number(((uploadedCount * 100) / this.allChunksUploadStatus.length).toFixed(0).valueOf());
     };
@@ -119,7 +121,9 @@ class FileBreakpoint {
                 if (typeof res === "object" && res.data?.code === this.code) {
                     this.allChunksUploadStatus[index] = true; // 更新标记为
                     this.uploadProcess = this.calUploadProcess(); // 更新上传百分比
-                    if (this.uploadProcess === 100) {this.success?.()}// 完成合并上传
+                    if (this.uploadProcess === 100) {
+                        this.success?.()
+                    }// 完成合并上传
                 }
             })
             .catch((err) => {

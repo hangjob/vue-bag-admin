@@ -6,7 +6,7 @@ export default [
         align: 'center',
         ellipsis: true,
         width: 70,
-        customRender: ({ index }: { index: number }) => {
+        customRender: ({index}: { index: number }) => {
             return index + 1
         },
     },
@@ -21,9 +21,9 @@ export default [
                 autoLink: false,
                 label: '图片名称',
                 name: 'name',
-                rules: [{ required: true, message: '输入图片名称', trigger: 'blur' }],
+                rules: [{required: true, message: '输入图片名称', trigger: 'blur'}],
             },
-            $elAttrs: { placeholder: '输入图片名称', value: '' },
+            $elAttrs: {placeholder: '输入图片名称', value: ''},
         },
     },
     {
@@ -38,7 +38,7 @@ export default [
                 label: '选择分组',
                 name: 'groupimg_id',
             },
-            $elAttrs: { placeholder: '输入图片名称', value: '', options: [] },
+            $elAttrs: {placeholder: '输入图片名称', value: '', options: []},
         },
     },
     {
@@ -52,7 +52,7 @@ export default [
                 autoLink: false,
                 label: '图片地址',
                 name: 'image',
-                rules: [{ required: true, message: '图片地址必填项', trigger: 'blur' }],
+                rules: [{required: true, message: '图片地址必填项', trigger: 'blur'}],
             },
             $elAttrs: {
                 placeholder: '图片地址',
@@ -74,7 +74,7 @@ export default [
                 label: '关键词',
                 name: 'keywords',
             },
-            $elAttrs: { placeholder: '选择关键词', value: '' },
+            $elAttrs: {placeholder: '选择关键词', value: ''},
         },
     },
     {
@@ -90,6 +90,6 @@ export default [
         key: 'action',
         align: 'center',
         width: 200,
-        slots: { name: 'action' },
+        slots: {name: 'action'},
     },
 ]

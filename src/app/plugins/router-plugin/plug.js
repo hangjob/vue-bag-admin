@@ -14,8 +14,9 @@ function useAddRouter(ctx, routes = []) {
         ctx.helpers.depthForEach(routes, (item) => {
             if (!ctx.router.hasRoute(item.name)) {
                 const {component, name, path, ...meta} = item
+                // 注意这里，如果不过扩展meta属性，其他属性添加不进去，被addRoute过滤了
                 ctx.router.addRoute(item.root ? item.root : 'layout', {
-                    component, name, path, meta
+                    component, name, path, meta,
                 })
             }
         })
@@ -72,7 +73,6 @@ function commonMenuItem(ctx, data) {
             }
         })
     }
-    console.log(data)
     return data || []
 }
 

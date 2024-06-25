@@ -12,9 +12,11 @@
     align-items: center;
     justify-content: center;
     height: 100%;
+
     .qrcode {
         width: 25%;
         min-width: 100px;
+
         img {
             width: 100%;
         }

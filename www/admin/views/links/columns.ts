@@ -10,9 +10,9 @@ export default [
                 autoLink: false,
                 label: '网站名称',
                 name: 'name',
-                rules: [{ required: true, message: '请输入网站名称' }],
+                rules: [{required: true, message: '请输入网站名称'}],
             },
-            $elAttrs: { placeholder: '输入网站名称', value: '' },
+            $elAttrs: {placeholder: '输入网站名称', value: ''},
         },
     },
     {
@@ -28,7 +28,7 @@ export default [
                 label: '网站链接',
                 name: 'url',
             },
-            $elAttrs: { placeholder: '输入网站链接', value: '' },
+            $elAttrs: {placeholder: '输入网站链接', value: ''},
         },
     },
     {
@@ -45,7 +45,7 @@ export default [
                 label: '描述',
                 name: 'describe',
             },
-            $elAttrs: { placeholder: '输入描述', value: '', maxlength: 300 },
+            $elAttrs: {placeholder: '输入描述', value: '', maxlength: 300},
         },
     },
     {
@@ -58,7 +58,7 @@ export default [
             $formItemAttrs: {
                 label: '网站logo',
                 name: 'logo',
-                rules: [{ required: true, message: '网站logo为必填项', trigger: 'blur' }],
+                rules: [{required: true, message: '网站logo为必填项', trigger: 'blur'}],
             },
             $elAttrs: {
                 fixedBox: false,

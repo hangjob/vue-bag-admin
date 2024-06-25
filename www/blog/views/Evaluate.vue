@@ -8,15 +8,15 @@
             <el-col :xs="24" :sm="24" :md="12" :lg="8" :xl="8" v-for="(item,idx) in items" :key="idx">
                 <div class="feedback-bok">
                     <div class="describe">
-                       {{item.message}}
+                        {{ item.message }}
                     </div>
                     <div class="client">
                         <el-icon color="#e96656" size="30">
-                            <MagicStick />
+                            <MagicStick/>
                         </el-icon>
                         <div class="client-info">
-                            <h6>{{item.name}}</h6>
-                            <p>{{item.url ? item.url : item.createTime}}</p>
+                            <h6>{{ item.name }}</h6>
+                            <p>{{ item.url ? item.url : item.createTime }}</p>
                         </div>
                         <div class="client-head">
                             <img src="/src/packages/assets/image/yanghang.jpg" alt="">
@@ -30,6 +30,7 @@
 <script lang="ts" setup>
 import {webLeaveAll} from "@www/blog/service";
 import {ref} from "vue";
+
 const items = ref()
 webLeaveAll().then((res: any) => {
     items.value = res.data.data
@@ -84,7 +85,7 @@ webLeaveAll().then((res: any) => {
 
                 p {
                     color: #909090;
-                    margin-top:5px;
+                    margin-top: 5px;
                 }
             }
 

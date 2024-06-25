@@ -23,9 +23,9 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue'
+import {defineComponent, onMounted, ref} from 'vue'
 import menuList from '@www/blog/config/menu'
-import { browser } from 'pm-utils'
+import {browser} from 'pm-utils'
 
 export default defineComponent({
     setup() {
@@ -51,6 +51,7 @@ export default defineComponent({
     z-index: 1000;
     padding: 0 30px;
     text-align: center;
+
     &-logo {
         display: flex;
         height: @nah;

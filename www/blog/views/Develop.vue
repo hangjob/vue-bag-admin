@@ -6,21 +6,24 @@
         </div>
         <div>
             <el-row :gutter="20">
-                <el-col class="wow animate__animated animate__fadeInTopLeft" data-wow-duration="1.0s" data-wow-delay="0.2s"  :xs="24" :sm="24" :md="8" :lg="12" :xl="12">
+                <el-col class="wow animate__animated animate__fadeInTopLeft" data-wow-duration="1.0s"
+                        data-wow-delay="0.2s" :xs="24" :sm="24" :md="8" :lg="12" :xl="12">
                     <div class="feature">
                         <el-icon size="40px" color="#3ab0e2">
-                            <Sunrise />
+                            <Sunrise/>
                         </el-icon>
                         <div>
                             <h5>懂技术</h5>
-                            <p>掌握JavaScript/Node语言，掌握Vue/Egg.js框架，能够熟练应用Vue生态插件，了解webpack、gulp、nginx工作原理，良好的数据库知识</p>
+                            <p>
+                                掌握JavaScript/Node语言，掌握Vue/Egg.js框架，能够熟练应用Vue生态插件，了解webpack、gulp、nginx工作原理，良好的数据库知识</p>
                         </div>
                     </div>
                 </el-col>
-                <el-col class="wow animate__animated animate__fadeInTopRight" data-wow-duration="1.0s" data-wow-delay="0.2s" :xs="24" :sm="24" :md="8" :lg="12" :xl="12">
+                <el-col class="wow animate__animated animate__fadeInTopRight" data-wow-duration="1.0s"
+                        data-wow-delay="0.2s" :xs="24" :sm="24" :md="8" :lg="12" :xl="12">
                     <div class="feature">
                         <el-icon size="40px" color="#e96656">
-                            <Sunny />
+                            <Sunny/>
                         </el-icon>
                         <div>
                             <h5>好动手</h5>
@@ -28,21 +31,24 @@
                         </div>
                     </div>
                 </el-col>
-                <el-col class="wow animate__animated animate__fadeInLeft" data-wow-duration="1.0s" data-wow-delay="0.2s" :xs="24" :sm="24" :md="8" :lg="12" :xl="12">
+                <el-col class="wow animate__animated animate__fadeInLeft" data-wow-duration="1.0s" data-wow-delay="0.2s"
+                        :xs="24" :sm="24" :md="8" :lg="12" :xl="12">
                     <div class="feature">
                         <el-icon size="40px" color="#34d293">
-                            <Ship />
+                            <Ship/>
                         </el-icon>
                         <div>
                             <h5>小机灵</h5>
-                            <p>看到好的设计，能想到如何设计一个好的模板，并且在设计的过程中发现Bag的程序的不足，提出来进行更正</p>
+                            <p>
+                                看到好的设计，能想到如何设计一个好的模板，并且在设计的过程中发现Bag的程序的不足，提出来进行更正</p>
                         </div>
                     </div>
                 </el-col>
-                <el-col class="wow animate__animated animate__fadeInRight" data-wow-duration="1.0s" data-wow-delay="0.2s" :xs="24" :sm="24" :md="8" :lg="12" :xl="12">
+                <el-col class="wow animate__animated animate__fadeInRight" data-wow-duration="1.0s"
+                        data-wow-delay="0.2s" :xs="24" :sm="24" :md="8" :lg="12" :xl="12">
                     <div class="feature">
                         <el-icon size="40px" color="#409eff">
-                            <MostlyCloudy />
+                            <MostlyCloudy/>
                         </el-icon>
                         <div>
                             <h5>好奇心</h5>
@@ -50,25 +56,29 @@
                         </div>
                     </div>
                 </el-col>
-                <el-col class="wow animate__animated animate__fadeInBottomLeft" data-wow-duration="1.0s" data-wow-delay="0.2s" :xs="24" :sm="24" :md="8" :lg="12" :xl="12">
+                <el-col class="wow animate__animated animate__fadeInBottomLeft" data-wow-duration="1.0s"
+                        data-wow-delay="0.2s" :xs="24" :sm="24" :md="8" :lg="12" :xl="12">
                     <div class="feature">
-                        <el-icon size="40px"  color="#FFCA28">
-                            <PartlyCloudy />
+                        <el-icon size="40px" color="#FFCA28">
+                            <PartlyCloudy/>
                         </el-icon>
                         <div>
                             <h5>有审美</h5>
-                            <p>懂有色彩搭配，网站布局的技巧，模块合理性的摆放，利用CSS3和JavaScript制作简单用户回馈动画.</p>
+                            <p>
+                                懂有色彩搭配，网站布局的技巧，模块合理性的摆放，利用CSS3和JavaScript制作简单用户回馈动画.</p>
                         </div>
                     </div>
                 </el-col>
-                <el-col class="wow animate__animated animate__fadeInBottomRight" data-wow-duration="1.0s" data-wow-delay="0.2s" :xs="24" :sm="24" :md="8" :lg="12" :xl="12">
+                <el-col class="wow animate__animated animate__fadeInBottomRight" data-wow-duration="1.0s"
+                        data-wow-delay="0.2s" :xs="24" :sm="24" :md="8" :lg="12" :xl="12">
                     <div class="feature">
-                        <el-icon size="40px"  color="#4FC3F7">
-                            <Sunset />
+                        <el-icon size="40px" color="#4FC3F7">
+                            <Sunset/>
                         </el-icon>
                         <div>
                             <h5>有耐心</h5>
-                            <p>制作的一个好的主题，就像木匠一样，需要细心打磨，耐心、细心、用心，有些事不是看到希望才坚持，而是坚持了才能看到希望</p>
+                            <p>
+                                制作的一个好的主题，就像木匠一样，需要细心打磨，耐心、细心、用心，有些事不是看到希望才坚持，而是坚持了才能看到希望</p>
                         </div>
                     </div>
                 </el-col>
@@ -91,11 +101,13 @@
 
     &-title {
         text-align: center;
+
         h1 {
             font-size: 40px;
             font-weight: bold;
         }
-        p{
+
+        p {
             color: #8f8f8f;
         }
     }
@@ -105,15 +117,18 @@
         display: flex;
         padding: 25px 10px;
         align-items: center;
-        h5{
+
+        h5 {
             font-weight: bold;
             line-height: 28px;
             color: #404040;
         }
-        p{
+
+        p {
             color: #808080;
         }
-        i{
+
+        i {
             margin-right: 10px;
         }
     }

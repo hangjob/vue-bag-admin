@@ -11,11 +11,11 @@ import {Liquid, measureTextWidth} from '@antv/g2plot';
 export default defineComponent({
     setup() {
         function container() {
-            let dom1:HTMLElement = document.getElementById('dom1') as HTMLElement;
+            let dom1: HTMLElement = document.getElementById('dom1') as HTMLElement;
             const liquidPlot = new Liquid(dom1, {
                 percent: 0.26,
                 radius: 0.8,
-                height:210,
+                height: 210,
                 statistic: {
                     title: {
                         formatter: () => '盈利率',
@@ -30,7 +30,7 @@ export default defineComponent({
                             lineHeight: 1,
                             fill: percent > 0.65 ? 'white' : 'rgba(44,53,66,0.85)',
                         }),
-                        customHtml: (container, view, res:any) => {
+                        customHtml: (container, view, res: any) => {
                             const {width, height} = container.getBoundingClientRect();
                             const d = Math.sqrt(Math.pow(width / 2, 2) + Math.pow(height / 2, 2));
                             const text = `占比 ${(res.percent * 100).toFixed(0)}%`;

@@ -3,14 +3,14 @@
         <a-row>
             <a-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
                 <h3 class="title">官方API: <a href="https://github.com/quilljs/quill"
-                                            target="_blank"
+                                              target="_blank"
                 >[Quill-富文本编辑器-文档]</a></h3>
                 <div>
                     <div id="editor-container"></div>
                 </div>
             </a-col>
         </a-row>
-        <br />
+        <br/>
         <div>
             <h3 class="title">预览</h3>
             <p class="break-word"
@@ -29,10 +29,10 @@
     </bag-view>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue'
+import {defineComponent, onMounted, ref} from 'vue'
 import Quill from 'quill'
 import 'quill/dist/quill.snow.css'
-import { useRoute } from 'vue-router'
+import {useRoute} from 'vue-router'
 
 export default defineComponent({
     name: 'module-rich',
@@ -52,16 +52,16 @@ export default defineComponent({
                     toolbar: [
                         ['bold', 'italic', 'underline', 'strike'],
                         ['blockquote', 'code-block'],
-                        [{ header: 1 }, { header: 2 }],
-                        [{ list: 'ordered' }, { list: 'bullet' }],
-                        [{ script: 'sub' }, { script: 'super' }],
-                        [{ indent: '-1' }, { indent: '+1' }],
-                        [{ direction: 'rtl' }],
-                        [{ size: ['small', false, 'large', 'huge'] }],
-                        [{ header: [1, 2, 3, 4, 5, 6, false] }],
-                        [{ color: [] }, { background: [] }],
-                        [{ font: [] }],
-                        [{ align: [] }],
+                        [{header: 1}, {header: 2}],
+                        [{list: 'ordered'}, {list: 'bullet'}],
+                        [{script: 'sub'}, {script: 'super'}],
+                        [{indent: '-1'}, {indent: '+1'}],
+                        [{direction: 'rtl'}],
+                        [{size: ['small', false, 'large', 'huge']}],
+                        [{header: [1, 2, 3, 4, 5, 6, false]}],
+                        [{color: []}, {background: []}],
+                        [{font: []}],
+                        [{align: []}],
                         ['clean'],
                         ['link', 'image'],
                     ],

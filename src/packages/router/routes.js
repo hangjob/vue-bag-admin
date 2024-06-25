@@ -12,7 +12,7 @@ export const defaultBuiltRouter = [
                 meta: {
                     id: 'home',
                     title: '首页',
-                    localesKey:'home'
+                    localesKey: 'home'
                 }
             },
         ],

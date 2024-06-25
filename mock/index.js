@@ -99,6 +99,7 @@ export default [
                 {
                     id: 100,
                     title: '基础功能',
+                    localesKey: 'basic',
                     file: '/src/app/views/user/index.vue',
                     path: '/user',
                     name: 'user',
@@ -107,6 +108,7 @@ export default [
                 {
                     id: 200,
                     title: '工程建设',
+                    localesKey: 'engineeringConstruction',
                     file: '/src/app/views/user/index.vue',
                     path: '/user',
                     name: 'user',
@@ -115,6 +117,7 @@ export default [
                 {
                     id: 300,
                     title: '政府采购',
+                    localesKey: 'governmentProcurement',
                     file: '/src/app/views/user/index.vue',
                     path: '/user',
                     name: 'user',
@@ -122,6 +125,7 @@ export default [
                 {
                     id: 400,
                     title: '系统设置',
+                    localesKey: 'systemSettings',
                     file: '/src/app/views/user/index.vue',
                     path: '/user',
                     name: 'user',

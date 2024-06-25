@@ -19,7 +19,7 @@ export default [
                 label: '标题',
                 name: 'title',
             },
-            $elAttrs: { placeholder: '输入标题', value: '' },
+            $elAttrs: {placeholder: '输入标题', value: ''},
         },
     },
     {
@@ -34,7 +34,7 @@ export default [
                 label: '用户ID',
                 name: 'user_id',
             },
-            $elAttrs: { placeholder: '输入用户ID', value: '' },
+            $elAttrs: {placeholder: '输入用户ID', value: ''},
         },
     },
     {
@@ -50,7 +50,7 @@ export default [
                 label: '标题样式',
                 name: 'title_style',
             },
-            $elAttrs: { placeholder: '输入标题样式', value: '', maxlength: 300 },
+            $elAttrs: {placeholder: '输入标题样式', value: '', maxlength: 300},
         },
     },
     {
@@ -65,7 +65,7 @@ export default [
                 label: '栏目ID',
                 name: 'channel_id',
             },
-            $elAttrs: { placeholder: '输入栏目ID', value: '' },
+            $elAttrs: {placeholder: '输入栏目ID', value: ''},
         },
     },
     {
@@ -86,8 +86,8 @@ export default [
                 placeholder: '选择热度',
                 value: '推荐',
                 options: [
-                    { label: '置顶', value: '置顶' }, { label: '最新', value: '最新' },
-                    { label: '推荐', value: '推荐' }, { label: '热门', value: '热门' },
+                    {label: '置顶', value: '置顶'}, {label: '最新', value: '最新'},
+                    {label: '推荐', value: '推荐'}, {label: '热门', value: '热门'},
                 ],
             },
         },
@@ -125,7 +125,7 @@ export default [
                 autoLink: false,
                 label: '封面图',
                 name: 'image',
-                rules: [{ required: true, message: '封面图', trigger: 'blur' }],
+                rules: [{required: true, message: '封面图', trigger: 'blur'}],
             },
             $elAttrs: {
                 placeholder: '输入封面图',
@@ -165,7 +165,7 @@ export default [
                 label: '内容简述',
                 name: 'describe',
             },
-            $elAttrs: { placeholder: '输入内容简述', maxlength: 300, value: '' },
+            $elAttrs: {placeholder: '输入内容简述', maxlength: 300, value: ''},
         },
     },
     {
@@ -181,13 +181,13 @@ export default [
                 autoLink: false,
                 label: '内容',
                 name: 'content',
-                labelCol: { span: 1, offset: 0 },
-                wrapperCol: { span: 22, offset: 0 },
+                labelCol: {span: 1, offset: 0},
+                wrapperCol: {span: 22, offset: 0},
             },
             slot: {
                 name: 'curdPname',
             },
-            $elAttrs: { placeholder: '输入内容', value: '' },
+            $elAttrs: {placeholder: '输入内容', value: ''},
             $colAttrs: {
                 xs: 24,
                 sm: 24,
@@ -210,7 +210,7 @@ export default [
                 label: '浏览次数',
                 name: 'views',
             },
-            $elAttrs: { placeholder: '输入浏览次数', value: '' },
+            $elAttrs: {placeholder: '输入浏览次数', value: ''},
         },
     },
     {
@@ -226,7 +226,7 @@ export default [
                 label: '点赞次数',
                 name: 'likes',
             },
-            $elAttrs: { placeholder: '输入点赞次数', value: '' },
+            $elAttrs: {placeholder: '输入点赞次数', value: ''},
         },
     },
     {
@@ -243,7 +243,7 @@ export default [
                 label: '评论数量',
                 name: 'comments',
             },
-            $elAttrs: { placeholder: '输入评论数量', value: '' },
+            $elAttrs: {placeholder: '输入评论数量', value: ''},
         },
     },
     {
@@ -322,6 +322,6 @@ export default [
         key: 'action',
         align: 'center',
         width: 200,
-        slot: { name: 'action' },
+        slot: {name: 'action'},
     },
 ]

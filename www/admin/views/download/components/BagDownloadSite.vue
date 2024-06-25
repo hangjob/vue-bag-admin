@@ -10,11 +10,11 @@
                         <a-input v-model:value="compData.editableData[record.key].name"
                                  @pressEnter="dataForm.saveItem(record.key)"
                         />
-                        <check-outlined class="editable-cell-icon-check" @click="dataForm.saveItem(record.key)" />
+                        <check-outlined class="editable-cell-icon-check" @click="dataForm.saveItem(record.key)"/>
                     </div>
                     <div v-else class="editable-cell-text-wrapper">
                         {{ text || ' ' }}
-                        <edit-outlined class="editable-cell-icon" @click="dataForm.editItem(record.key)" />
+                        <edit-outlined class="editable-cell-icon" @click="dataForm.editItem(record.key)"/>
                     </div>
                 </div>
             </template>
@@ -24,12 +24,12 @@
                         <a-input v-model:value="compData.editableData[record.key].url"
                                  @pressEnter="dataForm.saveItem(record.key)"
                         />
-                        <check-outlined class="editable-cell-icon-check" @click="dataForm.saveItem(record.key)" />
+                        <check-outlined class="editable-cell-icon-check" @click="dataForm.saveItem(record.key)"/>
                         <a-button size="small" style="margin:0 10px">上传文件</a-button>
                     </div>
                     <div v-else class="editable-cell-text-wrapper">
                         {{ text || ' ' }}
-                        <edit-outlined class="editable-cell-icon" @click="dataForm.editItem(record.key)" />
+                        <edit-outlined class="editable-cell-icon" @click="dataForm.editItem(record.key)"/>
                     </div>
                 </div>
             </template>
@@ -43,8 +43,8 @@
     </a-table>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, ref, UnwrapRef, computed, watchEffect, watch, onMounted } from 'vue'
-import { cloneDeep } from 'lodash-es'
+import {defineComponent, reactive, ref, UnwrapRef, computed, watchEffect, watch, onMounted} from 'vue'
+import {cloneDeep} from 'lodash-es'
 
 export default defineComponent({
     props: {
@@ -61,8 +61,8 @@ export default defineComponent({
             },
         },
     },
-    setup(props, { emit }) {
-        
+    setup(props, {emit}) {
+
         const compData = reactive({
             dataSource: <any>[],
             editableData: [],
@@ -85,7 +85,7 @@ export default defineComponent({
             ],
         })
         compData.count = computed(() => compData.dataSource.length + 1)
-        
+
         const dataForm = reactive({
             deleteItem: (key: string) => {
                 compData.dataSource = compData.dataSource.filter(item => item.key !== key)
@@ -118,18 +118,18 @@ export default defineComponent({
 <style lang="less">
 .editable-cell {
     position: relative;
-    
+
     .editable-cell-input-wrapper,
     .editable-cell-text-wrapper {
         padding-right: 24px;
         display: flex;
         align-items: center;
     }
-    
+
     .editable-cell-text-wrapper {
         padding: 5px 24px 5px 5px;
     }
-    
+
     .editable-cell-icon,
     .editable-cell-icon-check {
         position: absolute;
@@ -137,17 +137,17 @@ export default defineComponent({
         width: 20px;
         cursor: pointer;
     }
-    
+
     .editable-cell-icon {
         margin-top: 4px;
         display: none;
     }
-    
+
     .editable-cell-icon:hover,
     .editable-cell-icon-check:hover {
         color: #108ee9;
     }
-    
+
     .editable-add-btn {
         margin-bottom: 8px;
     }

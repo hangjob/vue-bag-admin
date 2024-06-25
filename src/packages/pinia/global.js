@@ -25,7 +25,12 @@ const useGlobalStore = defineStore('global', {
             isDataPersistence: false, // 标签是否持久化
             layoutMode: 1, // 布局方式
             isSubmenu: true, // 分类子菜单
-            language: navigator.language.indexOf('zh') !== -1 ? 'zh' : 'en',
+            language: navigator.language.indexOf('zh') !== -1 ? 'zh' : 'en', // 语言
+            isDocking: false, // 分类模块化
+            isFooter: true, // 是否显示底部
+            isWatermark: false, // 是否水印
+            watermark: '品茗科技', // 水印文字
+            layoutName: 1, // 主题名称
         },
         deviceInfo: { // 设备类型,
             isMobile: false,
@@ -33,8 +38,8 @@ const useGlobalStore = defineStore('global', {
             isDesktop: false
         },
         webSite: {
-            title: '品茗科技',
-            subTitle: '为专业赋能',
+            title: '品茗科技', // logo
+            subTitle: '为专业赋能', // 副标题
         },
         currentRouter: {}, // 当前路由对象
         breadcrumb: [], // 头部面包屑导航

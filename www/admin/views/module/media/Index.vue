@@ -12,6 +12,7 @@
 import {defineComponent, ref} from 'vue'
 import $ from 'jquery';
 import {browser} from 'pm-utils'
+
 window.$ = $;
 export default defineComponent({
     setup() {
@@ -147,7 +148,8 @@ export default defineComponent({
         margin-top: 20px;
         border-radius: 5px;
         overflow: hidden;
-        .video{
+
+        .video {
             background-color: #1ec4c5;
         }
     }
@@ -159,8 +161,9 @@ export default defineComponent({
         margin-right: 10px;
         margin-left: 10px;
     }
-    .xgplayer-skin-default .xgplayer-controls{
-        background-image: linear-gradient(180deg,transparent,rgba(0,0,0,.0),rgba(0,0,0,.0),rgba(0,0,0,.0));
+
+    .xgplayer-skin-default .xgplayer-controls {
+        background-image: linear-gradient(180deg, transparent, rgba(0, 0, 0, .0), rgba(0, 0, 0, .0), rgba(0, 0, 0, .0));
     }
 }
 </style>

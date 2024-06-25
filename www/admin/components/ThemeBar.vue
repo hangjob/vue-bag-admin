@@ -1,25 +1,26 @@
 <template>
     <div class="right_menu-item hidden-xs" @click="handleDocument">
-        <InstagramOutlined class="icon-svg" />
+        <InstagramOutlined class="icon-svg"/>
     </div>
     <div class="right_menu-item hidden-xs" @click="handleAntDesign">
-        <AntDesignOutlined class="icon-svg" />
+        <AntDesignOutlined class="icon-svg"/>
     </div>
     <div class="right_menu-item hidden-xs" @click="handleGithub">
-        <GithubOutlined class="icon-svg" />
+        <GithubOutlined class="icon-svg"/>
     </div>
-<!--    <div class="right_menu-item hidden-xs" @click="handleOfficial">-->
-<!--        <ChromeOutlined class="icon-svg" />-->
-<!--    </div>-->
+    <!--    <div class="right_menu-item hidden-xs" @click="handleOfficial">-->
+    <!--        <ChromeOutlined class="icon-svg" />-->
+    <!--    </div>-->
 </template>
 <script>
-import { defineComponent } from 'vue'
+import {defineComponent} from 'vue'
 
 export default defineComponent({
     props: {
         compData: {
             type: Object,
-            default: () => { },
+            default: () => {
+            },
         },
     },
     setup(props) {
@@ -29,7 +30,7 @@ export default defineComponent({
         const handleGithub = () => {
             window.open('https://github.com/hangjob/vue-bag-admin')
         }
-        
+
         const handleAntDesign = () => {
             window.open('https://antdv.com/docs/vue/introduce-cn')
         }

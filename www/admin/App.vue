@@ -8,9 +8,10 @@
 import zhCN from 'ant-design-vue/es/locale/zh_CN'
 import dayjs from 'dayjs'
 import 'dayjs/locale/zh-cn'
-import { ConfigProvider } from 'ant-design-vue'
+import {ConfigProvider} from 'ant-design-vue'
+
 dayjs.locale('zh-cn')
-import { defineComponent, reactive } from 'vue'
+import {defineComponent, reactive} from 'vue'
 
 export default defineComponent({
     setup() {
@@ -22,7 +23,6 @@ export default defineComponent({
         }
     },
 })
-
 
 
 </script>

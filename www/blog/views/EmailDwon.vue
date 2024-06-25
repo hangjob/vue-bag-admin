@@ -1,7 +1,8 @@
 <template>
     <section class="section section-container">
         <div class="section-title">
-            <h1 class="wow animate__animated animate__bounce" data-wow-duration="1.0s" data-wow-delay="0.2s">不想下载？</h1>
+            <h1 class="wow animate__animated animate__bounce" data-wow-duration="1.0s" data-wow-delay="0.2s">
+                不想下载？</h1>
             <p>如果您不想下载可以在下方输入您的邮箱，系统会将最新的源码发送给您...</p>
         </div>
         <div class="action">
@@ -12,8 +13,10 @@
                 size="large"
                 style="width:200px;margin-right:10px"
             />
-            <el-button :loading="loading" class="wow animate__animated animate__headShake" data-wow-duration="1.0s" data-wow-delay="0.2s"
-                       style="flex-shrink: 0;" v-debounce="{ func: handleSendEmail,wait:1000}" type="success" size="large"
+            <el-button :loading="loading" class="wow animate__animated animate__headShake" data-wow-duration="1.0s"
+                       data-wow-delay="0.2s"
+                       style="flex-shrink: 0;" v-debounce="{ func: handleSendEmail,wait:1000}" type="success"
+                       size="large"
             >发送
             </el-button>
         </div>

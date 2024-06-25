@@ -4,7 +4,8 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import {NaiveUiResolver} from 'unplugin-vue-components/resolvers'
 import path from "path";
-import { viteMockServe } from 'vite-plugin-mock'
+import {viteMockServe} from 'vite-plugin-mock'
+
 export default defineConfig(({command, mode}) => {
     const env = loadEnv(mode, process.cwd())
     return {

@@ -8,7 +8,7 @@ export default [
         width: 70,
         visible: false,
         disabled: true,
-        customRender: ({ index }: { index: number }) => {
+        customRender: ({index}: { index: number }) => {
             return index + 1
         },
     },
@@ -23,9 +23,9 @@ export default [
                 autoLink: false,
                 label: '网站名称',
                 name: 'name',
-                rules: [{ required: true, message: '请输入网站名称' }],
+                rules: [{required: true, message: '请输入网站名称'}],
             },
-            $elAttrs: { placeholder: '输入网站名称', value: '' },
+            $elAttrs: {placeholder: '输入网站名称', value: ''},
         },
     },
     {
@@ -39,9 +39,9 @@ export default [
                 autoLink: false,
                 label: '网站链接',
                 name: 'url',
-                rules: [{ required: true, message: '请输入网站链接' }],
+                rules: [{required: true, message: '请输入网站链接'}],
             },
-            $elAttrs: { placeholder: '输入网站链接', value: '' },
+            $elAttrs: {placeholder: '输入网站链接', value: ''},
         },
     },
     {
@@ -56,7 +56,7 @@ export default [
                 label: '二维码地址',
                 name: 'qrcode',
             },
-            $elAttrs: { placeholder: '输入二维码地址', value: '' },
+            $elAttrs: {placeholder: '输入二维码地址', value: ''},
         },
     },
     {
@@ -71,9 +71,9 @@ export default [
                 autoLink: false,
                 label: '二维码地址',
                 name: 'slogan',
-                rules: [{ required: true, message: '输入描述为必填项', trigger: 'blur' }],
+                rules: [{required: true, message: '输入描述为必填项', trigger: 'blur'}],
             },
-            $elAttrs: { placeholder: '输入描述为必填项', value: '' },
+            $elAttrs: {placeholder: '输入描述为必填项', value: ''},
         },
     },
     {
@@ -82,7 +82,7 @@ export default [
         align: 'center',
         ellipsis: true,
         width: 200,
-        customRender: ({ text, index }: { text: any, index: number }) => {
+        customRender: ({text, index}: { text: any, index: number }) => {
             if (text) {
                 return text.join(',')
             } else {
@@ -116,7 +116,7 @@ export default [
                 autoLink: false,
                 label: '备案号',
                 name: 'record',
-                rules: [{ required: true, message: '输入备案号必填项', trigger: 'blur' }],
+                rules: [{required: true, message: '输入备案号必填项', trigger: 'blur'}],
             },
             $elAttrs: {
                 placeholder: '输入备案号',
@@ -136,7 +136,7 @@ export default [
                 autoLink: false,
                 label: '网站logo',
                 name: 'logo',
-                rules: [{ required: true, message: '图片为必填项', trigger: 'blur' }],
+                rules: [{required: true, message: '图片为必填项', trigger: 'blur'}],
             },
             $elAttrs: {
                 placeholder: '上传图片',
@@ -156,7 +156,7 @@ export default [
                 autoLink: false,
                 label: '背景图',
                 name: 'lologinbggo',
-                rules: [{ required: true, message: '背景图为必填项', trigger: 'blur' }],
+                rules: [{required: true, message: '背景图为必填项', trigger: 'blur'}],
             },
             $elAttrs: {
                 placeholder: '上传背景图',
@@ -178,6 +178,6 @@ export default [
         align: 'center',
         disabled: true,
         width: 200,
-        slot: { name: 'action' },
+        slot: {name: 'action'},
     },
 ]

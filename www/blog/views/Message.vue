@@ -58,9 +58,9 @@
     </section>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue'
-import { webLeaveCreate } from '@www/blog/service'
-import { ElNotification } from 'element-plus'
+import {defineComponent, reactive, ref} from 'vue'
+import {webLeaveCreate} from '@www/blog/service'
+import {ElNotification} from 'element-plus'
 import {
     Edit,
 } from '@element-plus/icons-vue'
@@ -76,7 +76,7 @@ export default defineComponent({
         })
         const text = ref('提交留言')
         const disabled = ref(true)
-        const handleSave = function() {
+        const handleSave = function () {
             webLeaveCreate(fromData).then((res: any) => {
                 if (res.data.code === 1) {
                     ElNotification({

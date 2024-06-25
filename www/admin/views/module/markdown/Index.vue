@@ -10,8 +10,11 @@
         <br/>
         <a-space :size="10">
             <a-button type="primary" :class="activeClass('edit')" @click="handleSetMode('edit')">纯编辑模式</a-button>
-            <a-button  class="hidden-xs" type="primary" :class="activeClass('editable')" @click="handleSetMode('editable')">编辑与预览模式</a-button>
-            <a-button type="primary" :class="activeClass('preview')" @click="handleSetMode('preview')">纯预览模式</a-button>
+            <a-button class="hidden-xs" type="primary" :class="activeClass('editable')"
+                      @click="handleSetMode('editable')">编辑与预览模式
+            </a-button>
+            <a-button type="primary" :class="activeClass('preview')" @click="handleSetMode('preview')">纯预览模式
+            </a-button>
         </a-space>
     </bag-view>
 </template>
@@ -32,7 +35,7 @@ VMdEditor.use(githubTheme, {
     Hljs: hljs,
 });
 export default defineComponent({
-    name:'module-markdown',
+    name: 'module-markdown',
     components: {
         VMdEditor
     },
