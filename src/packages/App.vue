@@ -4,12 +4,15 @@
                        :theme="$globalStore.configs.isDarkMode ? darkTheme : null"
                        :theme-overrides="$globalStore.theme.overrides">
         <n-global-style/>
-        <router-view></router-view>
+<!--   多router-view模式     -->
+        <template v-if="$globalStore.isRouterAlive">
+            <router-view v-if="$globalStore.configs.isIframe" name="iframe"></router-view>
+            <router-view v-else></router-view>
+        </template>
     </n-config-provider>
 </template>
 <script setup>
-import {darkTheme, NConfigProvider, zhCN, dateZhCN, useMessage} from 'naive-ui'
-
+import {darkTheme, NConfigProvider, zhCN, dateZhCN} from 'naive-ui'
 const locales = ref({
     zh: {
         locale: zhCN,

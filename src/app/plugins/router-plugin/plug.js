@@ -111,6 +111,7 @@ async function getAppGroups(ctx) {
 const setupMenuRouter = (ctx) => {
     ctx.router.beforeEach(async (to, from, next) => {
         try {
+
             const {isLoadRoutes, dispatchFiles, dispatchIsRoutes} = ctx.app.config.globalProperties.$globalStore;
             if (!isLoadRoutes) {
                 dispatchFiles(files)

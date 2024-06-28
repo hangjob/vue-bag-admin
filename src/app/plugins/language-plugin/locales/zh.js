@@ -16,4 +16,11 @@ export default {
     basic: '基础功能',
     engineeringConstruction: '工程建设',
     governmentProcurement: '政府采购',
+    contentFullScreen:'内容区域全屏',
+    refreshCurrentTab:'刷新当前标签',
+    closeCurrentTab:'关闭当前标签',
+    closeLeftTab:'关闭左侧标签',
+    closeRightTab:'关闭右侧标签',
+    modalWindowTab:'模态窗口标签',
+    closeAlltTab:'关闭全部标签',
 }

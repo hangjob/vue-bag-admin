@@ -32,14 +32,14 @@ const httpPost = (url, data = null, options = {}) => {
     return alovaInstance.Post(url, data, options)
 }
 
-const htttGet = (url, data = null, options = {}) => {
+const httpGet = (url, data = null, options = {}) => {
     return alovaInstance.Get(url, {params: data, ...options})
 }
 
 
 export {
     httpPost,
-    htttGet,
+    httpGet,
     alovaInstance
 }
 

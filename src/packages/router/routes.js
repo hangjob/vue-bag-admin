@@ -3,7 +3,11 @@ export const defaultBuiltRouter = [
         path: '/',
         name: 'layout',
         redirect: '/home',
-        component: () => import("@/packages/layout/index.vue"),
+        // 在多个router-view标签下，是 components 不是component
+        components:{
+            default:() => import("@/packages/layout/index.vue"),
+            iframe:() => import("@/packages/layout/iframe.vue"),
+        },
         children: [
             {
                 path: 'home',
@@ -24,5 +28,5 @@ export const defaultBuiltRouter = [
         component: () => import("@/packages/views/error/index.vue"),
         title: '404',
         hidden: true,
-    }
+    },
 ]

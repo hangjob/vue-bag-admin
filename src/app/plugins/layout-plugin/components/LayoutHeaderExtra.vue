@@ -10,7 +10,7 @@
         </n-dropdown>
         <LayoutHeaderExtra v-model:show="visible"></LayoutHeaderExtra>
     </template>
-    <n-dropdown v-else trigger="hover" :render-label="renderLabel" :options="allOptions">
+    <n-dropdown v-else trigger="hover" :render-label="(item)=>$global?.helpers?.formatTitle($global, item)" :options="allOptions">
         <n-button :bordered="false">
             <n-badge>
                 <n-icon size="20">
@@ -70,9 +70,7 @@ function renderCustomHeader() {
     )
 }
 
-const renderLabel = (item) => {
-    return globalProperties.$global?.helpers?.formatTitle(globalProperties.$global, item)
-}
+
 const noticeOptions = [
     {
         key: 'header',

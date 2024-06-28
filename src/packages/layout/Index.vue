@@ -24,7 +24,7 @@
                 <component is="LayoutTabBar">
                     <TabBar v-if="$globalStore.configs.isTabar"/>
                 </component>
-                <n-layout has-sider :native-scrollbar="false">
+                <n-layout id="layout"  has-sider :native-scrollbar="false">
                     <router-view class="flex-auto"></router-view>
                 </n-layout>
             </div>

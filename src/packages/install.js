@@ -2,6 +2,8 @@ import {createApp} from 'vue'
 import "@/packages/style/tailwind.css"
 import "@/packages/style/reset.css"
 import "@/packages/style/style.less"
+import nprogress from 'nprogress'
+import 'nprogress/nprogress.css'
 import App from '@/packages/App.vue'
 import router from "@/packages/router/index.js";
 import {createPinia} from "pinia"
@@ -23,7 +25,8 @@ const framework = new Framework({
     radash,
     hooksPlus,
     dayjs,
-    http
+    http,
+    nprogress
 });
 
 export {
@@ -35,5 +38,6 @@ export {
     hooksPlus,
     dayjs,
     framework,
-    http
+    http,
+    nprogress
 }

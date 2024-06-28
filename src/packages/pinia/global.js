@@ -1,7 +1,7 @@
 import {defineStore} from 'pinia'
 import {unique, replaceOrAppend} from 'radash'
 import currentDevice from "current-device" // 获取设备
-
+import {nextTick} from "vue"
 
 const getBrowserDeviceType = function (w = 718) {
     return window.innerWidth < w;
@@ -31,6 +31,7 @@ const useGlobalStore = defineStore('global', {
             isWatermark: false, // 是否水印
             watermark: '品茗科技', // 水印文字
             layoutName: 1, // 主题名称
+            isIframe: window.self.frameElement && window.self.frameElement.tagName === "IFRAME" // 判断页面是否被路由嵌套
         },
         deviceInfo: { // 设备类型,
             isMobile: false,
@@ -44,6 +45,7 @@ const useGlobalStore = defineStore('global', {
         currentRouter: {}, // 当前路由对象
         breadcrumb: [], // 头部面包屑导航
         tabs: [], // 菜单切换
+        isRouterAlive:true, // 切换刷新页面
         theme: {
             colors: [
                 {name: '薄暮', color: '#f5222d'}, {name: '火山', color: '#fa541c'},
@@ -90,6 +92,12 @@ const useGlobalStore = defineStore('global', {
         dispatchThemeOverrides({overrides, color}) {
             this.theme.overrides = overrides
             this.theme.color = color
+        },
+        reloadView(){
+            this.isRouterAlive = false;
+            nextTick().then(()=>{
+                this.isRouterAlive = true
+            })
         }
     },
 })

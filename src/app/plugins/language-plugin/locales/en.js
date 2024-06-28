@@ -16,4 +16,11 @@ export default {
     basic: 'Basic',
     engineeringConstruction: 'EngineeringConstruction',
     governmentProcurement: 'GovernmentProcurement',
+    contentFullScreen:'ContentFullScreen',
+    refreshCurrentTab:'RefreshCurrentTab',
+    closeCurrentTab:'CloseCurrentTab',
+    closeLeftTab:'CloseLeftTab',
+    closeRightTab:'CloseRightTab',
+    modalWindowTab:'ModalWindowTab',
+    closeAlltTab:'CloseAlltTab',
 }

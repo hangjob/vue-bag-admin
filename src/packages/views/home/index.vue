@@ -2,6 +2,7 @@
     <div>
         <n-button @click="handleClick">cess</n-button>
         <n-date-picker></n-date-picker>
+        {{+new Date()}}
     </div>
 </template>
 <script setup>
