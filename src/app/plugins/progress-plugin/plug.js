@@ -1,66 +1,87 @@
-import { NButton, NAvatar,NProgress } from "naive-ui";
-import {ref} from "vue"
-const useProgress = (ctx)=>{
-    const percentage = ref(0);
-    const difference = ref(1)
-    let speed = 20,timer=null,isStop = false;
-    const cache = []
-    const clearMemory = (progress,timer)=>{
-        if(progress && timer){ // 手动清楚
+import {NButton, NAvatar, NProgress,NNotificationProvider} from "naive-ui";
+import {ref,h} from "vue"
+
+const useProgress = (ctx) => {
+    let speed = 20;
+    const caches = {};
+    const clearMemory = (progress, timer) => {
+        if (progress && timer) { // 手动清楚
             progress && progress.destroy();
             timer && clearInterval(timer)
-        }else{
+        } else {
             // 自动清楚
-            cache.forEach(({p,t})=>{
-                setTimeout(()=>{
+            cache.forEach(({p, t}) => {
+                setTimeout(() => {
                     p && p.destroy()
-                },500)
+                }, 1200)
                 t && clearInterval(t)
             })
         }
     }
-    const createProgress = (to,t)=>{
-        percentage.value = 0;
-        difference.value = 0;
-        const progress = ctx?.naive?.notification?.create({
-            title: `${to.meta?.title()}-页面数据加载中...`,
-            content: ()=>h(NProgress,{
+
+    function hanledNotification(notification) {
+        notification && notification.destroy()
+    }
+
+    const createProgress = (to, cach) => {
+        cach.percentageNumber.value = 0;
+        cach.differenceNumber.value = 0;
+        const notification = ctx?.naive?.notification?.create({
+            title: `${ctx.helpers.formatTitle(ctx, to.meta)}-页面数据加载中...`,
+            content: () => h(NProgress, {
                 text: true,
                 type: "line",
-                status:"success",
-                percentage:percentage.value,
-                'indicator-placement':'inside',
+                status: "success",
+                percentage: cach.percentageNumber.value,
+                'indicator-placement': 'inside',
+                lacement:'bottom-right'
             }),
-            meta: ()=>h('span',{},`耗时:${difference.value}ms`),
+            lacement:'bottom-right',
+            meta: () => h('span', {}, `耗时:${cach.differenceNumber.value}ms`),
             action: () => h(
                 NButton,
-                { text: true, type: 'primary', onClick: () => clearMemory(progress,t)},
-                { default: () => "关闭" },
+                {
+                    text: true, type: 'primary', onClick: () => hanledNotification(notification)
+                },
+                {default: () => "关闭"},
             ),
-            onClose: () => clearMemory(progress,t)
+            onClose: () => hanledNotification(notification),
         })
-        return progress;
+        return notification
     }
     ctx.router.beforeEach((to, from, next) => {
-        let startTime = (new Date()).getTime()
-        const timer = setInterval(()=>{
-            percentage.value += Math.floor(Math.random()*10+3)
+        to.nanoid = ctx.helpers.nanoid()
+        let cach = caches[to.nanoid] = {};
+
+        cach.startTime = (new Date()).getTime();
+        cach.percentageNumber = ref(0)
+        cach.differenceNumber = ref(0)
+
+        cach.beforeAnimationFrame = window.requestAnimationFrame(function fn() {
+            cach.percentageNumber.value += Math.floor(Math.random() * 10 + 5)
             let endTime = (new Date()).getTime()
-            difference.value = endTime - startTime > 0  ? endTime - startTime : 0;
-            if(!isStop && percentage.value >= 99){
-                percentage.value = 99;
-                return
-            }
-            if(isStop && percentage.value >= 100){
-                percentage.value = 100;
-                clearMemory()
-            }
-        },speed)
-        cache.push({p:createProgress(to,timer),t:timer})
+            cach.differenceNumber.value = endTime - cach.startTime > 0 ? endTime - cach.startTime : 0;
+            cach.beforeAnimationFrame = window.requestAnimationFrame(fn)
+        })
+        cach.progress = createProgress(to, cach)
         next()
     })
     ctx.router.afterEach((to, from) => {
-        isStop = true;
+        let cach = caches[to.nanoid];
+        if (cach) {
+            const animationFrame = window.requestAnimationFrame(function fn() {
+                if (cach.percentageNumber.value >= 100) {
+                    cach.percentageNumber.value = 100;
+                    setTimeout(() => {
+                        cach.progress && cach.progress.destroy()
+                    }, 500)
+                    window.cancelAnimationFrame(animationFrame)
+                    window.cancelAnimationFrame(cach.beforeAnimationFrame)
+                    return
+                }
+                window.requestAnimationFrame(fn)
+            })
+        }
     })
 }
 

@@ -1,6 +1,8 @@
 import {h} from "vue";
 import {NIcon} from "naive-ui";
 import lscache from "lscache"
+import {isFunction} from "radash"
+import {customAlphabet} from 'nanoid';
 
 function renderIcon(icon, props) {
     return () => h(NIcon, props, {default: () => h(icon)})
@@ -46,10 +48,14 @@ function formatTitle(ctx, item, isRender = false) {
 }
 
 
+const nanoid = customAlphabet('ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890', 24);
+
+
 export {
     renderIcon,
     depthForEach,
     findParents,
     lscache,
-    formatTitle
+    formatTitle,
+    nanoid
 }
