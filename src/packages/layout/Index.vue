@@ -5,9 +5,9 @@
             <n-layout-sider
                 bordered
                 v-model:collapsed="$globalStore.configs.menuCollapsed"
-                :show-trigger="!$globalStore.deviceInfo.isMobile"
+                :show-trigger="$globalStore.configs.layoutName === 'default' && !$globalStore.deviceInfo.isMobile"
                 collapse-mode="width"
-                :collapsed-width="64"
+                :collapsed-width="$globalStore.configs.layoutName === 'lessen' ? $globalStore.configs.layoutSiderWidth : $globalStore.configs.collapsedWidth"
                 :width="$globalStore.deviceInfo.isMobile ? 0 : $globalStore.configs.layoutSiderWidth"
             >
                 <SiderMenu/>
@@ -24,14 +24,14 @@
                 <component is="LayoutTabBar">
                     <TabBar v-if="$globalStore.configs.isTabar"/>
                 </component>
-                <n-layout id="layout"  has-sider :native-scrollbar="false">
+                <n-layout id="layout" has-sider :native-scrollbar="false">
                     <router-view class="flex-auto"></router-view>
                 </n-layout>
             </div>
         </n-layout>
-        <n-drawer v-model:show="$globalStore.configs.mobileMenuVisible" :width="$globalStore.configs.layoutSiderWidth"
+        <n-drawer v-model:show="$globalStore.configs.mobileMenuVisible" :width="$globalStore.configs.mobileMenuDrawer"
                   placement="left">
-            <n-drawer-content :title="$globalStore.configs.title">
+            <n-drawer-content body-content-style="padding: 0;" :title="$globalStore.configs.title">
                 <SiderMenu/>
             </n-drawer-content>
         </n-drawer>
@@ -67,9 +67,11 @@ export default defineComponent({
         Header, Footer, SiderMenu, TabBar
     },
     setup() {
+
         const {appContext: {config: {globalProperties}}} = getCurrentInstance();
         globalProperties.$globalStore.dispatchDeviceInfo()
         currentDevice.onChangeOrientation(globalProperties.$globalStore.dispatchDeviceInfo)
+
         return {
             components: getCurrentInstance().appContext.components
         }

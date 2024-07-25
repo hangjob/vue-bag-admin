@@ -22,7 +22,8 @@ const menus = [
         localesKey: 'projectManagement',
         file: '/src/app/views/pmp/index.vue',
         path: '/pmp',
-        name: 'pmp'
+        name: 'pmp',
+        icon: 'BookOutline'
     },
     {
         id: 3,
@@ -30,7 +31,8 @@ const menus = [
         localesKey: 'iconManagement',
         file: '/src/app/views/icon/index.vue',
         path: '/icon',
-        name: 'icon'
+        name: 'icon',
+        icon: 'BookOutline'
     },
     {
         id: 4,

@@ -7,25 +7,25 @@
                         <div class="composition flex w-full justify-around">
                             <div
                                 class="classical shadow-blue-400 bg-[#ebeef1] h-[45px] flex-1 relative rounded-sm overflow-hidden cursor-pointer"
-                                @click="$globalStore.configs.layoutMode = 1">
+                                @click="$globalStore.configs.layoutName = 'default'">
                                 <div class="absolute top-0 left-0 block bg-white w-[25%] h-full"></div>
-                                <n-icon v-if="$globalStore.configs.layoutMode === 1"
+                                <n-icon v-if="$globalStore.configs.layoutName === 'default'"
                                         class="icon absolute right-[25%] bottom-[5px]" :component="CheckboxOutline"
                                         size="20" :depth="1"/>
                             </div>
                             <div
                                 class="classical shadow-sm bg-[#ebeef1] flex-1 h-[45px] mx-[15%] relative rounded-sm overflow-hidden cursor-pointer"
-                                @click="$globalStore.configs.layoutMode = 2">
+                                @click="$globalStore.configs.layoutName = 'lessen'">
                                 <div class="absolute top-0 left-0 block bg-white w-[25%] h-full"></div>
-                                <n-icon v-if="$globalStore.configs.layoutMode === 2"
+                                <n-icon v-if="$globalStore.configs.layoutName === 'lessen'"
                                         class="icon absolute right-[25%] bottom-[5px]" :component="CheckboxOutline"
                                         size="20" :depth="1"/>
                             </div>
                             <div
                                 class="classical shadow-sm bg-[#ebeef1] flex-1 h-[45px] relative rounded-sm overflow-hidden cursor-pointer"
-                                @click="$globalStore.configs.layoutMode = 3">
+                                @click="$globalStore.configs.layoutName = 'spillover'">
                                 <div class="absolute top-0 left-0 block bg-white w-[25%] h-full"></div>
-                                <n-icon v-if="$globalStore.configs.layoutMode === 3"
+                                <n-icon v-if="$globalStore.configs.layoutName === 'spillover'"
                                         class="icon absolute right-[40%] bottom-[5px]" :component="CheckboxOutline"
                                         size="20" :depth="1"/>
                             </div>
@@ -41,7 +41,7 @@
                         </n-space>
                     </n-form-item>
                     <n-form-item label-placement="left" label="菜单宽度">
-                        <n-slider :marks="marks" v-model:value="form.setp" :step="50"/>
+                        <n-slider :tooltip="false" :marks="form.marks" v-model:value="form.setp" step="mark"/>
                     </n-form-item>
                     <n-form-item label-placement="left" label="顶部导航栏色">
                         <n-switch v-model:value="$globalStore.configs.isTopColor">
@@ -79,7 +79,7 @@
                         <n-switch v-model:value="$globalStore.configs.isFooter"/>
                     </n-form-item>
                     <n-form-item v-if="$globalStore.configs.isWatermark" label="水印文案" path="user.name">
-                        <n-input v-model:value="$globalStore.configs.watermark" placeholder="输入水印文案" />
+                        <n-input v-model:value="$globalStore.configs.watermark" placeholder="输入水印文案"/>
                     </n-form-item>
                     <n-form-item label-placement="left" label="水印显示" path="user.phone">
                         <n-switch v-model:value="$globalStore.configs.isWatermark"/>
@@ -88,7 +88,7 @@
                         <n-select v-model:value="form.value" :options="options" placeholder="选择标签风格"/>
                     </n-form-item>
                     <n-form-item label-placement="left" label="语言切换" path="user.phone">
-                        <n-select v-model:value="$globalStore.configs.language" :options="languageOptions"
+                        <n-select v-model:value="$globalStore.configs.language" :options="form.languageOptions"
                                   placeholder="选择语言"/>
                     </n-form-item>
                 </n-space>
@@ -98,45 +98,48 @@
 </template>
 <script setup>
 import {
-    PlanetOutline,
-    PlanetSharp,
     ColorPaletteOutline,
     Moon,
     Sunny,
     CheckboxOutline
 } from "@vicons/ionicons5"
 
-const marks = {
-    0: '150px',
-    25: '200px',
-    50: '最佳',
-    100: '300px'
-}
+const arrs = [{setp: 0, width: 170}, {setp: 33, width: 200}, {setp: 66, width: 240}, {setp: 100, width: 300}];
+
 const {appContext: {config: {globalProperties}}} = getCurrentInstance();
+
 const form = reactive({
-    color: '#18A058',
-    setp: 50,
-    indeterminate: false,
-    value: ref(null),
-    language: ref(null)
+    setp: 75,
+    marks:[],
+    languageOptions:[
+        {
+            label: "中文",
+            value: 'zh',
+        },
+        {
+            label: "英文",
+            value: 'en',
+        }
+    ],
 })
 
-const languageOptions = reactive([
-    {
-        label: "中文",
-        value: 'zh',
-    },
-    {
-        label: "英文",
-        value: 'en',
-    }
-])
+
+form.marks = arrs.reduce((accumulator, current) => {
+    accumulator[current.setp] = current.width + 'px';
+    return accumulator;
+}, {});
+
+watch(globalProperties?.$globalStore?.configs, (newValue) => {
+    const data = arrs.find(item => item.width === newValue.layoutSiderWidth)
+    form.setp = data.setp
+},{
+    deep: true,
+    immediate: true
+})
 
 watch(form, () => {
-    const arrs = [{setp: 0, width: 150}, {setp: 25, width: 200}, {setp: 50, width: 240}, {setp: 100, width: 300}];
     globalProperties.$globalStore.configs.layoutSiderWidth = (arrs.find(item => item.setp === form.setp))['width']
 })
-
 const options = []
 </script>
 <style lang="less" scoped>

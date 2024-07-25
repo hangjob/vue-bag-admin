@@ -7,6 +7,7 @@ export const defaultBuiltRouter = [
         components:{
             default:() => import("@/packages/layout/index.vue"),
             iframe:() => import("@/packages/layout/iframe.vue"),
+            lessen:() => import("@/packages/layout/lessen.vue"),
         },
         children: [
             {

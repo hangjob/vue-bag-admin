@@ -8,6 +8,7 @@ function renderIcon(icon, props) {
     return () => h(NIcon, props, {default: () => h(icon)})
 }
 
+
 function depthForEach(tree = [], callback, children = 'children') {
     function DFS(treeData) {
         for (const item of treeData) {
@@ -38,6 +39,14 @@ function findParents(arr = [], key = '', node) {
     }
 }
 
+
+/**
+ * 格式化标题
+ * @param ctx
+ * @param item
+ * @param isRender
+ * @returns {(function(): *)|*}
+ */
 function formatTitle(ctx, item, isRender = false) {
     const t = ctx.i18n?.global?.t;
     if (t && item.localesKey) {

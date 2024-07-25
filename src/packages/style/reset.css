@@ -46,3 +46,18 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
+/* 隐藏滚动条 */
+.hide-scrollbar::-webkit-scrollbar {
+    width: 0;
+    background-color: transparent;
+}
+
+.hide-scrollbar::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+.hide-scrollbar::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+

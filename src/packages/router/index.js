@@ -10,7 +10,6 @@ const router = createRouter({
     routes: defaultBuiltRouter
 })
 
-
 // 处理面包屑导航
 function updataBreadcrumbMenus(app, to) {
     const breadcrumbMenus = findParents(app.menus, to.meta.id)
@@ -30,7 +29,7 @@ function updataBreadcrumbMenus(app, to) {
     }
 }
 
-// 更新tab
+// 更新tabbar
 function updataTabs(app, to) {
     app.dispatchTabs({path: to.path, ...to.meta})
 }
@@ -45,13 +44,20 @@ function updataPersistenceTabs(app, to) {
     }
 }
 
-// 处理
+
+// 更新子菜单
+function updataSubMenu(app, to) {
+    const data = app.menus.find((item) => item.id === to.meta.topId)
+    app.subMenus = (data && data.children) || []
+}
+
 router.afterEach((to, from) => {
     const app = useGlobalStore()
     app.currentRouter = to;
     updataTabs(app, to)
     updataBreadcrumbMenus(app, to)
     updataPersistenceTabs(app, to)
+    updataSubMenu(app, to)
 })
 
 export default router;

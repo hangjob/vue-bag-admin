@@ -8,9 +8,10 @@
                 {{ $global?.helpers?.formatTitle($global, item) }}
             </n-button>
         </n-dropdown>
-        <LayoutHeaderExtra v-model:show="visible"></LayoutHeaderExtra>
+        <LayoutSettings v-model:show="visible"></LayoutSettings>
     </template>
-    <n-dropdown v-else trigger="hover" :render-label="(item)=>$global?.helpers?.formatTitle($global, item)" :options="allOptions">
+    <n-dropdown v-else trigger="hover" :render-label="(item)=>$global?.helpers?.formatTitle($global, item)"
+                :options="allOptions">
         <n-button :bordered="false">
             <n-badge>
                 <n-icon size="20">
@@ -29,9 +30,9 @@ import {
     Language
 } from "@vicons/ionicons5";
 import {UserCircleRegular} from "@vicons/fa";
-import LayoutHeaderExtra from "./LayoutSettings.vue"
-import {formatTitle, renderIcon} from "@/packages/helpers/index.js";
-import {useMessage, NAvatar, NText} from 'naive-ui'
+import LayoutSettings from "./LayoutSettings.vue"
+import {renderIcon} from "@/packages/helpers/index.js";
+import {NAvatar, NText} from 'naive-ui'
 
 const {appContext: {config: {globalProperties}}} = getCurrentInstance();
 const useI18n = globalProperties?.$global?.i18n?.useI18n()

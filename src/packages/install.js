@@ -14,6 +14,9 @@ import * as radash from "radash"
 import * as hooksPlus from "vue-hooks-plus"
 import * as dayjs from "dayjs"
 
+Array.prototype.first = function () {
+    return this.slice(0, 1)[0];
+}
 const pina = createPinia()
 const app = createApp(App)
 

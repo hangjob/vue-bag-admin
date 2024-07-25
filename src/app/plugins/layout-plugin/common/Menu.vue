@@ -3,6 +3,7 @@
         v-model:value="$globalStore.currentRouter.meta.topId"
         mode="horizontal"
         key-field="id"
+        :collapsed-icon-size="$globalStore.configs.collapsedIconSize"
         :children-field="$globalStore.configs.isSubmenu ? 'children' : '__children__'"
         :options="$globalStore.appGroups"
         responsive

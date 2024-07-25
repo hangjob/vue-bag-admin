@@ -52,7 +52,7 @@ export default defineConfig(({command, mode}) => {
         },
         server: {
             host: '0.0.0.0',
-            port: 5173,
+            port: 5100,
             // proxy: {
             //     '/api': {
             //         target: ' http://172.16.14.191:5173/',

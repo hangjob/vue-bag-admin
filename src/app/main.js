@@ -16,7 +16,7 @@ framework.use(useIconPlugin)
 framework.use(useLayoutPlugin)
 framework.use(useRouterPlugin)
 framework.use(useLanguagePlugin)
-framework.use(useProgressPlugin)
+// framework.use(useProgressPlugin)
 app.mount("#app")
 
 
