@@ -9,7 +9,6 @@ const getBrowserDeviceType = function (w = 718) {
 
 const useGlobalStore = defineStore('global', {
     state: () => {
-        const layoutName = 'lessen'
         return {
             sourceMenus: [], // 原始菜单 数据固定不变
             menus: [], // 左侧菜单
@@ -23,22 +22,26 @@ const useGlobalStore = defineStore('global', {
                 collapsedIconSize: 22, // 折叠图标大小
                 mobileMenuDrawer: 240, // 移动菜单抽屉宽度
                 menuDrawer: 240, // 菜单抽屉宽度
-                layoutSiderWidth: layoutName === 'lessen' ? 170 : 240, // 左侧宽度
-                menuCollapsed: false, // 是否折叠
+                layoutSiderWidth: 240, // 左侧宽度
+                isMenuCollapsed: false, // 是否折叠
                 mobileMenuVisible: false, // 是否隐藏菜单
                 isTopColor: false, // 顶部栏颜色
                 isDarkMode: false, // 暗黑模式
                 isTabar: true, // 标签是否显示
+                isBreadcrumb: true, // 是否展示面包屑
+                isBreadcrumbIcon: true, // 是否显示面包屑图标
                 isDataPersistence: false, // 标签是否持久化
-                isSubmenu: true, // 分类子菜单
+                isSubmenu: true, // 是否展示应用分类子菜单
                 language: navigator.language.indexOf('zh') !== -1 ? 'zh' : 'en', // 语言
                 isDocking: false, // 分类模块化
                 isFooter: true, // 是否显示底部
                 isWatermark: false, // 是否水印
                 watermark: '品茗科技', // 水印文字
-                layoutName, // 主题名称 default lessen spillover
-                isIframe: window.self.frameElement && window.self.frameElement.tagName === "IFRAME" // 判断页面是否被路由嵌套
+                layoutName:'lessen', // 主题名称 default lessen spillover
+                tabStyle: 'button', // 标签风格 button card
+                formStyle: 'drawer', // 表单风格 drawer dialogue
             },
+            isIframe: window.self.frameElement && window.self.frameElement.tagName === "IFRAME", // 判断页面是否被路由嵌套
             deviceInfo: { // 设备类型,
                 isMobile: false,
                 isTablet: false,
@@ -53,14 +56,21 @@ const useGlobalStore = defineStore('global', {
             tabs: [], // 菜单切换
             isRouterAlive: true, // 切换刷新页面
             theme: {
+                color: '#18a058',
                 colors: [
-                    {name: '薄暮', color: '#f5222d'}, {name: '火山', color: '#fa541c'},
-                    {name: '日暮', color: '#13c2c2'}, {name: '深绿', color: '#009688'},
-                    {name: '火山', color: '#fa541c'}, {name: '日暮', color: '#13c2c2'},
+                    {name: '默认', color: '#18a058'},
+                    {name: '薄暮', color: '#f5222d'},
+                    {name: '日暮', color: '#13c2c2'},
+                    {name: '火山', color: '#fa541c'},
                     {name: '深绿', color: '#009688'},
+                    {name: '金盏花', color: '#faad14'},
+                    {name: '日出', color: '#ffec3d'},
+                    {name: '青柠', color: '#a0d911'},
+                    {name: '极光绿', color: '#52c41a'},
+                    {name: '拂晓蓝', color: '#1890ff'},
+                    {name: '极客蓝', color: '#2f54eb'},
                 ],
-                color: '#f5222d',
-                overrides: {}, // 主题变量
+                overrides: {},
             },
         }
     },
@@ -86,7 +96,10 @@ const useGlobalStore = defineStore('global', {
         },
         dispatchTabs(tab) {
             if (tab.title) {
-                this.tabs = replaceOrAppend(this.tabs, tab, f => f.id === tab.id)
+                const tabs = replaceOrAppend(this.tabs, tab, existingTab => existingTab.id === tab.id);
+                this.tabs = tabs.sort((a, b) => {
+                    return b.sort || 0 - a.sort || 0
+                })
             }
         },
         dispatchDeviceInfo() {
@@ -94,7 +107,7 @@ const useGlobalStore = defineStore('global', {
             this.deviceInfo.isMobile = currentDevice.mobile() || getBrowserDeviceType(718)
             this.deviceInfo.isTablet = currentDevice.tablet() || getBrowserDeviceType(1199)
             this.deviceInfo.isDesktop = currentDevice.desktop() || getBrowserDeviceType(Number.MAX_SAFE_INTEGER)
-            this.configs.menuCollapsed = this.deviceInfo.isTablet
+            this.configs.isMenuCollapsed = this.deviceInfo.isTablet
         },
         dispatchThemeOverrides({overrides, color}) {
             this.theme.overrides = overrides
@@ -106,6 +119,12 @@ const useGlobalStore = defineStore('global', {
                 this.isRouterAlive = true
             })
         }
+    },
+    persist: {
+        key: 'pinia', //存储名称
+        storage: localStorage, // 存储方式
+        //指定 state 中哪些数据需要被持久化。[] 表示不持久化任何状态，undefined 或 null 表示持久化整个 state
+        paths: ['configs', 'theme'],
     },
 })
 

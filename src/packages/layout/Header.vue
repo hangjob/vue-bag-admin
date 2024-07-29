@@ -1,16 +1,15 @@
 <template>
-    <n-layout-header :inverted="false" bordered>
+    <n-layout-header class="bag-layout-header" :inverted="false" bordered>
         <n-page-header>
             <template #title>
                 <component is="LayoutHeaderTitle">
-                    <n-el tag="div" v-if="!$globalStore.deviceInfo.isMobile"
-                          class="flex items-center justify-center border-solid border-r bag-border-color h-[50px]"
-                          :style="{width:$globalStore.configs.layoutSiderWidth+'px'}">
-                        <a href="" class="text-base flex-shrink-0">{{ $globalStore.webSite.title }}</a>
+                    <div v-if="!$globalStore.deviceInfo.isMobile"
+                         class="flex items-center justify-center border-solid border-r bag-border-color h-[50px] text-inherit"
+                         :style="{width:$globalStore.configs.layoutSiderWidth+'px'}">
+                        <a href="/" class="text-base flex-shrink-0">{{ $globalStore.webSite.title }}</a>
                         <span class="text-xs ml-2 flex-shrink-0">{{ $globalStore.webSite.subTitle }}</span>
-                    </n-el>
-                    <n-el
-                        tag="div"
+                    </div>
+                    <div
                         class="flex cursor-pointer items-center justify-center border-solid border-r bag-border-color h-[50px] w-[64px]"
                         v-else>
                         <n-button
@@ -22,7 +21,7 @@
                                 </n-icon>
                             </n-badge>
                         </n-button>
-                    </n-el>
+                    </div>
                 </component>
             </template>
             <template #subtitle>

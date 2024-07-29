@@ -1,9 +1,11 @@
 <template>
-    <n-result class="" status="418" title="418 我是个杯具" description="一切尽在不言中">
-        <template #footer>
-            <n-button @click="handleClick">接受真相就是这么简单</n-button>
-        </template>
-    </n-result>
+    <div class="h-full flex items-center justify-center mt-[-100px]">
+        <n-result size="huge" status="404" title="404 我是个杯具" description="一切尽在不言中">
+            <template #footer>
+                <n-button @click="handleClick">返回</n-button>
+            </template>
+        </n-result>
+    </div>
 </template>
 <style lang="less" scoped>
 

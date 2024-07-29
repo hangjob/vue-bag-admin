@@ -13,13 +13,15 @@ import * as http from "@/packages/http/request.js"
 import * as radash from "radash"
 import * as hooksPlus from "vue-hooks-plus"
 import * as dayjs from "dayjs"
-
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate' // 持久化
+import useComponents from "@/packages/components/index.js"
 Array.prototype.first = function () {
     return this.slice(0, 1)[0];
 }
 const pina = createPinia()
+pina.use(piniaPluginPersistedstate)
 const app = createApp(App)
-
+app.use(useComponents)
 const framework = new Framework({
     app,
     pina,

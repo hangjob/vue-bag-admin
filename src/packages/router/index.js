@@ -51,6 +51,13 @@ function updataSubMenu(app, to) {
     app.subMenus = (data && data.children) || []
 }
 
+// 更新菜单
+function updataMenus(app, to) {
+    const item = app.appGroups.find((t) => t.id === app.currentRouter.meta.topId)
+    item ? app.dispatchMenus(item.children) : app.dispatchMenus(app.sourceMenus)
+}
+
+
 router.afterEach((to, from) => {
     const app = useGlobalStore()
     app.currentRouter = to;
@@ -58,6 +65,7 @@ router.afterEach((to, from) => {
     updataBreadcrumbMenus(app, to)
     updataPersistenceTabs(app, to)
     updataSubMenu(app, to)
+    updataMenus(app, to)
 })
 
 export default router;

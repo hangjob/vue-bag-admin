@@ -25,6 +25,7 @@
     "nanoid": "^5.0.7",
     "nprogress": "^0.2.0",
     "pinia": "^2.1.7",
+    "pinia-plugin-persistedstate": "^3.2.1",
     "radash": "^12.1.0",
     "vite-plugin-mock": "^3.0.2",
     "vue": "^3.4.21",

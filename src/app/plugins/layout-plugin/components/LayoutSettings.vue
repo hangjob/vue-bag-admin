@@ -4,7 +4,7 @@
             <n-form ref="formRef" :model="form">
                 <n-space vertical>
                     <n-form-item label="布局" path="user.name">
-                        <div class="composition flex w-full justify-around">
+                        <div class="composition  flex w-full justify-around">
                             <div
                                 class="classical shadow-blue-400 bg-[#ebeef1] h-[45px] flex-1 relative rounded-sm overflow-hidden cursor-pointer"
                                 @click="$globalStore.configs.layoutName = 'default'">
@@ -66,10 +66,13 @@
                     <n-form-item label-placement="left" label="标签显示" path="user.phone">
                         <n-switch v-model:value="$globalStore.configs.isTabar"/>
                     </n-form-item>
+                    <n-form-item label-placement="left" label="面包屑显示" path="user.phone">
+                        <n-switch v-model:value="$globalStore.configs.isBreadcrumb"/>
+                    </n-form-item>
                     <n-form-item label-placement="left" label="标签持久化" path="user.phone">
                         <n-switch v-model:value="$globalStore.configs.isDataPersistence"/>
                     </n-form-item>
-                    <n-form-item label-placement="left" label="分类子菜单" path="user.phone">
+                    <n-form-item label-placement="left" label="应用分类子菜单" path="user.phone">
                         <n-switch v-model:value="$globalStore.configs.isSubmenu"/>
                     </n-form-item>
                     <n-form-item label-placement="left" label="模块坞" path="user.phone">
@@ -85,7 +88,12 @@
                         <n-switch v-model:value="$globalStore.configs.isWatermark"/>
                     </n-form-item>
                     <n-form-item label-placement="left" label="标签风格" path="user.phone">
-                        <n-select v-model:value="form.value" :options="options" placeholder="选择标签风格"/>
+                        <n-select v-model:value="$globalStore.configs.tabStyle" :options="form.tabStyle"
+                                  placeholder="选择标签风格"/>
+                    </n-form-item>
+                    <n-form-item label-placement="left" label="表单风格" path="user.phone">
+                        <n-select v-model:value="$globalStore.configs.formStyle" :options="form.tabStyle"
+                                  placeholder="选择表单风格"/>
                     </n-form-item>
                     <n-form-item label-placement="left" label="语言切换" path="user.phone">
                         <n-select v-model:value="$globalStore.configs.language" :options="form.languageOptions"
@@ -110,17 +118,15 @@ const {appContext: {config: {globalProperties}}} = getCurrentInstance();
 
 const form = reactive({
     setp: 75,
-    marks:[],
-    languageOptions:[
-        {
-            label: "中文",
-            value: 'zh',
-        },
-        {
-            label: "英文",
-            value: 'en',
-        }
+    marks: [],
+    languageOptions: [
+        {label: "中文", value: 'zh',},
+        {label: "英文", value: 'en',}
     ],
+    tabStyle: [
+        {label: "按钮风格", value: 'button',},
+        {label: "卡片风格", value: 'card',},
+    ]
 })
 
 
@@ -132,7 +138,7 @@ form.marks = arrs.reduce((accumulator, current) => {
 watch(globalProperties?.$globalStore?.configs, (newValue) => {
     const data = arrs.find(item => item.width === newValue.layoutSiderWidth)
     form.setp = data.setp
-},{
+}, {
     deep: true,
     immediate: true
 })
@@ -155,7 +161,6 @@ const options = []
             content: "";
             background-color: #001529;
         }
-
         &:after {
             position: absolute;
             top: 0;

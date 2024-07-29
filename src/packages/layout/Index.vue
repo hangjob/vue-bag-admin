@@ -1,10 +1,10 @@
 <template>
-    <div class="flex flex-col" style="height: 100%">
+    <n-el tag="div" class="flex flex-col" style="height: 100%">
         <Header/>
         <n-layout fle has-sider style="flex: 1;">
             <n-layout-sider
                 bordered
-                v-model:collapsed="$globalStore.configs.menuCollapsed"
+                v-model:collapsed="$globalStore.configs.isMenuCollapsed"
                 :show-trigger="$globalStore.configs.layoutName === 'default' && !$globalStore.deviceInfo.isMobile"
                 collapse-mode="width"
                 :collapsed-width="$globalStore.configs.layoutName === 'lessen' ? $globalStore.configs.layoutSiderWidth : $globalStore.configs.collapsedWidth"
@@ -14,7 +14,7 @@
             </n-layout-sider>
             <div class="flex h-full flex-col flex-auto overflow-hidden item">
                 <template v-if="components.LayoutHeaderSubtitle">
-                    <n-breadcrumb class="py-2 px-4">
+                    <n-breadcrumb class="py-2 px-4" v-if="$globalStore.configs.isBreadcrumb">
                         <n-breadcrumb-item v-for="item in $globalStore.breadcrumb">
                             {{ $global?.helpers?.formatTitle($global, item) }}
                         </n-breadcrumb-item>
@@ -24,8 +24,8 @@
                 <component is="LayoutTabBar">
                     <TabBar v-if="$globalStore.configs.isTabar"/>
                 </component>
-                <n-layout id="layout" has-sider :native-scrollbar="false">
-                    <router-view class="flex-auto"></router-view>
+                <n-layout id="layout" class="p-2 bg-gray-50" has-sider :native-scrollbar="false">
+                    <router-view></router-view>
                 </n-layout>
             </div>
         </n-layout>
@@ -38,7 +38,7 @@
         <component is="LayoutFooter">
             <Footer/>
         </component>
-    </div>
+    </n-el>
     <n-watermark
         v-if="$globalStore.configs.isWatermark"
         :content="$globalStore.configs.watermark"

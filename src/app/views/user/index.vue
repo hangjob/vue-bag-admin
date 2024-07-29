@@ -1,8 +1,5 @@
 <template>
-    <div>
-        <n-button type="primary" @click="handleClick">usrr</n-button>
-        <n-button type="success" @click="handleClick">usrr</n-button>
-    </div>
+   <BagTable/>
 </template>
 <script setup>
 import {useRouter} from "vue-router";
