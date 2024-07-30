@@ -1,7 +1,7 @@
-import BagTable from "@/packages/components/BagTable.vue";
+import GlobalTable from "@/packages/components/GlobalTable.vue";
 
 const useComponents = (app) => {
-    app.component('BagTable', BagTable)
+    app.component('BagGlobalTable', GlobalTable)
 }
 
 export default useComponents
