@@ -8,6 +8,16 @@ const result = (data = []) => {
 
 const menus = [
     {
+        id: 10000,
+        title: '登录',
+        file: '/src/app/views/login/index.vue',
+        path: '/login',
+        name: 'login',
+        icon: 'BookOutline',
+        root: '/',
+        overlayRouting: false
+    },
+    {
         id: 0,
         title: '首页',
         localesKey: 'home',
@@ -16,7 +26,7 @@ const menus = [
         name: 'home',
         icon: 'BookOutline',
         isClose: false,
-        sort:100
+        sort: 100
     },
     {
         id: 1,

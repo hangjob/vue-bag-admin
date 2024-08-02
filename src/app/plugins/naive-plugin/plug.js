@@ -10,12 +10,12 @@ const setupNaive = (ctx) => {
     }));
     // 解决脱离setup也能用
     const {message, notification, dialog, loadingBar, modal} = createDiscreteApi(
-        ["message","dialog", "notification", "loadingBar", "modal"],
+        ["message", "dialog", "notification", "loadingBar", "modal"],
         {
             configProviderProps: configProviderPropsRef
         }
     );
-    ctx.naive = {
+    window.naive = ctx.naive = {
         message,
         notification,
         dialog,

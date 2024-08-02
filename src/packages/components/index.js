@@ -1,7 +1,7 @@
 import GlobalTable from "@/packages/components/GlobalTable.vue";
 
-const useComponents = (app) => {
+const setupComponents = (app) => {
     app.component('BagGlobalTable', GlobalTable)
 }
 
-export default useComponents
+export default setupComponents

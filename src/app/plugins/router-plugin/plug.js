@@ -12,7 +12,8 @@ const files = import.meta.glob(`@/app/views/*/*.vue`, {eager: true})
 function useAddRouter(ctx, routes = []) {
     if (ctx.radash.isArray(routes)) {
         ctx.helpers.depthForEach(routes, (item) => {
-            if (!ctx.router.hasRoute(item.name)) {
+            // overlayRouting 是否开启覆盖路由，开启后则可以覆盖框架已有的路由，注意item.root你所填根节点
+            if (!ctx.router.hasRoute(item.name) || item.overlayRouting) {
                 const {component, name, path, ...meta} = item
                 // 注意这里，如果不过扩展meta属性，其他属性添加不进去，被addRoute过滤了
                 ctx.router.addRoute(item.root ? item.root : 'layout', {

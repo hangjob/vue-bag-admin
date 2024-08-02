@@ -58,15 +58,17 @@
             </n-space>
         </template>
         <template #table="{height}">
-            <n-data-table flex-height :style="{height:height+'px'}" :single-line="false" :columns="compTable.columns" :data="compTable.data" :pagination="compTable.pagination"/>
+            <n-data-table flex-height :style="{height:height+'px'}" :single-line="false" :columns="compTable.columns"
+                          :data="compTable.data" :pagination="compTable.pagination" />
         </template>
     </bag-global-table>
 </template>
 <script setup>
 import $ from "jquery"
+
 const formValue = reactive({})
 const compTable = reactive({
-    data: Array.from({ length: 46 }).map((_, index) => ({
+    data: Array.from({length: 46}).map((_, index) => ({
         key: index,
         name: `Edward Edward Edward Edward Edward Edward King ${index}`,
         age: 32,

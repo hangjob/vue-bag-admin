@@ -15,16 +15,32 @@ const alovaInstance = createAlova({
         // 假设我们需要添加token到请求头
         // config.headers.token = 'token'
     },
+    // 如需重写此方法
     async responsed(response) {
-        if (response.status !== 200) {
-            return Promise.reject(response)
+        if (response.ok) {
+            const json = await response.json();
+            if (response.status !== 200) {
+                if (Object.keys(json?.error?.details).length === 0) {
+                    window.naive.message.warning(json?.error?.message)
+                } else {
+                    json?.error?.details?.errors?.forEach((item) => {
+                        window.naive.message.warning(item.message)
+                    })
+                }
+                return Promise.reject(json)
+            }
+            if (successCode.includes(json.code)) {
+                return Promise.resolve(json);
+            }
+            return Promise.resolve(response);
+        } else {
+            window.naive.message.warning(response.statusText)
+            return Promise.resolve(response);
         }
-        const json = await response.json();
-        if (successCode.includes(json.code)) {
-            return Promise.resolve(json);
-        }
-        return Promise.resolve(response);
     },
+    onError(res) {
+        console.log(res)
+    }
 })
 
 

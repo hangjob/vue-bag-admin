@@ -14,14 +14,17 @@ import * as radash from "radash"
 import * as hooksPlus from "vue-hooks-plus"
 import * as dayjs from "dayjs"
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate' // 持久化
-import useComponents from "@/packages/components/index.js"
+import setupComponents from "@/packages/components/index.js"
+import {useApisPlugin} from "@/packages/http/apis.js";
+
 Array.prototype.first = function () {
     return this.slice(0, 1)[0];
 }
 const pina = createPinia()
 pina.use(piniaPluginPersistedstate)
 const app = createApp(App)
-app.use(useComponents)
+app.use(setupComponents)
+
 const framework = new Framework({
     app,
     pina,
@@ -31,8 +34,9 @@ const framework = new Framework({
     hooksPlus,
     dayjs,
     http,
-    nprogress
+    nprogress,
 });
+
 
 export {
     app,
@@ -44,5 +48,6 @@ export {
     dayjs,
     framework,
     http,
-    nprogress
+    nprogress,
+    useApisPlugin
 }

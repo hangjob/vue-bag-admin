@@ -36,6 +36,7 @@ import {NAvatar, NText} from 'naive-ui'
 
 const {appContext: {config: {globalProperties}}} = getCurrentInstance();
 const useI18n = globalProperties?.$global?.i18n?.useI18n()
+const $router = globalProperties?.$router
 
 watch(
     () => globalProperties.$globalStore?.configs?.language,
@@ -144,17 +145,22 @@ const allOptions = [
         localesKey: 'userName',
         icon: renderIcon(UserCircleRegular, {size: 18}),
         props: {
-            class: 'mr-2'
+            class: 'mr-2',
         },
         options: [
             {
                 title: '修改账户',
                 key: '1',
-                disabled: true
+                disabled: true,
             },
             {
                 title: '退出登录',
                 key: '3',
+                props: {
+                    onClick: () => {
+                        $router.push({path:'/login'})
+                    }
+                }
             }
         ]
     },
