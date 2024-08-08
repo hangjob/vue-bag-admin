@@ -1,5 +1,5 @@
 import {defineStore} from 'pinia'
-import {unique, replaceOrAppend} from 'radash'
+import {unique, replaceOrAppend, select} from 'radash'
 import currentDevice from "current-device" // 获取设备
 import {nextTick} from "vue"
 
@@ -37,7 +37,7 @@ const useGlobalStore = defineStore('global', {
                 isFooter: true, // 是否显示底部
                 isWatermark: false, // 是否水印
                 watermark: '品茗科技', // 水印文字
-                layoutName:'lessen', // 主题名称 default lessen spillover
+                layoutName: 'lessen', // 主题名称 default lessen spillover
                 tabStyle: 'button', // 标签风格 button card
                 formStyle: 'drawer', // 表单风格 drawer dialogue
             },
@@ -80,7 +80,7 @@ const useGlobalStore = defineStore('global', {
             this.routes = unique(this.routes.concat(routes), item => item.id);
         },
         dispatchMenus(menus) {
-            this.menus = unique(menus, item => item.id);
+            this.menus = unique(select(menus, f => ({...f}), f => !f.hasMenu), item => item.id);
         },
         dispatchSourceMenus(menus) {
             this.sourceMenus = unique(menus, item => item.id);
@@ -95,7 +95,7 @@ const useGlobalStore = defineStore('global', {
             this.isLoadRoutes = true
         },
         dispatchTabs(tab) {
-            if (tab.title) {
+            if (tab.title && tab.id) {
                 const tabs = replaceOrAppend(this.tabs, tab, existingTab => existingTab.id === tab.id);
                 this.tabs = tabs.sort((a, b) => {
                     return b.sort || 0 - a.sort || 0

@@ -84,8 +84,8 @@ function commonMenuItem(ctx, data) {
  */
 async function getAppMenus(ctx) {
     const {dispatchRoutes, dispatchMenus, dispatchSourceMenus} = ctx.app.config.globalProperties.$globalStore;
-    return http.httpPost('/getMenus').then((res) => {
-        const menus = commonMenuItem(ctx, res.data)
+    return http.httpGet('/menus?limit =-1').then((res) => {
+        const menus = commonMenuItem(ctx, ctx.helpers.buildTree(res.data))
         const routes = mapMenusToRoutes(menus)
         dispatchMenus(menus)
         dispatchRoutes(routes)

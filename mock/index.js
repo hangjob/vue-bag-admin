@@ -14,8 +14,10 @@ const menus = [
         path: '/login',
         name: 'login',
         icon: 'BookOutline',
-        root: '/',
-        overlayRouting: false
+        root: '/', // 路由布局
+        hasMenu: true, // 隐藏菜单
+        hasRouter: true, // 隐藏路由
+        overlayRouting: false // 是否开启覆盖路由 默认开启
     },
     {
         id: 0,
@@ -25,7 +27,7 @@ const menus = [
         path: '/home',
         name: 'home',
         icon: 'BookOutline',
-        isClose: false,
+        hasClose: false,
         sort: 100
     },
     {
@@ -36,7 +38,7 @@ const menus = [
         path: '/user',
         name: 'user',
         icon: 'BookOutline',
-        isClose: true
+        hasClose: true
     },
     {
         id: 2,
@@ -46,7 +48,7 @@ const menus = [
         path: '/pmp',
         name: 'pmp',
         icon: 'BookOutline',
-        isClose: true
+        hasClose: true
     },
     {
         id: 3,
@@ -56,7 +58,7 @@ const menus = [
         path: '/icon',
         name: 'icon',
         icon: 'BookOutline',
-        isClose: true
+        hasClose: true
     },
     {
         id: 4,
@@ -74,7 +76,7 @@ const menus = [
                 file: '/src/app/views/editor/md.vue',
                 path: '/md',
                 name: 'md',
-                isClose: true
+                hasClose: true
             },
             {
                 id: 6,
@@ -83,7 +85,7 @@ const menus = [
                 file: '/src/app/views/editor/rich.vue',
                 path: '/rich',
                 name: 'rich',
-                isClose: true
+                hasClose: true
             },
         ]
     }]
@@ -97,7 +99,7 @@ const gcjsMenus = [
         path: '/user2',
         name: 'user2',
         icon: 'BookOutline',
-        isClose: true
+        hasClose: true
     },
 ]
 
@@ -109,7 +111,7 @@ const baseMenus = [
         file: '/src/app/views/editor/rich.vue',
         path: '/rich3',
         name: 'rich3',
-        isClose: true
+        hasClose: true
     },
 ]
 
@@ -151,7 +153,7 @@ export default [
                     file: '/src/app/views/user/index.vue',
                     path: '/user',
                     name: 'user',
-                    isClose: true
+                    hasClose: true
                 },
                 {
                     id: 400,
@@ -160,7 +162,7 @@ export default [
                     file: '/src/app/views/user/index.vue',
                     path: '/user',
                     name: 'user',
-                    isClose: true
+                    hasClose: true
                 },
             ])
         }

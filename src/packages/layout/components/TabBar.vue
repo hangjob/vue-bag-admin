@@ -11,7 +11,7 @@
                           closable
                           @click="$global.router.push(item)">
                     {{ $global?.helpers?.formatTitle($global, item) }}
-                    <template v-if="item.isClose" #icon>
+                    <template v-if="!item.hasClose" #icon>
                         <n-icon size="18" @click.stop="$globalHook.useCloseTabBarJump(item)">
                             <CloseOutline/>
                         </n-icon>
@@ -26,7 +26,7 @@
                      :style="tabStyle($globalStore,item)"
                      v-for="item in $globalStore.tabs" @click="$global.router.push(item)">
                     <span>{{ $global?.helpers?.formatTitle($global, item) }}</span>
-                    <template v-if="item.isClose">
+                    <template v-if="!item.hasClose">
                         <n-icon size="18" @click.stop="$globalHook.useCloseTabBarJump(item)">
                             <CloseOutline/>
                         </n-icon>

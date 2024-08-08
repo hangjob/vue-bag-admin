@@ -57,6 +57,37 @@ function formatTitle(ctx, item, isRender = false) {
 }
 
 
+function buildTree(data = [], key = 'id', pkey = 'pid') {
+    const nodeMap = new Map(); // 用于存储所有节点
+    const rootNodes = []; // 用于存储根节点
+
+    // 遍历数据并创建节点映射
+    data.forEach(item => {
+        const node = {...item};
+        nodeMap.set(item[key], node);
+
+        // 如果没有父节点，则添加到根节点列表
+        if (item[pkey] === null) {
+            rootNodes.push(node);
+        }
+    });
+
+    // 连接子节点到父节点
+    data.forEach(item => {
+        if (item[pkey] !== null) {
+            const parentNode = nodeMap.get(item[pkey]);
+            if (parentNode) {
+                if (!parentNode.children) {
+                    parentNode.children = [];
+                }
+                parentNode.children.push(nodeMap.get(item[key]));
+            }
+        }
+    });
+
+    return rootNodes;
+}
+
 const nanoid = customAlphabet('ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890', 24);
 
 
@@ -66,5 +97,6 @@ export {
     findParents,
     lscache,
     formatTitle,
-    nanoid
+    nanoid,
+    buildTree
 }

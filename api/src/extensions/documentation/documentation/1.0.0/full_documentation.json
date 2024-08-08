@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-08-01T12:02:44.542Z"
+    "x-generation-date": "2024-08-08T01:40:34.612Z"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -95,7 +95,46 @@
           "data": {
             "type": "object",
             "properties": {
+              "title": {
+                "type": "string"
+              },
+              "path": {
+                "type": "string"
+              },
+              "des": {
+                "type": "string"
+              },
+              "file": {
+                "type": "string"
+              },
               "name": {
+                "type": "string"
+              },
+              "icon": {
+                "type": "string"
+              },
+              "root": {
+                "type": "string"
+              },
+              "hasMenu": {
+                "type": "boolean"
+              },
+              "hasRouter": {
+                "type": "boolean"
+              },
+              "overlayRouting": {
+                "type": "boolean"
+              },
+              "sort": {
+                "type": "integer"
+              },
+              "hasClose": {
+                "type": "boolean"
+              },
+              "pid": {
+                "type": "integer"
+              },
+              "localesKey": {
                 "type": "string"
               }
             }
@@ -151,7 +190,46 @@
       "Menu": {
         "type": "object",
         "properties": {
+          "title": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "des": {
+            "type": "string"
+          },
+          "file": {
+            "type": "string"
+          },
           "name": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          },
+          "root": {
+            "type": "string"
+          },
+          "hasMenu": {
+            "type": "boolean"
+          },
+          "hasRouter": {
+            "type": "boolean"
+          },
+          "overlayRouting": {
+            "type": "boolean"
+          },
+          "sort": {
+            "type": "integer"
+          },
+          "hasClose": {
+            "type": "boolean"
+          },
+          "pid": {
+            "type": "integer"
+          },
+          "localesKey": {
             "type": "string"
           },
           "createdAt": {

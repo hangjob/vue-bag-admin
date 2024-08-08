@@ -368,12 +368,26 @@ export interface ApiMenuMenu extends Schema.CollectionType {
     singularName: 'menu';
     pluralName: 'menus';
     displayName: 'Menu';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
+    title: Attribute.String;
+    path: Attribute.String;
+    des: Attribute.Text;
+    file: Attribute.String;
     name: Attribute.String;
+    icon: Attribute.String;
+    root: Attribute.String;
+    hasMenu: Attribute.Boolean & Attribute.DefaultTo<false>;
+    hasRouter: Attribute.Boolean & Attribute.DefaultTo<false>;
+    overlayRouting: Attribute.Boolean & Attribute.DefaultTo<false>;
+    sort: Attribute.Integer;
+    hasClose: Attribute.Boolean & Attribute.DefaultTo<false>;
+    pid: Attribute.Integer;
+    localesKey: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

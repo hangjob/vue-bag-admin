@@ -1,8 +1,6 @@
 import {createAlova} from 'alova';
 import GlobalFetch from 'alova/GlobalFetch';
 import VueHook from 'alova/vue';
-
-const successCode = [1]
 const alovaInstance = createAlova({
     // 假设我们需要与这个域名的服务器交互
     baseURL: '/api',
@@ -17,7 +15,7 @@ const alovaInstance = createAlova({
     },
     // 如需重写此方法
     async responsed(response) {
-        if (response.ok) {
+        if (response.status !== 500) {
             const json = await response.json();
             if (response.status !== 200) {
                 if (Object.keys(json?.error?.details).length === 0) {
@@ -29,23 +27,17 @@ const alovaInstance = createAlova({
                 }
                 return Promise.reject(json)
             }
-            if (successCode.includes(json.code)) {
-                return Promise.resolve(json);
-            }
-            return Promise.resolve(response);
+            return Promise.resolve(json);
         } else {
             window.naive.message.warning(response.statusText)
-            return Promise.resolve(response);
+            return Promise.reject(response);
         }
-    },
-    onError(res) {
-        console.log(res)
     }
 })
 
 
 const httpPost = (url, data = null, options = {}) => {
-    return alovaInstance.Post(url, data, options)
+    return alovaInstance.Post(url, data,options)
 }
 
 const httpGet = (url, data = null, options = {}) => {

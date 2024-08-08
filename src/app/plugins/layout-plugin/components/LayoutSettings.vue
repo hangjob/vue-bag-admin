@@ -7,7 +7,7 @@
                         <div class="composition  flex w-full justify-around">
                             <div
                                 class="classical shadow-blue-400 bg-[#ebeef1] h-[45px] flex-1 relative rounded-sm overflow-hidden cursor-pointer"
-                                @click="$globalStore.configs.layoutName = 'default'">
+                                @click="handleCutLoayout($globalStore,'default')">
                                 <div class="absolute top-0 left-0 block bg-white w-[25%] h-full"></div>
                                 <n-icon v-if="$globalStore.configs.layoutName === 'default'"
                                         class="icon absolute right-[25%] bottom-[5px]" :component="CheckboxOutline"
@@ -15,7 +15,7 @@
                             </div>
                             <div
                                 class="classical shadow-sm bg-[#ebeef1] flex-1 h-[45px] mx-[15%] relative rounded-sm overflow-hidden cursor-pointer"
-                                @click="$globalStore.configs.layoutName = 'lessen'">
+                                @click="handleCutLoayout($globalStore,'lessen')">
                                 <div class="absolute top-0 left-0 block bg-white w-[25%] h-full"></div>
                                 <n-icon v-if="$globalStore.configs.layoutName === 'lessen'"
                                         class="icon absolute right-[25%] bottom-[5px]" :component="CheckboxOutline"
@@ -23,7 +23,7 @@
                             </div>
                             <div
                                 class="classical shadow-sm bg-[#ebeef1] flex-1 h-[45px] relative rounded-sm overflow-hidden cursor-pointer"
-                                @click="$globalStore.configs.layoutName = 'spillover'">
+                                @click="handleCutLoayout($globalStore,'spillover')">
                                 <div class="absolute top-0 left-0 block bg-white w-[25%] h-full"></div>
                                 <n-icon v-if="$globalStore.configs.layoutName === 'spillover'"
                                         class="icon absolute right-[40%] bottom-[5px]" :component="CheckboxOutline"
@@ -126,9 +126,18 @@ const form = reactive({
     tabStyle: [
         {label: "按钮风格", value: 'button',},
         {label: "卡片风格", value: 'card',},
-    ]
+    ],
 })
 
+const handleCutLoayout = ($globalStore, name) => {
+    if(name === 'default'){
+        $globalStore.configs.layoutSiderWidth =  arrs[2].width
+    }
+    if(name === 'lessen'){
+        $globalStore.configs.layoutSiderWidth = arrs[0].width
+    }
+    $globalStore.configs.layoutName = name
+}
 
 form.marks = arrs.reduce((accumulator, current) => {
     accumulator[current.setp] = current.width + 'px';
@@ -161,6 +170,7 @@ const options = []
             content: "";
             background-color: #001529;
         }
+
         &:after {
             position: absolute;
             top: 0;

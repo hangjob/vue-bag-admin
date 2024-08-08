@@ -12,14 +12,17 @@ export class ApisPlugin {
 
     install({ctx}, options = []) {
         console.log(`${this.name}安装了`);
-        ctx.apis = {};
+        ctx.apis = {http};
         options.forEach((item) => {
-            ctx.apis[item.replace(/\/(\w)/g, (_, c) => (c ? c.toUpperCase() : ""))] = {
-                url: item,
-                httpGet: (data, options) => http.httpGet(item, data, options),
-                httpPost: (data, options) => http.httpPost(item, data, options)
-            }
+            const api = ctx.apis[item.replace(/\/(\w)/g, (_, c) => (c ? c.toUpperCase() : ""))] = {url: item}
+            api.httpGet = (data, options) => http.httpGet(api.url, data, options)
+            api.httpPost = (data, options) => http.httpPost(api.url, data, options)
         });
+        if (typeof window === 'object'){
+            if(!window.$apis){
+                window.$apis = ctx.apis
+            }
+        }
         this._enable = true;
     }
 

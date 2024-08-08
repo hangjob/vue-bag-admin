@@ -20,9 +20,12 @@ import {useApisPlugin} from "@/packages/http/apis.js";
 Array.prototype.first = function () {
     return this.slice(0, 1)[0];
 }
+
+const app = createApp(App)
+
 const pina = createPinia()
 pina.use(piniaPluginPersistedstate)
-const app = createApp(App)
+
 app.use(setupComponents)
 
 const framework = new Framework({

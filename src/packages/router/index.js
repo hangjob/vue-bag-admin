@@ -36,7 +36,7 @@ function updataTabs(app, to) {
 
 // 更新持久化存储
 function updataPersistenceTabs(app, to) {
-    if (to && app.configs.isDataPersistence) {
+    if (to && Object.keys(to.meta).length && app.configs.isDataPersistence) {
         const data = {...to.meta, path: to.path};
         const tabs = replaceOrAppend(lscache.get('tabs') || [], data, f => f.id === data.id)
         app.tabs = tabs
