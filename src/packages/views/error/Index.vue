@@ -18,7 +18,7 @@ const router = useRouter()
 const handleClick = () => {
     loading.value = true
     setTimeout(() => {
-        window.location.reload()
+        router.push('/')
     }, 200)
 }
 </script>
