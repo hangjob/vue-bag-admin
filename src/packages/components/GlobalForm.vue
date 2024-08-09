@@ -17,10 +17,7 @@
             <slot></slot>
             <template #footer>
                 <slot name="footer">
-                    <n-space justify="end">
-                        <n-button @click="emit('handleSubmit')" type="primary">提交数据</n-button>
-                        <n-button @click="handleClick(false)">关闭</n-button>
-                    </n-space>
+                    <FooterComponent></FooterComponent>
                 </slot>
             </template>
         </n-card>
@@ -39,25 +36,24 @@
             <slot></slot>
             <template #footer>
                 <slot name="footer">
-                    <n-space justify="end">
-                        <n-button @click="emit('handleSubmit')" type="primary">提交数据</n-button>
-                        <n-button @click="handleClick(false)">关闭</n-button>
-                    </n-space>
+                    <FooterComponent></FooterComponent>
                 </slot>
             </template>
         </n-drawer-content>
     </n-drawer>
 </template>
 <script setup>
-const props  = defineProps({
+import {NSpace, NButton} from "naive-ui"
+
+const props = defineProps({
     showModal: {
         type: Boolean,
         default: false
     }
 })
-const attrs = useAttrs()
-console.log(attrs)
-const emit = defineEmits(['update:showModal','handleSubmit'])
+
+
+const emit = defineEmits(['update:showModal', 'handleSubmit'])
 const showModalComputed = computed({
     get() {
         return props.showModal;
@@ -66,7 +62,21 @@ const showModalComputed = computed({
         emit('update:showModal', val);
     },
 });
-const handleClick = (val)=>{
+const handleClick = (val) => {
     emit('update:showModal', val);
+}
+
+const FooterComponent = (props, context) => {
+    return h(NSpace, {
+        justify: 'end'
+    }, {
+        default: () => [
+            h(NButton, {
+                type: 'primary',
+                onClick: () => handleClick(false)
+            }, {default: () => '提交数据'}),
+            h(NButton, {}, {default: () => '关闭'})
+        ]
+    })
 }
 </script>
