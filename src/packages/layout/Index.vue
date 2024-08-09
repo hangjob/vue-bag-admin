@@ -24,7 +24,7 @@
                 <component is="LayoutTabBar">
                     <TabBar v-if="$globalStore.configs.isTabar"/>
                 </component>
-                <n-layout id="layout" class="p-2 bg-gray-50">
+                <n-layout id="layout" class="p-2">
                     <router-view></router-view>
                 </n-layout>
             </div>

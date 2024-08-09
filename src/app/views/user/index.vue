@@ -1,6 +1,6 @@
 <template>
-    <bag-global-table :modal="compTable.modal">
-        <template #search="{tableCompData}">
+    <div class="h-full flex flex-col">
+        <n-card content-style="padding:24px 10px 0px 10px">
             <n-form
                 ref="formRef"
                 inline
@@ -50,69 +50,63 @@
                     </n-gi>
                 </n-grid>
             </n-form>
-        </template>
-        <template #header="{tableCompData}">
-            <n-space>
-                <n-button type="primary" @click="handleClick(tableCompData)">新增数据</n-button>
-                <n-button dashed type="error">批量删除</n-button>
-            </n-space>
-        </template>
-        <template #table="{tableCompData}">
-            <n-data-table flex-height :style="{height:tableCompData.height+'px'}" :single-line="false"
+        </n-card>
+        <n-card content-style="padding:10px" header-style="padding:10px" style="margin-top: 10px;flex: 1">
+            <template #header>
+                <n-space>
+                    <n-button type="primary" @click="handleClick(true)">新增数据</n-button>
+                    <n-button dashed type="error">批量删除</n-button>
+                </n-space>
+            </template>
+            <n-data-table flex-height class="h-full min-h-[400px]" :single-line="false"
                           :columns="compTable.columns"
                           :data="compTable.data" :pagination="compTable.pagination"/>
-        </template>
-        <template #form="{tableCompData}">
-            <n-form
-                ref="formRef"
-                inline
-                :label-width="80"
-                :model="formValue"
-                :rules="rules"
-                label-placement="left"
-            >
-                <n-grid x-gap="12" :cols="1">
-                    <n-gi>
-                        <n-form-item label="申请状态" path="user.name">
-                            <n-input v-model:value="formValue.name" placeholder="输入申请状态"/>
-                        </n-form-item>
-                    </n-gi>
-                    <n-gi>
-                        <n-form-item label="申请状态:" path="user.name">
-                            <n-input v-model:value="formValue.name" placeholder="输入申请状态"/>
-                        </n-form-item>
-                    </n-gi>
-                    <n-gi>
-                        <n-form-item label="申请状态" path="user.name">
-                            <n-input v-model:value="formValue.name" placeholder="输入申请状态"/>
-                        </n-form-item>
-                    </n-gi>
-                    <n-gi>
-                        <n-form-item label="申请状态" path="user.name">
-                            <n-input v-model:value="formValue.name" placeholder="输入申请状态"/>
-                        </n-form-item>
-                    </n-gi>
-                    <n-gi>
-                        <n-form-item label="申请状态" path="user.name">
-                            <n-input v-model:value="formValue.name" placeholder="输入申请状态"/>
-                        </n-form-item>
-                    </n-gi>
-                    <n-gi>
-                        <n-form-item label="申请状态" path="user.name">
-                            <n-input v-model:value="formValue.name" placeholder="输入申请状态"/>
-                        </n-form-item>
-                    </n-gi>
+        </n-card>
+    </div>
+    <bag-global-form :modal="compTable.modal" v-model:showModal="compTable.showModal">
+        <n-form
+            ref="formRef"
+            inline
+            :label-width="80"
+            :model="formValue"
+            :rules="rules"
+            label-placement="left"
+        >
+            <n-grid x-gap="12" :cols="1">
+                <n-gi>
+                    <n-form-item label="申请状态" path="user.name">
+                        <n-input v-model:value="formValue.name" placeholder="输入申请状态"/>
+                    </n-form-item>
+                </n-gi>
+                <n-gi>
+                    <n-form-item label="申请状态:" path="user.name">
+                        <n-input v-model:value="formValue.name" placeholder="输入申请状态"/>
+                    </n-form-item>
+                </n-gi>
+                <n-gi>
+                    <n-form-item label="申请状态" path="user.name">
+                        <n-input v-model:value="formValue.name" placeholder="输入申请状态"/>
+                    </n-form-item>
+                </n-gi>
+                <n-gi>
+                    <n-form-item label="申请状态" path="user.name">
+                        <n-input v-model:value="formValue.name" placeholder="输入申请状态"/>
+                    </n-form-item>
+                </n-gi>
+                <n-gi>
+                    <n-form-item label="申请状态" path="user.name">
+                        <n-input v-model:value="formValue.name" placeholder="输入申请状态"/>
+                    </n-form-item>
+                </n-gi>
+                <n-gi>
+                    <n-form-item label="申请状态" path="user.name">
+                        <n-input v-model:value="formValue.name" placeholder="输入申请状态"/>
+                    </n-form-item>
+                </n-gi>
 
-                </n-grid>
-            </n-form>
-        </template>
-        <template #form-footer="{tableCompData}">
-            <n-space justify="end">
-                <n-button type="primary">提交数据</n-button>
-                <n-button @click="tableCompData.showModal = false">关闭</n-button>
-            </n-space>
-        </template>
-    </bag-global-table>
+            </n-grid>
+        </n-form>
+    </bag-global-form>
 </template>
 <script setup>
 const formValue = reactive({})
@@ -126,6 +120,7 @@ const compTable = reactive({
     modal: {
         title: '编辑',
     },
+    showModal:false,
     columns: [{title: 'Name', key: 'name'}, {title: 'Age', key: 'age'}, {title: 'Address', key: 'address'}],
     pagination: {
         page: 1,
@@ -143,7 +138,7 @@ const compTable = reactive({
 })
 const rules = {}
 const formRef = ref();
-const handleClick = (tableCompData) => {
-    tableCompData.showModal = true
+const handleClick = (val) => {
+    compTable.showModal = val
 }
 </script>
