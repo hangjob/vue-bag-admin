@@ -120,7 +120,7 @@ const compTable = reactive({
     modal: {
         title: '编辑',
     },
-    showModal:false,
+    showModal: false,
     columns: [{title: 'Name', key: 'name'}, {title: 'Age', key: 'age'}, {title: 'Address', key: 'address'}],
     pagination: {
         page: 1,
@@ -141,7 +141,7 @@ const formRef = ref();
 const handleClick = (val) => {
     compTable.showModal = val
 }
-const handleSubmit = ()=>{
+const handleSubmit = () => {
     console.log(11)
 }
 </script>
