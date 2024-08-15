@@ -1,24 +1,34 @@
 <template>
     <div class="h-full flex items-center justify-center mt-[-100px]">
-        <n-result size="huge" status="404" title="404 找不到、不见了、错误、" description="一切尽在不言中，在给个机会吧">
+        <n-result v-if="!route.path.includes('form_')" size="huge" status="404" title="404 找不到、不见了、错误、"
+                  description="一切尽在不言中，在给个机会吧">
             <template #footer>
                 <n-button type="primary" :loading="loading" @click="handleClick">重新进入系统</n-button>
             </template>
         </n-result>
+        <div v-else>
+            {{ router.go(-1) }}
+        </div>
     </div>
 </template>
 <style lang="less" scoped>
 
 </style>
 <script setup>
-import {useRouter} from "vue-router";
+import {useRouter, useRoute, onBeforeRouteLeave} from "vue-router";
 
 const loading = ref(false)
 const router = useRouter()
+const route = useRoute()
+let timer = null;
 const handleClick = () => {
     loading.value = true
-    setTimeout(() => {
+    timer = setTimeout(() => {
         router.push('/')
-    }, 200)
+        loading.value = false
+    }, 3000)
 }
+onBeforeRouteLeave(() => {
+    timer && clearInterval(timer)
+})
 </script>

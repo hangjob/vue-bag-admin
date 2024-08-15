@@ -12,7 +12,7 @@
             style="width: 80%"
             size="medium"
             v-bind="$attrs.modal"
-            @click="handleClick(false)"
+            @close="handleClick(false)"
         >
             <slot></slot>
             <template #footer>
@@ -43,15 +43,37 @@
     </n-drawer>
 </template>
 <script setup>
-import {NSpace, NButton} from "naive-ui"
+import {NSpace, NButton, NCard} from "naive-ui"
+import {getCurrentInstance} from "vue";
+import {md5} from 'js-md5';
+
+const {appContext: {config: {globalProperties}}} = getCurrentInstance();
 
 const props = defineProps({
     showModal: {
         type: Boolean,
         default: false
-    }
+    },
 })
 
+const slots = useSlots()
+const attrs = useAttrs()
+watch(props, () => {
+    if (props.showModal && globalProperties.$globalStore.configs.formStyle === 'tab') {
+        const title = globalProperties.$global?.helpers?.formatTitle(globalProperties.$global, globalProperties.$route.meta) + '-' + attrs?.modal?.title;
+        const id = 'form_' + (attrs?.modal?.id || md5(title))
+        const component = h(NCard, {}, {
+            default: () => slots.default?.(),
+            footer: () => slots?.footer?.() || FooterComponent()
+        })
+        const options = {name: id, path: id, meta: {title, id}}
+        globalProperties.$router.addRoute(globalProperties.$route.meta.root ? globalProperties.$route.meta.root : 'layout', {
+            component,
+            ...options
+        })
+        globalProperties.$router.push(options.path)
+    }
+})
 
 const emit = defineEmits(['update:showModal', 'handleSubmit'])
 const showModalComputed = computed({
@@ -66,7 +88,7 @@ const handleClick = (val) => {
     emit('update:showModal', val);
 }
 
-const FooterComponent = (props, context) => {
+const FooterComponent = () => {
     return h(NSpace, {
         justify: 'end'
     }, {

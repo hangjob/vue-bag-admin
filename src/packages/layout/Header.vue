@@ -44,8 +44,6 @@
 
 <script setup>
 import {MenuUnfoldOutlined} from "@vicons/antd"
-import {getCurrentInstance} from 'vue';
-
 
 </script>
 <style lang="less" scoped>

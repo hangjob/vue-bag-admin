@@ -43,16 +43,6 @@
                     <n-form-item label-placement="left" label="菜单宽度">
                         <n-slider :tooltip="false" :marks="form.marks" v-model:value="form.setp" step="mark"/>
                     </n-form-item>
-                    <n-form-item label-placement="left" label="顶部导航栏色">
-                        <n-switch v-model:value="$globalStore.configs.isTopColor">
-                            <template #checked-icon>
-                                <n-icon :component="ColorPaletteOutline"/>
-                            </template>
-                            <template #unchecked-icon>
-                                <n-icon :component="ColorPaletteOutline"/>
-                            </template>
-                        </n-switch>
-                    </n-form-item>
                     <n-form-item label-placement="left" label="暗黑模式" path="user.phone">
                         <n-switch v-model:value="$globalStore.configs.isDarkMode">
                             <template #checked-icon>
@@ -127,17 +117,18 @@ const form = reactive({
         {label: "按钮风格", value: 'button',},
         {label: "卡片风格", value: 'card',},
     ],
-    formStyle:[
+    formStyle: [
         {label: "抽屉风格", value: 'drawer',},
         {label: "模态窗口", value: 'dialogue',},
+        {label: "标签风格", value: 'tab',},
     ]
 })
 
 const handleCutLoayout = ($globalStore, name) => {
-    if(name === 'default'){
-        $globalStore.configs.layoutSiderWidth =  arrs[2].width
+    if (name === 'default') {
+        $globalStore.configs.layoutSiderWidth = arrs[2].width
     }
-    if(name === 'lessen'){
+    if (name === 'lessen') {
         $globalStore.configs.layoutSiderWidth = arrs[0].width
     }
     $globalStore.configs.layoutName = name

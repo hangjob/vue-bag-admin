@@ -109,6 +109,8 @@
     </bag-global-form>
 </template>
 <script setup>
+import {NButton} from "naive-ui"
+
 const formValue = reactive({})
 const compTable = reactive({
     data: Array.from({length: 46}).map((_, index) => ({
@@ -118,10 +120,29 @@ const compTable = reactive({
         address: `London, Park Lane no. ${index}`
     })),
     modal: {
-        title: '编辑',
+        title: '新增',
     },
     showModal: false,
-    columns: [{title: 'Name', key: 'name'}, {title: 'Age', key: 'age'}, {title: 'Address', key: 'address'}],
+    columns: [{title: 'Name', key: 'name'}, {title: 'Age', key: 'age'},
+        {title: 'Address', key: 'address'},
+        {
+            title: 'Action',
+            key: 'actions',
+            render(row) {
+                return h(
+                    NButton,
+                    {
+                        size: 'small',
+                        onClick: () => {
+                            compTable.modal.title = '编辑'
+                            handleClick(true)
+                        }
+                    },
+                    {default: () => 'Send Email'}
+                )
+            }
+        }
+    ],
     pagination: {
         page: 1,
         pageSize: 30,
@@ -139,6 +160,7 @@ const compTable = reactive({
 const rules = {}
 const formRef = ref();
 const handleClick = (val) => {
+    console.log(compTable.modal)
     compTable.showModal = val
 }
 const handleSubmit = () => {

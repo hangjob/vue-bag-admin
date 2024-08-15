@@ -1,6 +1,6 @@
 import {http} from "@/packages/install.js";
 import {md5} from 'js-md5';
-
+import lscache from "lscache"
 
 const files = import.meta.glob(`@/app/views/*/*.vue`, {eager: true})
 
