@@ -5,10 +5,11 @@ import Components from 'unplugin-vue-components/vite'
 import {NaiveUiResolver} from 'unplugin-vue-components/resolvers'
 import path from "path";
 import {viteMockServe} from 'vite-plugin-mock'
+import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js"
 
 export default defineConfig(({command, mode}) => {
     const env = loadEnv(mode, process.cwd())
-    return {
+    const config = {
         // vite 配置
         plugins: [
             vue(),
@@ -46,9 +47,17 @@ export default defineConfig(({command, mode}) => {
             outDir: 'lib',
             lib: {
                 entry: path.resolve(__dirname, 'src/packages/install.js'),
-                name: 'PmWebFramework',
-                fileName: 'PmWebFramework',
+                name: 'vue-bag-admin',
+                formats: ['es', 'cjs'],
+                fileName: (format) => `vue-bag-admin.${format}.js` // 打包后的文件名
             },
+            rollupOptions:{
+                output: {
+                    manualChunks: () => {
+                        return 'vendor'
+                    }
+                }
+            }
         },
         server: {
             host: '0.0.0.0',
@@ -62,4 +71,8 @@ export default defineConfig(({command, mode}) => {
             },
         }
     }
+    if(mode === 'lib'){
+        config.plugins.push(cssInjectedByJsPlugin())
+    }
+    return config;
 })

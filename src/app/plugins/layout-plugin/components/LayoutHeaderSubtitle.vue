@@ -1,5 +1,5 @@
 <template>
-    <n-popover trigger="click" v-if="$globalStore.configs.isDocking">
+    <n-popover trigger="click" v-if="$globalStore.configs.isDocking && $globalStore.appGroups.length">
         <template #trigger>
             <n-icon size="18">
                 <GridOutline/>

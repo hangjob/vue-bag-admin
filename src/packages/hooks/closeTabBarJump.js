@@ -1,5 +1,3 @@
-import lscache from "lscache";
-
 /**
  * 关闭router
  * @param ctx
@@ -13,7 +11,6 @@ function closeTabBarJump(ctx, route) {
         const tab = idx ? tabs[--idx] : tabs[idx];
         tab && ctx.router.push(tab.path)
     }
-    lscache.set('tabs', tabs)
 }
 
 

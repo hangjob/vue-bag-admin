@@ -103,7 +103,11 @@ const allOptions = [
         key: 'home',
         localesKey: 'home',
         icon: renderIcon(HomeOutline, {size: 18}),
-        props: {}
+        props: {
+            onClick:()=>{
+                $router.push({path:'/'})
+            }
+        }
     },
     {
         title: '通知',

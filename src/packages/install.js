@@ -16,6 +16,7 @@ import * as dayjs from "dayjs"
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate' // 持久化
 import setupComponents from "@/packages/components/index.js"
 import {useApisPlugin} from "@/packages/http/apis.js";
+import  * as plugins  from "@/app/plugins/index.js"
 
 Array.prototype.first = function () {
     return this.slice(0, 1)[0];
@@ -24,9 +25,10 @@ Array.prototype.first = function () {
 const app = createApp(App)
 
 const pina = createPinia()
+app.use(pina)
 pina.use(piniaPluginPersistedstate)
-
 app.use(setupComponents)
+app.use(router)
 
 const framework = new Framework({
     app,
@@ -52,5 +54,6 @@ export {
     framework,
     http,
     nprogress,
-    useApisPlugin
+    useApisPlugin,
+    plugins
 }

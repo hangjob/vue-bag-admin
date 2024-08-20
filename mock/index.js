@@ -117,15 +117,15 @@ const baseMenus = [
 
 export default [
     {
-        url: "/api/getMenus",
+        url: "/api/menus",
         method: "post",
         response: () => {
             return result(menus)
         }
     },
     {
-        url: "/api/getClassify",
-        method: "post",
+        url: "/api/classify",
+        method: "get",
         response: () => {
             return result([
                 {

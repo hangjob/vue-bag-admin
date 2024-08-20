@@ -9,7 +9,13 @@
         responsive
         :on-update:value="(value,item)=>handleUpdateValue(value,item,$globalStore,$global)"
         v-bind="$attrs"
+        v-if="$globalStore.appGroups.length"
     />
+    <n-breadcrumb v-else>
+        <n-breadcrumb-item v-for="item in $globalStore.breadcrumb">
+            {{ $global?.helpers?.formatTitle($global, item) }}
+        </n-breadcrumb-item>
+    </n-breadcrumb>
 </template>
 <script setup>
 const handleUpdateValue = (key, item, $globalStore, $global) => {

@@ -14,12 +14,14 @@
             </n-layout-sider>
             <div class="flex h-full flex-col flex-auto overflow-hidden item">
                 <template v-if="components.LayoutHeaderSubtitle">
-                    <n-breadcrumb class="py-2 px-4" v-if="$globalStore.configs.isBreadcrumb">
-                        <n-breadcrumb-item v-for="item in $globalStore.breadcrumb">
-                            {{ $global?.helpers?.formatTitle($global, item) }}
-                        </n-breadcrumb-item>
-                    </n-breadcrumb>
-                    <n-divider style="margin-bottom: 0;margin-top: 0"/>
+                    <template  v-if="$globalStore.configs.isBreadcrumb && ($globalStore.appGroups.length)">
+                        <n-breadcrumb class="py-2 px-4">
+                            <n-breadcrumb-item v-for="item in $globalStore.breadcrumb">
+                                {{ $global?.helpers?.formatTitle($global, item) }}
+                            </n-breadcrumb-item>
+                        </n-breadcrumb>
+                        <n-divider style="margin-bottom: 0;margin-top: 0"/>
+                    </template>
                 </template>
                 <component is="LayoutTabBar">
                     <TabBar v-if="$globalStore.configs.isTabar"/>

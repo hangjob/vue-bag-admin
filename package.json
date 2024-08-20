@@ -3,6 +3,14 @@
   "private": false,
   "version": "4.3.1",
   "type": "module",
+  "main": "./lib/vue-bag-admin.cjs.js",
+  "module": "./lib/vue-bag-admin.es.js",
+  "exports": {
+    ".": {
+      "import": "./lib/vue-bag-admin.es.js",
+      "require": "./lib/vue-bag-admin.cjs.js"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -28,6 +36,7 @@
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
     "radash": "^12.1.0",
+    "vite-plugin-css-injected-by-js": "^3.5.1",
     "vite-plugin-mock": "^3.0.2",
     "vue": "^3.4.21",
     "vue-hooks-plus": "^1.8.9",
@@ -55,7 +64,7 @@
     "Pinia",
     "Vue-admin",
     "Naive Ui",
-    "Bag-admin",
+    "Vue-Bag-admin",
     "JavaScript"
   ],
   "repository": {

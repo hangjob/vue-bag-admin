@@ -1,5 +1,6 @@
 import {
-    createDiscreteApi, darkTheme,
+    createDiscreteApi,
+    darkTheme,
     lightTheme
 } from "naive-ui";
 
@@ -15,7 +16,7 @@ const setupNaive = (ctx) => {
             configProviderProps: configProviderPropsRef
         }
     );
-    window.naive = ctx.naive = {
+    window.$naive = ctx.naive = {
         message,
         notification,
         dialog,

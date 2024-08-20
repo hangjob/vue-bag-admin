@@ -44,7 +44,6 @@ function updataPersistenceTabs(app, to) {
     }
 }
 
-
 // 更新子菜单
 function updataSubMenu(app, to) {
     const data = app.menus.find((item) => item.id === to.meta.topId)

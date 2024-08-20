@@ -11,27 +11,29 @@ export class RouterPlugin {
 
     install({ctx}, options) {
         ctx.loadRouter = true
-        console.log(`${this.name}安装了`);
-        setupMenuRouter(ctx)
+        setupMenuRouter(ctx,options)
     }
 
 
+    // 禁用插件
     disable() {
-        console.log(`${this.name}被禁用了`);
+
         this._enable = false;
     }
 
+    // 启用插件
     enable() {
-        console.log(`${this.name}启用了`);
+
         this._enable = true;
     }
 
+    // 卸载插件
     destroy() {
-        console.log(`${this.name}要被卸载了`);
+
     }
 
+    // 插件状态
     inEnabled() {
-        console.log(`${this.name}目前时是${this._enable}`);
         return this._enable
     }
 }

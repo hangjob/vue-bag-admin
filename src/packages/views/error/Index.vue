@@ -23,10 +23,13 @@ const route = useRoute()
 let timer = null;
 const handleClick = () => {
     loading.value = true
+    if(timer){
+        return window.location.reload()
+    }
     timer = setTimeout(() => {
         router.push('/')
         loading.value = false
-    }, 3000)
+    }, 800)
 }
 onBeforeRouteLeave(() => {
     timer && clearInterval(timer)

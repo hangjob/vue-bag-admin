@@ -2,13 +2,14 @@ import {defineStore} from 'pinia'
 import {unique, replaceOrAppend, select} from 'radash'
 import currentDevice from "current-device" // 获取设备
 import {nextTick} from "vue"
-
+import lscache from "lscache";
 const getBrowserDeviceType = function (w = 718) {
     return window.innerWidth < w;
 };
 
 const useGlobalStore = defineStore('global', {
     state: () => {
+        const tabs = (lscache.get('tabs') || []).filter(item => !item.path.includes('form_'));
         return {
             sourceMenus: [], // 原始菜单 数据固定不变
             menus: [], // 左侧菜单
@@ -33,7 +34,7 @@ const useGlobalStore = defineStore('global', {
                 isDataPersistence: false, // 标签是否持久化
                 isSubmenu: true, // 是否展示应用分类子菜单
                 language: navigator.language.indexOf('zh') !== -1 ? 'zh' : 'en', // 语言
-                isDocking: false, // 分类模块化
+                isDocking: true, // 模块坞
                 isFooter: true, // 是否显示底部
                 isWatermark: false, // 是否水印
                 watermark: '品茗科技', // 水印文字
@@ -53,7 +54,7 @@ const useGlobalStore = defineStore('global', {
             },
             currentRouter: {}, // 当前路由对象
             breadcrumb: [], // 头部面包屑导航
-            tabs: [], // 菜单切换
+            tabs: tabs, // 菜单切换
             isRouterAlive: true, // 切换刷新页面
             theme: {
                 color: '#18a058',
@@ -100,6 +101,7 @@ const useGlobalStore = defineStore('global', {
                 this.tabs = tabs.sort((a, b) => {
                     return b.sort || 0 - a.sort || 0
                 })
+                this.configs.isDataPersistence ? lscache.set('tabs', this.tabs) : lscache.set('tabs', [])
             }
         },
         dispatchDeviceInfo() {

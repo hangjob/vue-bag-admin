@@ -5,6 +5,7 @@ class Framework {
     constructor(ctx) {
         this.installedPlugins = new Map();
         this.ctx = ctx;
+        this.setGlobal()
     }
 
     use(plugin, options) {
