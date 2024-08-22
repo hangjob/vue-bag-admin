@@ -57,8 +57,8 @@ class Framework {
     }
 
     setGlobal() {
-        this.ctx.app.config.globalProperties.$global = this.ctx;
-        this.ctx.app.config.globalProperties.$globalStore = useGlobalStore()
+        this.ctx.app.config.globalProperties.$global = window.$global = this.ctx;
+        this.ctx.app.config.globalProperties.$globalStore = window.$globalStore = useGlobalStore()
         this.ctx.app.config.globalProperties.$globalHook = {
             useCloseTabBarJump: useCloseTabBarJump(this.ctx),
             useCutColorTheme: useCutColorTheme(this.ctx)

@@ -6,8 +6,8 @@ import {NaiveUiResolver} from 'unplugin-vue-components/resolvers'
 import path from "path";
 import {viteMockServe} from 'vite-plugin-mock'
 import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js"
-
-export default defineConfig(({command, mode}) => {
+import { analyzer } from "vite-bundle-analyzer";
+export default defineConfig(({ mode}) => {
     const env = loadEnv(mode, process.cwd())
     const config = {
         // vite 配置
@@ -56,12 +56,17 @@ export default defineConfig(({command, mode}) => {
                     manualChunks: () => {
                         return 'vendor'
                     }
-                }
+                },
+                // 设置为库模式
+                external: ['vue'], // 这个配置很重要，不然会导致 公用的组件无法使用
             }
         },
         server: {
             host: '0.0.0.0',
             port: 5100,
+            headers:{
+                'Access-Control-Allow-Origin': '*',
+            },
             proxy: {
                 '/api': {
                     target: 'http://localhost:1337/api',
@@ -73,6 +78,7 @@ export default defineConfig(({command, mode}) => {
     }
     if(mode === 'lib'){
         config.plugins.push(cssInjectedByJsPlugin())
+        config.plugins.push(analyzer())
     }
     return config;
 })

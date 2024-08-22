@@ -138,6 +138,7 @@ const addRoutes = (ctx, routes=[])=>{
 const menusToLocalRoutes = (menus, files)=>{
     const localRoutes = []
     const routes = []
+    console.log(files)
     for (const key in files) {
         const module = files[key]
         localRoutes.push({component: module.default, md5: md5(key), file: key})

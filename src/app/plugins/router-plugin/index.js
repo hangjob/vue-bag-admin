@@ -1,4 +1,4 @@
-import setupMenuRouter from "./plug.js"
+import initMenuRouter from "./plug.js"
 
 /**
  * 页面视图插件
@@ -11,7 +11,7 @@ export class RouterPlugin {
 
     install({ctx}, options) {
         ctx.loadRouter = true
-        setupMenuRouter(ctx,options)
+        initMenuRouter(ctx,options)
     }
 
 
@@ -40,3 +40,4 @@ export class RouterPlugin {
 
 
 export const useRouterPlugin = new RouterPlugin()
+

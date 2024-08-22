@@ -1,3 +1,4 @@
+import { merge } from 'radash'
 const files = import.meta.glob(`@/app/views/*/*.vue`, {eager: true})
 
 /**
@@ -41,11 +42,11 @@ async function getAppGroups(ctx) {
     }
 }
 
-const setupMenuRouter = (ctx, options) => {
+const initMenuRouter = (ctx, options) => {
+    const $globalStore = ctx.app.config.globalProperties.$globalStore;
+    $globalStore.dispatchFiles({ ...files, ...(options?.files || {}) }) // 做一个全局的文件缓存，方便后续使用
     ctx.router.beforeEach(async (to, from, next) => {
         try {
-            const $globalStore = ctx.app.config.globalProperties.$globalStore;
-            $globalStore.dispatchFiles(options?.files || files) // 做一个全局的文件缓存，方便后续使用
             if (!$globalStore.isLoadRoutes) {
                 await getAppMenus(ctx)
                 await getAppGroups(ctx)
@@ -62,4 +63,4 @@ const setupMenuRouter = (ctx, options) => {
 }
 
 
-export default setupMenuRouter;
+export default initMenuRouter;

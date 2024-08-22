@@ -17,18 +17,19 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate' // 持久化
 import setupComponents from "@/packages/components/index.js"
 import {useApisPlugin} from "@/packages/http/apis.js";
 import  * as plugins  from "@/app/plugins/index.js"
+import WujieVue from "wujie-vue3";
 
 Array.prototype.first = function () {
     return this.slice(0, 1)[0];
 }
 
 const app = createApp(App)
-
 const pina = createPinia()
 app.use(pina)
 pina.use(piniaPluginPersistedstate)
 app.use(setupComponents)
 app.use(router)
+app.use(WujieVue)
 
 const framework = new Framework({
     app,
@@ -55,5 +56,6 @@ export {
     http,
     nprogress,
     useApisPlugin,
-    plugins
+    plugins,
+    WujieVue
 }

@@ -56,6 +56,7 @@
                 <n-space>
                     <n-button type="primary" @click="handleClick(true)">新增数据</n-button>
                     <n-button dashed type="error">批量删除</n-button>
+                    <n-button type="success" @click="handleSkip($global)">跳转路由</n-button>
                 </n-space>
             </template>
             <n-data-table flex-height class="h-full min-h-[350px]" :single-line="false"
@@ -160,8 +161,12 @@ const compTable = reactive({
 const rules = {}
 const formRef = ref();
 const handleClick = (val) => {
-    console.log(compTable.modal)
     compTable.showModal = val
+}
+const handleSkip = (ctx)=>{
+    console.log(window.$wujie)
+    window.$wujie?.props.jump({ path: "/md" });
+    // ctx.router.push({path:'/md'})
 }
 const handleSubmit = () => {
     console.log(11)
