@@ -9,6 +9,7 @@
         <div v-else>
             {{ router.go(-1) }}
         </div>
+        {{ handleErrorTips($global) }}
     </div>
 </template>
 <style lang="less" scoped>
@@ -23,13 +24,19 @@ const route = useRoute()
 let timer = null;
 const handleClick = () => {
     loading.value = true
-    if(timer){
+    if (timer) {
         return window.location.reload()
     }
     timer = setTimeout(() => {
         router.push('/')
         loading.value = false
     }, 800)
+}
+const handleErrorTips = (ctx) => {
+    if (!ctx?.apis) {
+        ctx?.naive?.message?.error?.('请先安装apis-plugin插件')
+        router.push('/login')
+    }
 }
 onBeforeRouteLeave(() => {
     timer && clearInterval(timer)

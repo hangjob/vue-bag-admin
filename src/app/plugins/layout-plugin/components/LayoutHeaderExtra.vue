@@ -8,25 +8,25 @@
                 {{ $global?.helpers?.formatTitle($global, item) }}
             </n-button>
         </n-dropdown>
-        <LayoutSettings v-model:show="visible"></LayoutSettings>
     </template>
     <n-dropdown v-else trigger="hover" :render-label="(item)=>$global?.helpers?.formatTitle($global, item)"
                 :options="allOptions">
         <n-button :bordered="false">
             <n-badge>
                 <n-icon size="20">
-                    <RibbonOutline/>
+                    <Apps/>
                 </n-icon>
             </n-badge>
         </n-button>
     </n-dropdown>
+    <LayoutSettings v-model:show="visible"></LayoutSettings>
 </template>
 <script setup>
 import {
     HomeOutline,
     NotificationsOutline,
     SettingsOutline,
-    RibbonOutline,
+    Apps,
     Language
 } from "@vicons/ionicons5";
 import {UserCircleRegular} from "@vicons/fa";
@@ -119,7 +119,7 @@ const allOptions = [
     },
     {
         title: '语言',
-        key: 'settings',
+        key: 'language',
         localesKey: 'language',
         icon: renderIcon(Language, {size: 18}),
         props: {

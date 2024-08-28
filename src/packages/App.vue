@@ -12,10 +12,7 @@
     </n-config-provider>
 </template>
 <script setup>
-import {getCurrentInstance} from 'vue'
 import {darkTheme, NConfigProvider, zhCN, dateZhCN} from 'naive-ui'
-
-const {appContext: {config: {globalProperties}}} = getCurrentInstance();
 const locales = ref({
     zh: {
         locale: zhCN,
@@ -26,5 +23,4 @@ const locales = ref({
         dateLocale: ref(null)
     }
 })
-globalProperties.$globalHook.useCutColorTheme();
 </script>

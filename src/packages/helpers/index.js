@@ -3,6 +3,8 @@ import {NIcon} from "naive-ui";
 import lscache from "lscache"
 import {customAlphabet} from 'nanoid';
 import {md5} from "js-md5";
+import {generate} from "@ant-design/colors";
+import {commonDark} from 'naive-ui'
 
 function renderIcon(icon, props) {
     return () => h(NIcon, props, {default: () => h(icon)})
@@ -138,7 +140,6 @@ const addRoutes = (ctx, routes=[])=>{
 const menusToLocalRoutes = (menus, files)=>{
     const localRoutes = []
     const routes = []
-    console.log(files)
     for (const key in files) {
         const module = files[key]
         localRoutes.push({component: module.default, md5: md5(key), file: key})
@@ -164,7 +165,7 @@ const menusProcessing = (ctx , menus)=>{
     ctx.helpers.depthForEach(menus, (item) => {
         const topIds = findParents(menus, item.id) // 获取当前的菜单的父级ID
         item.md5 = item.file ? md5(item.file) : null // 对每一个数据打印标记
-        item.icon = ctx.helpers.getIcons(ctx, item.icon) // 转换传递过来的icon为render函数
+        item.icon = ctx?.helpers?.getIcons?.(ctx, item.icon) // 转换传递过来的icon为render函数
         item.title = formatTitle(ctx, item, true);
         if (ctx.radash.isArray(topIds)) {
             const topId = topIds[topIds.length - 1]
@@ -173,6 +174,56 @@ const menusProcessing = (ctx , menus)=>{
     })
     return menus;
 }
+
+
+
+/**
+ * 关闭router
+ * @param ctx
+ * @param route
+ */
+function closeTabBarJump(ctx, route) {
+    const {tabs, currentRouter} = ctx.app.config.globalProperties.$globalStore
+    let idx = tabs.findIndex(item => item.id === route.id)
+    tabs.length > 1 && tabs.splice(idx, 1)
+    if (currentRouter.path === route.path) {
+        const tab = idx ? tabs[--idx] : tabs[idx];
+        tab && ctx.router.push(tab.path)
+    }
+}
+
+
+/**
+ * 切换主题
+ * @param ctx
+ * @param color
+ */
+function cutColorTheme(ctx, color) {
+    const $globalStore = ctx.app.config.globalProperties.$globalStore
+    function setThemeOverrides() {
+        const _color = color || $globalStore.theme.color
+        const colors = generate(_color, {
+            theme: 'dark',
+            backgroundColor: commonDark.bodyColor
+        })
+        // 这里可以返回的更多的主题配置色，https://liubing.me/article/vue/naive-ui/naive-ui-custom-theme.html#%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90
+        $globalStore.dispatchThemeOverrides({
+            overrides: {
+                common: {
+                    primaryColor: colors[5],
+                    primaryColorHover: colors[4],
+                    primaryColorSuppl: colors[4],
+                    primaryColorPressed: colors[6]
+                },
+            },
+            color: _color
+        })
+    }
+    setThemeOverrides()
+}
+
+
+
 
 export {
     renderIcon,
@@ -184,5 +235,7 @@ export {
     buildTree,
     addRoutes,
     menusToLocalRoutes,
-    menusProcessing
+    menusProcessing,
+    closeTabBarJump,
+    cutColorTheme
 }

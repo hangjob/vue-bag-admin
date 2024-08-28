@@ -24,3 +24,4 @@ lib
 *.njsproj
 *.sln
 *.sw?
+cache

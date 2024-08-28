@@ -1,6 +1,3 @@
-import * as http from "@/packages/http/request.js"
-
-
 /**
  * 自动生成api插件
  */
@@ -10,11 +7,11 @@ export class ApisPlugin {
     }
 
     install({ctx}, options = []) {
-        ctx.apis = {http};
+        ctx.apis = {...ctx.http};
         options.forEach((item) => {
             const api = ctx.apis[item.replace(/\/(\w)/g, (_, c) => (c ? c.toUpperCase() : ""))] = {url: item}
-            api.httpGet = (params, options) => http.httpGet(api.url, params, options)
-            api.httpPost = (params, options) => http.httpPost(api.url, params, options)
+            api.httpGet = (params, config) => ctx.http.httpGet(api.url, params, config)
+            api.httpPost = (params, config) => ctx.http.httpPost(api.url, params, config)
         });
         if (typeof window === 'object'){
             if(!window.$apis){

@@ -56,6 +56,7 @@ const useGlobalStore = defineStore('global', {
             breadcrumb: [], // 头部面包屑导航
             tabs: tabs, // 菜单切换
             isRouterAlive: true, // 切换刷新页面
+            bgs:[], // 背景图
             theme: {
                 color: '#18a058',
                 colors: [

@@ -1,3 +1,5 @@
+import 'default-passive-events' // 去掉chrome51版本后的事件捕获机制Passive Event Listeners 的警告
+import '@/packages/style/tailwind.css'
 import {createApp} from 'vue'
 import "@/packages/style/tailwind.css"
 import "@/packages/style/reset.css"
@@ -15,9 +17,8 @@ import * as hooksPlus from "vue-hooks-plus"
 import * as dayjs from "dayjs"
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate' // 持久化
 import setupComponents from "@/packages/components/index.js"
-import {useApisPlugin} from "@/packages/http/apis.js";
-import  * as plugins  from "@/app/plugins/index.js"
-import WujieVue from "wujie-vue3";
+import * as plugins from "@/app/plugins/index.js"
+import useGlobalStore from "@/packages/pinia/global.js";
 
 Array.prototype.first = function () {
     return this.slice(0, 1)[0];
@@ -28,13 +29,13 @@ const pina = createPinia()
 app.use(pina)
 pina.use(piniaPluginPersistedstate)
 app.use(setupComponents)
-app.use(router)
-app.use(WujieVue)
+
+
+app.config.globalProperties.$globalStore = window.$globalStore = useGlobalStore()
 
 const framework = new Framework({
     app,
     pina,
-    router,
     helpers: {...helpers}, // 可以持续扩展
     radash,
     hooksPlus,
@@ -43,11 +44,11 @@ const framework = new Framework({
     nprogress,
 });
 
+framework.use(plugins.useNaivePlugin)
 
 export {
     app,
     pina,
-    router,
     helpers, // 可以持续扩展
     radash,
     hooksPlus,
@@ -55,7 +56,6 @@ export {
     framework,
     http,
     nprogress,
-    useApisPlugin,
     plugins,
-    WujieVue
+    router
 }

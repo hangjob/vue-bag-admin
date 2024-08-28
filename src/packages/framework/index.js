@@ -1,5 +1,4 @@
 import useGlobalStore from "@/packages/pinia/global.js";
-import {useCloseTabBarJump, useCutColorTheme} from "@/packages/hooks/index.js";
 
 class Framework {
     constructor(ctx) {
@@ -58,11 +57,7 @@ class Framework {
 
     setGlobal() {
         this.ctx.app.config.globalProperties.$global = window.$global = this.ctx;
-        this.ctx.app.config.globalProperties.$globalStore = window.$globalStore = useGlobalStore()
-        this.ctx.app.config.globalProperties.$globalHook = {
-            useCloseTabBarJump: useCloseTabBarJump(this.ctx),
-            useCutColorTheme: useCutColorTheme(this.ctx)
-        }
+        // this.ctx.app.config.globalProperties.$globalStore = window.$globalStore = useGlobalStore()
     }
 }
 

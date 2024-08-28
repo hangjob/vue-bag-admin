@@ -5,13 +5,9 @@ import {findParents} from "@/packages/helpers"
 import lscache from "lscache"
 import {replaceOrAppend} from "radash";
 
-const router = createRouter({
-    history: createWebHistory(),
-    routes: defaultBuiltRouter
-})
 
 // 处理面包屑导航
-function updataBreadcrumbMenus(app, to) {
+function updataBreadcrumbMenus(app, router, to) {
     const breadcrumbMenus = findParents(app.menus, to.meta.id)
     if (breadcrumbMenus) {
         app.breadcrumb = breadcrumbMenus.reverse()
@@ -57,14 +53,22 @@ function updataMenus(app, to) {
 }
 
 
-router.afterEach((to, from) => {
-    const app = useGlobalStore()
-    app.currentRouter = to;
-    updataTabs(app, to)
-    updataBreadcrumbMenus(app, to)
-    updataPersistenceTabs(app, to)
-    updataSubMenu(app, to)
-    updataMenus(app, to)
-})
+function setupRouterInstall(ctx, options = {}) {
+    const router = createRouter({
+        history:createWebHistory(),
+        routes: defaultBuiltRouter,
+        ...options
+    })
+    router.afterEach((to, from) => {
+        const globalStore = useGlobalStore()
+        globalStore.currentRouter = to;
+        updataTabs(globalStore, to)
+        updataBreadcrumbMenus(globalStore, router, to)
+        updataPersistenceTabs(globalStore, to)
+        updataSubMenu(globalStore, to)
+        updataMenus(globalStore, to)
+    })
+    return router;
+}
 
-export default router;
+export default setupRouterInstall;

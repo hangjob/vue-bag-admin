@@ -7,7 +7,7 @@ const locales = {zh, en}
 const setupI18n = (ctx) => {
     const i18n = createI18n({
         legacy: false,
-        locale: ctx.pina.state.value.global.configs.language,
+        locale: ctx.pina.state.value?.global?.configs?.language,
         fallbackLocale: 'en',
         messages: locales,
         globalInjection: true, // 可以在template模板中使用$t

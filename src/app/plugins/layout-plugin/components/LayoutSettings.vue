@@ -33,7 +33,8 @@
                     </n-form-item>
                     <n-form-item label-placement="left" label="主题颜色" path="user.age">
                         <n-space :size="[10,0]" align="center">
-                            <n-avatar @click="$globalHook.useCutColorTheme(item.color)" class="cursor-pointer"
+                            <n-avatar @click="$global?.helpers?.cutColorTheme($global,item.color)"
+                                      class="cursor-pointer"
                                       v-for="item in $globalStore.theme.colors" size="small"
                                       :style="{ backgroundColor: item.color}">
                                 {{ $globalStore.theme.color === item.color ? item.name : '' }}
@@ -101,6 +102,7 @@ import {
     Sunny,
     CheckboxOutline
 } from "@vicons/ionicons5"
+import {cutColorTheme} from "@/packages/helpers/index.js";
 
 const arrs = [{setp: 0, width: 170}, {setp: 33, width: 200}, {setp: 66, width: 240}, {setp: 100, width: 300}];
 
@@ -150,7 +152,6 @@ watch(globalProperties?.$globalStore?.configs, (newValue) => {
 watch(form, () => {
     globalProperties.$globalStore.configs.layoutSiderWidth = (arrs.find(item => item.setp === form.setp))['width']
 })
-const options = []
 </script>
 <style lang="less" scoped>
 .composition {

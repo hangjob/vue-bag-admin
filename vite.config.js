@@ -5,9 +5,11 @@ import Components from 'unplugin-vue-components/vite'
 import {NaiveUiResolver} from 'unplugin-vue-components/resolvers'
 import path from "path";
 import {viteMockServe} from 'vite-plugin-mock'
-import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js"
-import { analyzer } from "vite-bundle-analyzer";
-export default defineConfig(({ mode}) => {
+import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js" // css 整合 js
+import {analyzer} from "vite-bundle-analyzer"; // 分析包大小依赖
+import VueDevTools from 'vite-plugin-vue-devtools' // 调试面板
+
+export default defineConfig(({mode}) => {
     const env = loadEnv(mode, process.cwd())
     const config = {
         // vite 配置
@@ -34,6 +36,7 @@ export default defineConfig(({ mode}) => {
                 localEnabled: true,
                 prodEnabled: true
             }),
+            VueDevTools()
         ],
         define: {
             __APP_ENV__: JSON.stringify(env.APP_ENV),
@@ -51,20 +54,27 @@ export default defineConfig(({ mode}) => {
                 formats: ['es', 'cjs'],
                 fileName: (format) => `vue-bag-admin.${format}.js` // 打包后的文件名
             },
-            rollupOptions:{
+            rollupOptions: {
                 output: {
                     manualChunks: () => {
                         return 'vendor'
                     }
                 },
                 // 设置为库模式
-                external: ['vue'], // 这个配置很重要，不然会导致 公用的组件无法使用
+                external: ['vue', 'naive-ui'], // 这个配置很重要，不然会导致 公用的组件无法使用
+            },
+            minify: 'terser',
+            terserOptions: {
+                compress: {
+                    drop_console: true,
+                    drop_debugger: true,
+                },
             }
         },
         server: {
             host: '0.0.0.0',
             port: 5100,
-            headers:{
+            headers: {
                 'Access-Control-Allow-Origin': '*',
             },
             proxy: {
@@ -76,7 +86,7 @@ export default defineConfig(({ mode}) => {
             },
         }
     }
-    if(mode === 'lib'){
+    if (mode === 'lib') {
         config.plugins.push(cssInjectedByJsPlugin())
         config.plugins.push(analyzer())
     }

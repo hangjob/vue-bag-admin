@@ -12,7 +12,7 @@
                           @click="$global.router.push(item)">
                     {{ $global?.helpers?.formatTitle($global, item) }}
                     <template v-if="!item.hasClose" #icon>
-                        <n-icon size="18" @click.stop="$globalHook.useCloseTabBarJump(item)">
+                        <n-icon size="18" @click.stop="$global?.helpers?.closeTabBarJump($global,item)">
                             <CloseOutline/>
                         </n-icon>
                     </template>
@@ -27,7 +27,7 @@
                      v-for="item in $globalStore.tabs" @click="$global.router.push(item)">
                     <span>{{ $global?.helpers?.formatTitle($global, item) }}</span>
                     <template v-if="!item.hasClose">
-                        <n-icon size="18" @click.stop="$globalHook.useCloseTabBarJump(item)">
+                        <n-icon size="18" @click.stop="$global?.helpers?.closeTabBarJump($global,item)">
                             <CloseOutline/>
                         </n-icon>
                     </template>
@@ -90,26 +90,26 @@ const handlePopselectOptions = ($global, $globalHook, $globalStore, key) => {
     }
     if (key === 'closeCurrentTab') {
         const data = $globalStore.tabs.find(item => item.id === $globalStore.currentRouter.meta.id)
-        data && $globalHook.useCloseTabBarJump(data)
+        data && $global?.helpers?.closeTabBarJump($global,item)
     }
     if (key === 'closeLeftTab') {
         const index = $globalStore.tabs.findIndex(item => item.id === $globalStore.currentRouter.meta.id)
         const sliceData = $globalStore.tabs.slice(0, index);
         sliceData.forEach(item => {
-            $globalHook.useCloseTabBarJump(item)
+            $global?.helpers?.closeTabBarJump($global,item)
         })
     }
     if (key === 'closeRightTab') {
         const index = $globalStore.tabs.findIndex(item => item.id === $globalStore.currentRouter.meta.id)
         const sliceData = $globalStore.tabs.slice(index + 1);
         sliceData.forEach(item => {
-            $globalHook.useCloseTabBarJump(item)
+            $global?.helpers?.closeTabBarJump($global,item)
         })
     }
     if (key === 'closeAlltTab') {
         $globalStore.tabs.forEach(item => {
             if (item.id !== $globalStore.currentRouter.meta.id) {
-                $globalHook.useCloseTabBarJump(item)
+                $global?.helpers?.closeTabBarJump($global,item)
             }
         })
     }

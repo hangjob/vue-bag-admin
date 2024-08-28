@@ -1,4 +1,3 @@
-import { merge } from 'radash'
 const files = import.meta.glob(`@/app/views/*/*.vue`, {eager: true})
 
 /**
@@ -8,16 +7,16 @@ const files = import.meta.glob(`@/app/views/*/*.vue`, {eager: true})
  */
 async function getAppMenus(ctx) {
     const $globalStore = ctx.app.config.globalProperties.$globalStore;
-    if(ctx.apis.Menus){
-        return ctx.apis.Menus.httpGet({'pagination[limit]':'-1'}).then((res) => {
+    if (ctx?.apis?.Menus) {
+        return ctx.apis.Menus.httpGet({'pagination[limit]': '-1'}).then((res) => {
             const menus = ctx.helpers.menusProcessing(ctx, ctx.helpers.buildTree(res.data))
-            const routes = ctx.helpers.menusToLocalRoutes(menus,$globalStore.files)
+            const routes = ctx.helpers.menusToLocalRoutes(menus, $globalStore.files)
             $globalStore.dispatchMenus(menus)
             $globalStore.dispatchRoutes(routes)
             $globalStore.dispatchSourceMenus(menus)
             ctx.helpers.addRoutes(ctx, routes)
         })
-    }else{
+    } else {
         return Promise.resolve()
     }
 }
@@ -29,23 +28,28 @@ async function getAppMenus(ctx) {
  */
 async function getAppGroups(ctx) {
     const $globalStore = ctx.app.config.globalProperties.$globalStore;
-    if(ctx.apis.Classify){
+    if (ctx?.apis?.Classify) {
         return ctx.apis.Classify.httpGet().then((res) => {
             const groups = ctx.helpers.menusProcessing(ctx, ctx.helpers.buildTree(res.data))
-            const routes = ctx.helpers.menusToLocalRoutes(groups,$globalStore.files)
+            const routes = ctx.helpers.menusToLocalRoutes(groups, $globalStore.files)
             $globalStore.dispatchRoutes(routes)
             $globalStore.dispatchAppGroups(groups)
             ctx.helpers.addRoutes(ctx, routes)
         })
-    }else{
+    } else {
         return Promise.resolve()
     }
 }
 
-const initMenuRouter = (ctx, options) => {
+/**
+ * 在路由拦截中，获取应用分类、菜单
+ * @param ctx
+ * @param options
+ */
+const beforeEachGetMenu = (ctx, options) => {
     const $globalStore = ctx.app.config.globalProperties.$globalStore;
-    $globalStore.dispatchFiles({ ...files, ...(options?.files || {}) }) // 做一个全局的文件缓存，方便后续使用
-    ctx.router.beforeEach(async (to, from, next) => {
+    $globalStore.dispatchFiles({...files, ...(options?.files || {})}) // 做一个全局的文件缓存，方便后续使用
+    ctx?.router?.beforeEach?.(async (to, from, next) => {
         try {
             if (!$globalStore.isLoadRoutes) {
                 await getAppMenus(ctx)
@@ -62,5 +66,4 @@ const initMenuRouter = (ctx, options) => {
     })
 }
 
-
-export default initMenuRouter;
+export default beforeEachGetMenu;

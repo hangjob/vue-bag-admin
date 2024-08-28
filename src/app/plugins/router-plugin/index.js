@@ -1,4 +1,5 @@
-import initMenuRouter from "./plug.js"
+import {router} from "@/packages/install.js"
+import beforeEachGetMenu from "./plug.js"
 
 /**
  * 页面视图插件
@@ -9,15 +10,15 @@ export class RouterPlugin {
         this._enable = false
     }
 
-    install({ctx}, options) {
-        ctx.loadRouter = true
-        initMenuRouter(ctx,options)
+    install({ctx}, options = {}) {
+        ctx.router = router(ctx, options)
+        ctx.app.use(ctx.router)
+        beforeEachGetMenu(ctx, options)
     }
 
 
     // 禁用插件
     disable() {
-
         this._enable = false;
     }
 

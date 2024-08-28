@@ -164,11 +164,10 @@ const handleClick = (val) => {
     compTable.showModal = val
 }
 const handleSkip = (ctx)=>{
-    console.log(window.$wujie)
     window.$wujie?.props.jump({ path: "/md" });
     // ctx.router.push({path:'/md'})
 }
 const handleSubmit = () => {
-    console.log(11)
+
 }
 </script>
