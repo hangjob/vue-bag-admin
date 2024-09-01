@@ -24,8 +24,8 @@ export default defineConfig({
                 text: '准备工作',
                 items: [
                     {text: '安装', link: '/guide/install'},
-                    {text: '快速开始', link: '/guide/started'},
-                    {text: '源码开发', link: '/guide/deploy'}
+                    {text: '快速开始', link: '/guide/start'},
+                    {text: '源码开发', link: '/guide/source_code'}
                 ]
             }
         ],

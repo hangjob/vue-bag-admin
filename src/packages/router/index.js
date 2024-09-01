@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory} from "vue-router"
+import {createRouter as _createRouter, createWebHistory} from "vue-router"
 import {defaultBuiltRouter} from "@/packages/router/routes.js"
 import useGlobalStore from "@/packages/pinia/global.js";
 import {findParents} from "@/packages/helpers"
@@ -7,12 +7,12 @@ import {replaceOrAppend} from "radash";
 
 
 // 处理面包屑导航
-function updataBreadcrumbMenus(app, router, to) {
+function updataBreadcrumbMenus(ctx, app, to) {
     const breadcrumbMenus = findParents(app.menus, to.meta.id)
     if (breadcrumbMenus) {
         app.breadcrumb = breadcrumbMenus.reverse()
     } else {
-        const breadcrumbRoutes = findParents(router.getRoutes(), to.meta.id, (item) => item.meta.id)
+        const breadcrumbRoutes = findParents(ctx?.router?.getRoutes?.(), to.meta.id, (item) => item.meta.id)
         if (breadcrumbRoutes) {
             breadcrumbRoutes.forEach((item) => {
                 const meta = item?.meta || {};
@@ -53,22 +53,19 @@ function updataMenus(app, to) {
 }
 
 
-function setupRouterInstall(ctx, options = {}) {
-    const router = createRouter({
-        history:createWebHistory(),
-        routes: defaultBuiltRouter,
-        ...options
-    })
-    router.afterEach((to, from) => {
+function afterEach(ctx, options) {
+    ctx?.router?.afterEach?.((to, from) => {
         const globalStore = useGlobalStore()
         globalStore.currentRouter = to;
         updataTabs(globalStore, to)
-        updataBreadcrumbMenus(globalStore, router, to)
+        updataBreadcrumbMenus(ctx, globalStore, to)
         updataPersistenceTabs(globalStore, to)
         updataSubMenu(globalStore, to)
         updataMenus(globalStore, to)
     })
-    return router;
 }
 
-export default setupRouterInstall;
+
+export {
+    afterEach,
+}

@@ -46,7 +46,7 @@ async function getAppGroups(ctx) {
  * @param ctx
  * @param options
  */
-const beforeEachGetMenu = (ctx, options) => {
+const beforeEach = (ctx, options) => {
     const $globalStore = ctx.app.config.globalProperties.$globalStore;
     $globalStore.dispatchFiles({...files, ...(options?.files || {})}) // 做一个全局的文件缓存，方便后续使用
     ctx?.router?.beforeEach?.(async (to, from, next) => {
@@ -66,4 +66,4 @@ const beforeEachGetMenu = (ctx, options) => {
     })
 }
 
-export default beforeEachGetMenu;
+export default beforeEach;

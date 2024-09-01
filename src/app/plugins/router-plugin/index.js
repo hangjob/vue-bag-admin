@@ -1,8 +1,11 @@
-import {router} from "@/packages/install.js"
-import beforeEachGetMenu from "./plug.js"
+import {createRouter, createWebHistory} from "vue-router"
+import {defaultBuiltRouter} from "@/packages/router/routes.js";
+import {afterEach} from "@/packages/router/index.js"
+import beforeEach from "./plug.js"
+
 
 /**
- * 页面视图插件
+ * 页面视图路由插件
  */
 export class RouterPlugin {
     constructor() {
@@ -11,9 +14,15 @@ export class RouterPlugin {
     }
 
     install({ctx}, options = {}) {
-        ctx.router = router(ctx, options)
+        const {router, ...args} = options;
+        ctx.router = router || createRouter({
+            history: createWebHistory(),
+            routes: defaultBuiltRouter,
+            ...args
+        });
         ctx.app.use(ctx.router)
-        beforeEachGetMenu(ctx, options)
+        afterEach(ctx, args)
+        beforeEach(ctx, args)
     }
 
 

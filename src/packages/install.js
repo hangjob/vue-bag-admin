@@ -7,7 +7,6 @@ import "@/packages/style/style.less"
 import nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
 import App from '@/packages/App.vue'
-import router from "@/packages/router/index.js";
 import {createPinia} from "pinia"
 import Framework from "@/packages/framework/index.js";
 import * as helpers from "@/packages/helpers"
@@ -57,5 +56,4 @@ export {
     http,
     nprogress,
     plugins,
-    router
 }

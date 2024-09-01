@@ -5,7 +5,7 @@ import {customAlphabet} from 'nanoid';
 import {md5} from "js-md5";
 import {generate} from "@ant-design/colors";
 import {commonDark} from 'naive-ui'
-
+import { merge } from "radash";
 function renderIcon(icon, props) {
     return () => h(NIcon, props, {default: () => h(icon)})
 }
@@ -222,6 +222,16 @@ function cutColorTheme(ctx, color) {
     setThemeOverrides()
 }
 
+
+/**
+ * 两个树形结构合并
+ * @param tree1
+ * @param tree2
+ * @returns {any[]}
+ */
+function deepMergeTrees(tree1, tree2) {
+
+}
 
 
 
