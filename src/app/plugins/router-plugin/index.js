@@ -16,8 +16,8 @@ export class RouterPlugin {
     install({ctx}, options = {}) {
         const {router, ...args} = options;
         ctx.router = router || createRouter({
-            history: createWebHistory(),
-            routes: defaultBuiltRouter,
+            history: createWebHistory(options.base || '/'),
+            routes: ctx.helpers.deepMergeArrays(defaultBuiltRouter, options.routes || []), // 合并默认路由与用户配置路由
             ...args
         });
         ctx.app.use(ctx.router)

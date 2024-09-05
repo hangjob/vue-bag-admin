@@ -1,6 +1,6 @@
 # 环境准备
 
-### Node安装
+## Node安装
 
 **下载版本管理工具**
 在这里我推荐使用nvm来安装node.js，nvm是node.js版本管理工具，可以安装不同版本的node.js，并且可以切换不同版本的node.js，[下载nvm](https://github.com/coreybutler/nvm-windows#readme)
@@ -28,7 +28,7 @@ node -v # 20.17.0 说明安装成功
 安装nvm-windows，可以方便的管理node版本[下载可视化管理Node版本工具](https://github.com/1111mp/nvm-desktop/releases)
 :::
 
-### 搭建第一个 Vite 项目
+## 搭建第一个 Vite 项目
 
 ::: tip 兼容性注意
 

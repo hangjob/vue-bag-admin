@@ -1,5 +1,5 @@
 import LayoutHeaderExtra from "./components/LayoutHeaderExtra.vue"
-import LayoutHeaderSubtitle from "./components/LayoutHeaderSubtitle.vue"
+import LayoutHeaderCum from "./components/LayoutHeaderSubtitle.vue"
 
 export default class LayoutPlugin {
     constructor() {
@@ -9,7 +9,7 @@ export default class LayoutPlugin {
 
     install({ctx}, options) {
         ctx.app.component('LayoutHeaderExtra', LayoutHeaderExtra)
-        ctx.app.component('LayoutHeaderSubtitle', LayoutHeaderSubtitle)
+        ctx.app.component('LayoutHeaderCum', LayoutHeaderCum)
         this._enable = true;
     }
 

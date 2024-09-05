@@ -5,7 +5,8 @@ import {customAlphabet} from 'nanoid';
 import {md5} from "js-md5";
 import {generate} from "@ant-design/colors";
 import {commonDark} from 'naive-ui'
-import { merge } from "radash";
+import {merge, isString} from "radash";
+
 function renderIcon(icon, props) {
     return () => h(NIcon, props, {default: () => h(icon)})
 }
@@ -104,8 +105,6 @@ function buildTree(nodes, key = 'id', pkey = 'pid') {
 }
 
 
-
-
 /**
  * 生成随机字符串
  * @type {(size?: number) => string}
@@ -118,7 +117,7 @@ const nanoid = customAlphabet('ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890', 24);
  * @param ctx
  * @param routes
  */
-const addRoutes = (ctx, routes=[])=>{
+const addRoutes = (ctx, routes = []) => {
     ctx.helpers.depthForEach(routes, (item) => {
         // overlayRouting 是否开启覆盖路由，开启后则可以覆盖框架已有的路由，注意item.root你所填根节点
         if (!ctx.router.hasRoute(item.name) || item.overlayRouting) {
@@ -137,14 +136,14 @@ const addRoutes = (ctx, routes=[])=>{
  * @param files
  * @returns {*[]}
  */
-const menusToLocalRoutes = (menus, files)=>{
+const menusToLocalRoutes = (menus, files) => {
     const localRoutes = []
     const routes = []
     for (const key in files) {
         const module = files[key]
         localRoutes.push({component: module.default, md5: md5(key), file: key})
     }
-    depthForEach(menus,(item)=>{
+    depthForEach(menus, (item) => {
         const routeInfo = localRoutes.find((route) => route.md5 === item.md5)
         if (routeInfo) {
             let {children, ...newItem} = {...item, ...routeInfo}
@@ -161,7 +160,7 @@ const menusToLocalRoutes = (menus, files)=>{
  * @param menus
  * @returns {*}
  */
-const menusProcessing = (ctx , menus)=>{
+const menusProcessing = (ctx, menus) => {
     ctx.helpers.depthForEach(menus, (item) => {
         const topIds = findParents(menus, item.id) // 获取当前的菜单的父级ID
         item.md5 = item.file ? md5(item.file) : null // 对每一个数据打印标记
@@ -174,7 +173,6 @@ const menusProcessing = (ctx , menus)=>{
     })
     return menus;
 }
-
 
 
 /**
@@ -200,6 +198,7 @@ function closeTabBarJump(ctx, route) {
  */
 function cutColorTheme(ctx, color) {
     const $globalStore = ctx.app.config.globalProperties.$globalStore
+
     function setThemeOverrides() {
         const _color = color || $globalStore.theme.color
         const colors = generate(_color, {
@@ -219,21 +218,73 @@ function cutColorTheme(ctx, color) {
             color: _color
         })
     }
+
     setThemeOverrides()
 }
 
 
 /**
- * 两个树形结构合并
- * @param tree1
- * @param tree2
+ * 多个树形结构合并
  * @returns {any[]}
+ * @param arrays
  */
-function deepMergeTrees(tree1, tree2) {
 
+function deepMergeArrays(...arrays) {
+    const merged = [];
+    const key = isString(arrays[arrays.length - 1]) ? arrays.length - 1 : 'path'
+    const mergeArray = (target, source) => {
+        source.forEach((item) => {
+            const existingIndex = target.findIndex((existing) => existing[key] === item[key]);
+
+            if (existingIndex !== -1) {
+                const existingItem = target[existingIndex];
+
+                if (item.children && existingItem.children) {
+                    existingItem.children = mergeArray(existingItem.children, item.children);
+                } else {
+                    target[existingIndex] = item;
+                }
+            } else {
+                target.push(item);
+            }
+        });
+        return target;
+    };
+
+    arrays.forEach((arr) => {
+        mergeArray(merged, arr);
+    });
+
+    return merged;
 }
 
 
+/**
+ * 多个对象深度合并
+ * @param objects
+ * @returns {{}}
+ */
+function deepMergeObject(...objects) {
+    const merged = {};
+    for (let obj of objects) {
+        if (typeof obj === 'object') {
+            for (let key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    if (typeof obj[key] === 'object' && obj[key] !== null) {
+                        if (!merged.hasOwnProperty(key)) {
+                            merged[key] = Array.isArray(obj[key]) ? [] : {};
+                        }
+                        merged[key] = deepMergeObject(merged[key], obj[key]);
+                    } else {
+                        merged[key] = obj[key];
+                    }
+                }
+            }
+        }
+    }
+
+    return merged;
+}
 
 export {
     renderIcon,
@@ -247,5 +298,7 @@ export {
     menusToLocalRoutes,
     menusProcessing,
     closeTabBarJump,
-    cutColorTheme
+    cutColorTheme,
+    deepMergeArrays,
+    deepMergeObject
 }

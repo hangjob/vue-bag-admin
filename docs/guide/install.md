@@ -2,13 +2,13 @@
 
 我推荐您使用包管理器（如 NPM、Yarn 或 pnpm）安装核心基础框架，然后您就可以使用打包工具，例如 Vite 或 webpack。
 
-### pnpm安装
+## pnpm安装
 
 ```bash
 npm install -g pnpm
 ```
 
-### nrm安装
+## nrm安装
 
 切换npm源地址
 
@@ -27,7 +27,7 @@ nrm use taobao # 切换为淘宝源
 | Node.js 18 | ✔️ | ✔️ | ✔️ |
 | Node.js 20 | ✔️ | ✔️ | ✔️ |
 
-### 安装框架
+## 安装框架
 
 ```bash
 pnpm i vue-bag-admin  -S

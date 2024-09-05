@@ -1,6 +1,6 @@
 # 发布于部署
 
-### 构建
+## 构建
 
 项目开发完成之后，可以执行 `npm run build` 命令进行构建，构建打包成功之后，会在根目录生成 `dist` 文件夹，里面就是构建打包好的文件
 
@@ -9,7 +9,7 @@
 /app/，否则会出现资源引用错误.
 :::
 
-### 配置压缩
+## 配置压缩
 ```bash
 pnpm add -D vite-plugin-compression
 import viteCompression from 'vite-plugin-compression'
@@ -24,7 +24,7 @@ export default defineConfig({
 
 ```
 
-### Hash模式
+## Hash模式
 
 ```js{5}
 import {createWebHashHistory} from "vue-router"
@@ -37,7 +37,7 @@ framework.use(plugins.useRouterPlugin, {
 app.mount('#app')
 ```
 
-### History模式
+## History模式
 
 ```js{5}
 import {createWebHistory} from "vue-router"
@@ -71,7 +71,7 @@ export default defineConfig({
 });
 ```
 
-### Nginx配置
+## Nginx配置
 
 ::: details 部署单页面Nginx配置
 NGINX Config 支持 HTTP、HTTPS、PHP、Python、Node.js、WordPress、Drupal、缓存、逆向代理、日志等各种配置选项。在线生成 Web 服务器

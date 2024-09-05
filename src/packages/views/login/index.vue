@@ -117,8 +117,16 @@ const compData = reactive({
 })
 const imgList = computed(() => new URL(`../../assets/${compData.imgName}`, import.meta.url).href)
 const handleSubmit = ($global) => {
-    console.log($global.apis.AuthLocal.httpPost)
+    // $global.apis.AuthLocal.url='/ceshi/url'
+    // $global.apis.AuthLocal.httpPost(compData.form).then((res)=>{
+    //     console.log(res)
+    // })
     const method = $global.apis.AuthLocal.httpPost(compData.form)
-    console.log($global.router.push('/'))
+    method.baseURL = '/api2'
+    method.url = '/edit/api/url'
+    method.send().then((res) => {
+        console.log(res)
+    })
+    // console.log($global.router.push('/'))
 }
 </script>

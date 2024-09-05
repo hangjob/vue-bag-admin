@@ -21,13 +21,41 @@ export default defineConfig({
                 ]
             },
             {
-                text: '准备工作',
+                text: '开始使用',
                 items: [
                     {text: '安装', link: '/guide/install'},
                     {text: '快速开始', link: '/guide/start'},
-                    {text: '源码开发', link: '/guide/source_code'}
+                    {
+                        text: '插件列表',
+                        items: [
+                            {text: '路由插件', link: '/plugins/router'},
+                            {text: '布局插件', link: '/plugins/layout'},
+                            {text: '多语言插件', link: '/plugins/language'},
+                            {text: '图标插件', link: '/plugins/icon'},
+                            {text: 'API插件', link: '/plugins/api'},
+                            {text: '进度条插件', link: '/plugins/progress'},
+                        ]
+                    },
+                    {text: '全局扩展', link: '/guide/global'},
+                    {text: '表单组件', link: '/guide/comp'},
+                    {text: 'Css原子化', link: '/guide/css'},
+                    {text: 'Pinia状态管理', link: '/guide/pinia'},
                 ]
-            }
+            },
+            {
+                text: '高级用法',
+                items: [
+                    {text: '插件开发', link: '/plugins/exploit'},
+                    {text: '自动导入', link: '/usage/import'},
+                    {text: 'Vite插件', link: '/usage/vite'},
+                ]
+            },
+            {
+                text: 'Strapi',
+                items: [
+                    {text: 'API服务', link: '/strapi/install'},
+                ]
+            },
         ],
 
         socialLinks: [

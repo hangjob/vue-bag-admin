@@ -20,7 +20,7 @@ const menus = [
         overlayRouting: false // 是否开启覆盖路由 默认开启
     },
     {
-        id: 0,
+        id: 999,
         title: '首页',
         localesKey: 'home',
         file: '/src/app/views/home/index.vue',

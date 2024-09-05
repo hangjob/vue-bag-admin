@@ -13,7 +13,7 @@
                 <SiderMenu/>
             </n-layout-sider>
             <div class="flex h-full flex-col flex-auto overflow-hidden item">
-                <template v-if="components.LayoutHeaderSubtitle">
+                <template v-if="components.LayoutHeaderCum">
                     <template  v-if="$globalStore.configs.isBreadcrumb && ($globalStore.appGroups.length)">
                         <n-breadcrumb class="py-2 px-4">
                             <n-breadcrumb-item v-for="item in $globalStore.breadcrumb">

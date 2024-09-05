@@ -9,7 +9,7 @@ framework.use(plugins.useLanguagePlugin)
 framework.use(plugins.useRouterPlugin, {
     history: createWebHashHistory()
 })
-
+framework.use(plugins.useProgressPlugin)
 
 app.mount("#app")
 

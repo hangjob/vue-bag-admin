@@ -25,7 +25,7 @@
                 </component>
             </template>
             <template #subtitle>
-                <component is="LayoutHeaderSubtitle">
+                <component is="LayoutHeaderCum">
                     <n-breadcrumb>
                         <n-breadcrumb-item v-for="item in $globalStore.breadcrumb">
                             {{ $global?.helpers?.formatTitle($global, item) }}

@@ -9,9 +9,9 @@ export class LanguagePlugin {
         this._enable = false
     }
 
-    install({ctx}, options) {
+    install({ctx}, options={}) {
         this._enable = true;
-        setupI18n(ctx)
+        setupI18n(ctx,options)
     }
 
     disable() {
