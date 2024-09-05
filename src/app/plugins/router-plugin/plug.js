@@ -1,23 +1,29 @@
+import {isArray, isFunction, isPromise} from "radash";
+
 const files = import.meta.glob(`@/app/views/*/*.vue`, {eager: true})
 
 /**
  * 获取menu菜单
  * @param ctx
+ * @param options
  * @returns {Promise<{routes: *[], menus: *[]}>}
  */
-async function getAppMenus(ctx) {
+async function getAppMenus(ctx, options) {
     const $globalStore = ctx.app.config.globalProperties.$globalStore;
-    if (ctx?.apis?.Menus) {
-        return ctx.apis.Menus.httpGet({'pagination[limit]': '-1'}).then((res) => {
-            const menus = ctx.helpers.menusProcessing(ctx, ctx.helpers.buildTree(res.data))
-            const routes = ctx.helpers.menusToLocalRoutes(menus, $globalStore.files)
-            $globalStore.dispatchMenus(menus)
-            $globalStore.dispatchRoutes(routes)
-            $globalStore.dispatchSourceMenus(menus)
-            ctx.helpers.addRoutes(ctx, routes)
-        })
-    } else {
-        return Promise.resolve()
+    const disposeMenus = (data) => {
+        const menus = ctx.helpers.menusProcessing(ctx, ctx.helpers.buildTree(data))
+        const routes = ctx.helpers.menusToLocalRoutes(menus, $globalStore.files)
+        $globalStore.dispatchMenus(menus)
+        $globalStore.dispatchRoutes(routes)
+        $globalStore.dispatchSourceMenus(menus)
+        ctx.helpers.addRoutes(ctx, routes)
+    }
+
+    if (isFunction(options?.handleMenus)) {
+        const res = await options.handleMenus({ctx})
+        if (isArray(res.data) || isArray(res)) {
+            disposeMenus(res.data || res)
+        }
     }
 }
 
@@ -25,19 +31,23 @@ async function getAppMenus(ctx) {
 /**
  * 获取应用分类、菜单
  * @param ctx
+ * @param options
  */
-async function getAppGroups(ctx) {
+async function getAppGroups(ctx, options) {
     const $globalStore = ctx.app.config.globalProperties.$globalStore;
-    if (ctx?.apis?.Classify) {
-        return ctx.apis.Classify.httpGet().then((res) => {
-            const groups = ctx.helpers.menusProcessing(ctx, ctx.helpers.buildTree(res.data))
-            const routes = ctx.helpers.menusToLocalRoutes(groups, $globalStore.files)
-            $globalStore.dispatchRoutes(routes)
-            $globalStore.dispatchAppGroups(groups)
-            ctx.helpers.addRoutes(ctx, routes)
-        })
-    } else {
-        return Promise.resolve()
+    const disposeGroups = (data) => {
+        const groups = ctx.helpers.menusProcessing(ctx, ctx.helpers.buildTree(data))
+        const routes = ctx.helpers.menusToLocalRoutes(groups, $globalStore.files)
+        $globalStore.dispatchRoutes(routes)
+        $globalStore.dispatchAppGroups(groups)
+        ctx.helpers.addRoutes(ctx, routes)
+    }
+
+    if (isFunction(options?.handleGroups)) {
+        const res = await options.handleGroups({ctx})
+        if (isArray(res.data) || isArray(res)) {
+            disposeGroups(res.data || res)
+        }
     }
 }
 
@@ -52,7 +62,7 @@ const beforeEach = (ctx, options) => {
     ctx?.router?.beforeEach?.(async (to, from, next) => {
         try {
             if (!$globalStore.isLoadRoutes) {
-                await getAppMenus(ctx)
+                await getAppMenus(ctx, options)
                 await getAppGroups(ctx)
                 $globalStore.isLoadRoutes = true
                 next({...to, replace: true})

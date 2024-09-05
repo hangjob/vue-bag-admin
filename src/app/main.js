@@ -7,10 +7,12 @@ framework.use(plugins.useIconPlugin)
 framework.use(plugins.useLayoutPlugin)
 framework.use(plugins.useLanguagePlugin)
 framework.use(plugins.useRouterPlugin, {
-    history: createWebHashHistory()
+    history: createWebHashHistory(),
+    handleMenus: ({ctx}) => {
+        return ctx.apis.Menus.httpGet({'pagination[limit]': '-1'})
+    }
 })
-framework.use(plugins.useProgressPlugin)
-
+// framework.use(plugins.useProgressPlugin)
 app.mount("#app")
 
 

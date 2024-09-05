@@ -13,7 +13,6 @@ const ctx = new Framework({
     http, // 请求封装 https://alova.js.org/
     nprogress, // 进度条
 });
-// ctx['extend'] = 'xxx' // 可以这样扩展，贯穿整个框架
 ```
 
 ## [Radash官网](https://www.radash.wiki/)

@@ -98,16 +98,26 @@ framework.use(plugins.useRouterPlugin, {
 app.mount('#app')
 ```
 
-## Menus
+## handleMenus
 
-框架支持默认接口菜单，也可以通过传递`menus`参数，框架会自动生成路由，当同时配置接口菜单和`menus`参数，数据会进行合并
+获取菜单数据，可以通过接口获取菜单数据，也可以通过传递一个数组来获取菜单数据
+
+该函数类型可以是一个函数返回一个Promise，也可以是一个数组
 
 ```javascript
 import {app, framework, plugins} from "vue-bag-admin"
 
 framework.use(plugins.useRouterPlugin, {
     files,
-    menus: [
+    handleMenus: ({ctx}) => {
+        // 使用了API插件获取数据
+        return ctx.apis.Menus.httpGet({'pagination[limit]': '-1'}) // 从接口获取菜单数据
+    }
+})
+
+framework.use(plugins.useRouterPlugin, {
+    files,
+    handleMenus: [
         {
             id: 1,
             title: '首页',
@@ -117,7 +127,11 @@ framework.use(plugins.useRouterPlugin, {
             name: 'home',
             icon: 'BookOutline',
             hasClose: false,
-            sort: 100
+            sort: 100,
+            hasMenu: false,
+            hasRouter: false,
+            overlayRouting: false,
+            children: []
         },
         {
             id: 2,
@@ -127,14 +141,44 @@ framework.use(plugins.useRouterPlugin, {
             path: '/user',
             name: 'user',
             icon: 'BookOutline',
-            hasClose: true
+            hasClose: true,
+            hasMenu: false,
+            hasRouter: false,
+            overlayRouting: false,
+            children: []
         },
-    ]
+    ],
 })
 app.mount('#app')
 ```
 
+## handleGroups
+
+框架应用分类获取菜单数据，可以通过接口获取菜单数据，也可以通过传递一个数组来获取菜单数据
+
 ```javascript
-插件源码
-ctx.apis.Menus.httpGet // [!code focus]
+framework.use(plugins.useRouterPlugin, {
+    files,
+    handleGroups: ({ctx}) => {
+        // 使用方式同上
+    }
+})
 ```
+
+#### 属性说明
+
+| 属性             |   类型    |     说明      |
+|----------------|:-------:|:-----------:|
+| id             | number  |    菜单id     |
+| title          | string  |    菜单名称     |
+| localesKey     | string  | 菜单名称的国际化key |
+| file           | string  |  菜单对应的文件路径  |
+| path           | string  |   菜单对应的路径   |
+| name           | string  |  菜单对应的路由名称  |
+| icon           | string  |   菜单对应的图标   |
+| hasClose       | boolean |   是否有关闭按钮   |
+| sort           | number  |    菜单排序     |
+| hasMenu        | boolean |    是否有菜单    |
+| hasRouter      | boolean |    是否有路由    |
+| overlayRouting | boolean |   是否覆盖路由    |
+| children       |  array  |    子菜单数据    |
