@@ -22,5 +22,5 @@ export default {
     closeLeftTab:'CloseLeftTab',
     closeRightTab:'CloseRightTab',
     modalWindowTab:'ModalWindowTab',
-    closeAlltTab:'CloseAlltTab',
+    closeAllTab:'CloseAlltTab',
 }

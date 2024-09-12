@@ -8,8 +8,12 @@ export default class LayoutPlugin {
     }
 
     install({ctx}, options) {
-        ctx.app.component('LayoutHeaderExtra', LayoutHeaderExtra)
-        ctx.app.component('LayoutHeaderCum', LayoutHeaderCum)
+        if(!ctx.app.component('LayoutHeaderExtra')){
+            ctx.app.component('LayoutHeaderExtra', LayoutHeaderExtra)
+        }
+        if(!ctx.app.component('LayoutHeaderCum')){
+            ctx.app.component('LayoutHeaderCum', LayoutHeaderCum)
+        }
         this._enable = true;
     }
 

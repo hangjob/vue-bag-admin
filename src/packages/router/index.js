@@ -1,5 +1,3 @@
-import {createRouter as _createRouter, createWebHistory} from "vue-router"
-import {defaultBuiltRouter} from "@/packages/router/routes.js"
 import useGlobalStore from "@/packages/pinia/global.js";
 import {findParents} from "@/packages/helpers"
 import lscache from "lscache"

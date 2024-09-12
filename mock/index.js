@@ -64,7 +64,7 @@ const menus = [
         id: 4,
         title: '编辑器',
         localesKey: 'editor',
-        file: '/src/app/views/editor/index.vue',
+        file: '/src/app/views/user/index.vue',
         path: '/editor',
         name: 'editor',
         icon: 'BookOutline',
@@ -73,7 +73,7 @@ const menus = [
                 id: 5,
                 title: 'MD文档',
                 localesKey: 'markdown',
-                file: '/src/app/views/editor/md.vue',
+                file: '/src/app/views/user/index.vue',
                 path: '/md',
                 name: 'md',
                 hasClose: true

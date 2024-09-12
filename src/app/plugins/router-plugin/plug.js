@@ -18,7 +18,6 @@ async function getAppMenus(ctx, options) {
         $globalStore.dispatchSourceMenus(menus)
         ctx.helpers.addRoutes(ctx, routes)
     }
-
     if (isFunction(options?.handleMenus)) {
         const res = await options.handleMenus({ctx})
         if (isArray(res.data) || isArray(res)) {
@@ -42,7 +41,6 @@ async function getAppGroups(ctx, options) {
         $globalStore.dispatchAppGroups(groups)
         ctx.helpers.addRoutes(ctx, routes)
     }
-
     if (isFunction(options?.handleGroups)) {
         const res = await options.handleGroups({ctx})
         if (isArray(res.data) || isArray(res)) {
@@ -63,7 +61,7 @@ const beforeEach = (ctx, options) => {
         try {
             if (!$globalStore.isLoadRoutes) {
                 await getAppMenus(ctx, options)
-                await getAppGroups(ctx)
+                await getAppGroups(ctx, options)
                 $globalStore.isLoadRoutes = true
                 next({...to, replace: true})
             } else {

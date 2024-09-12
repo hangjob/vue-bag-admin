@@ -18,7 +18,7 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate' // 持久化
 import setupComponents from "@/packages/components/index.js"
 import * as plugins from "@/app/plugins/index.js"
 import useGlobalStore from "@/packages/pinia/global.js";
-
+import * as router from "vue-router"
 Array.prototype.first = function () {
     return this.slice(0, 1)[0];
 }
@@ -31,6 +31,7 @@ app.use(setupComponents)
 
 
 app.config.globalProperties.$globalStore = window.$globalStore = useGlobalStore()
+
 
 const framework = new Framework({
     app,
@@ -45,6 +46,8 @@ const framework = new Framework({
 
 framework.use(plugins.useNaivePlugin)
 
+app.config.globalProperties.$global = window.$global = framework.ctx;
+
 export {
     app,
     pina,
@@ -56,4 +59,5 @@ export {
     http,
     nprogress,
     plugins,
+    router
 }

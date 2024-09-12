@@ -180,5 +180,6 @@ framework.use(plugins.useRouterPlugin, {
 | sort           | number  |    菜单排序     |
 | hasMenu        | boolean |    是否有菜单    |
 | hasRouter      | boolean |    是否有路由    |
+| hasTab         | boolean |   是否有tab    |
 | overlayRouting | boolean |   是否覆盖路由    |
 | children       |  array  |    子菜单数据    |

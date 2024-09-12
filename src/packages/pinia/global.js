@@ -3,6 +3,7 @@ import {unique, replaceOrAppend, select} from 'radash'
 import currentDevice from "current-device" // 获取设备
 import {nextTick} from "vue"
 import lscache from "lscache";
+
 const getBrowserDeviceType = function (w = 718) {
     return window.innerWidth < w;
 };
@@ -38,7 +39,7 @@ const useGlobalStore = defineStore('global', {
                 isFooter: true, // 是否显示底部
                 isWatermark: false, // 是否水印
                 watermark: '品茗科技', // 水印文字
-                layoutName: 'lessen', // 主题名称 default lessen spillover
+                layoutName: 'default', // 主题名称 default lessen spillover
                 tabStyle: 'button', // 标签风格 button card
                 formStyle: 'drawer', // 表单风格 drawer dialogue
             },
@@ -52,11 +53,12 @@ const useGlobalStore = defineStore('global', {
                 title: '品茗科技', // logo
                 subTitle: '为专业赋能', // 副标题
             },
+            userInfo: {}, // 用户信息
             currentRouter: {}, // 当前路由对象
             breadcrumb: [], // 头部面包屑导航
             tabs: tabs, // 菜单切换
             isRouterAlive: true, // 切换刷新页面
-            bgs:[], // 背景图
+            bgs: [], // 背景图
             theme: {
                 color: '#18a058',
                 colors: [
@@ -95,6 +97,9 @@ const useGlobalStore = defineStore('global', {
         },
         dispatchIsRoutes() {
             this.isLoadRoutes = true
+        },
+        dispatchUserInfo(data) {
+            this.userInfo = data
         },
         dispatchTabs(tab) {
             if (tab.title && tab.id) {

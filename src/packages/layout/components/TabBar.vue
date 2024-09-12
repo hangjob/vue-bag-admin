@@ -4,7 +4,7 @@
             <ChevronBackOutline></ChevronBackOutline>
         </n-icon>
         <n-el v-if="$globalStore.configs.tabStyle === 'button'" tag="div"
-              class="box-border py-1 flex-1 px-2 flex-shrink-0 border-l border-r border-solid bag-border-color no-scrollbar overflow-y-hidden overflow-x-scroll flex whitespace-nowrap">
+              class="box-border py-1 flex-1 px-2 flex-shrink-0 border-l border-r border-solid bag-border-color no-scrollbar items-center overflow-y-hidden overflow-x-scroll flex whitespace-nowrap">
             <n-space :wrap="false">
                 <n-button :color="$globalStore.currentRouter.path === item.path ? $globalStore.theme.color : ''"
                           icon-placement="right" class="cursor-pointer" v-for="item in $globalStore.tabs"
@@ -40,7 +40,7 @@
         </n-icon>
         <n-dropdown key-field="localesKey" :render-label="(item)=>$global?.helpers?.formatTitle($global, item)"
                     :options="popselectOptions"
-                    @select="(key)=>handlePopselectOptions($global,$globalHook,$globalStore,key)">
+                    @select="(key)=>handleSelectOptions($global,$globalHook,$globalStore,key)">
             <n-icon size="20" class="px-2 w-auto flex-shrink-0 cursor-pointer">
                 <HappyOutline></HappyOutline>
             </n-icon>
@@ -67,7 +67,7 @@ const popselectOptions = ref([
     {localesKey: 'closeRightTab', icon: renderIcon(ArrowForward)},
     {type: 'divider', localesKey: 'd2'},
     {localesKey: 'modalWindowTab', icon: renderIcon(Resize)},
-    {localesKey: 'closeAlltTab', icon: renderIcon(LeafOutline)},
+    {localesKey: 'closeAllTab', icon: renderIcon(LeafOutline)},
 ])
 
 const [, {enterFullscreen}] = useFullscreen(() => document.getElementById('layout'))
@@ -81,7 +81,7 @@ const tabStyle = ($globalStore, item) => {
     }
 }
 
-const handlePopselectOptions = ($global, $globalHook, $globalStore, key) => {
+const handleSelectOptions = ($global, $globalHook, $globalStore, key) => {
     if (key === 'contentFullScreen') {
         enterFullscreen()
     }
@@ -90,33 +90,33 @@ const handlePopselectOptions = ($global, $globalHook, $globalStore, key) => {
     }
     if (key === 'closeCurrentTab') {
         const data = $globalStore.tabs.find(item => item.id === $globalStore.currentRouter.meta.id)
-        data && $global?.helpers?.closeTabBarJump($global,item)
+        data && $global?.helpers?.closeTabBarJump($global, data)
     }
     if (key === 'closeLeftTab') {
         const index = $globalStore.tabs.findIndex(item => item.id === $globalStore.currentRouter.meta.id)
         const sliceData = $globalStore.tabs.slice(0, index);
         sliceData.forEach(item => {
-            $global?.helpers?.closeTabBarJump($global,item)
+            $global?.helpers?.closeTabBarJump($global, item)
         })
     }
     if (key === 'closeRightTab') {
         const index = $globalStore.tabs.findIndex(item => item.id === $globalStore.currentRouter.meta.id)
         const sliceData = $globalStore.tabs.slice(index + 1);
         sliceData.forEach(item => {
-            $global?.helpers?.closeTabBarJump($global,item)
+            $global?.helpers?.closeTabBarJump($global, item)
         })
     }
-    if (key === 'closeAlltTab') {
+    if (key === 'closeAllTab') {
         $globalStore.tabs.forEach(item => {
             if (item.id !== $globalStore.currentRouter.meta.id) {
-                $global?.helpers?.closeTabBarJump($global,item)
+                $global?.helpers?.closeTabBarJump($global, item)
             }
         })
     }
     if (key === 'modalWindowTab') {
         createWindow({
             title: $global.helpers.formatTitle($global, $globalStore.currentRouter.meta),
-            background:$globalStore.theme.color,
+            background: $globalStore.theme.color,
             x: "center", y: "center", width: "80%", height: "80%", url: window.location.href
         })
     }

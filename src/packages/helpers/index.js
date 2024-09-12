@@ -6,6 +6,8 @@ import {md5} from "js-md5";
 import {generate} from "@ant-design/colors";
 import {commonDark} from 'naive-ui'
 import {merge, isString} from "radash";
+import CryptoJS from "crypto-js";
+
 
 function renderIcon(icon, props) {
     return () => h(NIcon, props, {default: () => h(icon)})
@@ -230,32 +232,35 @@ function cutColorTheme(ctx, color) {
  */
 
 function deepMergeArrays(...arrays) {
-    const merged = [];
-    const key = isString(arrays[arrays.length - 1]) ? arrays.length - 1 : 'path'
-    const mergeArray = (target, source) => {
-        source.forEach((item) => {
-            const existingIndex = target.findIndex((existing) => existing[key] === item[key]);
+    const result = [];
+    const map = new Map();
 
-            if (existingIndex !== -1) {
-                const existingItem = target[existingIndex];
-
-                if (item.children && existingItem.children) {
-                    existingItem.children = mergeArray(existingItem.children, item.children);
-                } else {
-                    target[existingIndex] = item;
-                }
-            } else {
-                target.push(item);
+    // 遍历所有数组
+    arrays.forEach(array => {
+        array.forEach(item => {
+            if (!map.has(item.path)) {
+                map.set(item.path, []);
             }
+            map.get(item.path).push(item);
         });
-        return target;
-    };
-
-    arrays.forEach((arr) => {
-        mergeArray(merged, arr);
     });
 
-    return merged;
+    // 合并具有相同 path 的对象
+    map.forEach((items, path) => {
+        const mergedItem = items.reduce((acc, curr) => {
+            // 合并属性
+            Object.keys(curr).forEach(key => {
+                if (!acc.hasOwnProperty(key) || acc[key] === undefined) {
+                    acc[key] = curr[key];
+                }
+            });
+            return acc;
+        }, {path});
+
+        result.push(mergedItem);
+    });
+
+    return result;
 }
 
 
@@ -286,6 +291,63 @@ function deepMergeObject(...objects) {
     return merged;
 }
 
+
+const _iv = CryptoJS.enc.Utf8.parse("pinming@20180821");
+const _key = CryptoJS.enc.Utf8.parse("pinming@20180821"); //16位
+
+/**
+ *加密
+ * @param word
+ * @param iv
+ * @param key
+ * @returns {string}
+ */
+function encrypt(word, iv = _iv, key = _key) {
+    let str = typeof word == "string" ? word : JSON.stringify(word);
+    const srcs = CryptoJS.enc.Utf8.parse(str);
+    const encrypted = CryptoJS.AES.encrypt(srcs, key, {
+        iv: iv,
+        mode: CryptoJS.mode.CBC,
+        padding: CryptoJS.pad.Pkcs7
+    });
+    return encrypted.toString();
+}
+
+
+/**
+ * 解密
+ * @param word
+ * @param iv
+ * @param key
+ * @returns {string}
+ */
+function decrypt(word, iv = _iv, key = _key) {
+    const encryptedHexStr = CryptoJS.enc.Hex.parse(word);
+    const srcs = CryptoJS.enc.Base64.stringify(encryptedHexStr);
+    const decrypt = CryptoJS.AES.decrypt(srcs, key, {
+        iv: iv,
+        mode: CryptoJS.mode.CBC,
+        padding: CryptoJS.pad.Pkcs7
+    });
+    const decryptedStr = decrypt.toString(CryptoJS.enc.Utf8);
+    return decryptedStr.toString();
+}
+
+
+/**
+ * 去除重复的斜杠
+ * @param str
+ * @param isHttp
+ * @returns {string}
+ */
+function removeRepeatBias(str = '', isHttp = false) {
+    if (isHttp) {
+        return str.replace(/([^:])(\/\/+)/g, '$1/') // 第一个 双斜杠不去掉 http://
+    } else {
+        return str.replace(/(\/\/+)/g, '/')// 去掉所有的重复斜杠
+    }
+}
+
 export {
     renderIcon,
     depthForEach,
@@ -300,5 +362,8 @@ export {
     closeTabBarJump,
     cutColorTheme,
     deepMergeArrays,
-    deepMergeObject
+    deepMergeObject,
+    encrypt,
+    decrypt,
+    removeRepeatBias
 }

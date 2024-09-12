@@ -1,5 +1,5 @@
 import {createRouter, createWebHistory} from "vue-router"
-import {defaultBuiltRouter} from "@/packages/router/routes.js";
+import {defaultBuiltRouter, defaultErrorRouter} from "@/packages/router/routes.js";
 import {afterEach} from "@/packages/router/index.js"
 import beforeEach from "./plug.js"
 
@@ -15,9 +15,12 @@ export class RouterPlugin {
 
     install({ctx}, options = {}) {
         const {router, ...args} = options;
+        const routes = [...defaultBuiltRouter]
+        options.routes ? routes.push(...options.routes) : null;
+        options.errorRoute ? routes.push(options.errorRoute) : routes.push(defaultErrorRouter); // 这个要放在最后
         ctx.router = router || createRouter({
             history: createWebHistory(options.base || '/'),
-            routes: ctx.helpers.deepMergeArrays(defaultBuiltRouter, options.routes || []), // 合并默认路由与用户配置路由
+            routes:routes, // 合并默认路由与用户配置路由
             ...args
         });
         ctx.app.use(ctx.router)

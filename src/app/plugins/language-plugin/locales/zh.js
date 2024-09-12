@@ -22,5 +22,5 @@ export default {
     closeLeftTab:'关闭左侧标签',
     closeRightTab:'关闭右侧标签',
     modalWindowTab:'模态窗口标签',
-    closeAlltTab:'关闭全部标签',
+    closeAllTab:'关闭全部标签',
 }

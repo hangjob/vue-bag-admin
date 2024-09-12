@@ -10,7 +10,9 @@
                 :collapsed-width="$globalStore.configs.layoutName === 'lessen' ? $globalStore.configs.layoutSiderWidth : $globalStore.configs.collapsedWidth"
                 :width="$globalStore.deviceInfo.isMobile ? 0 : $globalStore.configs.layoutSiderWidth"
             >
-                <SiderMenu/>
+                <component is="LayoutSiderMenu">
+                    <SiderMenu/>
+                </component>
             </n-layout-sider>
             <div class="flex h-full flex-col flex-auto overflow-hidden item">
                 <template v-if="components.LayoutHeaderCum">
