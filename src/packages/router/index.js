@@ -26,6 +26,7 @@ function updataBreadcrumbMenus(ctx, app, to) {
 // 更新tabbar
 function updataTabs(app, to) {
     app.dispatchTabs({path: to.path, ...to.meta})
+    app.dispatchTabs({path: to.path, ...to.meta, query: to.query})
 }
 
 // 更新持久化存储

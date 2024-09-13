@@ -1,7 +1,7 @@
 {
   "name": "vue-bag-admin",
   "private": false,
-  "version": "5.0.7",
+  "version": "5.0.8",
   "type": "module",
   "main": "./lib/vue-bag-admin.cjs.js",
   "module": "./lib/vue-bag-admin.es.js",
