@@ -20,7 +20,7 @@ async function getAppMenus(ctx, options) {
     }
     if (isFunction(options?.handleMenus)) {
         const res = await options.handleMenus({ctx})
-        if (isArray(res.data) || isArray(res)) {
+        if (isArray(res?.data) || isArray(res)) {
             disposeMenus(res.data || res)
         }
     }
@@ -43,7 +43,7 @@ async function getAppGroups(ctx, options) {
     }
     if (isFunction(options?.handleGroups)) {
         const res = await options.handleGroups({ctx})
-        if (isArray(res.data) || isArray(res)) {
+        if (isArray(res?.data) || isArray(res)) {
             disposeGroups(res.data || res)
         }
     }
@@ -58,17 +58,12 @@ const beforeEach = (ctx, options) => {
     const $globalStore = ctx.app.config.globalProperties.$globalStore;
     $globalStore.dispatchFiles({...files, ...(options?.files || {})}) // 做一个全局的文件缓存，方便后续使用
     ctx?.router?.beforeEach?.(async (to, from, next) => {
-        try {
-            if (!$globalStore.isLoadRoutes) {
-                await getAppMenus(ctx, options)
-                await getAppGroups(ctx, options)
-                $globalStore.isLoadRoutes = true
-                next({...to, replace: true})
-            } else {
-                next()
-            }
-        } catch (err) {
-            console.log(err)
+        if (!$globalStore.isLoadRoutes) {
+            await getAppMenus(ctx, options)
+            await getAppGroups(ctx, options)
+            $globalStore.isLoadRoutes = true
+            next({...to, replace: true})
+        } else {
             next()
         }
     })

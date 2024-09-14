@@ -5,7 +5,6 @@ import {customAlphabet} from 'nanoid';
 import {md5} from "js-md5";
 import {generate} from "@ant-design/colors";
 import {commonDark} from 'naive-ui'
-import {merge, isString} from "radash";
 import CryptoJS from "crypto-js";
 
 
@@ -132,6 +131,44 @@ const addRoutes = (ctx, routes = []) => {
     })
 }
 
+
+/**
+ * 深度函数查找
+ * @param arr
+ * @param predicate
+ * @returns {*[]}
+ */
+function deepFind(arr, predicate) {
+    const result = [];
+
+    function traverse(items) {
+        for (let i = 0; i < items.length; i++) {
+            const item = items[i];
+            // 如果当前元素是对象，则检查其属性
+            if (typeof item === 'object' && item !== null) {
+                // 检查 `children` 属性是否存在
+                if (Array.isArray(item.children)) {
+                    traverse(item.children);
+                }
+
+                // 检查当前对象是否满足条件
+                if (predicate(item)) {
+                    result.push(item);
+                }
+            } else {
+                // 如果当前元素不是对象，则直接检查是否满足条件
+                if (predicate(item)) {
+                    result.push(item);
+                }
+            }
+        }
+    }
+
+    traverse(arr);
+    return result;
+}
+
+
 /**
  * 菜单转换本地路由，方可在调用addRoutes
  * @param menus
@@ -165,7 +202,8 @@ const menusToLocalRoutes = (menus, files) => {
 const menusProcessing = (ctx, menus) => {
     ctx.helpers.depthForEach(menus, (item) => {
         const topIds = findParents(menus, item.id) // 获取当前的菜单的父级ID
-        item.md5 = item.file ? md5(item.file) : null // 对每一个数据打印标记
+        item.topIds = topIds.map(item => item.id) // 给每个菜单添加一个自己的顶级应用分类的Id
+        item.md5 = item.md5 ? item.md5 : item.file ? md5(item.file) : null // 对每一个数据打印标记
         item.icon = ctx?.helpers?.getIcons?.(ctx, item.icon) // 转换传递过来的icon为render函数
         item.title = formatTitle(ctx, item, true);
         if (ctx.radash.isArray(topIds)) {
@@ -365,5 +403,6 @@ export {
     deepMergeObject,
     encrypt,
     decrypt,
-    removeRepeatBias
+    removeRepeatBias,
+    deepFind
 }
