@@ -1,7 +1,10 @@
 import {createWebHashHistory} from "vue-router"
-import {app, framework, plugins} from "@/packages/install.js"
+import install from "@/packages/install.js"
 
+const {app, framework, plugins} = install()
+const {} = install()
 
+framework.use(plugins.useNaivePlugin)
 framework.use(plugins.useApisPlugin, ['/auth/local/register', '/auth/local', '/secretkey', '/menus', '/classify'])
 framework.use(plugins.useIconPlugin)
 framework.use(plugins.useLayoutPlugin)

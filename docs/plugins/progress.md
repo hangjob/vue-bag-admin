@@ -83,7 +83,8 @@ const useProgressPlugin = new ProgressPlugin()
 
 ## 使用
 ```javascript
-import {app, framework, plugins} from "vue-bag-admin"
+import install from "vue-bag-admin"
+const {app, framework, plugins} = install()
 
 framework.use(plugins.useRouterPlugin) // [!code highlight] 
 framework.use(plugins.useProgressPlugin) // [!code ++]

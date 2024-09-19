@@ -36,6 +36,7 @@ export default defineConfig({
                             {text: '进度条插件', link: '/plugins/progress'},
                         ]
                     },
+                    {text: '路由布局', link: '/guide/router'},
                     {text: '全局扩展', link: '/guide/global'},
                     {text: '表单组件', link: '/guide/comp'},
                     {text: 'Css原子化', link: '/guide/css'},
@@ -59,7 +60,7 @@ export default defineConfig({
         ],
 
         socialLinks: [
-            {icon: 'github', link: 'https://github.com/vuejs/vitepress'}
+            {icon: 'instagram', link: 'https://github.com/vuejs/vitepress'}
         ],
         // 设置搜索框的样式
         search: {

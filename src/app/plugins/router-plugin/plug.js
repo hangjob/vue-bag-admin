@@ -19,9 +19,13 @@ async function getAppMenus(ctx, options) {
         ctx.helpers.addRoutes(ctx, routes)
     }
     if (isFunction(options?.handleMenus)) {
-        const res = await options.handleMenus({ctx})
-        if (isArray(res?.data) || isArray(res)) {
-            disposeMenus(res.data || res)
+        try {
+            const res = await options.handleMenus({ctx})
+            if (isArray(res?.data) || isArray(res)) {
+                disposeMenus(res.data || res)
+            }
+        } catch (e) {
+            console.log(e)
         }
     }
 }
@@ -42,9 +46,13 @@ async function getAppGroups(ctx, options) {
         ctx.helpers.addRoutes(ctx, routes)
     }
     if (isFunction(options?.handleGroups)) {
-        const res = await options.handleGroups({ctx})
-        if (isArray(res?.data) || isArray(res)) {
-            disposeGroups(res.data || res)
+        try {
+            const res = await options.handleGroups({ctx})
+            if (isArray(res?.data) || isArray(res)) {
+                disposeGroups(res.data || res)
+            }
+        } catch (e) {
+            console.log(e)
         }
     }
 }

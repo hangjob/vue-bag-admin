@@ -26,7 +26,8 @@ export default setupI18n
 ## 使用
 
 ```javascript
-import {app, framework, plugins} from "vue-bag-admin"
+import install from "vue-bag-admin"
+const {app, framework, plugins} = install()
 framework.use(plugins.useLanguagePlugin,{
     zh:{
         title:'羊先生' // 覆盖默认语言

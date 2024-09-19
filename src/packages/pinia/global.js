@@ -57,7 +57,7 @@ const useGlobalStore = defineStore('global', {
             currentRouter: {}, // 当前路由对象
             breadcrumb: [], // 头部面包屑导航
             tabs: tabs, // 菜单切换
-            isRouterAlive: true, // 切换刷新页面
+            isRouterReload: true, // 切换刷新页面
             bgs: [], // 背景图
             theme: {
                 color: '#18a058',
@@ -122,9 +122,9 @@ const useGlobalStore = defineStore('global', {
             this.theme.color = color
         },
         reloadView() {
-            this.isRouterAlive = false;
+            this.isRouterReload = false;
             nextTick().then(() => {
-                this.isRouterAlive = true
+                this.isRouterReload = true
             })
         }
     },

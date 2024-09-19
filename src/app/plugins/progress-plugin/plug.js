@@ -2,6 +2,7 @@ import {NButton, NAvatar, NProgress, NNotificationProvider} from "naive-ui";
 import {ref, h} from "vue"
 
 const useProgress = (ctx) => {
+
     const caches = {};
 
     const destroyNotification = (notification) => {

@@ -32,7 +32,8 @@ export const useRouterPlugin = new RouterPlugin()
 
 ```javascript
 import {createRouter, createWebHashHistory} from "vue-router"
-import {app, framework, plugins} from "vue-bag-admin"
+import install from "vue-bag-admin"
+const {app, framework, plugins} = install()
 
 const files = import.meta.glob(`@/app/views/*/*.vue`, {eager: true})
 framework.use(plugins.useRouterPlugin, {
@@ -46,7 +47,8 @@ app.mount('#app')
 ## 传递Router对象
 
 ```javascript
-import {app, framework, plugins} from "vue-bag-admin"
+import install from "vue-bag-admin"
+const {app, framework, plugins} = install()
 import {createRouter, createWebHashHistory} from "vue-router"
 
 const routes = [
@@ -89,7 +91,8 @@ app.mount('#app')
 > 通过传递`files`对象，框架就能寻找到外部文件，根据文件规则生成相对应的路由，一般作用于配合菜单使用
 
 ```javascript
-import {app, framework, plugins} from "vue-bag-admin"
+import install from "vue-bag-admin"
+const {app, framework, plugins} = install()
 
 const files = import.meta.glob(`@/app/views/*/*.vue`, {eager: true})
 framework.use(plugins.useRouterPlugin, {
@@ -105,7 +108,8 @@ app.mount('#app')
 该函数类型可以是一个函数返回一个Promise，也可以是一个数组
 
 ```javascript
-import {app, framework, plugins} from "vue-bag-admin"
+import install from "vue-bag-admin"
+const {app, framework, plugins} = install()
 
 framework.use(plugins.useRouterPlugin, {
     files,
@@ -165,7 +169,18 @@ framework.use(plugins.useRouterPlugin, {
 })
 ```
 
-#### 属性说明
+## 插件参数说明
+
+| 属性           |  类型  |           说明           |
+|--------------|:----:|:----------------------:|
+| files        | 文件对象 | 通过`import.meta.glob`获取 |
+| errorRoute   | 路由对象 |         错误路由的面         |
+| handleMenus  |  函数  |    返回菜单，或者一个Promise    |
+| handleGroups |  函数  |  返回菜单分组，或者返回一个Promise  |
+| base         | 字符串  |    vue-router参数保持一致    |
+| ...          | ...  | 更多属性跟vue-router参数保持一致  |
+
+## 菜单属性说明
 
 | 属性             |   类型    |     说明      |
 |----------------|:-------:|:-----------:|

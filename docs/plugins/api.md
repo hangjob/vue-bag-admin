@@ -30,7 +30,8 @@ export const useApisPlugin = new ApisPlugin()
 ## 注册插件
 
 ```javascript
-import {app, framework, plugins} from "vue-bag-admin"
+import install from "vue-bag-admin"
+const {app, framework, plugins} = install()
 
 const apis = ['/auth/local/register', '/auth/local', '/menus', 'secretkey']
 framework.use(plugins.useApisPlugin, apis)

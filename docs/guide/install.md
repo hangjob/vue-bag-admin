@@ -35,7 +35,8 @@ pnpm i vue-bag-admin  -S
 ```
 
 ```javascript
-import {app} from "vue-bag-admin"
+import install from "vue-bag-admin"
+const {app} = install()
 
 app.mount('#app')
 ```

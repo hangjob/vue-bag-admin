@@ -28,7 +28,8 @@ export default defineConfig({
 
 ```js{5}
 import {createWebHashHistory} from "vue-router"
-import {app, framework, plugins, router} from "vue-bag-admin"
+import install from "vue-bag-admin"
+const {app, framework, plugins} = install()
 
 framework.use(plugins.useRouterPlugin, {
     history:createWebHashHistory()
@@ -41,7 +42,8 @@ app.mount('#app')
 
 ```js{5}
 import {createWebHistory} from "vue-router"
-import {app, framework, plugins, router} from "vue-bag-admin"
+import install from "vue-bag-admin"
+const {app, framework, plugins} = install()
 
 framework.use(plugins.useRouterPlugin, {
     history:createWebHistory(),
@@ -54,7 +56,8 @@ app.mount('#app')
 
 ```js{5}
 import {createWebHistory} from "vue-router"
-import {app, framework, plugins, router} from "vue-bag-admin"
+import install from "vue-bag-admin"
+const {app, framework, plugins} = install()
 
 framework.use(plugins.useRouterPlugin, {
     history:createWebHistory('/app/'), // [!code focus]
