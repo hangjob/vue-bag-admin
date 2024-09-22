@@ -16,7 +16,7 @@
             </n-layout-sider>
             <div class="flex h-full flex-col flex-auto overflow-hidden item">
                 <template v-if="components.LayoutHeaderCum">
-                    <template  v-if="$globalStore.configs.isBreadcrumb && ($globalStore.appGroups.length)">
+                    <template v-if="$globalStore.configs.isBreadcrumb && ($globalStore.appGroups.length)">
                         <n-breadcrumb class="py-2 px-4">
                             <n-breadcrumb-item v-for="item in $globalStore.breadcrumb">
                                 {{ $global?.helpers?.formatTitle($global, item) }}
@@ -29,7 +29,11 @@
                     <TabBar v-if="$globalStore.configs.isTabar"/>
                 </component>
                 <n-layout id="layout" class="p-2">
-                    <router-view></router-view>
+                    <router-view v-slot="{ Component }">
+                        <transition mode="out-in">
+                            <component :is="Component"/>
+                        </transition>
+                    </router-view>
                 </n-layout>
             </div>
         </n-layout>

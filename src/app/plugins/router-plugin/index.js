@@ -20,7 +20,7 @@ export class RouterPlugin {
         options.errorRoute ? routes.push(options.errorRoute) : routes.push(defaultErrorRouter); // 这个要放在最后
         ctx.router = router || createRouter({
             history: createWebHistory(options.base || '/'),
-            routes:routes, // 合并默认路由与用户配置路由
+            routes: routes, // 合并默认路由与用户配置路由
             ...args
         });
         ctx.app.use(ctx.router)

@@ -20,7 +20,7 @@
 import install from "vue-bag-admin"
 import App from "./App.vue"
 
-const {app, framework, plugins} = install(App, {...})
+const {app, framework, plugins} = install(App)
 ```
 
 ### 附带框架源码

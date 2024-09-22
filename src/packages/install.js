@@ -1,7 +1,6 @@
 import 'default-passive-events' // 去掉chrome51版本后的事件捕获机制Passive Event Listeners 的警告
 import '@/packages/style/tailwind.css'
 import "@/packages/style/tailwind.css"
-import "@/packages/style/reset.css"
 import "@/packages/style/style.less"
 import nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
