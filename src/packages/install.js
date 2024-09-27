@@ -6,6 +6,7 @@ import nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
 import App from '@/packages/App.vue'
 import {createPinia} from "pinia"
+import * as pinia from "pinia"
 import Framework from "@/packages/framework/index.js";
 import * as helpers from "@/packages/helpers"
 import * as http from "@/packages/http/request.js"
@@ -28,18 +29,22 @@ Array.prototype.first = function () {
  * 如果已经安装了，则返回已经安装的app
  * @param elApp
  * @param rootProps
+ * @param options
  * @returns {*}
  */
-function install(elApp = null, rootProps = {}) {
+function install(elApp = null, options = {}) {
     if (install.app) {
         return install()
     }
     const app = createApp(elApp || App, {
-        ...rootProps,
+        ...options,
     })
     const pina = createPinia()
     app.use(pina)
     pina.use(piniaPluginPersistedstate)
+    for (const pinaKey in options.pinaPlugin) {
+        pina.use(options.pinaPlugin[pinaKey])
+    }
     app.use(setupComponents)
     app.config.globalProperties.$globalStore = window.$globalStore = useGlobalStore()
     const framework = new Framework({
@@ -74,3 +79,7 @@ function install(elApp = null, rootProps = {}) {
 }
 
 export default install
+
+export {
+    pinia
+}

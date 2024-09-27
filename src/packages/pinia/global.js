@@ -3,6 +3,7 @@ import {unique, replaceOrAppend, select} from 'radash'
 import currentDevice from "current-device" // 获取设备
 import {nextTick} from "vue"
 import lscache from "lscache";
+import {filterOut, removeDuplicates} from "@/packages/helpers/index.js";
 
 const getBrowserDeviceType = function (w = 718) {
     return window.innerWidth < w;
@@ -81,16 +82,16 @@ const useGlobalStore = defineStore('global', {
     getters: {},
     actions: {
         dispatchRoutes(routes) {
-            this.routes = unique(this.routes.concat(routes), item => item.id);
+            this.routes = removeDuplicates(this.routes.concat(routes));
         },
         dispatchMenus(menus) {
-            this.menus = unique(select(menus, f => ({...f}), f => !f.hasMenu), item => item.id);
+            this.menus = removeDuplicates(filterOut(menus, f => f.hasMenu))
         },
         dispatchSourceMenus(menus) {
-            this.sourceMenus = unique(menus, item => item.id);
+            this.sourceMenus = removeDuplicates(menus);
         },
         dispatchAppGroups(groups) {
-            this.appGroups = unique(groups, item => item.id);
+            this.appGroups = removeDuplicates(groups);
         },
         dispatchFiles(files) {
             this.files = files;

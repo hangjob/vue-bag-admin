@@ -44,7 +44,7 @@ const alovaInstance = createAlova({
 
 
 const httpPost = (url, params = null, config = {}) => {
-    const method = new Method('POST', alovaInstance, url, params, config)
+    const method = new Method('POST', alovaInstance, url, config, params)
     Object.getOwnPropertyNames(config).forEach((key) => method[key] = config[key])
     return method
 }

@@ -1,10 +1,9 @@
 import {h} from "vue";
-import {NIcon} from "naive-ui";
+import {commonDark, NIcon} from "naive-ui";
 import lscache from "lscache"
 import {customAlphabet} from 'nanoid';
 import {md5} from "js-md5";
 import {generate} from "@ant-design/colors";
-import {commonDark} from 'naive-ui'
 import CryptoJS from "crypto-js";
 
 
@@ -124,9 +123,11 @@ const addRoutes = (ctx, routes = []) => {
         if (!ctx.router.hasRoute(item.name) || item.overlayRouting) {
             const {component, name, path, ...meta} = item
             // 注意这里，如果不过扩展meta属性，其他属性添加不进去，被addRoute过滤了
-            ctx.router.addRoute(item.root ? item.root : 'layout', {
-                component, name, path, meta,
-            })
+            if (item.root) {
+                ctx.router.addRoute({component, name, path, meta}) // 这里可以再升级
+            } else {
+                ctx.router.addRoute('layout', {component, name, path, meta})
+            }
         }
     })
 }
@@ -167,7 +168,6 @@ function deepFind(arr, predicate) {
     traverse(arr);
     return result;
 }
-
 
 
 /**
@@ -330,18 +330,14 @@ function deepMergeObject(...objects) {
     return merged;
 }
 
-
-const _iv = CryptoJS.enc.Utf8.parse("pinming@20180821");
-const _key = CryptoJS.enc.Utf8.parse("pinming@20180821"); //16位
-
 /**
- *加密
+ * 对称加密
  * @param word
  * @param iv
  * @param key
  * @returns {string}
  */
-function encrypt(word, iv = _iv, key = _key) {
+function encrypt(word, iv, key) {
     let str = typeof word == "string" ? word : JSON.stringify(word);
     const srcs = CryptoJS.enc.Utf8.parse(str);
     const encrypted = CryptoJS.AES.encrypt(srcs, key, {
@@ -354,24 +350,37 @@ function encrypt(word, iv = _iv, key = _key) {
 
 
 /**
- * 解密
+ * 对称解密
  * @param word
  * @param iv
  * @param key
  * @returns {string}
  */
-function decrypt(word, iv = _iv, key = _key) {
-    const encryptedHexStr = CryptoJS.enc.Hex.parse(word);
-    const srcs = CryptoJS.enc.Base64.stringify(encryptedHexStr);
-    const decrypt = CryptoJS.AES.decrypt(srcs, key, {
+function decrypt(word, iv, key) {
+    const decrypt = CryptoJS.AES.decrypt(word, key, {
         iv: iv,
         mode: CryptoJS.mode.CBC,
         padding: CryptoJS.pad.Pkcs7
     });
-    const decryptedStr = decrypt.toString(CryptoJS.enc.Utf8);
-    return decryptedStr.toString();
+    return CryptoJS.enc.Utf8.stringify(decrypt);
 }
 
+
+
+
+/**
+ * 获取加密的密钥
+ * @param iv
+ * @param key
+ * @returns {{CryptoJS, iv: WordArray, key: WordArray}}
+ */
+function getCrypto({iv = '', key = ''} = {}) {
+    return {
+        CryptoJS,
+        iv: CryptoJS.enc.Utf8.parse(iv),
+        key: CryptoJS.enc.Utf8.parse(key), //16位
+    }
+}
 
 /**
  * 去除重复的斜杠
@@ -385,6 +394,59 @@ function removeRepeatBias(str = '', isHttp = false) {
     } else {
         return str.replace(/(\/\/+)/g, '/')// 去掉所有的重复斜杠
     }
+}
+
+
+/**
+ * 遍历数组并且过滤属性
+ * @param arr
+ * @param predicate
+ * @returns {*[]}
+ */
+function filterOut(arr, predicate) {
+    // 创建一个新的数组来存储过滤后的结果
+    const result = [];
+    arr.forEach(item => {
+        // 如果当前项是对象并且有children属性
+        if (typeof item === 'object' && item !== null && Array.isArray(item.children)) {
+            item.children = filterOut(item.children, predicate);
+            if (!predicate(item)) {
+                result.push(item);
+            }
+        } else {
+            // 如果当前项不是对象或者没有children属性
+            if (!predicate(item)) {
+                result.push(item);
+            }
+        }
+    });
+    return result;
+}
+
+
+/**
+ * 删除重复项
+ * @param arr
+ * @param seen
+ * @returns {*[]}
+ */
+function removeDuplicates(arr, seen = new Set()) {
+    const result = [];
+    for (let item of arr) {
+        if (typeof item === 'object' && item !== null && Array.isArray(item.children)) {
+            const filteredChildren = removeDuplicates(item.children, seen);
+            if (!seen.has(item.id)) {
+                seen.add(item.id);
+                result.push({...item, children: filteredChildren});
+            }
+        } else {
+            if (!seen.has(item.id)) {
+                seen.add(item.id);
+                result.push(item);
+            }
+        }
+    }
+    return result;
 }
 
 export {
@@ -405,5 +467,9 @@ export {
     encrypt,
     decrypt,
     removeRepeatBias,
-    deepFind
+    deepFind,
+    filterOut,
+    removeDuplicates,
+    getCrypto,
+    md5
 }

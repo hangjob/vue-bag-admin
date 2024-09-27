@@ -83,6 +83,10 @@ export default defineConfig(({mode}) => {
                     changeOrigin: true,
                     rewrite: (url) => url.replace(/^\/api/, ''),
                 },
+                '/bigfile': {
+                    target: "https://szzw-dev.pminfo.cn",
+                    changeOrigin: true
+                },
             },
         }
     }
