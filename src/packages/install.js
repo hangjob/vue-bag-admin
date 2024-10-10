@@ -28,7 +28,6 @@ Array.prototype.first = function () {
  * 这里利用惰性函数来实现单例模式
  * 如果已经安装了，则返回已经安装的app
  * @param elApp
- * @param rootProps
  * @param options
  * @returns {*}
  */

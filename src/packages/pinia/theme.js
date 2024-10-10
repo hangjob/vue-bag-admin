@@ -9,7 +9,6 @@ export default {
     ]
 }
 
-
 const useGlobalStore = defineStore('theme', {
     state: () => ({
         themeConfig: {

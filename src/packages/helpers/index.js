@@ -5,6 +5,7 @@ import {customAlphabet} from 'nanoid';
 import {md5} from "js-md5";
 import {generate} from "@ant-design/colors";
 import CryptoJS from "crypto-js";
+import LargeUploadFile from "@/packages/helpers/LargeUploadFile.js";
 
 
 function renderIcon(icon, props) {
@@ -236,27 +237,28 @@ function closeTabBarJump(ctx, route) {
  * 切换主题
  * @param ctx
  * @param color
+ * @param overrides
  */
-function cutColorTheme(ctx, color) {
+function cutColorTheme(ctx, color, overrides = {}) {
     const $globalStore = ctx.app.config.globalProperties.$globalStore
 
     function setThemeOverrides() {
-        const _color = color || $globalStore.theme.color
-        const colors = generate(_color, {
+        const activeColor = color || $globalStore.theme.color
+        const generateColors = generate(activeColor, {
             theme: 'dark',
             backgroundColor: commonDark.bodyColor
         })
         // 这里可以返回的更多的主题配置色，https://liubing.me/article/vue/naive-ui/naive-ui-custom-theme.html#%E6%80%9D%E8%B7%AF%E5%88%86%E6%9E%90
         $globalStore.dispatchThemeOverrides({
-            overrides: {
+            overrides: deepMerge({
                 common: {
-                    primaryColor: colors[5],
-                    primaryColorHover: colors[4],
-                    primaryColorSuppl: colors[4],
-                    primaryColorPressed: colors[6]
+                    primaryColor: generateColors[5],
+                    primaryColorHover: generateColors[4],
+                    primaryColorSuppl: generateColors[4],
+                    primaryColorPressed: generateColors[6]
                 },
-            },
-            color: _color
+            }, overrides),
+            color: activeColor
         })
     }
 
@@ -366,8 +368,6 @@ function decrypt(word, iv, key) {
 }
 
 
-
-
 /**
  * 获取加密的密钥
  * @param iv
@@ -449,6 +449,83 @@ function removeDuplicates(arr, seen = new Set()) {
     return result;
 }
 
+
+/**
+ * 添加参数到URL
+ * @param url
+ * @param params
+ * @returns {string}
+ */
+function addParamsToUrl(url, params) {
+    // 检查URL是否已经有查询字符串
+    let hasQuery = url.indexOf('?') !== -1;
+    // 创建URLSearchParams对象来处理参数
+    const searchParams = new URLSearchParams(hasQuery ? url.split('?')[1] : '');
+    // 遍历参数对象并添加到searchParams中
+    for (const key in params) {
+        if (params.hasOwnProperty(key)) {
+            searchParams.set(key, params[key]);
+        }
+    }
+    // 重新构建URL
+    return `${url.split('?')[0]}?${searchParams.toString()}`;
+}
+
+
+function deepClone(obj, cache = new WeakMap()) {
+    if (obj === null || typeof obj !== 'object') return obj;
+    if (cache.has(obj)) return cache.get(obj);
+    let clone;
+    if (obj instanceof Date) {
+        clone = new Date(obj.getTime());
+    } else if (obj instanceof RegExp) {
+        clone = new RegExp(obj);
+    } else if (obj instanceof Map) {
+        clone = new Map(Array.from(obj, ([key, value]) => [key, deepClone(value, cache)]));
+    } else if (obj instanceof Set) {
+        clone = new Set(Array.from(obj, value => deepClone(value, cache)));
+    } else if (Array.isArray(obj)) {
+        clone = obj.map(value => deepClone(value, cache));
+    } else if (Object.prototype.toString.call(obj) === '[object Object]') {
+        clone = Object.create(Object.getPrototypeOf(obj));
+        cache.set(obj, clone);
+        for (const [key, value] of Object.entries(obj)) {
+            clone[key] = deepClone(value, cache);
+        }
+    } else {
+        clone = Object.assign({}, obj);
+    }
+    cache.set(obj, clone);
+    return clone;
+}
+
+
+function deepMerge(target = {}, source = {}) {
+    target = deepClone(target);
+    if (typeof target !== 'object' || target === null || typeof source !== 'object' || source === null) return target;
+    const merged = Array.isArray(target) ? target.slice() : Object.assign({}, target);
+    for (const prop in source) {
+        if (!source.hasOwnProperty(prop)) continue;
+        const sourceValue = source[prop];
+        const targetValue = merged[prop];
+        if (sourceValue instanceof Date) {
+            merged[prop] = new Date(sourceValue);
+        } else if (sourceValue instanceof RegExp) {
+            merged[prop] = new RegExp(sourceValue);
+        } else if (sourceValue instanceof Map) {
+            merged[prop] = new Map(sourceValue);
+        } else if (sourceValue instanceof Set) {
+            merged[prop] = new Set(sourceValue);
+        } else if (typeof sourceValue === 'object' && sourceValue !== null) {
+            merged[prop] = deepMerge(targetValue, sourceValue);
+        } else {
+            merged[prop] = sourceValue;
+        }
+    }
+    return merged;
+}
+
+
 export {
     renderIcon,
     depthForEach,
@@ -471,5 +548,9 @@ export {
     filterOut,
     removeDuplicates,
     getCrypto,
-    md5
+    md5,
+    addParamsToUrl,
+    LargeUploadFile,
+    deepClone,
+    deepMerge
 }
