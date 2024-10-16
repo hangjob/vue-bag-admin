@@ -39,6 +39,7 @@ export default defineConfig({
                     {text: '路由布局', link: '/guide/router'},
                     {text: '全局扩展', link: '/guide/global'},
                     {text: '表单组件', link: '/guide/comp'},
+                    {text: '主题设置', link: '/guide/theme'},
                     {text: 'Css原子化', link: '/guide/css'},
                     {text: 'Pinia状态管理', link: '/guide/pinia'},
                 ]

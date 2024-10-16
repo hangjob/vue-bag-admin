@@ -1,6 +1,6 @@
 # 快速开始
 
-在构建整个框架的过程中，均使用插件开发，可以看[框架介绍](/guide/intro)架构图
+在构建整个框架的过程中，均使用插件开发，可以看[框架介绍](/guide/install#架构图)架构图
 
 ```javascript
 import install from "vue-bag-admin"

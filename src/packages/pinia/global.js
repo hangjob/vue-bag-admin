@@ -39,7 +39,7 @@ const useGlobalStore = defineStore('global', {
                 isDocking: true, // 模块坞
                 isFooter: true, // 是否显示底部
                 isWatermark: false, // 是否水印
-                watermark: '品茗科技', // 水印文字
+                watermark: 'vue-bag-admin', // 水印文字
                 layoutName: 'default', // 主题名称 default lessen spillover
                 tabStyle: 'button', // 标签风格 button card
                 formStyle: 'drawer', // 表单风格 drawer dialogue

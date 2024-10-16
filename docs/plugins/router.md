@@ -171,14 +171,14 @@ framework.use(plugins.useRouterPlugin, {
 
 ## 插件参数说明
 
-| 属性           |  类型  |           说明           |
-|--------------|:----:|:----------------------:|
-| files        | 文件对象 | 通过`import.meta.glob`获取 |
-| errorRoute   | 路由对象 |         错误路由的面         |
-| handleMenus  |  函数  |    返回菜单，或者一个Promise    |
-| handleGroups |  函数  |  返回菜单分组，或者返回一个Promise  |
-| base         | 字符串  |    vue-router参数保持一致    |
-| ...          | ...  | 更多属性跟vue-router参数保持一致  |
+| 属性           |      类型       |              说明               |
+|--------------|:-------------:|:-----------------------------:|
+| files        |    Object     |    通过`import.meta.glob`获取     |
+| errorRoute   |    Object     |            错误路由的面             |
+| handleMenus  | Array/Promise |  返回菜单数组，或者一个Promise(适用于网络接口)  |
+| handleGroups | Array/Promise | 返回菜单分组，或者返回一个Promise(适用于网络接口) |
+| base         |    String     |       vue-router参数保持一致        |
+| ...          |      ...      |     更多属性跟vue-router参数保持一致     |
 
 ## 菜单属性说明
 

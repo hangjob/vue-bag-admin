@@ -6,7 +6,7 @@ import {md5} from "js-md5";
 import {generate} from "@ant-design/colors";
 import CryptoJS from "crypto-js";
 import LargeUploadFile from "@/packages/helpers/LargeUploadFile.js";
-
+import automaticUpdate from "./AutomaticUpdate.js"
 
 function renderIcon(icon, props) {
     return () => h(NIcon, props, {default: () => h(icon)})
@@ -552,5 +552,6 @@ export {
     addParamsToUrl,
     LargeUploadFile,
     deepClone,
-    deepMerge
+    deepMerge,
+    automaticUpdate
 }

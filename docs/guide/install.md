@@ -27,6 +27,7 @@ nrm use taobao # 切换为淘宝源
 | Node.js 18 | ✔️ | ✔️ | ✔️ |
 | Node.js 20 | ✔️ | ✔️ | ✔️ |
 
+
 ## 安装框架
 
 ```bash
@@ -40,3 +41,8 @@ const {app} = install()
 
 app.mount('#app')
 ```
+
+
+## 架构图
+
+![组件预览图](../images/jgt.png)

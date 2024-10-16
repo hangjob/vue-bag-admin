@@ -69,9 +69,10 @@ export default defineConfig(({mode}) => {
                     drop_console: true,
                     drop_debugger: true,
                 },
-            }
+            },
         },
         server: {
+            // hmr: false,
             host: '0.0.0.0',
             port: 5100,
             headers: {
@@ -82,17 +83,19 @@ export default defineConfig(({mode}) => {
                     target: 'http://localhost:1337/api',
                     changeOrigin: true,
                     rewrite: (url) => url.replace(/^\/api/, ''),
-                },
-                '/bigfile': {
-                    target: "https://szzw-dev.pminfo.cn",
-                    changeOrigin: true
-                },
+                }
             },
         }
     }
     if (mode === 'lib') {
         config.plugins.push(cssInjectedByJsPlugin())
         // config.plugins.push(analyzer())
+    } else {
+        config.build.outDir = 'dist'
+        config.build.rollupOptions.input = {
+            main: path.resolve(__dirname, 'index.html'),
+            blog: path.resolve(__dirname, 'src', 'blog/index.html')
+        }
     }
     return config;
 })

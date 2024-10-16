@@ -1,7 +1,7 @@
 {
     "name": "vue-bag-admin",
     "private": false,
-    "version": "5.0.1",
+    "version": "5.0.15",
     "type": "module",
     "main": "./lib/vue-bag-admin.cjs.js",
     "module": "./lib/vue-bag-admin.es.js",
@@ -38,7 +38,9 @@
         "nprogress": "^0.2.0",
         "pinia": "^2.1.7",
         "pinia-plugin-persistedstate": "^3.2.1",
+        "qrcode": "^1.5.4",
         "radash": "^12.1.0",
+        "solarlunar": "^2.0.7",
         "vue": "^3.4.21",
         "vue-hooks-plus": "^1.8.9",
         "vue-i18n": "^9.13.1",

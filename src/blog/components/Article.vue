@@ -2,12 +2,12 @@
     <div class="article">
         <div class="item">
             <div class="item-img">
-                <a href="javascript:;" class="scroll-box" v-if="itemSumData.length">
+                <a href="javascript:" class="scroll-box" v-if="itemSumData.length">
                     <template v-for="(todo,j) in itemSumData">
                         <img v-if="j < 12" :key="j" :src="todo.pic" alt="itemData.title">
                     </template>
                 </a>
-                <a class="background" href="javascript:;" :style="{backgroundImage:'url(' + itemData.pic + ')'}" v-else
+                <a class="background" href="javascript:" :style="{backgroundImage:'url(' + itemData.pic + ')'}" v-else
                 ></a>
                 <a class="item-img-body">
                     <div class="tpye">{{ formatTime() }}</div>
@@ -35,12 +35,9 @@
         </div>
     </div>
 </template>
-<script lang="ts">
-import {defineComponent, ref, onMounted, nextTick} from 'vue'
+<script>
 import dayjs from 'dayjs'
-// @ts-ignore
 import {solar2lunar} from 'solarlunar'
-
 export default defineComponent({
     props: {
         itemData: {
@@ -164,6 +161,8 @@ export default defineComponent({
                 position: relative;
                 left: 50%;
                 top: 50%;
+                display: flex;
+                flex-wrap: wrap;
 
                 img {
                     width: 28%;

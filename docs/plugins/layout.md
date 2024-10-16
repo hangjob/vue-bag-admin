@@ -23,7 +23,7 @@ export const useLayoutPlugin = new LayoutPlugin()
 
 ## 支持全局组件
 
-`LayoutHeaderTitle`、`LayoutTabBar`、`LayoutFooter`、`LayoutHeaderExtra`、`LayoutHeaderCum`
+`LayoutHeaderTitle`、`LayoutTabBar`、`LayoutFooter`、`LayoutHeaderExtra`、`LayoutHeaderCum` 、`LayoutSiderMenu`
 
 ## 预览图
 
