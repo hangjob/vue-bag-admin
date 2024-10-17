@@ -33,7 +33,7 @@ features:
     details: 通过npm命令安装引入主程序包开发，也可以通过下载源码进行二次开发，框架(packages)和应用(app)分开，即可以减少项目之间的耦合，也能提升项目扩展性
   - icon: 🛠️
     title: 社区强大
-    details: 采用主流技术Vue3、Vite、Naive UI、JavaScript、Gulp、Pinia以及周边的优秀的插件搭建，不用担心自己业务所受框架有限的瓶颈， 完全免费，且可商用
+    details: 采用市面主流技术Vue3、Vite5、Naive-ui、Pinia 、Strapi5、MySQL等等，不用担心自己业务所受框架有限的瓶颈， 完全免费，且可商用
   - icon: 📦
     title: API服务
     details: Node.js提供的Strapi框架，一个开源的无头CMS，开发者可以自由喜欢的开发工具和框架，自由定义定制API，并可使用GraphQL作为API的查询语言，颗粒度权限拦截和认证

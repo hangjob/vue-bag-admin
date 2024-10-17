@@ -2,7 +2,7 @@
     <section class="py-[60px] bg-[#00000033]  section-container">
         <h1 class="text-[50px] text-white font-bold text-center">与我联系</h1>
         <p class="text-white mb-10 text-center">如果您有其他的问题请在下方提交留言与我联系（博客使用类问题请加交流群或看手册文档）.</p>
-        <n-grid cols="12" item-responsive responsive="screen" :x-gap="30">
+        <n-grid cols="12" item-responsive responsive="screen" :x-gap="30" y-gap="10">
             <n-grid-item class="message-input wow animate__animated animate__bounce" data-wow-duration="1.0s"
                     data-wow-delay="0.2s" span="12 m:12 l:4"
             >
@@ -44,7 +44,7 @@
         </div>
         <div class="flex justify-end mt-3">
             <n-button class="wow animate__animated animate__fadeInUp" data-wow-duration="1.4s" data-wow-delay="0.2s"
-                       @click="handleSave" :icon="Edit" type="success" size="large" :disabled="compData.disabled"
+                      type="success" size="large" :disabled="compData.disabled"
             >
                 {{ compData.text }}
             </n-button>

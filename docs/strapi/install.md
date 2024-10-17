@@ -26,7 +26,7 @@ npm run develop
 
 ## 使用框架提供Strapi
 
-下载源码[GitHub]()
+下载源码[GitHub](https://github.com/hangjob/vue-bag-admin/tree/main/api)
 
 修改`config/database.js`数据库配置
 

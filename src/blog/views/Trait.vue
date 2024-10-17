@@ -23,16 +23,16 @@ import {DesktopOutline, DiscOutline, PlanetOutline, HappyOutline} from "@vicons/
 const compData = reactive({
     btns: [
         {
-            title: '功能强大',
-            des: 'Bag所有内容均可以在后台进行修改，所有内容可定制化开发，覆盖面广，涉及后端、移动端、桌面端等开发，快速迭代，降低试错成本，让大家把更多时间专注在业务开发上',
+            title: '响应式开发',
+            des: '样式基于tailwindcss开发，自动适配PC端、移动端，增强网站的响应式设计，提高网站的可用性，提供多种不同风格的皮肤，页面美观，减少开发成本和维护工作',
             icon: markRaw(DesktopOutline),
             animateClass: 'animate__bounceInLeft',
             duration: '1.0s',
             color: '#e96656'
         },
         {
-            title: '简单易用',
-            des: "Bag通过简单npm命令安装，表单CURD完全傻瓜式操作，分分钟一个页面，所有功能，路由权限，按钮权限，即看即会，无需任何功底，无需掌握任何技术，谁都可以是个人站长.",
+            title: '方便易用',
+            des: "通过npm命令安装引入主程序包开发，也可以通过下载源码进行二次开发，框架(packages)和应用(app)分开，即可以减少项目之间的耦合，也能提升项目扩展性",
             icon: markRaw(DiscOutline),
             animateClass: 'animate__bounceInLeft',
             duration: '1.5s',
@@ -40,7 +40,7 @@ const compData = reactive({
         },
         {
             title: '社区强大',
-            des: "采用市面主流技术Vue3、Vite、TypeScript、Gulp、Node.js 、Egg.js 、MySQL以及周边的优秀的插件搭建，不用担心自己业务所受框架有限的瓶颈",
+            des: "采用市面主流技术Vue3、Vite5、Naive-ui、Pinia 、Strapi5、MySQL等等，不用担心自己业务所受框架有限的瓶颈， 完全免费，且可商用",
             icon: markRaw(PlanetOutline),
             animateClass: 'animate__bounceInRight',
             duration: '1.5s',

@@ -27,28 +27,28 @@ const compData =  reactive({
             title:'Projects Completed',
             icon:markRaw(PeopleOutline),
             from:0,
-            to:1800,
+            to:2990,
             color:"#e96656"
         },
         {
             title:'Happy Clients',
             icon:markRaw(PersonAddOutline),
             from:0,
-            to:1800,
+            to:1202,
             color:"#34d293"
         },
         {
             title:'Mail Conversation',
             icon:markRaw(AtOutline),
             from:0,
-            to:1800,
+            to:3600,
             color:"#3ab0e2"
         },
         {
             title:'Photos Taken',
             icon:markRaw(LeafOutline),
             from:0,
-            to:1800,
+            to:5639,
             color:"#f7d861"
         }
     ]

@@ -2,7 +2,7 @@
     <section class="bg-[#dbbf56] py-[60px] section-container">
         <h1 class="text-[50px] text-white font-bold text-center">评价</h1>
         <p class="text-white mb-10 text-center">以下内容来自于Bag用户对于本博客系统的评价.</p>
-        <n-grid cols="12" item-responsive responsive="screen" :x-gap="20">
+        <n-grid cols="12" item-responsive responsive="screen" x-gap="20"  y-gap="10">
             <n-grid-item span="12 m:6 l:4" v-for="(item) in compData.items">
                 <div class="bg-white p-[25px] rounded-[4px] text-left text-[#333] flex flex-col">
                     <div class="text-[#909090] text-[15px]">

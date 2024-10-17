@@ -4,6 +4,8 @@ import {defineConfig} from 'vitepress'
 export default defineConfig({
     title: "Vue-Bag-Admin",
     description: "旨在让开发者能够以最小的成本完成开发降低重复工作",
+    base: '/doc/',
+    lastUpdated: true,
     themeConfig: {
         // https://vitepress.dev/reference/default-theme-config
         nav: [

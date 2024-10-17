@@ -97,7 +97,7 @@
                         <li>时间：2022-01-20</li>
                         <li>简介：调整框架修复若干问题</li>
                         <li>简介：后台更新</li>
-                        <li>简介：node、mysql</li>
+                        <li>简介：thinkphp5</li>
                         <li style="display: flex;justify-content: center">
                             <n-button type="primary">查看介绍
                             </n-button>
@@ -147,7 +147,7 @@
         </n-grid>
     </section>
 </template>
-<script>
+<script setup>
 const images = ref([
     {src: 'https://s1.ax1x.com/2022/05/12/O0R3TO.png'},
     {src: 'https://s1.ax1x.com/2022/05/12/O0RB0f.png'},

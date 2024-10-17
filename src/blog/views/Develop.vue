@@ -3,7 +3,7 @@
         <h1 class="text-[50px] text-[#333] font-bold text-center">主题开发</h1>
         <p class="text-[#808080] mb-10 text-center">Bag是一个开源的系统，更希望有更多的人和我一起开发主题.</p>
         <div>
-            <n-grid cols="12" item-responsive responsive="screen" :x-gap="20">
+            <n-grid cols="12" item-responsive responsive="screen"  y-gap="10" x-gap="20">
                 <n-grid-item v-for="item in compData.items" class="wow animate__animated animate__fadeInTopLeft"
                              data-wow-duration="1.0s"
                              data-wow-delay="0.2s" span="12 m:12 l:6">

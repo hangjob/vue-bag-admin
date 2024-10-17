@@ -38,6 +38,7 @@
 <script>
 import dayjs from 'dayjs'
 import {solar2lunar} from 'solarlunar'
+
 export default defineComponent({
     props: {
         itemData: {
@@ -50,7 +51,7 @@ export default defineComponent({
         },
     },
     setup(props) {
-        const dateTime = parseInt(props.itemData.time) * 1000
+        const dateTime = props.itemData.time;
         const year = dayjs(dateTime).format('YYYY')
         const month = dayjs(dateTime).format('MM')
         const day = dayjs(dateTime).format('DD')
@@ -78,7 +79,7 @@ export default defineComponent({
         }
 
         const handleVisible = () => {
-            window.open(`https://www.vipbic.com/thread.html?id=${props.itemData.id}&roll=1`, '_blank')
+            window.open(props.itemData.url, '_blank', props.itemData.url)
         }
 
         return {
