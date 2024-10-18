@@ -8,6 +8,7 @@ import CryptoJS from "crypto-js";
 import LargeUploadFile from "@/packages/helpers/LargeUploadFile.js";
 import automaticUpdate from "./AutomaticUpdate.js"
 import * as icons from "@/packages/helpers/Icon.js"
+
 function renderIcon(icon, props) {
     return () => h(NIcon, props, {default: () => h(icon)})
 }
@@ -472,6 +473,12 @@ function addParamsToUrl(url, params) {
 }
 
 
+/**
+ * 深度克隆
+ * @param obj
+ * @param cache
+ * @returns {*|Date|Map<undefined, *>|Set<*>|RegExp}
+ */
 function deepClone(obj, cache = new WeakMap()) {
     if (obj === null || typeof obj !== 'object') return obj;
     if (cache.has(obj)) return cache.get(obj);
@@ -500,6 +507,12 @@ function deepClone(obj, cache = new WeakMap()) {
 }
 
 
+/**
+ * 深度合并
+ * @param target
+ * @param source
+ * @returns {any[]|any|Date|Map<undefined, *>|Set<*>|RegExp}
+ */
 function deepMerge(target = {}, source = {}) {
     target = deepClone(target);
     if (typeof target !== 'object' || target === null || typeof source !== 'object' || source === null) return target;
@@ -523,6 +536,24 @@ function deepMerge(target = {}, source = {}) {
         }
     }
     return merged;
+}
+
+
+/**
+ * 解决浏览器事件报错行为
+ */
+function browserPatch() {
+    if (typeof EventTarget !== "undefined") {
+        let func = EventTarget.prototype.addEventListener;
+        EventTarget.prototype.addEventListener = function (type, fn, capture) {
+            this.func = func;
+            if (typeof capture !== "boolean") {
+                capture = capture || {};
+                capture.passive = false;
+            }
+            this.func(type, fn, capture);
+        };
+    }
 }
 
 
@@ -554,5 +585,6 @@ export {
     deepClone,
     deepMerge,
     automaticUpdate,
-    icons
+    icons,
+    browserPatch
 }
