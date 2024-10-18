@@ -54,7 +54,7 @@ import {useFullscreen} from 'vue-hooks-plus'
 import {
     ChevronBackOutline, ChevronForward, HappyOutline, Expand, SyncOutline, PowerOutline, ArrowBackOutline, ArrowForward,
     Resize, LeafOutline, CloseOutline
-} from "@vicons/ionicons5"
+} from "@/packages/helpers/Icon.js"
 import {renderIcon} from "@/packages/helpers/index.js";
 
 const createWindow = useWinBox()

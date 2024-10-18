@@ -97,17 +97,13 @@
 </template>
 <script setup>
 import {
-    ColorPaletteOutline,
     Moon,
     Sunny,
     CheckboxOutline
-} from "@vicons/ionicons5"
-import {cutColorTheme} from "@/packages/helpers/index.js";
+} from "@/packages/helpers/Icon.js"
 
 const arrs = [{setp: 0, width: 170}, {setp: 33, width: 200}, {setp: 66, width: 240}, {setp: 100, width: 300}];
-
 const {appContext: {config: {globalProperties}}} = getCurrentInstance();
-
 const form = reactive({
     setp: 75,
     marks: [],

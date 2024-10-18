@@ -51,8 +51,9 @@ const useGlobalStore = defineStore('global', {
                 isDesktop: false
             },
             webSite: {
-                title: '品茗科技', // logo
-                subTitle: '为专业赋能', // 副标题
+                title: '', // logo
+                subTitle: '', // 副标题
+                logo:'', // logo图片
             },
             userInfo: {}, // 用户信息
             currentRouter: {}, // 当前路由对象

@@ -6,7 +6,9 @@
                     <div v-if="!$globalStore.deviceInfo.isMobile"
                          class="flex items-center justify-center border-solid border-r bag-border-color h-[50px] text-inherit"
                          :style="{width:$globalStore.configs.layoutSiderWidth+'px'}">
-                        <a href="/" class="text-base flex-shrink-0">{{ $globalStore.webSite.title }}</a>
+                        <img class="h-[32px] object-cover max-w-full pr-2" v-if="$globalStore.webSite.logo"
+                             :src="$globalStore.webSite.logo" :alt="$globalStore.webSite.title">
+                        <a href="/" class="text-base flex-shrink-0 font-bold">{{ $globalStore.webSite.title }}</a>
                         <span class="text-xs ml-2 flex-shrink-0">{{ $globalStore.webSite.subTitle }}</span>
                     </div>
                     <div
@@ -53,10 +55,10 @@
 </template>
 
 <script setup>
-import {MenuUnfoldOutlined} from "@vicons/antd"
+
+import {MenuUnfoldOutlined, UserCircleRegular, HomeOutline} from "@/packages/helpers/Icon.js"
 import {renderIcon} from "@/packages/helpers/index.js";
-import {UserCircleRegular} from "@vicons/fa";
-import {HomeOutline} from "@vicons/ionicons5";
+
 const {appContext: {config: {globalProperties}}} = getCurrentInstance();
 const $router = globalProperties?.$router
 const compData = reactive({
@@ -68,7 +70,7 @@ const compData = reactive({
             icon: renderIcon(HomeOutline, {size: 18}),
             props: {
                 onClick: () => {
-                    $router.push({path:'/home'})
+                    $router.push({path: '/home'})
                 }
             }
         },
@@ -91,7 +93,7 @@ const compData = reactive({
                     key: '3',
                     props: {
                         onClick: () => {
-                            $router.push({path:'/login'})
+                            $router.push({path: '/login'})
                         }
                     }
                 }

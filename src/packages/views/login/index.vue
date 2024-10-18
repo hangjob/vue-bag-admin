@@ -82,7 +82,7 @@
     </div>
 </template>
 <script setup>
-import {MoonOutline, SunnyOutline, LogoPinterest, LogoIonic} from "@vicons/ionicons5"
+import {MoonOutline, SunnyOutline, LogoPinterest, LogoIonic} from "@/packages/helpers/Icon.js"
 
 const imgs = ["bg_1.jpg", "bg_2.jpg", "bg_3.jpg"]
 

@@ -1,7 +1,5 @@
 import {isArray, isFunction, isPromise} from "radash";
 
-const files = import.meta.glob(`@/app/views/*/*.vue`, {eager: true})
-
 /**
  * 获取menu菜单
  * @param ctx
@@ -64,7 +62,7 @@ async function getAppGroups(ctx, options) {
  */
 const beforeEach = (ctx, options) => {
     const $globalStore = ctx.app.config.globalProperties.$globalStore;
-    $globalStore.dispatchFiles({...files, ...(options?.files || {})}) // 做一个全局的文件缓存，方便后续使用
+    $globalStore.dispatchFiles({...(options?.files || {})}) // 做一个全局的文件缓存，方便后续使用
     ctx?.router?.beforeEach?.(async (to, from, next) => {
         if (!$globalStore.isLoadRoutes) {
             await getAppMenus(ctx, options)

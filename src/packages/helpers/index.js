@@ -7,7 +7,7 @@ import {generate} from "@ant-design/colors";
 import CryptoJS from "crypto-js";
 import LargeUploadFile from "@/packages/helpers/LargeUploadFile.js";
 import automaticUpdate from "./AutomaticUpdate.js"
-
+import * as icons from "@/packages/helpers/Icon.js"
 function renderIcon(icon, props) {
     return () => h(NIcon, props, {default: () => h(icon)})
 }
@@ -553,5 +553,6 @@ export {
     LargeUploadFile,
     deepClone,
     deepMerge,
-    automaticUpdate
+    automaticUpdate,
+    icons
 }

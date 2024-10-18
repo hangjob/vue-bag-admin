@@ -12,6 +12,6 @@
 </template>
 
 <script setup>
-import {GridOutline} from '@vicons/ionicons5'
+import {GridOutline} from '@/packages/helpers/Icon.js'
 import Menu from "../common/Menu.vue"
 </script>

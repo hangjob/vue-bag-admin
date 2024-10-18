@@ -89,7 +89,7 @@ export default defineConfig(({mode}) => {
     }
     if (mode === 'lib') {
         config.plugins.push(cssInjectedByJsPlugin())
-        // config.plugins.push(analyzer())
+        config.plugins.push(analyzer())
     } else {
         config.build.outDir = 'dist'
         config.build.rollupOptions.input = {

@@ -28,7 +28,7 @@ import {
     SettingsOutline,
     Apps,
     Language
-} from "@vicons/ionicons5";
+} from "@/packages/helpers/Icon.js";
 import {UserCircleRegular} from "@vicons/fa";
 import LayoutSettings from "./LayoutSettings.vue"
 import {renderIcon} from "@/packages/helpers/index.js";
