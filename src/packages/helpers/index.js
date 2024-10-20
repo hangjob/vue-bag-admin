@@ -126,7 +126,7 @@ const addRoutes = (ctx, routes = []) => {
             const {component, name, path, ...meta} = item
             // 注意这里，如果不过扩展meta属性，其他属性添加不进去，被addRoute过滤了
             if (item.root) {
-                ctx.router.addRoute({component, name, path, meta}) // 这里可以再升级
+                ctx.router.addRoute(item.root, {component, name, path, meta}) // 这里可以再升级
             } else {
                 ctx.router.addRoute('layout', {component, name, path, meta})
             }
@@ -557,6 +557,28 @@ function browserPatch() {
 }
 
 
+/**
+ * 复制文本
+ * @param text
+ */
+function clipboardCopy(text) {
+    if (navigator.clipboard) {
+        navigator.clipboard.writeText(text);
+    } else {
+        let textarea = document.createElement('textarea');
+        document.body.appendChild(textarea);
+        textarea.style.position = 'fixed';
+        textarea.style.clip = 'rect(0 0 0 0)';
+        textarea.style.top = '10px';
+        textarea.value = text;
+        textarea.select();
+        document.execCommand('copy', true);
+        // 移除输入框
+        document.body.removeChild(textarea);
+    }
+}
+
+
 export {
     renderIcon,
     depthForEach,
@@ -586,5 +608,6 @@ export {
     deepMerge,
     automaticUpdate,
     icons,
-    browserPatch
+    browserPatch,
+    clipboardCopy
 }

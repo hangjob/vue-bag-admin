@@ -9,7 +9,7 @@ export default class IconPlugin {
 
     install({ctx}, options) {
         this._enable = true;
-        ctx.icons = Object.assign(ctx.helpers.icons, options?.icons || {})
+        ctx.icons = {...ctx.helpers.icons, ...options?.icons}
         ctx.helpers.getIcons = getIcons
     }
 

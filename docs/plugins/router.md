@@ -196,5 +196,6 @@ framework.use(plugins.useRouterPlugin, {
 | hasMenu        | boolean |    是否有菜单    |
 | hasRouter      | boolean |    是否有路由    |
 | hasTab         | boolean |   是否有tab    |
+| root           | string  |   是否覆盖路由    |
 | overlayRouting | boolean |   是否覆盖路由    |
 | children       |  array  |    子菜单数据    |
