@@ -68,16 +68,16 @@ vue-bag-admin，采用Vue3、Vite5、Naive UI、JavaScript、Gulp、Pinia以及�
 
 ```bash
 pnpm i vue-bag-admin --save
-pnpm i naive-ui pinia vue-router --save
 ```
 
 ## 快速开始
 
 ```javascript
-import {createApp} from 'vue'
-import App, {install, router, axios} from "vue-bag-admin"
+import install from "vue-bag-admin"
+const {app, framework, plugins} = install()
 
-createApp(App).use(install).use(router).mount('#app')
+framework.use(plugins.useRouterPlugin)
+app.mount('#app')
 ```
 
 ## 图片预览
@@ -98,9 +98,8 @@ createApp(App).use(install).use(router).mount('#app')
 
 正在以及想使用框架快速中后台系统，熟悉Vue使用它开发过几个实际项目，热爱技术，爱学习，想进阶和提升的同学
 
-### 后端框架
-[egg-bag-framework](https://github.com/hangjob/egg-bag-framework)
-
+### 技术交流
+![](./weixin.jpg)
 
 ### 版权信息
 
