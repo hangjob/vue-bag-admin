@@ -18,6 +18,7 @@ import setupComponents from "@/packages/components/index.js"
 import * as plugins from "@/app/plugins/index.js"
 import useGlobalStore from "@/packages/pinia/global.js";
 import * as router from "vue-router"
+import eventEmitter from "@/packages/middleware"
 
 Array.prototype.first = function () {
     return this.slice(0, 1)[0];
@@ -55,6 +56,9 @@ function install(elApp = null, options = {}) {
         dayjs,
         http,
         nprogress,
+        middleware: {
+            eventEmitter
+        }
     });
     framework.use(plugins.useNaivePlugin)
     app.config.globalProperties.$global = window.$global = framework.ctx
@@ -71,7 +75,10 @@ function install(elApp = null, options = {}) {
             http,
             nprogress,
             plugins,
-            router
+            router,
+            middleware: {
+                eventEmitter
+            }
         }
     }
     return install()

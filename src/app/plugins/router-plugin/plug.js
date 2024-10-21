@@ -70,7 +70,10 @@ const beforeEach = (ctx, options) => {
             $globalStore.isLoadRoutes = true
             next({...to, replace: true})
         } else {
-            next()
+            ctx.middleware.eventEmitter.emit('ROUTER:BEFORE', to, from, next)
+            if (ctx.middleware.eventEmitter.listeners['ROUTER:BEFORE'].size === 0) {
+                next()
+            }
         }
     })
 }

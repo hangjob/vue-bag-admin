@@ -1,6 +1,7 @@
 import {createAlova, Method} from 'alova';
 import fetchAdapter from 'alova/fetch';
 import VueHook from 'alova/vue';
+import emitter from "@/packages/middleware";
 
 const alovaOptions = {
     // 请求适配器，这里我们使用fetch请求适配器
@@ -14,29 +15,19 @@ const alovaOptions = {
 
 const alovaInstance = createAlova({
     ...alovaOptions,
-    // 如需要通编写插件重写此方法
     async responded(response) {
         const contentType = response.headers.get("content-type");
         if (response.status !== 500 && contentType && contentType.indexOf("application/json") !== -1) {
             const json = await response.json();
             if (response.status !== 200) {
-                if (!json?.error?.details) {
-                    window.$naive.message.warning(json?.error?.message)
-                } else {
-                    if (Reflect.ownKeys(json?.error?.details).length === 0) {
-                        window.$naive.message.warning(json?.error?.message)
-                    } else {
-                        json?.error?.details?.errors?.forEach((item) => {
-                            window.$naive.message.warning(item.message)
-                        })
-                    }
-                }
+                emitter.emit('API:REQUEST', {json, response})
                 return Promise.reject(json)
             }
+            emitter.emit('API:SUCCESS', {json, response})
             return Promise.resolve(json);
         } else {
             const text = await response.text();
-            window.$naive.message.warning(text || response.statusText)
+            emitter.emit('API:REQUEST', {text, response})
             return Promise.reject(response);
         }
     },

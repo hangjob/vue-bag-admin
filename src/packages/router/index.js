@@ -54,6 +54,7 @@ function updataMenus(app, to) {
 
 function afterEach(ctx, options) {
     ctx?.router?.afterEach?.((to, from) => {
+        ctx.middleware.eventEmitter.emit('ROUTER:AFTER', to, from)
         const globalStore = useGlobalStore()
         globalStore.currentRouter = to;
         updataTabs(globalStore, to)

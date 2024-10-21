@@ -50,6 +50,7 @@ export default defineConfig({
                 text: '高级用法',
                 items: [
                     {text: '插件开发', link: '/plugins/exploit'},
+                    {text: '中间件', link: '/guide/middleware'},
                     {text: '自动导入', link: '/usage/import'},
                     {text: 'Vite插件', link: '/usage/vite'},
                 ]
