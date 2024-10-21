@@ -388,6 +388,7 @@ export interface ApiMenuMenu extends Schema.CollectionType {
     hasClose: Attribute.Boolean & Attribute.DefaultTo<false>;
     pid: Attribute.Integer;
     localesKey: Attribute.String;
+    keepAlive: Attribute.Boolean & Attribute.DefaultTo<true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

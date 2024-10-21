@@ -1,5 +1,8 @@
 <template>
-    <div>md文本</div>
+    <div>md
+        <n-input v-model:value="value" type="text" placeholder="基本的 Input" />
+    </div>
 </template>
-<script>
+<script setup>
+const value = ref('')
 </script>

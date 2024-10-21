@@ -126,7 +126,11 @@ const addRoutes = (ctx, routes = []) => {
             const {component, name, path, ...meta} = item
             // 注意这里，如果不过扩展meta属性，其他属性添加不进去，被addRoute过滤了
             if (item.root) {
-                ctx.router.addRoute(item.root, {component, name, path, meta}) // 这里可以再升级
+                if (ctx.router.hasRoute(item.root)) {
+                    ctx.router.addRoute(item.root, {component, name, path, meta})
+                } else {
+                    ctx.router.addRoute({component, name, path, meta}) // 这里可以再升级
+                }
             } else {
                 ctx.router.addRoute('layout', {component, name, path, meta})
             }
@@ -209,6 +213,7 @@ const menusProcessing = (ctx, menus) => {
         item.md5 = item.md5 ? item.md5 : item.file ? md5(item.file) : null // 对每一个数据打印标记
         item.icon = ctx?.helpers?.getIcons?.(ctx, item.icon) // 转换传递过来的icon为render函数
         item.title = formatTitle(ctx, item, true);
+        item.keepAlive = item.keepAlive ? item.keepAlive : false
         if (ctx.radash.isArray(topIds)) {
             const topId = topIds[topIds.length - 1]
             item.topId = topId.id !== item.id ? topId.id : null // 给每个菜单添加一个自己的顶级应用分类的Id

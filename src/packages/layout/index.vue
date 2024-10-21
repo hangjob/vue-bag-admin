@@ -30,9 +30,10 @@
                 </component>
                 <n-layout id="layout" class="p-2">
                     <router-view v-slot="{ Component }">
-                        <transition mode="out-in">
-                            <component :is="Component"/>
-                        </transition>
+                        <keep-alive>
+                            <component :is="Component" :key="$route.name" v-if="$route.meta.keepAlive"/>
+                        </keep-alive>
+                        <component :is="Component" :key="$route.name" v-if="!$route.meta.keepAlive"/>
                     </router-view>
                 </n-layout>
             </div>
@@ -75,7 +76,6 @@ export default defineComponent({
         Header, Footer, SiderMenu, TabBar
     },
     setup() {
-
         const {appContext: {config: {globalProperties}}} = getCurrentInstance();
         globalProperties.$globalStore.dispatchDeviceInfo()
         currentDevice.onChangeOrientation(globalProperties.$globalStore.dispatchDeviceInfo)
