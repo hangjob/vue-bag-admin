@@ -8,7 +8,7 @@
         <template v-if="$globalStore.isRouterReload">
             <router-view v-if="$globalStore.isIframe" name="iframe">
             </router-view>
-            <router-view v-slot="{Component,route}" v-else></router-view>
+            <router-view v-else></router-view>
         </template>
     </n-config-provider>
 </template>

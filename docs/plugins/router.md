@@ -182,20 +182,21 @@ framework.use(plugins.useRouterPlugin, {
 
 ## 菜单属性说明
 
-| 属性             |   类型    |     说明      |
-|----------------|:-------:|:-----------:|
-| id             | number  |    菜单id     |
-| title          | string  |    菜单名称     |
-| localesKey     | string  | 菜单名称的国际化key |
-| file           | string  |  菜单对应的文件路径  |
-| path           | string  |   菜单对应的路径   |
-| name           | string  |  菜单对应的路由名称  |
-| icon           | string  |   菜单对应的图标   |
-| hasClose       | boolean |   是否有关闭按钮   |
-| sort           | number  |    菜单排序     |
-| hasMenu        | boolean |    是否有菜单    |
-| hasRouter      | boolean |    是否有路由    |
-| hasTab         | boolean |   是否有tab    |
-| root           | string  |   是否覆盖路由    |
-| overlayRouting | boolean |   是否覆盖路由    |
-| children       |  array  |    子菜单数据    |
+| 属性             |   类型    |      说明       |
+|----------------|:-------:|:-------------:|
+| id             | number  |     菜单id      |
+| title          | string  |     菜单名称      |
+| localesKey     | string  |  菜单名称的国际化key  |
+| file           | string  |   菜单对应的文件路径   |
+| path           | string  |    菜单对应的路径    |
+| name           | string  |   菜单对应的路由名称   |
+| icon           | string  |    菜单对应的图标    |
+| hasClose       | boolean |    是否有关闭按钮    |
+| sort           | number  |     菜单排序      |
+| hasMenu        | boolean |     是否有菜单     |
+| hasRouter      | boolean |     是否有路由     |
+| hasTab         | boolean |    是否有tab     |
+| root           | string  | 路由布局，默认layout |
+| keepAlive      | boolean |    是否缓存路由     |
+| overlayRouting | boolean |    是否覆盖路由     |
+| children       |  array  |     子菜单数据     |
