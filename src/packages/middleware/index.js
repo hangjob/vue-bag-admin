@@ -1,4 +1,4 @@
-const eventNames = ['API:SUCCESS', 'API:ERROR', 'API:REQUEST', 'ROUTER:BEFORE','ROUTER:AFTER'];
+const eventNames = ['API:SUCCESS', 'API:ERROR', 'API:REQUEST', 'ROUTER:BEFORE','ROUTER:AFTER','APP:INIT'];
 
 class EventEmitter {
     constructor() {

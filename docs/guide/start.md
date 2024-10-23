@@ -13,12 +13,13 @@ app.mount('#app')
 npm run dev
 ```
 
-## 加载路由插件
+## 安装路由
 
 ```bash
-pnpm install vue-router -S
+pnpm add vue-router -S
 ```
 
+## 注册路由插件
 ```javascript
 import {createWebHashHistory} from "vue-router"
 import install from "vue-bag-admin"

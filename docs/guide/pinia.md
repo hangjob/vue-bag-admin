@@ -1,5 +1,10 @@
 # Pinia状态管理
 
+### 安装
+```shell
+pnpm add pinia -S
+```
+
 框架内置`pinia`状态管理库,`pinia-plugin-persistedstate`
 以及持久化存储插件，具体用法[pinia官网](https://pinia.vuejs.org/zh/core-concepts/)
 
@@ -13,6 +18,8 @@ app.config.globalProperties.$globalStore = window.$globalStore = useGlobalStore(
 ## 定义 Store
 
 ```javascript
+import {defineStore} from 'pinia'
+
 export const useCounterStore = defineStore('counter', {
     state: () => ({count: 0, name: 'Eduardo'}),
     getters: {
@@ -32,6 +39,10 @@ export const useCounterStore = defineStore('counter', {
     },
 })
 ```
+
+::: tip 小技巧
+如果想在页面刷新的时候就有效，需要在`main.js`中引入执行`useCounterStore()`
+:::
 
 ## 使用 Store
 

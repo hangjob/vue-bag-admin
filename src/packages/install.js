@@ -6,7 +6,6 @@ import nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
 import App from '@/packages/App.vue'
 import {createPinia} from "pinia"
-import * as pinia from "pinia"
 import Framework from "@/packages/framework/index.js";
 import * as helpers from "@/packages/helpers"
 import * as http from "@/packages/http/request.js"
@@ -20,6 +19,9 @@ import useGlobalStore from "@/packages/pinia/global.js";
 import * as router from "vue-router"
 import eventEmitter from "@/packages/middleware"
 
+const middleware = {
+    eventEmitter
+}
 Array.prototype.first = function () {
     return this.slice(0, 1)[0];
 }
@@ -36,15 +38,10 @@ function install(elApp = null, options = {}) {
     if (install.app) {
         return install()
     }
-    const app = createApp(elApp || App, {
-        ...options,
-    })
+    const app = createApp(elApp || App, options)
     const pina = createPinia()
-    app.use(pina)
     pina.use(piniaPluginPersistedstate)
-    for (const pinaKey in options.pinaPlugin) {
-        pina.use(options.pinaPlugin[pinaKey])
-    }
+    app.use(pina)
     app.use(setupComponents)
     app.config.globalProperties.$globalStore = window.$globalStore = useGlobalStore()
     const framework = new Framework({
@@ -56,9 +53,7 @@ function install(elApp = null, options = {}) {
         dayjs,
         http,
         nprogress,
-        middleware: {
-            eventEmitter
-        }
+        middleware
     });
     framework.use(plugins.useNaivePlugin)
     app.config.globalProperties.$global = window.$global = framework.ctx
@@ -76,16 +71,10 @@ function install(elApp = null, options = {}) {
             nprogress,
             plugins,
             router,
-            middleware: {
-                eventEmitter
-            }
+            middleware
         }
     }
     return install()
 }
 
 export default install
-
-export {
-    pinia
-}

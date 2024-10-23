@@ -1,4 +1,10 @@
-# 路由插件
+# 安装
+
+```bash
+pnpm add vue-router -S
+```
+
+## 路由插件
 
 `useRouterPlugin`为框架提供默认路由插件源码
 

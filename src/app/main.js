@@ -2,7 +2,7 @@ import install from "@/packages/install.js"
 import logo from "@/packages/assets/logo.png"
 
 const files = import.meta.glob(`@/app/views/*/*.vue`, {eager: true})
-const {app, framework, plugins, helpers, pina, middleware} = install()
+const {app, framework, plugins, helpers, pina,middleware} = install()
 
 import * as icons from '@vicons/ionicons5'
 import {BehanceOutlined, ReadOutlined} from "@vicons/antd"
@@ -50,6 +50,7 @@ middleware.eventEmitter.on('API:REQUEST', ({json, text, response}) => {
 middleware.eventEmitter.on('ROUTER:BEFORE',(to, from, next)=>{
     next()
 })
+
 app.mount("#app")
 
 
