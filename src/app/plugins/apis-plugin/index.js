@@ -6,15 +6,22 @@ export class ApisPlugin {
         this.name = 'ApisPlugin'
     }
 
+
+    toCamelCase(str) {
+        return str
+            .replace(/[-_\/]+(.)?/g, (match, chr) => chr ? chr.toUpperCase() : '')
+            .replace(/^([a-z])/, (match) => match.toUpperCase());
+    }
+
     install({ctx}, options = []) {
         ctx.apis = {...ctx.http};
         options.forEach((item) => {
-            const api = ctx.apis[item.replace(/\/(\w)/g, (_, c) => (c ? c.toUpperCase() : ""))] = {url: item}
+            const api = ctx.apis[this.toCamelCase(item)] = {url: item}
             api.httpGet = (params, config) => ctx.http.httpGet(api.url, params, config)
             api.httpPost = (params, config) => ctx.http.httpPost(api.url, params, config)
         });
-        if (typeof window === 'object'){
-            if(!window.$apis){
+        if (typeof window === 'object') {
+            if (!window.$apis) {
                 window.$apis = ctx.apis
             }
         }

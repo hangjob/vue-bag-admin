@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_profiles",
+  "info": {
+    "singularName": "user-profile",
+    "pluralName": "user-profiles",
+    "displayName": "UserProfile",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "username": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "maxLength": 30,
+      "minLength": 2
+    },
+    "phone": {
+      "type": "string",
+      "required": true,
+      "maxLength": 11,
+      "unique": true
+    },
+    "email": {
+      "type": "string"
+    },
+    "sex": {
+      "type": "enumeration",
+      "enum": [
+        "man",
+        "girl"
+      ],
+      "default": "man",
+      "required": false
+    },
+    "password": {
+      "type": "text",
+      "required": true,
+      "private": true
+    }
+  }
+}

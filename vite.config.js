@@ -61,7 +61,7 @@ export default defineConfig(({mode}) => {
                     }
                 },
                 // 设置为库模式
-                external: ['vue', 'naive-ui', 'pinia'], // 这个配置很重要，不然会导致 公用的组件无法使用
+                external: ['vue', 'naive-ui'], // 这个配置很重要，不然会导致 公用的组件无法使用
             },
             minify: 'terser',
             terserOptions: {

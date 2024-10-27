@@ -9,6 +9,7 @@ import {createPinia} from "pinia"
 import Framework from "@/packages/framework/index.js";
 import * as helpers from "@/packages/helpers"
 import * as http from "@/packages/http/request.js"
+import * as pinia from "pinia"
 import * as radash from "radash"
 import * as hooksPlus from "vue-hooks-plus"
 import * as dayjs from "dayjs"
@@ -47,6 +48,7 @@ function install(elApp = null, options = {}) {
     const framework = new Framework({
         app,
         pina,
+        pinia,
         helpers: {...helpers}, // 可以持续扩展
         radash,
         hooksPlus,
@@ -62,6 +64,7 @@ function install(elApp = null, options = {}) {
         return {
             app,
             pina,
+            pinia,
             helpers, // 可以持续扩展
             radash,
             hooksPlus,
@@ -78,3 +81,6 @@ function install(elApp = null, options = {}) {
 }
 
 export default install
+export {
+    pinia
+}

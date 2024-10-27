@@ -1,0 +1,36 @@
+{
+    "name": "strapi-5",
+    "version": "0.1.0",
+    "private": true,
+    "description": "A Strapi application",
+    "scripts": {
+        "build": "strapi build",
+        "deploy": "strapi deploy",
+        "develop": "strapi develop",
+        "start": "strapi start",
+        "strapi": "strapi"
+    },
+    "dependencies": {
+        "@_sh/strapi-plugin-ckeditor": "^4.0.8",
+        "@strapi/plugin-cloud": "5.1.1",
+        "@strapi/plugin-color-picker": "^5.1.1",
+        "@strapi/plugin-documentation": "^5.1.1",
+        "@strapi/plugin-graphql": "^5.1.1",
+        "@strapi/plugin-users-permissions": "5.1.1",
+        "@strapi/strapi": "5.1.1",
+        "crypto": "^1.0.1",
+        "mysql2": "3.9.8",
+        "react": "^18.0.0",
+        "react-dom": "^18.0.0",
+        "react-router-dom": "^6.0.0",
+        "strapi-plugin-multi-select": "^2.1.1",
+        "styled-components": "^6.0.0"
+    },
+    "engines": {
+        "node": ">=18.0.0 <=22.x.x",
+        "npm": ">=6.0.0"
+    },
+    "strapi": {
+        "uuid": "206fe843-3e84-4d8e-922e-08064113a0fe"
+    }
+}

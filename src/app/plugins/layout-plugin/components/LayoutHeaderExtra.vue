@@ -163,6 +163,7 @@ const allOptions = [
                 props: {
                     onClick: () => {
                         $router.push({path:'/login'})
+                        $global.middleware.eventEmitter.emit('APP:LOGOUT')
                     }
                 }
             }
