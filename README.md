@@ -4,8 +4,9 @@
 
 <h1 align="center">Vue-Bag-Admin</h1>
 
-<p align="center">一款<b>开箱即用</b>的 Vue 中后台管理系统框架，旨在让开发者能够以最小的成本完成开发
-降低开发量</p>
+<p align="center">一款<b>开箱即用</b>的 Vue 中后台管理系统框架，旨在让开发者能够以最小的成本完成开发,
+你可以将它应用在任何需要的管理系统中
+</p>
 
 <p align="center">
     <a href="https://vite.itnavs.com/" target="_blank">官网</a>
@@ -25,44 +26,36 @@
     <a href="https://www.haiwb.com/" target="_blank">海栈-工具网</a>
 <p>
 
-
 ## 技术选型
 
-vue-bag-admin，采用Vue3、Vite5、Naive UI、JavaScript、Gulp、Pinia以及周边的优秀的插件搭建，通过npm命令安装引入主程序包开发，插件式开发，它允许开发者在不修改原有代码基础上扩展功能、增加新的处理逻辑，使得应用更加模块化和易于维护，响应式中后台管理系统，满足现有业务各种扩展...
+vue-bag-admin，采用Vue3、Vite5、Naive
+UI、JavaScript、Gulp、Pinia以及周边的优秀的插件搭建，通过npm命令安装引入主程序包开发，插件式开发，它允许开发者在不修改原有代码基础上扩展功能、增加新的处理逻辑，使得应用更加模块化和易于维护，响应式中后台管理系统，满足现有业务各种扩展...
 
 ## 特点
 
-- 路由动画加载
-- 内置富文本编辑器和MarkDown编辑器
-- 支持中英文切换
-- 支持全屏预览
-- 5000+图标库选择
-- 模拟数据
-- 网络配置
-- 请求拦截
-- 失败重连
-- 路由按钮权限
-- 网页水印
-- 字符拼音
-- 敏感词管理
-- 图像裁剪
-- 二维码生产器
-- 瀑布流图片
-- 模板打印
-- 表单设计器
-- 大文件上传
-- Pinia状态管理
-- 路由配置
-- 全局配置
-- UI风格布局切换
-- 灰色模式
-- 色弱模式
-- 标签持久化
-- 权限拦截
-- 多页面模式
-- 动态路由注入
-- 支持strapi框架接入
-- ......
+### 响应式开发
+
+样式基于tailwindcss开发，自动适配PC端、移动端，增强网站的响应式设计，提高网站的可用性，提供多种不同风格的皮肤，页面美观，减少开发成本和维护工作
+
+### 方便易用
+
+通过npm命令安装引入主程序包开发，也可以通过下载源码进行二次开发，框架(packages)和应用(app)分开，即可以减少项目之间的耦合，也能提升项目扩展性
+
+### 社区强大
+
+采用市面主流技术Vue3、Vite5、Naive-ui、Pinia 、Strapi5、MySQL等等，不用担心自己业务所受框架有限的瓶颈， 完全免费，且可商用
+
+### API服务
+
+Node.js提供的Strapi框架，一个开源的无头CMS，开发者可以自由喜欢的开发工具和框架，自由定义定制API，并可使用GraphQL作为API的查询语言，颗粒度权限拦截和认证
+
+### 功能齐全
+
+权限管理、多语言、页面缓存、主题切换、路由动画、布局风格、动态路由、状态管理、微前端，请求封装等等，旨在让开发者能够以最小的成本开发中后台系统，降低开发量
+
+### 插件式开发
+
+框架使用的方式属于插件式开发，它允许开发者在不修改原有代码基础上扩展功能、增加新的处理逻辑，使得应用更加模块化和易于维护。这种模式特别适用于那些需要高度可扩展性和可定制性的应用程序
 
 ## 安装
 
@@ -74,32 +67,39 @@ pnpm i vue-bag-admin --save
 
 ```javascript
 import install from "vue-bag-admin"
-const {app, framework, plugins} = install()
 
-framework.use(plugins.useRouterPlugin)
+const {app} = install()
 app.mount('#app')
 ```
+
+## 源码开发
+
+- `main`为最新分支，包含所有源代码，前端和后端程序
+- `v4` 为上一个版本分支，包含所有源代码，前端和后端程序(停止维护)
 
 ## 图片预览
 
 ### PC端
 
-![](https://pic.imgdb.cn/item/6505b885661c6c8e5425b40e.jpg)
+![PC端](https://pic.imgdb.cn/item/6505b885661c6c8e5425b40e.jpg)
 
 ### iPad端
 
-![](https://pic.imgdb.cn/item/6505b884661c6c8e5425b3f1.jpg)
+![iPad端](https://pic.imgdb.cn/item/6505b884661c6c8e5425b3f1.jpg)
 
 ### Mobile端
 
-![](https://pic.imgdb.cn/item/6505b885661c6c8e5425b3fc.jpg)
+![Mobile端](https://pic.imgdb.cn/item/6505b885661c6c8e5425b3fc.jpg)
 
 ### 适用人群
 
 正在以及想使用框架快速中后台系统，熟悉Vue使用它开发过几个实际项目，热爱技术，爱学习，想进阶和提升的同学
 
 ### 技术交流
-![](./weixin.jpg)
+
+加入我们一起交流技术，一起进步，一起成长
+
+![技术交流](./weixin.jpg)
 
 ### 版权信息
 
