@@ -7,9 +7,16 @@ const {app, framework, plugins, helpers, pina, middleware} = install()
 
 import * as icons from '@vicons/ionicons5'
 import {BehanceOutlined, ReadOutlined} from "@vicons/antd"
+import {iv, key} from "@/app/config/index.js";
 
+const apis = ['/auth/local/register', '/auth/local', '/secretkey', '/bag-menus', '/classify', '/clearCaches', '/upload', '/md5Check'];
 framework.use(plugins.useNaivePlugin)
-framework.use(plugins.useApisPlugin, ['/auth/local/register', '/auth/local', '/secretkey', '/bag-menus', '/classify', '/clearCaches', '/upload', '/md5Check'])
+plugins.useApisPlugin.httpConfig = {
+    headers: {
+        'sing': helpers.encrypt(JSON.stringify({name: 'bag', random: helpers.nanoid()}), iv, key)
+    },
+}
+framework.use(plugins.useApisPlugin, apis)
 framework.use(plugins.useIconPlugin, {
     icons: {
         BehanceOutlined,

@@ -4,6 +4,7 @@
 export class ApisPlugin {
     constructor() {
         this.name = 'ApisPlugin'
+        this.httpConfig = {}
     }
 
 
@@ -17,8 +18,8 @@ export class ApisPlugin {
         ctx.apis = {...ctx.http};
         options.forEach((item) => {
             const api = ctx.apis[this.toCamelCase(item)] = {url: item}
-            api.httpGet = (params, config) => ctx.http.httpGet(api.url, params, config)
-            api.httpPost = (params, config) => ctx.http.httpPost(api.url, params, config)
+            api.httpGet = (params, config) => ctx.http.httpGet(api.url, params, {...config, ...this.httpConfig})
+            api.httpPost = (params, config) => ctx.http.httpPost(api.url, params, {...config, ...this.httpConfig})
         });
         if (typeof window === 'object') {
             if (!window.$apis) {

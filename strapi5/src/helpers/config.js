@@ -1,3 +1,5 @@
+const CryptoJS = require("crypto-js");
+
 const privateKey = `-----BEGIN RSA PRIVATE KEY-----
 MIICXgIBAAKBgQDGcFwssGIu0i7mGzlNvuUkLiQay5rtvdHs0B/qxlRhtbCbjUDu
 HVAuYXJwMWV6e9zuxhxA9OhKLQGU7aOfenc47NfwPZav3i36b3w//LXpWGKWVziq
@@ -21,7 +23,13 @@ PZav3i36b3w//LXpWGKWVziqMalYnUcXyXKi1/Oec3eWN7NVoNiAuadGHnIkxGiu
 9J7AgmQ3LAHOvmX4qwIDAQAB
 -----END PUBLIC KEY-----`
 
+
+let aesKey = CryptoJS.enc.Utf8.parse('0132456789ABCDEF');
+let aesIv = CryptoJS.enc.Utf8.parse('0132456789ABCDEF');
+
 module.exports = {
     privateKey,
-    publicKey
+    publicKey,
+    aesKey,
+    aesIv
 }

@@ -12,6 +12,7 @@
     },
     "dependencies": {
         "@_sh/strapi-plugin-ckeditor": "^4.0.8",
+        "@strapi-community/plugin-redis": "^2.0.0",
         "@strapi/plugin-cloud": "5.1.1",
         "@strapi/plugin-color-picker": "^5.1.1",
         "@strapi/plugin-documentation": "^5.1.1",
@@ -19,6 +20,7 @@
         "@strapi/plugin-users-permissions": "5.1.1",
         "@strapi/strapi": "5.1.1",
         "crypto": "^1.0.1",
+        "crypto-js": "^4.2.0",
         "mysql2": "3.9.8",
         "react": "^18.0.0",
         "react-dom": "^18.0.0",
