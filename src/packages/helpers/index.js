@@ -1,5 +1,5 @@
 import {h} from "vue";
-import {commonDark, NIcon} from "naive-ui";
+import {commonDark, NIcon, NTag, NBadge} from "naive-ui";
 import lscache from "lscache"
 import {customAlphabet} from 'nanoid';
 import {md5} from "js-md5";
@@ -9,6 +9,7 @@ import LargeUploadFile from "@/packages/helpers/LargeUploadFile.js";
 import automaticUpdate from "./AutomaticUpdate.js"
 import * as icons from "@/packages/helpers/Icon.js"
 import highHtml from "./HighHtml.js"
+
 function renderIcon(icon, props) {
     return () => h(NIcon, props, {default: () => h(icon)})
 }
@@ -212,7 +213,15 @@ const menusProcessing = (ctx, menus) => {
         item.topIds = topIds.map(item => item.id) // 给每个菜单添加一个自己的顶级应用分类的Id
         item.md5 = item.md5 ? item.md5 : item.file ? md5(item.file) : null // 对每一个数据打印标记
         item.icon = ctx?.helpers?.getIcons?.(ctx, item.icon) // 转换传递过来的icon为render函数
-        item.title = formatTitle(ctx, item, true);
+        item.lable = formatTitle(ctx, item, true);
+        const extra = item.extra;
+        item.extraProps = {value: extra, dot: false, size: 'small', type: 'info', processing: true, show: !!extra}
+        if (!isNaN(parseFloat(extra))) {
+            item.extraProps.dot = false
+        } else if (/^[a-zA-Z]*$/.test(extra)) {
+            item.extraProps.dot = true
+        }
+        item.extra = () => h(NBadge, {...item.extraProps})
         item.keepAlive = item.keepAlive ? item.keepAlive : false
         if (ctx.radash.isArray(topIds)) {
             const topId = topIds[topIds.length - 1]
@@ -584,6 +593,28 @@ function clipboardCopy(text) {
 }
 
 
+/**
+ * 读取本地file
+ * @param filePath
+ * @returns {string|null}
+ */
+function readFile(filePath) {
+    // 创建一个新的xhr对象
+    let xhr = null
+    if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest()
+    } else {
+        // eslint-disable-next-line
+        xhr = new ActiveXObject('Microsoft.XMLHTTP')
+    }
+    const okStatus = document.location.protocol === 'file' ? 0 : 200
+    xhr.open('GET', filePath, false)
+    xhr.overrideMimeType('text/html;charset=utf-8')
+    xhr.send(null)
+    return xhr.status === okStatus ? xhr.responseText : null
+}
+
+
 export {
     renderIcon,
     depthForEach,
@@ -615,5 +646,6 @@ export {
     icons,
     browserPatch,
     clipboardCopy,
-    highHtml
+    highHtml,
+    readFile
 }

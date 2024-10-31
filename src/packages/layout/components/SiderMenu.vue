@@ -7,6 +7,7 @@
         :options="$globalStore.menus"
         key-field="id"
         label-field="label"
+        ref="menu"
         v-model:value="$globalStore.currentRouter.meta.id"
         :on-update:value="(value,item)=>$global.router.push(item.path)"
     />
@@ -37,7 +38,7 @@
     </n-el>
 </template>
 <script setup>
-
+const menu = ref()
 const classNameMenuItemActive = ($globalStore, item) => {
     if ($globalStore.currentRouter.meta.topId === item.id || $globalStore.currentRouter.meta.id === item.id) {
         return 'active'

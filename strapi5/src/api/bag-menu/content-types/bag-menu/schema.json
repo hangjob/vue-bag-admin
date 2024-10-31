@@ -1,67 +1,74 @@
 {
-    "kind": "collectionType",
-    "collectionName": "bag_menus",
-    "info": {
-        "singularName": "bag-menu",
-        "pluralName": "bag-menus",
-        "displayName": "bag_menu"
+  "kind": "collectionType",
+  "collectionName": "bag_menus",
+  "info": {
+    "singularName": "bag-menu",
+    "pluralName": "bag-menus",
+    "displayName": "bag_menu",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 10,
+      "minLength": 2
     },
-    "options": {
-        "draftAndPublish": true
+    "localesKey": {
+      "type": "string"
     },
-    "pluginOptions": {},
-    "attributes": {
-        "title": {
-            "type": "string",
-            "required": true,
-            "maxLength": 10,
-            "minLength": 2
-        },
-        "localesKey": {
-            "type": "string"
-        },
-        "file": {
-            "type": "string"
-        },
-        "path": {
-            "type": "string"
-        },
-        "name": {
-            "type": "string"
-        },
-        "icon": {
-            "type": "string"
-        },
-        "hasClose": {
-            "type": "boolean",
-            "default": false
-        },
-        "sort": {
-            "type": "biginteger",
-            "default": "0"
-        },
-        "hasMenu": {
-            "type": "boolean",
-            "default": false
-        },
-        "hasRouter": {
-            "type": "boolean",
-            "default": false
-        },
-        "hasTab": {
-            "type": "boolean",
-            "default": false
-        },
-        "root": {
-            "type": "string"
-        },
-        "keepAlive": {
-            "type": "boolean",
-            "default": false
-        },
-        "overlayRouting": {
-            "type": "boolean",
-            "default": false
-        }
+    "file": {
+      "type": "string"
+    },
+    "path": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "string"
+    },
+    "hasClose": {
+      "type": "boolean",
+      "default": false
+    },
+    "sort": {
+      "type": "biginteger",
+      "default": "0"
+    },
+    "hasMenu": {
+      "type": "boolean",
+      "default": false
+    },
+    "hasRouter": {
+      "type": "boolean",
+      "default": false
+    },
+    "hasTab": {
+      "type": "boolean",
+      "default": false
+    },
+    "root": {
+      "type": "string"
+    },
+    "keepAlive": {
+      "type": "boolean",
+      "default": false
+    },
+    "overlayRouting": {
+      "type": "boolean",
+      "default": false
+    },
+    "pid": {
+      "type": "string"
+    },
+    "extra": {
+      "type": "string"
     }
+  }
 }

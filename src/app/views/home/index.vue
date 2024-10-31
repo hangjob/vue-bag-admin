@@ -4,16 +4,16 @@
             <n-card title="欢迎您" :header-extra="()=>'今日多云转晴，18℃ - 26℃!'"
                     :segmented="{content: true,footer:true}" header-style="padding:10px;font-size:14px">
                 <div class="flex-row flex">
-                    <img alt="" class="w-[80px] rounded-[50%] h-[80px]" src="@/packages/assets/yanghang.jpg"/>
-                    <div class="ml-5">
-                        <h1 class="font-bold text-[20px] mb-1">嗨，{{ tleData.pam }} 今天是{{ tleData.date }}
-                            {{ tleData.week }} {{
-                                tleData.time
-                            }}，准备吃什么呢?</h1>
-                        <p class="text-justify">前端工程师 |
-                            品茗科技，vue-bag-admin，🍁采用Vite5、Vue3、Pinia 、Naive UI
-                            构建，框架使用的方式属于插件式开发，它允许开发者在不修改原有代码基础上扩展功能、增加新的处理逻辑，使得应用更加模块化和易于维护。这种模式特别适用于那些需要高度可扩展性和可定制性的应用程序</p>
-                    </div>
+<!--                    <img alt="" class="w-[80px] rounded-[50%] h-[80px]" src="@/packages/assets/yanghang.jpg"/>-->
+<!--                    <div class="ml-5">-->
+<!--                        <h1 class="font-bold text-[20px] mb-1">嗨，{{ tleData.pam }} 今天是{{ tleData.date }}-->
+<!--                            {{ tleData.week }} {{-->
+<!--                                tleData.time-->
+<!--                            }}，准备吃什么呢?</h1>-->
+<!--                        <p class="text-justify">前端工程师 |-->
+<!--                            品茗科技，vue-bag-admin，🍁采用Vite5、Vue3、Pinia 、Naive UI-->
+<!--                            构建，框架使用的方式属于插件式开发，它允许开发者在不修改原有代码基础上扩展功能、增加新的处理逻辑，使得应用更加模块化和易于维护。这种模式特别适用于那些需要高度可扩展性和可定制性的应用程序</p>-->
+<!--                    </div>-->
                 </div>
             </n-card>
         </n-grid-item>
@@ -39,7 +39,7 @@
             <n-card title="数据分析" style="height:100%" :segmented="{content: true,footer:true}"
                     header-style="padding:10px;font-size:14px"
                     footer-style="padding:10px" content-style="padding:10px;height:100%">
-                <div id="histogram" class="w-[70%]" style="height:320px;"></div>
+
                 <div class="flex flex-col">
                     <div></div>
                 </div>
@@ -49,7 +49,6 @@
 </template>
 <script setup>
 import {onBeforeRouteLeave} from "vue-router"
-import {histogram} from "@/app/views/home/vchart.js";
 const value = ref('')
 const numberAnimationInstRef = ref();
 const getPamFormat = (hour) => {
@@ -84,7 +83,6 @@ onBeforeRouteLeave(() => {
     clearInterval(intervalTimer)
 })
 onMounted(() => {
-    histogram({dom: 'histogram'})
 })
 </script>
 

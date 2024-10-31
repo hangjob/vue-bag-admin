@@ -6,13 +6,15 @@ export default defineConfig({
     description: "旨在让开发者能够以最小的成本完成开发降低重复工作",
     base: '/doc/',
     lastUpdated: true,
+    head: [
+        ['link', {rel: 'icon', href: '/doc/logo-min.png'}]
+    ],
     themeConfig: {
         // https://vitepress.dev/reference/default-theme-config
         nav: [
             {text: '🐻‍首页️', link: '/'},
             {text: '常见问题', link: '/markdown-examples'}
         ],
-
         sidebar: [
             {
                 text: '入门指南',
@@ -40,6 +42,7 @@ export default defineConfig({
                     },
                     {text: '路由布局', link: '/guide/router'},
                     {text: '全局扩展', link: '/guide/global'},
+                    {text: '全局方法', link: '/guide/funs'},
                     {text: '表单组件', link: '/guide/comp'},
                     {text: '主题设置', link: '/guide/theme'},
                     {text: 'Css原子化', link: '/guide/css'},

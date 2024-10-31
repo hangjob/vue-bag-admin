@@ -206,3 +206,5 @@ framework.use(plugins.useRouterPlugin, {
 | keepAlive      | boolean |    是否缓存路由     |
 | overlayRouting | boolean |    是否覆盖路由     |
 | children       |  array  |     子菜单数据     |
+| extra          | stirng  |      角标       |
+

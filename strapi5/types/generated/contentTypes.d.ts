@@ -372,6 +372,7 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
 export interface ApiBagMenuBagMenu extends Struct.CollectionTypeSchema {
   collectionName: 'bag_menus';
   info: {
+    description: '';
     displayName: 'bag_menu';
     pluralName: 'bag-menus';
     singularName: 'bag-menu';
@@ -383,6 +384,7 @@ export interface ApiBagMenuBagMenu extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    extra: Schema.Attribute.String;
     file: Schema.Attribute.String;
     hasClose: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     hasMenu: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
@@ -401,6 +403,7 @@ export interface ApiBagMenuBagMenu extends Struct.CollectionTypeSchema {
     overlayRouting: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
     path: Schema.Attribute.String;
+    pid: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     root: Schema.Attribute.String;
     sort: Schema.Attribute.BigInteger & Schema.Attribute.DefaultTo<'0'>;
