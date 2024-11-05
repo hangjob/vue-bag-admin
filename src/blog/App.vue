@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img class="vergas" src="@/blog/assets/bg1.jpg" alt="">
+        <img class="vergas" src="@/blog/assets/bg6.png" alt="">
         <template v-for="item in comps">
             <component :is="item.components"></component>
         </template>

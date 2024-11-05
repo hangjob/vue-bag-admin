@@ -1,43 +1,41 @@
 <template>
-    <n-el tag="div" class="flex flex-shrink-0 border-solid border-b bag-border-color items-center">
+    <n-el tag="div" class="tab-custom flex flex-shrink-0 border-solid border-b bag-border-color items-center">
         <n-icon @click="handleScroll('l')" size="20" class="px-2 w-auto flex-shrink-0 cursor-pointer">
             <ChevronBackOutline></ChevronBackOutline>
         </n-icon>
-        <n-config-provider :theme-overrides="{ Scrollbar: {height: '0px'}}">
-            <n-scrollbar ref="scrollbar" x-scrollable>
-                <n-el v-if="$globalStore.configs.tabStyle === 'button'" tag="div"
-                      class="box-border py-1 flex-1 px-2 flex-shrink-0 border-l border-r border-solid bag-border-color no-scrollbar items-center overflow-y-hidden overflow-x-scroll flex whitespace-nowrap">
-                    <n-space :wrap="false">
-                        <n-button :color="$globalStore.currentRouter.path === item.path ? $globalStore.theme.color : ''"
-                                  icon-placement="right" class="cursor-pointer" v-for="item in $globalStore.tabs"
-                                  closable
-                                  @click="handleTabRouter($global,item)">
-                            {{ $global?.helpers?.formatTitle($global, item) }}
-                            <template v-if="!item.hasClose" #icon>
-                                <n-icon size="18" @click.stop="$global?.helpers?.closeTabBarJump($global,item)">
-                                    <CloseOutline/>
-                                </n-icon>
-                            </template>
-                        </n-button>
-                    </n-space>
-                </n-el>
-                <n-el v-if="$globalStore.configs.tabStyle === 'card'" tag="div"
-                      class="box-border flex-1 flex-shrink-0 border-l border-r border-solid bag-border-color no-scrollbar overflow-y-hidden overflow-x-scroll flex whitespace-nowrap">
-                    <n-space :wrap="false">
-                        <div :class="['flex px-3 py-2 items-center justify-center cursor-pointer']"
-                             :style="tabStyle($globalStore,item)"
-                             v-for="item in $globalStore.tabs" @click="handleTabRouter($global,item)">
-                            <span>{{ $global?.helpers?.formatTitle($global, item) }}</span>
-                            <template v-if="!item.hasClose">
-                                <n-icon size="18" @click.stop="$global?.helpers?.closeTabBarJump($global,item)">
-                                    <CloseOutline/>
-                                </n-icon>
-                            </template>
-                        </div>
-                    </n-space>
-                </n-el>
-            </n-scrollbar>
-        </n-config-provider>
+        <n-scrollbar trigger="none" ref="scrollbar" x-scrollable>
+            <n-el v-if="$globalStore.configs.tabStyle === 'button'" tag="div"
+                  class="box-border py-1 flex-1 px-2 flex-shrink-0 border-l border-r border-solid bag-border-color no-scrollbar items-center overflow-y-hidden overflow-x-scroll flex whitespace-nowrap">
+                <n-space :wrap="false">
+                    <n-button :color="$globalStore.currentRouter.path === item.path ? $globalStore.theme.color : ''"
+                              icon-placement="right" class="cursor-pointer" v-for="item in $globalStore.tabs"
+                              closable
+                              @click="handleTabRouter($global,item)">
+                        {{ $global?.helpers?.formatTitle($global, item) }}
+                        <template v-if="!item.hasClose" #icon>
+                            <n-icon size="18" @click.stop="$global?.helpers?.closeTabBarJump($global,item)">
+                                <CloseOutline/>
+                            </n-icon>
+                        </template>
+                    </n-button>
+                </n-space>
+            </n-el>
+            <n-el v-if="$globalStore.configs.tabStyle === 'card'" tag="div"
+                  class="box-border flex-1 flex-shrink-0 border-l border-r border-solid bag-border-color no-scrollbar overflow-y-hidden overflow-x-scroll flex whitespace-nowrap">
+                <n-space :wrap="false">
+                    <div :class="['flex px-3 py-2 items-center justify-center cursor-pointer']"
+                         :style="tabStyle($globalStore,item)"
+                         v-for="item in $globalStore.tabs" @click="handleTabRouter($global,item)">
+                        <span>{{ $global?.helpers?.formatTitle($global, item) }}</span>
+                        <template v-if="!item.hasClose">
+                            <n-icon size="18" @click.stop="$global?.helpers?.closeTabBarJump($global,item)">
+                                <CloseOutline/>
+                            </n-icon>
+                        </template>
+                    </div>
+                </n-space>
+            </n-el>
+        </n-scrollbar>
         <n-icon @click="handleScroll('r')" size="20"
                 class="px-2 w-auto flex-shrink-0 cursor-pointer content-center h-full border-r border-solid bag-border-color">
             <ChevronForward></ChevronForward>
@@ -150,3 +148,8 @@ const handleScroll = (type) => {
     }
 }
 </script>
+<style scoped lang="less">
+.tab-custom :deep(.n-scrollbar-rail__scrollbar) {
+    display: none;
+}
+</style>

@@ -9,7 +9,7 @@ hero:
   theme: 'alt'
   tagline: 你可以将它应用在任何需要的管理系统中.
   image:
-    src: https://vite.itnavs.com/logo-min.png
+    src: https://vite.itnavs.com/doc/logo-min.png
     alt: Vite
   actions:
     - theme: brand

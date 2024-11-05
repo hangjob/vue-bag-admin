@@ -29,7 +29,7 @@ const useGlobalStore = defineStore('global', {
                 isMenuCollapsed: false, // 是否折叠
                 mobileMenuVisible: false, // 是否隐藏菜单
                 isTopColor: false, // 顶部栏颜色
-                isDarkMode: false, // 暗黑模式
+                isDarkMode: true, // 暗黑模式
                 isTabar: true, // 标签是否显示
                 isBreadcrumb: true, // 是否展示面包屑
                 isBreadcrumbIcon: true, // 是否显示面包屑图标
