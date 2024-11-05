@@ -4,6 +4,7 @@
         <n-layout fle has-sider style="flex: 1;">
             <n-layout-sider
                 bordered
+                :native-scrollbar="false"
                 v-model:collapsed="$globalStore.configs.isMenuCollapsed"
                 :show-trigger="$globalStore.configs.layoutName === 'default' && !$globalStore.deviceInfo.isMobile"
                 collapse-mode="width"
@@ -28,7 +29,7 @@
                 <component is="LayoutTabBar">
                     <TabBar v-if="$globalStore.configs.isTabar"/>
                 </component>
-                <n-layout id="layout" class="p-2">
+                <n-layout :native-scrollbar="false" id="layout" class="p-2">
                     <router-view v-slot="{ Component }">
                         <keep-alive>
                             <component :is="Component" :key="$route.name" v-if="$route.meta.keepAlive"/>

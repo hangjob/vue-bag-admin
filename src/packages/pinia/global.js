@@ -78,7 +78,11 @@ const useGlobalStore = defineStore('global', {
                     {name: '拂晓蓝', color: '#1890ff'},
                     {name: '极客蓝', color: '#2f54eb'},
                 ],
-                overrides: {},
+                overrides: {
+                    // Scrollbar: {
+                    //     height: '3px',
+                    // },
+                },
             },
         }
     },

@@ -44,9 +44,11 @@ framework.use(plugins.useRouterPlugin, {
         })
     },
 })
-pina.state.value.global.webSite.title = 'Vue Bag Admin'
+// pina.state.value.global.webSite.title = 'Vue Bag Admin'
+pina.state.value.global.webSite.title = '品茗科技'
+
 pina.state.value.global.webSite.footerText = 'Copyright©2024 Vue Bag Admin'
-pina.state.value.global.webSite.logo = logo
+// pina.state.value.global.webSite.logo = logo
 
 middleware.eventEmitter.on('API:REQUEST', ({json, text, response}) => {
     if (text) {

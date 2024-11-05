@@ -11,7 +11,7 @@
         v-model:value="getCurrentRouterId"
         :on-update:value="handleMenuChange"
     />
-    <n-el tag="div" class="hide-scrollbar h-full flex overflow-hidden w-full" v-else>
+    <n-el tag="div" class="h-full flex overflow-hidden w-full" v-else>
         <ul :style="{maxWidth:$globalStore.configs.layoutSiderWidth}"
             class="min-w-[90px] flex-1 p-2 box-border border-l border-r border-solid bag-border-color h-full">
             <li @click="handleMenuItemClick($global,item)"
