@@ -7,6 +7,20 @@ import path from "path";
 import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js" // css 整合 js
 import {analyzer} from "vite-bundle-analyzer"; // 分析包大小依赖
 import VueDevTools from 'vite-plugin-vue-devtools' // 调试面板
+import history from 'connect-history-api-fallback'
+function historyPlugin() {
+    return {
+        name: 'vite-plugin-history',
+        configureServer(server) {
+            server.middlewares.use(history({
+                rewrites: [
+                    { from: /\/admin/, to: '/admin.html' } // 解决页面 在history 刷新下会 404 的问题
+                ],
+                htmlAcceptHeaders: ['text/html', 'application/xhtml+xml'],
+            }))
+        }
+    }
+}
 
 export default defineConfig(({mode}) => {
     const env = loadEnv(mode, process.cwd())
@@ -30,7 +44,8 @@ export default defineConfig(({mode}) => {
             Components({
                 resolvers: [NaiveUiResolver()]
             }),
-            VueDevTools()
+            VueDevTools(),
+            historyPlugin()
         ],
         define: {
             __APP_ENV__: JSON.stringify(env.APP_ENV),
@@ -42,7 +57,7 @@ export default defineConfig(({mode}) => {
         },
         build: {
             outDir: 'lib',
-            rollupOptions:{}
+            rollupOptions: {}
         },
         server: {
             // hmr: false,
@@ -56,7 +71,7 @@ export default defineConfig(({mode}) => {
                     target: 'http://localhost:1337/api',
                     changeOrigin: true,
                     rewrite: (url) => url.replace(/^\/api/, ''),
-                }
+                },
             },
         }
     }

@@ -28,6 +28,7 @@
         "alova": "^3.0.11",
         "animate.css": "^4.1.1",
         "axios": "^1.6.8",
+        "connect-history-api-fallback": "^2.0.0",
         "crypto-js": "^4.2.0",
         "current-device": "^0.10.2",
         "date-fns": "^4.1.0",
