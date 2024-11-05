@@ -3,7 +3,7 @@ import {unique, replaceOrAppend, select} from 'radash'
 import currentDevice from "current-device" // 获取设备
 import {nextTick} from "vue"
 import lscache from "lscache";
-import {filterOut, removeDuplicates} from "@/packages/helpers/index.js";
+import {filterOut, removeDuplicates, removeZeroChildren} from "@/packages/helpers/index.js";
 
 const getBrowserDeviceType = function (w = 718) {
     return window.innerWidth < w;
@@ -39,6 +39,7 @@ const useGlobalStore = defineStore('global', {
                 isDocking: true, // 模块坞
                 isFooter: true, // 是否显示底部
                 isWatermark: false, // 是否水印
+                isTabCover: true,//是否覆盖式标签页面
                 watermark: 'vue-bag-admin', // 水印文字
                 layoutName: 'default', // 主题名称 default lessen spillover
                 tabStyle: 'button', // 标签风格 button card
@@ -53,7 +54,8 @@ const useGlobalStore = defineStore('global', {
             webSite: {
                 title: '', // logo
                 subTitle: '', // 副标题
-                logo:'', // logo图片
+                logo: '', // logo图片
+                footerText: ''
             },
             userInfo: {}, // 用户信息
             currentRouter: {}, // 当前路由对象
@@ -86,7 +88,8 @@ const useGlobalStore = defineStore('global', {
             this.routes = removeDuplicates(this.routes.concat(routes));
         },
         dispatchMenus(menus) {
-            this.menus = removeDuplicates(filterOut(menus, f => f.hasMenu))
+            const data = removeDuplicates(filterOut(menus, f => f.hasMenu))
+            this.menus = removeZeroChildren(data)
         },
         dispatchSourceMenus(menus) {
             this.sourceMenus = removeDuplicates(menus);
@@ -105,7 +108,8 @@ const useGlobalStore = defineStore('global', {
         },
         dispatchTabs(tab) {
             if (tab.title && tab.id) {
-                const tabs = replaceOrAppend(this.tabs, tab, existingTab => existingTab.id === tab.id);
+                const key = this.configs.isTabCover ? 'id' : 'path'
+                const tabs = replaceOrAppend(this.tabs, tab, existingTab => existingTab[key] === tab[key]);
                 this.tabs = tabs.sort((a, b) => {
                     return b.sort || 0 - a.sort || 0
                 })

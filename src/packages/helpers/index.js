@@ -213,13 +213,16 @@ const menusProcessing = (ctx, menus) => {
         item.topIds = topIds.map(item => item.id) // 给每个菜单添加一个自己的顶级应用分类的Id
         item.md5 = item.md5 ? item.md5 : item.file ? md5(item.file) : null // 对每一个数据打印标记
         item.icon = ctx?.helpers?.getIcons?.(ctx, item.icon) // 转换传递过来的icon为render函数
-        item.lable = formatTitle(ctx, item, true);
-        const extra = item.extra;
-        item.extraProps = {value: extra, dot: false, size: 'small', type: 'info', processing: true, show: !!extra}
-        if (!isNaN(parseFloat(extra))) {
-            item.extraProps.dot = false
-        } else if (/^[a-zA-Z]*$/.test(extra)) {
+        // item.lable = formatTitle(ctx, item, true);
+        let extra = item.extra;
+        item.extraProps = {value: '', dot: false, size: 'small', type: 'info', processing: true, show: !!extra}
+        if ((/true/i).test(extra)) {
             item.extraProps.dot = true
+        }
+        if (extra) {
+            let extras = extra.split(',')
+            item.extraProps.value = extras[0]
+            item.extraProps.type = extras[1] || 'info'
         }
         item.extra = () => h(NBadge, {...item.extraProps})
         item.keepAlive = item.keepAlive ? item.keepAlive : false
@@ -466,6 +469,22 @@ function removeDuplicates(arr, seen = new Set()) {
 
 
 /**
+ * 删除零个子节点的菜单
+ * @param arr
+ * @param id
+ * @returns {*}
+ */
+function removeZeroChildren(arr, id) {
+    depthForEach(arr,(item)=>{
+        if(item.children && item.children.length === 0){
+            delete item.children
+        }
+    })
+    return arr;
+}
+
+
+/**
  * 添加参数到URL
  * @param url
  * @param params
@@ -615,6 +634,13 @@ function readFile(filePath) {
 }
 
 
+function checkURL(url) {
+    let Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+    let objExp = new RegExp(Expression);
+    return objExp.test(url) === true;
+}
+
+
 export {
     renderIcon,
     depthForEach,
@@ -647,5 +673,7 @@ export {
     browserPatch,
     clipboardCopy,
     highHtml,
-    readFile
+    readFile,
+    checkURL,
+    removeZeroChildren
 }

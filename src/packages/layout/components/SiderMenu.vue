@@ -6,10 +6,10 @@
         :collapsed-icon-size="$globalStore.configs.collapsedIconSize"
         :options="$globalStore.menus"
         key-field="id"
-        label-field="label"
-        ref="menu"
-        v-model:value="$globalStore.currentRouter.meta.id"
-        :on-update:value="(value,item)=>$global.router.push(item.path)"
+        label-field="lable"
+        :render-label="(option)=>formatTitle($global, option)"
+        v-model:value="getCurrentRouterId"
+        :on-update:value="handleMenuChange"
     />
     <n-el tag="div" class="hide-scrollbar h-full flex overflow-hidden w-full" v-else>
         <ul :style="{maxWidth:$globalStore.configs.layoutSiderWidth}"
@@ -27,23 +27,27 @@
                 :collapsed-icon-size="$globalStore.configs.collapsedIconSize"
                 :options="$globalStore.subMenus"
                 key-field="id"
-                label-field="label"
+                label-field="lable"
                 ordered
+                :render-label="(option)=>formatTitle($global, option)"
                 :collapsed-width="$globalStore.configs.collapsedWidth"
                 :collapsed="true"
-                v-model:value="$globalStore.currentRouter.meta.id"
-                :on-update:value="(value,item)=>$global.router.push(item.path)"
+                v-model:value="getCurrentRouterId"
+                :on-update:value="handleMenuChange"
             />
         </div>
     </n-el>
 </template>
 <script setup>
-const menu = ref()
+import {formatTitle} from "@/packages/helpers/index.js"
+
 const classNameMenuItemActive = ($globalStore, item) => {
     if ($globalStore.currentRouter.meta.topId === item.id || $globalStore.currentRouter.meta.id === item.id) {
         return 'active'
     }
 }
+const getCurrentRouterId = computed(() => $globalStore.currentRouter.query.rid || $globalStore.currentRouter.meta.id)
+
 const handleMenuItemClick = ($global, item) => {
     if ($global.radash.isArray(item.children)) {
         const todo = item.children.first()
@@ -52,6 +56,12 @@ const handleMenuItemClick = ($global, item) => {
         item.path && $global.router.push(item.path)
     }
 }
+
+const handleMenuChange = (value, item) => {
+    $global.router.$push(item.path)
+}
+
+
 </script>
 <style lang="less" scoped>
 .menu-item {

@@ -30,7 +30,7 @@
                 <component is="LayoutHeaderCum">
                     <n-breadcrumb>
                         <n-breadcrumb-item v-for="item in $globalStore.breadcrumb">
-                            {{ $global?.helpers?.formatTitle($global, item) }}
+                           {{ $global?.helpers?.formatTitle($global, item) }}
                         </n-breadcrumb-item>
                     </n-breadcrumb>
                 </component>
@@ -44,7 +44,7 @@
                                 <n-badge>
                                     <component class="mr-2" :is="item.icon"></component>
                                 </n-badge>
-                                {{ $global?.helpers?.formatTitle($global, item) }}
+                               {{ $global?.helpers?.formatTitle($global, item) }}
                             </n-button>
                         </n-dropdown>
                     </component>

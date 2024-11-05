@@ -1,5 +1,5 @@
 import useGlobalStore from "@/packages/pinia/global.js";
-import {findParents} from "@/packages/helpers"
+import {findParents, md5} from "@/packages/helpers"
 import lscache from "lscache"
 import {replaceOrAppend} from "radash";
 
@@ -25,8 +25,7 @@ function updataBreadcrumbMenus(ctx, app, to) {
 
 // 更新tabbar
 function updataTabs(app, to) {
-    app.dispatchTabs({path: to.path, ...to.meta})
-    app.dispatchTabs({path: to.path, ...to.meta, query: to.query})
+    app.dispatchTabs({path: to.path, ...to.meta, ...to.query, query: to.query})
 }
 
 // 更新持久化存储

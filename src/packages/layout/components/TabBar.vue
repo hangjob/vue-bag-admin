@@ -9,7 +9,7 @@
                 <n-button :color="$globalStore.currentRouter.path === item.path ? $globalStore.theme.color : ''"
                           icon-placement="right" class="cursor-pointer" v-for="item in $globalStore.tabs"
                           closable
-                          @click="$global.router.push(item)">
+                          @click="handleTabRouter($global,item)">
                     {{ $global?.helpers?.formatTitle($global, item) }}
                     <template v-if="!item.hasClose" #icon>
                         <n-icon size="18" @click.stop="$global?.helpers?.closeTabBarJump($global,item)">
@@ -24,7 +24,7 @@
             <n-space :wrap="false">
                 <div :class="['flex px-3 py-2 items-center justify-center cursor-pointer']"
                      :style="tabStyle($globalStore,item)"
-                     v-for="item in $globalStore.tabs" @click="$global.router.push(item)">
+                     v-for="item in $globalStore.tabs" @click="handleTabRouter($global,item)">
                     <span>{{ $global?.helpers?.formatTitle($global, item) }}</span>
                     <template v-if="!item.hasClose">
                         <n-icon size="18" @click.stop="$global?.helpers?.closeTabBarJump($global,item)">
@@ -79,6 +79,13 @@ const tabStyle = ($globalStore, item) => {
             backgroundColor: 'var(--primary-color)'
         }
     }
+}
+
+const handleTabRouter = ($global, item) => {
+    $global.router.push({
+        path: item.path,
+        query: item.query,
+    })
 }
 
 const handleSelectOptions = ($global, $globalHook, $globalStore, key) => {

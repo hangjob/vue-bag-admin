@@ -8,6 +8,8 @@ const {app, framework, plugins, helpers, pina, middleware} = install()
 import * as icons from '@vicons/ionicons5'
 import {BehanceOutlined, ReadOutlined} from "@vicons/antd"
 import {iv, key} from "@/app/config/index.js";
+import {browserPatch} from "@/packages/helpers/index.js";
+import locaMenus from "@/app/router/menus.js"
 
 const apis = ['/auth/local/register', '/auth/local', '/secretkey', '/bag-menus', '/classify', '/clearCaches', '/upload', '/md5Check'];
 framework.use(plugins.useNaivePlugin)
@@ -29,6 +31,7 @@ framework.use(plugins.useLanguagePlugin)
 framework.use(plugins.useRouterPlugin, {
     // history: createWebHashHistory(),
     files,
+    base:'/admin/',
     handleMenus: ({ctx}) => {
         return ctx.apis.BagMenus.httpGet({'pagination[pageSize]': '100'}).then((res) => {
             res.data.forEach((item) => {
@@ -36,13 +39,14 @@ framework.use(plugins.useRouterPlugin, {
                 item.id = item.documentId;
                 item.documentId = _id;
             })
-            return res.data
+            res.data.sort((a, b) => parseInt(b.sort) - parseInt(a.sort)) // 根据sort字段排序
+            return [...res.data, ...locaMenus]
         })
     },
 })
-// pina.state.value.global.webSite.title = 'Vue Bag Admin'
-pina.state.value.global.webSite.title = '品茗科技'
-// pina.state.value.global.webSite.logo = logo
+pina.state.value.global.webSite.title = 'Vue Bag Admin'
+pina.state.value.global.webSite.footerText = 'Copyright©2024 Vue Bag Admin'
+pina.state.value.global.webSite.logo = logo
 
 middleware.eventEmitter.on('API:REQUEST', ({json, text, response}) => {
     if (text) {
@@ -70,6 +74,7 @@ middleware.eventEmitter.on('APP:LOGOUT', () => {
     $global.helpers.lscache.set('token', null)
     $global.router.push('/login')
 })
+helpers.browserPatch()
 app.mount("#app")
 
 

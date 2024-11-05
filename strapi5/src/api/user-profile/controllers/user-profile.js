@@ -61,7 +61,8 @@ module.exports = createCoreController('api::user-profile.user-profile', ({strapi
                 if (!findData) {
                     $utils.resultError('用户不存在，请先注册')
                 }
-                if ($utils.rsaDecrypt(findData.password) !== password) {
+                const pas = $utils.rsaDecrypt(findData.password);
+                if (pas !== password) {
                     $utils.resultError('密码错误')
                 }
                 const token = $utils.createJwtToken(findData);

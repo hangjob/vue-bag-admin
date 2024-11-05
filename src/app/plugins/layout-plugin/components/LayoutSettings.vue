@@ -72,6 +72,9 @@
                     <n-form-item label-placement="left" label="底部显示" path="user.phone">
                         <n-switch v-model:value="$globalStore.configs.isFooter"/>
                     </n-form-item>
+                    <n-form-item label-placement="left" label="覆盖式标签" path="user.phone">
+                        <n-switch v-model:value="$globalStore.configs.isTabCover"/>
+                    </n-form-item>
                     <n-form-item v-if="$globalStore.configs.isWatermark" label="水印文案" path="user.name">
                         <n-input v-model:value="$globalStore.configs.watermark" placeholder="输入水印文案"/>
                     </n-form-item>

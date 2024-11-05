@@ -2,6 +2,7 @@ import {createRouter, createWebHistory} from "vue-router"
 import {defaultBuiltRouter, defaultErrorRouter} from "@/packages/router/routes.js";
 import {afterEach} from "@/packages/router/index.js"
 import beforeEach from "./plug.js"
+import {checkURL} from "@/packages/helpers/index.js";
 
 
 /**
@@ -23,6 +24,13 @@ export class RouterPlugin {
             routes: routes, // 合并默认路由与用户配置路由
             ...args
         });
+        ctx.router.$push = (path) => {
+            if (ctx.helpers.checkURL(path)) {
+                window.open(path, path)
+            } else {
+                ctx.router.push(path).then()
+            }
+        }
         ctx.app.use(ctx.router)
         afterEach(ctx, args)
         beforeEach(ctx, args)

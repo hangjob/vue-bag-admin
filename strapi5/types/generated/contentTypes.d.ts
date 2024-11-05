@@ -384,6 +384,7 @@ export interface ApiBagMenuBagMenu extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    embed: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     extra: Schema.Attribute.String;
     file: Schema.Attribute.String;
     hasClose: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;

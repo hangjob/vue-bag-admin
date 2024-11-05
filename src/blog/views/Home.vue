@@ -20,7 +20,7 @@
 const compData = reactive({
     btns: [
         {
-            url: '/admin.html',
+            url: '/admin',
             title: '在线演示',
             type: 'success',
             className: 'animate__slideInLeft'

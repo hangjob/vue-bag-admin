@@ -210,9 +210,9 @@ const compData = reactive({
         ],
     },
     login: {
-        username: '',
+        username: 'admin',
         phone: '',
-        password: '',
+        password: '123456',
         memorization: false
     },
     loginLoading: false,

@@ -1,7 +1,5 @@
 'use strict';
 const utils = require('./helpers/utils') // 扩展工具
-// const services = require("./server/services");
-// console.log(services)
 module.exports = {
     /**
      * An asynchronous register function that runs before

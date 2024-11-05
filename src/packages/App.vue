@@ -15,7 +15,7 @@
 <script setup>
 import {darkTheme, NConfigProvider, zhCN, dateZhCN} from 'naive-ui'
 
-// 这里还可以使用inject注入值，延续在这个系统重使用
+// 这里还可以使用inject注入值，延续在这个系统中使用
 const props = defineProps({
     elRoot: {
         type: Boolean,

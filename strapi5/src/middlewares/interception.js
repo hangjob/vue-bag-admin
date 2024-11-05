@@ -7,10 +7,10 @@ module.exports = (config, {strapi}) => {
             if (ctx.request.header.sing) {
                 const sing = await redisClient.get(ctx.request.header.sing)
                 if (!sing) {
-                    const data = $utils.rsaDecrypt(ctx.request.header.sing)
-                    if (data.name === 'bag') {
+                    const data = $utils.aesDecrypt(ctx.request.header.sing)
+                    if (data?.name === 'bag') {
                         await redisClient.set(ctx.request.header.sing, 1);
-                        await redisClient.expire(ctx.request.header.sing, 60); // 1分钟过期
+                        await redisClient.expire(ctx.request.header.sing, 60 * 10); // 1分钟过期
                         await next();
                     } else {
                         return ctx.throw(403, 'invalid signature')

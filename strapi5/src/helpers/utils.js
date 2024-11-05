@@ -2,11 +2,10 @@
 const crypto = require('crypto')
 const utils = require("@strapi/utils");
 const {ApplicationError, ValidationError} = utils.errors;
-const {publicKey, privateKey, aesIv, aesKey} = require('./config');
+const {publicKey, privateKey, aesKey, aesIv} = require('./config');
 const jwt = require("jsonwebtoken");
 const _ = require("lodash");
 const CryptoJS = require("crypto-js");
-
 
 const checkIsJsonString = (str) => {
     try {
@@ -22,8 +21,8 @@ const isString = (arg) => {
 }
 
 
-// 非对称加密
-const rsaEncrypt = (str) => {
+// 对称加密
+const aesEncrypt = (str) => {
     let word = isString(str) ? str : JSON.stringify(str);
     const srcs = CryptoJS.enc.Utf8.parse(word);
     const encrypted = CryptoJS.AES.encrypt(srcs, aesKey, {
@@ -34,8 +33,8 @@ const rsaEncrypt = (str) => {
     return encrypted.toString();
 }
 
-// 非对称解密
-const rsaDecrypt = (str) => {
+// 对称解密
+const aesDecrypt = (str) => {
     const decrypt = CryptoJS.AES.decrypt(str, aesKey, {
         iv: aesIv,
         mode: CryptoJS.mode.CBC,
@@ -46,17 +45,17 @@ const rsaDecrypt = (str) => {
 }
 
 
-// 对称加密
-const aesEncrypt = (str) => {
+// 非对称加密
+const rsaEncrypt = (str) => {
     let word = isString(str) ? str : JSON.stringify(str);
-    const cipher = crypto.createCipheriv('aes-128-cbc', aesKey, aesIv);
-    return cipher.update(word, 'utf8', 'hex') + cipher.final('hex');
+    const crypted = crypto.publicEncrypt(publicKey, Buffer.from(word));
+    return crypted.toString('base64')
 }
 
-// 对称解密
-const aesDecrypt = (str) => {
-    const decipher = crypto.createDecipheriv('aes-128-cbc', aesKey, aesIv);
-    return decipher.update(str, 'hex', 'utf8') + decipher.final('utf8');
+// 非对称解密
+const rsaDecrypt = (str) => {
+    const decrypted = crypto.privateDecrypt(privateKey, Buffer.from(str, "base64"));
+    return decrypted.toString()
 }
 
 
@@ -65,7 +64,7 @@ const resultError = (error) => {
     if (isString(error)) {
         throw new ApplicationError(error)
     }
-    if (error.name === "ValidationError") {
+    if (error?.name === "ValidationError") {
         throw new ValidationError("小可爱，仔细检查下参数", error.errors);
     }
     throw error;
@@ -90,5 +89,5 @@ module.exports = {
     resultError,
     createJwtToken,
     aesEncrypt,
-    aesDecrypt
+    aesDecrypt,
 }
