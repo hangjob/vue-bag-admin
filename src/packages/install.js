@@ -23,6 +23,7 @@ import eventEmitter from "@/packages/middleware"
 const middleware = {
     eventEmitter
 }
+
 Array.prototype.first = function () {
     return this.slice(0, 1)[0];
 }
@@ -82,5 +83,9 @@ function install(elApp = null, options = {}) {
 
 export default install
 export {
-    pinia
+    pinia,
+    router,
+    dayjs,
+    radash,
+    hooksPlus
 }

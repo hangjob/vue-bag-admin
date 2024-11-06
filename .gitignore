@@ -25,4 +25,5 @@ lib
 *.sln
 *.sw?
 cache
+.gitattributes
 

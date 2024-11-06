@@ -33,5 +33,5 @@ www
 .npmignore
 jsconfig.json
 vite.config.js
-
+.gitattributes
 
