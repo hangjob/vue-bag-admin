@@ -215,7 +215,7 @@ const menusProcessing = (ctx, menus) => {
         item.icon = ctx?.helpers?.getIcons?.(ctx, item.icon) // 转换传递过来的icon为render函数
         // item.lable = formatTitle(ctx, item, true);
         let extra = item.extra;
-        item.extraProps = {value: '', dot: false, size: 'small', type: 'info', processing: true, show: !!extra}
+        item.extraProps = {value: '', dot: false, size: 'small', type: 'info', processing: true, show: !!item.extra}
         if ((/true/i).test(extra)) {
             item.extraProps.dot = true
         }
@@ -475,8 +475,8 @@ function removeDuplicates(arr, seen = new Set()) {
  * @returns {*}
  */
 function removeZeroChildren(arr, id) {
-    depthForEach(arr,(item)=>{
-        if(item.children && item.children.length === 0){
+    depthForEach(arr, (item) => {
+        if (item.children && item.children.length === 0) {
             delete item.children
         }
     })
