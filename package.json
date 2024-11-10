@@ -36,7 +36,6 @@
         "dayjs": "^1.11.10",
         "default-passive-events": "^2.0.0",
         "echarts": "^5.5.1",
-        "fingerprintjs2": "^2.1.4",
         "js-calendar-converter": "^0.0.6",
         "js-md5": "^0.8.3",
         "lscache": "^1.3.2",
@@ -54,11 +53,9 @@
         "vue": "^3.4.21",
         "vue-hooks-plus": "^1.8.9",
         "vue-i18n": "^9.13.1",
-        "vue-pdf-embed": "^2.1.1",
         "vue-router": "^4.3.0",
         "vue-winbox": "^0.2.3",
-        "vue3-esign": "^1.0.6",
-        "wow.js": "^1.2.2"
+        "vue3-esign": "^1.0.6"
     },
     "devDependencies": {
         "@vitejs/plugin-vue": "^5.0.4",
