@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "life_articles",
+  "info": {
+    "singularName": "life-article",
+    "pluralName": "life-articles",
+    "displayName": "life_article"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "life_categories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::life-category.life-category",
+      "mappedBy": "life_article"
+    }
+  }
+}

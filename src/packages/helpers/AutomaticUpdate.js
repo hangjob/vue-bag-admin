@@ -39,4 +39,3 @@ function automaticUpdate(updateNotice, time = 3000) {
 }
 
 export default automaticUpdate
-

@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "life_categories",
+  "info": {
+    "singularName": "life-category",
+    "pluralName": "life-categories",
+    "displayName": "life_category",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "des": {
+      "type": "text"
+    },
+    "life_article": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::life-article.life-article",
+      "inversedBy": "life_categories"
+    }
+  }
+}
