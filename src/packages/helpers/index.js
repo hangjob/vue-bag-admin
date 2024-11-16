@@ -219,7 +219,7 @@ const menusProcessing = (ctx, menus) => {
         if ((/true/i).test(extra)) {
             item.extraProps.dot = true
         }
-        if (extra) {
+        if (extra && extra.split) {
             let extras = extra.split(',')
             item.extraProps.value = extras[0]
             item.extraProps.type = extras[1] || 'info'
