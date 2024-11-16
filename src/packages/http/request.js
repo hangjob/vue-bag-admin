@@ -19,10 +19,6 @@ const alovaInstance = createAlova({
         const contentType = response.headers.get("content-type");
         if (response.status !== 500 && contentType && contentType.indexOf("application/json") !== -1) {
             const json = await response.json();
-            if (response.status !== 200) {
-                emitter.emit('API:REQUEST', {json, response})
-                return Promise.reject(json)
-            }
             emitter.emit('API:SUCCESS', {json, response})
             return Promise.resolve(json);
         } else {

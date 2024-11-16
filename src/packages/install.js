@@ -87,5 +87,6 @@ export {
     router,
     dayjs,
     radash,
-    hooksPlus
+    hooksPlus,
+    http
 }
