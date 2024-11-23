@@ -246,7 +246,7 @@ function closeTabBarJump(ctx, route) {
     tabs.length > 1 && tabs.splice(idx, 1)
     if (currentRouter.path === route.path) {
         const tab = idx ? tabs[--idx] : tabs[idx];
-        tab && ctx.router.push(tab.path)
+        tab && ctx.router.push(tab)
     }
 }
 
@@ -346,7 +346,6 @@ function deepMergeObject(...objects) {
             }
         }
     }
-
     return merged;
 }
 

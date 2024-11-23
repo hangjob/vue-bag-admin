@@ -24,7 +24,11 @@
     <a href="https://www.itnavs.com/" target="_blank">全栈导航</a>
     <span>&nbsp;|&nbsp;</span>
     <a href="https://www.haiwb.com/" target="_blank">海栈-工具网</a>
+    <span>&nbsp;|&nbsp;</span>
 <p>
+<p align="center">
+    <a href="https://life.itnavs.com/" target="_blank">一个热爱生活的文艺青年-羊先生</a>
+</p>
 
 ## 技术选型
 
