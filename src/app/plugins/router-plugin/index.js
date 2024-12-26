@@ -28,7 +28,7 @@ export class RouterPlugin {
             if (ctx.helpers.checkURL(path)) {
                 window.open(path, path)
             } else {
-                ctx.router.push(path).then()
+                return ctx.router.push(path)
             }
         }
         ctx.app.use(ctx.router)
