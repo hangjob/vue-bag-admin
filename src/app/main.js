@@ -53,7 +53,7 @@ middleware.eventEmitter.on('API:REQUEST', ({json, text, response}) => {
         window.$naive.message.warning(text || response.statusText)
     } else {
         if (!json?.error?.details) {
-            window.$naive.message.warning(json?.error?.message)
+            window.$naive.message.warning(json?.error?.message || response.statusText)
         } else {
             if (Reflect.ownKeys(json?.error?.details).length === 0) {
                 window.$naive.message.warning(json?.error?.message)

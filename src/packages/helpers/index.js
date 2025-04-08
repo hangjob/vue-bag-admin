@@ -472,6 +472,7 @@ function removeDuplicates(arr, seen = new Set()) {
  * @param arr
  * @param id
  * @returns {*}
+ * @returns {*}
  */
 function removeZeroChildren(arr, id) {
     depthForEach(arr, (item) => {
