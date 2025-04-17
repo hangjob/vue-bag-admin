@@ -641,6 +641,17 @@ function checkURL(url) {
 }
 
 
+function isMatch(str, obj) {
+    const processString = (s) => String(s || '').replace(/^\/+|\/+$/g, '');
+    const processedStr = processString(str);
+
+    const target = typeof obj === 'string' ? { name: obj, path: obj } : obj || {};
+    const processedName = processString(target.name);
+    const processedPath = processString(target.path);
+    return processedStr === processedName || processedStr === processedPath;
+}
+
+
 export {
     renderIcon,
     depthForEach,
@@ -675,5 +686,6 @@ export {
     highHtml,
     readFile,
     checkURL,
-    removeZeroChildren
+    removeZeroChildren,
+    isMatch
 }

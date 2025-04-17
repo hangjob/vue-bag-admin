@@ -19,7 +19,9 @@ import * as plugins from "@/app/plugins/index.js"
 import useGlobalStore from "@/packages/pinia/global.js";
 import * as router from "vue-router"
 import eventEmitter from "@/packages/middleware"
-
+import formCreate from '@form-create/naive-ui'
+import naiveUiInstall from '@form-create/naive-ui/auto-import'
+formCreate.use(naiveUiInstall)
 const middleware = {
     eventEmitter
 }
@@ -45,6 +47,7 @@ function install(elApp = null, options = {}) {
     pina.use(piniaPluginPersistedstate)
     app.use(pina)
     app.use(setupComponents)
+    app.use(formCreate)
     app.config.globalProperties.$globalStore = window.$globalStore = useGlobalStore()
     const framework = new Framework({
         app,

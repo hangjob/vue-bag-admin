@@ -34,10 +34,10 @@
                     footer-style="padding:10px"
                     content-style="padding:10px;">
                 <n-space>
-                    <n-button type="success" @click="$global.router.push({name:'/keep/nested'})">
+                    <n-button type="success" @click="$global.router.push({name:'keep/nested'})">
                         跳转深层次菜单(推荐使用name跳转)
                     </n-button>
-                    <n-button @click="$global.router.push({name:'/business'})" type="warning">
+                    <n-button @click="$global.router.push({name:'business'})" type="warning">
                         跳转空白页面
                     </n-button>
                 </n-space>

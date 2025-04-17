@@ -110,7 +110,7 @@
                     header-style="padding:10px;font-size:14px"
                     footer-style="padding:10px" content-style="padding:10px;height:100%">
                 <n-space :size="[20,20]" align="center">
-                    <div @click="$global.router.$push(item.path)" v-for="item in fastData"
+                    <div @click="$global.router.push(item.path)" v-for="item in fastData"
                          class="p-3 cursor-pointer border border-blue-50 w-[100px] text-center rounded-md">
                         <component class="text-[20px]" :is="item.icon"></component>
                         <h3 class="hover:font-extrabold">{{ item.title }}</h3>

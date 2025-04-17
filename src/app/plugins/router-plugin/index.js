@@ -2,7 +2,6 @@ import {createRouter, createWebHistory} from "vue-router"
 import {defaultBuiltRouter, defaultErrorRouter} from "@/packages/router/routes.js";
 import {afterEach} from "@/packages/router/index.js"
 import beforeEach from "./plug.js"
-import {checkURL} from "@/packages/helpers/index.js";
 
 
 /**
@@ -24,11 +23,32 @@ export class RouterPlugin {
             routes: routes, // 合并默认路由与用户配置路由
             ...args
         });
+
+        // 即将废弃此方法
         ctx.router.$push = (path) => {
             if (ctx.helpers.checkURL(path)) {
                 window.open(path, path)
             } else {
                 return ctx.router.push(path)
+            }
+        }
+
+        const originalPush = ctx.router.push
+        ctx.router.push = function (location) {
+            if (ctx.helpers.isMatch($globalStore?.configs?.formRoute, location)) {
+                if ($globalStore?.configs?.formMode !== 'page') {
+                    $globalStore.formCreate.show = true;
+                    return
+                }
+            }
+            if (ctx.helpers.checkURL(location)) {
+                window.open(location, location)
+            } else {
+                return originalPush.call(this, location)
+                    .catch(error => {
+                        console.error('跳转失败:', error)
+                        throw error
+                    })
             }
         }
         ctx.app.use(ctx.router)

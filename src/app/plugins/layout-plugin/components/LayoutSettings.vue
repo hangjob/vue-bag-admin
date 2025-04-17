@@ -86,7 +86,7 @@
                                   placeholder="选择标签风格"/>
                     </n-form-item>
                     <n-form-item label-placement="left" label="表单风格" path="user.phone">
-                        <n-select v-model:value="$globalStore.configs.formStyle" :options="form.formStyle"
+                        <n-select v-model:value="$globalStore.configs.formMode" :options="form.formMode"
                                   placeholder="选择表单风格"/>
                     </n-form-item>
                     <n-form-item label-placement="left" label="语言切换" path="user.phone">
@@ -118,10 +118,10 @@ const form = reactive({
         {label: "按钮风格", value: 'button',},
         {label: "卡片风格", value: 'card',},
     ],
-    formStyle: [
+    formMode: [
         {label: "抽屉风格", value: 'drawer',},
-        {label: "模态窗口", value: 'dialogue',},
-        {label: "标签风格", value: 'tab',},
+        {label: "模态窗口", value: 'modal',},
+        {label: "标签风格", value: 'page',},
     ]
 })
 

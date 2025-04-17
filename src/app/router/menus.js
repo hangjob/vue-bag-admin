@@ -7,7 +7,7 @@ export default [
         "localesKey": null,
         "file": "/src/app/views/tabs/detail.vue",
         "path": "/tabs/detail/:id",
-        "name": "/tabs/detail",
+        "name": "tabs/detail",
         "icon": "ReceiptOutline",
         "hasClose": false,
         "sort": "0",
@@ -28,7 +28,7 @@ export default [
         "localesKey": null,
         "file": "/src/app/views/business/index.vue",
         "path": "/business",
-        "name": "/business",
+        "name": "business",
         "icon": "ReceiptOutline",
         "hasClose": false,
         "sort": "0",
@@ -39,7 +39,6 @@ export default [
         "keepAlive": false,
         "overlayRouting": false,
         "pid": "",
-        "extra": null,
         "embed": null,
-    },
+    }
 ]

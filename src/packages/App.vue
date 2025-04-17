@@ -10,6 +10,7 @@
             </router-view>
             <router-view v-else></router-view>
         </template>
+        <BagGlobalFormCreate v-if="$globalStore.configs.formMode !== 'page'"/>
     </n-config-provider>
 </template>
 <script setup>

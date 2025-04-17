@@ -1,14 +1,13 @@
 import install from "@/packages/install.js"
 import logo from "@/packages/assets/logo.png"
 import "animate.css";
-
+import formCreate from '@form-create/naive-ui'
 const files = import.meta.glob(`@/app/views/*/**/*.vue`, {eager: true})
 const {app, framework, plugins, helpers, pina, middleware} = install()
 
 import * as icons from '@vicons/ionicons5'
-import {BehanceOutlined, ReadOutlined} from "@vicons/antd"
+import {BehanceOutlined, ReadOutlined,ReconciliationTwotone} from "@vicons/antd"
 import {iv, key} from "@/app/config/index.js";
-import {browserPatch} from "@/packages/helpers/index.js";
 import locaMenus from "@/app/router/menus.js"
 
 const apis = ['/auth/local/register', '/auth/local', '/secretkey', '/bag-menus', '/classify', '/clearCaches', '/upload', '/md5Check'];
@@ -23,6 +22,7 @@ framework.use(plugins.useIconPlugin, {
     icons: {
         BehanceOutlined,
         ReadOutlined,
+        ReconciliationTwotone,
         ...icons
     }
 })

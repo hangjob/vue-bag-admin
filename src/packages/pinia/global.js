@@ -44,6 +44,8 @@ const useGlobalStore = defineStore('global', {
                 layoutName: 'default', // 主题名称 default lessen spillover
                 tabStyle: 'button', // 标签风格 button card
                 formStyle: 'drawer', // 表单风格 drawer dialogue
+                formMode: 'page', // 表单模式 drawer | page | modal
+                formRoute: 'particulars', // 表单的路由名字 跟 formMode关联一起用
             },
             isIframe: window.self.frameElement && window.self.frameElement.tagName === "IFRAME", // 判断页面是否被路由嵌套
             deviceInfo: { // 设备类型,
@@ -63,6 +65,13 @@ const useGlobalStore = defineStore('global', {
             tabs: tabs, // 菜单切换
             isRouterReload: true, // 切换刷新页面
             bgs: [], // 背景图
+            formCreate: {
+                title: '',
+                show: false,
+                rule: [],
+                options: [],
+                fApi: {}
+            }, // BagGlobalFormCreate 组件配置
             theme: {
                 color: '#18a058',
                 colors: [

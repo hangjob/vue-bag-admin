@@ -58,7 +58,7 @@ const handleMenuItemClick = ($global, item) => {
 }
 
 const handleMenuChange = (value, item) => {
-    $global.router.$push(item.path)
+    $global.router.push(item.path)
 }
 
 
