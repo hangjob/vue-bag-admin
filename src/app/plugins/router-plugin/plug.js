@@ -23,7 +23,7 @@ async function getAppMenus(ctx, options) {
                 disposeMenus(res.data || res)
             }
         } catch (e) {
-            console.log(e)
+            throw e;
         }
     }
 }
