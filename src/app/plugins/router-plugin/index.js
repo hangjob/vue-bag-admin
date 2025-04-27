@@ -37,7 +37,7 @@ export class RouterPlugin {
         ctx.router.push = function (location) {
             if (ctx.helpers.isMatch($globalStore?.configs?.formRoute, location)) {
                 if ($globalStore?.configs?.formMode !== 'page') {
-                    $globalStore.formCreate.show = true;
+                    $globalStore.formCreateShow = true;
                     return
                 }
             }

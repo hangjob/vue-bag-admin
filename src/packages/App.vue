@@ -10,19 +10,13 @@
             </router-view>
             <router-view v-else></router-view>
         </template>
+        <!--  这里需要判断避免在非详情页也显示    -->
         <BagGlobalFormCreate v-if="$globalStore.configs.formMode !== 'page'"/>
     </n-config-provider>
 </template>
 <script setup>
 import {darkTheme, NConfigProvider, zhCN, dateZhCN} from 'naive-ui'
 
-// 这里还可以使用inject注入值，延续在这个系统中使用
-const props = defineProps({
-    elRoot: {
-        type: Boolean,
-        default: true
-    }
-})
 const locales = ref({
     zh: {
         locale: zhCN,

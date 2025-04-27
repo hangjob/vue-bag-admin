@@ -43,8 +43,8 @@ const useGlobalStore = defineStore('global', {
                 watermark: 'vue-bag-admin', // 水印文字
                 layoutName: 'default', // 主题名称 default lessen spillover
                 tabStyle: 'button', // 标签风格 button card
-                formStyle: 'drawer', // 表单风格 drawer dialogue
-                formMode: 'page', // 表单模式 drawer | page | modal
+                formStyle: 'drawer', // 表单风格 drawer dialogue // 该字段后续不在使用
+                formMode: 'drawer', // 表单模式 drawer | page | modal
                 formRoute: 'particulars', // 表单的路由名字 跟 formMode关联一起用
             },
             isIframe: window.self.frameElement && window.self.frameElement.tagName === "IFRAME", // 判断页面是否被路由嵌套
@@ -70,8 +70,10 @@ const useGlobalStore = defineStore('global', {
                 show: false,
                 rule: [],
                 options: [],
-                fApi: {}
+                fApi: {},
+                event:{}
             }, // BagGlobalFormCreate 组件配置
+            formCreateShow:false, // 是否展示
             theme: {
                 color: '#18a058',
                 colors: [
@@ -92,7 +94,7 @@ const useGlobalStore = defineStore('global', {
                     //     height: '3px',
                     // },
                 },
-            },
+            }, // 主题色
         }
     },
     getters: {},
@@ -151,7 +153,7 @@ const useGlobalStore = defineStore('global', {
         key: 'pinia', //存储名称
         storage: localStorage, // 存储方式
         //指定 state 中哪些数据需要被持久化。[] 表示不持久化任何状态，undefined 或 null 表示持久化整个 state
-        paths: ['configs', 'theme'],
+        paths: ['configs', 'theme','formCreate'],
     },
 })
 

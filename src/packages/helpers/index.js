@@ -577,14 +577,13 @@ function deepMerge(target = {}, source = {}) {
  */
 function browserPatch() {
     if (typeof EventTarget !== "undefined") {
-        let func = EventTarget.prototype.addEventListener;
+        const originalAddEventListener = EventTarget.prototype.addEventListener;
         EventTarget.prototype.addEventListener = function (type, fn, capture) {
-            this.func = func;
-            if (typeof capture !== "boolean") {
+            if (typeof capture !== 'boolean') {
                 capture = capture || {};
                 capture.passive = false;
             }
-            this.func(type, fn, capture);
+            originalAddEventListener.call(this, type, fn, capture);
         };
     }
 }
@@ -645,7 +644,7 @@ function isMatch(str, obj) {
     const processString = (s) => String(s || '').replace(/^\/+|\/+$/g, '');
     const processedStr = processString(str);
 
-    const target = typeof obj === 'string' ? { name: obj, path: obj } : obj || {};
+    const target = typeof obj === 'string' ? {name: obj, path: obj} : obj || {};
     const processedName = processString(target.name);
     const processedPath = processString(target.path);
     return processedStr === processedName || processedStr === processedPath;

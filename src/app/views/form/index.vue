@@ -11,7 +11,7 @@
             </template>
             <template #header-extra>
                 <div class="flex justify-end items-center gap-x-3">
-                    <n-button size="small">新增</n-button>
+                    <n-button size="small" @click="onCreate">新增</n-button>
                     <n-popover trigger="hover">
                         <template #trigger>
                             <n-popselect v-model:value="tableAttribute.size"
@@ -109,7 +109,7 @@ const formEdit = [
         type: "input",
         title: "商品名称",
         field: "goods_name",
-        value: "iphone 7",
+        value: "",
         props: {
             disabled: true,
         },
@@ -118,7 +118,7 @@ const formEdit = [
         type: "input",
         title: "商品名称",
         field: "goods_name",
-        value: "iphone 7",
+        value: "",
     },
     {
         type: "InputNumber",
@@ -133,7 +133,7 @@ const formEdit = [
         type: "autoComplete",
         title: "自动完成",
         field: "auto",
-        value: "xaboy",
+        value: "",
         inject: true,
         props: {},
     },
@@ -152,7 +152,7 @@ const formEdit = [
         type: "checkbox",
         title: "标签",
         field: "label",
-        value: ["1", "2", "3"],
+        value: [],
         options: [
             {value: "1", label: "好用", disabled: true},
             {value: "2", label: "方便", disabled: false},
@@ -164,7 +164,7 @@ const formEdit = [
         type: "select",
         field: "cate_id",
         title: "产品分类",
-        value: ["104", "105"],
+        value: [],
         options: [
             {"value": "104", "label": "生态蔬菜", "disabled": false},
             {"value": "105", "label": "新鲜水果", "disabled": false},
@@ -186,14 +186,14 @@ const formEdit = [
         type: "cascader",
         title: "所在区域",
         field: "address",
-        value: ['陕西省', '西安市', '新城区'],
+        value: [],
         props: {},
     },
     {
         type: "DatePicker",
         field: "section_day",
         title: "活动日期",
-        value: ['2018-02-20 12:12:12', '2018-03-20 12:12:12'],
+        value: null,
         props: {
             type: "datetimerange",
             placeholder: "请选择活动日期",
@@ -203,10 +203,7 @@ const formEdit = [
         type: "upload",
         field: "pic",
         title: "轮播图",
-        value: [
-            'https://w.wallhaven.cc/full/2y/wallhaven-2yp6gg.png',
-            'https://w.wallhaven.cc/full/2y/wallhaven-2yp6gg.png'
-        ],
+        value: [],
         props: {
             action: "/upload.php",
             max: 2,
@@ -220,15 +217,6 @@ const formEdit = [
         field: "section_time",
         title: "活动时间",
         value: '00:00:00',
-    },
-    {
-        type: "rate",
-        field: "rate",
-        title: "推荐级别",
-        value: 3.5,
-        props: {
-            count: 10,
-        }
     }
 ]
 const {renderMultiCheckbox, tableAttribute} = useTable(tableColumns, {
@@ -237,7 +225,7 @@ const {renderMultiCheckbox, tableAttribute} = useTable(tableColumns, {
             form: {
                 inline: false
             },
-            rule:{
+            rule: {
                 col: {
                     span: 24
                 },
@@ -248,8 +236,27 @@ const {renderMultiCheckbox, tableAttribute} = useTable(tableColumns, {
         $globalStore.formCreate.options = attribute.options;
         $globalStore.formCreate.fApi = attribute.fApi;
         $global.router.push({path: '/particulars', query: {rid: $globalStore.currentRouter?.meta?.id}})
-    }
+    },
 });
+
+
+const onCreate = () => {
+    const attribute = useFormCreate(formEdit, {
+        form: {
+            inline: false
+        },
+        rule: {
+            col: {
+                span: 24
+            },
+        }
+    })
+    $globalStore.formCreate.title = '新增'
+    $globalStore.formCreate.rule = attribute.rule;
+    $globalStore.formCreate.options = attribute.options;
+    $globalStore.formCreate.fApi = attribute.fApi;
+    $global.router.push({path: '/particulars', query: {rid: $globalStore.currentRouter?.meta?.id}})
+}
 
 const searchRule = [
     {

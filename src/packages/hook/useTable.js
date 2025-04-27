@@ -151,7 +151,7 @@ const useRule = (rule, options) => {
 }
 const useFormCreate = (rule = [], options = {}) => {
     const attribute = {
-        fApi: {},
+        fApi: ref(null),
         options: {
             resetBtn: false,
             submitBtn: false,
