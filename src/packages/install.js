@@ -19,9 +19,6 @@ import * as plugins from "@/app/plugins/index.js"
 import useGlobalStore from "@/packages/pinia/global.js";
 import * as router from "vue-router"
 import eventEmitter from "@/packages/middleware"
-import formCreate from '@form-create/naive-ui'
-import naiveUiInstall from '@form-create/naive-ui/auto-import'
-formCreate.use(naiveUiInstall)
 const middleware = {
     eventEmitter
 }
@@ -47,7 +44,6 @@ function install(elApp = null, options = {}) {
     pina.use(piniaPluginPersistedstate)
     app.use(pina)
     app.use(setupComponents)
-    app.use(formCreate)
     app.config.globalProperties.$globalStore = window.$globalStore = useGlobalStore()
     const framework = new Framework({
         app,
@@ -59,7 +55,7 @@ function install(elApp = null, options = {}) {
         dayjs,
         http,
         nprogress,
-        middleware
+        middleware,
     });
     framework.use(plugins.useNaivePlugin)
     app.config.globalProperties.$global = window.$global = framework.ctx
@@ -78,7 +74,7 @@ function install(elApp = null, options = {}) {
             nprogress,
             plugins,
             router,
-            middleware
+            middleware,
         }
     }
     return install()
@@ -91,5 +87,5 @@ export {
     dayjs,
     radash,
     hooksPlus,
-    http
+    http,
 }

@@ -72,7 +72,7 @@
 
 <script setup>
 import {ReloadOutline, ResizeOutline, SettingsOutline} from "@vicons/ionicons5";
-import {useTable, useFormCreate} from "@/packages/hook/useTable.js";
+import {useTable, useFormCreate} from "@/app/hook/useTable.js";
 
 const tableData = [
     {no: 3, title: "Wonderwall", length: "4:18", key: 1},

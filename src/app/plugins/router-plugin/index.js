@@ -35,12 +35,6 @@ export class RouterPlugin {
 
         const originalPush = ctx.router.push
         ctx.router.push = function (location) {
-            if (ctx.helpers.isMatch($globalStore?.configs?.formRoute, location)) {
-                if ($globalStore?.configs?.formMode !== 'page') {
-                    $globalStore.formCreateShow = true;
-                    return
-                }
-            }
             if (ctx.helpers.checkURL(location)) {
                 window.open(location, location)
             } else {

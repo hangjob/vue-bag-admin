@@ -1,6 +1,6 @@
 import {NButton, NCheckbox, NSpace, NText} from "naive-ui";
 import {isFunction} from "radash";
-
+// 暂时没有用到该文件
 function createColumnsSetting(columns) {
     const cloneColumns = $global.helpers.deepClone(columns)
     const columnsOptions = [];
@@ -73,7 +73,7 @@ const useColumns = (columns, tableAttribute) => {
                                     size: "small",
                                     type: "info",
                                     onClick: () => {
-                                        tableAttribute.onEdit()
+                                        tableAttribute.onEdit(row)
                                     }
                                 },
                                 {default: () => "编辑"}
@@ -85,7 +85,7 @@ const useColumns = (columns, tableAttribute) => {
                                     size: "small",
                                     type: "error",
                                     onClick: () => {
-                                        tableAttribute.onDelete()
+                                        tableAttribute.onDelete(row)
                                     }
                                 },
                                 {default: () => "删除"}

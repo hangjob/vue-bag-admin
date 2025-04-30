@@ -1,10 +1,12 @@
 import install from "@/packages/install.js"
 import logo from "@/packages/assets/logo.png"
 import "animate.css";
-import formCreate from '@form-create/naive-ui'
 const files = import.meta.glob(`@/app/views/*/**/*.vue`, {eager: true})
 const {app, framework, plugins, helpers, pina, middleware} = install()
-
+import formCreate from '@form-create/naive-ui'
+import naiveUiInstall from '@form-create/naive-ui/auto-import'
+import setupComponents from "@/app/components"
+formCreate.use(naiveUiInstall)
 import * as icons from '@vicons/ionicons5'
 import {BehanceOutlined, ReadOutlined,ReconciliationTwotone} from "@vicons/antd"
 import {iv, key} from "@/app/config/index.js";
@@ -75,6 +77,8 @@ middleware.eventEmitter.on('APP:LOGOUT', () => {
     $global.router.push('/login')
 })
 helpers.browserPatch()
+app.use(formCreate)
+app.use(setupComponents)
 app.mount("#app")
 
 

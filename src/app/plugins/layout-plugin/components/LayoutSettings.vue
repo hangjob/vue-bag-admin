@@ -85,10 +85,10 @@
                         <n-select v-model:value="$globalStore.configs.tabStyle" :options="form.tabStyle"
                                   placeholder="选择标签风格"/>
                     </n-form-item>
-                    <n-form-item label-placement="left" label="表单风格" path="user.phone">
-                        <n-select v-model:value="$globalStore.configs.formMode" :options="form.formMode"
-                                  placeholder="选择表单风格"/>
-                    </n-form-item>
+<!--                    <n-form-item label-placement="left" label="表单风格" path="user.phone">-->
+<!--                        <n-select v-model:value="$globalStore.configs.formMode" :options="form.formMode"-->
+<!--                                  placeholder="选择表单风格"/>-->
+<!--                    </n-form-item>-->
                     <n-form-item label-placement="left" label="语言切换" path="user.phone">
                         <n-select v-model:value="$globalStore.configs.language" :options="form.languageOptions"
                                   placeholder="选择语言"/>
