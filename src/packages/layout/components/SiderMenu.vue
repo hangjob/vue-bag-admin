@@ -46,7 +46,7 @@ const classNameMenuItemActive = ($globalStore, item) => {
         return 'active'
     }
 }
-const getCurrentRouterId = computed(() => $globalStore.currentRouter.query.rid || $globalStore.currentRouter.meta.id)
+const getCurrentRouterId = computed(() => Number($globalStore.currentRouter.query.rid) || Number($globalStore.currentRouter.meta.id))
 
 const handleMenuItemClick = ($global, item) => {
     if ($global.radash.isArray(item.children)) {

@@ -1,14 +1,15 @@
 import install from "@/packages/install.js"
 import logo from "@/packages/assets/logo.png"
 import "animate.css";
+
 const files = import.meta.glob(`@/app/views/*/**/*.vue`, {eager: true})
 const {app, framework, plugins, helpers, pina, middleware} = install()
 import formCreate from '@form-create/naive-ui'
 import naiveUiInstall from '@form-create/naive-ui/auto-import'
-import setupComponents from "@/app/components"
+
 formCreate.use(naiveUiInstall)
 import * as icons from '@vicons/ionicons5'
-import {BehanceOutlined, ReadOutlined,ReconciliationTwotone} from "@vicons/antd"
+import {BehanceOutlined, ReadOutlined, ReconciliationTwotone} from "@vicons/antd"
 import {iv, key} from "@/app/config/index.js";
 import locaMenus from "@/app/router/menus.js"
 
@@ -33,7 +34,7 @@ framework.use(plugins.useLanguagePlugin)
 framework.use(plugins.useRouterPlugin, {
     // history: createWebHashHistory(),
     files,
-    base:'/admin/',
+    base: '/admin/',
     handleMenus: ({ctx}) => {
         return ctx.apis.BagMenus.httpGet({'pagination[pageSize]': '100'}).then((res) => {
             res.data.forEach((item) => {
@@ -51,24 +52,28 @@ pina.state.value.global.webSite.footerText = 'Copyright©2024 Vue Bag Admin'
 pina.state.value.global.webSite.logo = logo
 
 middleware.eventEmitter.on('API:REQUEST', ({json, text, response}) => {
+    const {error} = json || {}
+    const details = error?.details || []
+    const defaultMessage = response.statusText
+
     if (text) {
-        window.$naive.message.warning(text || response.statusText)
+        window.$naive.message.warning(text || defaultMessage)
+        return
+    }
+
+    if (!error?.details) {
+        window.$naive.message.warning(error?.message || defaultMessage)
+        return
+    }
+
+    if (Reflect.ownKeys(details).length === 0) {
+        window.$naive.message.warning(error.message)
     } else {
-        if (!json?.error?.details) {
-            window.$naive.message.warning(json?.error?.message || response.statusText)
-        } else {
-            if (Reflect.ownKeys(json?.error?.details).length === 0) {
-                window.$naive.message.warning(json?.error?.message)
-            } else {
-                json?.error?.details?.forEach((item) => {
-                    window.$naive.message.warning(item)
-                })
-            }
-        }
+        details.forEach(item => window.$naive.message.warning(item))
     }
 })
 
-middleware.eventEmitter.on('ROUTER:BEFORE', (to, from, next) => {
+middleware.eventEmitter.on("ROUTER:BEFORE", (to, from, next) => {
     next()
 })
 
@@ -76,9 +81,9 @@ middleware.eventEmitter.on('APP:LOGOUT', () => {
     $global.helpers.lscache.set('token', null)
     $global.router.push('/login')
 })
+
 helpers.browserPatch()
 app.use(formCreate)
-app.use(setupComponents)
 app.mount("#app")
 
 

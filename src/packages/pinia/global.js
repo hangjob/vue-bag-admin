@@ -65,15 +65,6 @@ const useGlobalStore = defineStore('global', {
             tabs: tabs, // 菜单切换
             isRouterReload: true, // 切换刷新页面
             bgs: [], // 背景图
-            formCreate: {
-                title: '',
-                show: false,
-                rule: [],
-                options: [],
-                fApi: {},
-                event:{}
-            }, // BagGlobalFormCreate 组件配置
-            formCreateShow:false, // 是否展示
             theme: {
                 color: '#18a058',
                 colors: [
@@ -153,7 +144,7 @@ const useGlobalStore = defineStore('global', {
         key: 'pinia', //存储名称
         storage: localStorage, // 存储方式
         //指定 state 中哪些数据需要被持久化。[] 表示不持久化任何状态，undefined 或 null 表示持久化整个 state
-        paths: ['configs', 'theme','formCreate'],
+        paths: ['configs', 'theme'],
     },
 })
 

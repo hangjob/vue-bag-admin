@@ -10,8 +10,6 @@
             </router-view>
             <router-view v-else></router-view>
         </template>
-        <!--  这里需要判断避免在非详情页也显示    -->
-        <BagGlobalFormCreate v-if="$globalStore.configs.formMode !== 'page'"/>
     </n-config-provider>
 </template>
 <script setup>

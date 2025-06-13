@@ -19,6 +19,8 @@ import * as plugins from "@/app/plugins/index.js"
 import useGlobalStore from "@/packages/pinia/global.js";
 import * as router from "vue-router"
 import eventEmitter from "@/packages/middleware"
+
+// 中间件
 const middleware = {
     eventEmitter
 }

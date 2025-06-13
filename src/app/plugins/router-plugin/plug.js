@@ -70,9 +70,21 @@ const beforeEach = (ctx, options) => {
             $globalStore.isLoadRoutes = true
             next({...to, replace: true})
         } else {
-            ctx.middleware.eventEmitter.emit('ROUTER:BEFORE', to, from, next)
-            if (ctx.middleware.eventEmitter.listeners['ROUTER:BEFORE'].size === 0) {
-                next()
+            let isNextCalled = false;
+            const wrappedNext = (...args) => {
+                isNextCalled = true;
+                next(...args);
+            };
+            try {
+                await ctx.middleware.eventEmitter.emit('ROUTER:BEFORE', to, from, wrappedNext);
+                // 如果事件监听器没有调用next，则自动继续
+                if (!isNextCalled) {
+                    next();
+                }
+            } catch (error) {
+                // 处理可能的异常
+                console.error('路由前置守卫出错:', error);
+                next(false); // 取消导航
             }
         }
     })
