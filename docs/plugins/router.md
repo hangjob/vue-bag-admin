@@ -127,7 +127,7 @@ framework.use(plugins.useRouterPlugin, {
 
 framework.use(plugins.useRouterPlugin, {
     files,
-    handleMenus: ()=>[
+    handleMenus: [
         {
             id: 1,
             title: '首页',
