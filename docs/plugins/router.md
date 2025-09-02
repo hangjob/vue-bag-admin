@@ -175,6 +175,52 @@ framework.use(plugins.useRouterPlugin, {
 })
 ```
 
+## 示例说明
+
+```javascript
+// main.js
+import install from "vue-bag-admin"
+const files = import.meta.glob("@/app/web/views/**/*.vue", {eager: true})
+const {app, framework, plugins} = install()
+framework.use(plugins.useRouterPlugin,{
+    files,
+    handleMenus:()=>[
+        {
+            id: 1,
+            title: "登录",
+            localesKey: "home",
+            file: "/src/app/web/views/login/index.vue", // 覆盖登录页面
+            path: "/login",
+            name: "login",
+            icon: "BookOutline",
+            hasClose: false,
+            sort: 100,
+            hasMenu: true,
+            overlayRouting: true,
+            root: "/",
+            hasTab: true,
+
+        },
+        {
+            id: 2,
+            title: "登录",
+            localesKey: "home",
+            file: "/src/app/web/views/home/index.vue", // 覆盖登录页面
+            path: "/home",
+            name: "home",
+            icon: "BookOutline",
+            hasClose: false,
+            sort: 100,
+            hasMenu: true,
+            overlayRouting: true,
+            root: "/",
+            hasTab: true,
+        },
+    ]
+})
+app.mount("#app")
+```
+
 ## 插件参数说明
 
 | 属性           |      类型       |              说明               |
