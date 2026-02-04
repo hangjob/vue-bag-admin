@@ -17,7 +17,7 @@ hero:
       link: /guide/intro
     - theme: alt
       text: 🤗 寻求合作
-      link: https://yh.vipbic.com/
+      link: https://yh.itnavs.com/
     - theme: alt
       text: 在 GitHub 上查看
       link: https://github.com/hangjob/vue-bag-admin
