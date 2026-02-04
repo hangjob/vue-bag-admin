@@ -1,5 +1,5 @@
 import 'default-passive-events' // 去掉chrome51版本后的事件捕获机制Passive Event Listeners 的警告
-import '@/packages/style/tailwind.css'
+import { createApp } from 'vue'
 import "@/packages/style/tailwind.css"
 import "@/packages/style/style.less"
 import nprogress from 'nprogress'
@@ -25,8 +25,10 @@ const middleware = {
     eventEmitter
 }
 
-Array.prototype.first = function () {
-    return this.slice(0, 1)[0];
+if (!Array.prototype.first) {
+    Array.prototype.first = function () {
+        return this.slice(0, 1)[0];
+    }
 }
 
 

@@ -57,8 +57,13 @@ const handleMenuItemClick = ($global, item) => {
     }
 }
 
+function replaceId(inputString, replacementNumber) {
+    return inputString.replace(/\/:id/, `/${replacementNumber}`);
+}
+
 const handleMenuChange = (value, item) => {
-    $global.router.push(item.path)
+    const path = replaceId(item.path, value)
+    $global.router.push(path)
 }
 
 
