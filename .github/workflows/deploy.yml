@@ -65,6 +65,8 @@ jobs:
           mkdir -p .gh-pages-dist
           # 复制 Admin 构建产物
           cp -r apps/admin/dist/* .gh-pages-dist/
+          # 为了解决 GitHub Pages SPA 刷新 404 的问题，将 index.html 复制为 404.html
+          cp apps/admin/dist/index.html .gh-pages-dist/404.html
           # 复制 Docs 构建产物到 docs 子目录
           mkdir -p .gh-pages-dist/docs
           cp -r apps/docs/.vitepress/dist/* .gh-pages-dist/docs/
