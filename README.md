@@ -73,7 +73,3 @@ pnpm --filter admin dev
 pnpm --filter @bag/docs dev
 ```
 或者访问 `apps/docs` 下的内容了解详细架构和插件开发指南。
-
-## 许可证
-
-MIT License. Copyright © 2026-present Vue-Bag-Admin.
