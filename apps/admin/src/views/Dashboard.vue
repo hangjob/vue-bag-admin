@@ -125,7 +125,7 @@
             tag="div" 
             class="absolute inset-0 flex flex-col gap-0 pr-2 custom-scrollbar overflow-y-auto"
           >
-            <div v-for="(activity, i) in displayActivities" :key="activity.id" class="flex items-start gap-4 group py-3 border-b border-slate-50 dark:border-gray-800/50 last:border-0 transition-colors">
+            <div v-for="(activity, _i) in displayActivities" :key="activity.id" class="flex items-start gap-4 group py-3 border-b border-slate-50 dark:border-gray-800/50 last:border-0 transition-colors">
               <div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 bg-orange-50 dark:bg-orange-500/10 text-orange-500 dark:text-orange-400 group-hover:scale-110 group-hover:bg-orange-100 dark:group-hover:bg-orange-500/20 transition-all duration-300">
                 <component :is="activity.icon" class="w-5 h-5" />
               </div>

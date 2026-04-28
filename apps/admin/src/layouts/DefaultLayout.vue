@@ -326,7 +326,7 @@ import { renderMenuIcon } from '../icons/menu'
 import TabBar from './components/TabBar.vue'
 import type { MenuConfig } from '@bag/core'
 
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 const menuStore = useMenuStore()
 const userStore = useUserStore()
 const router = useRouter()
