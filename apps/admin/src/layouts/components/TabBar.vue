@@ -88,7 +88,6 @@ const { t } = useI18n()
 
 // 滚动相关
 const scrollContainer = ref<HTMLElement | null>(null)
-const tabRefs = ref<HTMLElement[]>([])
 
 const scrollLeft = () => {
   if (scrollContainer.value) {

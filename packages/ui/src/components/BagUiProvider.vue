@@ -11,7 +11,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { NConfigProvider, NGlobalStyle, NMessageProvider, NDialogProvider, darkTheme, dateEnUS, dateZhCN, enUS, zhCN, GlobalThemeOverrides } from 'naive-ui'
+import { NConfigProvider, NGlobalStyle, NMessageProvider, NDialogProvider, darkTheme, dateEnUS, dateZhCN, enUS, zhCN } from 'naive-ui'
+import type { GlobalThemeOverrides } from 'naive-ui'
 
 const props = withDefaults(
   defineProps<{

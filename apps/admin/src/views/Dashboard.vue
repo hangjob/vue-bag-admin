@@ -94,10 +94,10 @@
         <div class="flex-1 flex items-end justify-between gap-2 px-2 relative mt-6 min-h-[200px]">
           <!-- Grid lines -->
           <div class="absolute inset-0 flex flex-col justify-between pointer-events-none">
-            <div class="w-full h-px bg-slate-100 dark:bg-gray-800 transition-colors" v-for="i in 6" :key="i"></div>
+            <div class="w-full h-px bg-slate-100 dark:bg-gray-800 transition-colors" v-for="_ in 6" :key="_"></div>
           </div>
           <!-- Area/Bars -->
-          <div v-for="(val, i) in chartData" :key="i" class="w-full relative group cursor-pointer h-full flex flex-col justify-end items-center">
+          <div v-for="(val, idx) in chartData" :key="idx" class="w-full relative group cursor-pointer h-full flex flex-col justify-end items-center">
             <!-- Tooltip -->
             <div class="absolute -top-12 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:-translate-y-2 bg-slate-800 dark:bg-slate-700 text-white text-xs py-1.5 px-3 rounded-lg shadow-lg whitespace-nowrap z-10 pointer-events-none flex flex-col items-center">
               <span class="font-bold text-[13px]">¥{{ val.value }}</span>

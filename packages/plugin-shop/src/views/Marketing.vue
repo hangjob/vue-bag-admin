@@ -137,7 +137,7 @@ const openDataModal = (campaign: any) => {
   showDataModal.value = true
 }
 
-const handleEdit = (campaign: any) => {
+const handleEdit = (_campaign: any) => {
   // 跳转到编辑页面 (复用 MarketingCreate)
   router.push('/marketing/create')
 }

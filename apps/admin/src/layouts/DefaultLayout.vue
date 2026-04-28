@@ -326,8 +326,7 @@ import { renderMenuIcon } from '../icons/menu'
 import TabBar from './components/TabBar.vue'
 import type { MenuConfig } from '@bag/core'
 
-const { locale, t } = useI18n()
-const currentLang = ref(locale.value)
+const { locale } = useI18n()
 const menuStore = useMenuStore()
 const userStore = useUserStore()
 const router = useRouter()
@@ -472,12 +471,6 @@ const menuOptions = computed(() => {
   const merged = [...baseMenus, ...menuStore.menus]
   return filterMenus(merged).map(mapMenu)
 })
-
-const toggleLang = (e: Event) => {
-  const lang = (e.target as HTMLSelectElement).value
-  locale.value = lang
-  localStorage.setItem('lang', lang)
-}
 
 const langOptions = [
   { label: '中文', key: 'zh-CN' },
