@@ -58,7 +58,7 @@ jobs:
           VITE_BASE_URL: ${{ env.BASE_URL }}
           VITEPRESS_BASE: ${{ env.DOCS_BASE_URL }}
         run: |
-          pnpm run build
+          pnpm exec turbo run build --filter=admin --filter=@bag/docs
 
       - name: Combine build outputs
         run: |
