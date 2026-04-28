@@ -15,6 +15,9 @@ hero:
     - theme: alt
       text: 了解架构
       link: /guide/introduction
+    - theme: alt
+      text: 在线预览
+      link: https://hangjob.github.io/vue-bag-admin/
 
 features:
   - title: ⚡️ 极致速度

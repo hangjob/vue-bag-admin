@@ -11,7 +11,8 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '指南', link: '/guide/introduction' },
-      { text: 'API 参考', link: '/api/' }
+      { text: 'API 参考', link: '/api/' },
+      { text: '在线预览', link: 'https://hangjob.github.io/vue-bag-admin/' }
     ],
 
     sidebar: [
