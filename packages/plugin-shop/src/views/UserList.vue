@@ -151,9 +151,9 @@ const targetOptions = [
 ]
 
 const couponOptions = [
-  { label: '双十一专属满100减20券', value: 'c1', desc: '满100元可用，全品类通用', type: '满减券', value: '20' },
-  { label: '新人专享50元无门槛券', value: 'c2', desc: '无使用门槛，仅限新人首单', type: '无门槛券', value: '50' },
-  { label: '会员专享全场8折券', value: 'c3', desc: '满200元可用，最高抵扣100元', type: '折扣券', value: '8折' }
+  { label: '双十一专属满100减20券', value: 'c1', desc: '满100元可用，全品类 通用', type: '满减券', amount: '20' },
+  { label: '新人专享50元无门槛券', value: 'c2', desc: '无使用门槛，仅限新人 首单', type: '无门槛券', amount: '50' },
+  { label: '会员专享全场8折券', value: 'c3', desc: '满200元可用，最高抵扣100元', type: '折扣券', amount: '8折' }
 ]
 
 const currentCoupon = computed(() => {

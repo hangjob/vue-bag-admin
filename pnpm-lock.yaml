@@ -158,9 +158,15 @@ importers:
       '@bag/ui':
         specifier: workspace:*
         version: link:../ui
+      naive-ui:
+        specifier: ^2.40.0
+        version: 2.44.1(vue@3.5.33(typescript@5.9.2))
       vue:
         specifier: ^3.5.0
         version: 3.5.33(typescript@5.9.2)
+      vue-i18n:
+        specifier: ^10.0.0
+        version: 10.0.8(vue@3.5.33(typescript@5.9.2))
       vue-router:
         specifier: ^4.4.0
         version: 4.6.4(vue@3.5.33(typescript@5.9.2))

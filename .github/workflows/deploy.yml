@@ -1,0 +1,82 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Set Base Path
+        id: set-base
+        run: |
+          REPO_NAME=${{ github.event.repository.name }}
+          OWNER_NAME=${{ github.repository_owner }}
+          if [ "$REPO_NAME" == "$OWNER_NAME.github.io" ]; then
+            echo "BASE_URL=/" >> $GITHUB_ENV
+            echo "DOCS_BASE_URL=/docs/" >> $GITHUB_ENV
+          else
+            echo "BASE_URL=/$REPO_NAME/" >> $GITHUB_ENV
+            echo "DOCS_BASE_URL=/$REPO_NAME/docs/" >> $GITHUB_ENV
+          fi
+
+      - name: Build Admin and Docs
+        env:
+          VITE_BASE_URL: ${{ env.BASE_URL }}
+          VITEPRESS_BASE: ${{ env.DOCS_BASE_URL }}
+        run: |
+          pnpm run build
+
+      - name: Combine build outputs
+        run: |
+          mkdir -p .gh-pages-dist
+          # 复制 Admin 构建产物
+          cp -r apps/admin/dist/* .gh-pages-dist/
+          # 复制 Docs 构建产物到 docs 子目录
+          mkdir -p .gh-pages-dist/docs
+          cp -r apps/docs/.vitepress/dist/* .gh-pages-dist/docs/
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.gh-pages-dist'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

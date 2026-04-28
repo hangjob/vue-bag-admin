@@ -4,9 +4,11 @@
   "main": "src/index.ts",
   "types": "src/index.ts",
   "dependencies": {
-    "vue": "^3.5.0",
-    "vue-router": "^4.4.0",
     "@bag/core": "workspace:*",
-    "@bag/ui": "workspace:*"
+    "@bag/ui": "workspace:*",
+    "naive-ui": "^2.40.0",
+    "vue": "^3.5.0",
+    "vue-i18n": "^10.0.0",
+    "vue-router": "^4.4.0"
   }
 }
