@@ -11,6 +11,8 @@ node_modules
 .env.development.local
 .env.test.local
 .env.production.local
+**/.env
+**/.env.*.local
 
 # Testing
 coverage
@@ -36,3 +38,9 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+
+
+#idea
+.idea
+
+apps/docs/.vitepress/cache

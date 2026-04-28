@@ -1,135 +1,79 @@
-# Turborepo starter
+# Vue-Bag-Admin
 
-This Turborepo starter is maintained by the Turborepo core team.
+`Vue-Bag-Admin` 是一款基于最新技术栈（Vue 3、Vite 5、Naive-ui、TailwindCSS、Pinia 和 TypeScript）开发的中后台管理系统前端解决方案。其后端 API 默认对接了 **Strapi 5**（Headless CMS），能够帮助开发者极速搭建起一个全栈的中后台业务系统。
 
-## Using this example
+## 核心特性
 
-Run the following command:
+- ⚡️ **极致速度**：基于 Vite5 构建，提供闪电般的冷启动和热重载体验。
+- 🧩 **插件化微内核架构**：核心与业务完全解耦，每个业务模块均可作为独立插件（Plugin）热插拔，高度可复用。
+- 🛠️ **Monorepo 管理**：采用 pnpm workspace 进行多包管理，内置核心包、UI包、请求包分离，架构清晰。包命名空间统一使用 `@bag`。
+- 🔒 **完善的权限体系**：基于角色的动态路由与按钮级别权限控制，配合 Strapi5 轻松实现全栈权限流转。
+- 🎨 **Naive UI 与 TailwindCSS**：深度集成 Naive UI 组件库与 TailwindCSS，组件丰富且样式开发高效灵活。
+- 📦 **开箱即用**：提供完整的登录、Dashboard、403、404 等基础能力，助你专注于业务逻辑。
 
-```sh
-npx create-turbo@latest
+## 目录结构
+
+```text
+pm-web-admin-next
+├── apps
+│   ├── admin             # 前端宿主应用 (Vue3)
+│   ├── docs              # VitePress 官方文档
+│   └── strapi            # 后端服务 (Strapi 5)
+├── packages
+│   ├── core              # 核心包 (定义插件接口等)
+│   ├── request           # 请求库封装
+│   ├── ui                # 公共 UI 组件库
+│   └── plugin-*          # 各种业务插件包
+├── pnpm-workspace.yaml   # Monorepo 配置
+└── package.json
 ```
 
-## What's inside?
+## 快速上手
 
-This Turborepo includes the following packages/apps:
+### 环境准备
 
-### Apps and Packages
+- **Node.js**: `v24` 或更高版本。
+- **pnpm**: `v9` 或更高版本。
+- **MySQL**: `8.0` 以上版本（用于 Strapi5 后端）。
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+### 1. 安装依赖
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
+```bash
+pnpm install
 ```
 
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+### 2. 后端服务初始化 (Strapi)
 
+进入 `apps/strapi` 目录，配置数据库并启动：
+
+```bash
+cd apps/strapi
+cp .env.example .env
+pnpm dev
 ```
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
+> 默认使用 MySQL 数据库 `vue_bag_admin`（需要提前创建）。
 
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
+### 3. 前端服务启动
 
-### Develop
+回到根目录或在 `apps/admin` 目录中：
 
-To develop all apps and packages, run the following command:
+```bash
+cd apps/admin
+cp .env.example .env
 
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
+# 在根目录运行前端 dev 命令
+pnpm --filter admin dev
 ```
 
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+### 4. 查阅文档
 
+本地启动 VitePress 文档服务：
+
+```bash
+pnpm --filter @bag/docs dev
 ```
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
+或者访问 `apps/docs` 下的内容了解详细架构和插件开发指南。
 
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
+## 许可证
 
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-# With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
-
-# Without [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+MIT License. Copyright © 2026-present Vue-Bag-Admin.

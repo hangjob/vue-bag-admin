@@ -1,0 +1,31 @@
+{
+  "name": "admin",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@bag/core": "workspace:*",
+    "@bag/plugin-sys-setting": "workspace:*",
+    "@bag/plugin-shop": "workspace:*",
+    "@bag/request": "workspace:*",
+    "@bag/ui": "workspace:*",
+    "naive-ui": "^2.40.0",
+    "pinia": "^2.2.0",
+    "vue": "^3.5.0",
+    "vue-i18n": "^10.0.0",
+    "vue-router": "^4.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@vitejs/plugin-vue": "^6.0.0",
+    "@vue/tsconfig": "^0.9.1",
+    "typescript": "^5.5.3",
+    "vite": "^6.0.0",
+    "vue-tsc": "^2.1.0"
+  }
+}

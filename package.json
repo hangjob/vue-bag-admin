@@ -1,5 +1,5 @@
 {
-  "name": "pm-web-admin-next",
+  "name": "vue-bag-admin",
   "private": true,
   "scripts": {
     "preinstall": "npx only-allow pnpm",
@@ -8,7 +8,9 @@
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types",
-    "prepare": "husky"
+    "prepare": "husky",
+    "docs:dev": "pnpm --filter @bag/docs run dev",
+    "docs:build": "pnpm --filter @bag/docs run build"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.4.1",
@@ -22,5 +24,11 @@
   "engines": {
     "node": ">=24",
     "pnpm": ">=9"
+  },
+  "dependencies": {
+    "@vueuse/core": "^11.0.0",
+    "autoprefixer": "^10.5.0",
+    "postcss": "^8.5.10",
+    "tailwindcss": "^3.4.1"
   }
 }

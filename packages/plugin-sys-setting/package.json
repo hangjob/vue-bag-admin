@@ -1,0 +1,12 @@
+{
+  "name": "@bag/plugin-sys-setting",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "dependencies": {
+    "vue": "^3.5.0",
+    "vue-router": "^4.4.0",
+    "@bag/core": "workspace:*",
+    "@bag/ui": "workspace:*"
+  }
+}
