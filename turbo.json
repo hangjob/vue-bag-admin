@@ -4,8 +4,9 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
+      "env": ["VITE_BASE_URL", "VITEPRESS_BASE"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": ["dist/**"]
+      "outputs": ["dist/**", ".vitepress/dist/**"]
     },
     "lint": {
       "dependsOn": ["^lint"]

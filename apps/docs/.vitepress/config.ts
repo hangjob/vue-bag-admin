@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
-  base: process.env.VITEPRESS_BASE || '/',
+  base: process.env.VITEPRESS_BASE || '/vue-bag-admin/docs/',
   title: "Vue-Bag-Admin",
   description: "基于 Vue3 + Vite5 + Naive-ui + Pinia + Strapi5 的中后台系统框架",
   appearance: 'dark',

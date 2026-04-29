@@ -44,3 +44,4 @@ yarn-error.log*
 .idea
 
 apps/docs/.vitepress/cache
+.trae
