@@ -1,5 +1,10 @@
 <template>
-  <n-config-provider :locale="naiveLocale" :date-locale="naiveDateLocale" :theme="naiveTheme" :theme-overrides="themeOverrides">
+  <n-config-provider
+    :locale="naiveLocale"
+    :date-locale="naiveDateLocale"
+    :theme="naiveTheme"
+    :theme-overrides="themeOverrides"
+  >
     <n-global-style />
     <n-message-provider>
       <n-dialog-provider>
@@ -11,38 +16,53 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { NConfigProvider, NGlobalStyle, NMessageProvider, NDialogProvider, darkTheme, dateEnUS, dateZhCN, enUS, zhCN } from 'naive-ui'
+import {
+  NConfigProvider,
+  NGlobalStyle,
+  NMessageProvider,
+  NDialogProvider,
+  darkTheme,
+  dateEnUS,
+  dateZhCN,
+  enUS,
+  zhCN
+} from 'naive-ui'
 import type { GlobalThemeOverrides } from 'naive-ui'
 
 const props = withDefaults(
   defineProps<{
     lang?: string
     theme?: 'light' | 'dark'
+    themeColor?: string
   }>(),
   {
     lang: 'zh-CN',
     theme: 'light',
-  },
+    themeColor: '#f97316'
+  }
 )
 
-const themeOverrides: GlobalThemeOverrides = {
-  common: {
-    primaryColor: '#f97316', // orange-500
-    primaryColorHover: '#fb923c', // orange-400
-    primaryColorPressed: '#ea580c', // orange-600
-    primaryColorSuppl: '#f97316'
-  },
-  Select: {
-    peers: {
-      InternalSelection: {
-        borderFocus: '1px solid #f97316',
-        borderHover: '1px solid #f97316',
-        boxShadowFocus: '0 0 0 2px rgba(249, 115, 22, 0.2)',
-        boxShadowActive: '0 0 0 2px rgba(249, 115, 22, 0.2)'
+const themeOverrides = computed<GlobalThemeOverrides>(() => {
+  const primaryColor = props.themeColor
+  return {
+    common: {
+      primaryColor: primaryColor,
+      primaryColorHover: primaryColor,
+      primaryColorPressed: primaryColor,
+      primaryColorSuppl: primaryColor
+    },
+    Select: {
+      peers: {
+        InternalSelection: {
+          borderFocus: `1px solid ${primaryColor}`,
+          borderHover: `1px solid ${primaryColor}`,
+          boxShadowFocus: `0 0 0 2px ${primaryColor}33`,
+          boxShadowActive: `0 0 0 2px ${primaryColor}33`
+        }
       }
     }
   }
-}
+})
 
 const naiveTheme = computed(() => {
   return props.theme === 'dark' ? darkTheme : null

@@ -6,6 +6,8 @@ import type { AdminPlugin } from '@bag/core'
 import { useMenuStore } from '../stores/menu'
 import { useUserStore } from '../stores/user'
 import { useTabBarStore } from '../stores/tabbar'
+import { createDiscreteApi } from 'naive-ui'
+const { loadingBar } = createDiscreteApi(['loadingBar'])
 
 // 假设我们有一个默认的路由
 const defaultRoutes: RouteRecordRaw[] = [
@@ -19,8 +21,8 @@ const defaultRoutes: RouteRecordRaw[] = [
     component: () => import('../views/Login.vue'),
     meta: {
       layout: 'blank',
-      public: true,
-    },
+      public: true
+    }
   },
   {
     path: '/403',
@@ -70,7 +72,7 @@ export const router = createRouter({
 
 router.beforeEach(async (to) => {
   const user = useUserStore()
-
+  loadingBar.start()
   const isPublic = Boolean(to.meta?.public)
   if (!isPublic && !user.isAuthenticated) {
     return { path: '/login', query: { redirect: to.fullPath } }
@@ -94,8 +96,13 @@ router.beforeEach(async (to) => {
 })
 
 router.afterEach((to) => {
+  loadingBar.finish()
   const tabStore = useTabBarStore()
   tabStore.addTab(to)
+})
+
+router.onError(() => {
+  loadingBar.error()
 })
 
 export async function bootstrapPlugins(app: App, plugins: AdminPlugin[]) {
@@ -104,14 +111,14 @@ export async function bootstrapPlugins(app: App, plugins: AdminPlugin[]) {
   for (const plugin of plugins) {
     // 1. 注册路由
     if (plugin.routes) {
-      plugin.routes.forEach(route => router.addRoute(route))
+      plugin.routes.forEach((route) => router.addRoute(route))
     }
-    
+
     // 2. 收集菜单
     if (plugin.menus) {
       globalMenus.push(...plugin.menus)
     }
-    
+
     // 3. 动态合并语言包
     if (plugin.locales) {
       ;(Object.keys(plugin.locales) as Array<'zh-CN' | 'en'>).forEach((lang) => {

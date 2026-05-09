@@ -12,7 +12,7 @@ const sysSettingPlugin: AdminPlugin = {
       meta: {
         title: 'sysSetting.title',
         layout: 'default',
-        roles: ['authenticated'],
+        roles: ['authenticated']
       }
     },
     {
@@ -22,40 +22,48 @@ const sysSettingPlugin: AdminPlugin = {
       meta: {
         title: 'sysSetting.advanced',
         layout: 'default',
-        roles: ['authenticated'],
+        roles: ['authenticated']
       }
     }
   ],
   menus: [
     {
-      path: '/sys-setting',
+      path: '/sys-setting-group',
       title: 'sysSetting.title',
       icon: 'settings',
       sort: 100,
       roles: ['authenticated'],
       children: [
         {
+          path: '/sys-setting',
+          title: 'sysSetting.base',
+          sort: 1,
+          roles: ['authenticated']
+        },
+        {
           path: '/sys-setting/advanced',
           title: 'sysSetting.advanced',
           sort: 10,
-          roles: ['authenticated'],
-        },
-      ],
-    },
+          roles: ['authenticated']
+        }
+      ]
+    }
   ],
   locales: {
     'zh-CN': {
       sysSetting: {
         title: '系统设置',
+        base: '常规设置',
         advanced: '高级设置',
         welcome: '欢迎来到系统设置模块',
         buttonSave: '保存配置',
         logout: '退出登录'
       }
     },
-    'en': {
+    en: {
       sysSetting: {
         title: 'System Settings',
+        base: 'General Settings',
         advanced: 'Advanced',
         welcome: 'Welcome to System Settings',
         buttonSave: 'Save Config',

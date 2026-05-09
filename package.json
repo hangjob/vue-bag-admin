@@ -30,5 +30,10 @@
     "autoprefixer": "^10.5.0",
     "postcss": "^8.5.10",
     "tailwindcss": "^3.4.1"
+  },
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx,vue,json,md,css,scss}": [
+      "prettier --write"
+    ]
   }
 }
