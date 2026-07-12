@@ -15,7 +15,7 @@
 先把仓库拉到本地：
 
 ```bash
-git clone https://github.com/your-username/pm-web-admin-next.git
+git clone https://github.com/hangjob/pm-web-admin-next.git
 cd pm-web-admin-next
 ```
 

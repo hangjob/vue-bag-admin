@@ -42,8 +42,8 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { computed, onMounted, reactive, ref, watch, type PropType } from 'vue'
+<script setup lang="ts" generic="T extends Record<string, unknown> = Record<string, unknown>">
+import { onMounted, reactive, ref, watch } from 'vue'
 import { NDataTable, type DataTableColumns } from 'naive-ui'
 
 export interface ProTableRequestParams {
@@ -52,50 +52,37 @@ export interface ProTableRequestParams {
   [key: string]: unknown
 }
 
-export interface ProTableRequestResult<T = unknown> {
+export interface ProTableRequestResult<T = Record<string, unknown>> {
   list: T[]
   total: number
 }
 
-const props = defineProps({
-  title: {
-    type: String,
-    default: ''
-  },
-  columns: {
-    type: Array as PropType<DataTableColumns<unknown>>,
-    required: true
-  },
-  request: {
-    type: Function as PropType<(params: ProTableRequestParams) => Promise<ProTableRequestResult>>,
-    required: true
-  },
-  params: {
-    type: Object as PropType<Record<string, unknown>>,
-    default: () => ({})
-  },
-  rowKey: {
-    type: [String, Function] as PropType<
-      string | ((row: Record<string, unknown>) => string | number)
-    >,
-    default: 'id'
-  },
-  immediate: {
-    type: Boolean,
-    default: true
-  },
-  showToolbar: {
-    type: Boolean,
-    default: true
-  },
-  showRefresh: {
-    type: Boolean,
-    default: true
-  }
+type TableRowKey<TData extends Record<string, unknown>> =
+  | Extract<keyof TData, string>
+  | ((row: TData) => string | number)
+
+interface Props<TData extends Record<string, unknown>> {
+  title?: string
+  columns: DataTableColumns<TData>
+  request: (params: ProTableRequestParams) => Promise<ProTableRequestResult<TData>>
+  params?: Record<string, unknown>
+  rowKey?: TableRowKey<TData>
+  immediate?: boolean
+  showToolbar?: boolean
+  showRefresh?: boolean
+}
+
+const props = withDefaults(defineProps<Props<T>>(), {
+  title: '',
+  params: () => ({}),
+  rowKey: 'id' as TableRowKey<T>,
+  immediate: true,
+  showToolbar: true,
+  showRefresh: true
 })
 
 const loading = ref(false)
-const tableData = ref<unknown[]>([])
+const tableData = ref<T[]>([])
 const pagination = reactive({
   page: 1,
   pageSize: 10,
@@ -104,11 +91,14 @@ const pagination = reactive({
   pageSizes: [10, 20, 50]
 })
 
-// rowKey 既支持直接传字段名，也支持传函数，兼容不同数据源结构。
-const resolvedRowKey = computed(() => {
-  if (typeof props.rowKey === 'function') return props.rowKey
-  return (row: Record<string, unknown>) => row[props.rowKey] as string | number
-})
+// 对外允许传字段名或函数，这里统一收口成 Naive UI 需要的函数签名。
+const resolvedRowKey = (row: T): string | number => {
+  if (typeof props.rowKey === 'function') {
+    return props.rowKey(row)
+  }
+  const rowKey = props.rowKey as Extract<keyof T, string>
+  return row[rowKey] as string | number
+}
 
 const fetchData = async () => {
   loading.value = true

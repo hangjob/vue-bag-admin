@@ -6,10 +6,8 @@ import {
   type AdminPlugin,
   type AdminRouteRecordRaw,
   type MenuConfig,
-  getStoredDisabledPluginIds,
   isPluginEnabled,
-  registerRuntimePlugins,
-  setPluginEnabledState
+  registerRuntimePlugins
 } from '@bag/core'
 import { useMenuStore } from '../stores/menu'
 import { useUserStore } from '../stores/user'

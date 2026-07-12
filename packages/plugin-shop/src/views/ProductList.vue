@@ -80,10 +80,15 @@ import {
 } from 'naive-ui'
 import { PmProTable } from '@bag/ui'
 
+type ProTableExpose = {
+  reload: (options?: { resetPage?: boolean }) => void
+  reset: () => void
+}
+
 const router = useRouter()
 const dialog = useDialog()
 const message = useMessage()
-const tableRef = ref<InstanceType<typeof PmProTable> | null>(null)
+const tableRef = ref<ProTableExpose | null>(null)
 
 // Search State
 const keyword = ref('')

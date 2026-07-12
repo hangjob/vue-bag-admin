@@ -10,7 +10,10 @@ let handleForbidden: (error: HttpError) => void = () => {}
 let handleServerError: (error: HttpError) => void = () => {}
 let handleBusinessError: (error: HttpError) => void = () => {}
 let extractResponseData: (response: AxiosResponse) => unknown = (response) => response.data
-let resolveBusinessError: (payload: unknown) => HttpErrorDescriptor | null = () => null
+let resolveBusinessError: (
+  payload: unknown,
+  response: AxiosResponse
+) => HttpErrorDescriptor | null = () => null
 
 export interface HttpErrorDescriptor {
   message: string
@@ -75,7 +78,7 @@ http.interceptors.request.use((config) => {
 })
 
 http.interceptors.response.use(
-  (response) => {
+  ((response: AxiosResponse) => {
     const payload = extractResponseData(response)
     const businessError = resolveBusinessError(payload, response)
 
@@ -92,7 +95,7 @@ http.interceptors.response.use(
     }
 
     return payload
-  },
+  }) as unknown as (response: AxiosResponse) => AxiosResponse | Promise<AxiosResponse>,
   (err) => {
     if (err instanceof HttpError) {
       return Promise.reject(err)

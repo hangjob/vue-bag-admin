@@ -18,7 +18,7 @@
 
         <template v-else-if="schema.component === 'radio'">
           <n-radio-group
-            :value="getFieldValue(schema.field)"
+            :value="getScalarFieldValue(schema.field)"
             :disabled="isFieldDisabled(schema)"
             v-bind="getComponentProps(schema)"
             @update:value="(value) => setFieldValue(schema.field, value)"
@@ -38,14 +38,14 @@
 
         <template v-else-if="schema.component === 'checkbox'">
           <n-checkbox-group
-            :value="getFieldValue(schema.field) as Array<string | number | boolean>"
+            :value="getCheckboxGroupValue(schema.field)"
             :disabled="isFieldDisabled(schema)"
             v-bind="getComponentProps(schema)"
             @update:value="(value) => setFieldValue(schema.field, value)"
           >
             <div class="flex flex-wrap gap-3">
               <n-checkbox
-                v-for="option in getSchemaOptions(schema)"
+                v-for="option in getCheckboxOptions(schema)"
                 :key="`${schema.field}-${String(option.value)}`"
                 :value="option.value"
                 :disabled="option.disabled"
@@ -97,6 +97,7 @@ import {
   resolveDictionaryOptions,
   type DictionaryOption,
   type ProFormComponentType,
+  type ProFormOption,
   type ProFormSchema
 } from '@bag/core'
 
@@ -128,6 +129,8 @@ const emit = defineEmits<{
 }>()
 
 const dictOptionsMap = ref<Record<string, DictionaryOption[]>>({})
+type SchemaOption = Pick<ProFormOption, 'label' | 'value' | 'disabled'>
+type CheckboxOption = Omit<SchemaOption, 'value'> & { value: string | number }
 
 const componentMap: Record<
   Exclude<ProFormComponentType, 'radio' | 'checkbox' | 'slot'>,
@@ -152,8 +155,41 @@ const visibleSchemas = computed(() =>
 
 const getFieldValue = (field: string) => props.modelValue[field]
 
-const getSchemaOptions = (schema: ProFormSchema) =>
-  schema.options ?? (schema.dictCode ? (dictOptionsMap.value[schema.dictCode] ?? []) : [])
+const getScalarFieldValue = (field: string): string | number | boolean | null | undefined => {
+  const value = getFieldValue(field)
+  return typeof value === 'string' ||
+    typeof value === 'number' ||
+    typeof value === 'boolean' ||
+    value == null
+    ? value
+    : undefined
+}
+
+const getCheckboxGroupValue = (field: string): Array<string | number> => {
+  const value = getFieldValue(field)
+  if (!Array.isArray(value)) return []
+  return value.filter(
+    (item): item is string | number => typeof item === 'string' || typeof item === 'number'
+  )
+}
+
+const normalizeOption = (option: ProFormOption | DictionaryOption): SchemaOption => ({
+  label: option.label,
+  value: option.value,
+  disabled: 'disabled' in option ? option.disabled : undefined
+})
+
+const getSchemaOptions = (schema: ProFormSchema): SchemaOption[] => {
+  const options =
+    schema.options ?? (schema.dictCode ? (dictOptionsMap.value[schema.dictCode] ?? []) : [])
+  return options.map(normalizeOption)
+}
+
+const getCheckboxOptions = (schema: ProFormSchema): CheckboxOption[] =>
+  getSchemaOptions(schema).filter(
+    (option): option is CheckboxOption =>
+      typeof option.value === 'string' || typeof option.value === 'number'
+  )
 
 const setFieldValue = (field: string, value: unknown) => {
   emit('update:modelValue', {

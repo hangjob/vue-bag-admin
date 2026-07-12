@@ -15,10 +15,10 @@ export interface PluginRuntimeItem {
 const disabledPluginsStorageKey = 'bag.admin.disabledPlugins'
 const runtimePlugins = new Map<string, AdminPlugin>()
 
-const countRoutes = (routes: AdminPlugin['routes'] = []) =>
+const countRoutes = (routes: AdminPlugin['routes'] = []): number =>
   routes.reduce((total, route) => total + 1 + countRoutes(route.children), 0)
 
-const countMenus = (menus: AdminPlugin['menus'] = []) =>
+const countMenus = (menus: AdminPlugin['menus'] = []): number =>
   menus.reduce((total, menu) => total + 1 + countMenus(menu.children), 0)
 
 export const registerRuntimePlugins = (plugins: AdminPlugin[]) => {

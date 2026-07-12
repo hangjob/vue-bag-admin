@@ -45,7 +45,7 @@ export default defineConfig({
       }
     ],
 
-    socialLinks: [{ icon: 'github', link: 'https://github.com/your-username/pm-web-admin-next' }],
+    socialLinks: [{ icon: 'github', link: 'https://github.com/hangjob/vue-bag-admin/tree/next' }],
 
     footer: {
       message: 'Released under the MIT License.',

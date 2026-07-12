@@ -68,7 +68,7 @@
 
 <script setup lang="ts">
 import { computed, ref, watch, type PropType } from 'vue'
-import { NButton, NForm, type FormInst, type FormRules } from 'naive-ui'
+import { NButton, NForm, type FormInst, type FormItemRule, type FormRules } from 'naive-ui'
 import type { ProFormInstance, ProFormSchema, ProFormSubmitContext } from '@bag/core'
 import PmSchemaForm from './PmSchemaForm.vue'
 
@@ -184,7 +184,9 @@ const mergedRules = computed<FormRules>(() => {
   const rules: FormRules = {}
 
   props.schemas.forEach((schema) => {
-    const schemaRules = [...((schema.rules as NonNullable<FormRules[string]>) ?? [])]
+    const schemaRules: FormItemRule[] = Array.isArray(schema.rules)
+      ? [...(schema.rules as FormItemRule[])]
+      : []
 
     if (schema.required) {
       schemaRules.unshift({
