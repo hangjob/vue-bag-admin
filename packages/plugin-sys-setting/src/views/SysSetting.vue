@@ -226,6 +226,13 @@
                   </svg>
                 </button>
               </div>
+              <button
+                type="button"
+                class="px-3 py-2 text-sm rounded-lg border border-gray-200 dark:border-gray-700 text-slate-600 dark:text-slate-300 hover:border-primary-500 hover:text-primary-500 transition-colors"
+                @click="openAppearanceCenter"
+              >
+                打开配置中心
+              </button>
             </div>
 
             <hr class="border-gray-200 dark:border-gray-700/50" />
@@ -650,7 +657,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 
 const activeTab = ref('base')
 
@@ -687,14 +694,14 @@ const themeColors = [
   { name: '玫瑰红', value: '#f43f5e', bgClass: 'bg-rose-500' }
 ]
 
-const currentColor = ref('#f97316')
-
-onMounted(() => {
-  currentColor.value = localStorage.getItem('bag.themeColor') || '#f97316'
-})
+const currentColor = ref(localStorage.getItem('bag.themeColor') || '#f97316')
 
 const handleColorChange = (color: string) => {
   currentColor.value = color
   window.dispatchEvent(new CustomEvent('bag-theme-color-change', { detail: color }))
+}
+
+const openAppearanceCenter = () => {
+  window.dispatchEvent(new CustomEvent('bag-open-settings-drawer'))
 }
 </script>

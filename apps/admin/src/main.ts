@@ -6,10 +6,16 @@ import './style.css'
 import { createPinia } from 'pinia'
 import { setupHttp } from '@bag/request'
 import { useUserStore } from './stores/user'
+import { createDiscreteApi } from 'naive-ui'
+import { registerPermissionDirective } from './directives/permission'
+import PermissionAccess from './components/PermissionAccess.vue'
+import { setupBuiltinDictionaries } from './dictionaries'
 
 // 动态导入所有本地的插件
 import sysSettingPlugin from '@bag/plugin-sys-setting'
 import shopPlugin from '@bag/plugin-shop'
+
+const { message } = createDiscreteApi(['message'])
 
 async function setupApp() {
   const app = createApp(App)
@@ -17,6 +23,9 @@ async function setupApp() {
 
   app.use(pinia)
   app.use(i18n)
+  setupBuiltinDictionaries()
+  app.component('PermissionAccess', PermissionAccess)
+  registerPermissionDirective(app)
 
   const userStore = useUserStore()
   setupHttp({
@@ -26,6 +35,25 @@ async function setupApp() {
       userStore.logout()
       router.replace({ path: '/login', query: { redirect: router.currentRoute.value.fullPath } })
     },
+    onForbidden: () => {
+      message.warning('当前账号没有访问权限')
+      router.replace('/403')
+    },
+    onServerError: () => {
+      message.error('服务异常，请稍后重试')
+    },
+    resolveError: (payload) => {
+      const data = payload as
+        | { success?: boolean; code?: string | number; message?: string }
+        | undefined
+      if (data?.success === false) {
+        return {
+          code: data.code,
+          message: data.message || 'Request failed'
+        }
+      }
+      return null
+    }
   })
 
   // 挂载插件 (包含了路由注册)

@@ -1,5 +1,7 @@
 # Vue-Bag-Admin
 
+[在线体验](https://hangjob.github.io/vue-bag-admin) | [文档地址](https://hangjob.github.io/vue-bag-admin/docs/)
+
 `Vue-Bag-Admin` 是一款基于最新技术栈（Vue 3、Vite 5、Naive-ui、TailwindCSS、Pinia 和 TypeScript）开发的中后台管理系统前端解决方案。其后端 API 默认对接了 **Strapi 5**（Headless CMS），能够帮助开发者极速搭建起一个全栈的中后台业务系统。
 
 ## 核心特性
@@ -51,6 +53,7 @@ cd apps/strapi
 cp .env.example .env
 pnpm dev
 ```
+
 > 默认使用 MySQL 数据库 `vue_bag_admin`（需要提前创建）。
 
 ### 3. 前端服务启动
@@ -72,4 +75,5 @@ pnpm --filter admin dev
 ```bash
 pnpm --filter @bag/docs dev
 ```
+
 或者访问 `apps/docs` 下的内容了解详细架构和插件开发指南。

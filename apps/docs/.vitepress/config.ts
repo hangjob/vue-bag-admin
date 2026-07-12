@@ -2,8 +2,8 @@ import { defineConfig } from 'vitepress'
 
 export default defineConfig({
   base: process.env.VITEPRESS_BASE || '/vue-bag-admin/docs/',
-  title: "Vue-Bag-Admin",
-  description: "基于 Vue3 + Vite5 + Naive-ui + Pinia + Strapi5 的中后台系统框架",
+  title: 'Vue-Bag-Admin',
+  description: '基于 Vue3 + Vite5 + Naive-ui + Pinia + Strapi5 的中后台系统框架',
   appearance: 'dark',
   lastUpdated: true,
   themeConfig: {
@@ -29,27 +29,24 @@ export default defineConfig({
           { text: '插件化开发', link: '/guide/plugin-development' },
           { text: '路由与菜单', link: '/guide/routing-and-menu' },
           { text: '权限管理', link: '/guide/permissions' },
-          { text: '网络请求与拦截', link: '/guide/network-request' }
+          { text: '网络请求与拦截', link: '/guide/network-request' },
+          { text: 'PmProTable', link: '/guide/pro-table' },
+          { text: 'PmProForm', link: '/guide/pro-form' },
+          { text: '字典系统', link: '/guide/dictionary-system' }
         ]
       },
       {
         text: '上线部署',
-        items: [
-          { text: '生产环境部署', link: '/guide/deployment' }
-        ]
+        items: [{ text: '生产环境部署', link: '/guide/deployment' }]
       },
       {
         text: '参考',
-        items: [
-          { text: 'API 参考', link: '/api/' }
-        ]
+        items: [{ text: 'API 参考', link: '/api/' }]
       }
     ],
 
-    socialLinks: [
-      { icon: 'github', link: 'https://github.com/your-username/pm-web-admin-next' }
-    ],
-    
+    socialLinks: [{ icon: 'github', link: 'https://github.com/your-username/pm-web-admin-next' }],
+
     footer: {
       message: 'Released under the MIT License.',
       copyright: 'Copyright © 2026-present Vue-Bag-Admin'

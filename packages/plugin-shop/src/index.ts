@@ -4,6 +4,7 @@ const shopPlugin: AdminPlugin = {
   id: 'plugin-shop',
   name: '商城管理插件',
   version: '1.0.0',
+  order: 10,
   routes: [
     // 商品管理
     {
@@ -22,7 +23,14 @@ const shopPlugin: AdminPlugin = {
       path: '/product/edit/:id',
       name: 'ProductEdit',
       component: () => import('./views/ProductEdit.vue'),
-      meta: { title: 'shop.product.edit', layout: 'default', roles: ['authenticated'], hidden: true }
+      meta: {
+        title: 'shop.product.edit',
+        layout: 'default',
+        roles: ['authenticated'],
+        hidden: true,
+        activeMenu: '/product/list',
+        noCache: true
+      }
     },
     // 订单管理
     {
@@ -35,13 +43,27 @@ const shopPlugin: AdminPlugin = {
       path: '/order/detail/:id',
       name: 'OrderDetail',
       component: () => import('./views/OrderDetail.vue'),
-      meta: { title: 'shop.order.detail', layout: 'default', roles: ['authenticated'], hidden: true }
+      meta: {
+        title: 'shop.order.detail',
+        layout: 'default',
+        roles: ['authenticated'],
+        hidden: true,
+        activeMenu: '/order/list',
+        noCache: true
+      }
     },
     {
       path: '/order/ship/:id',
       name: 'OrderShip',
       component: () => import('./views/OrderShip.vue'),
-      meta: { title: 'shop.order.ship', layout: 'default', roles: ['authenticated'], hidden: true }
+      meta: {
+        title: 'shop.order.ship',
+        layout: 'default',
+        roles: ['authenticated'],
+        hidden: true,
+        activeMenu: '/order/list',
+        noCache: true
+      }
     },
     {
       path: '/order/returns',
@@ -53,7 +75,14 @@ const shopPlugin: AdminPlugin = {
       path: '/order/return/:id',
       name: 'ReturnDetail',
       component: () => import('./views/ReturnDetail.vue'),
-      meta: { title: 'shop.order.returnDetail', layout: 'default', roles: ['authenticated'], hidden: true }
+      meta: {
+        title: 'shop.order.returnDetail',
+        layout: 'default',
+        roles: ['authenticated'],
+        hidden: true,
+        activeMenu: '/order/returns',
+        noCache: true
+      }
     },
     // 用户管理
     {
@@ -66,13 +95,27 @@ const shopPlugin: AdminPlugin = {
       path: '/user/profile/:id',
       name: 'UserProfile',
       component: () => import('./views/UserProfile.vue'),
-      meta: { title: 'shop.user.profile', layout: 'default', roles: ['authenticated'], hidden: true }
+      meta: {
+        title: 'shop.user.profile',
+        layout: 'default',
+        roles: ['authenticated'],
+        hidden: true,
+        activeMenu: '/user/list',
+        noCache: true
+      }
     },
     {
       path: '/user/orders/:id',
       name: 'UserOrders',
       component: () => import('./views/UserOrders.vue'),
-      meta: { title: 'shop.user.orders', layout: 'default', roles: ['authenticated'], hidden: true }
+      meta: {
+        title: 'shop.user.orders',
+        layout: 'default',
+        roles: ['authenticated'],
+        hidden: true,
+        activeMenu: '/user/list',
+        noCache: true
+      }
     },
     // 优惠营销
     {
@@ -85,7 +128,14 @@ const shopPlugin: AdminPlugin = {
       path: '/marketing/create',
       name: 'MarketingCreate',
       component: () => import('./views/MarketingCreate.vue'),
-      meta: { title: 'shop.marketing.create', layout: 'default', roles: ['authenticated'], hidden: true }
+      meta: {
+        title: 'shop.marketing.create',
+        layout: 'default',
+        roles: ['authenticated'],
+        hidden: true,
+        activeMenu: '/marketing/index',
+        noCache: true
+      }
     },
     // 客服消息
     {
@@ -99,19 +149,36 @@ const shopPlugin: AdminPlugin = {
       path: '/finance/flow/daily',
       name: 'FinanceDaily',
       component: () => import('./views/Finance.vue'),
-      meta: { title: 'shop.finance.daily', layout: 'default', roles: ['authenticated'] }
+      meta: {
+        title: 'shop.finance.daily',
+        layout: 'default',
+        roles: ['authenticated'],
+        cacheKey: 'Finance'
+      }
     },
     {
       path: '/finance/flow/monthly',
       name: 'FinanceMonthly',
       component: () => import('./views/Finance.vue'),
-      meta: { title: 'shop.finance.monthly', layout: 'default', roles: ['authenticated'] }
+      meta: {
+        title: 'shop.finance.monthly',
+        layout: 'default',
+        roles: ['authenticated'],
+        cacheKey: 'Finance'
+      }
     },
     {
       path: '/finance/withdraw',
       name: 'FinanceWithdraw',
       component: () => import('./views/FinanceWithdraw.vue'),
-      meta: { title: 'shop.finance.withdraw', layout: 'default', roles: ['authenticated'], hidden: true }
+      meta: {
+        title: 'shop.finance.withdraw',
+        layout: 'default',
+        roles: ['authenticated'],
+        hidden: true,
+        activeMenu: '/finance/flow/daily',
+        noCache: true
+      }
     },
     // 店铺设置
     {
@@ -125,25 +192,25 @@ const shopPlugin: AdminPlugin = {
           path: 'base',
           name: 'StoreSettingsBase',
           component: () => import('./views/StoreSettingsBase.vue'),
-          meta: { title: 'shop.store.base', hidden: true }
+          meta: { title: 'shop.store.base', hidden: true, activeMenu: '/store/settings' }
         },
         {
           path: 'trade',
           name: 'StoreSettingsTrade',
           component: () => import('./views/StoreSettingsTrade.vue'),
-          meta: { title: 'shop.store.trade', hidden: true }
+          meta: { title: 'shop.store.trade', hidden: true, activeMenu: '/store/settings' }
         },
         {
           path: 'logistics',
           name: 'StoreSettingsLogistics',
           component: () => import('./views/StoreSettingsLogistics.vue'),
-          meta: { title: 'shop.store.logistics', hidden: true }
+          meta: { title: 'shop.store.logistics', hidden: true, activeMenu: '/store/settings' }
         },
         {
           path: 'service',
           name: 'StoreSettingsService',
           component: () => import('./views/StoreSettingsService.vue'),
-          meta: { title: 'shop.store.service', hidden: true }
+          meta: { title: 'shop.store.service', hidden: true, activeMenu: '/store/settings' }
         }
       ]
     }
@@ -295,7 +362,7 @@ const shopPlugin: AdminPlugin = {
         }
       }
     },
-    'en': {
+    en: {
       shop: {
         product: {
           title: 'Products',

@@ -1,33 +1,52 @@
+import { nextTick } from 'vue'
 import { defineStore } from 'pinia'
 import type { RouteLocationNormalizedLoaded } from 'vue-router'
-import { useSessionStorage, useLocalStorage } from '@vueuse/core'
+import { useLocalStorage } from '@vueuse/core'
 
 export interface TabItem {
   fullPath: string
   path: string
   name?: string
+  cacheKey?: string
   title?: string
   noCache?: boolean
 }
 
+const tabStorageKey = 'bag.admin.tabs'
+
 export const useTabBarStore = defineStore('tabbar', {
   state: () => ({
-    // 默认持久化，并且支持是否开启缓存功能
-    tabs: useSessionStorage<TabItem[]>('bag.admin.tabs', []),
-    // 因为设置可能来自于 localStorage, 所以这里需要从 localStorage 同步状态
+    // 标签页列表需要跨刷新和重开浏览器恢复，因此使用 localStorage 持久化。
+    tabs: useLocalStorage<TabItem[]>(tabStorageKey, []),
+    // 设置项可能由宿主或独立插件页修改，因此统一走 localStorage 做同步。
     enableTabCache: useLocalStorage<boolean>('bag.admin.enableTabCache', true),
-    enableTabPersist: useLocalStorage<boolean>('bag.admin.enableTabPersist', true)
+    enableTabPersist: useLocalStorage<boolean>('bag.admin.enableTabPersist', true),
+    // 刷新页面时会临时把目标视图从 KeepAlive include 中移除，确保重新挂载。
+    refreshingViews: [] as string[]
   }),
   getters: {
     cachedViews: (state) => {
-      // 如果全局关闭了缓存，则返回空数组
       if (!state.enableTabCache) return []
-      return state.tabs
-        .filter(tab => !tab.noCache && tab.name)
-        .map(tab => tab.name as string)
+
+      return [
+        ...new Set(
+          state.tabs
+            .filter((tab) => {
+              const cacheKey = tab.cacheKey || tab.name
+              return !tab.noCache && cacheKey && !state.refreshingViews.includes(cacheKey)
+            })
+            .map((tab) => (tab.cacheKey || tab.name) as string)
+        )
+      ]
     }
   },
   actions: {
+    syncRefreshingViews() {
+      const activeNames = new Set(
+        this.tabs.map((tab) => tab.cacheKey || tab.name).filter(Boolean) as string[]
+      )
+      this.refreshingViews = this.refreshingViews.filter((name) => activeNames.has(name))
+    },
     addTab(route: RouteLocationNormalizedLoaded) {
       // 忽略不需要加入 tab 的页面，比如重定向、登录页等
       if (['Login', 'NotFound', 'Forbidden', 'Redirect'].includes(route.name as string)) return
@@ -37,39 +56,43 @@ export const useTabBarStore = defineStore('tabbar', {
       if (!isExists) {
         const title = route.meta?.title as string | undefined
         const noCache = route.meta?.noCache as boolean | undefined
-        
+        const cacheKey = route.meta?.cacheKey as string | undefined
+
         this.tabs.push({
           fullPath: route.fullPath,
           path: route.path,
           name: route.name as string,
+          cacheKey,
           title: title || (route.name as string),
-          noCache: !!noCache,
+          noCache: !!noCache
         })
-      }
-      
-      // 如果不启用持久化，可以在每次刷新时通过其他机制清空，但通常我们可以只操作 enableTabPersist 来控制
-      if (!this.enableTabPersist) {
-        // 如果关闭了持久化，我们可以通过在系统启动时判断并清空
       }
     },
     removeTab(fullPath: string) {
+      const tab = this.tabs.find((item) => item.fullPath === fullPath)
       const index = this.tabs.findIndex((tab) => tab.fullPath === fullPath)
       if (index !== -1) {
         this.tabs.splice(index, 1)
       }
+      const cacheKey = tab?.cacheKey || tab?.name
+      if (cacheKey) {
+        this.refreshingViews = this.refreshingViews.filter((name) => name !== cacheKey)
+      }
     },
     clearTabs() {
-      // 保留首页，清空其他
-      this.tabs = this.tabs.filter(tab => tab.path === '/dashboard')
+      this.refreshingViews = []
+      this.tabs = this.tabs.filter((tab) => tab.path === '/dashboard')
     },
     closeOtherTabs(fullPath: string) {
-      this.tabs = this.tabs.filter(tab => tab.fullPath === fullPath || tab.path === '/dashboard')
+      this.tabs = this.tabs.filter((tab) => tab.fullPath === fullPath || tab.path === '/dashboard')
+      this.syncRefreshingViews()
     },
     closeLeftTabs(fullPath: string) {
       const index = this.tabs.findIndex((tab) => tab.fullPath === fullPath)
       if (index !== -1) {
         // 保留当前及其右侧的，还要保留 /dashboard (通常在第一个)
         this.tabs = this.tabs.filter((tab, i) => i >= index || tab.path === '/dashboard')
+        this.syncRefreshingViews()
       }
     },
     closeRightTabs(fullPath: string) {
@@ -77,7 +100,24 @@ export const useTabBarStore = defineStore('tabbar', {
       if (index !== -1) {
         // 保留当前及其左侧的
         this.tabs = this.tabs.filter((tab, i) => i <= index || tab.path === '/dashboard')
+        this.syncRefreshingViews()
       }
+    },
+    async evictCache(fullPath: string) {
+      const tab = this.tabs.find((item) => item.fullPath === fullPath)
+      const cacheKey = tab?.cacheKey || tab?.name
+      if (!cacheKey || tab.noCache) return
+      if (!this.refreshingViews.includes(cacheKey)) {
+        this.refreshingViews.push(cacheKey)
+      }
+
+      await nextTick()
+    },
+    restoreCache(fullPath: string) {
+      const tab = this.tabs.find((item) => item.fullPath === fullPath)
+      const cacheKey = tab?.cacheKey || tab?.name
+      if (!cacheKey) return
+      this.refreshingViews = this.refreshingViews.filter((name) => name !== cacheKey)
     }
   }
 })

@@ -1,2 +1,5 @@
 export { default as PmProTable } from './components/PmProTable.vue'
+export { default as PmSchemaForm } from './components/PmSchemaForm.vue'
+export { default as PmProForm } from './components/PmProForm.vue'
+export { default as PmDictTag } from './components/PmDictTag.vue'
 export { default as BagUiProvider } from './components/BagUiProvider.vue'

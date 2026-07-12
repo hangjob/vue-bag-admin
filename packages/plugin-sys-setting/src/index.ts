@@ -4,6 +4,7 @@ const sysSettingPlugin: AdminPlugin = {
   id: 'plugin-sys-setting',
   name: '系统设置插件',
   version: '1.0.0',
+  order: 100,
   routes: [
     {
       path: '/sys-setting',
@@ -21,6 +22,16 @@ const sysSettingPlugin: AdminPlugin = {
       component: () => import('./views/SysSettingAdvanced.vue'),
       meta: {
         title: 'sysSetting.advanced',
+        layout: 'default',
+        roles: ['authenticated']
+      }
+    },
+    {
+      path: '/sys-setting/plugins',
+      name: 'SysSettingPlugins',
+      component: () => import('./views/SysSettingPlugins.vue'),
+      meta: {
+        title: 'sysSetting.plugins',
         layout: 'default',
         roles: ['authenticated']
       }
@@ -45,6 +56,12 @@ const sysSettingPlugin: AdminPlugin = {
           title: 'sysSetting.advanced',
           sort: 10,
           roles: ['authenticated']
+        },
+        {
+          path: '/sys-setting/plugins',
+          title: 'sysSetting.plugins',
+          sort: 20,
+          roles: ['authenticated']
         }
       ]
     }
@@ -55,6 +72,7 @@ const sysSettingPlugin: AdminPlugin = {
         title: '系统设置',
         base: '常规设置',
         advanced: '高级设置',
+        plugins: '插件管理',
         welcome: '欢迎来到系统设置模块',
         buttonSave: '保存配置',
         logout: '退出登录'
@@ -65,15 +83,14 @@ const sysSettingPlugin: AdminPlugin = {
         title: 'System Settings',
         base: 'General Settings',
         advanced: 'Advanced',
+        plugins: 'Plugins',
         welcome: 'Welcome to System Settings',
         buttonSave: 'Save Config',
         logout: 'Logout'
       }
     }
   },
-  install() {
-    console.log('[Plugin] SysSetting is installed successfully!')
-  }
+  install() {}
 }
 
 export default sysSettingPlugin
