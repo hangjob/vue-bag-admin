@@ -15,8 +15,8 @@
 先把仓库拉到本地：
 
 ```bash
-git clone https://github.com/hangjob/pm-web-admin-next.git
-cd pm-web-admin-next
+git clone https://github.com/hangjob/vue-bag-admin.git
+cd vue-bag-admin
 ```
 
 ## 2. 安装依赖

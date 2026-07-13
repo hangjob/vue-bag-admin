@@ -11,6 +11,7 @@
 传统的中后台模板通常把所有的业务页面都堆积在 `src/views` 目录下。随着业务的迭代，项目会变得异常臃肿，难以维护，更难以在多个系统之间复用业务模块。
 
 **Vue-Bag-Admin 的最大亮点在于其微内核与插件化设计：**
+
 - **微内核架构**：应用宿主（Host）极其轻量，只负责应用的初始化、布局加载、登录鉴权。
 - **插件化机制（Plugin）**：我们将复杂的业务拆分为一个个独立的 Package（如 `@bag/plugin-sys-setting`）。路由、菜单、状态和页面视图都由插件自己声明并注入到系统中。
 
@@ -19,6 +20,7 @@
 ## 技术栈
 
 ### 前端
+
 - **框架**：Vue 3.5+ (Composition API + `<script setup>`)
 - **构建工具**：Vite 5
 - **语言**：TypeScript
@@ -29,6 +31,7 @@
 - **请求**：Axios (封装在 `@bag/request` 中)
 
 ### 后端
+
 - **框架**：Strapi 5 (Node.js)
 - **数据库**：MySQL 8+
 
@@ -37,7 +40,7 @@
 ## 目录结构说明
 
 ```text
-pm-web-admin-next
+vue-bag-admin
 ├── apps
 │   ├── admin             # 前端宿主应用 (Vue3)
 │   ├── docs              # VitePress 官方文档

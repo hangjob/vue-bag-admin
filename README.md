@@ -16,7 +16,7 @@
 ## 目录结构
 
 ```text
-pm-web-admin-next
+Vue-Bag-Admin
 ├── apps
 │   ├── admin             # 前端宿主应用 (Vue3)
 │   ├── docs              # VitePress 官方文档
@@ -77,3 +77,9 @@ pnpm --filter @bag/docs dev
 ```
 
 或者访问 `apps/docs` 下的内容了解详细架构和插件开发指南。
+
+## 微信群
+
+如果你想交流使用体验、插件设计或者一起补齐这个项目的能力边界，可以在最后扫这个码进群：
+
+<img src="./wxcode.jpg" alt="Vue-Bag-Admin 微信群二维码" width="320" />
