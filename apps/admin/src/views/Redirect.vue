@@ -5,7 +5,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useTabBarStore } from '../stores/tabbar'
+import { useTabBarStore } from '@bag/host-vue'
 
 const route = useRoute()
 const router = useRouter()

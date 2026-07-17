@@ -13,12 +13,15 @@
     "docs:build": "pnpm --filter @bag/docs run build"
   },
   "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.0",
     "@commitlint/cli": "^20.4.1",
     "@commitlint/config-conventional": "^20.4.1",
     "husky": "^9.1.7",
     "prettier": "^3.7.4",
     "turbo": "^2.8.3",
-    "typescript": "5.9.2"
+    "typescript": "5.9.2",
+    "vite": "^6.0.0",
+    "vue-tsc": "^2.1.0"
   },
   "packageManager": "pnpm@9.0.0",
   "engines": {

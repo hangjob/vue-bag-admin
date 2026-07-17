@@ -1,15 +1,19 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import i18n from './locales'
-import { bootstrapPlugins, router } from './core/plugin-manager'
 import './style.css'
 import { createPinia } from 'pinia'
 import { setupHttp } from '@bag/request'
-import { useUserStore } from './stores/user'
 import { createDiscreteApi } from 'naive-ui'
-import { registerPermissionDirective } from './directives/permission'
-import PermissionAccess from './components/PermissionAccess.vue'
+import {
+  PermissionAccess,
+  bootstrapPlugins,
+  createHostI18n,
+  createHostRouter,
+  registerPermissionDirective,
+  useUserStore
+} from '@bag/host-vue'
 import { setupBuiltinDictionaries } from './dictionaries'
+import { exampleRoutes } from './routes'
 
 // 动态导入所有本地的插件
 import sysSettingPlugin from '@bag/plugin-sys-setting'
@@ -20,6 +24,8 @@ const { message } = createDiscreteApi(['message'])
 async function setupApp() {
   const app = createApp(App)
   const pinia = createPinia()
+  const i18n = createHostI18n()
+  const router = createHostRouter({ routes: exampleRoutes })
 
   app.use(pinia)
   app.use(i18n)
@@ -57,7 +63,12 @@ async function setupApp() {
   })
 
   // 挂载插件 (包含了路由注册)
-  await bootstrapPlugins(app, [sysSettingPlugin, shopPlugin])
+  await bootstrapPlugins({
+    app,
+    router,
+    i18n,
+    plugins: [sysSettingPlugin, shopPlugin]
+  })
 
   // 等待路由准备好后再挂载应用
   await router.isReady()

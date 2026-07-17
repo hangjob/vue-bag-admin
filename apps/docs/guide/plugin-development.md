@@ -2,6 +2,8 @@
 
 Vue-Bag-Admin 的核心设计是“宿主应用 + 业务插件”。推荐把相对独立、内聚的业务域拆成 `packages/plugin-*` 包，再由宿主统一挂载。
 
+如果你已经准备把插件单独发到 npm，这篇文档可以直接作为起点看。现在仓库里的插件包已经按发布形态做过一轮收口，推荐新插件也沿用同样的结构。
+
 ## 插件能提供什么
 
 一个插件通常可以携带以下能力：
@@ -123,16 +125,45 @@ mkdir -p packages/plugin-report/src/views
 ```json
 {
   "name": "@bag/plugin-report",
-  "version": "1.0.0",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
-  "dependencies": {
+  "version": "0.1.0",
+  "type": "module",
+  "files": ["dist"],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "sideEffects": false,
+  "peerDependencies": {
     "vue": "^3.5.0",
     "vue-router": "^4.4.0",
-    "@bag/core": "workspace:*"
+    "@bag/core": "^0.1.0",
+    "@bag/ui": "^0.1.0"
+  },
+  "devDependencies": {
+    "vue": "^3.5.0",
+    "vue-router": "^4.4.0",
+    "@bag/core": "workspace:*",
+    "@bag/ui": "workspace:*"
+  },
+  "scripts": {
+    "build": "vite build && vue-tsc --project tsconfig.build.json --emitDeclarationOnly",
+    "check-types": "vue-tsc --noEmit"
   }
 }
 ```
+
+这份配置更接近“真正会发到 npm 的插件包”：
+
+- `peerDependencies` 用来声明宿主必须提供的运行时依赖，避免外部项目装出多份 `vue`
+- `devDependencies` 里的 `workspace:*` 方便你在 Monorepo 内联调
+- `main / module / types / exports` 都指向 `dist`，而不是源码目录
+
+如果你只是临时在仓库里做实验，当然可以先偷懒；但只要打算长期维护，建议一开始就用这套口径。
 
 ### 3. 编写页面
 
@@ -219,15 +250,68 @@ const plugin: AdminPlugin = {
 export default plugin
 ```
 
+### 5. 增加构建配置
+
+如果你的插件准备发布到 npm，至少再补两份文件：
+
+`tsconfig.build.json`
+
+```json
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": false,
+    "outDir": "dist"
+  },
+  "include": ["src/**/*.ts", "src/**/*.vue"]
+}
+```
+
+`vite.config.mjs`
+
+```js
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import { resolve } from 'node:path'
+
+export default defineConfig({
+  plugins: [vue()],
+  build: {
+    lib: {
+      entry: resolve(process.cwd(), 'src/index.ts'),
+      formats: ['es'],
+      fileName: () => 'index.js'
+    },
+    rollupOptions: {
+      external: ['vue', 'vue-router', '@bag/core', '@bag/ui']
+    }
+  }
+})
+```
+
+这样处理之后，插件包的使用者拿到的是明确的 `dist` 产物，宿主也更容易稳定消费。
+
 ## 在宿主中挂载
 
-在 `apps/admin/src/main.ts` 中引入并传给 `bootstrapPlugins()`：
+在宿主应用里引入并传给 `bootstrapPlugins()`。如果你是从脚手架生成项目，一般会在 `src/main.ts` 里做这一步：
 
 ```ts
+import { createApp } from 'vue'
 import reportPlugin from '@bag/plugin-report'
+import { bootstrapPlugins } from '@bag/host-vue'
 
-await bootstrapPlugins(app, [sysSettingPlugin, shopPlugin, reportPlugin])
+const app = createApp(App)
+
+await bootstrapPlugins({
+  app,
+  router,
+  i18n,
+  plugins: [reportPlugin]
+})
 ```
+
+如果你是在当前仓库里联调，也可以参考示例宿主 [main.ts](file:///d:/wwwsite/pm-web-admin-next/apps/admin/src/main.ts) 的接入方式。
 
 ## 插件注册规则
 
@@ -276,6 +360,20 @@ window.location.reload()
 ```
 
 `listRuntimePlugins()` 会返回当前宿主注册过的插件清单，以及它们的启用状态、依赖信息、路由数量和菜单数量，适合直接渲染管理页。
+
+## 开发态与发布态的区别
+
+这点很容易在刚拆包的时候弄混，单独说一下：
+
+- 开发态：更关心 Monorepo 内联调，允许使用 `workspace:*`
+- 发布态：更关心外部项目消费，入口应统一指向 `dist`
+
+推荐的习惯是：
+
+- 在仓库里开发时，通过 workspace 依赖做源码联调
+- 对外发布时，让 npm 消费者只接触 `dist`、`exports` 和 `peerDependencies`
+
+这样既保留内部开发效率，也不会把“工作区临时写法”带到公开包里。
 
 ## install 钩子
 

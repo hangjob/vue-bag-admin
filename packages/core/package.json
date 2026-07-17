@@ -1,10 +1,33 @@
 {
   "name": "@bag/core",
   "version": "1.0.0",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
-  "dependencies": {
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "sideEffects": false,
+  "scripts": {
+    "build": "vite build && tsc -p tsconfig.build.json",
+    "check-types": "tsc -p tsconfig.build.json --noEmit"
+  },
+  "peerDependencies": {
     "vue": "^3.5.0",
     "vue-router": "^4.4.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2",
+    "vite": "^6.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

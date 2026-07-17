@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@bag/core": "workspace:*",
+    "@bag/host-vue": "workspace:*",
     "@bag/plugin-sys-setting": "workspace:*",
     "@bag/plugin-shop": "workspace:*",
     "@bag/request": "workspace:*",

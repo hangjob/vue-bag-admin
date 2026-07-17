@@ -277,9 +277,8 @@ import {
   useAppConfigStore,
   type AppearancePresetKey,
   type ThemeMode
-} from '../stores/app-config'
-import { useMenuStore } from '../stores/menu'
-import { useTabBarStore } from '../stores/tabbar'
+} from '@bag/host-vue'
+import { useMenuStore, useTabBarStore } from '@bag/host-vue'
 
 const appConfigStore = useAppConfigStore()
 const menuStore = useMenuStore()

@@ -1,0 +1,50 @@
+{
+  "name": "@bag/host-vue",
+  "version": "1.0.0",
+  "type": "module",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./style.css": {
+      "default": "./dist/index.css"
+    }
+  },
+  "sideEffects": false,
+  "scripts": {
+    "build": "vite build && vue-tsc -p tsconfig.build.json",
+    "check-types": "vue-tsc -p tsconfig.build.json --noEmit"
+  },
+  "dependencies": {
+    "@vueuse/core": "^11.0.0"
+  },
+  "peerDependencies": {
+    "@bag/core": "^1.0.0",
+    "@bag/request": "^1.0.0",
+    "@bag/ui": "^1.0.0",
+    "naive-ui": "^2.40.0",
+    "pinia": "^2.2.0",
+    "vue": "^3.5.0",
+    "vue-i18n": "^10.0.0",
+    "vue-router": "^4.4.0"
+  },
+  "devDependencies": {
+    "@bag/core": "workspace:*",
+    "@bag/request": "workspace:*",
+    "@bag/ui": "workspace:*",
+    "@vitejs/plugin-vue": "^6.0.0",
+    "vite": "^6.0.0",
+    "vue-tsc": "^2.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

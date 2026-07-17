@@ -675,8 +675,7 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { useUserStore } from '../stores/user'
-import { useAppConfigStore } from '../stores/app-config'
+import { useAppConfigStore, useUserStore } from '@bag/host-vue'
 
 const router = useRouter()
 const route = useRoute()

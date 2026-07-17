@@ -474,8 +474,8 @@
 import { computed, ref } from 'vue'
 import { NCard, NAvatar, NTabs, NTabPane, NButton, NDivider, NTag, useMessage } from 'naive-ui'
 import type { ProFormSchema, ProFormSubmitContext } from '@bag/core'
+import { useUserStore } from '@bag/host-vue'
 import { PmDictTag, PmProForm } from '@bag/ui'
-import { useUserStore } from '../stores/user'
 
 const userStore = useUserStore()
 const message = useMessage()
