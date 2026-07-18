@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "declarationDir": "./dist",
+    "rootDir": "./src",
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "paths": {
+      "@bag/core": ["../core/src/index.d.ts"],
+      "@bag/request": ["../request/src/index.d.ts"],
+      "@bag/ui": ["../ui/src/index.d.ts"],
+      "@bag/host-vue": ["../host-vue/src/index.d.ts"]
+    },
+    "strict": true,
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*.ts"]
+}

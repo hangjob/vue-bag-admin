@@ -57,11 +57,11 @@ export interface ProTableRequestResult<T = Record<string, unknown>> {
   total: number
 }
 
-type TableRowKey<TData extends Record<string, unknown>> =
+export type TableRowKey<TData extends Record<string, unknown>> =
   | Extract<keyof TData, string>
   | ((row: TData) => string | number)
 
-interface Props<TData extends Record<string, unknown>> {
+export interface Props<TData extends Record<string, unknown>> {
   title?: string
   columns: DataTableColumns<TData>
   request: (params: ProTableRequestParams) => Promise<ProTableRequestResult<TData>>

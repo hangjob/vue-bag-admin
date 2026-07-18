@@ -153,6 +153,73 @@ importers:
         specifier: ^5
         version: 5.9.2
 
+  apps/template-playground:
+    dependencies:
+      '@bag/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@bag/host-vue':
+        specifier: workspace:*
+        version: link:../../packages/host-vue
+      '@bag/plugin-shop':
+        specifier: workspace:*
+        version: link:../../packages/plugin-shop
+      '@bag/plugin-sys-setting':
+        specifier: workspace:*
+        version: link:../../packages/plugin-sys-setting
+      '@bag/request':
+        specifier: workspace:*
+        version: link:../../packages/request
+      '@bag/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
+      '@vueuse/core':
+        specifier: ^11.0.0
+        version: 11.3.0(vue@3.5.33(typescript@5.9.2))
+      naive-ui:
+        specifier: ^2.40.0
+        version: 2.44.1(vue@3.5.33(typescript@5.9.2))
+      pinia:
+        specifier: ^2.2.0
+        version: 2.3.1(typescript@5.9.2)(vue@3.5.33(typescript@5.9.2))
+      vue:
+        specifier: ^3.5.0
+        version: 3.5.33(typescript@5.9.2)
+      vue-i18n:
+        specifier: ^10.0.0
+        version: 10.0.8(vue@3.5.33(typescript@5.9.2))
+      vue-router:
+        specifier: ^4.4.0
+        version: 4.6.4(vue@3.5.33(typescript@5.9.2))
+    devDependencies:
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.19.17
+      '@vitejs/plugin-vue':
+        specifier: ^6.0.0
+        version: 6.0.6(vite@6.4.2(@types/node@22.19.17)(jiti@1.21.7)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.8.4))(vue@3.5.33(typescript@5.9.2))
+      '@vue/tsconfig':
+        specifier: ^0.9.1
+        version: 0.9.1(typescript@5.9.2)(vue@3.5.33(typescript@5.9.2))
+      autoprefixer:
+        specifier: ^10.5.0
+        version: 10.5.0(postcss@8.5.10)
+      postcss:
+        specifier: ^8.5.10
+        version: 8.5.10
+      tailwindcss:
+        specifier: ^3.4.1
+        version: 3.4.19(yaml@2.8.4)
+      typescript:
+        specifier: ^5.5.3
+        version: 5.9.2
+      vite:
+        specifier: ^6.0.0
+        version: 6.4.2(@types/node@22.19.17)(jiti@1.21.7)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.8.4)
+      vue-tsc:
+        specifier: ^2.1.0
+        version: 2.2.12(typescript@5.9.2)
+
   packages/core:
     dependencies:
       vue:
@@ -169,7 +236,7 @@ importers:
         specifier: ^6.0.0
         version: 6.4.2(@types/node@22.19.17)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.8.4)
 
-  packages/create-bag-admin: {}
+  packages/create-vue-bag-admin: {}
 
   packages/host-vue:
     dependencies:
@@ -316,6 +383,43 @@ importers:
       vue-tsc:
         specifier: ^2.1.0
         version: 2.2.12(typescript@5.9.2)
+
+  packages/vue-bag-admin:
+    dependencies:
+      '@bag/core':
+        specifier: workspace:*
+        version: link:../core
+      '@bag/host-vue':
+        specifier: workspace:*
+        version: link:../host-vue
+      '@bag/request':
+        specifier: workspace:*
+        version: link:../request
+      '@bag/ui':
+        specifier: workspace:*
+        version: link:../ui
+      naive-ui:
+        specifier: ^2.40.0
+        version: 2.44.1(vue@3.5.33(typescript@5.9.2))
+      pinia:
+        specifier: ^2.2.0
+        version: 2.3.1(typescript@5.9.2)(vue@3.5.33(typescript@5.9.2))
+      vue:
+        specifier: ^3.5.0
+        version: 3.5.33(typescript@5.9.2)
+      vue-i18n:
+        specifier: ^10.0.0
+        version: 10.0.8(vue@3.5.33(typescript@5.9.2))
+      vue-router:
+        specifier: ^4.4.0
+        version: 4.6.4(vue@3.5.33(typescript@5.9.2))
+    devDependencies:
+      typescript:
+        specifier: ^5.9.2
+        version: 5.9.2
+      vite:
+        specifier: ^6.0.0
+        version: 6.4.2(@types/node@22.19.17)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.8.4)
 
 packages:
 
@@ -3061,6 +3165,7 @@ packages:
 
   '@ungap/structured-clone@1.3.0':
     resolution: {integrity: sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==}
+    deprecated: Potential CWE-502 - Update to 1.3.1 or higher
 
   '@vercel/oidc@3.0.5':
     resolution: {integrity: sha512-fnYhv671l+eTTp48gB4zEsTW/YtRgRPnkI2nT7x6qw5rkI1Lq2hTmQIpHPgyThI0znLK+vX2n9XxKdXZ7BUbbw==}
@@ -4581,6 +4686,7 @@ packages:
   git-raw-commits@4.0.0:
     resolution: {integrity: sha512-ICsMM1Wk8xSGMowkOmPrzo2Fgmfo4bMHLNX6ytHjajRJUqvHOw/TFapQ+QG75c3X/tTDDhOSRPGC52dDbNM8FQ==}
     engines: {node: '>=16'}
+    deprecated: Deprecated and no longer maintained. Use @conventional-changelog/git-client instead.
     hasBin: true
 
   git-up@7.0.0:
@@ -7385,6 +7491,7 @@ packages:
 
   uuid@8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   v8flags@4.0.1:
@@ -11064,7 +11171,7 @@ snapshots:
 
   '@types/accepts@1.3.7':
     dependencies:
-      '@types/node': 20.19.39
+      '@types/node': 22.19.17
 
   '@types/argparse@1.0.38': {}
 
@@ -11073,23 +11180,23 @@ snapshots:
   '@types/body-parser@1.19.6':
     dependencies:
       '@types/connect': 3.4.38
-      '@types/node': 20.19.39
+      '@types/node': 22.19.17
 
   '@types/cacheable-request@6.0.3':
     dependencies:
       '@types/http-cache-semantics': 4.2.0
       '@types/keyv': 3.1.4
-      '@types/node': 20.19.39
+      '@types/node': 22.19.17
       '@types/responselike': 1.0.3
 
   '@types/co-body@6.1.3':
     dependencies:
-      '@types/node': 20.19.39
+      '@types/node': 22.19.17
       '@types/qs': 6.15.0
 
   '@types/connect@3.4.38':
     dependencies:
-      '@types/node': 20.19.39
+      '@types/node': 22.19.17
 
   '@types/content-disposition@0.5.9': {}
 
@@ -11098,7 +11205,7 @@ snapshots:
       '@types/connect': 3.4.38
       '@types/express': 5.0.6
       '@types/keygrip': 1.0.6
-      '@types/node': 20.19.39
+      '@types/node': 22.19.17
 
   '@types/debug@4.1.13':
     dependencies:
@@ -11122,14 +11229,14 @@ snapshots:
 
   '@types/express-serve-static-core@4.19.8':
     dependencies:
-      '@types/node': 20.19.39
+      '@types/node': 22.19.17
       '@types/qs': 6.15.0
       '@types/range-parser': 1.2.7
       '@types/send': 1.2.1
 
   '@types/express-serve-static-core@5.1.1':
     dependencies:
-      '@types/node': 20.19.39
+      '@types/node': 22.19.17
       '@types/qs': 6.15.0
       '@types/range-parser': 1.2.7
       '@types/send': 1.2.1
@@ -11151,7 +11258,7 @@ snapshots:
 
   '@types/formidable@2.0.6':
     dependencies:
-      '@types/node': 20.19.39
+      '@types/node': 22.19.17
 
   '@types/hast@3.0.4':
     dependencies:
@@ -11182,13 +11289,13 @@ snapshots:
   '@types/jsonwebtoken@9.0.10':
     dependencies:
       '@types/ms': 2.1.0
-      '@types/node': 20.19.39
+      '@types/node': 22.19.17
 
   '@types/keygrip@1.0.6': {}
 
   '@types/keyv@3.1.4':
     dependencies:
-      '@types/node': 20.19.39
+      '@types/node': 22.19.17
 
   '@types/koa-compose@3.2.9':
     dependencies:
@@ -11203,12 +11310,12 @@ snapshots:
       '@types/http-errors': 2.0.5
       '@types/keygrip': 1.0.6
       '@types/koa-compose': 3.2.9
-      '@types/node': 20.19.39
+      '@types/node': 22.19.17
 
   '@types/liftoff@4.0.3':
     dependencies:
       '@types/fined': 1.1.5
-      '@types/node': 20.19.39
+      '@types/node': 22.19.17
 
   '@types/linkify-it@5.0.0': {}
 
@@ -11247,7 +11354,7 @@ snapshots:
 
   '@types/nodemon@1.19.6':
     dependencies:
-      '@types/node': 20.19.39
+      '@types/node': 22.19.17
 
   '@types/normalize-package-data@2.4.4': {}
 
@@ -11276,31 +11383,31 @@ snapshots:
 
   '@types/responselike@1.0.3':
     dependencies:
-      '@types/node': 20.19.39
+      '@types/node': 22.19.17
 
   '@types/send@0.17.6':
     dependencies:
       '@types/mime': 1.3.5
-      '@types/node': 20.19.39
+      '@types/node': 22.19.17
 
   '@types/send@1.2.1':
     dependencies:
-      '@types/node': 20.19.39
+      '@types/node': 22.19.17
 
   '@types/serve-static@1.15.10':
     dependencies:
       '@types/http-errors': 2.0.5
-      '@types/node': 20.19.39
+      '@types/node': 22.19.17
       '@types/send': 0.17.6
 
   '@types/serve-static@2.2.0':
     dependencies:
       '@types/http-errors': 2.0.5
-      '@types/node': 20.19.39
+      '@types/node': 22.19.17
 
   '@types/through@0.0.33':
     dependencies:
-      '@types/node': 20.19.39
+      '@types/node': 22.19.17
 
   '@types/triple-beam@1.3.5': {}
 
@@ -11379,6 +11486,12 @@ snapshots:
     dependencies:
       '@rolldown/pluginutils': 1.0.0-beta.19
       vite: 6.0.0(@types/node@24.12.2)(jiti@1.21.7)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.8.4)
+      vue: 3.5.33(typescript@5.9.2)
+
+  '@vitejs/plugin-vue@6.0.6(vite@6.4.2(@types/node@22.19.17)(jiti@1.21.7)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.8.4))(vue@3.5.33(typescript@5.9.2))':
+    dependencies:
+      '@rolldown/pluginutils': 1.0.0-rc.13
+      vite: 6.4.2(@types/node@22.19.17)(jiti@1.21.7)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.8.4)
       vue: 3.5.33(typescript@5.9.2)
 
   '@vitejs/plugin-vue@6.0.6(vite@6.4.2(@types/node@22.19.17)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.8.4))(vue@3.5.33(typescript@5.9.2))':
@@ -13481,7 +13594,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 20.19.39
+      '@types/node': 22.19.17
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
@@ -16095,6 +16208,22 @@ snapshots:
       rollup: 4.60.2
     optionalDependencies:
       '@types/node': 24.12.2
+      fsevents: 2.3.3
+      jiti: 1.21.7
+      lightningcss: 1.32.0
+      terser: 5.46.2
+      yaml: 2.8.4
+
+  vite@6.4.2(@types/node@22.19.17)(jiti@1.21.7)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.8.4):
+    dependencies:
+      esbuild: 0.25.12
+      fdir: 6.5.0(picomatch@4.0.4)
+      picomatch: 4.0.4
+      postcss: 8.5.10
+      rollup: 4.60.2
+      tinyglobby: 0.2.16
+    optionalDependencies:
+      '@types/node': 22.19.17
       fsevents: 2.3.3
       jiti: 1.21.7
       lightningcss: 1.32.0

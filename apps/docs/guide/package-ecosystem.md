@@ -7,7 +7,7 @@
 - `@bag/ui`：组件层，提供 `PmProTable`、`PmProForm`、`PmSchemaForm`、`PmDictTag`
 - `@bag/host-vue`：宿主层，负责布局、权限、标签页、插件引导和 i18n 初始化
 - `@bag/plugin-*`：业务插件层，把具体业务域拆成独立模块
-- `create-bag-admin`：脚手架入口，用来快速生成宿主项目
+- `create-vue-bag-admin`：脚手架入口，用来快速生成宿主项目
 
 ## 先记住这几个角色
 
@@ -18,7 +18,7 @@
 - `ui` 提供积木
 - `host-vue` 把宿主跑起来
 - `plugin-*` 往宿主里装业务
-- `create-bag-admin` 负责生成起步工程
+- `vue-bag-admin` 负责生成起步工程
 
 ## 建议怎么读
 
@@ -34,7 +34,7 @@
 
 最常见的一条链路大概是这样：
 
-1. 你先用 `create-bag-admin` 生成一个宿主项目
+1. 你先用 `vue-bag-admin` 生成一个宿主项目
 2. 宿主项目通过 `@bag/host-vue` 初始化路由、布局、权限和插件系统
 3. 业务插件通过 `@bag/core` 定义 `AdminPlugin`
 4. 插件页面里通过 `@bag/ui` 复用表单、表格和字典组件

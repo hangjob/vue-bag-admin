@@ -10,7 +10,7 @@
 pnpm add @bag/host-vue @bag/core @bag/request @bag/ui
 ```
 
-`@bag/host-vue` 依赖宿主项目自行提供 `vue`、`vue-router`、`pinia`、`vue-i18n` 和 `naive-ui`。如果你是通过 `create-bag-admin` 初始化项目，这部分依赖会直接给你带好。
+`@bag/host-vue` 依赖宿主项目自行提供 `vue`、`vue-router`、`pinia`、`vue-i18n` 和 `naive-ui`。如果你是通过 `create-vue-bag-admin` 初始化项目，这部分依赖会直接给你带好。
 
 ## 它负责什么
 
@@ -68,4 +68,4 @@ import '@bag/host-vue/style.css'
 - `@bag/core`: 插件协议、Schema 协议、字典协议
 - `@bag/ui`: Schema 组件层
 - `@bag/request`: HTTP / WS 能力
-- `create-bag-admin`: 初始化宿主工程
+- `vue-bag-admin`: 初始化宿主工程

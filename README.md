@@ -8,7 +8,7 @@
 
 - ⚡️ **极致速度**：基于 Vite5 构建，提供闪电般的冷启动和热重载体验。
 - 🧩 **插件化微内核架构**：核心与业务解耦，业务模块可以作为独立插件接入宿主。
-- 📦 **可拆包生态**：`@bag/core`、`@bag/ui`、`@bag/request`、`@bag/host-vue`、`@bag/plugin-*` 和 `create-bag-admin` 已拆成清晰分层。
+- 📦 **可拆包生态**：`@bag/core`、`@bag/ui`、`@bag/request`、`@bag/host-vue`、`@bag/plugin-*` 和 `vue-bag-admin` 已拆成清晰分层。
 - 🛠️ **Monorepo 管理**：采用 pnpm workspace 进行多包协作，仓库内置示例宿主、文档站和参考后端。
 - 🔒 **完善的权限体系**：基于角色的动态路由与按钮级别权限控制，配合 Strapi5 轻松实现全栈权限流转。
 - 🎨 **Naive UI 与 TailwindCSS**：深度集成 Naive UI 组件库与 TailwindCSS，组件丰富且样式开发高效灵活。
@@ -27,7 +27,7 @@ Vue-Bag-Admin
 │   ├── host-vue          # 宿主层：布局、权限、插件引导
 │   ├── request           # 请求能力层
 │   ├── ui                # Schema 驱动 UI 组件层
-│   ├── create-bag-admin  # 初始化脚手架
+│   ├── vue-bag-admin  # 初始化脚手架
 │   └── plugin-*          # 官方业务插件与示例插件
 ├── pnpm-workspace.yaml   # Monorepo 配置
 └── package.json
@@ -40,7 +40,7 @@ Vue-Bag-Admin
 如果你的目标是创建一个新的后台宿主项目，推荐直接从脚手架开始：
 
 ```bash
-npx create-bag-admin my-admin
+npx create-vue-bag-admin my-admin
 cd my-admin
 pnpm install
 pnpm dev
@@ -111,7 +111,7 @@ pnpm --filter @bag/docs dev
 - `@bag/host-vue`：Vue 宿主层，负责布局、权限、路由与插件引导
 - `@bag/plugin-shop`：官方商城示例插件
 - `@bag/plugin-sys-setting`：官方系统设置示例插件
-- `create-bag-admin`：宿主初始化脚手架
+- `create-vue-bag-admin`：宿主初始化脚手架
 
 更细的说明可以继续看这些文档：
 

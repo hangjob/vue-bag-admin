@@ -1,0 +1,65 @@
+{
+  "name": "vue-bag-admin",
+  "version": "6.0.0",
+  "description": "Unified entry package for the Vue Bag Admin runtime ecosystem.",
+  "type": "module",
+  "files": [
+    "dist",
+    "style.css",
+    "README.md"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./style.css": {
+      "default": "./style.css"
+    }
+  },
+  "keywords": [
+    "vue",
+    "admin",
+    "plugin",
+    "dashboard",
+    "runtime"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hangjob/vue-bag-admin.git",
+    "directory": "packages/vue-bag-admin"
+  },
+  "homepage": "https://github.com/hangjob/vue-bag-admin/tree/main/packages/vue-bag-admin#readme",
+  "bugs": {
+    "url": "https://github.com/hangjob/vue-bag-admin/issues"
+  },
+  "sideEffects": [
+    "./style.css"
+  ],
+  "scripts": {
+    "build": "vite build && node ./scripts/prepare-package.mjs",
+    "check-types": "tsc -p tsconfig.build.json --noEmit"
+  },
+  "peerDependencies": {
+    "naive-ui": "^2.40.0",
+    "pinia": "^2.2.0",
+    "vue": "^3.5.0",
+    "vue-i18n": "^10.0.0",
+    "vue-router": "^4.4.0"
+  },
+  "devDependencies": {
+    "@bag/core": "workspace:*",
+    "@bag/host-vue": "workspace:*",
+    "@bag/request": "workspace:*",
+    "@bag/ui": "workspace:*",
+    "typescript": "^5.9.2",
+    "vite": "^6.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

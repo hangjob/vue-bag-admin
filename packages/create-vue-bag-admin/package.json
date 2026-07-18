@@ -1,0 +1,37 @@
+{
+  "name": "create-vue-bag-admin",
+  "version": "6.0.0",
+  "description": "Scaffold a plugin-driven Vue admin project powered by the vue-bag-admin ecosystem.",
+  "type": "module",
+  "bin": {
+    "create-vue-bag-admin": "./bin/index.mjs"
+  },
+  "files": [
+    "bin",
+    "templates",
+    "README.md"
+  ],
+  "keywords": [
+    "vue",
+    "admin",
+    "scaffold",
+    "vite",
+    "cli"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hangjob/vue-bag-admin.git",
+    "directory": "packages/create-vue-bag-admin"
+  },
+  "homepage": "https://github.com/hangjob/vue-bag-admin/tree/main/packages/create-vue-bag-admin#readme",
+  "bugs": {
+    "url": "https://github.com/hangjob/vue-bag-admin/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

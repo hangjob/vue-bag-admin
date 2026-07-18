@@ -47,7 +47,7 @@
 - `@bag/ui`：组件层，承载 `PmProTable`、`PmProForm`、`PmSchemaForm`
 - `@bag/host-vue`：宿主层，负责布局、权限、路由和插件引导
 - `@bag/plugin-*`：业务插件层，例如 `@bag/plugin-shop`、`@bag/plugin-sys-setting`
-- `create-bag-admin`：脚手架入口，用来快速生成宿主项目
+- `create-vue-bag-admin`：脚手架入口，用来快速生成宿主项目
 
 如果你第一次接触这套项目，最实用的理解方式是：
 
@@ -55,7 +55,7 @@
 - `ui` 提供积木
 - `host-vue` 把宿主跑起来
 - `plugin-*` 往宿主里装业务
-- `create-bag-admin` 负责生成起步工程
+- `vue-bag-admin` 负责生成起步工程
 
 如果你想按 npm 分包逐个理解，可以继续看：
 
@@ -79,7 +79,7 @@ vue-bag-admin
 │   ├── request           # 请求能力层
 │   ├── ui                # 组件层
 │   ├── host-vue          # 宿主层
-│   ├── create-bag-admin  # 初始化脚手架
+│   ├── vue-bag-admin  # 初始化脚手架
 │   └── plugin-*          # 业务插件层
 ├── pnpm-workspace.yaml   # Monorepo 配置
 └── package.json

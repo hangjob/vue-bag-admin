@@ -10,7 +10,7 @@
 pnpm add @bag/plugin-shop @bag/core @bag/ui
 ```
 
-宿主项目还需要自行提供 `vue`、`vue-router`、`vue-i18n` 和 `naive-ui`。如果你已经使用 `@bag/host-vue` 或 `create-bag-admin`，这部分依赖通常已经具备。
+宿主项目还需要自行提供 `vue`、`vue-router`、`vue-i18n` 和 `naive-ui`。如果你已经使用 `@bag/host-vue` 或 `vue-bag-admin`，这部分依赖通常已经具备。
 
 ## 里面带了什么
 
