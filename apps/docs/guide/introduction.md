@@ -4,7 +4,7 @@
 
 ## 什么是 Vue-Bag-Admin？
 
-`Vue-Bag-Admin` 是一套面向 Vue 3 的插件化后台框架生态。你既可以把它当成一个 Monorepo 工程来开发，也可以把它拆开，按 npm 包的方式去消费宿主层、协议层、UI 层和业务插件。
+`Vue-Bag-Admin` 是一套面向 Vue 3 的插件化后台框架生态。你既可以把它当成一个 Monorepo 工程来开发，也可以把它拆开，按 npm 包的方式去消费统一主包和业务插件。
 
 ## 为什么选择我们？
 
@@ -16,7 +16,7 @@
 - **插件层（Plugin）**：把商城、系统设置、报表、内容等业务域拆成独立包，路由、菜单、页面和多语言都由插件自己声明。
 - **协议层（Core）**：把插件接口、路由 meta、Schema 协议统一收口，避免每个模块都说自己的方言。
 
-这意味着你既能在仓库里按 `pnpm workspace` 的方式联调，也能在外部项目里按 `@bag/*` 的方式自由组合。
+这意味着你既能在仓库里按 `pnpm workspace` 的方式联调，也能在外部项目里默认只安装 `vue-bag-admin`，需要业务能力时再按需追加 `@bag/plugin-*`。
 
 ## 技术栈
 
@@ -46,6 +46,7 @@
 - `@bag/request`：请求能力层，统一 HTTP / WS 相关封装
 - `@bag/ui`：组件层，承载 `PmProTable`、`PmProForm`、`PmSchemaForm`
 - `@bag/host-vue`：宿主层，负责布局、权限、路由和插件引导
+- `vue-bag-admin`：面向业务项目的统一主包，默认聚合宿主层、协议层、请求层和 UI 层
 - `@bag/plugin-*`：业务插件层，例如 `@bag/plugin-shop`、`@bag/plugin-sys-setting`
 - `create-vue-bag-admin`：脚手架入口，用来快速生成宿主项目
 
@@ -55,7 +56,8 @@
 - `ui` 提供积木
 - `host-vue` 把宿主跑起来
 - `plugin-*` 往宿主里装业务
-- `vue-bag-admin` 负责生成起步工程
+- `vue-bag-admin` 负责给业务项目提供默认主入口
+- `create-vue-bag-admin` 负责生成起步工程
 
 如果你想按 npm 分包逐个理解，可以继续看：
 
@@ -79,7 +81,8 @@ vue-bag-admin
 │   ├── request           # 请求能力层
 │   ├── ui                # 组件层
 │   ├── host-vue          # 宿主层
-│   ├── vue-bag-admin  # 初始化脚手架
+│   ├── vue-bag-admin      # 面向业务项目的统一主包
+│   ├── create-vue-bag-admin # 初始化脚手架
 │   └── plugin-*          # 业务插件层
 ├── pnpm-workspace.yaml   # Monorepo 配置
 └── package.json

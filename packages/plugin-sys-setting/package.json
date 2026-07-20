@@ -23,16 +23,14 @@
     "@vueuse/core": "^11.0.0"
   },
   "peerDependencies": {
-    "@bag/core": "^1.0.0",
-    "@bag/ui": "^1.0.0",
     "vue": "^3.5.0",
+    "vue-bag-admin": "^6.0.0",
     "vue-router": "^4.4.0"
   },
   "devDependencies": {
-    "@bag/core": "workspace:*",
-    "@bag/ui": "workspace:*",
     "@vitejs/plugin-vue": "^6.0.0",
     "vite": "^6.0.0",
+    "vue-bag-admin": "workspace:*",
     "vue-tsc": "^2.1.0"
   },
   "publishConfig": {

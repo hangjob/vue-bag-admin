@@ -20,18 +20,16 @@
     "check-types": "vue-tsc -p tsconfig.build.json --noEmit"
   },
   "peerDependencies": {
-    "@bag/core": "^1.0.0",
-    "@bag/ui": "^1.0.0",
     "naive-ui": "^2.40.0",
     "vue": "^3.5.0",
+    "vue-bag-admin": "^6.0.0",
     "vue-i18n": "^10.0.0",
     "vue-router": "^4.4.0"
   },
   "devDependencies": {
-    "@bag/core": "workspace:*",
-    "@bag/ui": "workspace:*",
     "@vitejs/plugin-vue": "^6.0.0",
     "vite": "^6.0.0",
+    "vue-bag-admin": "workspace:*",
     "vue-tsc": "^2.1.0"
   },
   "publishConfig": {

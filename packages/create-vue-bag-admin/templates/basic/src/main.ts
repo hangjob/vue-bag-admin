@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { createDiscreteApi } from 'naive-ui'
-import { setupHttp } from '@bag/request'
+import { setupHttp } from 'vue-bag-admin'
 import {
   PermissionAccess,
   bootstrapPlugins,
@@ -9,8 +9,9 @@ import {
   createHostRouter,
   registerPermissionDirective,
   useUserStore
-} from '@bag/host-vue'
+} from 'vue-bag-admin'
 import App from './App.vue'
+import 'vue-bag-admin/style.css'
 import './style.css'
 import { appRoutes } from './routes'
 import contentPlugin from './plugins/content'

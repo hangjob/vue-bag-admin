@@ -49,7 +49,7 @@ const router = useRouter()
 const cards = [
   {
     eyebrow: 'Host',
-    title: '@bag/host-vue',
+    title: 'vue-bag-admin',
     description: '默认布局、权限守卫、菜单与标签管理都已经接入。'
   },
   {

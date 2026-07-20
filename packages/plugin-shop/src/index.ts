@@ -1,4 +1,4 @@
-import type { AdminPlugin } from '@bag/core'
+import type { AdminPlugin } from 'vue-bag-admin'
 
 const shopPlugin: AdminPlugin = {
   id: 'plugin-shop',

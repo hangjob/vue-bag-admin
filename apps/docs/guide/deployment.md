@@ -53,6 +53,7 @@ server {
 ### 准备环境
 
 确保你的服务器上已经安装了：
+
 - Node.js (建议 v24)
 - MySQL 8.0+ 数据库
 - PM2 (推荐的 Node.js 进程管理工具: `npm install -g pm2`)
@@ -73,7 +74,7 @@ pnpm build
 
 在服务器的 `apps/strapi` 目录下，创建一个 `.env` 文件，填入生产环境的配置：
 
-```env
+```bash
 HOST=0.0.0.0
 PORT=1337
 APP_KEYS=your_app_keys_here # 生成几段随机字符串，用逗号隔开

@@ -12,8 +12,8 @@
     "docs:dev": "pnpm --filter @bag/docs run dev",
     "docs:build": "pnpm --filter @bag/docs run build",
     "pack:vue-bag-admin": "turbo run build --filter=vue-bag-admin && pnpm --dir packages/vue-bag-admin pack",
-    "release:dry-run:vue-bag-admin": "turbo run build --filter=vue-bag-admin && pnpm --dir packages/vue-bag-admin publish --access public --dry-run",
-    "release:vue-bag-admin": "turbo run build --filter=vue-bag-admin && pnpm --dir packages/vue-bag-admin publish --access public"
+    "release:dry-run:vue-bag-admin": "turbo run build --filter=vue-bag-admin && npm publish ./packages/vue-bag-admin --access public --dry-run",
+    "release:vue-bag-admin": "turbo run build --filter=vue-bag-admin && npm publish ./packages/vue-bag-admin --access public"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.0",

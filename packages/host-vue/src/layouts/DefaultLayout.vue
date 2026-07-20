@@ -38,11 +38,22 @@
           </svg>
         </button>
 
-        <div class="flex items-center gap-3 cursor-pointer group">
-          <div
-            class="relative flex items-center justify-center h-10 w-10 bg-gradient-to-br from-orange-400 to-rose-500 rounded-xl shadow-lg shadow-orange-500/20 group-hover:shadow-orange-500/40 group-hover:-translate-y-0.5 transition-all duration-300"
-          >
-            <svg viewBox="0 0 24 24" class="h-6 w-6 text-white" fill="currentColor">
+        <component :is="brandSlotComponent" v-if="brandSlotComponent" class="bag-brand-slot" />
+        <button
+          v-else
+          class="bag-brand group"
+          :class="{ 'is-static': !branding.homePath }"
+          type="button"
+          @click="handleBrandClick"
+        >
+          <span class="bag-brand-logo">
+            <img
+              v-if="branding.logo"
+              :src="branding.logo"
+              :alt="branding.logoAlt || branding.title"
+              class="bag-brand-logo-image"
+            />
+            <svg v-else viewBox="0 0 24 24" class="h-6 w-6 text-white" fill="currentColor">
               <path
                 d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-4zm-6-2h4v2h-4V4zm10 14H4V8h16v10z"
               />
@@ -50,13 +61,12 @@
                 d="M9 10a1 1 0 0 0-1 1v2a1 1 0 0 0 2 0v-2a1 1 0 0 0-1-1zm6 0a1 1 0 0 0-1 1v2a1 1 0 0 0 2 0v-2a1 1 0 0 0-1-1z"
               />
             </svg>
-          </div>
-          <h1
-            class="text-xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-orange-600 to-rose-500 dark:from-orange-400 dark:to-rose-400"
-          >
-            Vue Bag Admin
-          </h1>
-        </div>
+          </span>
+          <span v-if="branding.showTitle" class="bag-brand-copy">
+            <span class="bag-brand-title">{{ displayBrandTitle }}</span>
+            <span v-if="branding.badge" class="bag-brand-badge">{{ branding.badge }}</span>
+          </span>
+        </button>
 
         <div
           class="hidden md:block w-px h-6 bg-gray-200 dark:bg-gray-700 mx-6 transition-colors duration-300"
@@ -75,17 +85,10 @@
       </div>
 
       <!-- 右侧：工具栏 -->
-      <div
-        class="flex items-center space-x-4 md:space-x-6 text-slate-500 dark:text-slate-400 font-medium"
-      >
+      <div class="bag-header-actions text-slate-500 dark:text-slate-400 font-medium">
         <!-- 首页 -->
-        <div
-          class="hidden sm:flex items-center gap-1.5 cursor-pointer hover:text-orange-500 dark:hover:text-orange-400 transition-colors text-sm group"
-          @click="router.push('/dashboard')"
-        >
-          <div
-            class="p-1.5 rounded-lg group-hover:bg-orange-50 dark:group-hover:bg-gray-800 transition-colors"
-          >
+        <div class="bag-header-action hidden sm:flex" @click="router.push('/dashboard')">
+          <div class="bag-header-action-icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-4 w-4"
@@ -100,7 +103,7 @@
               <polyline points="9 22 9 12 15 12 15 22" />
             </svg>
           </div>
-          <span class="hidden lg:inline">首页</span>
+          <span class="bag-header-action-label hidden lg:inline">首页</span>
         </div>
 
         <!-- 通知 -->
@@ -109,14 +112,11 @@
           placement="bottom-end"
           :width="320"
           style="padding: 0; border-radius: 12px; overflow: hidden"
+          @update:show="handleMessagePopoverVisibleChange"
         >
           <template #trigger>
-            <div
-              class="hidden sm:flex items-center gap-1.5 cursor-pointer hover:text-orange-500 dark:hover:text-orange-400 transition-colors text-sm group relative"
-            >
-              <div
-                class="p-1.5 rounded-lg group-hover:bg-orange-50 dark:group-hover:bg-gray-800 transition-colors"
-              >
+            <div class="bag-header-action hidden sm:flex relative">
+              <div class="bag-header-action-icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="h-4 w-4"
@@ -131,7 +131,7 @@
                   <path d="M13.73 21a2 2 0 0 1-3.46 0" />
                 </svg>
               </div>
-              <span class="hidden lg:inline">消息</span>
+              <span class="bag-header-action-label hidden lg:inline">消息</span>
             </div>
           </template>
 
@@ -141,12 +141,9 @@
               class="px-4 py-3 flex justify-between items-center border-b border-gray-100 dark:border-gray-800"
             >
               <span class="font-bold text-slate-700 dark:text-slate-200">消息通知</span>
-              <span
-                @click="handleMarkAllRead"
-                class="text-xs text-orange-500 cursor-pointer hover:text-orange-600 transition-colors"
-              >
+              <button type="button" class="bag-notice-action" @click="handleMarkAllRead">
                 全部已读
-              </span>
+              </button>
             </div>
 
             <NTabs
@@ -156,14 +153,26 @@
               class="mt-1"
               pane-style="padding: 0;"
             >
-              <NTabPane name="notify" :tab="`通知 (${unreadCount})`">
+              <NTabPane
+                v-for="tab in messageTabList"
+                :key="tab.key"
+                :name="tab.key"
+                :tab="formatMessageTabLabel(tab)"
+              >
                 <div class="max-h-[300px] overflow-y-auto custom-scrollbar">
-                  <div v-if="notifications.length > 0" class="flex flex-col">
+                  <div
+                    v-if="messageLoading"
+                    class="flex items-center justify-center py-10 text-sm text-slate-400 dark:text-slate-500"
+                  >
+                    消息加载中...
+                  </div>
+                  <div v-else-if="getMessageListByTab(tab.key).length > 0" class="flex flex-col">
                     <div
-                      v-for="item in notifications"
+                      v-for="item in getMessageListByTab(tab.key)"
                       :key="item.id"
                       class="px-4 py-3 hover:bg-orange-50/50 dark:hover:bg-gray-800/50 cursor-pointer transition-colors flex gap-3 group relative"
                       :class="{ 'opacity-60': item.read }"
+                      @click="handleMessageItemClick(item, tab.key)"
                     >
                       <div
                         v-if="!item.read"
@@ -173,7 +182,7 @@
                         class="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
                         :class="item.color"
                       >
-                        <span class="text-lg">{{ item.icon }}</span>
+                        <span class="text-lg">{{ item.icon || '🔔' }}</span>
                       </div>
                       <div class="flex-1 min-w-0">
                         <p
@@ -181,62 +190,21 @@
                         >
                           {{ item.title }}
                         </p>
-                        <p class="text-xs text-slate-400 dark:text-slate-500 mt-1">
+                        <p v-if="item.time" class="text-xs text-slate-400 dark:text-slate-500 mt-1">
                           {{ item.time }}
                         </p>
                       </div>
                     </div>
                   </div>
                   <div v-else class="py-10">
-                    <NEmpty description="暂无新通知" />
+                    <NEmpty :description="tab.emptyText || `暂无${tab.label}`" />
                   </div>
-                </div>
-              </NTabPane>
-
-              <NTabPane name="system" tab="系统">
-                <div class="max-h-[300px] overflow-y-auto custom-scrollbar">
-                  <div v-if="systemMessages.length > 0" class="flex flex-col">
-                    <div
-                      v-for="item in systemMessages"
-                      :key="item.id"
-                      class="px-4 py-3 hover:bg-orange-50/50 dark:hover:bg-gray-800/50 cursor-pointer transition-colors flex gap-3 group"
-                      :class="{ 'opacity-60': item.read }"
-                    >
-                      <div
-                        class="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
-                        :class="item.color"
-                      >
-                        <span class="text-lg">{{ item.icon }}</span>
-                      </div>
-                      <div class="flex-1 min-w-0">
-                        <p
-                          class="text-sm text-slate-700 dark:text-slate-200 line-clamp-2 leading-snug group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors"
-                        >
-                          {{ item.title }}
-                        </p>
-                        <p class="text-xs text-slate-400 dark:text-slate-500 mt-1">
-                          {{ item.time }}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div v-else class="py-10">
-                    <NEmpty description="暂无系统消息" />
-                  </div>
-                </div>
-              </NTabPane>
-
-              <NTabPane name="todo" tab="待办">
-                <div class="max-h-[300px] overflow-y-auto custom-scrollbar py-10">
-                  <NEmpty description="暂无待办事项" />
                 </div>
               </NTabPane>
             </NTabs>
 
             <div class="border-t border-gray-100 dark:border-gray-800 p-2">
-              <button
-                class="w-full py-2 text-sm text-center text-slate-500 dark:text-slate-400 hover:text-orange-500 dark:hover:text-orange-400 hover:bg-orange-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
-              >
+              <button type="button" class="bag-notice-footer-btn" @click="handleViewAllMessages">
                 查看全部消息
               </button>
             </div>
@@ -245,12 +213,8 @@
 
         <!-- 多语言 -->
         <NDropdown trigger="click" :options="langOptions" @select="handleLangSelect">
-          <div
-            class="flex items-center gap-1.5 cursor-pointer hover:text-orange-500 dark:hover:text-orange-400 transition-colors text-sm group"
-          >
-            <div
-              class="p-1.5 rounded-lg group-hover:bg-orange-50 dark:group-hover:bg-gray-800 transition-colors"
-            >
+          <div class="bag-header-action">
+            <div class="bag-header-action-icon">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-4 w-4"
@@ -268,18 +232,18 @@
                 <path d="M2 12h20" />
               </svg>
             </div>
-            <span class="hidden md:inline">{{ locale === 'en' ? 'EN' : '中' }}</span>
+            <span class="bag-header-action-label hidden md:inline">
+              {{ locale === 'en' ? 'EN' : '中' }}
+            </span>
           </div>
         </NDropdown>
 
         <!-- 主题切换 -->
         <div
-          class="flex items-center gap-1.5 cursor-pointer transition-colors text-sm group"
+          class="bag-header-action bag-header-action--icon"
           @click="appConfigStore.toggleTheme()"
         >
-          <div
-            class="p-1.5 rounded-lg group-hover:bg-orange-50 dark:group-hover:bg-gray-800 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
-          >
+          <div class="bag-header-action-icon">
             <!-- 太阳图标 (亮色模式显示) -->
             <svg
               v-if="appConfigStore.theme === 'light'"
@@ -321,12 +285,10 @@
 
         <!-- 外观配置中心 -->
         <div
-          class="flex items-center gap-1.5 cursor-pointer transition-colors text-sm group"
+          class="bag-header-action bag-header-action--icon"
           @click="appConfigStore.openSettingsDrawer()"
         >
-          <div
-            class="p-1.5 rounded-lg group-hover:bg-orange-50 dark:group-hover:bg-gray-800 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
-          >
+          <div class="bag-header-action-icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-4 w-4"
@@ -347,9 +309,7 @@
 
         <!-- 用户名 -->
         <NDropdown trigger="click" :options="userOptions" @select="handleUserSelect">
-          <div
-            class="flex items-center gap-2 cursor-pointer hover:text-orange-600 dark:hover:text-orange-400 transition-colors text-sm pl-4 border-l border-gray-200 dark:border-gray-700 group"
-          >
+          <div class="bag-user-entry">
             <img
               src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix&backgroundColor=ffedd5"
               alt="avatar"
@@ -396,32 +356,20 @@
         ]"
       >
         <!-- PC端折叠按钮 -->
-        <div
-          class="p-3 hidden md:flex items-center overflow-hidden border-b border-gray-50 dark:border-gray-800/50 transition-all duration-300"
-          :class="collapsed ? 'justify-center' : 'justify-between'"
-        >
-          <div
-            class="flex items-center gap-2 pl-1 transition-all duration-300"
-            :class="collapsed ? 'opacity-0 w-0 overflow-hidden' : 'opacity-100 w-auto'"
-          >
-            <div
-              class="w-1.5 h-4 bg-gradient-to-b from-orange-400 to-rose-500 rounded-full flex-shrink-0 shadow-sm"
-            ></div>
-            <span
-              class="text-sm font-bold text-slate-600 dark:text-slate-300 tracking-wider whitespace-nowrap"
-            >
-              导航菜单
-            </span>
+        <div class="bag-sidebar-toolbar" :class="{ 'is-collapsed': collapsed }">
+          <div class="bag-sidebar-toolbar-content" :class="{ 'is-hidden': collapsed }">
+            <div class="bag-sidebar-toolbar-accent"></div>
+            <span class="bag-sidebar-toolbar-title">导航菜单</span>
           </div>
           <button
-            class="w-8 h-8 flex-shrink-0 flex items-center justify-center rounded-lg bg-gray-50 dark:bg-gray-800/50 text-gray-500 dark:text-gray-400 hover:bg-orange-50 dark:hover:bg-gray-800 hover:text-orange-600 dark:hover:text-orange-400 transition-all shadow-sm"
+            class="bag-sidebar-collapse-btn"
             type="button"
             @click="menuStore.toggleCollapsed()"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-4 w-4 transition-transform duration-300"
-              :class="{ 'rotate-180': collapsed }"
+              class="bag-sidebar-collapse-icon"
+              :class="{ 'is-rotated': collapsed }"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -530,7 +478,7 @@
 </style>
 
 <script setup lang="ts">
-import { computed, h, ref, watchEffect } from 'vue'
+import { computed, h, ref, watch, watchEffect } from 'vue'
 import { NMenu, NDropdown, NPopover, NTabs, NTabPane, NEmpty } from 'naive-ui'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
@@ -542,61 +490,22 @@ import TabBar from './components/TabBar.vue'
 import type { MenuConfig } from '@bag/core'
 import { canAccess } from '../access'
 import { useAppConfigStore } from '../stores/app-config'
+import { useHostUiConfig, type HostMessageItem, type HostMessageTab } from '../core/host-ui'
 
-const { locale, t } = useI18n()
+const { locale, fallbackLocale, messages, t } = useI18n()
 const menuStore = useMenuStore()
 const userStore = useUserStore()
 const appConfigStore = useAppConfigStore()
+const hostUi = useHostUiConfig()
 const router = useRouter()
 const route = useRoute()
 
-// 消息通知数据
+// 消息中心的数据通过 host-ui 注入，使用方可以在 bootstrapPlugins({ ui }) 中对接真实接口。
 const messageTabs = ref('notify')
-const notifications = ref([
-  {
-    id: 1,
-    title: '您有一个新的订单，请及时处理',
-    time: '10分钟前',
-    type: 'order',
-    read: false,
-    icon: '📦',
-    color: 'bg-orange-100 dark:bg-orange-500/20 text-orange-500'
-  },
-  {
-    id: 2,
-    title: '库存预警：商品“高级旅行背包”库存不足',
-    time: '1小时前',
-    type: 'warning',
-    read: false,
-    icon: '⚠️',
-    color: 'bg-rose-100 dark:bg-rose-500/20 text-rose-500'
-  },
-  {
-    id: 3,
-    title: '您的提现申请已通过',
-    time: '昨天',
-    type: 'success',
-    read: true,
-    icon: '💰',
-    color: 'bg-green-100 dark:bg-green-500/20 text-green-500'
-  }
-])
-const systemMessages = ref([
-  {
-    id: 1,
-    title: '系统升级通知：今晚凌晨2点进行停机维护',
-    time: '2天前',
-    read: true,
-    icon: '🔔',
-    color: 'bg-blue-100 dark:bg-blue-500/20 text-blue-500'
-  }
-])
-
-const unreadCount = computed(() => notifications.value.filter((n) => !n.read).length)
-
-const handleMarkAllRead = () => {
-  notifications.value.forEach((n) => (n.read = true))
-}
+const messagePopoverVisible = ref(false)
+const messageLoading = ref(false)
+const unreadCount = ref(0)
+const messageItems = ref<Record<string, HostMessageItem[]>>({})
 
 // 响应式断点检测
 const breakpoints = useBreakpoints(breakpointsTailwind)
@@ -610,6 +519,118 @@ watchEffect(() => {
 })
 
 const collapsed = computed(() => menuStore.collapsed)
+const branding = computed(() => hostUi.branding)
+const messageCenter = computed(() => hostUi.messageCenter)
+const messageTabList = computed(() => messageCenter.value.tabs)
+const brandSlotComponent = computed(() => hostUi.slots.brand)
+const displayBrandTitle = computed(() => {
+  const compactTitle = branding.value.compactTitle?.trim()
+  if (isMobile.value && compactTitle) {
+    return compactTitle
+  }
+  return branding.value.title
+})
+
+watch(
+  messageTabList,
+  (tabs) => {
+    if (!tabs.some((tab) => tab.key === messageTabs.value)) {
+      messageTabs.value = tabs[0]?.key ?? 'notify'
+    }
+  },
+  { immediate: true }
+)
+
+watch(messageTabs, (tab) => {
+  if (messagePopoverVisible.value) {
+    void loadMessageList(tab)
+  }
+})
+
+const getMessageListByTab = (tabKey: string) => {
+  return messageItems.value[tabKey] ?? []
+}
+
+const formatMessageTabLabel = (tab: HostMessageTab) => {
+  if (tab.key === 'notify' && unreadCount.value > 0) {
+    return `${tab.label} (${unreadCount.value})`
+  }
+  return tab.label
+}
+
+// 弹层打开时按需拉取当前 tab 数据，避免每次页面初始化都请求消息接口。
+const loadMessageList = async (tabKey: string) => {
+  messageLoading.value = true
+  try {
+    const list = await Promise.resolve(messageCenter.value.getList?.(tabKey) ?? [])
+    messageItems.value = {
+      ...messageItems.value,
+      [tabKey]: list ?? []
+    }
+  } catch (error) {
+    console.error('[bag-host] failed to load message list:', error)
+    messageItems.value = {
+      ...messageItems.value,
+      [tabKey]: []
+    }
+  } finally {
+    messageLoading.value = false
+  }
+}
+
+const refreshUnreadCount = async () => {
+  try {
+    unreadCount.value = await Promise.resolve(
+      messageCenter.value.getUnreadCount?.() ??
+        Object.values(messageItems.value)
+          .flat()
+          .filter((item) => !item.read).length
+    )
+  } catch (error) {
+    console.error('[bag-host] failed to load unread count:', error)
+    unreadCount.value = 0
+  }
+}
+
+const handleMessagePopoverVisibleChange = (visible: boolean) => {
+  messagePopoverVisible.value = visible
+  if (!visible) {
+    return
+  }
+
+  void Promise.all([loadMessageList(messageTabs.value), refreshUnreadCount()])
+}
+
+const markMessageAsRead = (itemId: HostMessageItem['id'], tabKey: string) => {
+  const nextList = getMessageListByTab(tabKey).map((item) =>
+    item.id === itemId ? { ...item, read: true } : item
+  )
+
+  messageItems.value = {
+    ...messageItems.value,
+    [tabKey]: nextList
+  }
+}
+
+const handleMarkAllRead = async () => {
+  const currentTab = messageTabs.value
+  await Promise.resolve(messageCenter.value.markAllRead?.(currentTab))
+  await loadMessageList(currentTab)
+  await refreshUnreadCount()
+}
+
+const handleMessageItemClick = async (item: HostMessageItem, tabKey: string) => {
+  if (!item.read) {
+    markMessageAsRead(item.id, tabKey)
+    await refreshUnreadCount()
+  }
+
+  await Promise.resolve(messageCenter.value.onItemClick?.(item, tabKey))
+}
+
+const handleViewAllMessages = async () => {
+  await Promise.resolve(messageCenter.value.onViewAll?.(messageTabs.value))
+}
 
 const activeKey = computed(() => {
   const menuPath = route.meta?.activeMenu
@@ -649,6 +670,64 @@ const baseMenus: MenuConfig[] = [
   }
 ]
 
+const isI18nKeyLike = (value?: string) =>
+  !!value && /^[A-Za-z0-9_-]+(?:\.[A-Za-z0-9_-]+)+$/.test(value)
+
+// 菜单标题和标签栏共用同一套 locale/fallback 查找顺序，避免两边显示不一致。
+const normalizeLocaleChain = () => {
+  const chain = [locale.value]
+  const fallback = fallbackLocale.value
+
+  if (typeof fallback === 'string') {
+    chain.push(fallback)
+  } else if (Array.isArray(fallback)) {
+    chain.push(...fallback)
+  } else if (fallback && typeof fallback === 'object') {
+    const localeFallback = fallback[locale.value]
+    if (typeof localeFallback === 'string') {
+      chain.push(localeFallback)
+    } else if (Array.isArray(localeFallback)) {
+      chain.push(...localeFallback)
+    }
+
+    const defaultFallback = fallback.default
+    if (typeof defaultFallback === 'string') {
+      chain.push(defaultFallback)
+    } else if (Array.isArray(defaultFallback)) {
+      chain.push(...defaultFallback)
+    }
+  }
+
+  return [...new Set(chain.filter(Boolean))]
+}
+
+// 直接查消息对象，缺失 key 时静默返回 undefined，不触发 vue-i18n warning。
+const getMessageByKey = (localeKey: string, messageKey: string) => {
+  let current: unknown = (messages.value as Record<string, unknown> | undefined)?.[localeKey]
+
+  for (const segment of messageKey.split('.')) {
+    if (!current || typeof current !== 'object' || !(segment in current)) {
+      return undefined
+    }
+    current = (current as Record<string, unknown>)[segment]
+  }
+
+  return typeof current === 'string' ? current : undefined
+}
+
+const resolveTitleText = (value?: string) => {
+  if (!value) return ''
+  if (!isI18nKeyLike(value)) return value
+
+  // 只翻译已存在的 key，找不到时回退原值，避免宿主菜单持续打印缺词条警告。
+  for (const localeKey of normalizeLocaleChain()) {
+    const message = getMessageByKey(localeKey, value)
+    if (message) return message
+  }
+
+  return value
+}
+
 const currentMenuTitle = computed(() => {
   const merged = [...baseMenus, ...menuStore.menus]
   const findTitle = (menus: MenuConfig[], targetPath: string): string | undefined => {
@@ -663,25 +742,24 @@ const currentMenuTitle = computed(() => {
   }
 
   const titleKey = findTitle(merged, activeKey.value)
-  if (titleKey) return String(t(titleKey))
-  if (route.meta?.title) return String(t(route.meta.title as string))
+  if (titleKey) return resolveTitleText(titleKey)
+  if (route.meta?.title) return resolveTitleText(route.meta.title as string)
   return ''
 })
 
 const menuOptions = computed(() => {
   const mapMenu = (menu: MenuConfig): any => {
-    const labelText = menu.title ? String(t(menu.title)) : ''
+    const labelText = resolveTitleText(menu.title)
     return {
       key: menu.path,
       label: () =>
-        h('div', { class: 'flex items-center justify-between w-full pr-2' }, [
-          h('span', labelText || menu.title),
+        h('div', { class: 'bag-menu-option-label' }, [
+          h('span', { class: 'bag-menu-option-text' }, labelText || menu.title),
           menu.badge
             ? h(
                 'span',
                 {
-                  class:
-                    'px-1.5 py-0.5 text-[10px] font-black leading-none bg-gradient-to-r from-rose-500 to-orange-500 text-white rounded shadow-sm scale-90 origin-right'
+                  class: 'bag-menu-badge'
                 },
                 menu.badge
               )
@@ -733,8 +811,409 @@ const handleMenuSelect = (key: string) => {
   }
 }
 
+const handleBrandClick = () => {
+  const targetPath = branding.value.homePath
+  if (!targetPath || route.path === targetPath) {
+    return
+  }
+  void router.push(targetPath)
+}
+
 const handleLogout = () => {
   userStore.logout()
   router.push('/login')
 }
 </script>
+
+<style>
+.bag-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .bag-header-actions {
+    gap: 24px;
+  }
+}
+
+.bag-header-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  color: inherit;
+  transition: color 0.2s ease;
+}
+
+.bag-header-action:hover {
+  color: #f97316;
+}
+
+.dark .bag-header-action:hover {
+  color: #fb923c;
+}
+
+.bag-header-action-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.bag-header-action:hover .bag-header-action-icon {
+  background: #fff7ed;
+}
+
+.dark .bag-header-action:hover .bag-header-action-icon {
+  background: rgba(31, 41, 55, 1);
+}
+
+.bag-header-action-label {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.bag-header-action--icon {
+  gap: 0;
+}
+
+.bag-user-entry {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+  padding-left: 16px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  border-left: 1px solid #e5e7eb;
+  transition: color 0.2s ease;
+}
+
+.dark .bag-user-entry {
+  border-left-color: #374151;
+}
+
+.bag-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.bag-brand.is-static {
+  cursor: default;
+}
+
+.bag-brand:focus-visible {
+  outline: 2px solid rgba(249, 115, 22, 0.35);
+  outline-offset: 6px;
+  border-radius: 16px;
+}
+
+.bag-brand-slot {
+  display: flex;
+  align-items: center;
+}
+
+.bag-brand-logo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #fb923c 0%, #f43f5e 100%);
+  color: #fff;
+  box-shadow:
+    0 10px 15px -3px rgba(249, 115, 22, 0.2),
+    0 4px 6px -4px rgba(249, 115, 22, 0.2);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.bag-brand-logo-image {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.bag-brand:hover .bag-brand-logo {
+  transform: translateY(-2px);
+  box-shadow:
+    0 14px 24px -6px rgba(249, 115, 22, 0.28),
+    0 8px 12px -8px rgba(244, 63, 94, 0.24);
+}
+
+.bag-brand-copy {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.bag-brand-title {
+  display: inline-block;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  color: #1e293b;
+  background: linear-gradient(90deg, #ea580c 0%, #f43f5e 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bag-brand-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(249, 115, 22, 0.12);
+  color: #ea580c;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.dark .bag-brand-title {
+  background: linear-gradient(90deg, #fb923c 0%, #fb7185 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dark .bag-brand-badge {
+  background: rgba(251, 146, 60, 0.14);
+  color: #fdba74;
+}
+
+.bag-sidebar-toolbar {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .bag-sidebar-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(249, 250, 251, 1);
+    transition: all 0.3s ease;
+  }
+
+  .dark .bag-sidebar-toolbar {
+    border-bottom-color: rgba(31, 41, 55, 0.5);
+  }
+
+  .bag-sidebar-toolbar.is-collapsed {
+    justify-content: center;
+  }
+}
+
+.bag-sidebar-toolbar-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 4px;
+  min-width: 0;
+  opacity: 1;
+  width: auto;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.bag-sidebar-toolbar-content.is-hidden {
+  opacity: 0;
+  width: 0;
+  padding-left: 0;
+}
+
+.bag-sidebar-toolbar-accent {
+  width: 6px;
+  height: 16px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #fb923c 0%, #f43f5e 100%);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12);
+}
+
+.bag-sidebar-toolbar-title {
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #475569;
+}
+
+.dark .bag-sidebar-toolbar-title {
+  color: #cbd5e1;
+}
+
+.bag-sidebar-collapse-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  outline: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: #f9fafb;
+  color: #6b7280;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.bag-sidebar-collapse-btn:hover {
+  background: #fff7ed;
+  color: #ea580c;
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.14);
+}
+
+.dark .bag-sidebar-collapse-btn {
+  background: rgba(31, 41, 55, 0.8);
+  color: #9ca3af;
+}
+
+.dark .bag-sidebar-collapse-btn:hover {
+  background: rgba(31, 41, 55, 1);
+  color: #fb923c;
+}
+
+.bag-sidebar-collapse-icon {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+}
+
+.bag-sidebar-collapse-icon.is-rotated {
+  transform: rotate(180deg);
+}
+
+.bag-menu-option-label {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-right: 8px;
+}
+
+.bag-menu-option-text {
+  min-width: 0;
+}
+
+.bag-menu-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #f43f5e 0%, #f97316 100%);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+  box-shadow: 0 2px 8px rgba(244, 63, 94, 0.24);
+  transform: scale(0.92);
+  transform-origin: right center;
+}
+
+.bag-notice-action {
+  appearance: none;
+  -webkit-appearance: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #f97316;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.bag-notice-action:hover {
+  color: #ea580c;
+}
+
+.dark .bag-notice-action {
+  color: #fb923c;
+}
+
+.dark .bag-notice-action:hover {
+  color: #fdba74;
+}
+
+.bag-notice-footer-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.2;
+  text-align: center;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.bag-notice-footer-btn:hover {
+  background: #fff7ed;
+  color: #f97316;
+}
+
+.dark .bag-notice-footer-btn {
+  color: #94a3b8;
+}
+
+.dark .bag-notice-footer-btn:hover {
+  background: rgba(31, 41, 55, 1);
+  color: #fb923c;
+}
+</style>

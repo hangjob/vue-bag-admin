@@ -1,6 +1,7 @@
 export { default as HostApp } from './HostApp.vue'
 export { default as PermissionAccess } from './components/PermissionAccess.vue'
 export * from './access'
+export * from './core/host-ui'
 export * from './core/plugin-manager'
 export * from './directives/permission'
 export * from './layouts/registry'

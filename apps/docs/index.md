@@ -3,8 +3,8 @@ layout: home
 
 hero:
   name: "Vue-Bag-Admin"
-  text: "新一代中后台框架"
-  tagline: "基于 Vue3 + Vite5 + Naive-ui + TailwindCSS + Pinia + Strapi5 打造的现代化、插件化微内核后台系统"
+  text: "插件化中后台框架"
+  tagline: "基于 Vue3 + Vite6 + Naive UI + Tailwind CSS + Pinia + Strapi5 的宿主式后台框架"
   image:
     src: /logo.png
     alt: Vue-Bag-Admin Logo
@@ -20,16 +20,16 @@ hero:
       link: https://hangjob.github.io/vue-bag-admin/
 
 features:
-  - title: ⚡️ 极致速度
-    details: 基于 Vite5 构建，提供闪电般的冷启动和热重载体验。
-  - title: 🧩 插件化微内核架构
-    details: 核心与业务完全解耦，每个业务模块均可作为独立插件（Plugin）热插拔，高度可复用。
-  - title: 🛠️ Monorepo 管理
-    details: 采用 pnpm workspace 进行多包管理，内置核心包、UI包、请求包分离，架构清晰。
-  - title: 🔒 完善的权限体系
-    details: 基于角色的动态路由与按钮级别权限控制，配合 Strapi5 轻松实现全栈权限流转。
-  - title: 🎨 Naive UI 与 TailwindCSS
-    details: 深度集成 Naive UI 组件库与 TailwindCSS，组件丰富且样式开发高效灵活。
-  - title: 📦 开箱即用
-    details: 提供完整的登录、Dashboard、403、404 等基础能力，助你专注于业务逻辑。
+  - title: 宿主与插件分层
+    details: `vue-bag-admin` 负责宿主运行时，`@bag/plugin-*` 负责业务能力，接入时先装主包，再按需装插件。
+  - title: Monorepo 管理
+    details: 仓库使用 pnpm workspace 组织 `core`、`request`、`ui`、`host-vue`、插件包和脚手架，便于联调和独立发包。
+  - title: 权限与路由
+    details: 宿主内置动态路由、菜单、标签页和按钮级权限控制，适合接标准后台场景。
+  - title: UI 与请求能力
+    details: 内置 `PmProTable`、`PmProForm`、字典组件，以及统一的 HTTP / fetch / WebSocket 接入能力。
+  - title: 脚手架起步
+    details: 可以通过 `create-vue-bag-admin` 直接生成宿主项目，再按需挂官方插件或业务插件。
+  - title: 本地联调
+    details: 支持直接联调 `apps/admin`，也支持在外部项目里通过 `link:` 验证主包和插件包的真实接入方式。
 ---

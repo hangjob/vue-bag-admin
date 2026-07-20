@@ -2,6 +2,7 @@ import type { App } from 'vue'
 import type { Router, RouterHistory } from 'vue-router'
 import type { I18n } from 'vue-i18n'
 import { type AdminPlugin, type AdminRouteRecordRaw } from '@bag/core'
+import type { HostUiConfig } from './host-ui'
 export interface CreateHostRouterOptions {
   routes: AdminRouteRecordRaw[]
   history?: RouterHistory
@@ -10,12 +11,14 @@ export declare const createHostRouter: ({ routes, history }: CreateHostRouterOpt
 export interface BootstrapPluginsOptions {
   app: App
   router: Router
-  plugins: AdminPlugin[]
+  plugins?: AdminPlugin[]
   i18n?: I18n
+  ui?: HostUiConfig
 }
 export declare function bootstrapPlugins({
   app,
   router,
   plugins,
-  i18n
+  i18n,
+  ui
 }: BootstrapPluginsOptions): Promise<void>

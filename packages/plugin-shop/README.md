@@ -7,10 +7,10 @@
 ## 安装
 
 ```bash
-pnpm add @bag/plugin-shop @bag/core @bag/ui
+pnpm add vue-bag-admin @bag/plugin-shop
 ```
 
-宿主项目还需要自行提供 `vue`、`vue-router`、`vue-i18n` 和 `naive-ui`。如果你已经使用 `@bag/host-vue` 或 `vue-bag-admin`，这部分依赖通常已经具备。
+宿主项目还需要自行提供 `vue`、`vue-router`、`vue-i18n` 和 `naive-ui`。如果你已经使用 `vue-bag-admin`，这部分依赖通常已经具备。
 
 ## 里面带了什么
 
@@ -29,7 +29,7 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { createI18n } from 'vue-i18n'
 import { createRouter, createWebHistory } from 'vue-router'
-import { bootstrapPlugins } from '@bag/host-vue'
+import { bootstrapPlugins } from 'vue-bag-admin'
 import shopPlugin from '@bag/plugin-shop'
 
 const app = createApp(App)
@@ -81,6 +81,5 @@ await bootstrapPlugins({
 
 ## 一般会搭什么
 
-- `@bag/core`：插件协议和路由 meta 协议
-- `@bag/ui`：表格、表单、字典标签这些后台组件
+- `vue-bag-admin`：提供插件协议、路由 meta 协议以及后台 UI 公共能力
 - `@bag/host-vue`：宿主层，负责真正把这个插件挂进去

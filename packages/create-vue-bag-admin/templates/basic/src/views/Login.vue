@@ -57,7 +57,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { useAppConfigStore, useUserStore } from '@bag/host-vue'
+import { useAppConfigStore, useUserStore } from 'vue-bag-admin'
 import { useMessage } from 'naive-ui'
 
 const route = useRoute()

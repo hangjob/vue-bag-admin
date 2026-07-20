@@ -1,8 +1,8 @@
 # @bag/request
 
-`@bag/request` 是请求层，主要把后台项目里最常见的 HTTP 和 WebSocket 接入方式收一下口。
+`@bag/request` 是请求层，主要把后台项目里常见的 HTTP 和 WebSocket 接入方式收在一起。
 
-它不是为了替代 `axios` 或 `fetch`。更像是在常用请求方案上补一层顺手的默认约定，把 token 注入、统一异常对象、业务错误识别、WS 初始化这些高频动作先配好。
+它不是为了替代 `axios` 或 `fetch`。它做的是把常用请求方案补上一层默认约定，把 token 注入、统一异常对象、业务错误识别、WS 初始化这些高频动作先配好。
 
 ## 这里有什么
 
@@ -108,7 +108,7 @@ try {
 
 ## 防抖和节流示例
 
-这两个能力底层基于 Lodash 的 `debounce` / `throttle`，但对外统一成了更适合请求场景的包装器：返回值仍然可以直接 `await`，同时带 `cancel()`、`flush()`、`pending()`。
+这两个能力底层基于 Lodash 的 `debounce` / `throttle`，但对外统一成了适合请求场景的包装器：返回值仍然可以直接 `await`，同时带 `cancel()`、`flush()`、`pending()`。
 
 ### 搜索联想
 

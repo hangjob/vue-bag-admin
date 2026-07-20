@@ -13,6 +13,7 @@ import {
 import { useMenuStore } from '../stores/menu'
 import { useTabBarStore } from '../stores/tabbar'
 import { useUserStore } from '../stores/user'
+import { setupHostUi, type HostUiConfig } from './host-ui'
 
 const { loadingBar } = createDiscreteApi(['loadingBar'])
 
@@ -56,7 +57,15 @@ export const createHostRouter = ({ routes, history }: CreateHostRouterOptions) =
 
   router.afterEach((to) => {
     loadingBar.finish()
-    useTabBarStore().addTab(to)
+    const tabbarStore = useTabBarStore()
+    const hiddenPaths = router
+      .getRoutes()
+      .filter((route) => route.meta?.layout === 'blank' || route.meta?.hideInTabBar === true)
+      .map((route) => route.path)
+
+    tabbarStore.addTab(to)
+    // 顺手清理 localStorage 里历史残留的隐藏页 tab，例如 login / 403。
+    tabbarStore.removeTabsByPaths(hiddenPaths)
   })
 
   router.onError(() => {
@@ -69,14 +78,23 @@ export const createHostRouter = ({ routes, history }: CreateHostRouterOptions) =
 export interface BootstrapPluginsOptions {
   app: App
   router: Router
-  plugins: AdminPlugin[]
+  plugins?: AdminPlugin[]
   i18n?: I18n
+  ui?: HostUiConfig
 }
 
-export async function bootstrapPlugins({ app, router, plugins, i18n }: BootstrapPluginsOptions) {
-  registerRuntimePlugins(plugins)
+export async function bootstrapPlugins({
+  app,
+  router,
+  plugins,
+  i18n,
+  ui
+}: BootstrapPluginsOptions) {
+  const resolvedPlugins = plugins ?? []
+  setupHostUi(app, ui)
+  registerRuntimePlugins(resolvedPlugins)
   const globalMenus: MenuConfig[] = []
-  const enabledPlugins = resolveEnabledPlugins(plugins)
+  const enabledPlugins = resolveEnabledPlugins(resolvedPlugins)
   assertPluginConflicts(enabledPlugins)
   const enabledPluginIds = enabledPlugins.map((plugin) => plugin.id)
 

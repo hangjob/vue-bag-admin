@@ -9,11 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@bag/core": "__BAG_VERSION__",
-    "@bag/host-vue": "__BAG_VERSION__",
-    "@bag/request": "__BAG_VERSION__",
-    "@bag/ui": "__BAG_VERSION__",
-    "@vueuse/core": "^11.0.0",
+    "vue-bag-admin": "__BAG_VERSION__",
     "naive-ui": "^2.40.0",
     "pinia": "^2.2.0",
     "vue": "^3.5.0",

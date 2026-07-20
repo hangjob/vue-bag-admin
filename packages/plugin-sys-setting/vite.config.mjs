@@ -11,7 +11,7 @@ export default defineConfig({
       fileName: 'index'
     },
     rollupOptions: {
-      external: ['vue', 'vue-router', '@vueuse/core', '@bag/core', '@bag/ui']
+      external: ['vue', 'vue-router', '@vueuse/core', 'vue-bag-admin']
     }
   }
 })

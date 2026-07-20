@@ -1,6 +1,6 @@
 # 网络请求与拦截
 
-在 Vue-Bag-Admin 中，所有网络请求都由 `@bag/request` 包统一管理。它同时支持 `axios` 和原生 `fetch`，负责：
+在 Vue-Bag-Admin 中，网络请求统一由 `@bag/request` 管理。它同时支持 `axios` 和原生 `fetch`，主要处理这些事情：
 
 - Token 注入
 - HTTP 状态码拦截
@@ -48,7 +48,7 @@ const fetchUsers = async () => {
 
 ## 初始化配置
 
-为了和宿主解耦，请求层不会硬编码 Token 获取与错误处理逻辑，而是通过 `setupHttp()` 在启动阶段注入。
+为了和宿主解耦，请求层不会硬编码 Token 获取和错误处理逻辑，而是通过 `setupHttp()` 在启动阶段注入。
 
 ```ts
 import { setupHttp } from '@bag/request'
@@ -84,7 +84,7 @@ setupHttp({
 })
 ```
 
-如果项目更偏向原生 API，也可以改成 `setupFetch()`：
+如果项目更偏向原生 API，也可以直接用 `setupFetch()`：
 
 ```ts
 import { setupFetch } from '@bag/request'
@@ -122,13 +122,13 @@ setupFetch({
 
 ## SetupHttpConfig 支持什么
 
-`setupHttp()` 同时支持两类配置：
+`setupHttp()` 主要支持这几类配置：
 
 - `axios` 原生配置：如 `baseURL`、`timeout`、`headers`
 - 宿主注入能力：如 `getToken`、错误钩子、业务错误识别函数
 - PWA 缓存能力：如缓存命名空间、缓存策略、缓存时长
 
-`setupFetch()` 则提供一组与之对应的能力：
+`setupFetch()` 也有对应的一组能力：
 
 - 原生 `fetch` 配置：如 `baseURL`、`headers`、`credentials`
 - 宿主注入能力：如 `getToken`、错误钩子、业务错误识别函数
@@ -136,7 +136,7 @@ setupFetch({
 
 ## PWA 模式
 
-如果你的管理端希望在弱网、断网或被安装为桌面应用后仍保持基本可用，可以直接在 `setupHttp()` 或 `setupFetch()` 里开启 `pwa` 配置。
+如果你的管理端希望在弱网、断网，或者被安装为桌面应用后还能保持基本可用，可以直接在 `setupHttp()` 或 `setupFetch()` 里开启 `pwa` 配置。
 
 `axios` 版本适合继续沿用 `http` 的项目：
 

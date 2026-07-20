@@ -13,8 +13,7 @@ Usage:
   create-vue-bag-admin <project-name> [options]
 
 Options:
-  --bag-version <version>  Set @bag/* dependency version, default: latest
-  --template <name>        Template name, default: basic
+  --bag-version <version>  Set vue-bag-admin version, default: latest
   --force                  Allow writing into a non-empty target directory
   -h, --help               Show help
 `.trim()
@@ -29,7 +28,6 @@ if (args.length === 0 || args.includes('-h') || args.includes('--help')) {
 
 const options = {
   bagVersion: 'latest',
-  template: 'basic',
   force: false
 }
 
@@ -39,11 +37,6 @@ for (let index = 0; index < args.length; index += 1) {
   const arg = args[index]
   if (arg === '--bag-version') {
     options.bagVersion = args[index + 1] ?? options.bagVersion
-    index += 1
-    continue
-  }
-  if (arg === '--template') {
-    options.template = args[index + 1] ?? options.template
     index += 1
     continue
   }
@@ -61,7 +54,7 @@ if (!projectName) {
   process.exit(1)
 }
 
-const templateDir = path.resolve(__dirname, '../templates', options.template)
+const templateDir = path.resolve(__dirname, '../templates/basic')
 const targetDir = path.resolve(process.cwd(), projectName)
 
 const pathExists = async (targetPath) => {
@@ -111,12 +104,6 @@ const renderTemplateFiles = async (dirPath, replacements) => {
 }
 
 const run = async () => {
-  const templateExists = await pathExists(templateDir)
-  if (!templateExists) {
-    console.error(`Unknown template: ${options.template}`)
-    process.exit(1)
-  }
-
   await ensureTargetDir()
   await cp(templateDir, targetDir, { recursive: true, force: true })
   await renderTemplateFiles(targetDir, {

@@ -78,7 +78,7 @@ import {
   useMessage,
   type DataTableColumns
 } from 'naive-ui'
-import { PmProTable } from '@bag/ui'
+import { PmProTable } from 'vue-bag-admin'
 
 type ProTableExpose = {
   reload: (options?: { resetPage?: boolean }) => void

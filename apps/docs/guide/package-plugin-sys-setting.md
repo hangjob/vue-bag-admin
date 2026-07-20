@@ -20,13 +20,13 @@
 
 所以更顺手的拆法是：
 
-- `@bag/host-vue` 负责提供设置能力的承载壳层
+- `vue-bag-admin` 负责提供设置能力的承载壳层
 - `@bag/plugin-sys-setting` 负责真正的设置业务页
 
 ## 接入方式
 
 ```ts
-import { bootstrapPlugins } from '@bag/host-vue'
+import { bootstrapPlugins } from 'vue-bag-admin'
 import sysSettingPlugin from '@bag/plugin-sys-setting'
 
 await bootstrapPlugins({

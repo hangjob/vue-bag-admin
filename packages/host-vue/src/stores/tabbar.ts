@@ -14,6 +14,10 @@ export interface TabItem {
 
 const tabStorageKey = 'bag.admin.tabs'
 
+const shouldHideInTabBar = (route: RouteLocationNormalizedLoaded) => {
+  return route.meta?.layout === 'blank' || route.meta?.hideInTabBar === true
+}
+
 export const useTabBarStore = defineStore('tabbar', {
   state: () => ({
     // 标签页列表需要跨刷新和重开浏览器恢复，因此使用 localStorage 持久化。
@@ -48,8 +52,8 @@ export const useTabBarStore = defineStore('tabbar', {
       this.refreshingViews = this.refreshingViews.filter((name) => activeNames.has(name))
     },
     addTab(route: RouteLocationNormalizedLoaded) {
-      // 忽略不需要加入 tab 的页面，比如重定向、登录页等
-      if (['Login', 'NotFound', 'Forbidden', 'Redirect'].includes(route.name as string)) return
+      // tab 是否显示统一由路由 meta 控制，避免业务侧改路由名后过滤失效。
+      if (shouldHideInTabBar(route)) return
       if (!route.name) return
 
       const isExists = this.tabs.some((tab) => tab.fullPath === route.fullPath)
@@ -67,6 +71,13 @@ export const useTabBarStore = defineStore('tabbar', {
           noCache: !!noCache
         })
       }
+    },
+    removeTabsByPaths(paths: string[]) {
+      if (paths.length === 0) return
+
+      const hiddenPaths = new Set(paths)
+      this.tabs = this.tabs.filter((tab) => !hiddenPaths.has(tab.path))
+      this.syncRefreshingViews()
     },
     removeTab(fullPath: string) {
       const tab = this.tabs.find((item) => item.fullPath === fullPath)

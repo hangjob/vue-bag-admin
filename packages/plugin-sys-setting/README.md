@@ -7,7 +7,7 @@
 ## 安装
 
 ```bash
-pnpm add @bag/plugin-sys-setting @bag/core @bag/ui
+pnpm add vue-bag-admin @bag/plugin-sys-setting
 ```
 
 宿主项目需要自行提供 `vue`、`vue-router`，并通常会和 `@bag/host-vue` 一起使用。
@@ -23,7 +23,7 @@ pnpm add @bag/plugin-sys-setting @bag/core @bag/ui
 ## 怎么接进去
 
 ```ts
-import { bootstrapPlugins } from '@bag/host-vue'
+import { bootstrapPlugins } from 'vue-bag-admin'
 import sysSettingPlugin from '@bag/plugin-sys-setting'
 
 await bootstrapPlugins({
@@ -37,7 +37,7 @@ await bootstrapPlugins({
 ## 一般拿它做什么
 
 - 作为官方“系统设置业务插件”的参考实现
-- 作为插件管理页的落点，配合 `@bag/core` 的运行时工具展示插件清单
+- 作为插件管理页的落点，配合 `vue-bag-admin` 暴露的运行时工具展示插件清单
 - 作为你自己项目里设置中心的起步模板
 
 ## 这份示例的特点
@@ -57,6 +57,5 @@ await bootstrapPlugins({
 
 ## 一般会搭什么
 
-- `@bag/core`：读取插件运行时清单和启停状态
-- `@bag/ui`：复用表单、字典和基础后台组件
+- `vue-bag-admin`：提供插件协议、运行时清单和基础后台组件
 - `@bag/host-vue`：把系统设置插件挂到宿主应用里

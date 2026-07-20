@@ -23,7 +23,7 @@
 ## 接入方式
 
 ```ts
-import { bootstrapPlugins } from '@bag/host-vue'
+import { bootstrapPlugins } from 'vue-bag-admin'
 import shopPlugin from '@bag/plugin-shop'
 
 await bootstrapPlugins({
@@ -44,7 +44,7 @@ await bootstrapPlugins({
 
 - 它是业务示例插件，不属于宿主框架基础层
 - 它更适合作为参考实现，不建议把里面的页面直接当成最终产品形态
-- 宿主布局、权限体系、标签页缓存机制还是属于 `@bag/host-vue`
+- 宿主布局、权限体系、标签页缓存机制还是属于 `vue-bag-admin` 提供的宿主运行时
 
 ## 继续阅读
 

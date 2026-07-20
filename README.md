@@ -8,7 +8,7 @@
 
 - ⚡️ **极致速度**：基于 Vite5 构建，提供闪电般的冷启动和热重载体验。
 - 🧩 **插件化微内核架构**：核心与业务解耦，业务模块可以作为独立插件接入宿主。
-- 📦 **可拆包生态**：`@bag/core`、`@bag/ui`、`@bag/request`、`@bag/host-vue`、`@bag/plugin-*` 和 `vue-bag-admin` 已拆成清晰分层。
+- 📦 **主包优先，插件按需**：业务项目默认只安装 `vue-bag-admin`，需要业务能力时再追加 `@bag/plugin-*`；仓库内部仍保留清晰分层。
 - 🛠️ **Monorepo 管理**：采用 pnpm workspace 进行多包协作，仓库内置示例宿主、文档站和参考后端。
 - 🔒 **完善的权限体系**：基于角色的动态路由与按钮级别权限控制，配合 Strapi5 轻松实现全栈权限流转。
 - 🎨 **Naive UI 与 TailwindCSS**：深度集成 Naive UI 组件库与 TailwindCSS，组件丰富且样式开发高效灵活。
@@ -27,7 +27,8 @@ Vue-Bag-Admin
 │   ├── host-vue          # 宿主层：布局、权限、插件引导
 │   ├── request           # 请求能力层
 │   ├── ui                # Schema 驱动 UI 组件层
-│   ├── vue-bag-admin  # 初始化脚手架
+│   ├── vue-bag-admin      # 面向业务项目的统一主包
+│   ├── create-vue-bag-admin # 初始化脚手架
 │   └── plugin-*          # 官方业务插件与示例插件
 ├── pnpm-workspace.yaml   # Monorepo 配置
 └── package.json
@@ -50,6 +51,11 @@ pnpm dev
 
 - `basic`：最小宿主模板
 - `with-demo-plugins`：带多插件演示的教学模板
+
+默认生成结果也已经统一成：
+
+- `basic`：只安装 `vue-bag-admin`
+- `with-demo-plugins`：安装 `vue-bag-admin`，再额外带上官方示例插件
 
 ### 2. 在当前仓库里开发
 
@@ -109,6 +115,7 @@ pnpm --filter @bag/docs dev
 - `@bag/request`：请求能力层，统一 HTTP / WS 相关能力，并内置基于 Lodash 的请求防抖 / 节流包装器
 - `@bag/ui`：后台组件层，承载 `PmProTable`、`PmProForm`、`PmSchemaForm`
 - `@bag/host-vue`：Vue 宿主层，负责布局、权限、路由与插件引导
+- `vue-bag-admin`：面向业务项目的统一主包，默认聚合宿主、请求、UI 和协议能力
 - `@bag/plugin-shop`：官方商城示例插件
 - `@bag/plugin-sys-setting`：官方系统设置示例插件
 - `create-vue-bag-admin`：宿主初始化脚手架

@@ -41,8 +41,14 @@
     "./style.css"
   ],
   "scripts": {
-    "build": "vite build && node ./scripts/prepare-package.mjs",
+    "build:deps": "pnpm --dir ../core build && pnpm --dir ../request build && pnpm --dir ../ui build && pnpm --dir ../host-vue build",
+    "build": "pnpm run build:deps && vite build && node ./scripts/prepare-package.mjs",
     "check-types": "tsc -p tsconfig.build.json --noEmit"
+  },
+  "dependencies": {
+    "@vueuse/core": "^11.0.0",
+    "axios": "^1.7.0",
+    "lodash-es": "^4.18.1"
   },
   "peerDependencies": {
     "naive-ui": "^2.40.0",

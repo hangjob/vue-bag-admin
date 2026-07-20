@@ -11,7 +11,7 @@ pnpm add vue-bag-admin vue@^3.5 vue-router@^4.4 pinia@^2.2 vue-i18n@^10 naive-ui
 ## 用法
 
 ```ts
-import { HostApp, bootstrapPlugins, createHttpClient, PmProTable } from 'vue-bag-admin'
+import { bootstrapPlugins, createHostI18n, createHostRouter, PmProTable } from 'vue-bag-admin'
 import 'vue-bag-admin/style.css'
 ```
 
@@ -21,6 +21,8 @@ import 'vue-bag-admin/style.css'
 - `@bag/request`
 - `@bag/ui`
 - `@bag/host-vue`
+- `@bag/plugin-shop`
+- `@bag/plugin-sys-setting`
 
 ## 脚手架
 

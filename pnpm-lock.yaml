@@ -153,73 +153,6 @@ importers:
         specifier: ^5
         version: 5.9.2
 
-  apps/template-playground:
-    dependencies:
-      '@bag/core':
-        specifier: workspace:*
-        version: link:../../packages/core
-      '@bag/host-vue':
-        specifier: workspace:*
-        version: link:../../packages/host-vue
-      '@bag/plugin-shop':
-        specifier: workspace:*
-        version: link:../../packages/plugin-shop
-      '@bag/plugin-sys-setting':
-        specifier: workspace:*
-        version: link:../../packages/plugin-sys-setting
-      '@bag/request':
-        specifier: workspace:*
-        version: link:../../packages/request
-      '@bag/ui':
-        specifier: workspace:*
-        version: link:../../packages/ui
-      '@vueuse/core':
-        specifier: ^11.0.0
-        version: 11.3.0(vue@3.5.33(typescript@5.9.2))
-      naive-ui:
-        specifier: ^2.40.0
-        version: 2.44.1(vue@3.5.33(typescript@5.9.2))
-      pinia:
-        specifier: ^2.2.0
-        version: 2.3.1(typescript@5.9.2)(vue@3.5.33(typescript@5.9.2))
-      vue:
-        specifier: ^3.5.0
-        version: 3.5.33(typescript@5.9.2)
-      vue-i18n:
-        specifier: ^10.0.0
-        version: 10.0.8(vue@3.5.33(typescript@5.9.2))
-      vue-router:
-        specifier: ^4.4.0
-        version: 4.6.4(vue@3.5.33(typescript@5.9.2))
-    devDependencies:
-      '@types/node':
-        specifier: ^22.0.0
-        version: 22.19.17
-      '@vitejs/plugin-vue':
-        specifier: ^6.0.0
-        version: 6.0.6(vite@6.4.2(@types/node@22.19.17)(jiti@1.21.7)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.8.4))(vue@3.5.33(typescript@5.9.2))
-      '@vue/tsconfig':
-        specifier: ^0.9.1
-        version: 0.9.1(typescript@5.9.2)(vue@3.5.33(typescript@5.9.2))
-      autoprefixer:
-        specifier: ^10.5.0
-        version: 10.5.0(postcss@8.5.10)
-      postcss:
-        specifier: ^8.5.10
-        version: 8.5.10
-      tailwindcss:
-        specifier: ^3.4.1
-        version: 3.4.19(yaml@2.8.4)
-      typescript:
-        specifier: ^5.5.3
-        version: 5.9.2
-      vite:
-        specifier: ^6.0.0
-        version: 6.4.2(@types/node@22.19.17)(jiti@1.21.7)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.8.4)
-      vue-tsc:
-        specifier: ^2.1.0
-        version: 2.2.12(typescript@5.9.2)
-
   packages/core:
     dependencies:
       vue:
@@ -293,18 +226,15 @@ importers:
         specifier: ^4.4.0
         version: 4.6.4(vue@3.5.33(typescript@5.9.2))
     devDependencies:
-      '@bag/core':
-        specifier: workspace:*
-        version: link:../core
-      '@bag/ui':
-        specifier: workspace:*
-        version: link:../ui
       '@vitejs/plugin-vue':
         specifier: ^6.0.0
         version: 6.0.6(vite@6.4.2(@types/node@22.19.17)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.8.4))(vue@3.5.33(typescript@5.9.2))
       vite:
         specifier: ^6.0.0
         version: 6.4.2(@types/node@22.19.17)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.8.4)
+      vue-bag-admin:
+        specifier: workspace:*
+        version: link:../vue-bag-admin
       vue-tsc:
         specifier: ^2.1.0
         version: 2.2.12(typescript@5.9.2)
@@ -321,18 +251,15 @@ importers:
         specifier: ^4.4.0
         version: 4.6.4(vue@3.5.33(typescript@5.9.2))
     devDependencies:
-      '@bag/core':
-        specifier: workspace:*
-        version: link:../core
-      '@bag/ui':
-        specifier: workspace:*
-        version: link:../ui
       '@vitejs/plugin-vue':
         specifier: ^6.0.0
         version: 6.0.6(vite@6.4.2(@types/node@22.19.17)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.8.4))(vue@3.5.33(typescript@5.9.2))
       vite:
         specifier: ^6.0.0
         version: 6.4.2(@types/node@22.19.17)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.8.4)
+      vue-bag-admin:
+        specifier: workspace:*
+        version: link:../vue-bag-admin
       vue-tsc:
         specifier: ^2.1.0
         version: 2.2.12(typescript@5.9.2)
@@ -386,18 +313,15 @@ importers:
 
   packages/vue-bag-admin:
     dependencies:
-      '@bag/core':
-        specifier: workspace:*
-        version: link:../core
-      '@bag/host-vue':
-        specifier: workspace:*
-        version: link:../host-vue
-      '@bag/request':
-        specifier: workspace:*
-        version: link:../request
-      '@bag/ui':
-        specifier: workspace:*
-        version: link:../ui
+      '@vueuse/core':
+        specifier: ^11.0.0
+        version: 11.3.0(vue@3.5.33(typescript@5.9.2))
+      axios:
+        specifier: ^1.7.0
+        version: 1.15.2
+      lodash-es:
+        specifier: ^4.18.1
+        version: 4.18.1
       naive-ui:
         specifier: ^2.40.0
         version: 2.44.1(vue@3.5.33(typescript@5.9.2))
@@ -414,6 +338,18 @@ importers:
         specifier: ^4.4.0
         version: 4.6.4(vue@3.5.33(typescript@5.9.2))
     devDependencies:
+      '@bag/core':
+        specifier: workspace:*
+        version: link:../core
+      '@bag/host-vue':
+        specifier: workspace:*
+        version: link:../host-vue
+      '@bag/request':
+        specifier: workspace:*
+        version: link:../request
+      '@bag/ui':
+        specifier: workspace:*
+        version: link:../ui
       typescript:
         specifier: ^5.9.2
         version: 5.9.2
@@ -11488,12 +11424,6 @@ snapshots:
       vite: 6.0.0(@types/node@24.12.2)(jiti@1.21.7)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.8.4)
       vue: 3.5.33(typescript@5.9.2)
 
-  '@vitejs/plugin-vue@6.0.6(vite@6.4.2(@types/node@22.19.17)(jiti@1.21.7)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.8.4))(vue@3.5.33(typescript@5.9.2))':
-    dependencies:
-      '@rolldown/pluginutils': 1.0.0-rc.13
-      vite: 6.4.2(@types/node@22.19.17)(jiti@1.21.7)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.8.4)
-      vue: 3.5.33(typescript@5.9.2)
-
   '@vitejs/plugin-vue@6.0.6(vite@6.4.2(@types/node@22.19.17)(jiti@2.6.1)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.8.4))(vue@3.5.33(typescript@5.9.2))':
     dependencies:
       '@rolldown/pluginutils': 1.0.0-rc.13
@@ -16208,22 +16138,6 @@ snapshots:
       rollup: 4.60.2
     optionalDependencies:
       '@types/node': 24.12.2
-      fsevents: 2.3.3
-      jiti: 1.21.7
-      lightningcss: 1.32.0
-      terser: 5.46.2
-      yaml: 2.8.4
-
-  vite@6.4.2(@types/node@22.19.17)(jiti@1.21.7)(lightningcss@1.32.0)(terser@5.46.2)(yaml@2.8.4):
-    dependencies:
-      esbuild: 0.25.12
-      fdir: 6.5.0(picomatch@4.0.4)
-      picomatch: 4.0.4
-      postcss: 8.5.10
-      rollup: 4.60.2
-      tinyglobby: 0.2.16
-    optionalDependencies:
-      '@types/node': 22.19.17
       fsevents: 2.3.3
       jiti: 1.21.7
       lightningcss: 1.32.0

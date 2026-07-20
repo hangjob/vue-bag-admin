@@ -15,7 +15,7 @@
       <div
         class="relative rounded-[28px] border border-white/70 bg-white/80 p-5 shadow-[0_18px_45px_rgba(15,23,42,0.06)] backdrop-blur-xl dark:border-slate-800/80 dark:bg-white/[0.05] dark:shadow-none"
       >
-        <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+        <div class="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
           <div class="max-w-3xl">
             <div
               class="inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 text-xs font-semibold text-orange-500 ring-1 ring-orange-100 dark:bg-white/5 dark:text-orange-300 dark:ring-slate-800/80"
@@ -91,7 +91,7 @@
 
     <section
       v-if="pendingReload"
-      class="flex flex-col gap-4 rounded-[28px] border border-amber-200/80 bg-amber-50/90 p-5 shadow-[0_18px_45px_rgba(245,158,11,0.10)] dark:border-amber-400/20 dark:bg-amber-500/10 dark:shadow-none lg:flex-row lg:items-center lg:justify-between"
+      class="flex flex-col gap-4 rounded-[28px] border border-amber-200/80 bg-amber-50/90 p-5 shadow-[0_18px_45px_rgba(245,158,11,0.10)] dark:border-amber-400/20 dark:bg-amber-500/10 dark:shadow-none md:flex-row md:items-center md:justify-between"
     >
       <div class="space-y-1">
         <div class="text-sm font-bold text-amber-700 dark:text-amber-300">检测到插件状态已更新</div>
@@ -111,7 +111,7 @@
     <section
       class="rounded-[28px] border border-slate-200/70 bg-white/80 p-5 shadow-[0_18px_45px_rgba(15,23,42,0.05)] backdrop-blur-xl dark:border-slate-800/80 dark:bg-white/[0.04] dark:shadow-none"
     >
-      <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+      <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
           <div class="text-lg font-bold text-slate-900 dark:text-white">插件视图</div>
           <p class="mt-1 text-sm leading-6 text-slate-500 dark:text-slate-400">
@@ -136,7 +136,7 @@
         </div>
       </div>
 
-      <div class="mt-5 grid gap-4 xl:grid-cols-2">
+      <div class="mt-5 grid gap-4 lg:grid-cols-2">
         <article
           v-for="plugin in visiblePlugins"
           :key="plugin.id"
@@ -353,7 +353,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { listRuntimePlugins, setPluginEnabledState, type PluginRuntimeItem } from '@bag/core'
+import { listRuntimePlugins, setPluginEnabledState, type PluginRuntimeItem } from 'vue-bag-admin'
 
 const router = useRouter()
 const refreshSeed = ref(0)

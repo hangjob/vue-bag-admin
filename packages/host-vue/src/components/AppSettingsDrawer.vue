@@ -7,7 +7,7 @@
         <div class="relative flex h-full flex-col">
           <button
             type="button"
-            class="absolute right-6 top-6 z-10 inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-white/80 text-slate-500 shadow-sm ring-1 ring-slate-200/70 transition hover:-translate-y-0.5 hover:text-slate-900 dark:bg-white/5 dark:text-slate-300 dark:ring-slate-800/90 dark:hover:text-white"
+            class="bag-settings-close-btn"
             @click="appConfigStore.closeSettingsDrawer()"
           >
             <svg
@@ -40,7 +40,7 @@
                 <div class="grid grid-cols-2 gap-3">
                   <button
                     type="button"
-                    class="rounded-2xl border p-4 text-left transition-all"
+                    class="bag-settings-theme-card"
                     :class="theme === 'light' ? activeOptionClass : inactiveOptionClass"
                     @click="handleThemeChange('light')"
                   >
@@ -68,7 +68,7 @@
 
                   <button
                     type="button"
-                    class="rounded-2xl border p-4 text-left transition-all"
+                    class="bag-settings-theme-card"
                     :class="theme === 'dark' ? activeOptionClass : inactiveOptionClass"
                     @click="handleThemeChange('dark')"
                   >
@@ -109,7 +109,7 @@
                     v-for="preset in appearancePresets"
                     :key="preset.key"
                     type="button"
-                    class="group rounded-[22px] border p-3.5 text-left transition-all duration-300"
+                    class="bag-settings-preset-card group"
                     :class="
                       presetKey === preset.key
                         ? 'border-transparent bg-[linear-gradient(135deg,rgba(255,255,255,0.94),rgba(255,237,213,0.92))] shadow-[0_18px_40px_rgba(249,115,22,0.16)] ring-2 ring-orange-300/70 dark:bg-[linear-gradient(135deg,rgba(249,115,22,0.18),rgba(168,85,247,0.16))] dark:ring-orange-400/30'
@@ -187,7 +187,7 @@
                     v-for="preset in themePresets"
                     :key="preset.value"
                     :title="preset.name"
-                    class="group flex flex-col items-center gap-2 rounded-2xl p-2 transition-transform hover:-translate-y-0.5"
+                    class="bag-settings-color-btn group"
                     @click="appConfigStore.setThemeColor(preset.value)"
                   >
                     <div
@@ -277,8 +277,9 @@ import {
   useAppConfigStore,
   type AppearancePresetKey,
   type ThemeMode
-} from '@bag/host-vue'
-import { useMenuStore, useTabBarStore } from '@bag/host-vue'
+} from '../stores/app-config'
+import { useMenuStore } from '../stores/menu'
+import { useTabBarStore } from '../stores/tabbar'
 
 const appConfigStore = useAppConfigStore()
 const menuStore = useMenuStore()
@@ -382,3 +383,105 @@ const handleReset = () => {
   tabbarStore.enableTabPersist = true
 }
 </script>
+
+<style>
+.bag-settings-close-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.82);
+  color: #64748b;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+  outline: 1px solid rgba(226, 232, 240, 0.8);
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.bag-settings-close-btn:hover {
+  transform: translateY(-2px);
+  color: #0f172a;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+}
+
+.dark .bag-settings-close-btn {
+  background: rgba(255, 255, 255, 0.06);
+  color: #cbd5e1;
+  outline-color: rgba(30, 41, 59, 0.9);
+}
+
+.dark .bag-settings-close-btn:hover {
+  color: #fff;
+}
+
+.bag-settings-theme-card,
+.bag-settings-preset-card,
+.bag-settings-color-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.bag-settings-theme-card {
+  width: 100%;
+  padding: 16px;
+  text-align: left;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 18px;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.bag-settings-preset-card {
+  width: 100%;
+  padding: 14px;
+  text-align: left;
+  border: 1px solid rgba(226, 232, 240, 0.82);
+  border-radius: 22px;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.bag-settings-color-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border: 0;
+  background: transparent;
+  border-radius: 16px;
+  transition: transform 0.2s ease;
+}
+
+.bag-settings-color-btn:hover {
+  transform: translateY(-2px);
+}
+
+.dark .bag-settings-theme-card,
+.dark .bag-settings-preset-card {
+  border-color: rgba(30, 41, 59, 0.86);
+}
+</style>

@@ -1,6 +1,7 @@
 <template>
   <BagUiProvider :lang="locale" :theme="theme" :theme-color="themeColor">
     <AppLayout />
+    <AppSettingsDrawer />
     <slot name="settings" />
   </BagUiProvider>
 </template>
@@ -12,6 +13,7 @@ import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
 import { BagUiProvider } from '@bag/ui'
 import AppLayout from './layouts/AppLayout.vue'
+import AppSettingsDrawer from './components/AppSettingsDrawer.vue'
 import { useAppConfigStore } from './stores/app-config'
 import { useTabBarStore } from './stores/tabbar'
 
