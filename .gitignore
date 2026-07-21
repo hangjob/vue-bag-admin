@@ -45,3 +45,4 @@ yarn-error.log*
 
 apps/docs/.vitepress/cache
 .trae
+packages/vue-bag-admin/vue-bag-admin-6.0.0.tgz
