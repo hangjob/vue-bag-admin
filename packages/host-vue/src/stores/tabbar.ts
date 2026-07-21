@@ -2,6 +2,7 @@ import { nextTick } from 'vue'
 import { defineStore } from 'pinia'
 import type { RouteLocationNormalizedLoaded } from 'vue-router'
 import { useLocalStorage } from '@vueuse/core'
+import { getHostNavigationConfig } from '../core/navigation'
 
 export interface TabItem {
   fullPath: string
@@ -92,17 +93,20 @@ export const useTabBarStore = defineStore('tabbar', {
     },
     clearTabs() {
       this.refreshingViews = []
-      this.tabs = this.tabs.filter((tab) => tab.path === '/dashboard')
+      const { homePath } = getHostNavigationConfig()
+      this.tabs = this.tabs.filter((tab) => tab.path === homePath)
     },
     closeOtherTabs(fullPath: string) {
-      this.tabs = this.tabs.filter((tab) => tab.fullPath === fullPath || tab.path === '/dashboard')
+      const { homePath } = getHostNavigationConfig()
+      this.tabs = this.tabs.filter((tab) => tab.fullPath === fullPath || tab.path === homePath)
       this.syncRefreshingViews()
     },
     closeLeftTabs(fullPath: string) {
       const index = this.tabs.findIndex((tab) => tab.fullPath === fullPath)
       if (index !== -1) {
-        // 保留当前及其右侧的，还要保留 /dashboard (通常在第一个)
-        this.tabs = this.tabs.filter((tab, i) => i >= index || tab.path === '/dashboard')
+        // 保留当前及其右侧的，还要保留首页 (通常在第一个)
+        const { homePath } = getHostNavigationConfig()
+        this.tabs = this.tabs.filter((tab, i) => i >= index || tab.path === homePath)
         this.syncRefreshingViews()
       }
     },
@@ -110,7 +114,8 @@ export const useTabBarStore = defineStore('tabbar', {
       const index = this.tabs.findIndex((tab) => tab.fullPath === fullPath)
       if (index !== -1) {
         // 保留当前及其左侧的
-        this.tabs = this.tabs.filter((tab, i) => i <= index || tab.path === '/dashboard')
+        const { homePath } = getHostNavigationConfig()
+        this.tabs = this.tabs.filter((tab, i) => i <= index || tab.path === homePath)
         this.syncRefreshingViews()
       }
     },

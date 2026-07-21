@@ -1,32 +1,34 @@
 <template>
   <n-grid :cols="cols" :x-gap="xGap" :y-gap="yGap">
-    <template v-for="schema in visibleSchemas" :key="schema.field">
+    <template v-for="formSchema in visibleSchemas" :key="formSchema.field">
       <n-form-item-gi
-        :span="schema.span ?? 24"
-        :path="schema.field"
-        :label="schema.label"
-        v-bind="schema.formItemProps"
+        :span="formSchema.span ?? 24"
+        :path="formSchema.field"
+        :label="formSchema.label"
+        v-bind="formSchema.formItemProps"
       >
-        <template v-if="schema.component === 'slot'">
+        <template v-if="formSchema.component === 'slot'">
           <slot
-            :name="schema.slotName || schema.field"
-            :schema="schema"
+            :name="formSchema.slotName || formSchema.field"
+            :schema="formSchema"
             :values="modelValue"
             :set-field-value="setFieldValue"
           />
         </template>
 
-        <template v-else-if="schema.component === 'radio'">
+        <template v-else-if="formSchema.component === 'radio'">
           <n-radio-group
-            :value="getScalarFieldValue(schema.field)"
-            :disabled="isFieldDisabled(schema)"
-            v-bind="getComponentProps(schema)"
-            @update:value="(value) => setFieldValue(schema.field, value)"
+            :value="getScalarFieldValue(formSchema.field)"
+            :disabled="isFieldDisabled(formSchema)"
+            v-bind="getComponentProps(formSchema)"
+            @update:value="
+              (value: string | number | boolean | null) => setFieldValue(formSchema.field, value)
+            "
           >
             <div class="flex flex-wrap gap-3">
               <n-radio
-                v-for="option in getSchemaOptions(schema)"
-                :key="`${schema.field}-${String(option.value)}`"
+                v-for="option in getSchemaOptions(formSchema)"
+                :key="`${formSchema.field}-${String(option.value)}`"
                 :value="option.value"
                 :disabled="option.disabled"
               >
@@ -36,17 +38,19 @@
           </n-radio-group>
         </template>
 
-        <template v-else-if="schema.component === 'checkbox'">
+        <template v-else-if="formSchema.component === 'checkbox'">
           <n-checkbox-group
-            :value="getCheckboxGroupValue(schema.field)"
-            :disabled="isFieldDisabled(schema)"
-            v-bind="getComponentProps(schema)"
-            @update:value="(value) => setFieldValue(schema.field, value)"
+            :value="getCheckboxGroupValue(formSchema.field)"
+            :disabled="isFieldDisabled(formSchema)"
+            v-bind="getComponentProps(formSchema)"
+            @update:value="
+              (value: Array<string | number>) => setFieldValue(formSchema.field, value)
+            "
           >
             <div class="flex flex-wrap gap-3">
               <n-checkbox
-                v-for="option in getCheckboxOptions(schema)"
-                :key="`${schema.field}-${String(option.value)}`"
+                v-for="option in getCheckboxOptions(formSchema)"
+                :key="`${formSchema.field}-${String(option.value)}`"
                 :value="option.value"
                 :disabled="option.disabled"
               >
@@ -58,19 +62,19 @@
 
         <template v-else>
           <component
-            :is="resolveComponent(schema.component)"
-            :value="getFieldValue(schema.field)"
-            :disabled="isFieldDisabled(schema)"
-            v-bind="getComponentProps(schema)"
-            @update:value="(value: unknown) => setFieldValue(schema.field, value)"
+            :is="resolveComponent(formSchema.component)"
+            :value="getFieldValue(formSchema.field)"
+            :disabled="isFieldDisabled(formSchema)"
+            v-bind="getComponentProps(formSchema)"
+            @update:value="(value: unknown) => setFieldValue(formSchema.field, value)"
           />
         </template>
 
         <p
-          v-if="schema.description"
+          v-if="formSchema.description"
           class="mt-2 text-xs leading-5 text-slate-400 dark:text-slate-500"
         >
-          {{ schema.description }}
+          {{ formSchema.description }}
         </p>
       </n-form-item-gi>
     </template>
@@ -144,7 +148,7 @@ const componentMap: Record<
   number: NInputNumber
 }
 
-const visibleSchemas = computed(() =>
+const visibleSchemas = computed<ProFormSchema[]>(() =>
   props.schemas.filter((schema) => {
     if (typeof schema.visible === 'function') {
       return schema.visible(props.modelValue, schema)

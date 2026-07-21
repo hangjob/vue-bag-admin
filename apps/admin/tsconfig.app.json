@@ -3,6 +3,10 @@
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "types": ["vite/client"],
+    "baseUrl": ".",
+    "paths": {
+      "vue-bag-admin": ["../../packages/vue-bag-admin/src/index.ts"]
+    },
 
     /* Linting */
     "noUnusedLocals": true,

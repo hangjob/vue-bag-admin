@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { useLocalStorage } from '@vueuse/core'
+import { applyThemeTokens, createThemeTokens } from '../core/theme-tokens'
 
 export type ThemeMode = 'light' | 'dark'
 export type ContentWidthMode = 'fluid' | 'compact'
@@ -33,14 +34,6 @@ export const themePresets: ThemePreset[] = [
   { name: '浪漫紫', value: '#8b5cf6', colorClass: 'bg-violet-500' },
   { name: '玫瑰红', value: '#f43f5e', colorClass: 'bg-rose-500' }
 ]
-
-const themeColorMap: Record<string, { hover: string; pressed: string }> = {
-  '#f97316': { hover: '#fb923c', pressed: '#ea580c' },
-  '#3b82f6': { hover: '#60a5fa', pressed: '#2563eb' },
-  '#10b981': { hover: '#34d399', pressed: '#059669' },
-  '#8b5cf6': { hover: '#a78bfa', pressed: '#7c3aed' },
-  '#f43f5e': { hover: '#fb7185', pressed: '#e11d48' }
-}
 
 const defaultThemeColor = '#f97316'
 
@@ -90,7 +83,8 @@ export const useAppConfigStore = defineStore('app-config', {
     settingsDrawerOpen: false
   }),
   getters: {
-    isDarkTheme: (state) => state.theme === 'dark'
+    isDarkTheme: (state) => state.theme === 'dark',
+    themeTokens: (state) => createThemeTokens(state.theme, state.themeColor)
   },
   actions: {
     ensureValidPresetKey() {
@@ -122,6 +116,7 @@ export const useAppConfigStore = defineStore('app-config', {
       this.markAsCustom()
       this.theme = theme
       this.applyThemeClass()
+      this.applyThemeColorVariables()
     },
     toggleTheme() {
       this.setTheme(this.theme === 'light' ? 'dark' : 'light')
@@ -175,15 +170,7 @@ export const useAppConfigStore = defineStore('app-config', {
     },
     applyThemeColorVariables() {
       if (typeof document === 'undefined') return
-
-      const palette = themeColorMap[this.themeColor] ?? {
-        hover: this.themeColor,
-        pressed: this.themeColor
-      }
-
-      document.documentElement.style.setProperty('--primary-color', this.themeColor)
-      document.documentElement.style.setProperty('--primary-color-400', palette.hover)
-      document.documentElement.style.setProperty('--primary-color-600', palette.pressed)
+      applyThemeTokens(this.themeTokens)
     }
   }
 })

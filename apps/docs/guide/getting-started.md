@@ -9,7 +9,7 @@
 
 ## 先准备环境
 
-- **Node.js**: `v24` 或更高版本
+- **Node.js**: `v24.4.1` 或更高版本。仓库 `.nvmrc` / `.nvmdrc` 使用完整版本号，避免部分版本管理工具无法解析 `24` 简写。
 - **pnpm**: `v9` 或更高版本
 - **MySQL**: `8.0` 或更高版本
 
@@ -26,27 +26,26 @@ pnpm install
 pnpm dev
 ```
 
-当前脚手架提供两种模板：
+当前脚手架固定使用 `templates/basic`，生成一个最小宿主模板。这个模板包含宿主基础路由和几个本地示例插件，适合直接作为业务项目起点。
 
-- `basic`：最小宿主模板，只带一个本地 demo 插件，适合直接开工
-- `with-demo-plugins`：教学型模板，预装多插件示例，适合先看一遍插件协作方式
-
-如果你想显式指定模板，可以这样写：
+如果你不是从脚手架起步，而是准备把它接进一个已有的 Vue 3 项目，也可以直接从 npm 安装：
 
 ```bash
-npx create-vue-bag-admin my-admin --template with-demo-plugins
+pnpm add vue-bag-admin naive-ui pinia vue-i18n vue-router
 ```
 
-生成后的项目默认只会装一个主包：
+这条路适合两种情况：
 
-- `vue-bag-admin`：统一提供宿主层、请求能力、Schema 驱动组件和插件协议
+- 你已经有自己的 Vite + Vue 项目，只想把宿主能力接进去
+- 你不想先跑脚手架，准备自己组织目录、路由和页面
 
-如果你选择的是 `with-demo-plugins` 模板，脚手架会额外装上两个官方示例插件包：
+装完以后，先引入 `vue-bag-admin/style.css`，再接 `createHostRouter()`、`createHostI18n()` 和 `bootstrapPlugins()` 这一套宿主初始化链路。
 
-- `@bag/plugin-shop`
-- `@bag/plugin-sys-setting`
+生成后的项目默认只装一个主包：
 
-这样拆的原因很简单：宿主运行时收口在 `vue-bag-admin`，业务能力继续按插件包独立发。
+- `vue-bag-admin`：提供宿主层、请求层、Schema 驱动组件和插件协议
+
+这样拆是为了少装无关依赖。宿主运行时放在 `vue-bag-admin`，业务功能继续按插件包独立发布。需要官方插件时，再在生成后的项目里安装 `@bag/plugin-shop`、`@bag/plugin-sys-setting` 等插件包。
 
 如果你只是接项目，不用先把整个 Monorepo 看完。
 
@@ -169,35 +168,35 @@ import { HostApp } from 'vue-bag-admin'
 2. `/dashboard`
 3. `/404`
 
-这套骨架稳定之后，再继续往里补：
+这套骨架稳定后，再继续往里补：
 
-1. 接 `setupHttp()` 统一处理 token 和异常
+1. 接 `setupHttp()` 处理 token 和异常
 2. 接权限指令和权限组件
 3. 接官方插件或你自己的业务插件
-4. 再补字典、多语言和设置面板
+4. 再补字典、多语言、主题 token 和设置面板
 
 等你开始接权限、字典、多语言或插件时，就可以直接看下一页的完整宿主示例。
 
-## 下一步怎么走
+## 下一步
 
-如果你已经准备从“最小可运行”切到“标准宿主接入”，下一步直接看：
+如果你已经准备从“最小可运行”切到“标准宿主接入”，直接看：
 
 - [完整宿主示例](./complete-host-app.md)
 
-这一页把标准宿主项目里最常见的 3 个文件放在一起：
+那一页会把标准宿主项目里最常见的 3 个文件放在一起：
 
 - `src/main.ts`
 - `src/routes.ts`
 - `src/App.vue`
 
-里面也会带上这些常见内容：
+里面还会带上这些内容：
 
 - `setupHttp()` 怎么接
 - 官方插件怎么挂
 - `.env` 至少要配什么
-- `#settings` 插槽和 `sysSettingPlugin` 的优先级
+- 内置外观抽屉、`#settings` 自定义插槽和主题 token 怎么接
 
-如果你要参与当前仓库本身的开发，或者要做 `apps/admin`、`apps/strapi`、`packages/*` 的本地联调，就直接去看：
+如果你要参与当前仓库本身的开发，或者要做 `apps/admin`、`apps/strapi`、`packages/*` 的本地联调，直接去看：
 
 - [本地联调](./local-debugging.md)
 
@@ -214,5 +213,6 @@ import { HostApp } from 'vue-bag-admin'
 - [插件化开发](./plugin-development.md)
 - [路由与菜单](./routing-and-menu.md)
 - [权限管理](./permissions.md)
+- [主题与布局 Token](./theme-tokens.md)
 - [本地联调](./local-debugging.md)
 - [发包流程](./package-publishing.md)

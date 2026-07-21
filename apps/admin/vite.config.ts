@@ -9,6 +9,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      'vue-bag-admin': path.resolve(__dirname, '../../packages/vue-bag-admin/src/index.ts'),
       '@bag/core': path.resolve(__dirname, '../../packages/core/src/index.ts'),
       '@bag/host-vue': path.resolve(__dirname, '../../packages/host-vue/src/index.ts'),
       '@bag/plugin-shop': path.resolve(__dirname, '../../packages/plugin-shop/src/index.ts'),

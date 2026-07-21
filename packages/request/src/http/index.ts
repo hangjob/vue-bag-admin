@@ -1,5 +1,6 @@
 import axios, {
   AxiosError,
+  type AxiosInstance,
   type AxiosRequestConfig,
   type AxiosResponse,
   type CreateAxiosDefaults,
@@ -376,6 +377,79 @@ export const setupHttp = (config: SetupHttpConfig) => {
   Object.assign(http.defaults, axiosConfig)
 }
 
+export const createHttpClient = (config: SetupHttpConfig): AxiosInstance => {
+  const {
+    getToken: clientGetToken,
+    onUnauthorized,
+    onForbidden = () => {},
+    onServerError = () => {},
+    onBusinessError = () => {},
+    extractData,
+    resolveError,
+    ...axiosConfig
+  } = config
+  const client = axios.create({
+    timeout: 10000,
+    ...axiosConfig
+  })
+  const clientExtractData = extractData ?? ((response: AxiosResponse) => response.data)
+  const clientResolveError = resolveError ?? (() => null)
+
+  client.interceptors.request.use((requestConfig) => {
+    const token = clientGetToken()
+    if (token) {
+      requestConfig.headers = requestConfig.headers ?? {}
+      requestConfig.headers.Authorization = `Bearer ${token}`
+    }
+    return requestConfig
+  })
+
+  client.interceptors.response.use(
+    ((response: AxiosResponse) => {
+      const payload = clientExtractData(response)
+      const businessError = clientResolveError(payload, response)
+
+      if (businessError) {
+        const error = new HttpError(businessError.message, {
+          code: businessError.code,
+          status: response.status,
+          payload,
+          response
+        })
+        onBusinessError(error)
+        return Promise.reject(error)
+      }
+
+      return payload
+    }) as unknown as (response: AxiosResponse) => AxiosResponse | Promise<AxiosResponse>,
+    (err) => {
+      if (err instanceof HttpError) {
+        return Promise.reject(err)
+      }
+
+      const axiosError = err as AxiosError
+      const response = axiosError.response
+      const error = new HttpError(response?.statusText || axiosError.message || 'Request failed', {
+        status: response?.status,
+        payload: response?.data,
+        response
+      })
+
+      if (response?.status === 401) {
+        onUnauthorized()
+      } else if (response?.status === 403) {
+        onForbidden(error)
+      } else if ((response?.status ?? 0) >= 500) {
+        onServerError(error)
+      }
+
+      return Promise.reject(error)
+    }
+  )
+
+  return client
+}
+
 http.interceptors.request.use((config) => {
   const requestConfig = config as InternalHttpRequestConfig
   const token = getToken()
@@ -447,7 +521,7 @@ http.interceptors.response.use(
     const axiosError = err as AxiosError
     const requestConfig = axiosError.config as InternalHttpRequestConfig | undefined
 
-    if (requestConfig && !requestConfig.__bagBypassPwaCache) {
+    if (!axiosError.response && requestConfig && !requestConfig.__bagBypassPwaCache) {
       const pwaOptions = resolveHttpPwaOptions(requestConfig)
       if (pwaOptions.enabled && pwaOptions.cacheEnabled) {
         const cachedEntry = readHttpCacheEntry(pwaOptions.cacheNamespace, pwaOptions.cacheKey, {

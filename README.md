@@ -47,15 +47,7 @@ pnpm install
 pnpm dev
 ```
 
-脚手架目前提供：
-
-- `basic`：最小宿主模板
-- `with-demo-plugins`：带多插件演示的教学模板
-
-默认生成结果也已经统一成：
-
-- `basic`：只安装 `vue-bag-admin`
-- `with-demo-plugins`：安装 `vue-bag-admin`，再额外带上官方示例插件
+脚手架目前固定使用 `templates/basic`，生成一个最小宿主模板，只安装 `vue-bag-admin`。如果后续需要官方业务插件，再在业务项目里按需安装 `@bag/plugin-*`。
 
 ### 2. 在当前仓库里开发
 
@@ -65,7 +57,7 @@ pnpm dev
 
 ### 环境准备
 
-- **Node.js**: `v24` 或更高版本。
+- **Node.js**: `v24.4.1` 或更高版本。仓库 `.nvmrc` / `.nvmdrc` 使用完整版本号，避免部分版本管理工具无法解析 `24` 简写。
 - **pnpm**: `v9` 或更高版本。
 - **MySQL**: `8.0` 以上版本（用于 Strapi5 后端）。
 

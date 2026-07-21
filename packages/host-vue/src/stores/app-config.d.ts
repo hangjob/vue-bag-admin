@@ -1,3 +1,5 @@
+import type { ThemeTokens } from '../core/theme-tokens'
+
 export type ThemeMode = 'light' | 'dark'
 export type ContentWidthMode = 'fluid' | 'compact'
 export type AppearancePresetKey = 'default' | 'compact' | 'custom'
@@ -56,6 +58,27 @@ export declare const useAppConfigStore: import('pinia').StoreDefinition<
         settingsDrawerOpen: boolean
       }>
     ) => boolean
+    themeTokens: (
+      state: {
+        presetKey: AppearancePresetKey
+        theme: ThemeMode
+        themeColor: string
+        contentWidth: ContentWidthMode
+        showTabBar: boolean
+        showFooter: boolean
+        enablePageTransition: boolean
+        settingsDrawerOpen: boolean
+      } & import('pinia').PiniaCustomStateProperties<{
+        presetKey: import('@vueuse/core').RemovableRef<AppearancePresetKey>
+        theme: import('@vueuse/core').RemovableRef<ThemeMode>
+        themeColor: import('@vueuse/core').RemovableRef<string>
+        contentWidth: import('@vueuse/core').RemovableRef<ContentWidthMode>
+        showTabBar: import('@vueuse/core').RemovableRef<boolean>
+        showFooter: import('@vueuse/core').RemovableRef<boolean>
+        enablePageTransition: import('@vueuse/core').RemovableRef<boolean>
+        settingsDrawerOpen: boolean
+      }>
+    ) => ThemeTokens
   },
   {
     ensureValidPresetKey(): void

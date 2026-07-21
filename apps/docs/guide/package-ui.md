@@ -1,6 +1,6 @@
 # @bag/ui
 
-`@bag/ui` 是组件层，主要干的就是两件事：把后台里最容易重复的列表页和表单页先沉下来，然后直接吃 `@bag/core` 里定义的 Schema 和字典协议。
+`@bag/ui` 是组件层，主要干两件事：把后台里最容易重复的列表页和表单页沉下来，然后直接吃 `@bag/core` 里定义的 Schema 和字典协议。
 
 ## 现在有这些组件
 
@@ -73,7 +73,7 @@ const request = async ({ page, pageSize }: { page: number; pageSize: number }) =
 </template>
 ```
 
-## 它值在哪
+## 它解决什么
 
 - 表单和列表页的重复代码会少很多
 - 页面能直接吃 Schema 和字典协议
@@ -84,7 +84,7 @@ const request = async ({ page, pageSize }: { page: number; pageSize: number }) =
 
 - 它不负责插件挂载和宿主初始化
 - 它不定义 Schema 协议本身，那部分来自 `@bag/core`
-- 它更偏“通用积木层”，复杂业务流程还是建议在页面层自己组合扩展
+- 它更偏通用积木层，复杂业务流程还是放在页面层自己组合
 
 ## 继续阅读
 

@@ -5,7 +5,7 @@
     <div class="flex justify-between items-center mb-8">
       <h2 class="text-2xl font-bold text-slate-800 dark:text-slate-200">系统常规设置</h2>
       <button
-        class="px-6 py-2.5 bg-gradient-to-r from-primary-500 to-rose-500 text-white rounded-lg hover:shadow-lg hover:shadow-primary-500/30 transition-all font-bold"
+        class="bag-sys-primary-action px-6 py-2.5 text-white rounded-lg transition-all font-bold"
       >
         保存配置
       </button>
@@ -657,9 +657,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { themePresets, useAppConfigStore } from 'vue-bag-admin'
 
 const activeTab = ref('base')
+const appConfigStore = useAppConfigStore()
 
 // SEO 配置表单
 const seoForm = ref({
@@ -686,22 +688,29 @@ const noticeForm = ref({
   type: 'info'
 })
 
-const themeColors = [
-  { name: '默认橘', value: '#f97316', bgClass: 'bg-orange-500' },
-  { name: '科技蓝', value: '#3b82f6', bgClass: 'bg-blue-500' },
-  { name: '护眼绿', value: '#10b981', bgClass: 'bg-green-500' },
-  { name: '浪漫紫', value: '#8b5cf6', bgClass: 'bg-purple-500' },
-  { name: '玫瑰红', value: '#f43f5e', bgClass: 'bg-rose-500' }
-]
+const themeColors = themePresets.map((preset) => ({
+  name: preset.name,
+  value: preset.value,
+  bgClass: preset.colorClass
+}))
 
-const currentColor = ref(localStorage.getItem('bag.themeColor') || '#f97316')
+const currentColor = computed(() => appConfigStore.themeColor)
 
 const handleColorChange = (color: string) => {
-  currentColor.value = color
-  window.dispatchEvent(new CustomEvent('bag-theme-color-change', { detail: color }))
+  appConfigStore.setThemeColor(color)
 }
 
 const openAppearanceCenter = () => {
-  window.dispatchEvent(new CustomEvent('bag-open-settings-drawer'))
+  appConfigStore.openSettingsDrawer()
 }
 </script>
+
+<style scoped>
+.bag-sys-primary-action {
+  background: linear-gradient(90deg, var(--bag-color-primary) 0%, var(--bag-color-accent) 100%);
+}
+
+.bag-sys-primary-action:hover {
+  box-shadow: 0 10px 24px var(--bag-color-primary-soft);
+}
+</style>

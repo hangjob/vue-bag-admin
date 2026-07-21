@@ -2,9 +2,9 @@
 
 如果你已经过了“先跑起来”这个阶段，准备把权限、字典、请求、官方插件和设置面板一起接进来，就看这一页。
 
-这里放的是一版接近真实项目的宿主入口示例，代码参考的是外部联调项目 `D:\web_test_loca\loca_test`。
+这里放一版接近真实项目的宿主入口示例，代码参考外部联调项目 `D:\web_test_loca\loca_test`。
 
-通常最先会接触这 3 个文件：
+你通常会先碰到这 3 个文件：
 
 - `src/main.ts`：初始化宿主、路由、i18n、请求和插件
 - `src/routes.ts`：宿主自己的基础路由
@@ -27,9 +27,11 @@ import './style.css'
 import {
   PermissionAccess,
   bootstrapPlugins,
+  createStrapiAuthProvider,
   createHostI18n,
   createHostRouter,
   registerPermissionDirective,
+  setAuthProvider,
   setupHttp,
   useUserStore
 } from 'vue-bag-admin'
@@ -40,25 +42,35 @@ import shopPlugin from '@bag/plugin-shop'
 import sysSettingPlugin from '@bag/plugin-sys-setting'
 
 const { message } = createDiscreteApi(['message'])
+const strapiAuthProvider = createStrapiAuthProvider()
 
 async function setupApp() {
   const app = createApp(App)
   const pinia = createPinia()
   const i18n = createHostI18n()
   // 这里先挂宿主自己的基础路由，插件路由后面交给 bootstrapPlugins()。
-  const router = createHostRouter({ routes: exampleRoutes })
+  const router = createHostRouter({
+    routes: exampleRoutes,
+    navigation: {
+      homePath: '/dashboard',
+      loginPath: '/login',
+      profilePath: '/profile',
+      forbiddenPath: '/403'
+    }
+  })
 
   app.use(pinia)
   app.use(i18n)
+  setAuthProvider(strapiAuthProvider)
 
-  // 字典、权限组件和权限指令通常都在入口阶段统一注册。
+  // 字典、权限组件和权限指令通常都在入口阶段注册。
   setupBuiltinDictionaries()
   app.component('PermissionAccess', PermissionAccess)
   registerPermissionDirective(app)
 
   const userStore = useUserStore()
 
-  // 统一接管 token、鉴权失败和通用服务端错误。
+  // 在这里接管 token、鉴权失败和通用服务端错误。
   setupHttp({
     baseURL: import.meta.env.VITE_API_URL,
     getToken: () => userStore.token,
@@ -93,8 +105,9 @@ setupApp()
 先看这几个点：
 
 - 样式顺序别写反，先引 `vue-bag-admin/style.css`，再引项目自己的 `style.css`
-- `createHostRouter()` 先接宿主自己的基础路由，插件路由交给 `bootstrapPlugins()`
-- `setupHttp()` 负责把 token、401、403 和服务端异常统一收进来
+- `createHostRouter()` 先接宿主自己的基础路由，也可以通过 `navigation` 配置首页、登录页、个人中心和 403 路径
+- `setAuthProvider()` 用来注入认证适配器，默认可以使用 `createStrapiAuthProvider()`
+- `setupHttp()` 负责接住 token、401、403 和服务端异常
 - `bootstrapPlugins()` 不只是挂插件，它也会顺手把插件路由注册进去
 
 如果你直接照这段 `main.ts` 来写，先准备一个最小 `.env`：
@@ -132,7 +145,7 @@ export const exampleRoutes: AdminRouteRecordRaw[] = [
     name: 'Dashboard',
     component: () => import('./views/Dashboard.vue'),
     meta: {
-      // 推荐统一写 i18n key，后面做多语言切换更省事。
+      // 这里建议写 i18n key，后面做多语言切换更省事。
       title: 'menu.dashboard',
       layout: 'default'
     }
@@ -185,45 +198,38 @@ export const exampleRoutes: AdminRouteRecordRaw[] = [
 `meta.title` 这里最容易出问题。
 
 - 如果你传的是国际化 key，比如 `menu.dashboard`、`sysSetting.profile`，宿主会按 i18n 处理
-- 如果你直接写中文也能显示，但更推荐统一写 key，后面做中英文切换会省很多事
+- 直接写中文也能显示，但写 key 更适合后面做中英文切换
 
 ## `src/App.vue`
 
-最后是最外层宿主组件，这里通常很薄：
+再看最外层宿主组件。它通常很薄：
 
 ```vue
 <template>
-  <HostApp>
-    <!-- 宿主公共插槽可以在这里继续挂设置面板、品牌区等扩展内容 -->
-    <template #settings>
-      <AppSettingsDrawer />
-    </template>
-  </HostApp>
+  <HostApp />
 </template>
 
 <script setup lang="ts">
 import { HostApp } from 'vue-bag-admin'
-import AppSettingsDrawer from './components/AppSettingsDrawer.vue'
 </script>
 ```
 
 这里有一个使用细节：
 
-- 如果你显式传了 `#settings` 插槽，宿主会优先渲染这个插槽内容
-- 这时候就不会再去使用插件里的设置面板实现，比如 `sysSettingPlugin` 提供的那套设置入口
-- 如果你没有传 `#settings` 插槽，才会回退到插件里的默认设置面板实现
+- 默认情况下，`HostApp` 会挂载内置外观配置抽屉
+- 如果你显式传了 `#settings` 插槽，宿主会渲染你的插槽内容，并跳过内置抽屉，避免出现两套设置面板
 
 - `HostApp` 负责布局、菜单、标签页、主题、权限这些宿主能力
-- 你自己的设置抽屉、品牌区、业务插槽，可以按需往里面塞
+- 插件里的系统设置页可以通过 `useAppConfigStore()` 修改主题色或打开外观抽屉，不需要直接读写 `localStorage`
 
-## 建议接入顺序
+## 接入顺序
 
-可以按这个顺序接：
+可以按这个顺序来：
 
 1. 先把 `main.ts` 跑通
 2. 再补 `routes.ts` 里的宿主基础页面
 3. 然后决定要不要挂官方插件
-4. 最后再接自己的业务插件或本地 demo 插件
+4. 再接自己的业务插件或本地 demo 插件
 
 如果你暂时不想接官方插件，也可以先把这里改成空数组：
 

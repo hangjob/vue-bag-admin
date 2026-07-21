@@ -1,4 +1,4 @@
-import { registerDictionaries, type DictionaryDefinition } from '@bag/core'
+import { registerDictionaries, type DictionaryDefinition } from 'vue-bag-admin'
 
 const builtinDictionaries: DictionaryDefinition[] = [
   {

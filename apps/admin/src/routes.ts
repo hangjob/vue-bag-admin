@@ -1,4 +1,4 @@
-import type { AdminRouteRecordRaw } from '@bag/core'
+import type { AdminRouteRecordRaw } from 'vue-bag-admin'
 
 export const exampleRoutes: AdminRouteRecordRaw[] = [
   {

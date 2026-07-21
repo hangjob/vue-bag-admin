@@ -1,19 +1,20 @@
 # @bag/request
 
-`@bag/request` 是请求层，主要把后台项目里常见的 HTTP 和 WebSocket 接入方式收在一起。
+`@bag/request` 是请求层，把后台项目里常见的 HTTP 和 WebSocket 接入方式收在一起。
 
-它不是为了替代 `axios` 或 `fetch`。它做的是把常用请求方案补上一层默认约定，把 token 注入、统一异常对象、业务错误识别、WS 初始化这些高频动作先配好。
+它不是为了替代 `axios` 或 `fetch`。它只是把 token 注入、异常对象、业务错误识别、WS 初始化这些重复动作先配好，业务页不用每次重写一遍。
 
 ## 这里有什么
 
 - 默认导出的 `http` 实例
-- `setupHttp()`：统一配置鉴权、错误处理与 `axios` 缓存策略
+- `setupHttp()`：配置鉴权、错误处理与 `axios` 缓存策略
+- `createHttpClient()`：创建独立的 axios 风格客户端，适合插件接不同服务
 - `fetchHttp` / `setupFetch()`：给原生 `fetch` 一套同风格能力
 - `http` / `fetch` 的 PWA 模式：离线缓存、断网入队、恢复后重放
 - `createFetchClient()`：按需创建独立的 `fetch` 客户端
 - `useRequest()`：把 `loading`、`data`、`error` 和 `run()` 这层执行状态收起来
 - `debounceRequest()` / `throttleRequest()`：基于 Lodash 的高频请求控制
-- `HttpError`：统一承载 HTTP 状态和业务载荷
+- `HttpError`：承载 HTTP 状态和业务载荷
 - `setupWs()`：设置 WS token 与基础地址
 - `createWsClient()`：创建轻量 WS 客户端
 
@@ -58,6 +59,24 @@ try {
 ```
 
 现在 `http` 这条线也支持 PWA 缓存配置，适合继续沿用 `axios` 的项目。
+
+如果插件要连接独立服务，不建议改全局 `http` 配置，可以创建自己的客户端：
+
+```ts
+import { createHttpClient } from '@bag/request'
+
+const reportHttp = createHttpClient({
+  baseURL: 'https://report-api.example.com',
+  getToken: () => localStorage.getItem('report-token'),
+  onUnauthorized: () => {
+    console.log('report api unauthorized')
+  }
+})
+
+const summary = await reportHttp.get('/summary')
+```
+
+这样插件之间的 `baseURL`、token 和错误处理不会互相覆盖。
 
 ## WebSocket 示例
 
@@ -108,7 +127,7 @@ try {
 
 ## 防抖和节流示例
 
-这两个能力底层基于 Lodash 的 `debounce` / `throttle`，但对外统一成了适合请求场景的包装器：返回值仍然可以直接 `await`，同时带 `cancel()`、`flush()`、`pending()`。
+这两个工具底层还是 Lodash 的 `debounce` / `throttle`，只是外面包了一层请求友好的行为：返回值可以直接 `await`，也带 `cancel()`、`flush()`、`pending()`。
 
 ### 搜索联想
 
@@ -293,7 +312,7 @@ await replayOfflineQueue()
 
 ## 谁会经常用到
 
-- 宿主项目：统一初始化请求层
+- 宿主项目：初始化请求层
 - 业务插件：直接复用 `http` 和 WS 客户端
 - 多端团队：把“错误码怎么识别、401 怎么收口”放到同一个地方
 
@@ -306,7 +325,7 @@ await replayOfflineQueue()
 - `useRequest()` 负责页面执行状态，不会替你拆业务 API，也不会直接中断已发出的网络请求
 - 开启 PWA 缓存后，`http` 和 `fetchHttp` 的读请求都会优先读取本地缓存
 - PWA 模式只增强请求层，不负责 manifest、Service Worker 注册与安装提示
-- 如果后端响应结构有差异，建议统一通过 `setupHttp()` 或 `setupFetch()` 适配
+- 如果后端响应结构有差异，通过 `setupHttp()` 或 `setupFetch()` 适配
 
 ## 继续阅读
 

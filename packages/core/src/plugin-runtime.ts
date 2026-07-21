@@ -10,16 +10,27 @@ export interface PluginRuntimeItem {
   dependsOn: string[]
   routeCount: number
   menuCount: number
+  permissionCount: number
+  settingCount: number
+  contributionCount: number
 }
 
 const disabledPluginsStorageKey = 'bag.admin.disabledPlugins'
 const runtimePlugins = new Map<string, AdminPlugin>()
+
+export interface PluginStateProvider {
+  getDisabledPluginIds: () => string[]
+  setPluginEnabledState: (pluginId: string, enabled: boolean) => void
+}
 
 const countRoutes = (routes: AdminPlugin['routes'] = []): number =>
   routes.reduce((total, route) => total + 1 + countRoutes(route.children), 0)
 
 const countMenus = (menus: AdminPlugin['menus'] = []): number =>
   menus.reduce((total, menu) => total + 1 + countMenus(menu.children), 0)
+
+const countContributions = (plugin: AdminPlugin) =>
+  Object.values(plugin.contributes ?? {}).reduce((total, entries) => total + entries.length, 0)
 
 export const registerRuntimePlugins = (plugins: AdminPlugin[]) => {
   runtimePlugins.clear()
@@ -28,15 +39,46 @@ export const registerRuntimePlugins = (plugins: AdminPlugin[]) => {
   })
 }
 
+const localStoragePluginStateProvider: PluginStateProvider = {
+  getDisabledPluginIds: () => {
+    if (typeof window === 'undefined') return []
+    try {
+      const raw = window.localStorage.getItem(disabledPluginsStorageKey)
+      const parsed = raw ? JSON.parse(raw) : []
+      return Array.isArray(parsed)
+        ? parsed.filter((id): id is string => typeof id === 'string')
+        : []
+    } catch {
+      return []
+    }
+  },
+  setPluginEnabledState: (pluginId, enabled) => {
+    if (typeof window === 'undefined') return
+
+    const disabledPluginIds = new Set(pluginStateProvider.getDisabledPluginIds())
+    if (enabled) {
+      disabledPluginIds.delete(pluginId)
+    } else {
+      disabledPluginIds.add(pluginId)
+    }
+
+    window.localStorage.setItem(disabledPluginsStorageKey, JSON.stringify([...disabledPluginIds]))
+  }
+}
+
+let pluginStateProvider: PluginStateProvider = localStoragePluginStateProvider
+
+export const setPluginStateProvider = (provider: PluginStateProvider) => {
+  pluginStateProvider = provider
+}
+
+export const resetPluginStateProvider = () => {
+  pluginStateProvider = localStoragePluginStateProvider
+}
+
 export const getStoredDisabledPluginIds = () => {
   if (typeof window === 'undefined') return []
-  try {
-    const raw = window.localStorage.getItem(disabledPluginsStorageKey)
-    const parsed = raw ? JSON.parse(raw) : []
-    return Array.isArray(parsed) ? parsed.filter((id): id is string => typeof id === 'string') : []
-  } catch {
-    return []
-  }
+  return pluginStateProvider.getDisabledPluginIds()
 }
 
 export const isPluginEnabled = (plugin: AdminPlugin) => {
@@ -46,16 +88,7 @@ export const isPluginEnabled = (plugin: AdminPlugin) => {
 }
 
 export const setPluginEnabledState = (pluginId: string, enabled: boolean) => {
-  if (typeof window === 'undefined') return
-
-  const disabledPluginIds = new Set(getStoredDisabledPluginIds())
-  if (enabled) {
-    disabledPluginIds.delete(pluginId)
-  } else {
-    disabledPluginIds.add(pluginId)
-  }
-
-  window.localStorage.setItem(disabledPluginsStorageKey, JSON.stringify([...disabledPluginIds]))
+  pluginStateProvider.setPluginEnabledState(pluginId, enabled)
 }
 
 export const listRuntimePlugins = (): PluginRuntimeItem[] => {
@@ -70,6 +103,9 @@ export const listRuntimePlugins = (): PluginRuntimeItem[] => {
       enabled: isPluginEnabled(plugin),
       dependsOn: plugin.dependsOn ?? [],
       routeCount: countRoutes(plugin.routes),
-      menuCount: countMenus(plugin.menus)
+      menuCount: countMenus(plugin.menus),
+      permissionCount: plugin.permissions?.length ?? 0,
+      settingCount: plugin.settings?.length ?? 0,
+      contributionCount: countContributions(plugin)
     }))
 }

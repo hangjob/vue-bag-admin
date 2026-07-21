@@ -1,28 +1,37 @@
 import type { App } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 import type { RouteRecordRaw, Router, RouterHistory } from 'vue-router'
-import type { I18n } from 'vue-i18n'
 import { createDiscreteApi } from 'naive-ui'
 import {
   type AdminPlugin,
   type AdminRouteRecordRaw,
+  type AccessMode,
   type MenuConfig,
+  type PluginStateProvider,
   isPluginEnabled,
-  registerRuntimePlugins
+  registerRuntimePlugins,
+  setPluginStateProvider
 } from '@bag/core'
 import { useMenuStore } from '../stores/menu'
 import { useTabBarStore } from '../stores/tabbar'
 import { useUserStore } from '../stores/user'
 import { setupHostUi, type HostUiConfig } from './host-ui'
+import {
+  getHostNavigationConfig,
+  setupHostNavigation,
+  type HostNavigationConfig
+} from './navigation'
 
 const { loadingBar } = createDiscreteApi(['loadingBar'])
 
 export interface CreateHostRouterOptions {
   routes: AdminRouteRecordRaw[]
   history?: RouterHistory
+  navigation?: Partial<HostNavigationConfig>
 }
 
-export const createHostRouter = ({ routes, history }: CreateHostRouterOptions) => {
+export const createHostRouter = ({ routes, history, navigation }: CreateHostRouterOptions) => {
+  setupHostNavigation(navigation)
   const router = createRouter({
     history: history ?? createWebHashHistory(),
     routes: routes as RouteRecordRaw[]
@@ -34,7 +43,7 @@ export const createHostRouter = ({ routes, history }: CreateHostRouterOptions) =
 
     const isPublic = Boolean(to.meta?.public)
     if (!isPublic && !user.isAuthenticated) {
-      return { path: '/login', query: { redirect: to.fullPath } }
+      return { path: getHostNavigationConfig().loginPath, query: { redirect: to.fullPath } }
     }
 
     if (!isPublic && user.isAuthenticated && !user.profileLoaded) {
@@ -42,14 +51,23 @@ export const createHostRouter = ({ routes, history }: CreateHostRouterOptions) =
         await user.fetchProfile()
       } catch {
         user.logout()
-        return { path: '/login', query: { redirect: to.fullPath } }
+        return { path: getHostNavigationConfig().loginPath, query: { redirect: to.fullPath } }
       }
     }
 
     const roles = to.meta?.roles as string[] | undefined
     const permissions = to.meta?.permissions as string[] | undefined
-    if (!user.hasRole(roles) || !user.hasPermission(permissions)) {
-      return { path: '/403' }
+    const roleMode = to.meta?.roleMode as AccessMode | undefined
+    const permissionMode = to.meta?.permissionMode as AccessMode | undefined
+    const policy = to.meta?.policy
+    if (
+      !user.hasRole(roles, roleMode) ||
+      !user.hasPermission(permissions, permissionMode) ||
+      !(typeof policy === 'function'
+        ? policy({ roles: user.roles, permissions: user.permissions, user: user.user, route: to })
+        : true)
+    ) {
+      return { path: getHostNavigationConfig().forbiddenPath }
     }
 
     return true
@@ -79,8 +97,13 @@ export interface BootstrapPluginsOptions {
   app: App
   router: Router
   plugins?: AdminPlugin[]
-  i18n?: I18n
+  i18n?: {
+    global: {
+      mergeLocaleMessage: (locale: string, message: Record<string, unknown>) => void
+    }
+  }
   ui?: HostUiConfig
+  pluginStateProvider?: PluginStateProvider
 }
 
 export async function bootstrapPlugins({
@@ -88,14 +111,24 @@ export async function bootstrapPlugins({
   router,
   plugins,
   i18n,
-  ui
+  ui,
+  pluginStateProvider
 }: BootstrapPluginsOptions) {
   const resolvedPlugins = plugins ?? []
+  if (pluginStateProvider) {
+    setPluginStateProvider(pluginStateProvider)
+  }
   setupHostUi(app, ui)
   registerRuntimePlugins(resolvedPlugins)
   const globalMenus: MenuConfig[] = []
   const enabledPlugins = resolveEnabledPlugins(resolvedPlugins)
-  assertPluginConflicts(enabledPlugins)
+  assertPluginConflicts(
+    enabledPlugins,
+    router.getRoutes().map((route) => ({
+      path: route.path,
+      name: typeof route.name === 'string' ? route.name : undefined
+    }))
+  )
   const enabledPluginIds = enabledPlugins.map((plugin) => plugin.id)
 
   for (const plugin of enabledPlugins) {
@@ -117,7 +150,7 @@ export async function bootstrapPlugins({
     }
 
     if (plugin.install) {
-      await plugin.install(app, { router, enabledPluginIds })
+      await plugin.install(app, { app, router, enabledPluginIds })
     }
   }
 
@@ -142,12 +175,19 @@ const resolveEnabledPlugins = (plugins: AdminPlugin[]) => {
   return enabledPlugins
 }
 
-const walkRoutes = (routes: AdminPlugin['routes'] = []) => {
+const joinRoutePath = (parentPath: string, routePath: string) => {
+  if (routePath.startsWith('/')) return routePath
+  if (!parentPath) return routePath
+  return `${parentPath.replace(/\/+$/, '')}/${routePath.replace(/^\/+/, '')}`
+}
+
+const walkRoutes = (routes: AdminPlugin['routes'] = [], parentPath = '') => {
   const entries: Array<{ path: string; name?: string | symbol | null }> = []
   routes.forEach((route) => {
-    entries.push({ path: route.path, name: route.name })
+    const path = joinRoutePath(parentPath, route.path)
+    entries.push({ path, name: route.name })
     if (route.children?.length) {
-      entries.push(...walkRoutes(route.children))
+      entries.push(...walkRoutes(route.children, path))
     }
   })
   return entries
@@ -164,10 +204,13 @@ const walkMenus = (menus: MenuConfig[] = []) => {
   return paths
 }
 
-const assertPluginConflicts = (plugins: AdminPlugin[]) => {
+const assertPluginConflicts = (
+  plugins: AdminPlugin[],
+  existingRoutes: Array<{ path: string; name?: string }>
+) => {
   const pluginIds = new Set<string>()
-  const routePaths = new Set<string>()
-  const routeNames = new Set<string>()
+  const routePaths = new Set(existingRoutes.map((route) => route.path))
+  const routeNames = new Set(existingRoutes.map((route) => route.name).filter(Boolean) as string[])
   const menuPaths = new Set<string>()
 
   plugins.forEach((plugin) => {

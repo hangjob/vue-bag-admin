@@ -1,9 +1,7 @@
 <template>
   <n-drawer v-model:show="settingsDrawerOpen" :width="420" placement="right">
     <n-drawer-content :native-scrollbar="false" body-content-style="padding: 0;">
-      <div
-        class="relative h-full overflow-hidden bg-[linear-gradient(180deg,#fff7fb_0%,#fffdf8_38%,#ffffff_100%)] dark:bg-[linear-gradient(180deg,#171727_0%,#111827_38%,#0b1220_100%)]"
-      >
+      <div class="bag-settings-shell relative h-full overflow-hidden">
         <div class="relative flex h-full flex-col">
           <button
             type="button"
@@ -28,9 +26,7 @@
 
           <div class="flex-1 overflow-y-auto px-6 py-6 pt-20">
             <div class="space-y-5">
-              <section
-                class="rounded-[24px] border border-white/70 bg-white/75 p-5 shadow-[0_14px_40px_rgba(15,23,42,0.05)] backdrop-blur-xl dark:border-slate-800/80 dark:bg-white/5 dark:shadow-none"
-              >
+              <section class="bag-settings-section p-5 backdrop-blur-xl">
                 <div class="mb-4">
                   <div class="text-[15px] font-bold text-slate-900 dark:text-white">主题模式</div>
                   <div class="mt-1 text-xs leading-5 text-slate-500 dark:text-slate-400">
@@ -45,7 +41,7 @@
                     @click="handleThemeChange('light')"
                   >
                     <div
-                      class="mb-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-300 to-orange-500 text-white shadow-lg shadow-orange-500/20"
+                      class="bag-settings-mode-icon bag-settings-mode-icon--light mb-3 flex h-10 w-10 items-center justify-center rounded-2xl text-white shadow-lg"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +69,7 @@
                     @click="handleThemeChange('dark')"
                   >
                     <div
-                      class="mb-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500 to-fuchsia-500 text-white shadow-lg shadow-fuchsia-500/20"
+                      class="bag-settings-mode-icon bag-settings-mode-icon--dark mb-3 flex h-10 w-10 items-center justify-center rounded-2xl text-white shadow-lg"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -95,9 +91,7 @@
                 </div>
               </section>
 
-              <section
-                class="rounded-[28px] border border-white/70 bg-white/75 p-4 shadow-[0_18px_50px_rgba(15,23,42,0.06)] backdrop-blur-xl dark:border-slate-800/80 dark:bg-white/5 dark:shadow-none"
-              >
+              <section class="bag-settings-section bag-settings-section--wide p-4 backdrop-blur-xl">
                 <div class="mb-3">
                   <div class="text-[15px] font-bold text-slate-900 dark:text-white">布局预设</div>
                   <div class="mt-1 text-sm text-slate-500 dark:text-slate-400">
@@ -110,11 +104,7 @@
                     :key="preset.key"
                     type="button"
                     class="bag-settings-preset-card group"
-                    :class="
-                      presetKey === preset.key
-                        ? 'border-transparent bg-[linear-gradient(135deg,rgba(255,255,255,0.94),rgba(255,237,213,0.92))] shadow-[0_18px_40px_rgba(249,115,22,0.16)] ring-2 ring-orange-300/70 dark:bg-[linear-gradient(135deg,rgba(249,115,22,0.18),rgba(168,85,247,0.16))] dark:ring-orange-400/30'
-                        : 'border-slate-200/80 bg-white/80 hover:-translate-y-0.5 hover:border-orange-200 hover:shadow-[0_14px_30px_rgba(15,23,42,0.08)] dark:border-slate-800/80 dark:bg-white/[0.03] dark:hover:border-orange-400/30'
-                    "
+                    :class="{ 'is-active': presetKey === preset.key }"
                     @click="applyAppearancePreset(preset.key)"
                   >
                     <div class="flex items-center justify-between gap-3">
@@ -173,9 +163,7 @@
                 </div>
               </section>
 
-              <section
-                class="rounded-[24px] border border-white/70 bg-white/75 p-5 shadow-[0_14px_40px_rgba(15,23,42,0.05)] backdrop-blur-xl dark:border-slate-800/80 dark:bg-white/5 dark:shadow-none"
-              >
+              <section class="bag-settings-section p-5 backdrop-blur-xl">
                 <div class="mb-4">
                   <div class="text-[15px] font-bold text-slate-900 dark:text-white">主题色</div>
                   <div class="mt-1 text-sm text-slate-500 dark:text-slate-400">
@@ -216,9 +204,7 @@
                 </div>
               </section>
 
-              <section
-                class="rounded-[24px] border border-white/70 bg-white/75 p-5 shadow-[0_14px_40px_rgba(15,23,42,0.05)] backdrop-blur-xl dark:border-slate-800/80 dark:bg-white/5 dark:shadow-none"
-              >
+              <section class="bag-settings-section p-5 backdrop-blur-xl">
                 <div class="mb-4">
                   <div class="text-[15px] font-bold text-slate-900 dark:text-white">细节选项</div>
                   <div class="mt-1 text-sm text-slate-500 dark:text-slate-400">
@@ -230,7 +216,7 @@
                   <div
                     v-for="item in layoutToggles"
                     :key="item.key"
-                    class="flex items-center justify-between rounded-2xl border border-slate-200/70 bg-slate-50/80 px-4 py-4 transition-colors hover:border-orange-200 hover:bg-white dark:border-slate-800/80 dark:bg-white/[0.03] dark:hover:border-orange-400/20"
+                    class="bag-settings-toggle-row flex items-center justify-between px-4 py-4 transition-colors"
                   >
                     <div class="pr-4">
                       <div class="text-sm font-semibold text-slate-900 dark:text-white">
@@ -247,7 +233,7 @@
             </div>
           </div>
 
-          <div class="border-t border-white/50 px-6 py-4 backdrop-blur-sm dark:border-slate-800/80">
+          <div class="bag-settings-footer border-t px-6 py-4 backdrop-blur-sm">
             <div class="flex items-center gap-3">
               <n-button secondary class="flex-1 !rounded-2xl" @click="handleReset">
                 恢复默认
@@ -295,11 +281,8 @@ const {
   themeColor
 } = storeToRefs(appConfigStore)
 
-const activeOptionClass =
-  'border-transparent bg-[linear-gradient(135deg,rgba(255,255,255,0.96),rgba(245,243,255,0.96))] shadow-[0_12px_28px_rgba(139,92,246,0.12)] ring-2 ring-violet-300/70 dark:bg-[linear-gradient(135deg,rgba(139,92,246,0.18),rgba(59,130,246,0.14))] dark:ring-violet-400/30'
-
-const inactiveOptionClass =
-  'border-slate-200/80 bg-slate-50/80 hover:-translate-y-0.5 hover:border-violet-200 hover:bg-white dark:border-slate-800/80 dark:bg-white/[0.03] dark:hover:border-violet-400/20'
+const activeOptionClass = 'is-active'
+const inactiveOptionClass = ''
 
 const applyAppearancePreset = (presetKey: AppearancePresetKey) => {
   const preset = appearancePresets.find((item) => item.key === presetKey)
@@ -385,6 +368,30 @@ const handleReset = () => {
 </script>
 
 <style>
+.bag-settings-shell {
+  background: linear-gradient(
+    180deg,
+    var(--bag-color-primary-softer) 0%,
+    var(--bag-color-bg-soft) 38%,
+    var(--bag-color-surface) 100%
+  );
+}
+
+.bag-settings-section {
+  border: 1px solid var(--bag-color-border-muted);
+  border-radius: var(--bag-radius-xl);
+  background: var(--bag-color-surface-overlay);
+  box-shadow: var(--bag-shadow-card);
+}
+
+.bag-settings-section--wide {
+  border-radius: 28px;
+}
+
+.bag-settings-footer {
+  border-color: var(--bag-color-border-muted);
+}
+
 .bag-settings-close-btn {
   position: absolute;
   top: 24px;
@@ -397,14 +404,14 @@ const handleReset = () => {
   height: 40px;
   padding: 0;
   border: 0;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.82);
-  color: #64748b;
+  border-radius: var(--bag-radius-lg);
+  background: var(--bag-color-surface-overlay);
+  color: var(--bag-color-text-muted);
   cursor: pointer;
   appearance: none;
   -webkit-appearance: none;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
-  outline: 1px solid rgba(226, 232, 240, 0.8);
+  outline: 1px solid var(--bag-color-border-muted);
   transition:
     transform 0.2s ease,
     color 0.2s ease,
@@ -414,14 +421,14 @@ const handleReset = () => {
 
 .bag-settings-close-btn:hover {
   transform: translateY(-2px);
-  color: #0f172a;
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+  color: var(--bag-color-text);
+  box-shadow: var(--bag-shadow-card);
 }
 
 .dark .bag-settings-close-btn {
-  background: rgba(255, 255, 255, 0.06);
-  color: #cbd5e1;
-  outline-color: rgba(30, 41, 59, 0.9);
+  background: var(--bag-color-surface-muted);
+  color: var(--bag-color-icon);
+  outline-color: var(--bag-color-border-muted);
 }
 
 .dark .bag-settings-close-btn:hover {
@@ -442,8 +449,9 @@ const handleReset = () => {
   width: 100%;
   padding: 16px;
   text-align: left;
-  border: 1px solid rgba(226, 232, 240, 0.9);
-  border-radius: 18px;
+  border: 1px solid var(--bag-color-border-muted);
+  border-radius: var(--bag-radius-lg);
+  background: var(--bag-color-surface-muted);
   transition:
     transform 0.2s ease,
     border-color 0.2s ease,
@@ -451,17 +459,59 @@ const handleReset = () => {
     background-color 0.2s ease;
 }
 
+.bag-settings-theme-card:hover,
+.bag-settings-preset-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--bag-color-primary-soft);
+  background: var(--bag-color-surface);
+  box-shadow: var(--bag-shadow-card);
+}
+
+.bag-settings-theme-card.is-active,
+.bag-settings-preset-card.is-active {
+  border-color: transparent;
+  background: linear-gradient(
+    135deg,
+    var(--bag-color-surface-elevated),
+    var(--bag-color-primary-softer)
+  );
+  box-shadow: var(--bag-shadow-card);
+  outline: 2px solid var(--bag-color-primary-soft);
+}
+
+.bag-settings-mode-icon--light {
+  background: linear-gradient(135deg, var(--bag-color-warning) 0%, var(--bag-color-primary) 100%);
+  box-shadow: 0 10px 24px var(--bag-color-primary-soft);
+}
+
+.bag-settings-mode-icon--dark {
+  background: linear-gradient(135deg, var(--bag-color-info) 0%, var(--bag-color-accent) 100%);
+  box-shadow: 0 10px 24px var(--bag-color-accent-soft);
+}
+
 .bag-settings-preset-card {
   width: 100%;
   padding: 14px;
   text-align: left;
-  border: 1px solid rgba(226, 232, 240, 0.82);
+  border: 1px solid var(--bag-color-border-muted);
   border-radius: 22px;
+  background: var(--bag-color-surface-overlay);
   transition:
     transform 0.2s ease,
     border-color 0.2s ease,
     box-shadow 0.2s ease,
     background-color 0.2s ease;
+}
+
+.bag-settings-toggle-row {
+  border: 1px solid var(--bag-color-border-muted);
+  border-radius: var(--bag-radius-lg);
+  background: var(--bag-color-surface-muted);
+}
+
+.bag-settings-toggle-row:hover {
+  border-color: var(--bag-color-primary-soft);
+  background: var(--bag-color-surface);
 }
 
 .bag-settings-color-btn {
@@ -482,6 +532,6 @@ const handleReset = () => {
 
 .dark .bag-settings-theme-card,
 .dark .bag-settings-preset-card {
-  border-color: rgba(30, 41, 59, 0.86);
+  border-color: var(--bag-color-border-muted);
 }
 </style>

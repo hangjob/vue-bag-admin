@@ -9,10 +9,10 @@
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "paths": {
-      "@bag/core": ["../core/src/index.d.ts"],
-      "@bag/request": ["../request/src/index.d.ts"],
-      "@bag/ui": ["../ui/src/index.d.ts"],
-      "@bag/host-vue": ["../host-vue/src/index.d.ts"]
+      "@bag/core": ["../core/dist/index.d.ts"],
+      "@bag/request": ["../request/dist/index.d.ts"],
+      "@bag/ui": ["../ui/dist/index.d.ts"],
+      "@bag/host-vue": ["../host-vue/dist/index.d.ts"]
     },
     "strict": true,
     "skipLibCheck": true

@@ -1,10 +1,10 @@
 # 上线部署
 
-由于 Vue-Bag-Admin 是一个由前端宿主应用和后端 API（默认包含 Strapi 5）组成的系统，我们需要分别对前端和后端进行构建和部署。
+Vue-Bag-Admin 分成前端宿主应用和后端 API。仓库默认带一套 Strapi 5 后端，所以部署时也分两段看：先前端，再后端。
 
 ## 1. 前端部署
 
-前端打包基于 Vite 构建静态文件，可以使用 Nginx 或任何静态服务器进行托管。
+前端由 Vite 打成静态文件，放到 Nginx 或其他静态服务器上就能跑。
 
 ### 构建静态文件
 
@@ -15,13 +15,13 @@
 pnpm --filter admin build
 ```
 
-构建完成后，在 `apps/admin/dist` 目录下会生成所有的静态 HTML、CSS 和 JS 文件。
+构建完成后，`apps/admin/dist` 里会生成 HTML、CSS 和 JS 文件。
 
 ### Nginx 部署配置
 
 将 `dist` 目录下的内容上传到你的服务器（例如放到 `/usr/share/nginx/html/admin`）。
 
-由于 Vue-Bag-Admin 默认使用了 Vue Router 的 **History 模式**，你必须在 Nginx 配置中将所有的 404 请求回退到 `index.html`，否则在非根路径刷新页面会出现 404 错误。
+Vue-Bag-Admin 默认使用 Vue Router 的 **History 模式**。Nginx 需要把找不到的前端路径回退到 `index.html`，不然在非根路径刷新页面会 404。
 
 ```nginx
 server {
@@ -33,7 +33,7 @@ server {
     index index.html;
 
     location / {
-        # History 模式核心配置：找不到文件时默认指向 index.html
+        # History 模式配置：找不到文件时默认指向 index.html
         try_files $uri $uri/ /index.html;
     }
 
@@ -52,11 +52,11 @@ server {
 
 ### 准备环境
 
-确保你的服务器上已经安装了：
+服务器上先准备好这些：
 
-- Node.js (建议 v24)
+- Node.js (v24.4.1 或更高版本)
 - MySQL 8.0+ 数据库
-- PM2 (推荐的 Node.js 进程管理工具: `npm install -g pm2`)
+- PM2 (`npm install -g pm2`)
 
 ### 生产环境构建
 
@@ -93,7 +93,7 @@ DATABASE_PASSWORD=your_password
 
 ### 使用 PM2 启动服务
 
-通过 PM2 启动 Node.js 进程，可以保证服务崩溃后自动重启：
+用 PM2 启动 Node.js 进程，服务崩溃后会自动重启：
 
 ```bash
 # 启动 Strapi 服务，并命名为 "pm-backend"
@@ -103,4 +103,7 @@ pm2 start npm --name "pm-backend" -- run start
 pm2 save
 ```
 
-至此，你的前端管理页面和后端接口服务都已经成功在生产环境运行了！
+跑完后重点看两处：
+
+- 前端非根路径刷新不会 404
+- Strapi 进程在 `pm2 list` 里处于 online

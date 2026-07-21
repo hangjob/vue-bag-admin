@@ -675,7 +675,7 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-import { useAppConfigStore, useUserStore } from '@bag/host-vue'
+import { useAppConfigStore, useUserStore } from 'vue-bag-admin'
 
 const router = useRouter()
 const route = useRoute()

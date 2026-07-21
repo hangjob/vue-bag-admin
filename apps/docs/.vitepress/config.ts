@@ -11,7 +11,6 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '指南', link: '/guide/introduction' },
-      { text: '包与工具', link: '/guide/package-ecosystem' },
       { text: '在线预览', link: 'https://hangjob.github.io/vue-bag-admin/' }
     ],
 
@@ -35,6 +34,7 @@ export default defineConfig({
             { text: '完整宿主示例', link: '/guide/complete-host-app' },
             { text: '路由与菜单', link: '/guide/routing-and-menu' },
             { text: '权限管理', link: '/guide/permissions' },
+            { text: '主题与布局 Token', link: '/guide/theme-tokens' },
             { text: '网络请求', link: '/guide/network-request' },
             { text: '字典系统', link: '/guide/dictionary-system' }
           ]
@@ -83,6 +83,7 @@ export default defineConfig({
             { text: '完整宿主示例', link: '/guide/complete-host-app' },
             { text: '路由与菜单', link: '/guide/routing-and-menu' },
             { text: '权限管理', link: '/guide/permissions' },
+            { text: '主题与布局 Token', link: '/guide/theme-tokens' },
             { text: '网络请求', link: '/guide/network-request' },
             { text: '字典系统', link: '/guide/dictionary-system' }
           ]

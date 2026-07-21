@@ -31,7 +31,7 @@
 
         <!-- 关闭按钮（Dashboard 不能关闭） -->
         <button
-          v-if="tab.path !== '/dashboard'"
+          v-if="tab.path !== navigation.homePath"
           type="button"
           class="tabbar-close-btn"
           @click.stop="closeTab(tab.fullPath)"
@@ -87,11 +87,13 @@ import { useTabBarStore, type TabItem } from '../../stores/tabbar'
 import { useRoute, useRouter } from 'vue-router'
 import { NDropdown } from 'naive-ui'
 import { useI18n } from 'vue-i18n'
+import { getHostNavigationConfig } from '../../core/navigation'
 
 const tabbarStore = useTabBarStore()
 const route = useRoute()
 const router = useRouter()
 const { locale, fallbackLocale, messages, t } = useI18n()
+const navigation = getHostNavigationConfig()
 
 // 只有形如 `a.b.c` 的值才按国际化 key 处理，中文直写标题直接展示。
 const isI18nKeyLike = (value?: string) =>
@@ -219,12 +221,12 @@ const handleCloseTab = (fullPath: string) => {
 
   // 如果关闭的是当前激活的标签页，需要自动跳转到旁边的标签
   if (isActive(fullPath)) {
-    // 优先跳转到左侧的标签，如果没有左侧则跳转到右侧，保底跳转到 dashboard
+    // 优先跳转到左侧的标签，如果没有左侧则跳转到右侧，保底跳转到首页。
     const nextTab = tabs[index - 1] || tabs[index + 1]
     if (nextTab) {
       router.push(nextTab.fullPath)
     } else {
-      router.push('/dashboard')
+      router.push(navigation.homePath)
     }
   }
   tabbarStore.removeTab(fullPath)
@@ -264,7 +266,7 @@ const contextMenuOptions = computed(() => [
   {
     label: t('tabbar.close', '关闭标签'),
     key: 'close',
-    disabled: activeContextPath.value === '/dashboard'
+    disabled: activeContextPath.value === navigation.homePath
   },
   { label: t('tabbar.closeOther', '关闭其他'), key: 'closeOther' },
   { label: t('tabbar.closeLeft', '关闭左侧'), key: 'closeLeft' },
@@ -319,7 +321,7 @@ const handleSelect = async (key: string | number) => {
       break
     case 'closeAll':
       tabbarStore.clearTabs()
-      router.push('/dashboard')
+      router.push(navigation.homePath)
       break
   }
 }

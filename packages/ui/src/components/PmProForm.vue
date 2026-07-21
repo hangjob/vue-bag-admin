@@ -32,11 +32,11 @@
         :y-gap="yGap"
       >
         <template
-          v-for="schema in schemas"
-          :key="`schema-slot-${schema.field}`"
-          v-slot:[schema.slotName||schema.field]="slotProps"
+          v-for="formSlot in schemaSlotDescriptors"
+          :key="`schema-slot-${formSlot.field}`"
+          v-slot:[formSlot.name]="slotProps"
         >
-          <slot :name="schema.slotName || schema.field" v-bind="slotProps" />
+          <slot :name="formSlot.name" v-bind="slotProps" />
         </template>
       </PmSchemaForm>
     </n-form>
@@ -163,6 +163,18 @@ const buildDefaultModel = (schemas: ProFormSchema[], model: Record<string, unkno
   })
   return nextModel
 }
+
+interface SchemaSlotDescriptor {
+  field: string
+  name: string
+}
+
+const schemaSlotDescriptors = computed<SchemaSlotDescriptor[]>(() =>
+  props.schemas.map((schema) => ({
+    field: schema.field,
+    name: schema.slotName || schema.field
+  }))
+)
 
 watch(
   () => [props.modelValue, props.schemas] as const,

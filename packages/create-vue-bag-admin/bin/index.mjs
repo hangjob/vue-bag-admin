@@ -16,6 +16,9 @@ Options:
   --bag-version <version>  Set vue-bag-admin version, default: latest
   --force                  Allow writing into a non-empty target directory
   -h, --help               Show help
+
+Template:
+  The scaffold currently always uses templates/basic.
 `.trim()
 
 const TEXT_FILE_RE = /\.(json|ts|js|mjs|cjs|vue|html|md|env|css)$/i

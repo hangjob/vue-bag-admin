@@ -1,1 +1,46 @@
 @tailwind utilities;
+
+:root {
+  --primary-color: #f97316;
+  --primary-color-400: #fb923c;
+  --primary-color-600: #ea580c;
+  --bag-color-primary: #f97316;
+  --bag-color-primary-hover: #fb923c;
+  --bag-color-primary-pressed: #ea580c;
+  --bag-color-primary-suppl: #fb923c;
+  --bag-color-primary-rgb: 249 115 22;
+  --bag-color-primary-soft: rgba(249, 115, 22, 0.12);
+  --bag-color-primary-softer: rgba(249, 115, 22, 0.06);
+  --bag-color-accent: #f43f5e;
+  --bag-color-accent-hover: #fb7185;
+  --bag-color-accent-soft: rgba(244, 63, 94, 0.12);
+  --bag-color-success: #10b981;
+  --bag-color-warning: #f59e0b;
+  --bag-color-danger: #f43f5e;
+  --bag-color-info: #3b82f6;
+  --bag-color-bg: #fff7ed;
+  --bag-color-bg-soft: #fffdf8;
+  --bag-color-surface: #ffffff;
+  --bag-color-surface-muted: #f8fafc;
+  --bag-color-surface-elevated: rgba(255, 255, 255, 0.9);
+  --bag-color-surface-overlay: rgba(255, 255, 255, 0.78);
+  --bag-color-border: #e5e7eb;
+  --bag-color-border-muted: rgba(226, 232, 240, 0.74);
+  --bag-color-text: #1e293b;
+  --bag-color-text-muted: #64748b;
+  --bag-color-text-subtle: #94a3b8;
+  --bag-color-icon: #64748b;
+  --bag-layout-header-height: 64px;
+  --bag-layout-sidebar-width: 256px;
+  --bag-layout-sidebar-collapsed-width: 72px;
+  --bag-layout-content-max-width: 1280px;
+  --bag-radius-sm: 8px;
+  --bag-radius-md: 12px;
+  --bag-radius-lg: 16px;
+  --bag-radius-xl: 24px;
+  --bag-shadow-focus: 0 0 0 2px rgba(249, 115, 22, 0.22);
+  --bag-shadow-header: 0 4px 20px rgba(249, 115, 22, 0.06);
+  --bag-shadow-sidebar: 4px 0 24px rgba(15, 23, 42, 0.03);
+  --bag-shadow-card: 0 14px 40px rgba(15, 23, 42, 0.06);
+  --bag-shadow-menu-active: 0 4px 12px rgba(249, 115, 22, 0.25);
+}

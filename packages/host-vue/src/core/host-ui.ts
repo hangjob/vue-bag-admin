@@ -1,4 +1,5 @@
 import { inject, type App, type Component, type FunctionalComponent, type InjectionKey } from 'vue'
+import { getHostNavigationConfig } from './navigation'
 
 export interface HostBrandingConfig {
   title: string
@@ -75,16 +76,16 @@ const createDefaultHostMessages = (): Record<string, HostMessageItem[]> => ({
   notify: [
     {
       id: 1,
-      title: '您有一个新的订单，请及时处理',
+      title: '有一条新的待处理通知',
       time: '10分钟前',
-      type: 'order',
+      type: 'notice',
       read: false,
-      icon: '📦',
+      icon: '🔔',
       color: 'bg-orange-100 dark:bg-orange-500/20 text-orange-500'
     },
     {
       id: 2,
-      title: '库存预警：商品“高级旅行背包”库存不足',
+      title: '系统检测到一项配置需要确认',
       time: '1小时前',
       type: 'warning',
       read: false,
@@ -93,11 +94,11 @@ const createDefaultHostMessages = (): Record<string, HostMessageItem[]> => ({
     },
     {
       id: 3,
-      title: '您的提现申请已通过',
+      title: '本周运行摘要已生成',
       time: '昨天',
       type: 'success',
       read: true,
-      icon: '💰',
+      icon: '✅',
       color: 'bg-green-100 dark:bg-green-500/20 text-green-500'
     }
   ],
@@ -138,10 +139,12 @@ export const HOST_UI_CONFIG_KEY: InjectionKey<ResolvedHostUiConfig> = Symbol('ba
 
 export function resolveHostUiConfig(config?: HostUiConfig): ResolvedHostUiConfig {
   const defaultMessageCenter = createDefaultMessageCenter()
+  const navigation = getHostNavigationConfig()
 
   return {
     branding: {
       ...defaultHostBranding,
+      homePath: navigation.homePath,
       ...config?.branding
     },
     messageCenter: {

@@ -16,14 +16,14 @@
 - `@bag/plugin-*`：按需安装的业务插件包
 - `create-vue-bag-admin`：生成宿主项目的脚手架
 
-使用方不需要先关心内部拆了多少层。接入时先装主包，再按业务需要装插件。
+使用方不用一开始就关心内部拆了多少层。先装主包，再按业务需要装插件。
 
 ## 仓库内部怎么拆
 
-仓库内部还是分层的，只是这些分层主要服务于实现和维护：
+仓库内部还是分层的，这些分层主要服务实现和维护：
 
 - `@bag/core`：协议层，定义插件、路由 meta、菜单、Schema、字典这些公共约定
-- `@bag/request`：请求层，统一 HTTP 和 WebSocket 的接入方式
+- `@bag/request`：请求层，处理 HTTP 和 WebSocket 接入
 - `@bag/ui`：组件层，提供 `PmProTable`、`PmProForm`、`PmSchemaForm`、`PmDictTag`
 - `@bag/host-vue`：宿主层，负责布局、权限、标签页、插件引导和 i18n 初始化
 - `vue-bag-admin`：把前面几层收成业务项目更容易接入的主包
@@ -44,18 +44,18 @@
 - `plugin-*` 往宿主里挂业务
 - `create-vue-bag-admin` 帮你把项目先起出来
 
-## 建议怎么读
+## 阅读顺序
 
-第一次接触这套项目，可以按下面这个顺序看：
+第一次接触这套项目，可以按这个顺序看：
 
-1. `vue-bag-admin` / `create-vue-bag-admin`：先看推荐入口，知道正常使用姿势是什么
+1. `vue-bag-admin` / `create-vue-bag-admin`：先看入口，知道正常使用姿势是什么
 2. [@bag/core](./package-core.md)：再看插件协议和 Schema 协议到底长什么样
-3. [@bag/ui](./package-ui.md)：理解这些协议最后怎么落到组件上
+3. [@bag/ui](./package-ui.md)：理解这些协议怎么落到组件上
 4. [@bag/request](./package-request.md)：补上请求层的接入方式
 5. `@bag/host-vue`：再回头看宿主怎样把插件、布局、权限串起来
-6. [@bag/plugin-shop](./package-plugin-shop.md) / [@bag/plugin-sys-setting](./package-plugin-sys-setting.md)：最后看官方插件示例，会更容易代入
+6. [@bag/plugin-shop](./package-plugin-shop.md) / [@bag/plugin-sys-setting](./package-plugin-sys-setting.md)：再看官方插件示例，会更容易代入
 
-这个顺序就是先看“怎么用”，再看“内部为什么这么设计”。
+这个顺序就是先看怎么用，再看内部为什么这么设计。
 
 ## 这些包怎么串起来
 
@@ -94,4 +94,4 @@
 - 包目录下的 `README.md`：更适合 npm 用户，重点放在安装、最小示例、公开能力和边界
 - `apps/docs`：更适合顺着看，重点是概念串联、学习路径，以及这些包之间到底怎么配合
 
-第一次上手，先看 `apps/docs` 更顺。已经知道自己要接哪个包了，再直接去对应包的 `README.md` 会更快。
+第一次上手，先看 `apps/docs` 更顺。已经知道自己要接哪个包了，再去对应包的 `README.md` 会更快。

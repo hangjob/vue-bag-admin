@@ -2,16 +2,19 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import './style.css'
 import { createPinia } from 'pinia'
-import { setupHttp } from '@bag/request'
 import { createDiscreteApi } from 'naive-ui'
 import {
   PermissionAccess,
   bootstrapPlugins,
+  createStrapiAuthProvider,
   createHostI18n,
   createHostRouter,
   registerPermissionDirective,
+  setAuthProvider,
+  setupHttp,
+  type AuthProvider,
   useUserStore
-} from '@bag/host-vue'
+} from 'vue-bag-admin'
 import { setupBuiltinDictionaries } from './dictionaries'
 import { exampleRoutes } from './routes'
 
@@ -20,6 +23,38 @@ import sysSettingPlugin from '@bag/plugin-sys-setting'
 import shopPlugin from '@bag/plugin-shop'
 
 const { message } = createDiscreteApi(['message'])
+const strapiAuthProvider = createStrapiAuthProvider()
+
+const demoAuthProvider: AuthProvider = {
+  async login(payload) {
+    if (payload.username === 'admin' && payload.password === '123456') {
+      return {
+        token: 'mock-token-for-demo',
+        profile: {
+          username: 'admin',
+          user: { username: 'admin', source: 'demo' },
+          roles: ['admin', 'authenticated'],
+          permissions: ['*']
+        }
+      }
+    }
+
+    return strapiAuthProvider.login(payload)
+  },
+  async fetchProfile(session) {
+    if (session.token === 'mock-token-for-demo') {
+      return {
+        username: 'admin',
+        user: { username: 'admin', source: 'demo' },
+        roles: ['admin', 'authenticated'],
+        permissions: ['*']
+      }
+    }
+
+    return strapiAuthProvider.fetchProfile(session)
+  },
+  logout: () => strapiAuthProvider.logout?.()
+}
 
 async function setupApp() {
   const app = createApp(App)
@@ -30,6 +65,7 @@ async function setupApp() {
   app.use(pinia)
   app.use(i18n)
   setupBuiltinDictionaries()
+  setAuthProvider(demoAuthProvider)
   app.component('PermissionAccess', PermissionAccess)
   registerPermissionDirective(app)
 

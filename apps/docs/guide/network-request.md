@@ -1,11 +1,11 @@
 # 网络请求与拦截
 
-在 Vue-Bag-Admin 中，网络请求统一由 `@bag/request` 管理。它同时支持 `axios` 和原生 `fetch`，主要处理这些事情：
+Vue-Bag-Admin 把网络请求放在 `@bag/request` 里处理。它同时支持 `axios` 和原生 `fetch`，主要管这些事：
 
 - Token 注入
 - HTTP 状态码拦截
 - 业务错误转异常
-- 宿主自定义错误处理策略
+- 宿主自定义错误处理
 - 面向 PWA 场景的离线缓存与离线写入队列
 - 页面层的 `loading` / `data` / `error` 执行状态管理
 - 基于 Lodash 的防抖 / 节流请求控制
@@ -31,7 +31,7 @@ const createUser = async (payload) => {
 }
 ```
 
-默认情况下，响应拦截器会直接返回 `response.data`，因此业务层无需再手动解构 `.data`。
+默认情况下，响应拦截器直接返回 `response.data`，业务层不用再手动解构 `.data`。
 
 如果你更想直接使用原生 `fetch`，也可以使用 `fetchHttp`：
 
@@ -48,7 +48,7 @@ const fetchUsers = async () => {
 
 ## 初始化配置
 
-为了和宿主解耦，请求层不会硬编码 Token 获取和错误处理逻辑，而是通过 `setupHttp()` 在启动阶段注入。
+为了不把请求层和宿主绑死，Token 获取和错误处理都在启动阶段通过 `setupHttp()` 注入。
 
 ```ts
 import { setupHttp } from '@bag/request'
@@ -122,17 +122,17 @@ setupFetch({
 
 ## SetupHttpConfig 支持什么
 
-`setupHttp()` 主要支持这几类配置：
+`setupHttp()` 主要接这几类配置：
 
 - `axios` 原生配置：如 `baseURL`、`timeout`、`headers`
-- 宿主注入能力：如 `getToken`、错误钩子、业务错误识别函数
-- PWA 缓存能力：如缓存命名空间、缓存策略、缓存时长
+- 宿主注入项：如 `getToken`、错误钩子、业务错误识别函数
+- PWA 缓存项：如缓存命名空间、缓存策略、缓存时长
 
-`setupFetch()` 也有对应的一组能力：
+`setupFetch()` 也有一组对应配置：
 
 - 原生 `fetch` 配置：如 `baseURL`、`headers`、`credentials`
-- 宿主注入能力：如 `getToken`、错误钩子、业务错误识别函数
-- PWA 增强能力：如离线缓存策略、断网入队、联网后自动重放
+- 宿主注入项：如 `getToken`、错误钩子、业务错误识别函数
+- PWA 增强项：如离线缓存策略、断网入队、联网后自动重放
 
 ## PWA 模式
 
@@ -166,7 +166,7 @@ const dashboardData = await http.get('/dashboard', {
 })
 ```
 
-`fetch` 版本则适合希望同时拿到离线队列能力的场景：
+`fetch` 版本适合同时要离线队列的项目：
 
 ```ts
 import {
@@ -233,7 +233,7 @@ stopListening()
 
 如果页面里有搜索联想、自动保存、按钮防连点这类高频交互，可以直接使用 `@bag/request` 提供的 `debounceRequest()` 和 `throttleRequest()`。
 
-这层底层基于 Lodash 的 `debounce` / `throttle`，但对请求场景补了三点：
+这层底层还是 Lodash 的 `debounce` / `throttle`，只是针对请求补了三点：
 
 - 返回值保持为 `Promise`，可以继续 `await`
 - 提供 `cancel()`、`flush()`、`pending()` 便于页面控制
@@ -335,7 +335,7 @@ fetchUsers.cancel('component unmount')
 
 ## 页面请求状态
 
-如果页面里总是在手写 `loading`、`data`、`error`、`run`，可以直接用 `useRequest()` 把执行状态收起来。
+如果页面里总是在手写 `loading`、`data`、`error`、`run`，可以用 `useRequest()` 把这层状态收起来。
 
 ```ts
 import { http, useRequest } from '@bag/request'
@@ -420,11 +420,11 @@ articleRequest.reset()
 }
 ```
 
-这时可以通过 `resolveError()` 将其识别为业务错误，并统一转成异常抛出。
+这时可以通过 `resolveError()` 把它识别为业务错误，再转成异常抛出。
 
 ### 3. HttpError
 
-请求层会统一抛出 `HttpError`，其中包含：
+请求层会抛出 `HttpError`，里面包含：
 
 - `message`
 - `code`
@@ -432,7 +432,7 @@ articleRequest.reset()
 - `payload`
 - `response`
 
-业务层可以在 `catch` 中统一处理：
+业务层可以在 `catch` 中集中处理：
 
 ```ts
 import { HttpError, http } from '@bag/request'
@@ -454,10 +454,10 @@ try {
    - 若 `resolveError()` 识别出业务错误，则转成 `HttpError` 抛出。
    - 若捕获到 `401` / `403` / `5xx`，则触发对应钩子。
 
-## 推荐实践
+## 使用建议
 
 - 插件页面里只写业务请求，不要重复处理 Token
-- 宿主应用统一注入 `setupHttp()` 或 `setupFetch()`
+- 宿主应用在入口注入 `setupHttp()` 或 `setupFetch()`
 - 用 `resolveError()` 适配你的后端业务错误格式
 - 页面层优先用 `useRequest()` 收口执行状态，避免重复维护 `loading`、`data`、`error`
 - PWA 模式更适合列表、详情、配置查询这类可缓存读请求

@@ -473,9 +473,13 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { NCard, NAvatar, NTabs, NTabPane, NButton, NDivider, NTag, useMessage } from 'naive-ui'
-import type { ProFormSchema, ProFormSubmitContext } from '@bag/core'
-import { useUserStore } from '@bag/host-vue'
-import { PmDictTag, PmProForm } from '@bag/ui'
+import {
+  PmDictTag,
+  PmProForm,
+  type ProFormSchema,
+  type ProFormSubmitContext,
+  useUserStore
+} from 'vue-bag-admin'
 
 const userStore = useUserStore()
 const message = useMessage()

@@ -1,6 +1,6 @@
 # 本地联调
 
-本地联调主要就两种场景：
+本地联调主要就两种情况：
 
 - 在当前 Monorepo 里，怎么联调 `apps/admin` 和 `packages/*`
 - 在仓库外新建一个使用方项目后，怎么通过 `link:` 联调主包和插件包
@@ -40,6 +40,10 @@ pnpm --filter admin dev
 - `@bag/ui` 组件
 - `@bag/request` 请求能力
 
+仓库内联调要保证运行时入口同源。`apps/admin` 会把 `vue-bag-admin`、`@bag/core`、`@bag/host-vue`、`@bag/request`、`@bag/ui` 和官方插件都 alias 到当前仓库源码。这样宿主启动时 `bootstrapPlugins()` 注册插件，插件管理页再调用 `listRuntimePlugins()` 时，读到的是同一份 runtime registry。
+
+如果只 alias 了 `@bag/core` / `@bag/host-vue`，但插件页面从另一个 `vue-bag-admin` 包实例导入 API，就会出现“菜单已经有插件页面，但插件管理页识别到 0 个插件”的情况。
+
 ### 3. 后端联调（可选）
 
 如果你还要把仓库里的 Strapi 一起跑起来：
@@ -69,9 +73,9 @@ D:\web_test_loca\loca_test
 - `pm-web-admin-next` 是框架仓库
 - `loca_test` 是外部使用方项目
 
-## 使用方建议安装哪些包
+## 使用方装哪些包
 
-推荐的最小联调组合是：
+最小联调组合是：
 
 - `vue-bag-admin`
 - `@bag/plugin-shop`
@@ -99,9 +103,9 @@ D:\web_test_loca\loca_test
 
 1. 先在框架仓库里构建包
 2. 再去使用方项目安装依赖
-3. 最后启动使用方项目
+3. 再启动使用方项目
 
-## 推荐执行顺序
+## 执行顺序
 
 ### 第一步：在框架仓库里构建
 
@@ -128,7 +132,7 @@ pnpm dev
 
 ## 什么时候需要重新 build
 
-只要你改了这些目录里的内容，基本都该重新构建一次：
+只要你改了这些目录里的内容，基本都要重新构建一次：
 
 - `packages/core`
 - `packages/request`
@@ -156,7 +160,7 @@ import 'vue-bag-admin/style.css'
 import './style.css'
 ```
 
-顺序反了，或者扫描不到链接包里的类名，常见现象就是图标大小不对、响应式类失效，布局和按钮样式也会跟着乱。
+顺序反了，或者扫描不到链接包里的类名，常见现象就是图标大小不对、响应式类失效，布局和按钮样式跟着乱。
 
 ## 常见问题
 
@@ -198,4 +202,4 @@ pnpm --filter vue-bag-admin build
 - 你在验证 npm 使用方接入姿势：优先用外部项目联调
 - 你在排查软连接、样式、peerDependencies 问题：一定要用外部项目联调
 
-这两种方式不冲突。更常见的做法是先在仓库里改，再去外部项目做一遍真实接入验证。
+这两种方式不冲突。平时可以先在仓库里改，再去外部项目做一遍真实接入验证。

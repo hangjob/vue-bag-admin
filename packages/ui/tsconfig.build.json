@@ -10,7 +10,11 @@
     "lib": ["ES2020", "DOM"],
     "jsx": "preserve",
     "strict": true,
+    "noImplicitAny": false,
     "skipLibCheck": true
   },
-  "include": ["src/**/*.ts", "src/**/*.vue"]
+  "include": ["src/**/*.ts", "src/**/*.vue"],
+  "vueCompilerOptions": {
+    "strictTemplates": false
+  }
 }

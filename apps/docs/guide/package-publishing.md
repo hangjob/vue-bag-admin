@@ -20,13 +20,13 @@
 
 ## 发布前检查
 
-正式发之前，建议先过一遍这几步：
+正式发之前，先过一遍这几步：
 
 1. 确认版本号已经更新
 2. 在根目录执行一次依赖安装
 3. 先跑构建，确认产物能正常生成
 4. 优先跑 `dry-run`，确认发布内容和文件列表
-5. 最后再执行正式 `publish`
+5. 再执行正式 `publish`
 
 根目录安装依赖：
 
@@ -126,9 +126,9 @@ npm publish ./packages/plugin-sys-setting --access public
 
 1. 先发布 `vue-bag-admin`
 2. 再发布依赖它的 `@bag/plugin-*`
-3. 最后用外部项目做一次安装验证
+3. 再用外部项目做一次安装验证
 
-推荐按下面的顺序走一遍：
+可以按下面的顺序走一遍：
 
 ```bash
 pnpm --filter vue-bag-admin build
@@ -151,11 +151,11 @@ npm publish ./packages/plugin-sys-setting --access public --dry-run
 
 如果你平时主要靠 `link:` 联调，这一步更别省。`link:` 能跑，不代表真正从 npm 装下来也一定没问题。
 
-## 维护建议
+## 后面可以补的脚本
 
 现在根目录已经有主包的发布脚本了，但两个插件包还是手动 `npm publish`。
 
-如果后面你准备频繁发布插件，建议把这些脚本也补到根目录，例如：
+如果后面你准备频繁发布插件，可以把这些脚本也补到根目录，例如：
 
 - `pack:plugin-shop`
 - `pack:plugin-sys-setting`

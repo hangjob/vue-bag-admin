@@ -5,9 +5,12 @@ import { setupHttp } from 'vue-bag-admin'
 import {
   PermissionAccess,
   bootstrapPlugins,
+  createStrapiAuthProvider,
   createHostI18n,
   createHostRouter,
   registerPermissionDirective,
+  setAuthProvider,
+  type AuthProvider,
   useUserStore
 } from 'vue-bag-admin'
 import App from './App.vue'
@@ -19,6 +22,38 @@ import systemPlugin from './plugins/system'
 import workspacePlugin from './plugins/workspace'
 
 const { message } = createDiscreteApi(['message'])
+const strapiAuthProvider = createStrapiAuthProvider()
+
+const demoAuthProvider: AuthProvider = {
+  async login(payload) {
+    if (payload.username === 'admin' && payload.password === '123456') {
+      return {
+        token: 'mock-token-for-demo',
+        profile: {
+          username: 'admin',
+          user: { username: 'admin', source: 'demo' },
+          roles: ['admin', 'authenticated'],
+          permissions: ['*']
+        }
+      }
+    }
+
+    return strapiAuthProvider.login(payload)
+  },
+  async fetchProfile(session) {
+    if (session.token === 'mock-token-for-demo') {
+      return {
+        username: 'admin',
+        user: { username: 'admin', source: 'demo' },
+        roles: ['admin', 'authenticated'],
+        permissions: ['*']
+      }
+    }
+
+    return strapiAuthProvider.fetchProfile(session)
+  },
+  logout: () => strapiAuthProvider.logout?.()
+}
 
 async function setupApp() {
   const app = createApp(App)
@@ -28,6 +63,7 @@ async function setupApp() {
 
   app.use(pinia)
   app.use(i18n)
+  setAuthProvider(demoAuthProvider)
   app.component('PermissionAccess', PermissionAccess)
   registerPermissionDirective(app)
 

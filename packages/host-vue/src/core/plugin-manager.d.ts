@@ -1,6 +1,5 @@
 import type { App } from 'vue'
 import type { Router, RouterHistory } from 'vue-router'
-import type { I18n } from 'vue-i18n'
 import { type AdminPlugin, type AdminRouteRecordRaw } from '@bag/core'
 import type { HostUiConfig } from './host-ui'
 export interface CreateHostRouterOptions {
@@ -12,7 +11,11 @@ export interface BootstrapPluginsOptions {
   app: App
   router: Router
   plugins?: AdminPlugin[]
-  i18n?: I18n
+  i18n?: {
+    global: {
+      mergeLocaleMessage: (locale: string, message: Record<string, unknown>) => void
+    }
+  }
   ui?: HostUiConfig
 }
 export declare function bootstrapPlugins({

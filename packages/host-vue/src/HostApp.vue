@@ -1,13 +1,20 @@
 <template>
-  <BagUiProvider :lang="locale" :theme="theme" :theme-color="themeColor">
+  <BagUiProvider
+    :lang="locale"
+    :theme="theme"
+    :theme-color="themeTokens.color.primary"
+    :theme-color-hover="themeTokens.color.primaryHover"
+    :theme-color-pressed="themeTokens.color.primaryPressed"
+    :theme-color-suppl="themeTokens.color.primarySuppl"
+  >
     <AppLayout />
-    <AppSettingsDrawer />
+    <AppSettingsDrawer v-if="!slots.settings" />
     <slot name="settings" />
   </BagUiProvider>
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue'
+import { computed, onMounted, onUnmounted, useSlots } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import { useRouter } from 'vue-router'
@@ -16,12 +23,16 @@ import AppLayout from './layouts/AppLayout.vue'
 import AppSettingsDrawer from './components/AppSettingsDrawer.vue'
 import { useAppConfigStore } from './stores/app-config'
 import { useTabBarStore } from './stores/tabbar'
+import { getHostNavigationConfig } from './core/navigation'
 
 const { locale } = useI18n()
 const appConfigStore = useAppConfigStore()
 const tabbarStore = useTabBarStore()
-const { theme, themeColor } = storeToRefs(appConfigStore)
+const { theme } = storeToRefs(appConfigStore)
+const themeTokens = computed(() => appConfigStore.themeTokens)
 const router = useRouter()
+const navigation = getHostNavigationConfig()
+const slots = useSlots()
 
 const handleThemeColorChange = (event: Event) => {
   const customEvent = event as CustomEvent<string>
@@ -37,7 +48,10 @@ onMounted(() => {
 
   if (!tabbarStore.enableTabPersist) {
     tabbarStore.clearTabs()
-    if (router.currentRoute.value.path !== '/dashboard' && router.currentRoute.value.path !== '/') {
+    if (
+      router.currentRoute.value.path !== navigation.homePath &&
+      router.currentRoute.value.path !== '/'
+    ) {
       tabbarStore.addTab(router.currentRoute.value)
     }
   }

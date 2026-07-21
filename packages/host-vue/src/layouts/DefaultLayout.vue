@@ -1,18 +1,18 @@
 <template>
   <div
-    class="app-layout bg-orange-50/50 dark:bg-[#050B14] text-slate-800 dark:text-slate-300 min-h-screen relative overflow-hidden font-sans transition-colors duration-300"
+    class="app-layout min-h-screen relative overflow-hidden font-sans transition-colors duration-300"
   >
-    <!-- Warm E-commerce Background Accents -->
+    <!-- Soft workspace background accents -->
     <div
-      class="absolute top-0 right-0 w-96 h-96 bg-orange-200/40 dark:bg-orange-500/10 rounded-full blur-[100px] pointer-events-none transition-colors duration-300"
+      class="bag-workspace-accent bag-workspace-accent--primary absolute top-0 right-0 w-96 h-96 rounded-full blur-[100px] pointer-events-none transition-colors duration-300"
     ></div>
     <div
-      class="absolute bottom-0 left-0 w-96 h-96 bg-rose-200/30 dark:bg-rose-500/10 rounded-full blur-[100px] pointer-events-none transition-colors duration-300"
+      class="bag-workspace-accent bag-workspace-accent--accent absolute bottom-0 left-0 w-96 h-96 rounded-full blur-[100px] pointer-events-none transition-colors duration-300"
     ></div>
 
     <!-- 顶部导航栏 -->
     <header
-      class="bg-white/90 dark:bg-[#0A1120]/90 backdrop-blur-xl border-b border-orange-100 dark:border-gray-800 flex justify-between items-center h-16 shrink-0 relative z-20 px-4 md:px-6 shadow-[0_4px_20px_rgba(251,146,60,0.05)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.2)] transition-colors duration-300"
+      class="bag-app-header backdrop-blur-xl border-b flex justify-between items-center shrink-0 relative z-20 px-4 md:px-6 transition-colors duration-300"
     >
       <!-- 左侧：Logo + 标题 + 分割线 + 左侧导航 -->
       <div class="flex items-center h-full">
@@ -20,7 +20,7 @@
         <button
           v-if="isMobile"
           @click="menuStore.toggleMobileDrawer()"
-          class="p-2 -ml-2 mr-2 rounded-xl hover:bg-orange-50 dark:hover:bg-gray-800 transition-colors md:hidden text-orange-500 dark:text-orange-400"
+          class="bag-mobile-menu-btn p-2 -ml-2 mr-2 rounded-xl transition-colors md:hidden"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -73,13 +73,11 @@
         ></div>
 
         <!-- 左侧菜单: 动态显示当前菜单 -->
-        <div
-          class="hidden md:flex items-center text-sm font-bold text-slate-700 dark:text-slate-200"
-        >
+        <div class="hidden md:flex items-center text-sm font-bold">
           <div
-            class="flex items-center gap-2 px-3 py-1.5 bg-orange-50 dark:bg-gray-800 rounded-full text-orange-600 dark:text-orange-400 border border-orange-100 dark:border-gray-700 transition-colors duration-300"
+            class="bag-current-menu-pill flex items-center gap-2 px-3 py-1.5 rounded-full border transition-colors duration-300"
           >
-            {{ currentMenuTitle || '商城总览' }}
+            {{ currentMenuTitle || '工作台' }}
           </div>
         </div>
       </div>
@@ -87,7 +85,7 @@
       <!-- 右侧：工具栏 -->
       <div class="bag-header-actions text-slate-500 dark:text-slate-400 font-medium">
         <!-- 首页 -->
-        <div class="bag-header-action hidden sm:flex" @click="router.push('/dashboard')">
+        <div class="bag-header-action hidden sm:flex" @click="router.push(navigation.homePath)">
           <div class="bag-header-action-icon">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -170,13 +168,13 @@
                     <div
                       v-for="item in getMessageListByTab(tab.key)"
                       :key="item.id"
-                      class="px-4 py-3 hover:bg-orange-50/50 dark:hover:bg-gray-800/50 cursor-pointer transition-colors flex gap-3 group relative"
+                      class="bag-notice-item px-4 py-3 cursor-pointer transition-colors flex gap-3 group relative"
                       :class="{ 'opacity-60': item.read }"
                       @click="handleMessageItemClick(item, tab.key)"
                     >
                       <div
                         v-if="!item.read"
-                        class="absolute left-2 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-rose-500"
+                        class="bag-notice-unread-dot absolute left-2 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full"
                       ></div>
                       <div
                         class="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
@@ -186,7 +184,7 @@
                       </div>
                       <div class="flex-1 min-w-0">
                         <p
-                          class="text-sm text-slate-700 dark:text-slate-200 line-clamp-2 leading-snug group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors"
+                          class="bag-notice-title text-sm line-clamp-2 leading-snug transition-colors"
                         >
                           {{ item.title }}
                         </p>
@@ -313,14 +311,14 @@
             <img
               src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix&backgroundColor=ffedd5"
               alt="avatar"
-              class="w-8 h-8 rounded-full border-2 border-white dark:border-gray-800 shadow-sm group-hover:border-orange-200 dark:group-hover:border-orange-500/50 transition-colors"
+              class="bag-user-avatar w-8 h-8 rounded-full border-2 shadow-sm transition-colors"
             />
             <span class="font-bold text-slate-700 dark:text-slate-200">
               {{ userStore.username || 'Admin' }}
             </span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-4 w-4 text-gray-400 dark:text-gray-500 group-hover:text-orange-500 dark:group-hover:text-orange-400 transition-colors"
+              class="bag-user-caret h-4 w-4 transition-colors"
               viewBox="0 0 20 20"
               fill="currentColor"
             >
@@ -339,19 +337,19 @@
       <!-- 移动端遮罩层 -->
       <div
         v-if="isMobile && menuStore.mobileDrawerOpen"
-        class="fixed inset-0 bg-slate-900/20 dark:bg-black/40 backdrop-blur-sm z-20 md:hidden transition-opacity"
+        class="bag-mobile-backdrop fixed inset-0 backdrop-blur-sm z-20 md:hidden transition-opacity"
         @click="menuStore.setMobileDrawer(false)"
       ></div>
 
       <!-- 侧边栏 -->
       <aside
-        class="bg-white dark:bg-[#0A1120] border-r border-gray-100 dark:border-gray-800 flex flex-col transition-all duration-300 z-30 shadow-[4px_0_24px_rgba(0,0,0,0.02)] dark:shadow-[4px_0_24px_rgba(0,0,0,0.2)]"
+        class="bag-sidebar border-r flex flex-col transition-all duration-300 z-30"
         :class="[
           isMobile
-            ? 'fixed inset-y-0 left-0 h-full w-64 -translate-x-full'
+            ? 'bag-sidebar--mobile fixed inset-y-0 left-0 h-full -translate-x-full'
             : collapsed
-              ? 'w-[72px]'
-              : 'w-64',
+              ? 'bag-sidebar--collapsed'
+              : 'bag-sidebar--expanded',
           isMobile && menuStore.mobileDrawerOpen ? '!translate-x-0 pt-16' : ''
         ]"
       >
@@ -393,7 +391,7 @@
             :value="activeKey"
             @update:value="handleMenuSelect"
             @update:expanded-keys="menuStore.setExpandedKeys"
-            class="ecommerce-menu"
+            class="bag-menu"
           />
         </div>
       </aside>
@@ -402,19 +400,21 @@
       <section class="flex-1 flex flex-col min-w-0 overflow-hidden bg-transparent">
         <TabBar
           v-if="appConfigStore.showTabBar"
-          class="hidden sm:flex border-b border-gray-200/60 dark:border-gray-800/60 bg-white/60 dark:bg-[#0A1120]/60 backdrop-blur-md transition-colors duration-300"
+          class="bag-layout-tabbar hidden sm:flex border-b backdrop-blur-md transition-colors duration-300"
         />
         <div class="flex-1 overflow-auto custom-scrollbar relative flex flex-col">
           <div
             class="flex-1 p-4 md:p-6"
-            :class="appConfigStore.contentWidth === 'compact' ? 'mx-auto w-full max-w-7xl' : ''"
+            :class="
+              appConfigStore.contentWidth === 'compact' ? 'mx-auto w-full bag-content-compact' : ''
+            "
           >
             <slot />
           </div>
           <!-- 底部版权信息 -->
           <footer
             v-if="appConfigStore.showFooter"
-            class="py-4 text-center text-sm text-slate-400 dark:text-slate-500 border-t border-slate-200/50 dark:border-gray-800/50 mt-auto"
+            class="bag-layout-footer py-4 text-center text-sm border-t mt-auto"
           >
             <p>Copyright © {{ new Date().getFullYear() }} Vue Bag Admin. All rights reserved.</p>
             <p class="text-xs mt-1 opacity-75">Made with ❤️ by Vue-Bag-Admin</p>
@@ -426,6 +426,113 @@
 </template>
 
 <style>
+.app-layout {
+  background: var(--bag-color-bg);
+  color: var(--bag-color-text);
+}
+
+.bag-workspace-accent--primary {
+  background: var(--bag-color-primary-soft);
+}
+
+.bag-workspace-accent--accent {
+  background: var(--bag-color-accent-soft);
+}
+
+.bag-app-header {
+  height: var(--bag-layout-header-height);
+  background: var(--bag-color-surface-elevated);
+  border-color: var(--bag-color-primary-soft);
+  box-shadow: var(--bag-shadow-header);
+}
+
+.bag-mobile-menu-btn {
+  color: var(--bag-color-primary);
+}
+
+.bag-mobile-menu-btn:hover {
+  background: var(--bag-color-primary-softer);
+}
+
+.bag-current-menu-pill {
+  background: var(--bag-color-primary-softer);
+  border-color: var(--bag-color-primary-soft);
+  color: var(--bag-color-primary-pressed);
+}
+
+.bag-mobile-backdrop {
+  background: rgba(15, 23, 42, 0.2);
+}
+
+.dark .bag-mobile-backdrop {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.bag-sidebar {
+  background: var(--bag-color-surface);
+  border-color: var(--bag-color-border);
+  box-shadow: var(--bag-shadow-sidebar);
+}
+
+.bag-sidebar--mobile,
+.bag-sidebar--expanded {
+  width: var(--bag-layout-sidebar-width);
+}
+
+.bag-sidebar--collapsed {
+  width: var(--bag-layout-sidebar-collapsed-width);
+}
+
+.bag-layout-tabbar {
+  background: var(--bag-color-surface-overlay);
+  border-color: var(--bag-color-border-muted);
+}
+
+.bag-content-compact {
+  max-width: var(--bag-layout-content-max-width);
+}
+
+.bag-layout-footer {
+  color: var(--bag-color-text-subtle);
+  border-color: var(--bag-color-border-muted);
+}
+
+.bag-notice-item:hover {
+  background: var(--bag-color-primary-softer);
+}
+
+.bag-notice-unread-dot {
+  background: var(--bag-color-danger);
+}
+
+.bag-notice-title {
+  color: var(--bag-color-text);
+}
+
+.bag-notice-item:hover .bag-notice-title {
+  color: var(--bag-color-primary-pressed);
+}
+
+.dark .bag-notice-item:hover .bag-notice-title {
+  color: var(--bag-color-primary-hover);
+}
+
+.bag-user-avatar {
+  border-color: var(--bag-color-surface);
+}
+
+.bag-user-entry:hover .bag-user-avatar {
+  border-color: var(--bag-color-primary-soft);
+}
+
+.bag-user-caret {
+  color: var(--bag-color-text-subtle);
+}
+
+.bag-user-entry:hover .bag-user-caret {
+  color: var(--bag-color-primary);
+}
+
 /* Custom scrollbar for clean UI */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
@@ -442,37 +549,41 @@
   background: #475569;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #f97316;
+  background: var(--bag-color-primary);
 }
 
-/* Override NMenu styles for ecommerce theme */
-.ecommerce-menu .n-menu-item-content {
+/* Override NMenu styles for the default host theme */
+.bag-menu .n-menu-item-content {
   border-radius: 12px !important;
   transition: all 0.2s ease !important;
   margin-bottom: 4px;
 }
-.ecommerce-menu .n-menu-item-content:hover {
-  background-color: #fff7ed !important; /* orange-50 */
-  color: #ea580c !important; /* orange-600 */
+.bag-menu .n-menu-item-content:hover {
+  background-color: var(--bag-color-primary-softer) !important;
+  color: var(--bag-color-primary-pressed) !important;
 }
-.dark .ecommerce-menu .n-menu-item-content:hover {
-  background-color: #1f2937 !important; /* gray-800 */
-  color: #fb923c !important; /* orange-400 */
+.dark .bag-menu .n-menu-item-content:hover {
+  background-color: var(--bag-color-surface-muted) !important;
+  color: var(--bag-color-primary-hover) !important;
 }
-.ecommerce-menu .n-menu-item-content--selected {
-  background: linear-gradient(135deg, #f97316 0%, #f43f5e 100%) !important;
-  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.25);
+.bag-menu .n-menu-item-content--selected {
+  background: linear-gradient(
+    135deg,
+    var(--bag-color-primary) 0%,
+    var(--bag-color-accent) 100%
+  ) !important;
+  box-shadow: var(--bag-shadow-menu-active);
 }
-.dark .ecommerce-menu .n-menu-item-content--selected {
-  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.15);
+.dark .bag-menu .n-menu-item-content--selected {
+  box-shadow: var(--bag-shadow-menu-active);
 }
-.ecommerce-menu .n-menu-item-content--selected,
-.ecommerce-menu .n-menu-item-content--selected .n-menu-item-content-header,
-.ecommerce-menu .n-menu-item-content--selected .n-menu-item-content-header a,
-.ecommerce-menu .n-menu-item-content--selected .n-menu-item-content__icon {
+.bag-menu .n-menu-item-content--selected,
+.bag-menu .n-menu-item-content--selected .n-menu-item-content-header,
+.bag-menu .n-menu-item-content--selected .n-menu-item-content-header a,
+.bag-menu .n-menu-item-content--selected .n-menu-item-content__icon {
   color: white !important;
 }
-.ecommerce-menu .n-menu-item-content-header {
+.bag-menu .n-menu-item-content-header {
   font-weight: 600;
 }
 </style>
@@ -491,6 +602,7 @@ import type { MenuConfig } from '@bag/core'
 import { canAccess } from '../access'
 import { useAppConfigStore } from '../stores/app-config'
 import { useHostUiConfig, type HostMessageItem, type HostMessageTab } from '../core/host-ui'
+import { getHostNavigationConfig } from '../core/navigation'
 
 const { locale, fallbackLocale, messages, t } = useI18n()
 const menuStore = useMenuStore()
@@ -499,6 +611,7 @@ const appConfigStore = useAppConfigStore()
 const hostUi = useHostUiConfig()
 const router = useRouter()
 const route = useRoute()
+const navigation = getHostNavigationConfig()
 
 // 消息中心的数据通过 host-ui 注入，使用方可以在 bootstrapPlugins({ ui }) 中对接真实接口。
 const messageTabs = ref('notify')
@@ -664,7 +777,7 @@ const filterMenus = (menus: MenuConfig[]): MenuConfig[] => {
 
 const baseMenus: MenuConfig[] = [
   {
-    path: '/dashboard',
+    path: navigation.homePath,
     title: 'menu.dashboard',
     icon: 'dashboard'
   }
@@ -791,7 +904,7 @@ const userOptions = computed(() => [
 
 const handleUserSelect = (key: string) => {
   if (key === 'profile') {
-    router.push('/profile')
+    router.push(navigation.profilePath)
   } else if (key === 'logout') {
     handleLogout()
   }
@@ -851,11 +964,11 @@ const handleLogout = () => {
 }
 
 .bag-header-action:hover {
-  color: #f97316;
+  color: var(--bag-color-primary);
 }
 
 .dark .bag-header-action:hover {
-  color: #fb923c;
+  color: var(--bag-color-primary-hover);
 }
 
 .bag-header-action-icon {
@@ -872,11 +985,11 @@ const handleLogout = () => {
 }
 
 .bag-header-action:hover .bag-header-action-icon {
-  background: #fff7ed;
+  background: var(--bag-color-primary-softer);
 }
 
 .dark .bag-header-action:hover .bag-header-action-icon {
-  background: rgba(31, 41, 55, 1);
+  background: var(--bag-color-surface-muted);
 }
 
 .bag-header-action-label {
@@ -898,12 +1011,12 @@ const handleLogout = () => {
   cursor: pointer;
   font-size: 14px;
   line-height: 1;
-  border-left: 1px solid #e5e7eb;
+  border-left: 1px solid var(--bag-color-border);
   transition: color 0.2s ease;
 }
 
 .dark .bag-user-entry {
-  border-left-color: #374151;
+  border-left-color: var(--bag-color-border);
 }
 
 .bag-brand {
@@ -924,7 +1037,7 @@ const handleLogout = () => {
 }
 
 .bag-brand:focus-visible {
-  outline: 2px solid rgba(249, 115, 22, 0.35);
+  outline: 2px solid var(--bag-color-primary-soft);
   outline-offset: 6px;
   border-radius: 16px;
 }
@@ -942,11 +1055,15 @@ const handleLogout = () => {
   width: 40px;
   height: 40px;
   border-radius: 12px;
-  background: linear-gradient(135deg, #fb923c 0%, #f43f5e 100%);
+  background: linear-gradient(
+    135deg,
+    var(--bag-color-primary-hover) 0%,
+    var(--bag-color-accent) 100%
+  );
   color: #fff;
   box-shadow:
-    0 10px 15px -3px rgba(249, 115, 22, 0.2),
-    0 4px 6px -4px rgba(249, 115, 22, 0.2);
+    0 10px 15px -3px var(--bag-color-primary-soft),
+    0 4px 6px -4px var(--bag-color-primary-soft);
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
@@ -961,8 +1078,8 @@ const handleLogout = () => {
 .bag-brand:hover .bag-brand-logo {
   transform: translateY(-2px);
   box-shadow:
-    0 14px 24px -6px rgba(249, 115, 22, 0.28),
-    0 8px 12px -8px rgba(244, 63, 94, 0.24);
+    0 14px 24px -6px var(--bag-color-primary-soft),
+    0 8px 12px -8px var(--bag-color-accent-soft);
 }
 
 .bag-brand-copy {
@@ -979,8 +1096,12 @@ const handleLogout = () => {
   font-weight: 800;
   line-height: 1.2;
   letter-spacing: -0.025em;
-  color: #1e293b;
-  background: linear-gradient(90deg, #ea580c 0%, #f43f5e 100%);
+  color: var(--bag-color-text);
+  background: linear-gradient(
+    90deg,
+    var(--bag-color-primary-pressed) 0%,
+    var(--bag-color-accent) 100%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -992,8 +1113,8 @@ const handleLogout = () => {
   justify-content: center;
   padding: 4px 10px;
   border-radius: 999px;
-  background: rgba(249, 115, 22, 0.12);
-  color: #ea580c;
+  background: var(--bag-color-primary-soft);
+  color: var(--bag-color-primary-pressed);
   font-size: 11px;
   font-weight: 700;
   line-height: 1;
@@ -1001,15 +1122,19 @@ const handleLogout = () => {
 }
 
 .dark .bag-brand-title {
-  background: linear-gradient(90deg, #fb923c 0%, #fb7185 100%);
+  background: linear-gradient(
+    90deg,
+    var(--bag-color-primary-hover) 0%,
+    var(--bag-color-accent-hover) 100%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .dark .bag-brand-badge {
-  background: rgba(251, 146, 60, 0.14);
-  color: #fdba74;
+  background: var(--bag-color-primary-soft);
+  color: var(--bag-color-primary-hover);
 }
 
 .bag-sidebar-toolbar {
@@ -1024,12 +1149,12 @@ const handleLogout = () => {
     gap: 12px;
     padding: 12px;
     overflow: hidden;
-    border-bottom: 1px solid rgba(249, 250, 251, 1);
+    border-bottom: 1px solid var(--bag-color-border-muted);
     transition: all 0.3s ease;
   }
 
   .dark .bag-sidebar-toolbar {
-    border-bottom-color: rgba(31, 41, 55, 0.5);
+    border-bottom-color: var(--bag-color-border-muted);
   }
 
   .bag-sidebar-toolbar.is-collapsed {
@@ -1060,7 +1185,11 @@ const handleLogout = () => {
   height: 16px;
   flex-shrink: 0;
   border-radius: 999px;
-  background: linear-gradient(180deg, #fb923c 0%, #f43f5e 100%);
+  background: linear-gradient(
+    180deg,
+    var(--bag-color-primary-hover) 0%,
+    var(--bag-color-accent) 100%
+  );
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.12);
 }
 
@@ -1069,11 +1198,11 @@ const handleLogout = () => {
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #475569;
+  color: var(--bag-color-text-muted);
 }
 
 .dark .bag-sidebar-toolbar-title {
-  color: #cbd5e1;
+  color: var(--bag-color-icon);
 }
 
 .bag-sidebar-collapse-btn {
@@ -1089,8 +1218,8 @@ const handleLogout = () => {
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  background: #f9fafb;
-  color: #6b7280;
+  background: var(--bag-color-surface-muted);
+  color: var(--bag-color-icon);
   cursor: pointer;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
   transition:
@@ -1101,19 +1230,19 @@ const handleLogout = () => {
 }
 
 .bag-sidebar-collapse-btn:hover {
-  background: #fff7ed;
-  color: #ea580c;
-  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.14);
+  background: var(--bag-color-primary-softer);
+  color: var(--bag-color-primary-pressed);
+  box-shadow: var(--bag-shadow-menu-active);
 }
 
 .dark .bag-sidebar-collapse-btn {
-  background: rgba(31, 41, 55, 0.8);
-  color: #9ca3af;
+  background: var(--bag-color-surface-muted);
+  color: var(--bag-color-text-muted);
 }
 
 .dark .bag-sidebar-collapse-btn:hover {
-  background: rgba(31, 41, 55, 1);
-  color: #fb923c;
+  background: var(--bag-color-surface-muted);
+  color: var(--bag-color-primary-hover);
 }
 
 .bag-sidebar-collapse-icon {
@@ -1146,12 +1275,12 @@ const handleLogout = () => {
   min-width: 20px;
   padding: 2px 6px;
   border-radius: 999px;
-  background: linear-gradient(90deg, #f43f5e 0%, #f97316 100%);
+  background: linear-gradient(90deg, var(--bag-color-accent) 0%, var(--bag-color-primary) 100%);
   color: #fff;
   font-size: 10px;
   font-weight: 800;
   line-height: 1;
-  box-shadow: 0 2px 8px rgba(244, 63, 94, 0.24);
+  box-shadow: 0 2px 8px var(--bag-color-accent-soft);
   transform: scale(0.92);
   transform-origin: right center;
 }
@@ -1162,7 +1291,7 @@ const handleLogout = () => {
   padding: 0;
   border: 0;
   background: transparent;
-  color: #f97316;
+  color: var(--bag-color-primary);
   font-size: 12px;
   line-height: 1;
   cursor: pointer;
@@ -1170,15 +1299,15 @@ const handleLogout = () => {
 }
 
 .bag-notice-action:hover {
-  color: #ea580c;
+  color: var(--bag-color-primary-pressed);
 }
 
 .dark .bag-notice-action {
-  color: #fb923c;
+  color: var(--bag-color-primary-hover);
 }
 
 .dark .bag-notice-action:hover {
-  color: #fdba74;
+  color: var(--bag-color-primary-hover);
 }
 
 .bag-notice-footer-btn {
@@ -1193,7 +1322,7 @@ const handleLogout = () => {
   border: 0;
   border-radius: 12px;
   background: transparent;
-  color: #64748b;
+  color: var(--bag-color-text-muted);
   font-size: 14px;
   line-height: 1.2;
   text-align: center;
@@ -1204,16 +1333,16 @@ const handleLogout = () => {
 }
 
 .bag-notice-footer-btn:hover {
-  background: #fff7ed;
-  color: #f97316;
+  background: var(--bag-color-primary-softer);
+  color: var(--bag-color-primary);
 }
 
 .dark .bag-notice-footer-btn {
-  color: #94a3b8;
+  color: var(--bag-color-text-muted);
 }
 
 .dark .bag-notice-footer-btn:hover {
-  background: rgba(31, 41, 55, 1);
-  color: #fb923c;
+  background: var(--bag-color-surface-muted);
+  color: var(--bag-color-primary-hover);
 }
 </style>
