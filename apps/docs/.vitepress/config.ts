@@ -13,7 +13,6 @@ export default defineConfig({
       { text: '指南', link: '/guide/introduction' },
       { text: '在线预览', link: 'https://hangjob.github.io/vue-bag-admin/' }
     ],
-
     sidebar: {
       '/guide/package': [
         {
