@@ -1,44 +1,55 @@
-# Vue-Bag-Admin
+<div align="center">
+  <img src="./apps/docs/public/logo.png" width="96" alt="Vue-Bag-Admin Logo" />
+  <h1>Vue-Bag-Admin</h1>
+  <p><strong>插件化、可拆包、面向业务增长的 Vue3 中后台解决方案</strong></p>
+  <p>
+    <a href="https://hangjob.github.io/vue-bag-admin">在线体验</a>
+    ·
+    <a href="https://hangjob.github.io/vue-bag-admin/docs/">文档地址</a>
+    ·
+    <a href="./apps/docs/guide/getting-started.md">快速开始</a>
+    ·
+    <a href="./apps/docs/guide/plugin-development.md">插件开发</a>
+  </p>
+  <p>
+    <img src="https://img.shields.io/badge/Vue-3.5-42b883?style=flat-square" alt="Vue 3.5" />
+    <img src="https://img.shields.io/badge/Vite-6-646cff?style=flat-square" alt="Vite 6" />
+    <img src="https://img.shields.io/badge/Naive_UI-2.40-18a058?style=flat-square" alt="Naive UI" />
+    <img src="https://img.shields.io/badge/TailwindCSS-3.4-38bdf8?style=flat-square" alt="TailwindCSS" />
+    <img src="https://img.shields.io/badge/pnpm-workspace-f69220?style=flat-square" alt="pnpm workspace" />
+    <img src="https://img.shields.io/badge/license-MIT-111827?style=flat-square" alt="MIT License" />
+  </p>
+</div>
 
-[在线体验](https://hangjob.github.io/vue-bag-admin) | [文档地址](https://hangjob.github.io/vue-bag-admin/docs/)
+---
 
-`Vue-Bag-Admin` 现在不只是一个后台工程仓库，也是一套正在拆包发布的插件化后台生态。你可以直接在 Monorepo 里开发，也可以通过 npm 包和脚手架去起一个新的宿主项目。
+`Vue-Bag-Admin` 不只是一个后台工程模板，也是一套正在拆包发布的插件化后台生态。它把布局、权限、路由、请求、Schema UI 和插件引导收敛到统一主包中，让业务项目可以先轻量启动，再按需接入独立插件。
 
-## 核心特性
+你可以直接用脚手架创建一个新的后台宿主，也可以在当前 Monorepo 中开发框架、插件、文档站和参考后端。
 
-- ⚡️ **极致速度**：基于 Vite5 构建，提供闪电般的冷启动和热重载体验。
-- 🧩 **插件化微内核架构**：核心与业务解耦，业务模块可以作为独立插件接入宿主。
-- 📦 **主包优先，插件按需**：业务项目默认只安装 `vue-bag-admin`，需要业务能力时再追加 `@bag/plugin-*`；仓库内部仍保留清晰分层。
-- 🛠️ **Monorepo 管理**：采用 pnpm workspace 进行多包协作，仓库内置示例宿主、文档站和参考后端。
-- 🔒 **完善的权限体系**：基于角色的动态路由与按钮级别权限控制，配合 Strapi5 轻松实现全栈权限流转。
-- 🎨 **Naive UI 与 TailwindCSS**：深度集成 Naive UI 组件库与 TailwindCSS，组件丰富且样式开发高效灵活。
-- 📦 **开箱即用**：提供完整的登录、Dashboard、403、404 等基础能力，助你专注于业务逻辑。
+## 为什么选择
 
-## 目录结构
+| 能力       | 你会得到什么                                                              |
+| ---------- | ------------------------------------------------------------------------- |
+| 插件化架构 | 核心框架与业务模块解耦，商城、系统设置等能力可以作为独立插件接入。        |
+| 主包优先   | 业务项目默认只安装 `vue-bag-admin`，避免一开始就被完整 Monorepo 绑住。    |
+| 权限闭环   | 支持动态路由、菜单权限、按钮级权限，并可与 Strapi5 配合完成全栈权限流转。 |
+| 工程化基础 | pnpm workspace 管理多包协作，内置宿主应用、文档站、参考后端和脚手架。     |
+| 现代 UI 栈 | Vue3、Vite6、Naive UI、TailwindCSS、Pinia、Vue Router 组成稳定开发底座。  |
+| 开箱即用   | 登录、Dashboard、布局、403、404、请求封装等后台基础能力已经准备好。       |
 
-```text
-Vue-Bag-Admin
-├── apps
-│   ├── admin             # 前端宿主应用 (Vue3)
-│   ├── docs              # VitePress 官方文档
-│   └── strapi            # 后端服务 (Strapi 5)
-├── packages
-│   ├── core              # 协议层：插件、路由 meta、Schema 等
-│   ├── host-vue          # 宿主层：布局、权限、插件引导
-│   ├── request           # 请求能力层
-│   ├── ui                # Schema 驱动 UI 组件层
-│   ├── vue-bag-admin      # 面向业务项目的统一主包
-│   ├── create-vue-bag-admin # 初始化脚手架
-│   └── plugin-*          # 官方业务插件与示例插件
-├── pnpm-workspace.yaml   # Monorepo 配置
-└── package.json
-```
+## 适合场景
 
-## 两种开始方式
+| 场景                 | 推荐用法                                                         |
+| -------------------- | ---------------------------------------------------------------- |
+| 快速搭建业务后台     | 使用 `create-vue-bag-admin` 创建最小宿主项目。                   |
+| 沉淀公司内部后台基座 | 基于 `vue-bag-admin` 主包扩展业务规范和 UI 约定。                |
+| 拆分复用业务模块     | 将业务能力封装为 `@bag/plugin-*` 插件，按需接入不同宿主。        |
+| 学习中后台工程实践   | 阅读 Monorepo、宿主、插件、请求、Schema UI 与 Strapi5 后端实现。 |
 
-### 1. 直接用 npm 起项目
+## 快速开始
 
-如果你的目标是创建一个新的后台宿主项目，推荐直接从脚手架开始：
+### 创建新的后台项目
 
 ```bash
 npx create-vue-bag-admin my-admin
@@ -47,29 +58,16 @@ pnpm install
 pnpm dev
 ```
 
-脚手架目前固定使用 `templates/basic`，生成一个最小宿主模板，只安装 `vue-bag-admin`。如果后续需要官方业务插件，再在业务项目里按需安装 `@bag/plugin-*`。
+脚手架当前使用 `templates/basic` 生成最小宿主模板，默认只安装 `vue-bag-admin`。当项目需要商城、系统设置等官方业务能力时，再按需安装对应的 `@bag/plugin-*` 插件即可。
 
-### 2. 在当前仓库里开发
-
-如果你想参与这套框架本身的开发，再按下面的方式跑 Monorepo。
-
-## 仓库开发
-
-### 环境准备
-
-- **Node.js**: `v24.4.1` 或更高版本。仓库 `.nvmrc` / `.nvmdrc` 使用完整版本号，避免部分版本管理工具无法解析 `24` 简写。
-- **pnpm**: `v9` 或更高版本。
-- **MySQL**: `8.0` 以上版本（用于 Strapi5 后端）。
-
-### 1. 安装依赖
+### 开发当前 Monorepo
 
 ```bash
 pnpm install
+pnpm --filter admin dev
 ```
 
-### 2. 后端服务初始化 (Strapi)
-
-进入 `apps/strapi` 目录，配置数据库并启动：
+如果需要同时运行参考后端，请先准备 MySQL 数据库 `vue_bag_admin`，再启动 Strapi：
 
 ```bash
 cd apps/strapi
@@ -77,49 +75,71 @@ cp .env.example .env
 pnpm dev
 ```
 
-> 默认使用 MySQL 数据库 `vue_bag_admin`（需要提前创建）。
+## 环境要求
 
-### 3. 前端服务启动
+| 依赖    | 版本                                      |
+| ------- | ----------------------------------------- |
+| Node.js | `v24.4.1` 或更高版本                      |
+| pnpm    | `v9` 或更高版本                           |
+| MySQL   | `8.0` 或更高版本，仅 Strapi5 参考后端需要 |
 
-回到根目录或在 `apps/admin` 目录中：
+> 仓库中的 `.nvmrc` / `.nvmdrc` 使用完整版本号 `24.4.1`，避免部分版本管理工具无法解析 `24` 简写。
 
-```bash
-cd apps/admin
-cp .env.example .env
+## 项目结构
 
-# 在根目录运行前端 dev 命令
-pnpm --filter admin dev
+```text
+Vue-Bag-Admin
+├── apps
+│   ├── admin                 # 前端宿主应用 (Vue3)
+│   ├── docs                  # VitePress 官方文档
+│   └── strapi                # 参考后端服务 (Strapi 5)
+├── packages
+│   ├── core                  # 协议层：插件、路由 meta、Schema 等
+│   ├── host-vue              # 宿主层：布局、权限、路由、插件引导
+│   ├── request               # 请求能力层
+│   ├── ui                    # Schema 驱动的 UI 组件层
+│   ├── vue-bag-admin         # 面向业务项目的统一主包
+│   ├── create-vue-bag-admin  # 初始化脚手架
+│   └── plugin-*              # 官方业务插件与示例插件
+├── pnpm-workspace.yaml       # Monorepo 配置
+└── package.json
 ```
 
-### 4. 查阅文档
+## 包生态
 
-本地启动 VitePress 文档服务：
+| 包名                      | 定位     | 说明                                                                |
+| ------------------------- | -------- | ------------------------------------------------------------------- |
+| `vue-bag-admin`           | 统一主包 | 默认聚合宿主、请求、UI 和协议能力，是业务项目的首选入口。           |
+| `@bag/core`               | 协议层   | 定义插件接口、路由 meta、Schema 协议等基础约定。                    |
+| `@bag/host-vue`           | 宿主层   | 负责布局、权限、路由注册和插件引导。                                |
+| `@bag/request`            | 请求层   | 统一 HTTP / WS 能力，并内置基于 Lodash 的请求防抖 / 节流包装器。    |
+| `@bag/ui`                 | 组件层   | 承载 `PmProTable`、`PmProForm`、`PmSchemaForm` 等 Schema 驱动组件。 |
+| `@bag/plugin-shop`        | 业务插件 | 官方商城示例插件。                                                  |
+| `@bag/plugin-sys-setting` | 业务插件 | 官方系统设置示例插件。                                              |
+| `create-vue-bag-admin`    | 脚手架   | 快速创建后台宿主项目。                                              |
 
-```bash
-pnpm --filter @bag/docs dev
-```
+## 常用命令
 
-或者访问 `apps/docs` 下的内容了解详细架构和插件开发指南。
+| 命令                          | 说明                         |
+| ----------------------------- | ---------------------------- |
+| `pnpm install`                | 安装 Monorepo 依赖。         |
+| `pnpm --filter admin dev`     | 启动前端宿主应用。           |
+| `pnpm --filter @bag/docs dev` | 启动 VitePress 文档站。      |
+| `pnpm dev`                    | 启动除 Strapi 外的开发任务。 |
+| `pnpm dev:all`                | 启动全部开发任务。           |
+| `pnpm build`                  | 构建所有包和应用。           |
+| `pnpm check-types`            | 执行类型检查。               |
 
-## 包生态说明
+## 延伸阅读
 
-- `@bag/core`：协议层，定义插件接口、路由 meta、Schema 协议
-- `@bag/request`：请求能力层，统一 HTTP / WS 相关能力，并内置基于 Lodash 的请求防抖 / 节流包装器
-- `@bag/ui`：后台组件层，承载 `PmProTable`、`PmProForm`、`PmSchemaForm`
-- `@bag/host-vue`：Vue 宿主层，负责布局、权限、路由与插件引导
-- `vue-bag-admin`：面向业务项目的统一主包，默认聚合宿主、请求、UI 和协议能力
-- `@bag/plugin-shop`：官方商城示例插件
-- `@bag/plugin-sys-setting`：官方系统设置示例插件
-- `create-vue-bag-admin`：宿主初始化脚手架
+- [快速开始](./apps/docs/guide/getting-started.md)
+- [插件开发指南](./apps/docs/guide/plugin-development.md)
+- [宿主层说明](./packages/host-vue/README.md)
 
-更细的说明可以继续看这些文档：
+## 交流
 
-- `apps/docs/guide/getting-started.md`
-- `apps/docs/guide/plugin-development.md`
-- `packages/host-vue/README.md`
+如果你想交流使用体验、插件设计，或者一起补齐项目的能力边界，可以扫描下方二维码加入微信群：
 
-## 微信群
-
-如果你想交流使用体验、插件设计或者一起补齐这个项目的能力边界，可以在最后扫这个码进群：
-
-<img src="./wxcode.jpg" alt="Vue-Bag-Admin 微信群二维码" width="320" />
+<div align="center">
+  <img src="./wxcode.jpg" alt="Vue-Bag-Admin 微信群二维码" width="320" />
+</div>
