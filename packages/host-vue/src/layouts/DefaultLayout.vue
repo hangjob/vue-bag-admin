@@ -934,7 +934,7 @@ const handleBrandClick = () => {
 
 const handleLogout = () => {
   userStore.logout()
-  router.push('/login')
+  router.push(navigation.loginPath)
 }
 </script>
 

@@ -8,6 +8,7 @@ import {
   createStrapiAuthProvider,
   createHostI18n,
   createHostRouter,
+  getHostNavigationConfig,
   registerPermissionDirective,
   setAuthProvider,
   type AuthProvider,
@@ -59,7 +60,7 @@ async function setupApp() {
   const app = createApp(App)
   const pinia = createPinia()
   const i18n = createHostI18n()
-  const router = createHostRouter({ routes: appRoutes })
+  const router = createHostRouter({ routes: appRoutes, auth: true })
 
   app.use(pinia)
   app.use(i18n)
@@ -68,12 +69,16 @@ async function setupApp() {
   registerPermissionDirective(app)
 
   const userStore = useUserStore()
+  const navigation = getHostNavigationConfig()
   setupHttp({
     baseURL: import.meta.env.VITE_API_URL,
     getToken: () => userStore.token,
     onUnauthorized: () => {
       userStore.logout()
-      router.replace({ path: '/login', query: { redirect: router.currentRoute.value.fullPath } })
+      router.replace({
+        path: navigation.loginPath,
+        query: { redirect: router.currentRoute.value.fullPath }
+      })
     },
     onForbidden: () => {
       message.warning('当前账号没有访问权限')

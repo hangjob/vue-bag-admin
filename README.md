@@ -9,7 +9,7 @@
     ·
     <a href="./apps/docs/guide/getting-started.md">快速开始</a>
     ·
-    <a href="./apps/docs/guide/plugin-development.md">插件开发</a>
+    <a href="./apps/docs/guide/plugins/create-plugin.md">插件开发</a>
   </p>
   <p>
     <img src="https://img.shields.io/badge/Vue-3.5-42b883?style=flat-square" alt="Vue 3.5" />
@@ -133,7 +133,7 @@ Vue-Bag-Admin
 ## 延伸阅读
 
 - [快速开始](./apps/docs/guide/getting-started.md)
-- [插件开发指南](./apps/docs/guide/plugin-development.md)
+- [插件开发指南](./apps/docs/guide/plugins/create-plugin.md)
 - [宿主层说明](./packages/host-vue/README.md)
 
 ## 交流

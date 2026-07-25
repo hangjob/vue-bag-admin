@@ -2,6 +2,14 @@
 
 `vue-bag-admin` 是面向业务项目的统一运行时入口包。你可以只安装这一个主包，然后从同一个入口拿到宿主层、请求层、UI 组件层和插件协议层的常用能力。
 
+<p align="center">
+  <a href="https://hangjob.github.io/vue-bag-admin/docs/">使用文档</a>
+  ·
+  <a href="https://hangjob.github.io/vue-bag-admin/">在线预览</a>
+  ·
+  <a href="https://github.com/hangjob/vue-bag-admin">GitHub</a>
+</p>
+
 ## 安装
 
 ```bash
@@ -34,7 +42,8 @@ async function setupApp() {
   const pinia = createPinia()
   const i18n = createHostI18n()
   const router = createHostRouter({
-    routes: exampleRoutes
+    routes: exampleRoutes,
+    auth: false
   })
 
   app.use(pinia)
@@ -72,7 +81,7 @@ import { HostApp } from 'vue-bag-admin'
 </script>
 ```
 
-宿主自己的基础路由先保留登录页、首页和 404 即可：
+如果只是轻量接入宿主壳层，可以先不提供登录页：
 
 ```ts
 import type { AdminRouteRecordRaw } from 'vue-bag-admin'
@@ -80,23 +89,13 @@ import type { AdminRouteRecordRaw } from 'vue-bag-admin'
 export const exampleRoutes: AdminRouteRecordRaw[] = [
   {
     path: '/',
-    redirect: '/dashboard'
+    redirect: '/HomeView'
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: () => import('./views/Login.vue'),
+    path: '/HomeView',
+    name: 'HomeView',
+    component: () => import('./views/HomeView.vue'),
     meta: {
-      layout: 'blank',
-      public: true
-    }
-  },
-  {
-    path: '/dashboard',
-    name: 'Dashboard',
-    component: () => import('./views/Dashboard.vue'),
-    meta: {
-      title: 'menu.dashboard',
       layout: 'default'
     }
   },
@@ -114,6 +113,8 @@ export const exampleRoutes: AdminRouteRecordRaw[] = [
   }
 ]
 ```
+
+如果项目要启用默认后台登录守卫，把 `auth` 改成 `true`，并提供带 `meta.public: true` 的 `/login` 路由。
 
 接入时通常按这个顺序来：
 
@@ -148,3 +149,7 @@ import { http, PmProTable, PmProForm, PmSchemaForm } from 'vue-bag-admin'
 ```bash
 npx create-vue-bag-admin my-admin
 ```
+
+## 文档与社区
+
+遇到接入、插件开发或中后台实践相关的问题，可以先查看[使用文档](https://hangjob.github.io/vue-bag-admin/docs/)；也欢迎通过下面的入口继续交流。

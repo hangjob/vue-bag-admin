@@ -1,6 +1,12 @@
 import type { App } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
-import type { RouteRecordRaw, Router, RouterHistory } from 'vue-router'
+import type {
+  RouteLocationNormalized,
+  RouteLocationRaw,
+  RouteRecordRaw,
+  Router,
+  RouterHistory
+} from 'vue-router'
 import { createDiscreteApi } from 'naive-ui'
 import {
   type AdminPlugin,
@@ -28,10 +34,142 @@ export interface CreateHostRouterOptions {
   routes: AdminRouteRecordRaw[]
   history?: RouterHistory
   navigation?: Partial<HostNavigationConfig>
+  auth?: HostAuthOption
 }
 
-export const createHostRouter = ({ routes, history, navigation }: CreateHostRouterOptions) => {
-  setupHostNavigation(navigation)
+export type HostProfileErrorAction = 'logout' | 'ignore' | 'throw'
+
+export interface HostAuthGuardContext {
+  to: RouteLocationNormalized
+  router: Router
+  user: ReturnType<typeof useUserStore>
+}
+
+export type HostUnauthenticatedHandler = (
+  context: HostAuthGuardContext
+) => RouteLocationRaw | false | void | Promise<RouteLocationRaw | false | void>
+
+export type HostProfileErrorHandler = (
+  context: HostAuthGuardContext & { error: unknown }
+) =>
+  | HostProfileErrorAction
+  | RouteLocationRaw
+  | false
+  | void
+  | Promise<HostProfileErrorAction | RouteLocationRaw | false | void>
+
+export interface HostAuthConfig extends Partial<HostNavigationConfig> {
+  enabled?: boolean
+  onUnauthenticated?: HostUnauthenticatedHandler
+  onProfileError?: HostProfileErrorHandler
+}
+
+export type HostAuthOption = boolean | HostAuthConfig
+
+interface ResolvedHostAuthConfig {
+  enabled: boolean
+  onUnauthenticated?: HostUnauthenticatedHandler
+  onProfileError?: HostProfileErrorHandler
+}
+
+const resolveHostAuthConfig = (auth?: HostAuthOption): ResolvedHostAuthConfig => {
+  if (auth === false) {
+    return { enabled: false }
+  }
+
+  if (auth && typeof auth === 'object') {
+    return {
+      enabled: auth.enabled ?? true,
+      onUnauthenticated: auth.onUnauthenticated,
+      onProfileError: auth.onProfileError
+    }
+  }
+
+  return { enabled: true }
+}
+
+const getAuthNavigationConfig = (auth?: HostAuthOption): Partial<HostNavigationConfig> => {
+  if (!auth || typeof auth === 'boolean') {
+    return {}
+  }
+
+  const { homePath, loginPath, profilePath, forbiddenPath, notFoundPath, redirectName } = auth
+  return {
+    ...(homePath ? { homePath } : {}),
+    ...(loginPath ? { loginPath } : {}),
+    ...(profilePath ? { profilePath } : {}),
+    ...(forbiddenPath ? { forbiddenPath } : {}),
+    ...(notFoundPath ? { notFoundPath } : {}),
+    ...(redirectName ? { redirectName } : {})
+  }
+}
+
+const hasRoutePath = (router: Router, path: string) => {
+  return router.getRoutes().some((route) => route.path === path)
+}
+
+const resolveUnauthenticatedRedirect = async (
+  auth: ResolvedHostAuthConfig,
+  context: HostAuthGuardContext
+) => {
+  const customRedirect = await auth.onUnauthenticated?.(context)
+  if (customRedirect !== undefined) {
+    return customRedirect
+  }
+
+  const { loginPath } = getHostNavigationConfig()
+  if (context.to.path === loginPath) {
+    return true
+  }
+
+  if (!hasRoutePath(context.router, loginPath)) {
+    console.error(
+      `[vue-bag-admin] auth enabled but login route "${loginPath}" is missing. ` +
+        'Add the route, mark it as meta.public, configure auth.loginPath, or pass auth: false.'
+    )
+    return false
+  }
+
+  return { path: loginPath, query: { redirect: context.to.fullPath } }
+}
+
+const resolveProfileErrorRedirect = async (
+  auth: ResolvedHostAuthConfig,
+  context: HostAuthGuardContext & { error: unknown }
+) => {
+  const customAction = await auth.onProfileError?.(context)
+
+  if (customAction === 'ignore') {
+    return true
+  }
+
+  if (customAction === 'throw') {
+    throw context.error
+  }
+
+  if (customAction && customAction !== 'logout') {
+    return customAction
+  }
+
+  if (customAction === false) {
+    return false
+  }
+
+  context.user.logout()
+  return resolveUnauthenticatedRedirect(auth, context)
+}
+
+export const createHostRouter = ({
+  routes,
+  history,
+  navigation,
+  auth
+}: CreateHostRouterOptions) => {
+  setupHostNavigation({
+    ...navigation,
+    ...getAuthNavigationConfig(auth)
+  })
+  const authConfig = resolveHostAuthConfig(auth)
   const router = createRouter({
     history: history ?? createWebHashHistory(),
     routes: routes as RouteRecordRaw[]
@@ -42,16 +180,19 @@ export const createHostRouter = ({ routes, history, navigation }: CreateHostRout
     loadingBar.start()
 
     const isPublic = Boolean(to.meta?.public)
-    if (!isPublic && !user.isAuthenticated) {
-      return { path: getHostNavigationConfig().loginPath, query: { redirect: to.fullPath } }
+    if (!to.matched.length || isPublic || !authConfig.enabled) {
+      return true
     }
 
-    if (!isPublic && user.isAuthenticated && !user.profileLoaded) {
+    if (!user.isAuthenticated) {
+      return resolveUnauthenticatedRedirect(authConfig, { to, router, user })
+    }
+
+    if (!user.profileLoaded) {
       try {
         await user.fetchProfile()
-      } catch {
-        user.logout()
-        return { path: getHostNavigationConfig().loginPath, query: { redirect: to.fullPath } }
+      } catch (error) {
+        return resolveProfileErrorRedirect(authConfig, { to, router, user, error })
       }
     }
 

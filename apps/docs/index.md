@@ -33,3 +33,9 @@ features:
   - title: 🔧 本地联调
     details: '可以直接跑 `apps/admin`，也可以在外部项目里用 `link:` 验证主包和插件包。'
 ---
+
+<script setup>
+import CommunitySection from './.vitepress/theme/components/CommunitySection.vue'
+</script>
+
+<CommunitySection />

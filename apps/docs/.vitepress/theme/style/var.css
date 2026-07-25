@@ -1,20 +1,801 @@
 :root {
-    --vp-c-brand: #00e6ff;
-    --vp-c-brand-light: #00e6ffd4;
-    --vp-c-brand-lighter: #a0d911;
-    --vp-c-brand-lightest: #bcc0ff;
-    --vp-c-brand-dark: #00e5ffd4;
-    --vp-c-brand-darker: #00e5ffd4;
-    --vp-c-brand-dimm: rgba(100, 108, 255, 0.08);
-    /* 标题 */
-    --vp-home-hero-name-color: transparent;
-    --vp-home-hero-name-background: linear-gradient( 135deg, #00e6ff 10%, #a0d911 100%);
+  --vp-c-brand: #00e6ff;
+  --vp-c-brand-light: #00e6ffd4;
+  --vp-c-brand-lighter: #a0d911;
+  --vp-c-brand-lightest: #bcc0ff;
+  --vp-c-brand-dark: #00e5ffd4;
+  --vp-c-brand-darker: #00e5ffd4;
+  --vp-c-brand-dimm: rgba(100, 108, 255, 0.08);
+  /* 标题 */
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(135deg, #00e6ff 10%, #a0d911 100%);
 
-    /* 图标背景 */
-    --vp-home-hero-image-background-image: linear-gradient( 135deg, #00e6ff 10%, #a0d911 100%);
-    --vp-home-hero-image-filter: blur(180px);
+  /* 图标背景 */
+  --vp-home-hero-image-background-image: linear-gradient(135deg, #00e6ff 10%, #a0d911 100%);
+  --vp-home-hero-image-filter: blur(180px);
 }
 
 .custom-block.tip {
-    border-color: var(--vp-c-brand);
+  border-color: var(--vp-c-brand);
+}
+
+.bag-community {
+  --bag-ink: #07132f;
+  --bag-muted: #5e6b7d;
+  position: relative;
+  width: min(1152px, calc(100vw - 48px));
+  margin: 80px auto 32px;
+  color: var(--vp-c-text-1);
+  isolation: isolate;
+  scroll-margin-top: calc(var(--vp-nav-height) + 24px);
+}
+
+.bag-community::before {
+  display: none;
+}
+
+.bag-community a,
+.bag-community a:visited,
+.bag-community a:hover,
+.bag-community a:active {
+  color: inherit;
+  text-decoration: none !important;
+}
+
+.bag-community a * {
+  text-decoration: none !important;
+}
+
+.bag-community-ghost {
+  position: absolute;
+  top: 6px;
+  right: 0;
+  z-index: -1;
+  color: color-mix(in srgb, var(--vp-c-text-1) 6%, transparent);
+  font-size: 104px;
+  font-weight: 900;
+  letter-spacing: -0.08em;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.bag-community-heading {
+  position: relative;
+  z-index: 2;
+  width: min(690px, 52%);
+}
+
+.bag-community-eyebrow {
+  display: inline-flex;
+  gap: 14px;
+  align-items: center;
+  color: #48e7e1;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.bag-community-eyebrow::before {
+  color: #48e7e1;
+  content: '✦';
+  font-size: 21px;
+}
+
+.bag-community-heading h2 {
+  margin: 18px 0 10px;
+  border: 0;
+  color: var(--vp-c-text-1);
+  font-size: 48px;
+  font-weight: 900;
+  letter-spacing: -0.07em;
+  line-height: 0.98;
+  text-shadow: none;
+}
+
+.bag-community-heading h2::after {
+  display: inline-block;
+  width: 36px;
+  height: 30px;
+  margin-left: 12px;
+  border-top: 4px solid #35dfda;
+  border-right: 4px solid #35dfda;
+  content: '';
+  opacity: 0.9;
+  transform: rotate(-15deg) skew(-8deg);
+}
+
+.bag-community-heading p {
+  margin: 0;
+  color: var(--vp-c-text-2);
+  font-size: 16px;
+  letter-spacing: 0.01em;
+  line-height: 1.65;
+}
+
+.bag-community-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  height: 420px;
+  margin-top: 32px;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.94fr);
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 15px 22px;
+}
+
+.bag-community-card {
+  position: relative;
+  overflow: hidden;
+  border: 0;
+  border-radius: 24px;
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.12);
+}
+
+.bag-community-card--wechat {
+  height: calc(100% - 28px);
+  margin-top: 28px;
+  padding: 18px;
+  grid-row: 1 / 3;
+  background: linear-gradient(145deg, #dff9ff 0%, #a5f2ed 55%, #9ce9d5 100%);
+}
+
+.bag-community-surface,
+.bag-community-link-surface {
+  position: relative;
+  z-index: 1;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow:
+    0 20px 44px rgba(52, 101, 127, 0.12),
+    inset 0 1px 0 #fff;
+}
+
+.bag-community-wechat-surface {
+  display: grid;
+  height: calc(100% - 30px);
+  margin-top: 30px;
+  padding: 28px;
+  border-radius: 22px;
+  grid-template-columns: minmax(0, 1fr) 180px;
+  gap: 22px;
+  align-items: center;
+}
+
+.bag-community-card-icon {
+  position: absolute;
+  z-index: 4;
+  display: grid;
+  border: 1px solid rgba(255, 255, 255, 0.84);
+  border-radius: 50%;
+  box-shadow:
+    0 14px 28px rgba(16, 60, 93, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  place-items: center;
+}
+
+.bag-community-card-icon svg {
+  width: 54%;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+}
+
+.bag-community-card-icon--wechat {
+  top: 18px;
+  left: 20px;
+  width: 68px;
+  height: 68px;
+  background: linear-gradient(145deg, #a9eff2, #64d8dc);
+  color: #fff;
+}
+
+.bag-community-doodle {
+  position: absolute;
+  z-index: 3;
+  width: 70px;
+  height: 24px;
+  border-top: 4px solid currentColor;
+  border-radius: 50%;
+  color: #55d7d3;
+  pointer-events: none;
+  transform: rotate(-8deg) skewX(-28deg);
+}
+
+.bag-community-doodle::after {
+  position: absolute;
+  top: 7px;
+  right: 4px;
+  width: 48px;
+  height: 16px;
+  border-top: 4px solid currentColor;
+  border-radius: 50%;
+  content: '';
+}
+
+.bag-community-doodle--wechat {
+  top: 62px;
+  left: 130px;
+}
+
+.bag-community-star {
+  position: absolute;
+  top: 22px;
+  right: 34px;
+  z-index: 3;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 38px;
+  line-height: 1;
+}
+
+.bag-community-copy {
+  position: relative;
+  z-index: 2;
+  color: var(--bag-ink);
+}
+
+.bag-community-copy h3,
+.bag-community-link-copy h3 {
+  margin: 0;
+  border: 0;
+  color: var(--bag-ink);
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.bag-community-title-mark {
+  display: block;
+  width: min(100%, 170px);
+  height: 10px;
+  margin-top: -5px;
+  border-radius: 999px;
+  background: #d6f5f1;
+}
+
+.bag-community-name {
+  margin: 22px 0 0 !important;
+  color: #0c1732 !important;
+  font-size: 17px !important;
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  line-height: 1.3 !important;
+  white-space: nowrap;
+}
+
+.bag-community-dots {
+  display: block;
+  width: min(92%, 190px);
+  height: 8px;
+  margin-top: 10px;
+  background-image: radial-gradient(circle, #74dbd6 1.6px, transparent 1.7px);
+  background-position: left center;
+  background-size: 12px 8px;
+}
+
+.bag-community-join,
+.bag-community-action {
+  display: inline-flex;
+  width: fit-content;
+  gap: 10px;
+  align-items: center;
+  border-radius: 999px;
+  color: #0b1730;
+  font-weight: 750;
+  line-height: 1;
+}
+
+.bag-community-join {
+  margin-top: 20px;
+  font-size: 15px;
+}
+
+.bag-community-join > span {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #aaf2ec, #62d9d4);
+  color: #fff;
+  box-shadow: 0 12px 24px rgba(64, 191, 184, 0.22);
+  font-size: 17px;
+  place-items: center;
+}
+
+.bag-community-qr-card {
+  display: grid;
+  aspect-ratio: 1;
+  width: 100%;
+  padding: 14px;
+  border: 7px solid rgba(255, 255, 255, 0.82);
+  border-radius: 22px;
+  background: linear-gradient(145deg, #f6fbfc, #dfeff1);
+  box-shadow:
+    0 16px 34px rgba(45, 91, 111, 0.16),
+    inset 0 0 0 1px rgba(74, 111, 125, 0.1);
+  place-items: center;
+}
+
+.bag-community-qr-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.bag-community-link-card {
+  min-height: 0;
+  padding: 7px 7px 10px;
+  color: var(--bag-ink) !important;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.bag-community-link-card:hover {
+  box-shadow: 0 30px 64px rgba(0, 4, 20, 0.28);
+  transform: translateY(-4px);
+}
+
+.bag-community-link-card--station {
+  background: linear-gradient(100deg, #e7fb9e 0%, #dff4ff 100%);
+}
+
+.bag-community-link-card--contact {
+  background: linear-gradient(100deg, #ffe6a8 0%, #ffd8be 100%);
+}
+
+.bag-community-link-surface {
+  display: grid;
+  height: 100%;
+  min-height: 100%;
+  padding: 20px;
+  overflow: hidden;
+  border-radius: 20px;
+  grid-template-columns: minmax(0, 1fr) 130px;
+  align-items: center;
+}
+
+.bag-community-link-card--station .bag-community-link-surface {
+  background:
+    radial-gradient(circle at 88% 80%, rgba(195, 223, 255, 0.7), transparent 36%),
+    rgba(255, 255, 255, 0.96);
+}
+
+.bag-community-link-card--contact .bag-community-link-surface {
+  background:
+    radial-gradient(circle at 88% 80%, rgba(255, 224, 155, 0.72), transparent 38%),
+    rgba(255, 255, 255, 0.96);
+}
+
+.bag-community-link-card .bag-community-card-icon {
+  top: 20px;
+  left: 20px;
+  width: 56px;
+  height: 56px;
+}
+
+.bag-community-card-icon--station {
+  background: linear-gradient(145deg, #dffb94, #a9df44);
+  color: #fff;
+}
+
+.bag-community-card-icon--contact {
+  background: linear-gradient(145deg, #ffae77, #ff694b);
+  color: #fff;
+}
+
+.bag-community-link-copy {
+  position: relative;
+  z-index: 3;
+  padding-left: 68px;
+}
+
+.bag-community-link-copy h3 {
+  font-size: 28px;
+}
+
+.bag-community-link-card--station .bag-community-title-mark {
+  width: 150px;
+  background: #e6f4c4;
+}
+
+.bag-community-link-card--contact .bag-community-title-mark {
+  width: 150px;
+  background: #fde0db;
+}
+
+.bag-community-link-copy p {
+  margin: 12px 0 0;
+  color: #26334b;
+  font-size: 14px;
+  line-height: 1.45;
+  white-space: nowrap;
+}
+
+.bag-community-link-card--station .bag-community-dots {
+  width: 150px;
+  margin-top: 7px;
+  background-image: radial-gradient(circle, #9ec844 1.6px, transparent 1.7px);
+}
+
+.bag-community-link-card--contact .bag-community-dots {
+  width: 150px;
+  margin-top: 7px;
+  background-image: radial-gradient(circle, #ff8265 1.6px, transparent 1.7px);
+}
+
+.bag-community-action {
+  margin-top: 10px;
+  padding: 8px 14px 8px 10px;
+  font-size: 13px;
+}
+
+.bag-community-action > span {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.78);
+  font-size: 15px;
+  transition: transform 0.2s ease;
+  place-items: center;
+}
+
+.bag-community-link-card:hover .bag-community-action > span {
+  transform: translateX(3px);
+}
+
+.bag-community-action--station {
+  background: #e6f6bd;
+}
+
+.bag-community-action--station > span {
+  color: #9bc844;
+}
+
+.bag-community-action--contact {
+  background: #ff8168;
+  color: #fff;
+}
+
+.bag-community-action--contact > span {
+  color: #ff8168;
+}
+
+.bag-community-station-art,
+.bag-community-contact-art {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  min-height: 150px;
+}
+
+.bag-community-note {
+  position: absolute;
+  top: 16%;
+  width: 37%;
+  height: 54%;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(52, 86, 130, 0.12);
+}
+
+.bag-community-note::before {
+  position: absolute;
+  top: -8px;
+  left: 20%;
+  width: 58%;
+  height: 12px;
+  background-image: repeating-linear-gradient(90deg, #9cb668 0 4px, transparent 4px 12px);
+  content: '';
+}
+
+.bag-community-note::after {
+  position: absolute;
+  inset: 28% 18% 16%;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(88, 110, 143, 0.2) 0 3px,
+    transparent 3px 12px
+  );
+  content: '';
+}
+
+.bag-community-note--life {
+  left: 18%;
+  background: linear-gradient(145deg, #f6ffd9, #e7f5bc);
+  transform: rotate(-4deg);
+}
+
+.bag-community-note--tech {
+  right: 7%;
+  background: linear-gradient(145deg, #eef5ff, #dceaff);
+  transform: rotate(5deg);
+}
+
+.bag-community-note--tech::before {
+  background-image: repeating-linear-gradient(90deg, #84a2d6 0 4px, transparent 4px 12px);
+}
+
+.bag-community-compass {
+  position: absolute;
+  right: 20%;
+  bottom: 4%;
+  display: grid;
+  width: 43%;
+  aspect-ratio: 1;
+  border: 9px solid #bdd6ff;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 14px 26px rgba(71, 113, 178, 0.22);
+  place-items: center;
+}
+
+.bag-community-compass::before {
+  position: absolute;
+  inset: 18%;
+  border: 2px solid #9ebeea;
+  border-radius: 50%;
+  content: '';
+}
+
+.bag-community-compass i {
+  width: 13%;
+  height: 52%;
+  border-radius: 999px 999px 70% 70%;
+  background: linear-gradient(to bottom, #9ad93d 0 50%, #719bdc 50%);
+  transform: rotate(32deg);
+}
+
+.bag-community-contact-art {
+  display: grid;
+  align-items: end;
+  justify-items: center;
+}
+
+.bag-community-message {
+  position: absolute;
+  top: 23%;
+  left: 0;
+  display: flex;
+  width: 56%;
+  height: 42%;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 22px 22px 22px 7px;
+  background: linear-gradient(145deg, #ffe19a, #ffbd61);
+  box-shadow: 0 12px 24px rgba(212, 135, 44, 0.16);
+}
+
+.bag-community-message i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #e89836;
+}
+
+.bag-community-handshake {
+  position: absolute;
+  right: -3%;
+  bottom: 0;
+  width: 80%;
+  color: #f39a69;
+  filter: drop-shadow(0 12px 18px rgba(199, 99, 49, 0.18));
+}
+
+.bag-community-handshake svg {
+  width: 100%;
+  fill: #ffd1b1;
+  stroke: #f29b6c;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.5;
+}
+
+.bag-community-doodle--station,
+.bag-community-doodle--contact {
+  top: 20px;
+  right: 22px;
+  width: 44px;
+  height: 18px;
+  border-top-width: 2px;
+}
+
+.bag-community-doodle--station {
+  color: #fff;
+}
+
+.bag-community-doodle--contact {
+  color: #efb342;
+}
+
+@media (max-width: 1100px) {
+  .bag-community {
+    width: min(1152px, calc(100vw - 48px));
+  }
+
+  .bag-community-heading {
+    width: 72%;
+  }
+
+  .bag-community-grid {
+    height: auto;
+    margin-top: 34px;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .bag-community-card--wechat {
+    height: auto;
+    min-height: 520px;
+    margin-top: 0;
+    grid-row: auto;
+  }
+
+  .bag-community-wechat-surface {
+    height: auto;
+  }
+
+  .bag-community-link-card {
+    min-height: 270px;
+  }
+
+  .bag-community-link-surface {
+    grid-template-columns: minmax(0, 1fr) 180px;
+  }
+
+  .bag-community-link-copy {
+    padding-left: 72px;
+  }
+}
+
+@media (max-width: 768px) {
+  .bag-community {
+    width: min(1152px, calc(100vw - 48px));
+    margin-top: 64px;
+  }
+
+  .bag-community-ghost {
+    display: none;
+  }
+
+  .bag-community-heading {
+    width: 100%;
+  }
+
+  .bag-community-heading h2 {
+    margin-top: 18px;
+    font-size: 40px;
+  }
+
+  .bag-community-heading p {
+    font-size: 15px;
+  }
+
+  .bag-community-grid {
+    margin-top: 32px;
+    gap: 18px;
+  }
+
+  .bag-community-card--wechat {
+    min-height: 680px;
+    padding: 20px;
+  }
+
+  .bag-community-wechat-surface {
+    margin-top: 36px;
+    padding: 28px 22px;
+    grid-template-columns: 1fr;
+  }
+
+  .bag-community-copy h3 {
+    margin-top: 12px;
+    font-size: 32px;
+  }
+
+  .bag-community-qr-card {
+    width: min(100%, 230px);
+    margin: 6px auto 0;
+  }
+
+  .bag-community-link-card {
+    min-height: 260px;
+  }
+
+  .bag-community-link-surface {
+    padding: 20px;
+    grid-template-columns: minmax(0, 1fr) 115px;
+  }
+
+  .bag-community-link-copy {
+    padding-left: 64px;
+  }
+
+  .bag-community-link-copy h3 {
+    font-size: 26px;
+  }
+
+  .bag-community-link-copy p {
+    white-space: normal;
+  }
+
+  .bag-community-link-card .bag-community-card-icon {
+    top: 20px;
+    left: 20px;
+    width: 54px;
+    height: 54px;
+  }
+}
+
+@media (max-width: 520px) {
+  .bag-community-heading h2 {
+    font-size: 36px;
+  }
+
+  .bag-community-heading h2::after {
+    display: none;
+  }
+
+  .bag-community-card--wechat {
+    min-height: 650px;
+  }
+
+  .bag-community-card-icon--wechat {
+    left: 20px;
+    width: 60px;
+    height: 60px;
+  }
+
+  .bag-community-doodle--wechat {
+    left: 104px;
+  }
+
+  .bag-community-wechat-surface {
+    padding: 28px 18px 22px;
+  }
+
+  .bag-community-name {
+    font-size: 16px !important;
+  }
+
+  .bag-community-link-card {
+    min-height: 270px;
+  }
+
+  .bag-community-link-surface {
+    grid-template-columns: minmax(0, 1fr) 100px;
+  }
+
+  .bag-community-link-copy {
+    padding-left: 0;
+    padding-top: 64px;
+  }
+
+  .bag-community-link-copy h3 {
+    font-size: 25px;
+  }
+
+  .bag-community-link-copy .bag-community-dots {
+    width: 130px;
+  }
+
+  .bag-community-station-art,
+  .bag-community-contact-art {
+    min-height: 130px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bag-community-link-card,
+  .bag-community-action > span {
+    transition: none;
+  }
 }

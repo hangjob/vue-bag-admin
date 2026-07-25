@@ -52,11 +52,44 @@ Vue-Bag-Admin 的权限模型基于 RBAC，覆盖这几块：
 
 ### 鉴权逻辑
 
-系统的全局前置路由守卫会拦截路由跳转：
+`createHostRouter()` 支持三种鉴权模式：
+
+```ts
+createHostRouter({ routes, auth: false })
+```
+
+关闭登录与页面权限守卫，适合只想使用宿主布局、路由和插件壳层的项目。
+
+```ts
+createHostRouter({ routes, auth: true })
+```
+
+使用默认后台鉴权约定。未登录访问非公开页面时跳到默认登录页 `/login`。
+
+```ts
+createHostRouter({
+  routes,
+  auth: {
+    enabled: true,
+    loginPath: '/login',
+    homePath: '/dashboard',
+    forbiddenPath: '/403',
+    onProfileError() {
+      return 'logout'
+    }
+  }
+})
+```
+
+自定义鉴权路径与异常处理，适合已有登录系统、SSO 或企业统一门户。
+
+开启鉴权后，系统的全局前置路由守卫会拦截路由跳转：
 
 1. 未登录访问非公开页面时，跳转到登录页
 2. 已登录但尚未拉取用户信息时，先请求用户资料
 3. 角色或权限不满足时，跳转到 `/403`
+
+如果已经有 token，但用户资料加载失败，默认会清空登录态并回到登录页。你可以通过 `onProfileError` 改成忽略、抛错或跳到自己的处理页。
 
 默认情况下，`roles` 和 `permissions` 数组内部都是“满足任意一个即可”。如果页面需要同时满足多个角色或多个权限，可以配置 `roleMode` 或 `permissionMode`：
 

@@ -49,7 +49,7 @@ import '@bag/host-vue/style.css'
 - `HostApp`
 - `PermissionAccess`
 - `createHostI18n()`
-- `createHostRouter({ routes })`
+- `createHostRouter({ routes, auth })`
 - `bootstrapPlugins({ app, router, i18n, plugins })`
 - `registerPermissionDirective(app)`
 - `useAppConfigStore()`
@@ -60,7 +60,7 @@ import '@bag/host-vue/style.css'
 ## 设计边界
 
 - 这个包自带一套默认后台布局，适合先跑起来，再按项目风格替换。
-- 认证逻辑当前仍然是默认实现，后面更适合继续抽成可注入 adapter。
+- 路由鉴权支持 `auth: false`、`auth: true` 和自定义 `auth` 配置；轻量接入不再要求必须提供 `/login` 页面。
 - 现在已经提供可发布的包入口、类型产物和样式入口；后续演进重点会放在宿主适配能力，而不是继续堆叠业务模块。
 
 ## 推荐搭配

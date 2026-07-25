@@ -30,6 +30,7 @@ import {
   createStrapiAuthProvider,
   createHostI18n,
   createHostRouter,
+  getHostNavigationConfig,
   registerPermissionDirective,
   setAuthProvider,
   setupHttp,
@@ -51,11 +52,15 @@ async function setupApp() {
   // 这里先挂宿主自己的基础路由，插件路由后面交给 bootstrapPlugins()。
   const router = createHostRouter({
     routes: exampleRoutes,
-    navigation: {
+    auth: {
+      enabled: true,
       homePath: '/dashboard',
       loginPath: '/login',
       profilePath: '/profile',
-      forbiddenPath: '/403'
+      forbiddenPath: '/403',
+      onProfileError() {
+        return 'logout'
+      }
     }
   })
 
@@ -69,6 +74,7 @@ async function setupApp() {
   registerPermissionDirective(app)
 
   const userStore = useUserStore()
+  const navigation = getHostNavigationConfig()
 
   // 在这里接管 token、鉴权失败和通用服务端错误。
   setupHttp({
@@ -76,11 +82,14 @@ async function setupApp() {
     getToken: () => userStore.token,
     onUnauthorized: () => {
       userStore.logout()
-      router.replace({ path: '/login', query: { redirect: router.currentRoute.value.fullPath } })
+      router.replace({
+        path: navigation.loginPath,
+        query: { redirect: router.currentRoute.value.fullPath }
+      })
     },
     onForbidden: () => {
       message.warning('当前账号没有访问权限')
-      router.replace('/403')
+      router.replace(navigation.forbiddenPath)
     },
     onServerError: () => {
       message.error('服务异常，请稍后重试')
@@ -105,7 +114,7 @@ setupApp()
 先看这几个点：
 
 - 样式顺序别写反，先引 `vue-bag-admin/style.css`，再引项目自己的 `style.css`
-- `createHostRouter()` 先接宿主自己的基础路由，也可以通过 `navigation` 配置首页、登录页、个人中心和 403 路径
+- `createHostRouter()` 先接宿主自己的基础路由；带登录的后台项目建议显式传 `auth: { enabled: true }`，并配置首页、登录页、个人中心和 403 路径
 - `setAuthProvider()` 用来注入认证适配器，默认可以使用 `createStrapiAuthProvider()`
 - `setupHttp()` 负责接住 token、401、403 和服务端异常
 - `bootstrapPlugins()` 不只是挂插件，它也会顺手把插件路由注册进去

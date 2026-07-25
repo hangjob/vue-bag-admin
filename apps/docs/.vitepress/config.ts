@@ -1,4 +1,7 @@
 import { defineConfig } from 'vitepress'
+import frameworkPackage from '../../../packages/vue-bag-admin/package.json'
+
+const frameworkVersion = frameworkPackage.version
 
 export default defineConfig({
   base: process.env.VITEPRESS_BASE || '/vue-bag-admin/docs/',
@@ -11,104 +14,66 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '指南', link: '/guide/introduction' },
-      { text: '在线预览', link: 'https://hangjob.github.io/vue-bag-admin/' }
+      { text: '在线预览', link: 'https://hangjob.github.io/vue-bag-admin/' },
+      {
+        text: '社区',
+        items: [
+          { text: '微信群', link: '/#community' },
+          { text: '知航驿站', link: 'https://www.itnavs.com/' },
+          { text: '合作机会', link: 'https://yh.itnavs.com/contact' }
+        ]
+      },
+      {
+        text: `v${frameworkVersion}`,
+        link: 'https://www.npmjs.com/package/vue-bag-admin'
+      }
     ],
     sidebar: {
-      '/guide/package': [
-        {
-          text: '开始',
-          items: [
-            { text: '简介', link: '/guide/introduction' },
-            { text: '快速上手', link: '/guide/getting-started' },
-            { text: '本地联调', link: '/guide/local-debugging' },
-            { text: '发包流程', link: '/guide/package-publishing' },
-            { text: '生产环境部署', link: '/guide/deployment' }
-          ]
-        },
-        {
-          text: '宿主开发',
-          items: [
-            { text: '主包入口', link: '/guide/package-ecosystem' },
-            { text: '宿主层', link: '/guide/introduction' },
-            { text: '完整宿主示例', link: '/guide/complete-host-app' },
-            { text: '路由与菜单', link: '/guide/routing-and-menu' },
-            { text: '权限管理', link: '/guide/permissions' },
-            { text: '主题与布局 Token', link: '/guide/theme-tokens' },
-            { text: '网络请求', link: '/guide/network-request' },
-            { text: '字典系统', link: '/guide/dictionary-system' }
-          ]
-        },
-        {
-          text: 'UI 与表单',
-          items: [
-            { text: 'UI 组件', link: '/guide/package-ui' },
-            { text: 'PmProTable', link: '/guide/pro-table' },
-            { text: 'PmProForm', link: '/guide/pro-form' }
-          ]
-        },
-        {
-          text: '插件开发',
-          items: [
-            { text: '插件化开发', link: '/guide/plugin-development' },
-            { text: '商品插件', link: '/guide/package-plugin-shop' },
-            { text: '系统设置插件', link: '/guide/package-plugin-sys-setting' }
-          ]
-        },
-        {
-          text: '包与工具',
-          items: [
-            { text: '包生态总览', link: '/guide/package-ecosystem' },
-            { text: 'Core 协议层', link: '/guide/package-core' },
-            { text: 'Request 请求层', link: '/guide/package-request' }
-          ]
-        }
-      ],
       '/guide/': [
         {
-          text: '开始',
+          text: '开始使用',
           items: [
-            { text: '简介', link: '/guide/introduction' },
+            { text: '项目介绍', link: '/guide/introduction' },
             { text: '快速上手', link: '/guide/getting-started' },
-            { text: '本地联调', link: '/guide/local-debugging' },
-            { text: '发包流程', link: '/guide/package-publishing' },
-            { text: '生产环境部署', link: '/guide/deployment' }
+            { text: '创建项目', link: '/guide/create-project' }
           ]
         },
         {
-          text: '宿主开发',
+          text: '核心开发',
           items: [
-            { text: '主包入口', link: '/guide/package-ecosystem' },
-            { text: '宿主层', link: '/guide/introduction' },
-            { text: '完整宿主示例', link: '/guide/complete-host-app' },
-            { text: '路由与菜单', link: '/guide/routing-and-menu' },
-            { text: '权限管理', link: '/guide/permissions' },
-            { text: '主题与布局 Token', link: '/guide/theme-tokens' },
-            { text: '网络请求', link: '/guide/network-request' },
-            { text: '字典系统', link: '/guide/dictionary-system' }
+            { text: '初始化宿主', link: '/guide/host/bootstrap' },
+            { text: '路由与菜单', link: '/guide/host/routing-and-menu' },
+            { text: '登录与权限', link: '/guide/host/auth-and-permissions' },
+            { text: '请求与组件', link: '/guide/request-and-components' }
           ]
         },
         {
-          text: 'UI 与表单',
+          text: '官方插件',
           items: [
-            { text: 'UI 组件', link: '/guide/package-ui' },
-            { text: 'PmProTable', link: '/guide/pro-table' },
-            { text: 'PmProForm', link: '/guide/pro-form' }
+            { text: '插件总览', link: '/guide/official-plugins/' },
+            { text: '安装与启停', link: '/guide/official-plugins/install-and-toggle' },
+            { text: '商城插件', link: '/guide/official-plugins/shop' },
+            { text: '系统设置插件', link: '/guide/official-plugins/sys-setting' }
           ]
         },
         {
           text: '插件开发',
           items: [
-            { text: '插件化开发', link: '/guide/plugin-development' },
-            { text: '商品插件', link: '/guide/package-plugin-shop' },
-            { text: '系统设置插件', link: '/guide/package-plugin-sys-setting' }
-          ]
-        },
-        {
-          text: '包与工具',
-          items: [
-            { text: '包生态总览', link: '/guide/package-ecosystem' },
-            { text: 'Core 协议层', link: '/guide/package-core' },
-            { text: 'Request 请求层', link: '/guide/package-request' }
+            { text: '创建插件', link: '/guide/plugins/create-plugin' },
+            { text: 'AdminPlugin 配置', link: '/guide/plugins/admin-plugin' },
+            {
+              text: '路由、菜单与多语言',
+              link: '/guide/plugins/routes-menus-locales'
+            },
+            {
+              text: '权限与配置项',
+              link: '/guide/plugins/permissions-and-settings'
+            },
+            {
+              text: '生命周期与依赖',
+              link: '/guide/plugins/lifecycle-and-dependencies'
+            },
+            { text: '调试与发布', link: '/guide/plugins/debug-and-publish' }
           ]
         }
       ]

@@ -45,6 +45,17 @@ export default plugin
 | `noCache`     | `boolean`              | 是否禁止当前页进入标签页缓存。                                              |
 | `cacheKey`    | `string`               | 显式指定 KeepAlive 匹配名。多个路由复用同一个页面组件时，用它来对齐组件名。 |
 
+如果项目暂时不接登录，请在创建路由时关闭鉴权：
+
+```ts
+createHostRouter({
+  routes,
+  auth: false
+})
+```
+
+如果开启了鉴权，所有没有 `meta.public: true` 的页面都会被视为登录后访问；登录页、404、回调页这类页面需要显式标记为公开页面。
+
 ### activeMenu 什么时候用
 
 后台里经常会遇到这种页面：
