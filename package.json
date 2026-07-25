@@ -13,8 +13,14 @@
     "docs:dev": "pnpm --filter @bag/docs run dev",
     "docs:build": "pnpm --filter @bag/docs run build",
     "pack:vue-bag-admin": "turbo run build --filter=vue-bag-admin && pnpm --dir packages/vue-bag-admin pack",
+    "version:patch:vue-bag-admin": "npm version patch --prefix ./packages/vue-bag-admin --no-git-tag-version",
+    "version:minor:vue-bag-admin": "npm version minor --prefix ./packages/vue-bag-admin --no-git-tag-version",
+    "version:major:vue-bag-admin": "npm version major --prefix ./packages/vue-bag-admin --no-git-tag-version",
     "release:dry-run:vue-bag-admin": "turbo run build --filter=vue-bag-admin && npm publish ./packages/vue-bag-admin --access public --dry-run",
-    "release:vue-bag-admin": "turbo run build --filter=vue-bag-admin && npm publish ./packages/vue-bag-admin --access public"
+    "release:patch:vue-bag-admin": "pnpm run version:patch:vue-bag-admin && turbo run build --filter=vue-bag-admin && npm publish ./packages/vue-bag-admin --access public",
+    "release:minor:vue-bag-admin": "pnpm run version:minor:vue-bag-admin && turbo run build --filter=vue-bag-admin && npm publish ./packages/vue-bag-admin --access public",
+    "release:major:vue-bag-admin": "pnpm run version:major:vue-bag-admin && turbo run build --filter=vue-bag-admin && npm publish ./packages/vue-bag-admin --access public",
+    "release:vue-bag-admin": "pnpm run release:patch:vue-bag-admin"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.0",

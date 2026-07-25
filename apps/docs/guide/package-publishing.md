@@ -22,7 +22,7 @@
 
 正式发之前，先过一遍这几步：
 
-1. 确认版本号已经更新
+1. 确认这次准备发的是 `patch`、`minor` 还是 `major`
 2. 在根目录执行一次依赖安装
 3. 先跑构建，确认产物能正常生成
 4. 优先跑 `dry-run`，确认发布内容和文件列表
@@ -56,7 +56,7 @@ pnpm run pack:vue-bag-admin
 
 ### 模拟发布
 
-这一步不会真正上传，只是先把最终发布内容过一遍：
+这一步不会真正上传，也不会改版本号，只是先把最终发布内容过一遍：
 
 ```bash
 pnpm run release:dry-run:vue-bag-admin
@@ -64,8 +64,20 @@ pnpm run release:dry-run:vue-bag-admin
 
 ### 正式发布
 
+默认正式发布脚本会先把 `packages/vue-bag-admin/package.json` 的版本号自动升一个 `patch`，再构建并发布。
+
 ```bash
 pnpm run release:vue-bag-admin
+```
+
+如果这次不是补丁版本，也可以直接跑对应脚本：
+
+```bash
+pnpm run release:minor:vue-bag-admin
+```
+
+```bash
+pnpm run release:major:vue-bag-admin
 ```
 
 ## 插件包：@bag/plugin-shop
