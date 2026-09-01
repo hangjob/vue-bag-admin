@@ -138,8 +138,4 @@ Vue-Bag-Admin
 
 ## 交流
 
-如果你想交流使用体验、插件设计，或者一起补齐项目的能力边界，可以扫描下方二维码加入微信群：
-
-<div align="center">
-  <img src="./wxcode.jpg" alt="Vue-Bag-Admin 微信群二维码" width="320" />
-</div>
+如果你想交流使用体验、插件设计，或者一起补齐项目的能力边界，可以访问[联系页面](https://www.vipbic.com/connect)。
